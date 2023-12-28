@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BotFF_peche.Properties
+namespace Tao_Bot_Maker.Properties
 {
 
 

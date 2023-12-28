@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotFF_peche
+namespace Tao_Bot_Maker
 {
     class Action_Image : Action
     {

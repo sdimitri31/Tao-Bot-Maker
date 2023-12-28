@@ -1,4 +1,4 @@
-﻿namespace BotFF_peche
+﻿namespace Tao_Bot_Maker
 {
     partial class MainApp
     {
@@ -106,8 +106,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonClearSequence = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPanelActionImage)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panelActionBoucle.SuspendLayout();
@@ -127,9 +127,10 @@
             // 
             // pictureBoxPanelActionImage
             // 
-            this.pictureBoxPanelActionImage.Location = new System.Drawing.Point(10, 50);
+            this.pictureBoxPanelActionImage.Location = new System.Drawing.Point(7, 32);
+            this.pictureBoxPanelActionImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBoxPanelActionImage.Name = "pictureBoxPanelActionImage";
-            this.pictureBoxPanelActionImage.Size = new System.Drawing.Size(225, 131);
+            this.pictureBoxPanelActionImage.Size = new System.Drawing.Size(150, 85);
             this.pictureBoxPanelActionImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxPanelActionImage.TabIndex = 2;
             this.pictureBoxPanelActionImage.TabStop = false;
@@ -147,9 +148,11 @@
             this.groupBox1.Controls.Add(this.panelActionIfImage);
             this.groupBox1.Controls.Add(this.panelActionImage);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(6, 135);
+            this.groupBox1.Location = new System.Drawing.Point(4, 88);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 487);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(362, 317);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Créer action";
@@ -163,9 +166,10 @@
             this.panelActionBoucle.Controls.Add(this.label21);
             this.panelActionBoucle.Controls.Add(this.textBoxPanelBoucle_NbRepetition);
             this.panelActionBoucle.Controls.Add(this.label20);
-            this.panelActionBoucle.Location = new System.Drawing.Point(7, 654);
+            this.panelActionBoucle.Location = new System.Drawing.Point(6, 425);
+            this.panelActionBoucle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelActionBoucle.Name = "panelActionBoucle";
-            this.panelActionBoucle.Size = new System.Drawing.Size(528, 69);
+            this.panelActionBoucle.Size = new System.Drawing.Size(353, 48);
             this.panelActionBoucle.TabIndex = 12;
             // 
             // comboBoxPanelActionBoucle_Sequence
@@ -174,17 +178,19 @@
             this.comboBoxPanelActionBoucle_Sequence.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPanelActionBoucle_Sequence.ForeColor = System.Drawing.Color.White;
             this.comboBoxPanelActionBoucle_Sequence.FormattingEnabled = true;
-            this.comboBoxPanelActionBoucle_Sequence.Location = new System.Drawing.Point(206, 38);
+            this.comboBoxPanelActionBoucle_Sequence.Location = new System.Drawing.Point(137, 25);
+            this.comboBoxPanelActionBoucle_Sequence.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxPanelActionBoucle_Sequence.Name = "comboBoxPanelActionBoucle_Sequence";
-            this.comboBoxPanelActionBoucle_Sequence.Size = new System.Drawing.Size(319, 28);
+            this.comboBoxPanelActionBoucle_Sequence.Size = new System.Drawing.Size(214, 21);
             this.comboBoxPanelActionBoucle_Sequence.TabIndex = 3;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 41);
+            this.label21.Location = new System.Drawing.Point(5, 27);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(90, 20);
+            this.label21.Size = new System.Drawing.Size(62, 13);
             this.label21.TabIndex = 2;
             this.label21.Text = "Séquence :";
             // 
@@ -192,17 +198,19 @@
             // 
             this.textBoxPanelBoucle_NbRepetition.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelBoucle_NbRepetition.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelBoucle_NbRepetition.Location = new System.Drawing.Point(206, 6);
+            this.textBoxPanelBoucle_NbRepetition.Location = new System.Drawing.Point(137, 4);
+            this.textBoxPanelBoucle_NbRepetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelBoucle_NbRepetition.Name = "textBoxPanelBoucle_NbRepetition";
-            this.textBoxPanelBoucle_NbRepetition.Size = new System.Drawing.Size(319, 26);
+            this.textBoxPanelBoucle_NbRepetition.Size = new System.Drawing.Size(214, 20);
             this.textBoxPanelBoucle_NbRepetition.TabIndex = 1;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(7, 9);
+            this.label20.Location = new System.Drawing.Point(5, 6);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(173, 20);
+            this.label20.Size = new System.Drawing.Size(116, 13);
             this.label20.TabIndex = 0;
             this.label20.Text = "Nombre de répétitions :";
             // 
@@ -218,17 +226,19 @@
             this.panelActionMouseClick.Controls.Add(this.textBoxPanelActionMouseClick_Y);
             this.panelActionMouseClick.Controls.Add(this.textBoxPanelActionMouseClick_X);
             this.panelActionMouseClick.Controls.Add(this.label19);
-            this.panelActionMouseClick.Location = new System.Drawing.Point(7, 534);
+            this.panelActionMouseClick.Location = new System.Drawing.Point(6, 347);
+            this.panelActionMouseClick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelActionMouseClick.Name = "panelActionMouseClick";
-            this.panelActionMouseClick.Size = new System.Drawing.Size(528, 110);
+            this.panelActionMouseClick.Size = new System.Drawing.Size(354, 72);
             this.panelActionMouseClick.TabIndex = 21;
             // 
             // buttonPanelActionMouseClick_ShowZone
             // 
             this.buttonPanelActionMouseClick_ShowZone.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionMouseClick_ShowZone.Location = new System.Drawing.Point(4, 70);
+            this.buttonPanelActionMouseClick_ShowZone.Location = new System.Drawing.Point(3, 46);
+            this.buttonPanelActionMouseClick_ShowZone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionMouseClick_ShowZone.Name = "buttonPanelActionMouseClick_ShowZone";
-            this.buttonPanelActionMouseClick_ShowZone.Size = new System.Drawing.Size(521, 37);
+            this.buttonPanelActionMouseClick_ShowZone.Size = new System.Drawing.Size(347, 24);
             this.buttonPanelActionMouseClick_ShowZone.TabIndex = 17;
             this.buttonPanelActionMouseClick_ShowZone.Text = "Afficher la zone de clic";
             this.buttonPanelActionMouseClick_ShowZone.UseVisualStyleBackColor = false;
@@ -237,19 +247,21 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(282, 41);
+            this.label18.Location = new System.Drawing.Point(188, 27);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(24, 20);
+            this.label18.Size = new System.Drawing.Size(18, 13);
             this.label18.TabIndex = 21;
             this.label18.Text = "y :";
             // 
             // radioButtonPanelActionMouseClick_right
             // 
             this.radioButtonPanelActionMouseClick_right.AutoSize = true;
-            this.radioButtonPanelActionMouseClick_right.Location = new System.Drawing.Point(280, 11);
+            this.radioButtonPanelActionMouseClick_right.Location = new System.Drawing.Point(187, 7);
+            this.radioButtonPanelActionMouseClick_right.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButtonPanelActionMouseClick_right.Name = "radioButtonPanelActionMouseClick_right";
             this.radioButtonPanelActionMouseClick_right.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.radioButtonPanelActionMouseClick_right.Size = new System.Drawing.Size(94, 24);
+            this.radioButtonPanelActionMouseClick_right.Size = new System.Drawing.Size(65, 17);
             this.radioButtonPanelActionMouseClick_right.TabIndex = 1;
             this.radioButtonPanelActionMouseClick_right.TabStop = true;
             this.radioButtonPanelActionMouseClick_right.Text = "Clic droit";
@@ -259,10 +271,11 @@
             // 
             this.radioButtonPanelActionMouseClick_left.AutoSize = true;
             this.radioButtonPanelActionMouseClick_left.Checked = true;
-            this.radioButtonPanelActionMouseClick_left.Location = new System.Drawing.Point(104, 11);
+            this.radioButtonPanelActionMouseClick_left.Location = new System.Drawing.Point(69, 7);
+            this.radioButtonPanelActionMouseClick_left.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButtonPanelActionMouseClick_left.Name = "radioButtonPanelActionMouseClick_left";
             this.radioButtonPanelActionMouseClick_left.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.radioButtonPanelActionMouseClick_left.Size = new System.Drawing.Size(116, 24);
+            this.radioButtonPanelActionMouseClick_left.Size = new System.Drawing.Size(81, 17);
             this.radioButtonPanelActionMouseClick_left.TabIndex = 0;
             this.radioButtonPanelActionMouseClick_left.TabStop = true;
             this.radioButtonPanelActionMouseClick_left.Text = "Clic gauche";
@@ -272,26 +285,29 @@
             // 
             this.textBoxPanelActionMouseClick_Y.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionMouseClick_Y.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionMouseClick_Y.Location = new System.Drawing.Point(409, 38);
+            this.textBoxPanelActionMouseClick_Y.Location = new System.Drawing.Point(273, 25);
+            this.textBoxPanelActionMouseClick_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionMouseClick_Y.Name = "textBoxPanelActionMouseClick_Y";
-            this.textBoxPanelActionMouseClick_Y.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionMouseClick_Y.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionMouseClick_Y.TabIndex = 19;
             // 
             // textBoxPanelActionMouseClick_X
             // 
             this.textBoxPanelActionMouseClick_X.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionMouseClick_X.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionMouseClick_X.Location = new System.Drawing.Point(120, 38);
+            this.textBoxPanelActionMouseClick_X.Location = new System.Drawing.Point(80, 25);
+            this.textBoxPanelActionMouseClick_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionMouseClick_X.Name = "textBoxPanelActionMouseClick_X";
-            this.textBoxPanelActionMouseClick_X.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionMouseClick_X.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionMouseClick_X.TabIndex = 17;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(7, 41);
+            this.label19.Location = new System.Drawing.Point(5, 27);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(24, 20);
+            this.label19.Size = new System.Drawing.Size(18, 13);
             this.label19.TabIndex = 18;
             this.label19.Text = "x :";
             // 
@@ -302,17 +318,19 @@
             this.panelActionSequence.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelActionSequence.Controls.Add(this.label16);
             this.panelActionSequence.Controls.Add(this.comboBoxPanelActionSequence);
-            this.panelActionSequence.Location = new System.Drawing.Point(7, 1160);
+            this.panelActionSequence.Location = new System.Drawing.Point(6, 754);
+            this.panelActionSequence.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelActionSequence.Name = "panelActionSequence";
-            this.panelActionSequence.Size = new System.Drawing.Size(528, 41);
+            this.panelActionSequence.Size = new System.Drawing.Size(353, 29);
             this.panelActionSequence.TabIndex = 19;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 13);
+            this.label16.Location = new System.Drawing.Point(5, 8);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(90, 20);
+            this.label16.Size = new System.Drawing.Size(62, 13);
             this.label16.TabIndex = 17;
             this.label16.Text = "Séquence :";
             // 
@@ -322,9 +340,10 @@
             this.comboBoxPanelActionSequence.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPanelActionSequence.ForeColor = System.Drawing.Color.White;
             this.comboBoxPanelActionSequence.FormattingEnabled = true;
-            this.comboBoxPanelActionSequence.Location = new System.Drawing.Point(206, 10);
+            this.comboBoxPanelActionSequence.Location = new System.Drawing.Point(137, 6);
+            this.comboBoxPanelActionSequence.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxPanelActionSequence.Name = "comboBoxPanelActionSequence";
-            this.comboBoxPanelActionSequence.Size = new System.Drawing.Size(319, 28);
+            this.comboBoxPanelActionSequence.Size = new System.Drawing.Size(214, 21);
             this.comboBoxPanelActionSequence.TabIndex = 16;
             // 
             // panelActionTouche
@@ -334,9 +353,10 @@
             this.panelActionTouche.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelActionTouche.Controls.Add(this.textBoxPanelActionTouche);
             this.panelActionTouche.Controls.Add(this.labelTouche);
-            this.panelActionTouche.Location = new System.Drawing.Point(7, 79);
+            this.panelActionTouche.Location = new System.Drawing.Point(6, 51);
+            this.panelActionTouche.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelActionTouche.Name = "panelActionTouche";
-            this.panelActionTouche.Size = new System.Drawing.Size(528, 39);
+            this.panelActionTouche.Size = new System.Drawing.Size(352, 28);
             this.panelActionTouche.TabIndex = 17;
             // 
             // textBoxPanelActionTouche
@@ -345,18 +365,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxPanelActionTouche.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionTouche.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionTouche.Location = new System.Drawing.Point(205, 10);
+            this.textBoxPanelActionTouche.Location = new System.Drawing.Point(137, 6);
+            this.textBoxPanelActionTouche.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionTouche.MaxLength = 1;
             this.textBoxPanelActionTouche.Name = "textBoxPanelActionTouche";
-            this.textBoxPanelActionTouche.Size = new System.Drawing.Size(319, 26);
+            this.textBoxPanelActionTouche.Size = new System.Drawing.Size(214, 20);
             this.textBoxPanelActionTouche.TabIndex = 1;
             // 
             // labelTouche
             // 
             this.labelTouche.AutoSize = true;
-            this.labelTouche.Location = new System.Drawing.Point(6, 13);
+            this.labelTouche.Location = new System.Drawing.Point(4, 8);
+            this.labelTouche.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTouche.Name = "labelTouche";
-            this.labelTouche.Size = new System.Drawing.Size(70, 20);
+            this.labelTouche.Size = new System.Drawing.Size(50, 13);
             this.labelTouche.TabIndex = 2;
             this.labelTouche.Text = "Touche :";
             // 
@@ -367,26 +389,29 @@
             this.panelActionDelai.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelActionDelai.Controls.Add(this.textBoxPanelActionAttente);
             this.panelActionDelai.Controls.Add(this.label15);
-            this.panelActionDelai.Location = new System.Drawing.Point(7, 1106);
+            this.panelActionDelai.Location = new System.Drawing.Point(6, 719);
+            this.panelActionDelai.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelActionDelai.Name = "panelActionDelai";
-            this.panelActionDelai.Size = new System.Drawing.Size(528, 39);
+            this.panelActionDelai.Size = new System.Drawing.Size(353, 28);
             this.panelActionDelai.TabIndex = 18;
             // 
             // textBoxPanelActionAttente
             // 
             this.textBoxPanelActionAttente.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionAttente.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionAttente.Location = new System.Drawing.Point(206, 10);
+            this.textBoxPanelActionAttente.Location = new System.Drawing.Point(137, 6);
+            this.textBoxPanelActionAttente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionAttente.Name = "textBoxPanelActionAttente";
-            this.textBoxPanelActionAttente.Size = new System.Drawing.Size(319, 26);
+            this.textBoxPanelActionAttente.Size = new System.Drawing.Size(214, 20);
             this.textBoxPanelActionAttente.TabIndex = 1;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(7, 13);
+            this.label15.Location = new System.Drawing.Point(5, 8);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(88, 20);
+            this.label15.Size = new System.Drawing.Size(59, 13);
             this.label15.TabIndex = 2;
             this.label15.Text = "Délai (ms) :";
             // 
@@ -398,9 +423,10 @@
             this.comboBoxActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxActions.ForeColor = System.Drawing.Color.White;
             this.comboBoxActions.FormattingEnabled = true;
-            this.comboBoxActions.Location = new System.Drawing.Point(7, 35);
+            this.comboBoxActions.Location = new System.Drawing.Point(5, 23);
+            this.comboBoxActions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxActions.Name = "comboBoxActions";
-            this.comboBoxActions.Size = new System.Drawing.Size(526, 28);
+            this.comboBoxActions.Size = new System.Drawing.Size(354, 21);
             this.comboBoxActions.TabIndex = 0;
             this.comboBoxActions.SelectedIndexChanged += new System.EventHandler(this.comboBoxActions_SelectedIndexChanged);
             // 
@@ -428,9 +454,10 @@
             this.panelActionIfImage.Controls.Add(this.textBoxPanelActionIfImage_y1);
             this.panelActionIfImage.Controls.Add(this.label14);
             this.panelActionIfImage.Controls.Add(this.textBoxPanelActionIfImage_x1);
-            this.panelActionIfImage.Location = new System.Drawing.Point(7, 133);
+            this.panelActionIfImage.Location = new System.Drawing.Point(6, 86);
+            this.panelActionIfImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelActionIfImage.Name = "panelActionIfImage";
-            this.panelActionIfImage.Size = new System.Drawing.Size(529, 391);
+            this.panelActionIfImage.Size = new System.Drawing.Size(354, 254);
             this.panelActionIfImage.TabIndex = 17;
             // 
             // buttonPanelActionIfImage_ClearDrawing
@@ -438,9 +465,10 @@
             this.buttonPanelActionIfImage_ClearDrawing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPanelActionIfImage_ClearDrawing.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionIfImage_ClearDrawing.Location = new System.Drawing.Point(286, 94);
+            this.buttonPanelActionIfImage_ClearDrawing.Location = new System.Drawing.Point(191, 61);
+            this.buttonPanelActionIfImage_ClearDrawing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionIfImage_ClearDrawing.Name = "buttonPanelActionIfImage_ClearDrawing";
-            this.buttonPanelActionIfImage_ClearDrawing.Size = new System.Drawing.Size(239, 37);
+            this.buttonPanelActionIfImage_ClearDrawing.Size = new System.Drawing.Size(160, 24);
             this.buttonPanelActionIfImage_ClearDrawing.TabIndex = 26;
             this.buttonPanelActionIfImage_ClearDrawing.Text = "Effacer les zones";
             this.buttonPanelActionIfImage_ClearDrawing.UseVisualStyleBackColor = false;
@@ -448,9 +476,10 @@
             // 
             // pictureBoxPanelActionIfImage
             // 
-            this.pictureBoxPanelActionIfImage.Location = new System.Drawing.Point(4, 50);
+            this.pictureBoxPanelActionIfImage.Location = new System.Drawing.Point(3, 32);
+            this.pictureBoxPanelActionIfImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBoxPanelActionIfImage.Name = "pictureBoxPanelActionIfImage";
-            this.pictureBoxPanelActionIfImage.Size = new System.Drawing.Size(232, 131);
+            this.pictureBoxPanelActionIfImage.Size = new System.Drawing.Size(155, 85);
             this.pictureBoxPanelActionIfImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxPanelActionIfImage.TabIndex = 25;
             this.pictureBoxPanelActionIfImage.TabStop = false;
@@ -459,9 +488,10 @@
             // 
             this.buttonPanelActionIfImage_FindImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPanelActionIfImage_FindImage.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionIfImage_FindImage.Location = new System.Drawing.Point(286, 50);
+            this.buttonPanelActionIfImage_FindImage.Location = new System.Drawing.Point(192, 32);
+            this.buttonPanelActionIfImage_FindImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionIfImage_FindImage.Name = "buttonPanelActionIfImage_FindImage";
-            this.buttonPanelActionIfImage_FindImage.Size = new System.Drawing.Size(239, 38);
+            this.buttonPanelActionIfImage_FindImage.Size = new System.Drawing.Size(159, 25);
             this.buttonPanelActionIfImage_FindImage.TabIndex = 25;
             this.buttonPanelActionIfImage_FindImage.Text = "Chercher l\'image";
             this.buttonPanelActionIfImage_FindImage.UseVisualStyleBackColor = false;
@@ -470,9 +500,10 @@
             // buttonPanelActionIfImage_ShowZone
             // 
             this.buttonPanelActionIfImage_ShowZone.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionIfImage_ShowZone.Location = new System.Drawing.Point(4, 351);
+            this.buttonPanelActionIfImage_ShowZone.Location = new System.Drawing.Point(3, 228);
+            this.buttonPanelActionIfImage_ShowZone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionIfImage_ShowZone.Name = "buttonPanelActionIfImage_ShowZone";
-            this.buttonPanelActionIfImage_ShowZone.Size = new System.Drawing.Size(521, 37);
+            this.buttonPanelActionIfImage_ShowZone.Size = new System.Drawing.Size(347, 24);
             this.buttonPanelActionIfImage_ShowZone.TabIndex = 16;
             this.buttonPanelActionIfImage_ShowZone.Text = "Afficher la zone de recherche";
             this.buttonPanelActionIfImage_ShowZone.UseVisualStyleBackColor = false;
@@ -481,9 +512,10 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 320);
+            this.label9.Location = new System.Drawing.Point(5, 208);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(132, 20);
+            this.label9.Size = new System.Drawing.Size(90, 13);
             this.label9.TabIndex = 15;
             this.label9.Text = "Sinon séquence :";
             // 
@@ -493,17 +525,19 @@
             this.comboBoxPanelActionSequenceIfImageNotFound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPanelActionSequenceIfImageNotFound.ForeColor = System.Drawing.Color.White;
             this.comboBoxPanelActionSequenceIfImageNotFound.FormattingEnabled = true;
-            this.comboBoxPanelActionSequenceIfImageNotFound.Location = new System.Drawing.Point(206, 317);
+            this.comboBoxPanelActionSequenceIfImageNotFound.Location = new System.Drawing.Point(137, 206);
+            this.comboBoxPanelActionSequenceIfImageNotFound.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxPanelActionSequenceIfImageNotFound.Name = "comboBoxPanelActionSequenceIfImageNotFound";
-            this.comboBoxPanelActionSequenceIfImageNotFound.Size = new System.Drawing.Size(319, 28);
+            this.comboBoxPanelActionSequenceIfImageNotFound.Size = new System.Drawing.Size(214, 21);
             this.comboBoxPanelActionSequenceIfImageNotFound.TabIndex = 13;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 286);
+            this.label8.Location = new System.Drawing.Point(5, 186);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(152, 20);
+            this.label8.Size = new System.Drawing.Size(103, 13);
             this.label8.TabIndex = 14;
             this.label8.Text = "Séquence si image :";
             // 
@@ -513,35 +547,39 @@
             this.comboBoxPanelActionSequenceIfImageFound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPanelActionSequenceIfImageFound.ForeColor = System.Drawing.Color.White;
             this.comboBoxPanelActionSequenceIfImageFound.FormattingEnabled = true;
-            this.comboBoxPanelActionSequenceIfImageFound.Location = new System.Drawing.Point(206, 283);
+            this.comboBoxPanelActionSequenceIfImageFound.Location = new System.Drawing.Point(137, 184);
+            this.comboBoxPanelActionSequenceIfImageFound.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxPanelActionSequenceIfImageFound.Name = "comboBoxPanelActionSequenceIfImageFound";
-            this.comboBoxPanelActionSequenceIfImageFound.Size = new System.Drawing.Size(319, 28);
+            this.comboBoxPanelActionSequenceIfImageFound.Size = new System.Drawing.Size(214, 21);
             this.comboBoxPanelActionSequenceIfImageFound.TabIndex = 13;
             // 
             // textBoxPanelActionIfImage_tolerance
             // 
             this.textBoxPanelActionIfImage_tolerance.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionIfImage_tolerance.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionIfImage_tolerance.Location = new System.Drawing.Point(120, 251);
+            this.textBoxPanelActionIfImage_tolerance.Location = new System.Drawing.Point(80, 163);
+            this.textBoxPanelActionIfImage_tolerance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionIfImage_tolerance.Name = "textBoxPanelActionIfImage_tolerance";
-            this.textBoxPanelActionIfImage_tolerance.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionIfImage_tolerance.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionIfImage_tolerance.TabIndex = 12;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 254);
+            this.label10.Location = new System.Drawing.Point(5, 165);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 20);
+            this.label10.Size = new System.Drawing.Size(61, 13);
             this.label10.TabIndex = 11;
             this.label10.Text = "Tolerance :";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(282, 225);
+            this.label11.Location = new System.Drawing.Point(188, 146);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 20);
+            this.label11.Size = new System.Drawing.Size(24, 13);
             this.label11.TabIndex = 10;
             this.label11.Text = "y2 :";
             // 
@@ -551,9 +589,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPanelActionIfImage_ImagePath.AutoSize = true;
             this.buttonPanelActionIfImage_ImagePath.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionIfImage_ImagePath.Location = new System.Drawing.Point(4, 10);
+            this.buttonPanelActionIfImage_ImagePath.Location = new System.Drawing.Point(3, 6);
+            this.buttonPanelActionIfImage_ImagePath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionIfImage_ImagePath.Name = "buttonPanelActionIfImage_ImagePath";
-            this.buttonPanelActionIfImage_ImagePath.Size = new System.Drawing.Size(521, 30);
+            this.buttonPanelActionIfImage_ImagePath.Size = new System.Drawing.Size(348, 23);
             this.buttonPanelActionIfImage_ImagePath.TabIndex = 4;
             this.buttonPanelActionIfImage_ImagePath.Text = "Image";
             this.buttonPanelActionIfImage_ImagePath.UseVisualStyleBackColor = false;
@@ -563,17 +602,19 @@
             // 
             this.textBoxPanelActionIfImage_y2.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionIfImage_y2.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionIfImage_y2.Location = new System.Drawing.Point(409, 222);
+            this.textBoxPanelActionIfImage_y2.Location = new System.Drawing.Point(273, 144);
+            this.textBoxPanelActionIfImage_y2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionIfImage_y2.Name = "textBoxPanelActionIfImage_y2";
-            this.textBoxPanelActionIfImage_y2.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionIfImage_y2.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionIfImage_y2.TabIndex = 9;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(282, 193);
+            this.label12.Location = new System.Drawing.Point(188, 125);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(33, 20);
+            this.label12.Size = new System.Drawing.Size(24, 13);
             this.label12.TabIndex = 8;
             this.label12.Text = "y1 :";
             // 
@@ -581,17 +622,19 @@
             // 
             this.textBoxPanelActionIfImage_x2.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionIfImage_x2.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionIfImage_x2.Location = new System.Drawing.Point(120, 219);
+            this.textBoxPanelActionIfImage_x2.Location = new System.Drawing.Point(80, 142);
+            this.textBoxPanelActionIfImage_x2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionIfImage_x2.Name = "textBoxPanelActionIfImage_x2";
-            this.textBoxPanelActionIfImage_x2.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionIfImage_x2.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionIfImage_x2.TabIndex = 7;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 222);
+            this.label13.Location = new System.Drawing.Point(5, 144);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(33, 20);
+            this.label13.Size = new System.Drawing.Size(24, 13);
             this.label13.TabIndex = 6;
             this.label13.Text = "x2 :";
             // 
@@ -599,17 +642,19 @@
             // 
             this.textBoxPanelActionIfImage_y1.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionIfImage_y1.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionIfImage_y1.Location = new System.Drawing.Point(409, 190);
+            this.textBoxPanelActionIfImage_y1.Location = new System.Drawing.Point(273, 123);
+            this.textBoxPanelActionIfImage_y1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionIfImage_y1.Name = "textBoxPanelActionIfImage_y1";
-            this.textBoxPanelActionIfImage_y1.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionIfImage_y1.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionIfImage_y1.TabIndex = 5;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(7, 190);
+            this.label14.Location = new System.Drawing.Point(5, 123);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(33, 20);
+            this.label14.Size = new System.Drawing.Size(24, 13);
             this.label14.TabIndex = 4;
             this.label14.Text = "x1 :";
             // 
@@ -617,9 +662,10 @@
             // 
             this.textBoxPanelActionIfImage_x1.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionIfImage_x1.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionIfImage_x1.Location = new System.Drawing.Point(120, 187);
+            this.textBoxPanelActionIfImage_x1.Location = new System.Drawing.Point(80, 122);
+            this.textBoxPanelActionIfImage_x1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionIfImage_x1.Name = "textBoxPanelActionIfImage_x1";
-            this.textBoxPanelActionIfImage_x1.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionIfImage_x1.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionIfImage_x1.TabIndex = 3;
             // 
             // panelActionImage
@@ -646,17 +692,19 @@
             this.panelActionImage.Controls.Add(this.textBoxPanelActionImage_y1);
             this.panelActionImage.Controls.Add(this.label1);
             this.panelActionImage.Controls.Add(this.textBoxPanelActionImage_x1);
-            this.panelActionImage.Location = new System.Drawing.Point(8, 735);
+            this.panelActionImage.Location = new System.Drawing.Point(6, 478);
+            this.panelActionImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelActionImage.Name = "panelActionImage";
-            this.panelActionImage.Size = new System.Drawing.Size(527, 360);
+            this.panelActionImage.Size = new System.Drawing.Size(353, 234);
             this.panelActionImage.TabIndex = 16;
             // 
             // buttonPanelActionImage_ShowZone
             // 
             this.buttonPanelActionImage_ShowZone.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionImage_ShowZone.Location = new System.Drawing.Point(3, 320);
+            this.buttonPanelActionImage_ShowZone.Location = new System.Drawing.Point(2, 208);
+            this.buttonPanelActionImage_ShowZone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionImage_ShowZone.Name = "buttonPanelActionImage_ShowZone";
-            this.buttonPanelActionImage_ShowZone.Size = new System.Drawing.Size(521, 37);
+            this.buttonPanelActionImage_ShowZone.Size = new System.Drawing.Size(347, 24);
             this.buttonPanelActionImage_ShowZone.TabIndex = 17;
             this.buttonPanelActionImage_ShowZone.Text = "Afficher la zone de recherche";
             this.buttonPanelActionImage_ShowZone.UseVisualStyleBackColor = false;
@@ -665,9 +713,10 @@
             // buttonPanelActionImage_ClearDrawing
             // 
             this.buttonPanelActionImage_ClearDrawing.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionImage_ClearDrawing.Location = new System.Drawing.Point(285, 94);
+            this.buttonPanelActionImage_ClearDrawing.Location = new System.Drawing.Point(190, 61);
+            this.buttonPanelActionImage_ClearDrawing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionImage_ClearDrawing.Name = "buttonPanelActionImage_ClearDrawing";
-            this.buttonPanelActionImage_ClearDrawing.Size = new System.Drawing.Size(239, 37);
+            this.buttonPanelActionImage_ClearDrawing.Size = new System.Drawing.Size(159, 24);
             this.buttonPanelActionImage_ClearDrawing.TabIndex = 24;
             this.buttonPanelActionImage_ClearDrawing.Text = "Effacer les zones";
             this.buttonPanelActionImage_ClearDrawing.UseVisualStyleBackColor = false;
@@ -676,18 +725,20 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 289);
+            this.label7.Location = new System.Drawing.Point(4, 188);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(177, 20);
+            this.label7.Size = new System.Drawing.Size(120, 13);
             this.label7.TabIndex = 15;
             this.label7.Text = "Séquence si expiration :";
             // 
             // buttonPanelActionImage_FindImage
             // 
             this.buttonPanelActionImage_FindImage.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionImage_FindImage.Location = new System.Drawing.Point(285, 50);
+            this.buttonPanelActionImage_FindImage.Location = new System.Drawing.Point(190, 32);
+            this.buttonPanelActionImage_FindImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionImage_FindImage.Name = "buttonPanelActionImage_FindImage";
-            this.buttonPanelActionImage_FindImage.Size = new System.Drawing.Size(239, 38);
+            this.buttonPanelActionImage_FindImage.Size = new System.Drawing.Size(159, 25);
             this.buttonPanelActionImage_FindImage.TabIndex = 23;
             this.buttonPanelActionImage_FindImage.Text = "Chercher l\'image";
             this.buttonPanelActionImage_FindImage.UseVisualStyleBackColor = false;
@@ -697,17 +748,19 @@
             // 
             this.textBoxPanelActionImage_waitTime.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionImage_waitTime.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionImage_waitTime.Location = new System.Drawing.Point(408, 251);
+            this.textBoxPanelActionImage_waitTime.Location = new System.Drawing.Point(272, 163);
+            this.textBoxPanelActionImage_waitTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionImage_waitTime.Name = "textBoxPanelActionImage_waitTime";
-            this.textBoxPanelActionImage_waitTime.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionImage_waitTime.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionImage_waitTime.TabIndex = 14;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(281, 254);
+            this.label6.Location = new System.Drawing.Point(187, 165);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 20);
+            this.label6.Size = new System.Drawing.Size(85, 13);
             this.label6.TabIndex = 13;
             this.label6.Text = "Expiration (sec) :";
             // 
@@ -715,9 +768,10 @@
             // 
             this.textBoxPanelActionImage_tolerance.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionImage_tolerance.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionImage_tolerance.Location = new System.Drawing.Point(119, 251);
+            this.textBoxPanelActionImage_tolerance.Location = new System.Drawing.Point(79, 163);
+            this.textBoxPanelActionImage_tolerance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionImage_tolerance.Name = "textBoxPanelActionImage_tolerance";
-            this.textBoxPanelActionImage_tolerance.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionImage_tolerance.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionImage_tolerance.TabIndex = 12;
             // 
             // comboBoxPanelActionImage_sequenceIfExpired
@@ -726,35 +780,39 @@
             this.comboBoxPanelActionImage_sequenceIfExpired.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPanelActionImage_sequenceIfExpired.ForeColor = System.Drawing.Color.White;
             this.comboBoxPanelActionImage_sequenceIfExpired.FormattingEnabled = true;
-            this.comboBoxPanelActionImage_sequenceIfExpired.Location = new System.Drawing.Point(205, 286);
+            this.comboBoxPanelActionImage_sequenceIfExpired.Location = new System.Drawing.Point(137, 186);
+            this.comboBoxPanelActionImage_sequenceIfExpired.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxPanelActionImage_sequenceIfExpired.Name = "comboBoxPanelActionImage_sequenceIfExpired";
-            this.comboBoxPanelActionImage_sequenceIfExpired.Size = new System.Drawing.Size(319, 28);
+            this.comboBoxPanelActionImage_sequenceIfExpired.Size = new System.Drawing.Size(214, 21);
             this.comboBoxPanelActionImage_sequenceIfExpired.TabIndex = 12;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 254);
+            this.label5.Location = new System.Drawing.Point(4, 165);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 20);
+            this.label5.Size = new System.Drawing.Size(61, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "Tolerance :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(281, 222);
+            this.label3.Location = new System.Drawing.Point(187, 144);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 20);
+            this.label3.Size = new System.Drawing.Size(24, 13);
             this.label3.TabIndex = 10;
             this.label3.Text = "y2 :";
             // 
             // buttonPanelActionImage_ImagePath
             // 
             this.buttonPanelActionImage_ImagePath.BackColor = System.Drawing.Color.DimGray;
-            this.buttonPanelActionImage_ImagePath.Location = new System.Drawing.Point(3, 10);
+            this.buttonPanelActionImage_ImagePath.Location = new System.Drawing.Point(2, 6);
+            this.buttonPanelActionImage_ImagePath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPanelActionImage_ImagePath.Name = "buttonPanelActionImage_ImagePath";
-            this.buttonPanelActionImage_ImagePath.Size = new System.Drawing.Size(521, 34);
+            this.buttonPanelActionImage_ImagePath.Size = new System.Drawing.Size(347, 22);
             this.buttonPanelActionImage_ImagePath.TabIndex = 4;
             this.buttonPanelActionImage_ImagePath.Text = "Image";
             this.buttonPanelActionImage_ImagePath.UseVisualStyleBackColor = false;
@@ -764,17 +822,19 @@
             // 
             this.textBoxPanelActionImage_y2.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionImage_y2.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionImage_y2.Location = new System.Drawing.Point(408, 219);
+            this.textBoxPanelActionImage_y2.Location = new System.Drawing.Point(272, 142);
+            this.textBoxPanelActionImage_y2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionImage_y2.Name = "textBoxPanelActionImage_y2";
-            this.textBoxPanelActionImage_y2.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionImage_y2.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionImage_y2.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(281, 190);
+            this.label4.Location = new System.Drawing.Point(187, 123);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 20);
+            this.label4.Size = new System.Drawing.Size(24, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "y1 :";
             // 
@@ -782,17 +842,19 @@
             // 
             this.textBoxPanelActionImage_x2.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionImage_x2.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionImage_x2.Location = new System.Drawing.Point(119, 219);
+            this.textBoxPanelActionImage_x2.Location = new System.Drawing.Point(79, 142);
+            this.textBoxPanelActionImage_x2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionImage_x2.Name = "textBoxPanelActionImage_x2";
-            this.textBoxPanelActionImage_x2.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionImage_x2.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionImage_x2.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 222);
+            this.label2.Location = new System.Drawing.Point(4, 144);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 20);
+            this.label2.Size = new System.Drawing.Size(24, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "x2 :";
             // 
@@ -800,17 +862,19 @@
             // 
             this.textBoxPanelActionImage_y1.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionImage_y1.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionImage_y1.Location = new System.Drawing.Point(408, 187);
+            this.textBoxPanelActionImage_y1.Location = new System.Drawing.Point(272, 122);
+            this.textBoxPanelActionImage_y1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionImage_y1.Name = "textBoxPanelActionImage_y1";
-            this.textBoxPanelActionImage_y1.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionImage_y1.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionImage_y1.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 190);
+            this.label1.Location = new System.Drawing.Point(4, 123);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 20);
+            this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "x1 : ";
             // 
@@ -818,9 +882,10 @@
             // 
             this.textBoxPanelActionImage_x1.BackColor = System.Drawing.Color.DimGray;
             this.textBoxPanelActionImage_x1.ForeColor = System.Drawing.Color.White;
-            this.textBoxPanelActionImage_x1.Location = new System.Drawing.Point(119, 187);
+            this.textBoxPanelActionImage_x1.Location = new System.Drawing.Point(79, 122);
+            this.textBoxPanelActionImage_x1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPanelActionImage_x1.Name = "textBoxPanelActionImage_x1";
-            this.textBoxPanelActionImage_x1.Size = new System.Drawing.Size(116, 26);
+            this.textBoxPanelActionImage_x1.Size = new System.Drawing.Size(79, 20);
             this.textBoxPanelActionImage_x1.TabIndex = 3;
             // 
             // buttonStopBot
@@ -828,9 +893,10 @@
             this.buttonStopBot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStopBot.BackColor = System.Drawing.Color.DimGray;
-            this.buttonStopBot.Location = new System.Drawing.Point(268, 59);
+            this.buttonStopBot.Location = new System.Drawing.Point(179, 38);
+            this.buttonStopBot.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonStopBot.Name = "buttonStopBot";
-            this.buttonStopBot.Size = new System.Drawing.Size(259, 50);
+            this.buttonStopBot.Size = new System.Drawing.Size(173, 32);
             this.buttonStopBot.TabIndex = 7;
             this.buttonStopBot.Text = "Stop Bot (F7)";
             this.buttonStopBot.UseVisualStyleBackColor = false;
@@ -842,9 +908,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStartBot.BackColor = System.Drawing.Color.DimGray;
-            this.buttonStartBot.Location = new System.Drawing.Point(3, 59);
+            this.buttonStartBot.Location = new System.Drawing.Point(2, 38);
+            this.buttonStartBot.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonStartBot.Name = "buttonStartBot";
-            this.buttonStartBot.Size = new System.Drawing.Size(259, 50);
+            this.buttonStartBot.Size = new System.Drawing.Size(173, 32);
             this.buttonStartBot.TabIndex = 6;
             this.buttonStartBot.Text = "Start Bot (F6)";
             this.buttonStartBot.UseVisualStyleBackColor = false;
@@ -855,9 +922,10 @@
             this.buttonModifier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonModifier.BackColor = System.Drawing.Color.DimGray;
-            this.buttonModifier.Location = new System.Drawing.Point(268, 3);
+            this.buttonModifier.Location = new System.Drawing.Point(179, 2);
+            this.buttonModifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonModifier.Name = "buttonModifier";
-            this.buttonModifier.Size = new System.Drawing.Size(259, 46);
+            this.buttonModifier.Size = new System.Drawing.Size(173, 30);
             this.buttonModifier.TabIndex = 20;
             this.buttonModifier.Text = "Modifier";
             this.buttonModifier.UseVisualStyleBackColor = false;
@@ -870,9 +938,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonActionAjout.AutoSize = true;
             this.buttonActionAjout.BackColor = System.Drawing.Color.DimGray;
-            this.buttonActionAjout.Location = new System.Drawing.Point(3, 3);
+            this.buttonActionAjout.Location = new System.Drawing.Point(2, 2);
+            this.buttonActionAjout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonActionAjout.Name = "buttonActionAjout";
-            this.buttonActionAjout.Size = new System.Drawing.Size(259, 50);
+            this.buttonActionAjout.Size = new System.Drawing.Size(173, 32);
             this.buttonActionAjout.TabIndex = 2;
             this.buttonActionAjout.Text = "Ajouter";
             this.buttonActionAjout.UseVisualStyleBackColor = false;
@@ -881,9 +950,10 @@
             // labelNotice
             // 
             this.labelNotice.AutoSize = true;
-            this.labelNotice.Location = new System.Drawing.Point(6, 26);
+            this.labelNotice.Location = new System.Drawing.Point(4, 17);
+            this.labelNotice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNotice.Name = "labelNotice";
-            this.labelNotice.Size = new System.Drawing.Size(60, 20);
+            this.labelNotice.Size = new System.Drawing.Size(41, 13);
             this.labelNotice.TabIndex = 12;
             this.labelNotice.Text = "label17";
             // 
@@ -896,10 +966,10 @@
             this.listBoxActions.BackColor = System.Drawing.Color.DimGray;
             this.listBoxActions.ForeColor = System.Drawing.Color.White;
             this.listBoxActions.FormattingEnabled = true;
-            this.listBoxActions.ItemHeight = 20;
-            this.listBoxActions.Location = new System.Drawing.Point(9, 751);
+            this.listBoxActions.Location = new System.Drawing.Point(6, 488);
+            this.listBoxActions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxActions.Name = "listBoxActions";
-            this.listBoxActions.Size = new System.Drawing.Size(537, 464);
+            this.listBoxActions.Size = new System.Drawing.Size(361, 4);
             this.listBoxActions.TabIndex = 5;
             this.listBoxActions.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBoxActions_DragDrop);
             this.listBoxActions.DragOver += new System.Windows.Forms.DragEventHandler(this.listBoxActions_DragOver);
@@ -915,20 +985,21 @@
             this.listBoxLog.BackColor = System.Drawing.Color.DimGray;
             this.listBoxLog.ForeColor = System.Drawing.Color.White;
             this.listBoxLog.FormattingEnabled = true;
-            this.listBoxLog.ItemHeight = 20;
-            this.listBoxLog.Location = new System.Drawing.Point(9, 153);
+            this.listBoxLog.Location = new System.Drawing.Point(6, 99);
+            this.listBoxLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxLog.Name = "listBoxLog";
             this.listBoxLog.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxLog.Size = new System.Drawing.Size(646, 1064);
+            this.listBoxLog.Size = new System.Drawing.Size(434, 381);
             this.listBoxLog.TabIndex = 8;
             // 
             // buttonSaveSequence
             // 
             this.buttonSaveSequence.BackColor = System.Drawing.Color.DimGray;
             this.buttonSaveSequence.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSaveSequence.Location = new System.Drawing.Point(271, 3);
+            this.buttonSaveSequence.Location = new System.Drawing.Point(181, 2);
+            this.buttonSaveSequence.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonSaveSequence.Name = "buttonSaveSequence";
-            this.buttonSaveSequence.Size = new System.Drawing.Size(262, 34);
+            this.buttonSaveSequence.Size = new System.Drawing.Size(175, 23);
             this.buttonSaveSequence.TabIndex = 9;
             this.buttonSaveSequence.Text = "Sauvegarder la séquence";
             this.buttonSaveSequence.UseVisualStyleBackColor = false;
@@ -941,9 +1012,10 @@
             this.comboBoxListSequences.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxListSequences.ForeColor = System.Drawing.Color.White;
             this.comboBoxListSequences.FormattingEnabled = true;
-            this.comboBoxListSequences.Location = new System.Drawing.Point(3, 6);
+            this.comboBoxListSequences.Location = new System.Drawing.Point(2, 3);
+            this.comboBoxListSequences.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxListSequences.Name = "comboBoxListSequences";
-            this.comboBoxListSequences.Size = new System.Drawing.Size(262, 28);
+            this.comboBoxListSequences.Size = new System.Drawing.Size(175, 21);
             this.comboBoxListSequences.TabIndex = 11;
             this.comboBoxListSequences.SelectedIndexChanged += new System.EventHandler(this.comboBoxListSequences_SelectedIndexChanged);
             // 
@@ -958,10 +1030,11 @@
             this.tableLayoutPanel1.Controls.Add(this.groupBox3, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1224, 1246);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(820, 508);
             this.tableLayoutPanel1.TabIndex = 21;
             // 
             // groupBox2
@@ -973,9 +1046,11 @@
             this.groupBox2.Controls.Add(this.groupBox1);
             this.groupBox2.Controls.Add(this.listBoxActions);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Location = new System.Drawing.Point(2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(548, 1240);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(367, 504);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             // 
@@ -992,12 +1067,13 @@
             this.tableLayoutPanel3.Controls.Add(this.buttonModifier, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.buttonStartBot, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.buttonStopBot, 1, 1);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(13, 628);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(9, 408);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(530, 112);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(354, 72);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
             // tableLayoutPanel2
@@ -1012,26 +1088,14 @@
             this.tableLayoutPanel2.Controls.Add(this.buttonSaveSequence, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBoxListSequences, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonClearSequence, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(9, 26);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 17);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(536, 80);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(358, 54);
             this.tableLayoutPanel2.TabIndex = 21;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.AutoSize = true;
-            this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox3.Controls.Add(this.labelNotice);
-            this.groupBox3.Controls.Add(this.listBoxLog);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(557, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(664, 1240);
-            this.groupBox3.TabIndex = 22;
-            this.groupBox3.TabStop = false;
             // 
             // buttonClearSequence
             // 
@@ -1040,24 +1104,41 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClearSequence.AutoSize = true;
             this.buttonClearSequence.BackColor = System.Drawing.Color.DimGray;
-            this.buttonClearSequence.Location = new System.Drawing.Point(271, 43);
+            this.buttonClearSequence.Location = new System.Drawing.Point(181, 29);
+            this.buttonClearSequence.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonClearSequence.Name = "buttonClearSequence";
-            this.buttonClearSequence.Size = new System.Drawing.Size(262, 34);
+            this.buttonClearSequence.Size = new System.Drawing.Size(175, 23);
             this.buttonClearSequence.TabIndex = 12;
             this.buttonClearSequence.Text = "Clear Sequence";
             this.buttonClearSequence.UseVisualStyleBackColor = false;
             this.buttonClearSequence.Click += new System.EventHandler(this.buttonClearSequence_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.AutoSize = true;
+            this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox3.Controls.Add(this.labelNotice);
+            this.groupBox3.Controls.Add(this.listBoxLog);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(373, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(445, 504);
+            this.groupBox3.TabIndex = 22;
+            this.groupBox3.TabStop = false;
+            // 
             // MainApp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1224, 1246);
+            this.ClientSize = new System.Drawing.Size(820, 508);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1246, 905);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(836, 532);
             this.Name = "MainApp";
             this.Text = "Tao\'s Bot Maker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainApp_FormClosing);

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotFF_peche", "BotFF_peche\BotFF_peche.csproj", "{2815EEDE-1FC2-434D-85D9-2E6CCC494818}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tao's Bot Maker", "BotFF_peche\Tao's Bot Maker.csproj", "{2815EEDE-1FC2-434D-85D9-2E6CCC494818}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

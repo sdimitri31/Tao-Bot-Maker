@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BotFF_peche
+namespace Tao_Bot_Maker
 {
     class Bot
     {

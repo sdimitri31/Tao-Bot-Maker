@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace BotFF_peche
+namespace Tao_Bot_Maker
 {
     class SequenceXmlManager
     {
@@ -189,6 +189,7 @@ namespace BotFF_peche
 
         public List<String> sequencesList()
         {
+            System.IO.Directory.CreateDirectory(@"Sequences");
             DirectoryInfo directory = new DirectoryInfo(@"Sequences");
             FileInfo[] files = directory.GetFiles("*.xml"); //Getting xml files
 
