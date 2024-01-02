@@ -144,32 +144,32 @@ namespace Tao_Bot_Maker
             //Execute la séquence
             foreach (Action action in sequence.getActions())
             {
-                switch (action.type)
+                switch (action.Type)
                 {
-                    case (int)Action.ActionType.Touche:
-                        Action_Touche action_touche = (Action_Touche)action;
-                        log("Action : Touche " + action_touche.key, true);
-                        SendKeys.SendWait(PrepareForSendKeys(action_touche.key));
+                    case (int)Action.ActionType.Key:
+                        ActionKey action_touche = (ActionKey)action;
+                        log("Action : Touche " + action_touche.Key, true);
+                        SendKeys.SendWait(PrepareForSendKeys(action_touche.Key));
                         break;
 
-                    case (int)Action.ActionType.Attente:
-                        Action_Attente action_attente = (Action_Attente)action;
-                        log("Action : Attente " + action_attente.delai, true);
-                        Thread.Sleep(action_attente.delai);
+                    case (int)Action.ActionType.Wait:
+                        ActionWait action_attente = (ActionWait)action;
+                        log("Action : Attente " + action_attente.WaitTime, true);
+                        Thread.Sleep(action_attente.WaitTime);
                         break;
 
-                    case (int)Action.ActionType.Image_Attente:
+                    case (int)Action.ActionType.PictureWait:
 
-                        Action_Image action_image = (Action_Image)action;
-                        log("Action : Attente d'image " + action_image.chemin, true);
+                        ActionPictureWait action_image = (ActionPictureWait)action;
+                        log("Action : Attente d'image " + action_image.PictureName, true);
 
                         //Récupère les dimensions de l'image pour l'encadrement
-                        String imageFullPath = Directory.GetCurrentDirectory() + "\\Images\\" + action_image.chemin;
+                        String imageFullPath = MainApp.PICTURE_FOLDER_NAME + "\\" + action_image.PictureName;
                         System.Drawing.Image imageWait = System.Drawing.Image.FromFile(imageFullPath);
 
                         //Zone de recherche de l'image
                         zone.clearRectangles();
-                        zone.drawRectangle(action_image.x1, action_image.y1, action_image.x2 - action_image.x1, action_image.y2 - action_image.y1);
+                        zone.DrawRectangle(action_image.X1, action_image.Y1, action_image.X2 - action_image.X1, action_image.Y2 - action_image.Y1);
                         refreshRectangles();
 
                         var stopwatch = new Stopwatch();
@@ -181,7 +181,7 @@ namespace Tao_Bot_Maker
                         while (results_wait_image == null)
                         {
                             //Recherche l'image dans une zone précise
-                            results_wait_image = UseImageSearchArea(imageFullPath, action_image.tolerance.ToString(), action_image.x1, action_image.y1, action_image.x2, action_image.y2);
+                            results_wait_image = UseImageSearchArea(imageFullPath, action_image.Threshold.ToString(), action_image.X1, action_image.Y1, action_image.X2, action_image.Y2);
                             Thread.Sleep(10);
                             
                             //Compte le temps passé dans la boucle
@@ -195,17 +195,17 @@ namespace Tao_Bot_Maker
                             }
 
                             //Si on passe trop de temps on quitte et lance une autre séquence
-                            if (seconds >= action_image.waitTime)
+                            if (seconds >= action_image.WaitTime)
                             {
                                 stopwatch.Stop();
-                                doSequence(sequenceXmlManager.loadSequence(action_image.sequenceIfExpired), zone);
+                                doSequence(sequenceXmlManager.loadSequence(action_image.SequenceIfExpired), zone);
                                 return;
                             }
                         }
                         stopwatch.Stop();
 
                         zone.clearRectangles();
-                        zone.drawRectangle(Int32.Parse(results_wait_image[1]) - 15, Int32.Parse(results_wait_image[2]) - 15, imageWait.Width + 30, imageWait.Height + 30);
+                        zone.DrawRectangle(Int32.Parse(results_wait_image[1]) - 15, Int32.Parse(results_wait_image[2]) - 15, imageWait.Width + 30, imageWait.Height + 30);
                         refreshRectangles();
 
                         log("Action : Image trouvée X :" + results_wait_image[1] + " Y : " + results_wait_image[2], true);
@@ -213,54 +213,54 @@ namespace Tao_Bot_Maker
 
                         break;
 
-                    case (int)Action.ActionType.Si_Image:
+                    case (int)Action.ActionType.IfPicture:
 
-                        Action_Si_Image action_si_image = (Action_Si_Image)action;
-                        log("Action : si image " + action_si_image.chemin, true);
+                        ActionIfPicture action_si_image = (ActionIfPicture)action;
+                        log("Action : si image " + action_si_image.PictureName, true);
 
                         //Récupère les dimensions de l'image pour l'encadrement
-                        String siImageFullPath = Directory.GetCurrentDirectory() + "\\Images\\" + action_si_image.chemin;
+                        String siImageFullPath = Directory.GetCurrentDirectory() + "\\Images\\" + action_si_image.PictureName;
                         System.Drawing.Image img = System.Drawing.Image.FromFile(siImageFullPath);
 
                         //Recherche de l'image
-                        String[] results_if_image = UseImageSearchArea(siImageFullPath, action_si_image.tolerance.ToString(), action_si_image.x1, action_si_image.y1, action_si_image.x2, action_si_image.y2);
+                        String[] results_if_image = UseImageSearchArea(siImageFullPath, action_si_image.Threshold.ToString(), action_si_image.X1, action_si_image.Y1, action_si_image.X2, action_si_image.Y2);
 
                         //Si on ne trouve pas l'image
                         if (results_if_image == null)
                         {
-                            log("Action : Image pas trouvée execution de la séquence : " + action_si_image.ifFalseSequence, true);
-                            doSequence(sequenceXmlManager.loadSequence(action_si_image.ifFalseSequence), zone);
+                            log("Action : Image pas trouvée execution de la séquence : " + action_si_image.SequenceIfNotFound, true);
+                            doSequence(sequenceXmlManager.loadSequence(action_si_image.SequenceIfNotFound), zone);
                         }
                         else
                         {
-                            log("Action : Image trouvée X :" + results_if_image[1] + " Y : " + results_if_image[2] + " Execution de la séquence : " + action_si_image.ifTrueSequence, true);
+                            log("Action : Image trouvée X :" + results_if_image[1] + " Y : " + results_if_image[2] + " Execution de la séquence : " + action_si_image.SequenceIfFound, true);
 
                             zone.clearRectangles();
-                            zone.drawRectangle(Int32.Parse(results_if_image[1]) - 15, Int32.Parse(results_if_image[2]) - 15, img.Width + 30, img.Height + 30);
+                            zone.DrawRectangle(Int32.Parse(results_if_image[1]) - 15, Int32.Parse(results_if_image[2]) - 15, img.Width + 30, img.Height + 30);
                             refreshRectangles();
-                            doSequence(sequenceXmlManager.loadSequence(action_si_image.ifTrueSequence), zone);
+                            doSequence(sequenceXmlManager.loadSequence(action_si_image.SequenceIfFound), zone);
                         }
                         break;
 
                     case (int)Action.ActionType.Sequence:
-                        Action_Sequence action_sequence = (Action_Sequence)action;
-                        log("Action : sequence " + action_sequence.chemin, true);
-                        doSequence(sequenceXmlManager.loadSequence(action_sequence.chemin), zone);
+                        ActionSequence action_sequence = (ActionSequence)action;
+                        log("Action : sequence " + action_sequence.SequencePath, true);
+                        doSequence(sequenceXmlManager.loadSequence(action_sequence.SequencePath), zone);
                         break;
 
-                    case (int)Action.ActionType.Clic:
-                        Action_Clic action_clic = (Action_Clic)action;
-                        Cursor.Position = new Point(action_clic.x, action_clic.y);
+                    case (int)Action.ActionType.Click:
+                        ActionClick action_clic = (ActionClick)action;
+                        Cursor.Position = new Point(action_clic.X, action_clic.Y);
                         DoMouseClick();
                         break;
 
-                    case (int)Action.ActionType.Boucle:
-                        Action_Boucle action_boucle = (Action_Boucle)action;
+                    case (int)Action.ActionType.Loop:
+                        ActionLoop action_boucle = (ActionLoop)action;
                         int i = 1;
-                        while(i <= action_boucle.nbRepetition)
+                        while(i <= action_boucle.NumberOfRepetitions)
                         {
-                            log("Action : Boucle sequence " + action_boucle.chemin + " " + i + "/" + action_boucle.nbRepetition, true);
-                            doSequence(sequenceXmlManager.loadSequence(action_boucle.chemin), zone);
+                            log("Action : Boucle sequence " + action_boucle.SequencePath + " " + i + "/" + action_boucle.NumberOfRepetitions, true);
+                            doSequence(sequenceXmlManager.loadSequence(action_boucle.SequencePath), zone);
                             i++;
                         }
                         break;

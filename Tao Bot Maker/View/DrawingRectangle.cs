@@ -59,9 +59,27 @@ namespace Tao_Bot_Maker
                 e.Graphics.DrawRectangle(pen, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        public void drawRectangle(int x, int y, int width, int height)
+        public void DrawRectangle(int x, int y, int width, int height)
         {
-            rectangles.Add(new Rectangle(x, y, width, height));
+            if (width == 0 || height == 0)
+            {
+                throw new ArgumentException("Width and height must be greater than 0");
+            }
+            else
+            {
+                rectangles.Add(new Rectangle(x, y, width, height));
+            }
+        }
+        public void DrawRectangleAtCoords(int x1, int y1, int x2, int y2)
+        {
+            if (x2 < x1 || y2 < y1)
+            {
+                throw new ArgumentException("X1 and Y1 must be smaller than X2 and Y2");
+            }
+            else
+            {
+                rectangles.Add(new Rectangle(x1, y1, x2, y2));
+            }
         }
 
         public void clearRectangles()
