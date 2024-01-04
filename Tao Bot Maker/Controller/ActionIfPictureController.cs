@@ -1,5 +1,4 @@
-﻿
-using LogFramework;
+﻿using LogFramework;
 using System;
 using System.IO;
 using System.Security.Cryptography;

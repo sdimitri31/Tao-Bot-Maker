@@ -72,17 +72,13 @@ namespace Tao_Bot_Maker
         }
         public void DrawRectangleAtCoords(int x1, int y1, int x2, int y2)
         {
-            if (x2 < x1 || y2 < y1)
-            {
-                throw new ArgumentException("X1 and Y1 must be smaller than X2 and Y2");
-            }
-            else
-            {
-                rectangles.Add(new Rectangle(x1, y1, x2, y2));
-            }
+            //Calculate the height and witdh of the bottom right corner
+            x2 -= x1; 
+            y2 -= y1;
+            DrawRectangle(x1, y1, x2, y2);
         }
 
-        public void clearRectangles()
+        public void ClearRectangles()
         {
             rectangles.Clear();
         }

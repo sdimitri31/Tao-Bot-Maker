@@ -206,6 +206,13 @@ namespace Tao_Bot_Maker.View
             set { comboBoxActionIfPictureImageNotFound.SelectedItem = value.ToString(); }
         }
 
+        public void DrawFromTextBoxValues()
+        {
+            actionView.ClearRectangles();
+            actionView.DrawRectangleAtCoords(X1, Y1, X2, Y2);
+            actionView.RefreshRectangles();
+        }
+
         private void buttonActionIfPictureImagePath_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -264,9 +271,7 @@ namespace Tao_Bot_Maker.View
 
         private void buttonActionIfPictureShowZone_Click(object sender, EventArgs e)
         {
-            actionView.ClearRectangles();
-            actionView.DrawRectangleAtCoords(X1, Y1, X2, Y2);
-            actionView.RefreshRectangles();
+            DrawFromTextBoxValues();
         }
     }
 }

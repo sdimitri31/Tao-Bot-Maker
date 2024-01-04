@@ -84,19 +84,17 @@ namespace Tao_Bot_Maker.View
             }
             set { textBoxPanelActionMouseClick_Y.Text = value.ToString(); }
         }
-        private void buttonPanelActionMouseClick_ShowZone_Click(object sender, EventArgs e)
+
+        public void DrawFromTextBoxValues()
         {
             actionView.ClearRectangles();
-            try
-            {
-                actionView.DrawRectangle(
-                    Int32.Parse(textBoxPanelActionMouseClick_X.Text) - 5,
-                    Int32.Parse(textBoxPanelActionMouseClick_Y.Text) - 5,
-                    (Int32.Parse(textBoxPanelActionMouseClick_X.Text) + 10) - (Int32.Parse(textBoxPanelActionMouseClick_X.Text)),
-                    (Int32.Parse(textBoxPanelActionMouseClick_Y.Text) + 10) - (Int32.Parse(textBoxPanelActionMouseClick_Y.Text)));
-            }
-            catch { }
+            actionView.DrawRectangleAtCoords(X - 5, Y - 5, X + 5, Y + 5);
             actionView.RefreshRectangles();
+        }
+
+        private void buttonPanelActionMouseClick_ShowZone_Click(object sender, EventArgs e)
+        {
+            DrawFromTextBoxValues();
         }
     }
 }

@@ -78,13 +78,14 @@
     <Compile Include="Controller\ActionKeyController.cs" />
     <Compile Include="Controller\ActionWaitController.cs" />
     <Compile Include="Controller\ImageSearchController.cs" />
+    <Compile Include="Controller\SequenceController.cs" />
     <Compile Include="View\DrawingRectangle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainApp.cs">
+    <Compile Include="View\MainApp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainApp.Designer.cs">
+    <Compile Include="View\MainApp.Designer.cs">
       <DependentUpon>MainApp.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Action.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Model\ActionKey.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sequence.cs" />
+    <Compile Include="Model\Sequence.cs" />
     <Compile Include="Controller\SequenceXmlManager.cs" />
     <Compile Include="View\ActionClickPanel.cs">
       <SubType>UserControl</SubType>
@@ -147,7 +148,13 @@
     <Compile Include="View\ActionWaitPanel.Designer.cs">
       <DependentUpon>ActionWaitPanel.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainApp.resx">
+    <Compile Include="View\SaveSequenceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SaveSequenceView.Designer.cs">
+      <DependentUpon>SaveSequenceView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\MainApp.resx">
       <DependentUpon>MainApp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -184,6 +191,9 @@
     <EmbeddedResource Include="View\ActionWaitPanel.resx">
       <DependentUpon>ActionWaitPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\SaveSequenceView.resx">
+      <DependentUpon>SaveSequenceView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -198,7 +208,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tao.ico" />
+    <None Include="Resources\icons8-edit-48.png" />
+    <None Include="Resources\icons8-stop-circled-48.png" />
+    <None Include="Resources\icons8-circled-play-48.png" />
+    <None Include="Resources\icons8-great-britain-48.png" />
+    <None Include="Resources\icons8-france-48.png" />
+    <None Include="Resources\icons8-language-48.png" />
+    <None Include="Resources\icons8-change-theme-48.png" />
+    <None Include="Resources\icons8-save-as-48.png" />
+    <None Include="Resources\icons8-save-48.png" />
+    <None Include="Resources\icons8-remove-48.png" />
+    <None Include="Resources\icons8-adjust-48.png" />
+    <None Include="Resources\icons8-close-48.png" />
+    <None Include="Resources\icons8-add-48.png" />
+    <None Include="Resources\icons8-stop-48.png" />
+    <None Include="Resources\icons8-play-48.png" />
+    <EmbeddedResource Include="tao.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

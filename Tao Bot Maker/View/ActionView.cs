@@ -1,5 +1,6 @@
 ﻿using LogFramework;
 using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Tao_Bot_Maker.View
@@ -15,14 +16,14 @@ namespace Tao_Bot_Maker.View
             //Draw a rectangle at coordinates
             try
             {
-                drawingForm.DrawRectangleAtCoords(x1, y1, x2 - x1, y2 - y1);
+                drawingForm.DrawRectangleAtCoords(x1, y1, x2, y2);
                 Log.Write(Log.TRACE, "Rectangle drawn at coords");
                 Log.Write(Log.TRACE, "x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2);
             }
             catch (ArgumentException e)
             {
-                MessageBox.Show(e.Message);
-                Log.Write(Log.ERROR, "Trying to draw at impossible coords.");
+                Log.Write(Log.ERROR, "ActionView.cs Line 25");
+                Log.Write(Log.ERROR, e.Message);
                 Log.Write(Log.ERROR, "x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2);
             }
         }
@@ -44,23 +45,74 @@ namespace Tao_Bot_Maker.View
         }
         public void ClearRectangles()
         {
-            drawingForm.clearRectangles();
+            drawingForm.ClearRectangles();
             Log.Write(Log.TRACE, "Rectangles cleared");
         }
         public void RefreshRectangles()
         {
             drawingForm.Refresh();
         }
+        
+        //Get Key Shortcut when form is Focused
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                switch (comboBoxActions.SelectedIndex)
+                {
+                    case (int)Action.ActionType.PictureWait:
+                        //Get Mouse coords
+                        ((ActionPictureWaitPanel)actionPanel).X1 = Cursor.Position.X;
+                        ((ActionPictureWaitPanel)actionPanel).Y1 = Cursor.Position.Y;
+                        //Try to draw a rectangle
+                        ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
+                        break;
+                    case (int)Action.ActionType.IfPicture:
+                        //Get Mouse coords
+                        ((ActionIfPicturePanel)actionPanel).X1 = Cursor.Position.X;
+                        ((ActionIfPicturePanel)actionPanel).Y1 = Cursor.Position.Y;
+                        //Try to draw a rectangle
+                        ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+                        break;
+                    case (int)Action.ActionType.Click:
+                        //Get Mouse coords
+                        ((ActionClickPanel)actionPanel).X = Cursor.Position.X;
+                        ((ActionClickPanel)actionPanel).Y = Cursor.Position.Y;
+                        //Try to draw a rectangle
+                        ((ActionClickPanel)actionPanel).DrawFromTextBoxValues();
+                        break;
+                }
+            }
+            else if (keyData == (Keys.F2))
+            {
+                switch (comboBoxActions.SelectedIndex)
+                {
+                    case (int)Action.ActionType.PictureWait:
+                        //Get Mouse coords
+                        ((ActionPictureWaitPanel)actionPanel).X2 = Cursor.Position.X;
+                        ((ActionPictureWaitPanel)actionPanel).Y2 = Cursor.Position.Y;
+                        //Try to draw a rectangle
+                        ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
+                        break;
+                    case (int)Action.ActionType.IfPicture:
+                        //Get Mouse coords
+                        ((ActionIfPicturePanel)actionPanel).X2 = Cursor.Position.X;
+                        ((ActionIfPicturePanel)actionPanel).Y2 = Cursor.Position.Y;
+                        //Try to draw a rectangle
+                        ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+                        break;
+                        }
+                }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
         //UserControl of selected action
         Control actionPanel;
 
-        public bool isEditMode { get; set; }
-
         public ActionView()
         {
             InitializeComponent();
-            
+
             //Create a form to enable drawing
             drawingForm = new DrawingRectangle();
             drawingForm.Show();
@@ -71,17 +123,11 @@ namespace Tao_Bot_Maker.View
             //Populate combobox with actions
             comboBoxActions.Items.AddRange(ActionController.GetActionTypeNames());
             comboBoxActions.SelectedIndex = 0;
-
-            //Not in edit mode
-            isEditMode = false;
         }
 
         public ActionView(Action action)
         {
             InitializeComponent();
-
-            //In edit mode
-            isEditMode = true;
 
             //Create a form to enable drawing
             drawingForm = new DrawingRectangle();
@@ -136,7 +182,6 @@ namespace Tao_Bot_Maker.View
             RefreshRectangles();
             actionPanel = ActionController.GetControlView(comboBoxActions.SelectedIndex, this);
             ShowPanel(actionPanel);
-
         }
 
         private void button_Ok_Click(object sender, EventArgs e)

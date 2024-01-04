@@ -60,11 +60,11 @@ namespace Tao_Bot_Maker
         ThreadStart ts;
         Thread backgroundThread;
 
-        bool isRunning = false;
+        public bool isRunning = false;
 
         public List<Action> actionList = new List<Action>();
         public String sequenceName = "";
-        public Sequence sequence;
+        public SequenceController sequence;
 
         DrawingRectangle zoneRecherche;
 
@@ -87,7 +87,7 @@ namespace Tao_Bot_Maker
         }
 
 
-        public void botStart(Sequence sequence)
+        public void botStart(SequenceController sequence)
         {
             isRunning = true;
             backgroundThread = new Thread(ts);
@@ -108,7 +108,7 @@ namespace Tao_Bot_Maker
                 //Execute la séquence chargée
                 if (sequence != null)
                 {
-                    doSequence(sequence, zoneRecherche);
+                    doSequence(sequence.Sequence, zoneRecherche);
                 }
 
                 stopBot();
@@ -135,14 +135,16 @@ namespace Tao_Bot_Maker
 
         private void doSequence(Sequence sequence, DrawingRectangle zone)
         {
-            zone.clearRectangles();
+            zone.ClearRectangles();
             refreshRectangles();
+            SequenceController sequenceController = new SequenceController();
+            sequenceController.Sequence = sequence;
             //Charge une séquence 
             SequenceXmlManager sequenceXmlManager = new SequenceXmlManager();
             //Sequence sequence = sequenceXmlManager.loadSequence(sequenceName);
 
             //Execute la séquence
-            foreach (Action action in sequence.getActions())
+            foreach (Action action in sequenceController.GetActions())
             {
                 switch (action.Type)
                 {
@@ -168,7 +170,7 @@ namespace Tao_Bot_Maker
                         System.Drawing.Image imageWait = System.Drawing.Image.FromFile(imageFullPath);
 
                         //Zone de recherche de l'image
-                        zone.clearRectangles();
+                        zone.ClearRectangles();
                         zone.DrawRectangle(action_image.X1, action_image.Y1, action_image.X2 - action_image.X1, action_image.Y2 - action_image.Y1);
                         refreshRectangles();
 
@@ -198,13 +200,13 @@ namespace Tao_Bot_Maker
                             if (seconds >= action_image.WaitTime)
                             {
                                 stopwatch.Stop();
-                                doSequence(sequenceXmlManager.loadSequence(action_image.SequenceIfExpired), zone);
+                                doSequence(SequenceXmlManager.LoadSequence(action_image.SequenceIfExpired), zone);
                                 return;
                             }
                         }
                         stopwatch.Stop();
 
-                        zone.clearRectangles();
+                        zone.ClearRectangles();
                         zone.DrawRectangle(Int32.Parse(results_wait_image[1]) - 15, Int32.Parse(results_wait_image[2]) - 15, imageWait.Width + 30, imageWait.Height + 30);
                         refreshRectangles();
 
@@ -229,23 +231,23 @@ namespace Tao_Bot_Maker
                         if (results_if_image == null)
                         {
                             log("Action : Image pas trouvée execution de la séquence : " + action_si_image.SequenceIfNotFound, true);
-                            doSequence(sequenceXmlManager.loadSequence(action_si_image.SequenceIfNotFound), zone);
+                            doSequence(SequenceXmlManager.LoadSequence(action_si_image.SequenceIfNotFound), zone);
                         }
                         else
                         {
                             log("Action : Image trouvée X :" + results_if_image[1] + " Y : " + results_if_image[2] + " Execution de la séquence : " + action_si_image.SequenceIfFound, true);
 
-                            zone.clearRectangles();
+                            zone.ClearRectangles();
                             zone.DrawRectangle(Int32.Parse(results_if_image[1]) - 15, Int32.Parse(results_if_image[2]) - 15, img.Width + 30, img.Height + 30);
                             refreshRectangles();
-                            doSequence(sequenceXmlManager.loadSequence(action_si_image.SequenceIfFound), zone);
+                            doSequence(SequenceXmlManager.LoadSequence(action_si_image.SequenceIfFound), zone);
                         }
                         break;
 
                     case (int)Action.ActionType.Sequence:
                         ActionSequence action_sequence = (ActionSequence)action;
                         log("Action : sequence " + action_sequence.SequencePath, true);
-                        doSequence(sequenceXmlManager.loadSequence(action_sequence.SequencePath), zone);
+                        doSequence(SequenceXmlManager.LoadSequence(action_sequence.SequencePath), zone);
                         break;
 
                     case (int)Action.ActionType.Click:
@@ -260,7 +262,7 @@ namespace Tao_Bot_Maker
                         while(i <= action_boucle.NumberOfRepetitions)
                         {
                             log("Action : Boucle sequence " + action_boucle.SequencePath + " " + i + "/" + action_boucle.NumberOfRepetitions, true);
-                            doSequence(sequenceXmlManager.loadSequence(action_boucle.SequencePath), zone);
+                            doSequence(SequenceXmlManager.LoadSequence(action_boucle.SequencePath), zone);
                             i++;
                         }
                         break;
