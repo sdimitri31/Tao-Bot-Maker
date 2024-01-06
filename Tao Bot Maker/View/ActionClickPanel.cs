@@ -15,16 +15,24 @@ namespace Tao_Bot_Maker.View
         ActionView actionView;
         public ActionClickPanel(ActionView actionView)
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            Localization();
             this.actionView = actionView;
         }
         public ActionClickPanel(ActionView actionView, Action action)
         {
             InitializeComponent();
+            Localization();
             this.actionView = actionView;
             SelectedClick = ((ActionClick)action).SelectedClick;
             X = ((ActionClick)action).X;
             Y = ((ActionClick)action).Y;
+        }
+        private void Localization()
+        {
+            radioButtonPanelActionMouseClick_left.Text = Properties.strings.label_LeftClick;
+            radioButtonPanelActionMouseClick_right.Text = Properties.strings.label_RightClick;
+            buttonPanelActionMouseClick_ShowZone.Text = Properties.strings.button_ShowDrawingArea;
         }
 
         public String SelectedClick

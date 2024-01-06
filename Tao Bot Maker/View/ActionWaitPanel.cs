@@ -16,12 +16,18 @@ namespace Tao_Bot_Maker.View
         public ActionWaitPanel()
         {
             InitializeComponent();
+            Localization();
         }
 
         public ActionWaitPanel(Action action)
         {
             InitializeComponent();
+            Localization();
             WaitTime = ((ActionWait)action).WaitTime;
+        }
+        private void Localization()
+        {
+            label_WaitTime.Text = Properties.strings.label_WaitTime;
         }
 
         public int WaitTime

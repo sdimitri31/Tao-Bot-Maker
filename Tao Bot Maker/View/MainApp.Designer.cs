@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainApp));
-            this.labelNotice = new System.Windows.Forms.Label();
             this.listBoxActions = new System.Windows.Forms.ListBox();
             this.listBoxLog = new System.Windows.Forms.ListBox();
             this.comboBoxListSequences = new System.Windows.Forms.ComboBox();
@@ -60,16 +59,6 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelNotice
-            // 
-            this.labelNotice.AutoSize = true;
-            this.labelNotice.Location = new System.Drawing.Point(437, 55);
-            this.labelNotice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelNotice.Name = "labelNotice";
-            this.labelNotice.Size = new System.Drawing.Size(41, 13);
-            this.labelNotice.TabIndex = 12;
-            this.labelNotice.Text = "label17";
-            // 
             // listBoxActions
             // 
             this.listBoxActions.AllowDrop = true;
@@ -83,7 +72,7 @@
             this.listBoxActions.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxActions.Name = "listBoxActions";
             this.listBoxActions.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxActions.Size = new System.Drawing.Size(433, 316);
+            this.listBoxActions.Size = new System.Drawing.Size(484, 329);
             this.listBoxActions.TabIndex = 5;
             this.listBoxActions.SelectedIndexChanged += new System.EventHandler(this.ListBoxActions_SelectedIndexChanged);
             this.listBoxActions.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBoxActions_DragDrop);
@@ -94,17 +83,16 @@
             // 
             // listBoxLog
             // 
-            this.listBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.listBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxLog.BackColor = System.Drawing.Color.DimGray;
             this.listBoxLog.ForeColor = System.Drawing.Color.White;
             this.listBoxLog.FormattingEnabled = true;
-            this.listBoxLog.Location = new System.Drawing.Point(0, 374);
+            this.listBoxLog.Location = new System.Drawing.Point(0, 390);
             this.listBoxLog.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxLog.Name = "listBoxLog";
             this.listBoxLog.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxLog.Size = new System.Drawing.Size(585, 121);
+            this.listBoxLog.Size = new System.Drawing.Size(484, 121);
             this.listBoxLog.TabIndex = 8;
             // 
             // comboBoxListSequences
@@ -126,7 +114,7 @@
             this.tsm_Settings});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(585, 24);
+            this.menuStrip.Size = new System.Drawing.Size(484, 24);
             this.menuStrip.TabIndex = 22;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -254,7 +242,8 @@
             // 
             this.tsm_Settings_Logs.Name = "tsm_Settings_Logs";
             this.tsm_Settings_Logs.Size = new System.Drawing.Size(180, 22);
-            this.tsm_Settings_Logs.Text = "Logs";
+            this.tsm_Settings_Logs.Text = "Save logs";
+            this.tsm_Settings_Logs.Click += new System.EventHandler(this.Tsm_Settings_Logs_Click);
             // 
             // panel1
             // 
@@ -272,7 +261,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(585, 30);
+            this.panel1.Size = new System.Drawing.Size(484, 30);
             this.panel1.TabIndex = 23;
             // 
             // button_SaveSequence
@@ -360,9 +349,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(585, 495);
+            this.ClientSize = new System.Drawing.Size(484, 511);
             this.Controls.Add(this.listBoxActions);
-            this.Controls.Add(this.labelNotice);
             this.Controls.Add(this.listBoxLog);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip);
@@ -390,7 +378,6 @@
         private System.Windows.Forms.Button button_SaveSequence;
         private System.Windows.Forms.ComboBox comboBoxListSequences;
         private System.Windows.Forms.Button button_EditAction;
-        private System.Windows.Forms.Label labelNotice;
         private System.Windows.Forms.Button button_DeleteAction;
         private System.Windows.Forms.Button button_AddAction;
         private System.Windows.Forms.MenuStrip menuStrip;

@@ -15,14 +15,20 @@ namespace Tao_Bot_Maker.View
         public ActionSequencePanel()
         {
             InitializeComponent();
+            Localization();
             comboBoxPanelActionSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
         }
 
         public ActionSequencePanel(Action action)
         {
             InitializeComponent();
+            Localization();
             comboBoxPanelActionSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
             SequencePath = ((ActionSequence)action).SequencePath;
+        }
+        private void Localization()
+        {
+            label_Sequence.Text = Properties.strings.label_Sequence;
         }
 
         public String SequencePath

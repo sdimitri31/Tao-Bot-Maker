@@ -22,6 +22,7 @@ namespace Tao_Bot_Maker.View
         public ActionIfPicturePanel(ActionView actionView)
         {
             InitializeComponent();
+            Localization();
             originalPath = null;
             destinationPath = null;
             this.actionView = actionView;
@@ -31,6 +32,7 @@ namespace Tao_Bot_Maker.View
         public ActionIfPicturePanel(ActionView actionView, Action action)
         {
             InitializeComponent();
+            Localization();
             originalPath = null;
             destinationPath = null;
             this.actionView = actionView;
@@ -45,6 +47,16 @@ namespace Tao_Bot_Maker.View
             Y2 = ((ActionIfPicture)action).Y2;
             SequenceIfFound = ((ActionIfPicture)action).SequenceIfFound;
             SequenceIfNotFound = ((ActionIfPicture)action).SequenceIfNotFound;
+        }
+        private void Localization()
+        {
+            label_SequenceIfNoPicture.Text = Properties.strings.label_SequenceIfNotFound;
+            label_SequenceIfPicture.Text = Properties.strings.label_SequenceIfPicture;
+            label_Threshold.Text = Properties.strings.label_Threshold;
+            buttonActionIfPictureClearDrawing.Text = Properties.strings.button_ClearZone;
+            buttonActionIfPictureFindImage.Text = Properties.strings.button_FindImage;
+            buttonActionIfPictureImagePath.Text = Properties.strings.button_Picture;
+            buttonActionIfPictureShowZone.Text = Properties.strings.button_ShowDrawingArea;
         }
 
         public String DestinationPath
@@ -252,13 +264,13 @@ namespace Tao_Bot_Maker.View
 
                 MessageBox.Show("IMG FOUND\r\n " +
                     "Coords X :" + results_if_image[1] + " Y : " + results_if_image[2]);
-                Log.Write(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
+                actionView.Log(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
 
             }
             else
             {
                 MessageBox.Show("IMG NOT FOUND");
-                Log.Write(Log.INFO, "Image introuvable");
+                actionView.Log(Log.INFO, "Image introuvable");
             }
 
         }

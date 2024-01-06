@@ -75,8 +75,10 @@
             // 
             // ActionView
             // 
+            this.AcceptButton = this.button_Ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button_Cancel;
             this.ClientSize = new System.Drawing.Size(387, 337);
             this.Controls.Add(this.panelSelectedAction);
             this.Controls.Add(this.button_Cancel);

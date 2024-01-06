@@ -78,7 +78,13 @@
     <Compile Include="Controller\ActionKeyController.cs" />
     <Compile Include="Controller\ActionWaitController.cs" />
     <Compile Include="Controller\ImageSearchController.cs" />
+    <Compile Include="Controller\IniFile.cs" />
     <Compile Include="Controller\SequenceController.cs" />
+    <Compile Include="Properties\strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>strings.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\DrawingRectangle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,11 @@
     <Compile Include="View\SaveSequenceView.Designer.cs">
       <DependentUpon>SaveSequenceView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Properties\strings.fr.resx" />
+    <EmbeddedResource Include="Properties\strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainApp.resx">
       <DependentUpon>MainApp.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,6 +248,5 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

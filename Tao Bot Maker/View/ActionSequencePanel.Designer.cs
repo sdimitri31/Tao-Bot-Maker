@@ -30,7 +30,7 @@
         {
             this.label16 = new System.Windows.Forms.Label();
             this.comboBoxPanelActionSequence = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_Sequence = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label16
@@ -53,21 +53,21 @@
             this.comboBoxPanelActionSequence.Size = new System.Drawing.Size(214, 21);
             this.comboBoxPanelActionSequence.TabIndex = 18;
             // 
-            // label1
+            // label_Sequence
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 5);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Séquence :";
+            this.label_Sequence.AutoSize = true;
+            this.label_Sequence.Location = new System.Drawing.Point(2, 5);
+            this.label_Sequence.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_Sequence.Name = "label_Sequence";
+            this.label_Sequence.Size = new System.Drawing.Size(62, 13);
+            this.label_Sequence.TabIndex = 20;
+            this.label_Sequence.Text = "Séquence :";
             // 
             // ActionSequencePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_Sequence);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.comboBoxPanelActionSequence);
             this.Name = "ActionSequencePanel";
@@ -81,6 +81,6 @@
 
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox comboBoxPanelActionSequence;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_Sequence;
     }
 }

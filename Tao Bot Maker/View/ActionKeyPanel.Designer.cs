@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.textBoxPanelActionKey = new System.Windows.Forms.TextBox();
-            this.labelTouche = new System.Windows.Forms.Label();
+            this.label_Key = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxPanelActionKey
@@ -41,22 +41,22 @@
             this.textBoxPanelActionKey.Size = new System.Drawing.Size(179, 20);
             this.textBoxPanelActionKey.TabIndex = 1;
             // 
-            // labelTouche
+            // label_Key
             // 
-            this.labelTouche.AutoSize = true;
-            this.labelTouche.Location = new System.Drawing.Point(2, 9);
-            this.labelTouche.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTouche.Name = "labelTouche";
-            this.labelTouche.Size = new System.Drawing.Size(50, 13);
-            this.labelTouche.TabIndex = 2;
-            this.labelTouche.Text = "Touche :";
+            this.label_Key.AutoSize = true;
+            this.label_Key.Location = new System.Drawing.Point(2, 9);
+            this.label_Key.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_Key.Name = "label_Key";
+            this.label_Key.Size = new System.Drawing.Size(50, 13);
+            this.label_Key.TabIndex = 2;
+            this.label_Key.Text = "Touche :";
             // 
             // ActionKeyPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBoxPanelActionKey);
-            this.Controls.Add(this.labelTouche);
+            this.Controls.Add(this.label_Key);
             this.Name = "ActionKeyPanel";
             this.Size = new System.Drawing.Size(248, 33);
             this.ResumeLayout(false);
@@ -67,6 +67,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBoxPanelActionKey;
-        private System.Windows.Forms.Label labelTouche;
+        private System.Windows.Forms.Label label_Key;
     }
 }

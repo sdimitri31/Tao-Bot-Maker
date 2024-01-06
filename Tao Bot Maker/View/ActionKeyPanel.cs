@@ -15,11 +15,17 @@ namespace Tao_Bot_Maker.View
         public ActionKeyPanel()
         {
             InitializeComponent();
+            Localization();
         }
         public ActionKeyPanel(Action action)
         {
             InitializeComponent();
+            Localization();
             Key = ((ActionKey)action).Key;
+        }
+        private void Localization()
+        {
+            label_Key.Text = Properties.strings.label_Key;
         }
 
         public String Key

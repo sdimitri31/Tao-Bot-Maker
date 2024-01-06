@@ -78,7 +78,7 @@ namespace Tao_Bot_Maker
         }
         public void log(string logsentence, bool isthread = false, bool isTemporary = false)
         {
-            mainApp.log(logsentence, isthread, isTemporary);
+            mainApp.Log(logsentence, isthread, isTemporary);
         }
 
         public void setSequence(String sequenceName)

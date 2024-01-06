@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label15 = new System.Windows.Forms.Label();
+            this.label_WaitTime = new System.Windows.Forms.Label();
             this.textBoxWaitTime = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label15
+            // label_WaitTime
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(2, 9);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 13);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "Délai (ms) :";
+            this.label_WaitTime.AutoSize = true;
+            this.label_WaitTime.Location = new System.Drawing.Point(2, 9);
+            this.label_WaitTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_WaitTime.Name = "label_WaitTime";
+            this.label_WaitTime.Size = new System.Drawing.Size(59, 13);
+            this.label_WaitTime.TabIndex = 6;
+            this.label_WaitTime.Text = "Délai (ms) :";
             // 
             // textBoxWaitTime
             // 
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label_WaitTime);
             this.Controls.Add(this.textBoxWaitTime);
             this.Name = "ActionWaitPanel";
             this.Size = new System.Drawing.Size(211, 33);
@@ -64,7 +64,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label_WaitTime;
         private System.Windows.Forms.TextBox textBoxWaitTime;
     }
 }

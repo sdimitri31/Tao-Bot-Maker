@@ -28,38 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonPanelActionImage_ShowZone = new System.Windows.Forms.Button();
+            this.buttonActionPictureWaitShowZone = new System.Windows.Forms.Button();
             this.buttonActionPictureWaitClearDrawing = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label_SequenceIfExpired = new System.Windows.Forms.Label();
             this.buttonActionPictureWaitFindImage = new System.Windows.Forms.Button();
             this.textBoxActionPictureWaitWaitTime = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label_ExpirationTime = new System.Windows.Forms.Label();
             this.textBoxPanelActionPictureWaitThreshold = new System.Windows.Forms.TextBox();
             this.comboBoxActionPictureWaitSequenceIfExpired = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_Threshold = new System.Windows.Forms.Label();
+            this.label_Y2 = new System.Windows.Forms.Label();
             this.buttonActionPictureWaitImagePath = new System.Windows.Forms.Button();
             this.textBoxActionPictureWaitY2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label_Y1 = new System.Windows.Forms.Label();
             this.textBoxActionPictureWaitX2 = new System.Windows.Forms.TextBox();
             this.pictureBoxActionPictureWaitImage = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_X2 = new System.Windows.Forms.Label();
             this.textBoxActionPictureWaitY1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_X1 = new System.Windows.Forms.Label();
             this.textBoxActionPictureWaitX1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxActionPictureWaitImage)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonPanelActionImage_ShowZone
+            // buttonActionPictureWaitShowZone
             // 
-            this.buttonPanelActionImage_ShowZone.Location = new System.Drawing.Point(7, 205);
-            this.buttonPanelActionImage_ShowZone.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonPanelActionImage_ShowZone.Name = "buttonPanelActionImage_ShowZone";
-            this.buttonPanelActionImage_ShowZone.Size = new System.Drawing.Size(347, 24);
-            this.buttonPanelActionImage_ShowZone.TabIndex = 17;
-            this.buttonPanelActionImage_ShowZone.Text = "Afficher la zone de recherche";
-            this.buttonPanelActionImage_ShowZone.UseVisualStyleBackColor = false;
-            this.buttonPanelActionImage_ShowZone.Click += new System.EventHandler(this.buttonPanelActionImage_ShowZone_Click);
+            this.buttonActionPictureWaitShowZone.Location = new System.Drawing.Point(7, 205);
+            this.buttonActionPictureWaitShowZone.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonActionPictureWaitShowZone.Name = "buttonActionPictureWaitShowZone";
+            this.buttonActionPictureWaitShowZone.Size = new System.Drawing.Size(347, 24);
+            this.buttonActionPictureWaitShowZone.TabIndex = 17;
+            this.buttonActionPictureWaitShowZone.Text = "Afficher la zone de recherche";
+            this.buttonActionPictureWaitShowZone.UseVisualStyleBackColor = false;
+            this.buttonActionPictureWaitShowZone.Click += new System.EventHandler(this.buttonPanelActionImage_ShowZone_Click);
             // 
             // buttonActionPictureWaitClearDrawing
             // 
@@ -72,15 +72,15 @@
             this.buttonActionPictureWaitClearDrawing.UseVisualStyleBackColor = false;
             this.buttonActionPictureWaitClearDrawing.Click += new System.EventHandler(this.buttonActionPictureWaitClearDrawing_Click);
             // 
-            // label7
+            // label_SequenceIfExpired
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 185);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Séquence si expiration :";
+            this.label_SequenceIfExpired.AutoSize = true;
+            this.label_SequenceIfExpired.Location = new System.Drawing.Point(9, 185);
+            this.label_SequenceIfExpired.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_SequenceIfExpired.Name = "label_SequenceIfExpired";
+            this.label_SequenceIfExpired.Size = new System.Drawing.Size(120, 13);
+            this.label_SequenceIfExpired.TabIndex = 15;
+            this.label_SequenceIfExpired.Text = "Séquence si expiration :";
             // 
             // buttonActionPictureWaitFindImage
             // 
@@ -101,15 +101,15 @@
             this.textBoxActionPictureWaitWaitTime.Size = new System.Drawing.Size(79, 20);
             this.textBoxActionPictureWaitWaitTime.TabIndex = 14;
             // 
-            // label6
+            // label_ExpirationTime
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(192, 162);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Expiration (sec) :";
+            this.label_ExpirationTime.AutoSize = true;
+            this.label_ExpirationTime.Location = new System.Drawing.Point(192, 162);
+            this.label_ExpirationTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_ExpirationTime.Name = "label_ExpirationTime";
+            this.label_ExpirationTime.Size = new System.Drawing.Size(85, 13);
+            this.label_ExpirationTime.TabIndex = 13;
+            this.label_ExpirationTime.Text = "Expiration (sec) :";
             // 
             // textBoxPanelActionPictureWaitThreshold
             // 
@@ -132,25 +132,25 @@
             this.comboBoxActionPictureWaitSequenceIfExpired.Size = new System.Drawing.Size(214, 21);
             this.comboBoxActionPictureWaitSequenceIfExpired.TabIndex = 12;
             // 
-            // label5
+            // label_Threshold
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 162);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Tolerance :";
+            this.label_Threshold.AutoSize = true;
+            this.label_Threshold.Location = new System.Drawing.Point(9, 162);
+            this.label_Threshold.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_Threshold.Name = "label_Threshold";
+            this.label_Threshold.Size = new System.Drawing.Size(61, 13);
+            this.label_Threshold.TabIndex = 11;
+            this.label_Threshold.Text = "Tolerance :";
             // 
-            // label3
+            // label_Y2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(192, 141);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "y2 :";
+            this.label_Y2.AutoSize = true;
+            this.label_Y2.Location = new System.Drawing.Point(192, 141);
+            this.label_Y2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_Y2.Name = "label_Y2";
+            this.label_Y2.Size = new System.Drawing.Size(24, 13);
+            this.label_Y2.TabIndex = 10;
+            this.label_Y2.Text = "y2 :";
             // 
             // buttonActionPictureWaitImagePath
             // 
@@ -171,15 +171,15 @@
             this.textBoxActionPictureWaitY2.Size = new System.Drawing.Size(79, 20);
             this.textBoxActionPictureWaitY2.TabIndex = 9;
             // 
-            // label4
+            // label_Y1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(192, 120);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "y1 :";
+            this.label_Y1.AutoSize = true;
+            this.label_Y1.Location = new System.Drawing.Point(192, 120);
+            this.label_Y1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_Y1.Name = "label_Y1";
+            this.label_Y1.Size = new System.Drawing.Size(24, 13);
+            this.label_Y1.TabIndex = 8;
+            this.label_Y1.Text = "y1 :";
             // 
             // textBoxActionPictureWaitX2
             // 
@@ -200,15 +200,15 @@
             this.pictureBoxActionPictureWaitImage.TabIndex = 2;
             this.pictureBoxActionPictureWaitImage.TabStop = false;
             // 
-            // label2
+            // label_X2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 141);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "x2 :";
+            this.label_X2.AutoSize = true;
+            this.label_X2.Location = new System.Drawing.Point(9, 141);
+            this.label_X2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_X2.Name = "label_X2";
+            this.label_X2.Size = new System.Drawing.Size(24, 13);
+            this.label_X2.TabIndex = 6;
+            this.label_X2.Text = "x2 :";
             // 
             // textBoxActionPictureWaitY1
             // 
@@ -218,15 +218,15 @@
             this.textBoxActionPictureWaitY1.Size = new System.Drawing.Size(79, 20);
             this.textBoxActionPictureWaitY1.TabIndex = 5;
             // 
-            // label1
+            // label_X1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 120);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "x1 : ";
+            this.label_X1.AutoSize = true;
+            this.label_X1.Location = new System.Drawing.Point(9, 120);
+            this.label_X1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_X1.Name = "label_X1";
+            this.label_X1.Size = new System.Drawing.Size(27, 13);
+            this.label_X1.TabIndex = 4;
+            this.label_X1.Text = "x1 : ";
             // 
             // textBoxActionPictureWaitX1
             // 
@@ -240,24 +240,24 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.buttonPanelActionImage_ShowZone);
+            this.Controls.Add(this.buttonActionPictureWaitShowZone);
             this.Controls.Add(this.buttonActionPictureWaitClearDrawing);
             this.Controls.Add(this.pictureBoxActionPictureWaitImage);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label_SequenceIfExpired);
             this.Controls.Add(this.textBoxActionPictureWaitX1);
             this.Controls.Add(this.buttonActionPictureWaitFindImage);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_X1);
             this.Controls.Add(this.textBoxActionPictureWaitWaitTime);
             this.Controls.Add(this.textBoxActionPictureWaitY1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label_ExpirationTime);
+            this.Controls.Add(this.label_X2);
             this.Controls.Add(this.textBoxPanelActionPictureWaitThreshold);
             this.Controls.Add(this.textBoxActionPictureWaitX2);
             this.Controls.Add(this.comboBoxActionPictureWaitSequenceIfExpired);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label_Y1);
+            this.Controls.Add(this.label_Threshold);
             this.Controls.Add(this.textBoxActionPictureWaitY2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label_Y2);
             this.Controls.Add(this.buttonActionPictureWaitImagePath);
             this.Name = "ActionPictureWaitPanel";
             this.Size = new System.Drawing.Size(366, 238);
@@ -269,24 +269,24 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonPanelActionImage_ShowZone;
+        private System.Windows.Forms.Button buttonActionPictureWaitShowZone;
         private System.Windows.Forms.Button buttonActionPictureWaitClearDrawing;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label_SequenceIfExpired;
         private System.Windows.Forms.Button buttonActionPictureWaitFindImage;
         private System.Windows.Forms.TextBox textBoxActionPictureWaitWaitTime;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label_ExpirationTime;
         private System.Windows.Forms.TextBox textBoxPanelActionPictureWaitThreshold;
         private System.Windows.Forms.ComboBox comboBoxActionPictureWaitSequenceIfExpired;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_Threshold;
+        private System.Windows.Forms.Label label_Y2;
         private System.Windows.Forms.Button buttonActionPictureWaitImagePath;
         private System.Windows.Forms.TextBox textBoxActionPictureWaitY2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_Y1;
         private System.Windows.Forms.TextBox textBoxActionPictureWaitX2;
         private System.Windows.Forms.PictureBox pictureBoxActionPictureWaitImage;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_X2;
         private System.Windows.Forms.TextBox textBoxActionPictureWaitY1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_X1;
         private System.Windows.Forms.TextBox textBoxActionPictureWaitX1;
     }
 }

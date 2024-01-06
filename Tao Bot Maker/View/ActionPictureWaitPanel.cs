@@ -23,6 +23,7 @@ namespace Tao_Bot_Maker.View
         public ActionPictureWaitPanel(ActionView actionView)
         {
             InitializeComponent();
+            Localization();
             originalPath = null;
             destinationPath = null;
             this.actionView = actionView;
@@ -31,6 +32,7 @@ namespace Tao_Bot_Maker.View
         public ActionPictureWaitPanel(ActionView actionView, Action action)
         {
             InitializeComponent();
+            Localization();
             this.actionView = actionView;
             originalPath = null;
             destinationPath = null;
@@ -45,7 +47,15 @@ namespace Tao_Bot_Maker.View
             WaitTime = ((ActionPictureWait)action).WaitTime;
             SequenceIfExpired = ((ActionPictureWait)action).SequenceIfExpired;
         }
-
+        private void Localization()
+        {
+            label_SequenceIfExpired.Text = Properties.strings.label_SequenceIfExpired;
+            label_Threshold.Text = Properties.strings.label_Threshold;
+            buttonActionPictureWaitClearDrawing.Text = Properties.strings.button_ClearZone;
+            buttonActionPictureWaitFindImage.Text = Properties.strings.button_FindImage;
+            buttonActionPictureWaitImagePath.Text = Properties.strings.button_Picture;
+            buttonActionPictureWaitShowZone.Text = Properties.strings.button_ShowDrawingArea;
+        }
         public String DestinationPath
         {
             get
@@ -247,13 +257,13 @@ namespace Tao_Bot_Maker.View
 
                 MessageBox.Show("IMG FOUND\r\n " +
                     "Coords X :" + results_if_image[1] + " Y : " + results_if_image[2]);
-                Log.Write(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
+                actionView.Log(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
 
             }
             else
             {
                 MessageBox.Show("IMG NOT FOUND");
-                Log.Write(Log.INFO, "Image introuvable");                
+                actionView.Log(Log.INFO, "Image introuvable");                
             }
             
         }

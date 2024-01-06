@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.comboBoxPanelActionLoopSequence = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.label_Sequence = new System.Windows.Forms.Label();
             this.textBoxPanelBoucle_NbRepetition = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
+            this.label_NumberRepetitions = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxPanelActionLoopSequence
@@ -44,15 +44,15 @@
             this.comboBoxPanelActionLoopSequence.Size = new System.Drawing.Size(214, 21);
             this.comboBoxPanelActionLoopSequence.TabIndex = 3;
             // 
-            // label21
+            // label_Sequence
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(2, 36);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(62, 13);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "Séquence :";
+            this.label_Sequence.AutoSize = true;
+            this.label_Sequence.Location = new System.Drawing.Point(2, 36);
+            this.label_Sequence.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_Sequence.Name = "label_Sequence";
+            this.label_Sequence.Size = new System.Drawing.Size(62, 13);
+            this.label_Sequence.TabIndex = 2;
+            this.label_Sequence.Text = "Séquence :";
             // 
             // textBoxPanelBoucle_NbRepetition
             // 
@@ -62,23 +62,23 @@
             this.textBoxPanelBoucle_NbRepetition.Size = new System.Drawing.Size(214, 20);
             this.textBoxPanelBoucle_NbRepetition.TabIndex = 1;
             // 
-            // label20
+            // label_NumberRepetitions
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(2, 15);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(116, 13);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Nombre de répétitions :";
+            this.label_NumberRepetitions.AutoSize = true;
+            this.label_NumberRepetitions.Location = new System.Drawing.Point(2, 15);
+            this.label_NumberRepetitions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_NumberRepetitions.Name = "label_NumberRepetitions";
+            this.label_NumberRepetitions.Size = new System.Drawing.Size(116, 13);
+            this.label_NumberRepetitions.TabIndex = 0;
+            this.label_NumberRepetitions.Text = "Nombre de répétitions :";
             // 
             // ActionLoopPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboBoxPanelActionLoopSequence);
-            this.Controls.Add(this.label21);
-            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label_Sequence);
+            this.Controls.Add(this.label_NumberRepetitions);
             this.Controls.Add(this.textBoxPanelBoucle_NbRepetition);
             this.Name = "ActionLoopPanel";
             this.Size = new System.Drawing.Size(361, 69);
@@ -90,8 +90,8 @@
         #endregion
 
         private System.Windows.Forms.ComboBox comboBoxPanelActionLoopSequence;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label_Sequence;
         private System.Windows.Forms.TextBox textBoxPanelBoucle_NbRepetition;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label_NumberRepetitions;
     }
 }

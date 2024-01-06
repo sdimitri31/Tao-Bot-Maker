@@ -10,6 +10,16 @@ namespace Tao_Bot_Maker.View
         public int ReturnValueActionType { get; set; }
         public Action ReturnValueAction { get; set; }
 
+        MainApp app;
+        public void Log(String  message, int level)
+        {
+            app.Log(message, level);
+        }
+        public void Log(int level, String message)
+        {
+            app.Log(message, level);
+        }
+
         DrawingRectangle drawingForm;
         public void DrawRectangleAtCoords(int x1, int y1, int x2, int y2)
         {
@@ -17,14 +27,13 @@ namespace Tao_Bot_Maker.View
             try
             {
                 drawingForm.DrawRectangleAtCoords(x1, y1, x2, y2);
-                Log.Write(Log.TRACE, "Rectangle drawn at coords");
-                Log.Write(Log.TRACE, "x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2);
+                app.Log("Rectangle drawn at coords", LogFramework.Log.TRACE);
+                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.TRACE);
             }
             catch (ArgumentException e)
             {
-                Log.Write(Log.ERROR, "ActionView.cs Line 25");
-                Log.Write(Log.ERROR, e.Message);
-                Log.Write(Log.ERROR, "x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2);
+                app.Log(e.Message, LogFramework.Log.ERROR);
+                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.ERROR);
             }
         }
         public void DrawRectangle(int x1, int y1, int width, int height)
@@ -33,20 +42,20 @@ namespace Tao_Bot_Maker.View
             try
             {
                 drawingForm.DrawRectangle(x1, y1, width, height);
-                Log.Write(Log.TRACE, "Rectangle drawn");
-                Log.Write(Log.TRACE, "x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height);
+                app.Log("Rectangle drawn", LogFramework.Log.TRACE);
+                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.TRACE);
             }
             catch (ArgumentException e)
             {
                 MessageBox.Show(e.Message);
-                Log.Write(Log.ERROR, e.Message);
-                Log.Write(Log.ERROR, "x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height);
+                app.Log(e.Message, LogFramework.Log.ERROR);
+                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.ERROR);
             }
         }
         public void ClearRectangles()
         {
             drawingForm.ClearRectangles();
-            Log.Write(Log.TRACE, "Rectangles cleared");
+            app.Log("Rectangles cleared", LogFramework.Log.TRACE);
         }
         public void RefreshRectangles()
         {
@@ -109,13 +118,15 @@ namespace Tao_Bot_Maker.View
         //UserControl of selected action
         Control actionPanel;
 
-        public ActionView()
+        public ActionView(MainApp app)
         {
             InitializeComponent();
 
+            this.app = app;
             //Create a form to enable drawing
             drawingForm = new DrawingRectangle();
             drawingForm.Show();
+            Localization();
 
             //No panel selected
             actionPanel = null;
@@ -125,13 +136,15 @@ namespace Tao_Bot_Maker.View
             comboBoxActions.SelectedIndex = 0;
         }
 
-        public ActionView(Action action)
+        public ActionView(Action action, MainApp app)
         {
             InitializeComponent();
+            this.app = app;
 
             //Create a form to enable drawing
             drawingForm = new DrawingRectangle();
             drawingForm.Show();
+            Localization();
 
             //Populate combobox with actions
             comboBoxActions.Items.AddRange(ActionController.GetActionTypeNames());
@@ -140,6 +153,12 @@ namespace Tao_Bot_Maker.View
             actionPanel = CreatePanelFromAction(action);
             ShowPanel(actionPanel);
 
+        }
+
+        private void Localization()
+        {
+            button_Cancel.Text = Properties.strings.button_Cancel;
+            button_Ok.Text = Properties.strings.button_OK;
         }
 
         private Control CreatePanelFromAction(Action action)
