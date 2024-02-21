@@ -27,21 +27,22 @@ namespace Tao_Bot_Maker
             switch (type)
             {
                 case (int)Action.ActionType.Key:
-                    return "Touche";
+                    return Properties.strings.ActionName_Key;
                 case (int)Action.ActionType.Wait:
-                    return "Attente";
+                    return Properties.strings.ActionName_Wait;
                 case (int)Action.ActionType.PictureWait:
-                    return "Attente image";
+                    return Properties.strings.ActionName_PictureWait;
                 case (int)Action.ActionType.IfPicture:
-                    return "Si image";
+                    return Properties.strings.ActionName_IfPicture;
                 case (int)Action.ActionType.Sequence:
-                    return "Séquence";
+                    return Properties.strings.ActionName_Sequence;
                 case (int)Action.ActionType.Click:
-                    return "Clic";
+                    return Properties.strings.ActionName_Click;
                 case (int)Action.ActionType.Loop:
-                    return "Boucle";
+                    return Properties.strings.ActionName_Loop;
                 default:
-                    return "Unknown type";
+                    return Properties.strings.ActionName_Unknown;
+
             }
         }
         public static Control GetControlView(int type, ActionView actionView)

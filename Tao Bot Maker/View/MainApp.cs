@@ -28,12 +28,6 @@ namespace Tao_Bot_Maker
 {
     public partial class MainApp : Form
     {
-        //DLL Hotkey
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
         //DLL Drawing
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
@@ -45,25 +39,80 @@ namespace Tao_Bot_Maker
         static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
 
         //Public Members
-        public static String PICTURE_FOLDER_NAME = "Pictures";
-        public static String SETTINGS_INI_NAME = "Settings.ini";
-        public static String SETTINGS_SECTION_GENERAL = "General";
-        public static String SETTINGS_KEY_SAVELOGS = "SaveLogs";
+        public static string PICTURE_FOLDER_NAME                    = "Pictures";
+        public static string SETTINGS_INI_NAME                      = "Settings.ini";
+        public static string SETTINGS_SECTION_GENERAL               = "General";
+        public static string SETTINGS_KEY_SAVELOGS                  = "SaveLogs";
+        public static string SETTINGS_KEY_LANGUAGE                  = "Language";
+        public static string SETTINGS_SECTION_HOTKEY                = "Hotkey";
+        public static string SETTINGS_KEY_HOTKEY_STARTBOT_KEY       = "StartBotKey";
+        public static string SETTINGS_KEY_HOTKEY_STOPBOT_KEY        = "StopBotKey";
+        public static string SETTINGS_KEY_HOTKEY_XY_KEY             = "XYKey";
+        public static string SETTINGS_KEY_HOTKEY_XY2_KEY            = "XY2Key";
+        public static string SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER  = "StartBotModifier";
+        public static string SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER   = "StopBotModifier";
+        public static string SETTINGS_KEY_HOTKEY_XY_MODIFIER        = "XYModifier";
+        public static string SETTINGS_KEY_HOTKEY_XY2_MODIFIER       = "XY2Modifier";
+        public const int WM_HOTKEY_MSG_ID = 0x0312;
 
         //Private Members
         private SequenceController sequenceController;
-        private DrawingRectangle zoneRecherche;
         private Bot bot;
+        private HotKeyController hotkeyStartBot;
+        private HotKeyController hotkeyStopBot;
+        private HotKeyController hotkeyXY;
+        private HotKeyController hotkeyXY2;
 
-        enum KeyModifier
+        public MainApp()
         {
-            None = 0,
-            Alt = 1,
-            Control = 2,
-            Shift = 4,
-            WinKey = 8
+            SetProcessDPIAware();
+            InitializeComponent();
+
+            hotkeyStartBot = new HotKeyController(
+                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER), 
+                GetHotkeyKey(SETTINGS_KEY_HOTKEY_STARTBOT_KEY), 
+                this);
+            hotkeyStartBot.Register();
+
+            hotkeyStopBot = new HotKeyController(
+                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER),
+                GetHotkeyKey(SETTINGS_KEY_HOTKEY_STOPBOT_KEY),
+                this);
+            hotkeyStopBot.Register();
+
+            hotkeyXY = new HotKeyController(
+                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_XY_MODIFIER),
+                GetHotkeyKey(SETTINGS_KEY_HOTKEY_XY_KEY),
+                this);
+
+            hotkeyXY2 = new HotKeyController(
+                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_XY2_MODIFIER),
+                GetHotkeyKey(SETTINGS_KEY_HOTKEY_XY2_KEY),
+                this);
+
+            LoadSequencesList();
+
+            sequenceController = new SequenceController();
+
+            bot = new Bot(this);
+
+            //labelNotice.Text = "F1 : Angle haut gauche ou clic \r\n" +
+            //               "F2 : Angle bas droite \r\n" +
+            //               "F6 : Start Bot \r\n" +
+            //               "F7 : Stop Bot  \r\n" +
+            //               "Tolérance : 0-255; 0 = pixel perfect; (Recommandé 100-150)";
+
+            UpdateButtons();
+            UpdateLanguageUI(GetLanguage());
+            UpdateUIHotkey();
+            Log("Setting SaveLogs : " + IsSaveLogs(), LogFramework.Log.INFO);
+            Log("Setting Language : " + GetLanguage(), LogFramework.Log.INFO);
+            Log("Programme initialisé", LogFramework.Log.INFO);
         }
 
+        //------------------------------------------------------------
+        //    METHODS
+        //------------------------------------------------------------
         private void UpdateLanguageUI(string language)
         {
             switch (language)
@@ -91,43 +140,74 @@ namespace Tao_Bot_Maker
 
             tsm_Settings.Text = Properties.strings.tsm_Settings;
             tsm_Settings_Language.Text = Properties.strings.tsm_Settings_Language;
-            tsm_Settings_Shortcuts.Text = Properties.strings.tsm_Settings_Shortcuts;
+            tsm_Settings_Hotkeys.Text = Properties.strings.tsm_Settings_Shortcuts;
             tsm_Settings_Theme.Text = Properties.strings.tsm_Settings_Theme;
             tsm_Settings_Logs.Text = Properties.strings.tsm_Settings_SaveLogs;
-            
-        }
 
-        public MainApp()
+            tsm_About.Text = Properties.strings.tsm_About;
+
+        }
+        private void UpdateButtons()
         {
-            SetProcessDPIAware();
-            InitializeComponent();
-            RegisterHotKey(this.Handle, 0, (int)KeyModifier.None, Keys.F5.GetHashCode());
-            RegisterHotKey(this.Handle, 1, (int)KeyModifier.None, Keys.F6.GetHashCode()); 
+            //Enable Edit Button
+            if (listBoxActions.SelectedIndex == -1)
+                button_EditAction.Enabled = false;
+            else
+                button_EditAction.Enabled = true;
 
-            LoadSequencesList();
+            //Enable Bot Start or Stop
+            if (bot.IsRunning)
+            {
+                button_StartBot.Enabled = false;
+                tsm_Bot_Start.Enabled = false;
 
-            sequenceController = new SequenceController();
+                button_StopBot.Enabled = true;
+                tsm_Bot_Stop.Enabled = true;
+            }
+            else
+            {
+                button_StartBot.Enabled = true;
+                tsm_Bot_Start.Enabled = true;
 
-            zoneRecherche = new DrawingRectangle();
-            zoneRecherche.Show();
+                button_StopBot.Enabled = false;
+                tsm_Bot_Stop.Enabled = false;
+            }
 
-            bot = new Bot(this, zoneRecherche);
+            //Check SaveLogs menu
+            if (IsSaveLogs())
+            {
+                tsm_Settings_Logs.Checked = true;
+            }
+            else
+            {
+                tsm_Settings_Logs.Checked = false;
+            }
 
-            //labelNotice.Text = "F1 : Angle haut gauche ou clic \r\n" +
-            //               "F2 : Angle bas droite \r\n" +
-            //               "F6 : Start Bot \r\n" +
-            //               "F7 : Stop Bot  \r\n" +
-            //               "Tolérance : 0-255; 0 = pixel perfect; (Recommandé 100-150)";
-
-            UpdateButtons();
-            UpdateLanguageUI("EN");
-            Log("Setting SaveLogs : " + IsSaveLogs(), LogFramework.Log.INFO);
-            Log("Programme initialisé", LogFramework.Log.INFO);
+            //Language
+            String language = GetLanguage();
+            if (language == "EN")
+            {
+                tsm_Settings_Language_English.Checked = true;
+                tsm_Settings_Language_Francais.Checked = false;
+            }
+            else if (language == "FR")
+            {
+                tsm_Settings_Language_English.Checked = false;
+                tsm_Settings_Language_Francais.Checked = true;
+            }
         }
+        private void UpdateUIHotkey()
+        {
+            int modifier = 0;
 
-        //------------------------------------------------------------
-        //    METHODS
-        //------------------------------------------------------------
+            //Reversing alt and shift modifier because of a bug in UI 
+            modifier = Reverse3Bits((int)hotkeyStartBot.GetModifier()) << 16;
+            tsm_Bot_Start.ShortcutKeys = (Keys)((int)hotkeyStartBot.GetKey() | modifier);
+
+            modifier = Reverse3Bits((int)hotkeyStopBot.GetModifier()) << 16;
+            tsm_Bot_Stop.ShortcutKeys = (Keys)((int)hotkeyStopBot.GetKey() | modifier);
+
+        }
         public void Log(string message, int level)
         {
             Log(message, false, false, level);
@@ -136,7 +216,6 @@ namespace Tao_Bot_Maker
         {
             Log(message, false, false, level);
         }
-
         public void Log(string logsentence, bool isthread = false, bool isTemporary = false, int logLevel = LogFramework.Log.INFO)
         {
             DateTime dateTime = DateTime.Now;
@@ -172,42 +251,14 @@ namespace Tao_Bot_Maker
             if (IsSaveLogs())
                 LogFramework.Log.Write(logLevel, logsentence);
         }
-        private void UpdateButtons()
+
+        public HotKeyController GetHotKeyControllerXY()
         {
-            //Enable Edit Button
-            if (listBoxActions.SelectedIndex == -1)
-                button_EditAction.Enabled = false;
-            else
-                button_EditAction.Enabled = true;
-
-            //Enable Bot Start or Stop
-            if (bot.isRunning)
-            {
-                button_StartBot.Enabled = false;
-                tsm_Bot_Start.Enabled = false;
-
-                button_StopBot.Enabled = true;
-                tsm_Bot_Stop.Enabled = true;
-            }
-            else
-            {
-                button_StartBot.Enabled = true;
-                tsm_Bot_Start.Enabled = true;
-
-                button_StopBot.Enabled = false;
-                tsm_Bot_Stop.Enabled = false;
-            }
-
-            //Check SaveLogs menu
-            if (IsSaveLogs())
-            {
-                tsm_Settings_Logs.Checked = true;
-            }
-            else
-            {
-                tsm_Settings_Logs.Checked = false;
-            }
-
+            return hotkeyXY;
+        }
+        public HotKeyController GetHotKeyControllerXY2()
+        {
+            return hotkeyXY2;
         }
 
         //------------------------------------------------------------
@@ -306,6 +357,48 @@ namespace Tao_Bot_Maker
             return false;
         }
 
+        //LANGUAGE
+        private String GetLanguage()
+        {
+            string language = ReadSetting(SETTINGS_KEY_LANGUAGE, SETTINGS_SECTION_GENERAL);
+            if (language == "")
+                return "EN";
+            return language;
+        }
+
+        //HOTKEY
+        private int GetHotkeyModifier(string settingName)
+        {
+            int value = 0;
+            try
+            {
+                value = Int32.Parse(ReadSetting(settingName, SETTINGS_SECTION_HOTKEY));
+            }
+            catch
+            { }
+            return value;
+        }
+        private Keys GetHotkeyKey(string settingName)
+        {
+            Keys key;
+            bool result = Enum.TryParse(ReadSetting(settingName, SETTINGS_SECTION_HOTKEY), out key);
+            if (result)
+                return key;
+            else
+            {
+                if(settingName == SETTINGS_KEY_HOTKEY_STARTBOT_KEY)
+                    return Keys.F6;
+                if (settingName == SETTINGS_KEY_HOTKEY_STOPBOT_KEY)
+                    return Keys.F7;
+                if (settingName == SETTINGS_KEY_HOTKEY_XY_KEY)
+                    return Keys.F1;
+                if (settingName == SETTINGS_KEY_HOTKEY_XY2_KEY)
+                    return Keys.F2;
+            }
+            return Keys.None;
+        }
+
+
         //------------------------------------------------------------
         //ADDING, EDITING, DELETING
 
@@ -371,23 +464,14 @@ namespace Tao_Bot_Maker
 
         private void StartBot()
         {
-            bot.botStart(sequenceController);
+            bot.Start(sequenceController);
             UpdateButtons();
         }
 
         private void StopBot()
         {
-            zoneRecherche.ClearRectangles();
-            zoneRecherche.Refresh();
-            bot.stopBot();
+            bot.Stop();
             UpdateButtons();
-        }
-        
-        //TODO : See if better to implement in bot
-        public void clearZones()
-        {
-            zoneRecherche.ClearRectangles();
-            zoneRecherche.Refresh();
         }
 
         //------------------------------------------------------------
@@ -432,6 +516,7 @@ namespace Tao_Bot_Maker
             this.Close();
         }
 
+        //Save logs
         private void Tsm_Settings_Logs_Click(object sender, EventArgs e)
         {
             //Toggle the settings
@@ -446,7 +531,61 @@ namespace Tao_Bot_Maker
             Log(LogFramework.Log.INFO, "Setting SaveLogs : " + IsSaveLogs());
             UpdateButtons();
         }
+        
+        //English selected
+        private void Tsm_Settings_Language_English_Click(object sender, EventArgs e)
+        {
+            WriteSetting(SETTINGS_KEY_LANGUAGE, "EN", SETTINGS_SECTION_GENERAL);
+            Log(LogFramework.Log.INFO, "Setting Language : " + GetLanguage());
+            UpdateButtons();
+            UpdateLanguageUI(GetLanguage());
+        }
+        
+        //French selected
+        private void Tsm_Settings_Language_Francais_Click(object sender, EventArgs e)
+        {
+            WriteSetting(SETTINGS_KEY_LANGUAGE, "FR", SETTINGS_SECTION_GENERAL);
+            Log(LogFramework.Log.INFO, "Setting Language : " + GetLanguage());
+            UpdateButtons();
+            UpdateLanguageUI(GetLanguage());
+        }
+        
+        //Hotkey Dialog
+        private void Tsm_Settings_Hotkeys_Click(object sender, EventArgs e)
+        {
+            HotkeyView shortcutsView = new HotkeyView(hotkeyStartBot, hotkeyStopBot, hotkeyXY, hotkeyXY2);
+            shortcutsView.StartPosition = FormStartPosition.CenterParent;
+            var result = shortcutsView.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                hotkeyStartBot.Unregiser();
+                hotkeyStartBot.SetHotkey(shortcutsView.ReturnHotkeyStartBot);
+                hotkeyStartBot.Register();
+                WriteSetting(SETTINGS_KEY_HOTKEY_STARTBOT_KEY, hotkeyStartBot.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
+                WriteSetting(SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER, hotkeyStartBot.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
 
+                hotkeyStopBot.Unregiser();
+                hotkeyStopBot.SetHotkey(shortcutsView.ReturnHotkeyStopBot);
+                hotkeyStopBot.Register();
+                WriteSetting(SETTINGS_KEY_HOTKEY_STOPBOT_KEY, hotkeyStopBot.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
+                WriteSetting(SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER, hotkeyStopBot.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
+
+                hotkeyXY.SetHotkey(shortcutsView.ReturnHotkeyXY);
+                WriteSetting(SETTINGS_KEY_HOTKEY_XY_KEY, hotkeyXY.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
+                WriteSetting(SETTINGS_KEY_HOTKEY_XY_MODIFIER, hotkeyXY.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
+
+                hotkeyXY2.SetHotkey(shortcutsView.ReturnHotkeyXY2);
+                WriteSetting(SETTINGS_KEY_HOTKEY_XY2_KEY, hotkeyXY2.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
+                WriteSetting(SETTINGS_KEY_HOTKEY_XY2_MODIFIER, hotkeyXY2.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
+
+                UpdateUIHotkey();
+            }
+        }
+
+        public static int Reverse3Bits(int n)
+        {
+            return (0x73516240 >> (n << 2)) & 7;
+        }
         //------------------------------------------------------------
         // Buttons EVENTS 
 
@@ -592,9 +731,9 @@ namespace Tao_Bot_Maker
 
         private void MainApp_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bot.stopBot();
-            UnregisterHotKey(this.Handle, 0); //Start hotkey
-            UnregisterHotKey(this.Handle, 1); //Stop hotkey
+            StopBot();
+            hotkeyStartBot.Unregiser();
+            hotkeyStopBot.Unregiser();
             Log("Closing App complete", LogFramework.Log.INFO);
         }
 
@@ -606,14 +745,17 @@ namespace Tao_Bot_Maker
             if (m.Msg == 0x0312)
             {
                 Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
-                KeyModifier modifier = (KeyModifier)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
+                int modifier = ((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
                 int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
 
-                if (key.ToString() == "F6")
-                    Button_StartBot_Click(null, null);
-
-                if (key.ToString() == "F7")
-                    bot.stopBot();
+                if ((modifier == hotkeyStartBot.GetModifier()) && (key == hotkeyStartBot.GetKey()))
+                {
+                    StartBot();
+                }
+                if ((modifier == hotkeyStopBot.GetModifier()) && (key == hotkeyStopBot.GetKey()))
+                {
+                    StopBot();
+                }
             }
         }
 

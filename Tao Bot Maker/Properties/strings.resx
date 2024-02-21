@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionName_Click" xml:space="preserve">
+    <value>Click</value>
+  </data>
+  <data name="ActionName_IfPicture" xml:space="preserve">
+    <value>If picture</value>
+  </data>
+  <data name="ActionName_Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="ActionName_Loop" xml:space="preserve">
+    <value>Loop sequence</value>
+  </data>
+  <data name="ActionName_PictureWait" xml:space="preserve">
+    <value>Wait for picture</value>
+  </data>
+  <data name="ActionName_Sequence" xml:space="preserve">
+    <value>Sequence</value>
+  </data>
+  <data name="ActionName_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="ActionName_Wait" xml:space="preserve">
+    <value>Wait</value>
+  </data>
   <data name="button_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -134,6 +158,12 @@
   </data>
   <data name="button_ShowDrawingArea" xml:space="preserve">
     <value>Show area</value>
+  </data>
+  <data name="label_Alt" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="label_Ctrl" xml:space="preserve">
+    <value>Ctrl</value>
   </data>
   <data name="label_Key" xml:space="preserve">
     <value>Key</value>
@@ -159,11 +189,44 @@
   <data name="label_SequenceIfPicture" xml:space="preserve">
     <value>Sequence if found</value>
   </data>
+  <data name="label_SetXY" xml:space="preserve">
+    <value>Set X Y at cursor position</value>
+  </data>
+  <data name="label_SetXY2" xml:space="preserve">
+    <value>Set X2 Y2 at cursor position</value>
+  </data>
+  <data name="label_Shift" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="label_StartBot" xml:space="preserve">
+    <value>Start Bot</value>
+  </data>
+  <data name="label_StopBot" xml:space="preserve">
+    <value>Stop Bot</value>
+  </data>
   <data name="label_Threshold" xml:space="preserve">
     <value>Threshold</value>
   </data>
   <data name="label_WaitTime" xml:space="preserve">
     <value>Delay (ms)</value>
+  </data>
+  <data name="tab_NewSequence" xml:space="preserve">
+    <value>New sequence</value>
+  </data>
+  <data name="tab_ReplaceSequence" xml:space="preserve">
+    <value>Replace sequence</value>
+  </data>
+  <data name="title_Hotkeys" xml:space="preserve">
+    <value>Hotkeys</value>
+  </data>
+  <data name="title_NewActionDialog" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="title_SaveSequenceDialog" xml:space="preserve">
+    <value>Save sequence</value>
+  </data>
+  <data name="tsm_About" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="tsm_Bot" xml:space="preserve">
     <value>Bot</value>
@@ -196,7 +259,7 @@
     <value>Save logs</value>
   </data>
   <data name="tsm_Settings_Shortcuts" xml:space="preserve">
-    <value>Shortcuts</value>
+    <value>Hotkeys</value>
   </data>
   <data name="tsm_Settings_Theme" xml:space="preserve">
     <value>Theme</value>

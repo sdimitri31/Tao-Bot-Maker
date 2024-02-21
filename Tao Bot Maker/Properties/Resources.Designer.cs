@@ -143,6 +143,26 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_info_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_info_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_keypad_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_keypad_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_language_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-language-48", resourceCulture);

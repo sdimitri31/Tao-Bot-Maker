@@ -7,10 +7,14 @@ namespace Tao_Bot_Maker.View
 {
     public partial class ActionView : Form
     {
+
         public int ReturnValueActionType { get; set; }
         public Action ReturnValueAction { get; set; }
 
         MainApp app;
+        private HotKeyController hotkeyXY;
+        private HotKeyController hotkeyXY2;
+
         public void Log(String  message, int level)
         {
             app.Log(message, level);
@@ -62,60 +66,124 @@ namespace Tao_Bot_Maker.View
             drawingForm.Refresh();
         }
         
-        //Get Key Shortcut when form is Focused
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        protected override void WndProc(ref Message m)
         {
-            if (keyData == (Keys.F1))
+            base.WndProc(ref m);
+
+            if (m.Msg == 0x0312)
             {
-                switch (comboBoxActions.SelectedIndex)
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
+                int modifier = ((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
+                int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
+
+
+                if ((modifier == hotkeyXY.GetModifier()) && (key == hotkeyXY.GetKey()))
                 {
-                    case (int)Action.ActionType.PictureWait:
-                        //Get Mouse coords
-                        ((ActionPictureWaitPanel)actionPanel).X1 = Cursor.Position.X;
-                        ((ActionPictureWaitPanel)actionPanel).Y1 = Cursor.Position.Y;
-                        //Try to draw a rectangle
-                        ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
-                        break;
-                    case (int)Action.ActionType.IfPicture:
-                        //Get Mouse coords
-                        ((ActionIfPicturePanel)actionPanel).X1 = Cursor.Position.X;
-                        ((ActionIfPicturePanel)actionPanel).Y1 = Cursor.Position.Y;
-                        //Try to draw a rectangle
-                        ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
-                        break;
-                    case (int)Action.ActionType.Click:
-                        //Get Mouse coords
-                        ((ActionClickPanel)actionPanel).X = Cursor.Position.X;
-                        ((ActionClickPanel)actionPanel).Y = Cursor.Position.Y;
-                        //Try to draw a rectangle
-                        ((ActionClickPanel)actionPanel).DrawFromTextBoxValues();
-                        break;
+                    switch (comboBoxActions.SelectedIndex)
+                    {
+                        case (int)Action.ActionType.PictureWait:
+                            //Get Mouse coords
+                            ((ActionPictureWaitPanel)actionPanel).X1 = Cursor.Position.X;
+                            ((ActionPictureWaitPanel)actionPanel).Y1 = Cursor.Position.Y;
+                            //Try to draw a rectangle
+                            ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
+                            break;
+                        case (int)Action.ActionType.IfPicture:
+                            //Get Mouse coords
+                            ((ActionIfPicturePanel)actionPanel).X1 = Cursor.Position.X;
+                            ((ActionIfPicturePanel)actionPanel).Y1 = Cursor.Position.Y;
+                            //Try to draw a rectangle
+                            ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+                            break;
+                        case (int)Action.ActionType.Click:
+                            //Get Mouse coords
+                            ((ActionClickPanel)actionPanel).X = Cursor.Position.X;
+                            ((ActionClickPanel)actionPanel).Y = Cursor.Position.Y;
+                            //Try to draw a rectangle
+                            ((ActionClickPanel)actionPanel).DrawFromTextBoxValues();
+                            break;
+                    }
+                }
+                else if ((modifier == hotkeyXY2.GetModifier()) && (key == hotkeyXY2.GetKey()))
+                {
+                    switch (comboBoxActions.SelectedIndex)
+                    {
+                        case (int)Action.ActionType.PictureWait:
+                            //Get Mouse coords
+                            ((ActionPictureWaitPanel)actionPanel).X2 = Cursor.Position.X;
+                            ((ActionPictureWaitPanel)actionPanel).Y2 = Cursor.Position.Y;
+                            //Try to draw a rectangle
+                            ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
+                            break;
+                        case (int)Action.ActionType.IfPicture:
+                            //Get Mouse coords
+                            ((ActionIfPicturePanel)actionPanel).X2 = Cursor.Position.X;
+                            ((ActionIfPicturePanel)actionPanel).Y2 = Cursor.Position.Y;
+                            //Try to draw a rectangle
+                            ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+                            break;
+                    }
                 }
             }
-            else if (keyData == (Keys.F2))
-            {
-                switch (comboBoxActions.SelectedIndex)
-                {
-                    case (int)Action.ActionType.PictureWait:
-                        //Get Mouse coords
-                        ((ActionPictureWaitPanel)actionPanel).X2 = Cursor.Position.X;
-                        ((ActionPictureWaitPanel)actionPanel).Y2 = Cursor.Position.Y;
-                        //Try to draw a rectangle
-                        ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
-                        break;
-                    case (int)Action.ActionType.IfPicture:
-                        //Get Mouse coords
-                        ((ActionIfPicturePanel)actionPanel).X2 = Cursor.Position.X;
-                        ((ActionIfPicturePanel)actionPanel).Y2 = Cursor.Position.Y;
-                        //Try to draw a rectangle
-                        ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
-                        break;
-                        }
-                }
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        //UserControl of selected action
+        //Get Key Shortcut when form is Focused
+
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    Keys key = (Keys)(((int)msg.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
+        //    int modifier = ((int)msg.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
+
+        //    if ((modifier == app.GetHotKeyControllerXY().GetModifier()) && (key == app.GetHotKeyControllerXY().GetKey()))
+        //    {
+        //        switch (comboBoxActions.SelectedIndex)
+        //        {
+        //            case (int)Action.ActionType.PictureWait:
+        //                //Get Mouse coords
+        //                ((ActionPictureWaitPanel)actionPanel).X1 = Cursor.Position.X;
+        //                ((ActionPictureWaitPanel)actionPanel).Y1 = Cursor.Position.Y;
+        //                //Try to draw a rectangle
+        //                ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
+        //                break;
+        //            case (int)Action.ActionType.IfPicture:
+        //                //Get Mouse coords
+        //                ((ActionIfPicturePanel)actionPanel).X1 = Cursor.Position.X;
+        //                ((ActionIfPicturePanel)actionPanel).Y1 = Cursor.Position.Y;
+        //                //Try to draw a rectangle
+        //                ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+        //                break;
+        //            case (int)Action.ActionType.Click:
+        //                //Get Mouse coords
+        //                ((ActionClickPanel)actionPanel).X = Cursor.Position.X;
+        //                ((ActionClickPanel)actionPanel).Y = Cursor.Position.Y;
+        //                //Try to draw a rectangle
+        //                ((ActionClickPanel)actionPanel).DrawFromTextBoxValues();
+        //                break;
+        //        }
+        //    }
+        //    else if ((modifier == app.GetHotKeyControllerXY2().GetModifier()) && (key == app.GetHotKeyControllerXY2().GetKey()))
+        //    {
+        //        switch (comboBoxActions.SelectedIndex)
+        //        {
+        //            case (int)Action.ActionType.PictureWait:
+        //                //Get Mouse coords
+        //                ((ActionPictureWaitPanel)actionPanel).X2 = Cursor.Position.X;
+        //                ((ActionPictureWaitPanel)actionPanel).Y2 = Cursor.Position.Y;
+        //                //Try to draw a rectangle
+        //                ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
+        //                break;
+        //            case (int)Action.ActionType.IfPicture:
+        //                //Get Mouse coords
+        //                ((ActionIfPicturePanel)actionPanel).X2 = Cursor.Position.X;
+        //                ((ActionIfPicturePanel)actionPanel).Y2 = Cursor.Position.Y;
+        //                //Try to draw a rectangle
+        //                ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+        //                break;
+        //        }
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
+
         Control actionPanel;
 
         public ActionView(MainApp app)
@@ -134,6 +202,8 @@ namespace Tao_Bot_Maker.View
             //Populate combobox with actions
             comboBoxActions.Items.AddRange(ActionController.GetActionTypeNames());
             comboBoxActions.SelectedIndex = 0;
+
+            SetupHotkeys();
         }
 
         public ActionView(Action action, MainApp app)
@@ -153,12 +223,23 @@ namespace Tao_Bot_Maker.View
             actionPanel = CreatePanelFromAction(action);
             ShowPanel(actionPanel);
 
+            SetupHotkeys();
         }
 
         private void Localization()
         {
             button_Cancel.Text = Properties.strings.button_Cancel;
             button_Ok.Text = Properties.strings.button_OK;
+            Text = Properties.strings.title_NewActionDialog;
+        }
+
+        private void SetupHotkeys()
+        {
+            hotkeyXY = new HotKeyController(app.GetHotKeyControllerXY().GetModifier(), app.GetHotKeyControllerXY().GetKey(), this);
+            hotkeyXY.Register();
+
+            hotkeyXY2 = new HotKeyController(app.GetHotKeyControllerXY2().GetModifier(), app.GetHotKeyControllerXY2().GetKey(), this);
+            hotkeyXY2.Register();
         }
 
         private Control CreatePanelFromAction(Action action)
@@ -225,6 +306,8 @@ namespace Tao_Bot_Maker.View
         private void ActionView_FormClosing(object sender, FormClosingEventArgs e)
         {
             drawingForm.Close();
+            hotkeyXY.Unregiser();
+            hotkeyXY2.Unregiser();
         }
     }
 }

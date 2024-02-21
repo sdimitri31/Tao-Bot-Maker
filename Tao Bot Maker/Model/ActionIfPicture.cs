@@ -8,9 +8,10 @@ namespace Tao_Bot_Maker
         {
             Type = (int)ActionType.IfPicture;
         }
-        public ActionIfPicture(String picturePath, int threshold, int x1, int x2, int y1, int y2, String ifTrueSequence, String ifFalseSequence)
+        public ActionIfPicture(String pictureName, int threshold, int x1, int x2, int y1, int y2, String ifTrueSequence, String ifFalseSequence)
         {
             Type = (int)ActionType.IfPicture;
+            PictureName = pictureName;
             Threshold = threshold;
             X1 = x1;
             X2 = x2;

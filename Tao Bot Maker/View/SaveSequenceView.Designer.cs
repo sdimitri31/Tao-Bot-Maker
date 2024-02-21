@@ -34,7 +34,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.comboBox_SelectSave = new System.Windows.Forms.ComboBox();
-            this.button_Save = new System.Windows.Forms.Button();
+            this.button_Ok = new System.Windows.Forms.Button();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -83,22 +83,23 @@
             // 
             // comboBox_SelectSave
             // 
+            this.comboBox_SelectSave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_SelectSave.FormattingEnabled = true;
             this.comboBox_SelectSave.Location = new System.Drawing.Point(7, 7);
             this.comboBox_SelectSave.Name = "comboBox_SelectSave";
             this.comboBox_SelectSave.Size = new System.Drawing.Size(239, 21);
             this.comboBox_SelectSave.TabIndex = 0;
             // 
-            // button_Save
+            // button_Ok
             // 
-            this.button_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button_Save.Location = new System.Drawing.Point(142, 78);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(130, 23);
-            this.button_Save.TabIndex = 3;
-            this.button_Save.Text = "OK";
-            this.button_Save.UseVisualStyleBackColor = true;
-            this.button_Save.Click += new System.EventHandler(this.Button_Save_Click);
+            this.button_Ok.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button_Ok.Location = new System.Drawing.Point(142, 78);
+            this.button_Ok.Name = "button_Ok";
+            this.button_Ok.Size = new System.Drawing.Size(130, 23);
+            this.button_Ok.TabIndex = 3;
+            this.button_Ok.Text = "OK";
+            this.button_Ok.UseVisualStyleBackColor = true;
+            this.button_Ok.Click += new System.EventHandler(this.Button_Save_Click);
             // 
             // button_Cancel
             // 
@@ -112,13 +113,13 @@
             // 
             // SaveSequenceView
             // 
-            this.AcceptButton = this.button_Save;
+            this.AcceptButton = this.button_Ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
             this.ClientSize = new System.Drawing.Size(284, 111);
             this.Controls.Add(this.button_Cancel);
-            this.Controls.Add(this.button_Save);
+            this.Controls.Add(this.button_Ok);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(300, 150);
@@ -139,7 +140,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox comboBox_SelectSave;
-        private System.Windows.Forms.Button button_Save;
+        private System.Windows.Forms.Button button_Ok;
         private System.Windows.Forms.Button button_Cancel;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionView));
             this.comboBoxActions = new System.Windows.Forms.ComboBox();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_Ok = new System.Windows.Forms.Button();
@@ -84,6 +85,7 @@
             this.Controls.Add(this.button_Cancel);
             this.Controls.Add(this.button_Ok);
             this.Controls.Add(this.comboBoxActions);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ActionView";
             this.Text = "Action";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ActionView_FormClosing);

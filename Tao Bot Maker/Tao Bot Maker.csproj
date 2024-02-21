@@ -49,7 +49,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>tao.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LogFramework">
@@ -69,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bot.cs" />
+    <Compile Include="Controller\HotKeyController.cs" />
     <Compile Include="Controller\ActionController.cs" />
     <Compile Include="Controller\ActionClickController.cs" />
     <Compile Include="Controller\ActionLoopController.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Controller\ImageSearchController.cs" />
     <Compile Include="Controller\IniFile.cs" />
     <Compile Include="Controller\SequenceController.cs" />
+    <Compile Include="Model\Hotkey.cs" />
     <Compile Include="Properties\strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,10 +163,19 @@
     <Compile Include="View\SaveSequenceView.Designer.cs">
       <DependentUpon>SaveSequenceView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\HotkeyView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HotkeyView.Designer.cs">
+      <DependentUpon>HotkeyView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\strings.fr.resx" />
     <EmbeddedResource Include="Properties\strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DrawingRectangle.resx">
+      <DependentUpon>DrawingRectangle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainApp.resx">
       <DependentUpon>MainApp.cs</DependentUpon>
@@ -205,6 +217,9 @@
     <EmbeddedResource Include="View\SaveSequenceView.resx">
       <DependentUpon>SaveSequenceView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\HotkeyView.resx">
+      <DependentUpon>HotkeyView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -234,7 +249,6 @@
     <None Include="Resources\icons8-add-48.png" />
     <None Include="Resources\icons8-stop-48.png" />
     <None Include="Resources\icons8-play-48.png" />
-    <EmbeddedResource Include="tao.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -247,6 +261,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-keypad-48.png" />
+    <None Include="Resources\icons8-info-48.png" />
+    <Content Include="Resources\tao.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionName_Click" xml:space="preserve">
+    <value>Clic</value>
+  </data>
+  <data name="ActionName_IfPicture" xml:space="preserve">
+    <value>Si une image</value>
+  </data>
+  <data name="ActionName_Key" xml:space="preserve">
+    <value>Touche</value>
+  </data>
+  <data name="ActionName_Loop" xml:space="preserve">
+    <value>Boucler une séquence</value>
+  </data>
+  <data name="ActionName_PictureWait" xml:space="preserve">
+    <value>Attendre une image</value>
+  </data>
+  <data name="ActionName_Sequence" xml:space="preserve">
+    <value>Séquence</value>
+  </data>
+  <data name="ActionName_Unknown" xml:space="preserve">
+    <value>Inconnu</value>
+  </data>
+  <data name="ActionName_Wait" xml:space="preserve">
+    <value>Attendre</value>
+  </data>
   <data name="button_Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
@@ -134,6 +158,12 @@
   </data>
   <data name="button_ShowDrawingArea" xml:space="preserve">
     <value>Afficher la zone</value>
+  </data>
+  <data name="label_Alt" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="label_Ctrl" xml:space="preserve">
+    <value>Ctrl</value>
   </data>
   <data name="label_Key" xml:space="preserve">
     <value>Touche</value>
@@ -159,11 +189,44 @@
   <data name="label_SequenceIfPicture" xml:space="preserve">
     <value>Séquence si image trouvée</value>
   </data>
+  <data name="label_SetXY" xml:space="preserve">
+    <value>Définir X Y à la position du curseur</value>
+  </data>
+  <data name="label_SetXY2" xml:space="preserve">
+    <value>Définir X2 Y2 à la position du curseur</value>
+  </data>
+  <data name="label_Shift" xml:space="preserve">
+    <value>Maj</value>
+  </data>
+  <data name="label_StartBot" xml:space="preserve">
+    <value>Démarrer le Bot</value>
+  </data>
+  <data name="label_StopBot" xml:space="preserve">
+    <value>Arrêter le Bot</value>
+  </data>
   <data name="label_Threshold" xml:space="preserve">
     <value>Tolérance</value>
   </data>
   <data name="label_WaitTime" xml:space="preserve">
     <value>Attendre (ms)</value>
+  </data>
+  <data name="tab_NewSequence" xml:space="preserve">
+    <value>Nouvelle séquence</value>
+  </data>
+  <data name="tab_ReplaceSequence" xml:space="preserve">
+    <value>Remplacer une séquence</value>
+  </data>
+  <data name="title_Hotkeys" xml:space="preserve">
+    <value>Raccourcis</value>
+  </data>
+  <data name="title_NewActionDialog" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="title_SaveSequenceDialog" xml:space="preserve">
+    <value>Enregistrer la séquence</value>
+  </data>
+  <data name="tsm_About" xml:space="preserve">
+    <value>A propos</value>
   </data>
   <data name="tsm_Bot" xml:space="preserve">
     <value>Bot</value>

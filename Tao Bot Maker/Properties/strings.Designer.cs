@@ -61,6 +61,78 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click.
+        /// </summary>
+        internal static string ActionName_Click {
+            get {
+                return ResourceManager.GetString("ActionName_Click", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If picture.
+        /// </summary>
+        internal static string ActionName_IfPicture {
+            get {
+                return ResourceManager.GetString("ActionName_IfPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Key.
+        /// </summary>
+        internal static string ActionName_Key {
+            get {
+                return ResourceManager.GetString("ActionName_Key", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Loop sequence.
+        /// </summary>
+        internal static string ActionName_Loop {
+            get {
+                return ResourceManager.GetString("ActionName_Loop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Wait for picture.
+        /// </summary>
+        internal static string ActionName_PictureWait {
+            get {
+                return ResourceManager.GetString("ActionName_PictureWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence.
+        /// </summary>
+        internal static string ActionName_Sequence {
+            get {
+                return ResourceManager.GetString("ActionName_Sequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unknown.
+        /// </summary>
+        internal static string ActionName_Unknown {
+            get {
+                return ResourceManager.GetString("ActionName_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Wait.
+        /// </summary>
+        internal static string ActionName_Wait {
+            get {
+                return ResourceManager.GetString("ActionName_Wait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Cancel.
         /// </summary>
         internal static string button_Cancel {
@@ -111,6 +183,24 @@ namespace Tao_Bot_Maker.Properties {
         internal static string button_ShowDrawingArea {
             get {
                 return ResourceManager.GetString("button_ShowDrawingArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Alt.
+        /// </summary>
+        internal static string label_Alt {
+            get {
+                return ResourceManager.GetString("label_Alt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ctrl.
+        /// </summary>
+        internal static string label_Ctrl {
+            get {
+                return ResourceManager.GetString("label_Ctrl", resourceCulture);
             }
         }
         
@@ -187,6 +277,51 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Set X Y at cursor position.
+        /// </summary>
+        internal static string label_SetXY {
+            get {
+                return ResourceManager.GetString("label_SetXY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Set X2 Y2 at cursor position.
+        /// </summary>
+        internal static string label_SetXY2 {
+            get {
+                return ResourceManager.GetString("label_SetXY2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Shift.
+        /// </summary>
+        internal static string label_Shift {
+            get {
+                return ResourceManager.GetString("label_Shift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Start Bot.
+        /// </summary>
+        internal static string label_StartBot {
+            get {
+                return ResourceManager.GetString("label_StartBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stop Bot.
+        /// </summary>
+        internal static string label_StopBot {
+            get {
+                return ResourceManager.GetString("label_StopBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Threshold.
         /// </summary>
         internal static string label_Threshold {
@@ -201,6 +336,60 @@ namespace Tao_Bot_Maker.Properties {
         internal static string label_WaitTime {
             get {
                 return ResourceManager.GetString("label_WaitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New sequence.
+        /// </summary>
+        internal static string tab_NewSequence {
+            get {
+                return ResourceManager.GetString("tab_NewSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Replace sequence.
+        /// </summary>
+        internal static string tab_ReplaceSequence {
+            get {
+                return ResourceManager.GetString("tab_ReplaceSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Hotkeys.
+        /// </summary>
+        internal static string title_Hotkeys {
+            get {
+                return ResourceManager.GetString("title_Hotkeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action.
+        /// </summary>
+        internal static string title_NewActionDialog {
+            get {
+                return ResourceManager.GetString("title_NewActionDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save sequence.
+        /// </summary>
+        internal static string title_SaveSequenceDialog {
+            get {
+                return ResourceManager.GetString("title_SaveSequenceDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à About.
+        /// </summary>
+        internal static string tsm_About {
+            get {
+                return ResourceManager.GetString("tsm_About", resourceCulture);
             }
         }
         
@@ -295,7 +484,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Shortcuts.
+        ///   Recherche une chaîne localisée semblable à Hotkeys.
         /// </summary>
         internal static string tsm_Settings_Shortcuts {
             get {

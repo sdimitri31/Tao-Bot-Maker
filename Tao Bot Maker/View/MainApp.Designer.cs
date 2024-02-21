@@ -45,9 +45,10 @@
             this.tsm_Settings_Language = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_Settings_Language_English = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_Settings_Language_Francais = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsm_Settings_Shortcuts = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsm_Settings_Hotkeys = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_Settings_Theme = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_Settings_Logs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsm_About = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button_SaveSequence = new System.Windows.Forms.Button();
             this.button_StopBot = new System.Windows.Forms.Button();
@@ -111,7 +112,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsm_File,
             this.tsm_Bot,
-            this.tsm_Settings});
+            this.tsm_Settings,
+            this.tsm_About});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(484, 24);
@@ -193,7 +195,7 @@
             // 
             this.tsm_Settings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsm_Settings_Language,
-            this.tsm_Settings_Shortcuts,
+            this.tsm_Settings_Hotkeys,
             this.tsm_Settings_Theme,
             this.tsm_Settings_Logs});
             this.tsm_Settings.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -215,21 +217,25 @@
             // 
             this.tsm_Settings_Language_English.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_great_britain_48;
             this.tsm_Settings_Language_English.Name = "tsm_Settings_Language_English";
-            this.tsm_Settings_Language_English.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Settings_Language_English.Size = new System.Drawing.Size(117, 22);
             this.tsm_Settings_Language_English.Text = "English";
+            this.tsm_Settings_Language_English.Click += new System.EventHandler(this.Tsm_Settings_Language_English_Click);
             // 
             // tsm_Settings_Language_Francais
             // 
             this.tsm_Settings_Language_Francais.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_france_48;
             this.tsm_Settings_Language_Francais.Name = "tsm_Settings_Language_Francais";
-            this.tsm_Settings_Language_Francais.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Settings_Language_Francais.Size = new System.Drawing.Size(117, 22);
             this.tsm_Settings_Language_Francais.Text = "Français";
+            this.tsm_Settings_Language_Francais.Click += new System.EventHandler(this.Tsm_Settings_Language_Francais_Click);
             // 
-            // tsm_Settings_Shortcuts
+            // tsm_Settings_Hotkeys
             // 
-            this.tsm_Settings_Shortcuts.Name = "tsm_Settings_Shortcuts";
-            this.tsm_Settings_Shortcuts.Size = new System.Drawing.Size(180, 22);
-            this.tsm_Settings_Shortcuts.Text = "Shortcuts";
+            this.tsm_Settings_Hotkeys.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
+            this.tsm_Settings_Hotkeys.Name = "tsm_Settings_Hotkeys";
+            this.tsm_Settings_Hotkeys.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Settings_Hotkeys.Text = "Shortcuts";
+            this.tsm_Settings_Hotkeys.Click += new System.EventHandler(this.Tsm_Settings_Hotkeys_Click);
             // 
             // tsm_Settings_Theme
             // 
@@ -244,6 +250,13 @@
             this.tsm_Settings_Logs.Size = new System.Drawing.Size(180, 22);
             this.tsm_Settings_Logs.Text = "Save logs";
             this.tsm_Settings_Logs.Click += new System.EventHandler(this.Tsm_Settings_Logs_Click);
+            // 
+            // tsm_About
+            // 
+            this.tsm_About.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tsm_About.Name = "tsm_About";
+            this.tsm_About.Size = new System.Drawing.Size(52, 20);
+            this.tsm_About.Text = "About";
             // 
             // panel1
             // 
@@ -392,11 +405,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Language;
         private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Theme;
         private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Logs;
-        private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Shortcuts;
+        private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Hotkeys;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Language_English;
         private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Language_Francais;
+        private System.Windows.Forms.ToolStripMenuItem tsm_About;
     }
 }
 

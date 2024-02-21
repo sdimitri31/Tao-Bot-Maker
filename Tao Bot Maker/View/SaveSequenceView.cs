@@ -19,9 +19,19 @@ namespace Tao_Bot_Maker.View
         public SaveSequenceView(SequenceController sequenceToSave)
         {
             InitializeComponent();
+            Localization();
+
             this.mode = 0;
             this.sequenceToSave = sequenceToSave;
             LoadSequencesList();
+        }
+        private void Localization()
+        {
+            button_Cancel.Text = Properties.strings.button_Cancel;
+            button_Ok.Text = Properties.strings.button_OK;
+            tabPage1.Text = Properties.strings.tab_NewSequence;
+            tabPage2.Text = Properties.strings.tab_ReplaceSequence;
+            Text = Properties.strings.title_SaveSequenceDialog;
         }
 
         private void SetMode(int tabIndex)
