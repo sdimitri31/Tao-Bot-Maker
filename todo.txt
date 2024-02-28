@@ -1,14 +1,26 @@
 TO DO :
+Crash quand img non trouvée après expiration
+Désactiver le bouton supprimer l'action quand rien n'est sélectionné
+Désactiver le bouton Editer quand rien n'est sélectionné
+Désactiver le bouton start quand séquence vide
+Bloquer le redim de la hotkeyView
+Ajouter des couleurs pour les hotkeys dupliqués
+Espacer les hotkey start/stop de XY
+Localiser les logs
+Bloquer InfiniteLoop si séquence name = séquence sélectionnée
 Try Catch on sequence Load
 Afficher endroit pour le déplacement d'une action
 Inclure Imagesearch dll
+Log validation suppression séquence
+Séparer d'une ligne vide le log après le démarrage ou arrêt du log
 
 ADD ACTION :
+Fusion des panel If image et wait image
 Edit image problème path
+Définir taille écran en XY2 par défaut
 mettre que des nombres dans les TextBox
 PictureBox afficher des grandes images correctement
 Coordonées a analyser pour determiner lequel est XY ou XY2
-Panneaux Images "symétrique"
 Action Attendre intervalle random
 Remplacer dropdown par un menu 
 Actualisation en direct de la zone de recherche ou clic
@@ -17,19 +29,5 @@ Afficher controls quand ils sont chargés
 Verifier les coordonées avant recherche image
 
 DONE :
-Correction : possibilité d'avoir plusieurs fois la même combinaison d'hotkey
-Correction : boutons Démarrer et Arrêter le Bot qui n'avaient pas le bon état
-Correction : Fenêtre ajouter une action - Bloquage du redimensionnement par l'utilisateur
-Correction : Actualisation de la localisation sans redémarrer
-Correction : HotkeyView dropdown en dropdownList
-Correction : Panels "attendre image" et "si image" rendus cohérents
 
-Ajout : Fichier - Nouveau
-Ajout : Bouton supprimer actions sélectionnées
-Ajout : Bouton supprimer sequence
-Ajout : Tooltips
-Ajout : Ajout action clic - bouton Effacer Zone
-
-Suppression : logs de débug
-Suppression : messageBox "saved sequence name"
 

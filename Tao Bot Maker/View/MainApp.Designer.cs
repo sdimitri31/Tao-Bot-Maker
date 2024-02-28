@@ -34,7 +34,7 @@
             this.listBoxLog = new System.Windows.Forms.ListBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.tsm_File = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsm_File_New = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_File_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_File_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -124,7 +124,7 @@
             // tsm_File
             // 
             this.tsm_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
+            this.tsm_File_New,
             this.tsm_File_Save,
             this.tsm_File_SaveAs,
             this.toolStripSeparator1,
@@ -134,14 +134,14 @@
             this.tsm_File.Size = new System.Drawing.Size(46, 24);
             this.tsm_File.Text = "File";
             // 
-            // newToolStripMenuItem
+            // tsm_File_New
             // 
-            this.newToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_file_48;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.Tsm_File_New_Click);
+            this.tsm_File_New.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_file_48;
+            this.tsm_File_New.Name = "tsm_File_New";
+            this.tsm_File_New.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tsm_File_New.Size = new System.Drawing.Size(239, 26);
+            this.tsm_File_New.Text = "New";
+            this.tsm_File_New.Click += new System.EventHandler(this.Tsm_File_New_Click);
             // 
             // tsm_File_Save
             // 
@@ -191,7 +191,7 @@
             this.tsm_Bot_Start.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_play_48;
             this.tsm_Bot_Start.Name = "tsm_Bot_Start";
             this.tsm_Bot_Start.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.tsm_Bot_Start.Size = new System.Drawing.Size(224, 26);
+            this.tsm_Bot_Start.Size = new System.Drawing.Size(147, 26);
             this.tsm_Bot_Start.Text = "Start";
             this.tsm_Bot_Start.Click += new System.EventHandler(this.Tsm_Bot_Start_Click);
             // 
@@ -200,7 +200,7 @@
             this.tsm_Bot_Stop.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_stop_48;
             this.tsm_Bot_Stop.Name = "tsm_Bot_Stop";
             this.tsm_Bot_Stop.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.tsm_Bot_Stop.Size = new System.Drawing.Size(224, 26);
+            this.tsm_Bot_Stop.Size = new System.Drawing.Size(147, 26);
             this.tsm_Bot_Stop.Text = "Stop";
             this.tsm_Bot_Stop.Click += new System.EventHandler(this.Tsm_Bot_Stop_Click);
             // 
@@ -496,7 +496,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsm_Settings_Theme_Auto;
         private System.Windows.Forms.ToolStripMenuItem tsm_About;
         private System.Windows.Forms.Button button_DeleteSelectedAction;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsm_File_New;
         private System.Windows.Forms.ToolTip toolTip;
     }
 }

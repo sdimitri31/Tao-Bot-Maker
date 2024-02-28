@@ -12,7 +12,11 @@ namespace Tao_Bot_Maker
     public class ActionIfPictureController
     {
         public ActionIfPictureController() { }
-
+        /// <summary>
+        /// Validate and process data from ActionIfPicturePanel and send ActionIfPicture to ActionController
+        /// </summary>
+        /// <param name="panel">ActionIfPicturePanel</param>
+        /// <returns>ActionIfPicture if success or null if error</returns>
         public static Action GetActionFromControl(ActionIfPicturePanel panel)
         {
             int errorCount = 0;
@@ -20,10 +24,10 @@ namespace Tao_Bot_Maker
             ActionIfPicture actionIfPicture = null;
 
             //Moving picture into picture folder
-            //Get complete path of selected picture
-            String selectedPictureFullPath = panel.PictureName;
-            String selectedPictureDestinationFullPath = null;
-            String selectedPictureName = null;
+
+            String selectedPictureFullPath = panel.OriginalPath;
+            String targetFullPath = null;
+            String pictureName = panel.PictureName;
 
             //Create Pictures folder if not present
             Directory.CreateDirectory(Constants.PICTURE_FOLDER_NAME);
@@ -32,20 +36,19 @@ namespace Tao_Bot_Maker
             if (File.Exists(selectedPictureFullPath))
             {               
                 //Source Folder and Name
-                String selectedPictureFolderPath = Path.GetDirectoryName(selectedPictureFullPath);
-                selectedPictureName = Path.GetFileName(selectedPictureFullPath);
+                String sourceFolderPath = Path.GetDirectoryName(selectedPictureFullPath);
 
                 //Destination Folder
-                String picturesFolderPath = Directory.GetCurrentDirectory().ToString() + "\\" + Constants.PICTURE_FOLDER_NAME;
-                selectedPictureDestinationFullPath = picturesFolderPath + "\\" + selectedPictureName;
+                String targetFolderPath = Path.Combine(Directory.GetCurrentDirectory().ToString(), Constants.PICTURE_FOLDER_NAME);
+                targetFullPath = Path.Combine(targetFolderPath, pictureName);
 
                 //If not in the same directory
-                if (picturesFolderPath != selectedPictureFolderPath)
+                if (targetFolderPath != sourceFolderPath)
                 {
-                    //Check if file with same name already exists
-                    if (File.Exists(picturesFolderPath + "\\" + selectedPictureName))
+                    //Check if file with same name already exists in target folder
+                    if (File.Exists(Path.Combine(targetFolderPath, pictureName)))
                     {
-                        String message = "File with name : " + selectedPictureName + " already present in Pictures folder.\r\n" +
+                        String message = "File with name : " + pictureName + " already present in Pictures folder.\r\n" +
                             "Choose : \r\n" +
                             "Yes to replace\r\n" +
                             "No to add it with new name\r\n";
@@ -53,18 +56,20 @@ namespace Tao_Bot_Maker
 
                         if (dr == DialogResult.Yes)
                         {
+                            //Replace
                             try
                             {
                                 Log.Write(Log.INFO, "Source : " + selectedPictureFullPath);
-                                Log.Write(Log.INFO, "Destination : " + selectedPictureDestinationFullPath);
+                                Log.Write(Log.INFO, "Destination : " + targetFullPath);
 
-                                File.Delete(picturesFolderPath + "\\" + selectedPictureName);
-                                File.Copy(selectedPictureFullPath, selectedPictureDestinationFullPath);
+                                File.Delete(Path.Combine(targetFolderPath, pictureName));
+                                File.Copy(selectedPictureFullPath, targetFullPath);
                             }
-                            catch
+                            catch (Exception ex)
                             {
                                 errorCount++;
                                 errorMessage += "Erreur : Unable to replace the file\r\n";
+                                Log.Write(Log.ERROR, ex.Message.ToString());
                             }
                         }
                         else if (dr == DialogResult.Cancel)
@@ -73,22 +78,23 @@ namespace Tao_Bot_Maker
                         }
                         else if (dr == DialogResult.No)
                         {
+                            //Rename before moving
                             try
                             {
                                 String ext = Path.GetExtension(selectedPictureFullPath);
-                                selectedPictureName = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + ext;
-                                String dest = picturesFolderPath + "\\" + selectedPictureName;
+                                pictureName = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + ext;
+                                String dest = Path.Combine(targetFolderPath, pictureName);
 
                                 Log.Write(Log.INFO, "Source : " + selectedPictureFullPath);
                                 Log.Write(Log.INFO, "Destination : " + dest);
 
                                 File.Copy(selectedPictureFullPath, dest);
-
                             }
-                            catch
+                            catch (Exception ex)
                             {
                                 errorCount++;
                                 errorMessage += "Erreur : Unable to rename the file\r\n";
+                                Log.Write(Log.ERROR, ex.Message.ToString());
                             }
                         }
                     }
@@ -99,14 +105,15 @@ namespace Tao_Bot_Maker
                         try
                         {
                             Log.Write(Log.INFO, "Source : " + selectedPictureFullPath);
-                            Log.Write(Log.INFO, "Destination : " + selectedPictureDestinationFullPath);
+                            Log.Write(Log.INFO, "Destination : " + targetFullPath);
 
-                            File.Copy(selectedPictureFullPath, selectedPictureDestinationFullPath);
+                            File.Copy(selectedPictureFullPath, targetFullPath);
                         }
-                        catch
+                        catch (Exception ex)
                         {
                             errorCount++;
                             errorMessage += "Erreur : Unable to copy the file\r\n";
+                            Log.Write(Log.ERROR, ex.Message.ToString());
                         }
                     }
                 }
@@ -117,7 +124,7 @@ namespace Tao_Bot_Maker
                 errorMessage += "Erreur : File not found\r\n";
             }
 
-            if(selectedPictureDestinationFullPath == null)
+            if(targetFullPath == null)
             {
                 errorCount++;
                 errorMessage += "Erreur : Invalid picture destination\r\n";
@@ -133,49 +140,57 @@ namespace Tao_Bot_Maker
 
             //X1
             int x1 = panel.X1;
-            if (x1 < 0)
+            if (x1 < -999999 || x1 > 999999)
             {
                 errorCount++;
-                errorMessage += "Erreur : X1 should be a number greater or equal to 0\r\n";
+                errorMessage += "Erreur : X1 should be a number between -999999 and 999999\r\n";
             }
 
             //X2
             int x2 = panel.X2;
-            if (x2 < 0)
+            if (x2 < -999999 || x2 > 999999)
             {
                 errorCount++;
-                errorMessage += "Erreur : X2 should be a number greater or equal to 0\r\n";
+                errorMessage += "Erreur : X2 should be a number between -999999 and 999999\r\n";
             }
 
             //Y1
             int y1 = panel.Y1;
-            if (y1 < 0)
+            if (y1 < -999999 || y1 > 999999)
             {
                 errorCount++;
-                errorMessage += "Erreur : Y1 should be a number greater or equal to 0\r\n";
+                errorMessage += "Erreur : Y1 should be a number between -999999 and 999999\r\n";
             }
 
             //Y2
             int y2 = panel.Y2;
-            if (y2 < 0)
+            if (y2 < -999999 || y2 > 999999)
             {
                 errorCount++;
-                errorMessage += "Erreur : Y2 should be a number greater or equal to 0\r\n";
+                errorMessage += "Erreur : Y2 should be a number between -999999 and 999999\r\n";
+            }
+
+            //Expiration
+            int expiration = panel.Expiration;
+            if (expiration < -1)
+            {
+                errorCount++;
+                errorMessage += "Erreur : Expiration should be a number greater than -2\r\n";
             }
 
             //SequenceIfFound
-            string sequenceIfFound = panel.SequenceIfFound;
+            string ifFound = panel.IfFound;
 
-            if (sequenceIfFound == null)
+            if (ifFound == null)
             {
                 errorCount++;
                 errorMessage += "Erreur : A sequence must be selected\r\n";
             }
 
             //SequenceIfNotFound
-            string sequenceIfNotFound = panel.SequenceIfNotFound;
+            string ifNotFound = panel.IfNotFound;
 
-            if (sequenceIfNotFound == null)
+            if (ifNotFound == null)
             {
                 errorCount++;
                 errorMessage += "Erreur : A sequence must be selected\r\n";
@@ -183,7 +198,7 @@ namespace Tao_Bot_Maker
 
             if (errorCount == 0)
             {
-                actionIfPicture = new ActionIfPicture(selectedPictureName, threshold, x1, x2, y1, y2, sequenceIfFound, sequenceIfNotFound);
+                actionIfPicture = new ActionIfPicture(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
             }
             else
             {

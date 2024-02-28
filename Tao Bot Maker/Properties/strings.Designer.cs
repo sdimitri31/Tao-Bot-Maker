@@ -502,6 +502,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à New.
+        /// </summary>
+        internal static string tsm_File_New {
+            get {
+                return ResourceManager.GetString("tsm_File_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Save.
         /// </summary>
         internal static string tsm_File_Save {

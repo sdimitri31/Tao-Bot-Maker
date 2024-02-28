@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker.View
 {
@@ -18,6 +19,7 @@ namespace Tao_Bot_Maker.View
         {
             InitializeComponent();
             DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
+            labelAboutVersionNumber.Text = Constants.VERSION;
         }
         protected override bool ProcessDialogKey(Keys keyData)
         {

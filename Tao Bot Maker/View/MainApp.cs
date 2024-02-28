@@ -107,6 +107,7 @@ namespace Tao_Bot_Maker
         private void Localization()
         {
             tsm_File.Text = Properties.strings.tsm_File;
+            tsm_File_New.Text = Properties.strings.tsm_File_New;
             tsm_File_Save.Text = Properties.strings.tsm_File_Save;
             tsm_File_SaveAs.Text = Properties.strings.tsm_File_SaveAs;
             tsm_File_Exit.Text = Properties.strings.tsm_File_Exit;

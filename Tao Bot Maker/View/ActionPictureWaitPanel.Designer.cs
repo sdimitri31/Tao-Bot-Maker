@@ -41,21 +41,21 @@
             this.label_X2 = new System.Windows.Forms.Label();
             this.label_X1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flatComboBoxActionPictureWaitSequenceIfExpired = new DarkModeForms.FlatComboBox();
-            this.numericUpDownActionPictureWaitX1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownActionPictureWaitY1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownActionPictureWaitX2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownActionPictureWaitY2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownActionPictureWaitThreshold = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownActionPictureWaitWaitTime = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownActionPictureWaitY2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownActionPictureWaitX2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownActionPictureWaitY1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownActionPictureWaitX1 = new System.Windows.Forms.NumericUpDown();
+            this.flatComboBoxActionPictureWaitSequenceIfExpired = new DarkModeForms.FlatComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxActionPictureWaitImage)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitWaitTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonActionPictureWaitShowZone
@@ -98,10 +98,10 @@
             // 
             this.buttonActionPictureWaitFindImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.buttonActionPictureWaitFindImage, 2);
-            this.buttonActionPictureWaitFindImage.Location = new System.Drawing.Point(3, 247);
+            this.buttonActionPictureWaitFindImage.Location = new System.Drawing.Point(3, 245);
             this.buttonActionPictureWaitFindImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonActionPictureWaitFindImage.Name = "buttonActionPictureWaitFindImage";
-            this.buttonActionPictureWaitFindImage.Size = new System.Drawing.Size(242, 26);
+            this.buttonActionPictureWaitFindImage.Size = new System.Drawing.Size(242, 30);
             this.buttonActionPictureWaitFindImage.TabIndex = 23;
             this.buttonActionPictureWaitFindImage.Text = "Chercher l\'image";
             this.buttonActionPictureWaitFindImage.UseVisualStyleBackColor = false;
@@ -241,89 +241,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 325);
             this.tableLayoutPanel1.TabIndex = 25;
             // 
-            // flatComboBoxActionPictureWaitSequenceIfExpired
-            // 
-            this.flatComboBoxActionPictureWaitSequenceIfExpired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.flatComboBoxActionPictureWaitSequenceIfExpired.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.flatComboBoxActionPictureWaitSequenceIfExpired.FormattingEnabled = true;
-            this.flatComboBoxActionPictureWaitSequenceIfExpired.Location = new System.Drawing.Point(375, 270);
-            this.flatComboBoxActionPictureWaitSequenceIfExpired.Name = "flatComboBoxActionPictureWaitSequenceIfExpired";
-            this.tableLayoutPanel1.SetRowSpan(this.flatComboBoxActionPictureWaitSequenceIfExpired, 2);
-            this.flatComboBoxActionPictureWaitSequenceIfExpired.Size = new System.Drawing.Size(119, 24);
-            this.flatComboBoxActionPictureWaitSequenceIfExpired.TabIndex = 25;
-            // 
-            // numericUpDownActionPictureWaitX1
-            // 
-            this.numericUpDownActionPictureWaitX1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownActionPictureWaitX1.Location = new System.Drawing.Point(127, 89);
-            this.numericUpDownActionPictureWaitX1.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.numericUpDownActionPictureWaitX1.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownActionPictureWaitX1.Name = "numericUpDownActionPictureWaitX1";
-            this.numericUpDownActionPictureWaitX1.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDownActionPictureWaitX1.TabIndex = 26;
-            // 
-            // numericUpDownActionPictureWaitY1
-            // 
-            this.numericUpDownActionPictureWaitY1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownActionPictureWaitY1.Location = new System.Drawing.Point(127, 129);
-            this.numericUpDownActionPictureWaitY1.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.numericUpDownActionPictureWaitY1.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownActionPictureWaitY1.Name = "numericUpDownActionPictureWaitY1";
-            this.numericUpDownActionPictureWaitY1.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDownActionPictureWaitY1.TabIndex = 27;
-            // 
-            // numericUpDownActionPictureWaitX2
-            // 
-            this.numericUpDownActionPictureWaitX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownActionPictureWaitX2.Location = new System.Drawing.Point(127, 169);
-            this.numericUpDownActionPictureWaitX2.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.numericUpDownActionPictureWaitX2.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownActionPictureWaitX2.Name = "numericUpDownActionPictureWaitX2";
-            this.numericUpDownActionPictureWaitX2.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDownActionPictureWaitX2.TabIndex = 28;
-            // 
-            // numericUpDownActionPictureWaitY2
-            // 
-            this.numericUpDownActionPictureWaitY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownActionPictureWaitY2.Location = new System.Drawing.Point(127, 209);
-            this.numericUpDownActionPictureWaitY2.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.numericUpDownActionPictureWaitY2.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownActionPictureWaitY2.Name = "numericUpDownActionPictureWaitY2";
-            this.numericUpDownActionPictureWaitY2.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDownActionPictureWaitY2.TabIndex = 29;
-            // 
             // numericUpDownActionPictureWaitThreshold
             // 
             this.numericUpDownActionPictureWaitThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -360,6 +277,89 @@
             0,
             0});
             // 
+            // numericUpDownActionPictureWaitY2
+            // 
+            this.numericUpDownActionPictureWaitY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownActionPictureWaitY2.Location = new System.Drawing.Point(127, 209);
+            this.numericUpDownActionPictureWaitY2.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDownActionPictureWaitY2.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownActionPictureWaitY2.Name = "numericUpDownActionPictureWaitY2";
+            this.numericUpDownActionPictureWaitY2.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDownActionPictureWaitY2.TabIndex = 29;
+            // 
+            // numericUpDownActionPictureWaitX2
+            // 
+            this.numericUpDownActionPictureWaitX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownActionPictureWaitX2.Location = new System.Drawing.Point(127, 169);
+            this.numericUpDownActionPictureWaitX2.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDownActionPictureWaitX2.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownActionPictureWaitX2.Name = "numericUpDownActionPictureWaitX2";
+            this.numericUpDownActionPictureWaitX2.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDownActionPictureWaitX2.TabIndex = 28;
+            // 
+            // numericUpDownActionPictureWaitY1
+            // 
+            this.numericUpDownActionPictureWaitY1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownActionPictureWaitY1.Location = new System.Drawing.Point(127, 129);
+            this.numericUpDownActionPictureWaitY1.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDownActionPictureWaitY1.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownActionPictureWaitY1.Name = "numericUpDownActionPictureWaitY1";
+            this.numericUpDownActionPictureWaitY1.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDownActionPictureWaitY1.TabIndex = 27;
+            // 
+            // numericUpDownActionPictureWaitX1
+            // 
+            this.numericUpDownActionPictureWaitX1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownActionPictureWaitX1.Location = new System.Drawing.Point(127, 89);
+            this.numericUpDownActionPictureWaitX1.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDownActionPictureWaitX1.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownActionPictureWaitX1.Name = "numericUpDownActionPictureWaitX1";
+            this.numericUpDownActionPictureWaitX1.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDownActionPictureWaitX1.TabIndex = 26;
+            // 
+            // flatComboBoxActionPictureWaitSequenceIfExpired
+            // 
+            this.flatComboBoxActionPictureWaitSequenceIfExpired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatComboBoxActionPictureWaitSequenceIfExpired.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.flatComboBoxActionPictureWaitSequenceIfExpired.FormattingEnabled = true;
+            this.flatComboBoxActionPictureWaitSequenceIfExpired.Location = new System.Drawing.Point(375, 270);
+            this.flatComboBoxActionPictureWaitSequenceIfExpired.Name = "flatComboBoxActionPictureWaitSequenceIfExpired";
+            this.tableLayoutPanel1.SetRowSpan(this.flatComboBoxActionPictureWaitSequenceIfExpired, 2);
+            this.flatComboBoxActionPictureWaitSequenceIfExpired.Size = new System.Drawing.Size(119, 24);
+            this.flatComboBoxActionPictureWaitSequenceIfExpired.TabIndex = 25;
+            // 
             // ActionPictureWaitPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -371,12 +371,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxActionPictureWaitImage)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitWaitTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitY1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActionPictureWaitX1)).EndInit();
             this.ResumeLayout(false);
 
         }
