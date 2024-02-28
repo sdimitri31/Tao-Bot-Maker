@@ -23,11 +23,15 @@ using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using BlueMystic;
+using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker
 {
+
     public partial class MainApp : Form
     {
+        private DarkModeCS DM = null;
         //DLL Drawing
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
@@ -38,84 +42,56 @@ namespace Tao_Bot_Maker
         [DllImport("User32.dll")]
         static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
 
-        //Public Members
-        public static string PICTURE_FOLDER_NAME                    = "Pictures";
-        public static string SETTINGS_INI_NAME                      = "Settings.ini";
-        public static string SETTINGS_SECTION_GENERAL               = "General";
-        public static string SETTINGS_KEY_SAVELOGS                  = "SaveLogs";
-        public static string SETTINGS_KEY_LANGUAGE                  = "Language";
-        public static string SETTINGS_SECTION_HOTKEY                = "Hotkey";
-        public static string SETTINGS_KEY_HOTKEY_STARTBOT_KEY       = "StartBotKey";
-        public static string SETTINGS_KEY_HOTKEY_STOPBOT_KEY        = "StopBotKey";
-        public static string SETTINGS_KEY_HOTKEY_XY_KEY             = "XYKey";
-        public static string SETTINGS_KEY_HOTKEY_XY2_KEY            = "XY2Key";
-        public static string SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER  = "StartBotModifier";
-        public static string SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER   = "StopBotModifier";
-        public static string SETTINGS_KEY_HOTKEY_XY_MODIFIER        = "XYModifier";
-        public static string SETTINGS_KEY_HOTKEY_XY2_MODIFIER       = "XY2Modifier";
-        public const int WM_HOTKEY_MSG_ID = 0x0312;
-
         //Private Members
         private SequenceController sequenceController;
         private Bot bot;
         private HotKeyController hotkeyStartBot;
         private HotKeyController hotkeyStopBot;
-        private HotKeyController hotkeyXY;
-        private HotKeyController hotkeyXY2;
 
         public MainApp()
         {
             SetProcessDPIAware();
             InitializeComponent();
+            
+            //Apply theme
+            ApplyTheme();
+
+            //Set application language
+            SetLanguageUI();
+
+            //Apply language to controls
+            Localization();
 
             hotkeyStartBot = new HotKeyController(
-                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER), 
-                GetHotkeyKey(SETTINGS_KEY_HOTKEY_STARTBOT_KEY), 
+                SettingsController.GetHotkeyModifierStartBot(),
+                SettingsController.GetHotkeyKeyStartBot(), 
                 this);
             hotkeyStartBot.Register();
 
             hotkeyStopBot = new HotKeyController(
-                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER),
-                GetHotkeyKey(SETTINGS_KEY_HOTKEY_STOPBOT_KEY),
+                SettingsController.GetHotkeyModifierStopBot(),
+                SettingsController.GetHotkeyKeyStopBot(),
                 this);
             hotkeyStopBot.Register();
 
-            hotkeyXY = new HotKeyController(
-                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_XY_MODIFIER),
-                GetHotkeyKey(SETTINGS_KEY_HOTKEY_XY_KEY),
-                this);
-
-            hotkeyXY2 = new HotKeyController(
-                GetHotkeyModifier(SETTINGS_KEY_HOTKEY_XY2_MODIFIER),
-                GetHotkeyKey(SETTINGS_KEY_HOTKEY_XY2_KEY),
-                this);
-
-            LoadSequencesList();
-
-            sequenceController = new SequenceController();
+            NewSequence();
 
             bot = new Bot(this);
 
-            //labelNotice.Text = "F1 : Angle haut gauche ou clic \r\n" +
-            //               "F2 : Angle bas droite \r\n" +
-            //               "F6 : Start Bot \r\n" +
-            //               "F7 : Stop Bot  \r\n" +
-            //               "Tolérance : 0-255; 0 = pixel perfect; (Recommandé 100-150)";
-
-            UpdateButtons();
-            UpdateLanguageUI(GetLanguage());
+            UpdateButtonState();
             UpdateUIHotkey();
-            Log("Setting SaveLogs : " + IsSaveLogs(), LogFramework.Log.INFO);
-            Log("Setting Language : " + GetLanguage(), LogFramework.Log.INFO);
+
+            Log("Setting SaveLogs : " + SettingsController.IsSaveLogs(), LogFramework.Log.INFO);
+            Log("Setting Language : " + SettingsController.GetLanguage(), LogFramework.Log.INFO);
             Log("Programme initialisé", LogFramework.Log.INFO);
         }
 
         //------------------------------------------------------------
         //    METHODS
         //------------------------------------------------------------
-        private void UpdateLanguageUI(string language)
+        private void SetLanguageUI()
         {
-            switch (language)
+            switch (SettingsController.GetLanguage())
             {
                 case "EN":
                     Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
@@ -126,9 +102,10 @@ namespace Tao_Bot_Maker
                 default:
                     Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
                     break;
-
             }
-
+        }
+        private void Localization()
+        {
             tsm_File.Text = Properties.strings.tsm_File;
             tsm_File_Save.Text = Properties.strings.tsm_File_Save;
             tsm_File_SaveAs.Text = Properties.strings.tsm_File_SaveAs;
@@ -146,8 +123,16 @@ namespace Tao_Bot_Maker
 
             tsm_About.Text = Properties.strings.tsm_About;
 
+            toolTip.SetToolTip(this.button_AddAction, Properties.strings.toolTip_Button_AddAction);
+            toolTip.SetToolTip(this.button_EditAction, Properties.strings.toolTip_Button_EditAction);
+            toolTip.SetToolTip(this.button_DeleteSelectedAction, Properties.strings.toolTip_Button_DeleteAction);
+            toolTip.SetToolTip(this.button_StartBot, Properties.strings.toolTip_Button_StartBot);
+            toolTip.SetToolTip(this.button_StopBot, Properties.strings.toolTip_Button_StopBot);
+            toolTip.SetToolTip(this.button_SaveSequence, Properties.strings.toolTip_Button_SaveSequence);
+            toolTip.SetToolTip(this.button_DeleteSequence, Properties.strings.toolTip_Button_DeleteSequence);
+
         }
-        private void UpdateButtons()
+        private void UpdateButtonState()
         {
             //Enable Edit Button
             if (listBoxActions.SelectedIndex == -1)
@@ -156,11 +141,45 @@ namespace Tao_Bot_Maker
                 button_EditAction.Enabled = true;
 
             //Enable Bot Start or Stop
+            UpdateButtonStateBot();
+
+            //Check SaveLogs menu
+            tsm_Settings_Logs.Checked = SettingsController.IsSaveLogs();
+
+            //Language
+            String language = SettingsController.GetLanguage();
+            tsm_Settings_Language_Francais.Checked = false;
+            tsm_Settings_Language_English.Checked = false;
+            
+            if (language == "EN")
+                tsm_Settings_Language_English.Checked = true;
+            else if (language == "FR")
+                tsm_Settings_Language_Francais.Checked = true;
+
+            //Theme
+            int themeMode = SettingsController.GetTheme();
+            tsm_Settings_Theme_Dark.Checked = false;
+            tsm_Settings_Theme_Light.Checked = false;
+            tsm_Settings_Theme_Auto.Checked = false;
+
+            if (themeMode == 0)
+                tsm_Settings_Theme_Dark.Checked = true;
+            else if (themeMode == 1)
+                tsm_Settings_Theme_Light.Checked = true;
+            else
+                tsm_Settings_Theme_Auto.Checked = true;
+        }
+
+        public void UpdateButtonStateBot()
+        {
+            //Enable Bot Start or Stop
+            button_StartBot.Enabled = false;
+            tsm_Bot_Start.Enabled = false;
+            button_StopBot.Enabled = false;
+            tsm_Bot_Stop.Enabled = false;
+
             if (bot.IsRunning)
             {
-                button_StartBot.Enabled = false;
-                tsm_Bot_Start.Enabled = false;
-
                 button_StopBot.Enabled = true;
                 tsm_Bot_Stop.Enabled = true;
             }
@@ -168,34 +187,9 @@ namespace Tao_Bot_Maker
             {
                 button_StartBot.Enabled = true;
                 tsm_Bot_Start.Enabled = true;
-
-                button_StopBot.Enabled = false;
-                tsm_Bot_Stop.Enabled = false;
-            }
-
-            //Check SaveLogs menu
-            if (IsSaveLogs())
-            {
-                tsm_Settings_Logs.Checked = true;
-            }
-            else
-            {
-                tsm_Settings_Logs.Checked = false;
-            }
-
-            //Language
-            String language = GetLanguage();
-            if (language == "EN")
-            {
-                tsm_Settings_Language_English.Checked = true;
-                tsm_Settings_Language_Francais.Checked = false;
-            }
-            else if (language == "FR")
-            {
-                tsm_Settings_Language_English.Checked = false;
-                tsm_Settings_Language_Francais.Checked = true;
             }
         }
+
         private void UpdateUIHotkey()
         {
             int modifier = 0;
@@ -207,6 +201,19 @@ namespace Tao_Bot_Maker
             modifier = Reverse3Bits((int)hotkeyStopBot.GetModifier()) << 16;
             tsm_Bot_Stop.ShortcutKeys = (Keys)((int)hotkeyStopBot.GetKey() | modifier);
 
+        }
+        private void ApplyTheme()
+        {
+            DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
+        }
+        
+        private void ChangeLanguage(string language)
+        {
+            SettingsController.SetLanguage(language.ToUpper());
+            Log(LogFramework.Log.INFO, "Setting Language : " + SettingsController.GetLanguage());
+            UpdateButtonState();
+            SetLanguageUI();
+            Localization();
         }
         public void Log(string message, int level)
         {
@@ -248,18 +255,10 @@ namespace Tao_Bot_Maker
                 }
             }
 
-            if (IsSaveLogs())
+            if (SettingsController.IsSaveLogs())
                 LogFramework.Log.Write(logLevel, logsentence);
         }
 
-        public HotKeyController GetHotKeyControllerXY()
-        {
-            return hotkeyXY;
-        }
-        public HotKeyController GetHotKeyControllerXY2()
-        {
-            return hotkeyXY2;
-        }
 
         //------------------------------------------------------------
         //SAVING AND LOADING
@@ -269,16 +268,16 @@ namespace Tao_Bot_Maker
         /// </summary>
         private void LoadActions()
         {
-            Log(LogFramework.Log.INFO, "Loading actions");
+            //Log(LogFramework.Log.INFO, "Loading actions");
             this.listBoxActions.Items.Clear();
             foreach (Action action in sequenceController.GetActions())
             {
-                Log(LogFramework.Log.INFO, "Loading action : " + action.ToString());
+                //Log(LogFramework.Log.INFO, "Loading action : " + action.ToString());
                 String currentItem = action.ToString();
                 this.listBoxActions.Items.Add(currentItem);
             }
 
-            Log(LogFramework.Log.INFO, "Loading actions success");
+            //Log(LogFramework.Log.INFO, "Loading actions success");
         }
 
         /// <summary>
@@ -292,7 +291,7 @@ namespace Tao_Bot_Maker
             {
                 //Get Sequence from XML
                 this.sequenceController.Sequence = SequenceXmlManager.LoadSequence(sequenceName);
-                Log(LogFramework.Log.INFO, "Loading success");
+                //Log(LogFramework.Log.INFO, "Loading success");
                 return true;
             }
             Log(LogFramework.Log.ERROR, "Loading failed");
@@ -309,9 +308,9 @@ namespace Tao_Bot_Maker
             var result = saveSequenceView.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                MessageBox.Show(saveSequenceView.ReturnValueSequenceName);
+                //MessageBox.Show(saveSequenceView.ReturnValueSequenceName);
                 LoadSequencesList();
-                comboBoxListSequences.SelectedItem = saveSequenceView.ReturnValueSequenceName;
+                flatComboBoxSequenceList.SelectedItem = saveSequenceView.ReturnValueSequenceName;
 
                 Log(LogFramework.Log.INFO, "Sequence saved : " + saveSequenceView.ReturnValueSequenceName);
             }
@@ -322,80 +321,10 @@ namespace Tao_Bot_Maker
         /// </summary>
         private void SaveSequence()
         {
-            if(comboBoxListSequences.SelectedItem != null)
-                SequenceXmlManager.SaveSequence(comboBoxListSequences.SelectedItem.ToString(), this.sequenceController);
+            if(flatComboBoxSequenceList.SelectedItem != null)
+                SequenceXmlManager.SaveSequence(flatComboBoxSequenceList.SelectedItem.ToString(), this.sequenceController);
             else
                 SaveAsSequence();
-        }
-
-        //------------------------------------------------------------
-        //SETTINGS
-        public void WriteSetting(String key, String value, String section)
-        {
-            var MyIni = new IniFile(SETTINGS_INI_NAME);
-            MyIni.Write(key, value, section);
-        }
-        public void WriteSetting(String key, String value)
-        {
-            var MyIni = new IniFile(SETTINGS_INI_NAME);
-            MyIni.Write(key, value);
-        }
-        public String ReadSetting(String key, String section)
-        {
-            var MyIni = new IniFile(SETTINGS_INI_NAME);
-            var value = MyIni.Read(key, section);
-            return value.ToString();
-        }
-
-        //LOGS
-        private bool IsSaveLogs()
-        {
-            String value = ReadSetting(SETTINGS_KEY_SAVELOGS, SETTINGS_SECTION_GENERAL);
-            if (value.ToLower() == "true")
-                return true;
-
-            return false;
-        }
-
-        //LANGUAGE
-        private String GetLanguage()
-        {
-            string language = ReadSetting(SETTINGS_KEY_LANGUAGE, SETTINGS_SECTION_GENERAL);
-            if (language == "")
-                return "EN";
-            return language;
-        }
-
-        //HOTKEY
-        private int GetHotkeyModifier(string settingName)
-        {
-            int value = 0;
-            try
-            {
-                value = Int32.Parse(ReadSetting(settingName, SETTINGS_SECTION_HOTKEY));
-            }
-            catch
-            { }
-            return value;
-        }
-        private Keys GetHotkeyKey(string settingName)
-        {
-            Keys key;
-            bool result = Enum.TryParse(ReadSetting(settingName, SETTINGS_SECTION_HOTKEY), out key);
-            if (result)
-                return key;
-            else
-            {
-                if(settingName == SETTINGS_KEY_HOTKEY_STARTBOT_KEY)
-                    return Keys.F6;
-                if (settingName == SETTINGS_KEY_HOTKEY_STOPBOT_KEY)
-                    return Keys.F7;
-                if (settingName == SETTINGS_KEY_HOTKEY_XY_KEY)
-                    return Keys.F1;
-                if (settingName == SETTINGS_KEY_HOTKEY_XY2_KEY)
-                    return Keys.F2;
-            }
-            return Keys.None;
         }
 
 
@@ -409,7 +338,7 @@ namespace Tao_Bot_Maker
             var result = formPopup.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                Log(LogFramework.Log.INFO, "Action View OK");
+                //Log(LogFramework.Log.INFO, "Action View OK");
                 sequenceController.AddAction(formPopup.ReturnValueAction);
 
                 Log(LogFramework.Log.INFO, "Action Créé : " + formPopup.ReturnValueAction.ToString());
@@ -417,7 +346,7 @@ namespace Tao_Bot_Maker
             }
             else
             {
-                Log(LogFramework.Log.INFO, "Action View CANCEL");
+                //Log(LogFramework.Log.INFO, "Action View CANCEL");
             }
         }
 
@@ -425,12 +354,12 @@ namespace Tao_Bot_Maker
         {
             if (selectedActionIndex != -1)
             {
-                var formPopup = new ActionView(sequenceController.GetActions()[selectedActionIndex], this);
+                var formPopup = new ActionView(this, sequenceController.GetActions()[selectedActionIndex]);
                 formPopup.StartPosition = FormStartPosition.CenterParent;
                 var result = formPopup.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    Log(LogFramework.Log.INFO, "Action View Edit OK");
+                    //Log(LogFramework.Log.INFO, "Action View Edit OK");
                     sequenceController.EditAction(selectedActionIndex, formPopup.ReturnValueAction);
 
                     Log("Action Modifiée : " + sequenceController.GetActions()[selectedActionIndex].ToString());
@@ -438,15 +367,10 @@ namespace Tao_Bot_Maker
                 }
                 else
                 {
-                    Log(LogFramework.Log.INFO, "Action View Edit CANCEL");
+                    //Log(LogFramework.Log.INFO, "Action View Edit CANCEL");
                 }
             }
 
-        }
-        
-        private void RemoveAction(int selectedActionIndex)
-        {
-            sequenceController.RemoveAction(selectedActionIndex);
         }
         
         private void RemoveAction(Action selectedAction)
@@ -465,13 +389,11 @@ namespace Tao_Bot_Maker
         private void StartBot()
         {
             bot.Start(sequenceController);
-            UpdateButtons();
         }
 
         private void StopBot()
         {
             bot.Stop();
-            UpdateButtons();
         }
 
         //------------------------------------------------------------
@@ -479,11 +401,11 @@ namespace Tao_Bot_Maker
 
         private void LoadSequencesList()
         {
-            comboBoxListSequences.Items.Clear();
-            comboBoxListSequences.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            flatComboBoxSequenceList.Items.Clear();
+            flatComboBoxSequenceList.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
             try
             {
-                comboBoxListSequences.SelectedIndex = -1;
+                flatComboBoxSequenceList.SelectedIndex = -1;
             }
             catch { }
         }
@@ -495,6 +417,15 @@ namespace Tao_Bot_Maker
         //------------------------------------------------------------
         // ToolStripMenu EVENTS
 
+        //------------------------------------------------------------
+        //FILE
+
+        //New
+        private void Tsm_File_New_Click(object sender, EventArgs e)
+        {
+            NewSequence();
+        }
+        
         //Save
         private void Tsm_File_Save_Click(object sender, EventArgs e)
         {
@@ -516,44 +447,49 @@ namespace Tao_Bot_Maker
             this.Close();
         }
 
+        //------------------------------------------------------------
+        //BOT
+
+        //Start
+        private void Tsm_Bot_Start_Click(object sender, EventArgs e)
+        {
+            StartBot();
+        }
+        
+        //Stop
+        private void Tsm_Bot_Stop_Click(object sender, EventArgs e)
+        {
+            StopBot();
+        }
+
+        //------------------------------------------------------------
+        //SETTINGS
+
         //Save logs
         private void Tsm_Settings_Logs_Click(object sender, EventArgs e)
         {
             //Toggle the settings
-            if (IsSaveLogs())
-            {
-                WriteSetting(SETTINGS_KEY_SAVELOGS, "false", SETTINGS_SECTION_GENERAL);
-            }
-            else
-            {
-                WriteSetting(SETTINGS_KEY_SAVELOGS, "true", SETTINGS_SECTION_GENERAL);
-            }
-            Log(LogFramework.Log.INFO, "Setting SaveLogs : " + IsSaveLogs());
-            UpdateButtons();
+            SettingsController.SetSaveLogs(!SettingsController.IsSaveLogs());
+            Log(LogFramework.Log.INFO, "Setting SaveLogs : " + SettingsController.IsSaveLogs());
+            UpdateButtonState();
         }
         
         //English selected
         private void Tsm_Settings_Language_English_Click(object sender, EventArgs e)
         {
-            WriteSetting(SETTINGS_KEY_LANGUAGE, "EN", SETTINGS_SECTION_GENERAL);
-            Log(LogFramework.Log.INFO, "Setting Language : " + GetLanguage());
-            UpdateButtons();
-            UpdateLanguageUI(GetLanguage());
+            ChangeLanguage("EN");
         }
         
         //French selected
         private void Tsm_Settings_Language_Francais_Click(object sender, EventArgs e)
         {
-            WriteSetting(SETTINGS_KEY_LANGUAGE, "FR", SETTINGS_SECTION_GENERAL);
-            Log(LogFramework.Log.INFO, "Setting Language : " + GetLanguage());
-            UpdateButtons();
-            UpdateLanguageUI(GetLanguage());
+            ChangeLanguage("FR");
         }
         
         //Hotkey Dialog
         private void Tsm_Settings_Hotkeys_Click(object sender, EventArgs e)
         {
-            HotkeyView shortcutsView = new HotkeyView(hotkeyStartBot, hotkeyStopBot, hotkeyXY, hotkeyXY2);
+            HotkeyView shortcutsView = new HotkeyView();
             shortcutsView.StartPosition = FormStartPosition.CenterParent;
             var result = shortcutsView.ShowDialog(this);
             if (result == DialogResult.OK)
@@ -561,47 +497,57 @@ namespace Tao_Bot_Maker
                 hotkeyStartBot.Unregiser();
                 hotkeyStartBot.SetHotkey(shortcutsView.ReturnHotkeyStartBot);
                 hotkeyStartBot.Register();
-                WriteSetting(SETTINGS_KEY_HOTKEY_STARTBOT_KEY, hotkeyStartBot.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
-                WriteSetting(SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER, hotkeyStartBot.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
+                SettingsController.SetHotkeyStartBot(hotkeyStartBot.GetHotkey());
 
                 hotkeyStopBot.Unregiser();
                 hotkeyStopBot.SetHotkey(shortcutsView.ReturnHotkeyStopBot);
                 hotkeyStopBot.Register();
-                WriteSetting(SETTINGS_KEY_HOTKEY_STOPBOT_KEY, hotkeyStopBot.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
-                WriteSetting(SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER, hotkeyStopBot.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
+                SettingsController.SetHotkeyStopBot(hotkeyStopBot.GetHotkey());
 
-                hotkeyXY.SetHotkey(shortcutsView.ReturnHotkeyXY);
-                WriteSetting(SETTINGS_KEY_HOTKEY_XY_KEY, hotkeyXY.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
-                WriteSetting(SETTINGS_KEY_HOTKEY_XY_MODIFIER, hotkeyXY.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
+                SettingsController.SetHotkeyXY(shortcutsView.ReturnHotkeyXY);
 
-                hotkeyXY2.SetHotkey(shortcutsView.ReturnHotkeyXY2);
-                WriteSetting(SETTINGS_KEY_HOTKEY_XY2_KEY, hotkeyXY2.GetKey().ToString(), SETTINGS_SECTION_HOTKEY);
-                WriteSetting(SETTINGS_KEY_HOTKEY_XY2_MODIFIER, hotkeyXY2.GetModifier().ToString(), SETTINGS_SECTION_HOTKEY);
+                SettingsController.SetHotkeyXY2(shortcutsView.ReturnHotkeyXY2);
 
                 UpdateUIHotkey();
             }
         }
 
-        public static int Reverse3Bits(int n)
+
+        //Theme
+        private void Tsm_Settings_Theme_Light_Click(object sender, EventArgs e)
         {
-            return (0x73516240 >> (n << 2)) & 7;
+            SettingsController.SetTheme(1);
+            ApplyTheme();
+            UpdateButtonState();
+            this.Refresh();
         }
+
+        private void Tsm_Settings_Theme_Dark_Click(object sender, EventArgs e)
+        {
+            SettingsController.SetTheme(0);
+            ApplyTheme();
+            UpdateButtonState();
+            this.Refresh();
+        }
+
+        private void Tsm_Settings_Theme_Auto_Click(object sender, EventArgs e)
+        {
+            SettingsController.SetTheme(2);
+            ApplyTheme();
+            UpdateButtonState();
+            this.Refresh();
+        }
+       
+        //About
+        private void Tsm_About_Click(object sender, EventArgs e)
+        {
+            var aboutPopup = new About();
+            aboutPopup.StartPosition = FormStartPosition.CenterParent;
+            aboutPopup.ShowDialog(this);
+        }
+
         //------------------------------------------------------------
         // Buttons EVENTS 
-
-        private void ComboBoxListSequences_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxListSequences.SelectedIndex != -1)
-            {
-                //Load Sequence
-                if (LoadSequence(comboBoxListSequences.SelectedItem.ToString()))
-                {
-                    //Populate ActionListBox
-                    LoadActions();
-                }
-            }
-            UpdateButtons();
-        }
 
         private void Button_Add_Action_Click(object sender, EventArgs e)
         {
@@ -612,15 +558,19 @@ namespace Tao_Bot_Maker
         {
             EditAction(listBoxActions.SelectedIndex);
         }
-        
-        private void Button_ClearSequence_Click(object sender, EventArgs e)
+        private void Button_DeleteSelectedAction_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Warning : This will delete all actions in the list", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DeleteSelectedActions();
+        }
+        private void Button_DeleteSequence_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Warning : This will delete the sequence entirely", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (dr == DialogResult.Yes)
             {
-                ClearActions();
-                LoadActions();
+                bool result = SequenceController.DeleteSequence(sequenceController.SequenceName);
+                if(result)
+                    NewSequence();
             }
         }
         
@@ -641,31 +591,33 @@ namespace Tao_Bot_Maker
 
         //------------------------------------------------------------
         //ListBoxAction EVENTS
+        private void DeleteSelectedActions()
+        {
+            try
+            {
+                List<Action> actionsToRemove = new List<Action>();
+                //Get all selected actions
+                for (int i = 0; i < listBoxActions.SelectedItems.Count; i++)
+                {
+                    actionsToRemove.Add(sequenceController.GetActions()[listBoxActions.SelectedIndices[i]]);
+                }
 
+                //Remove all selected actions
+                foreach (Action action in actionsToRemove)
+                {
+                    RemoveAction(action);
+                }
+
+                LoadActions();
+            }
+            catch (Exception) { }
+        }
         private void ListBoxActions_KeyDown(object sender, KeyEventArgs e)
         {            
             //Del Key Pressed
             if (Keys.Delete == e.KeyCode)
             {
-                try
-                {
-                    List<Action> actionsToRemove = new List<Action>();
-                    //Get all selected actions
-                    for (int i = 0; i < listBoxActions.SelectedItems.Count; i++)
-                    {
-                        actionsToRemove.Add(sequenceController.GetActions()[listBoxActions.SelectedIndices[i]]);
-                    }
-
-                    //Remove all selected actions
-                    foreach (Action action in actionsToRemove)
-                    {
-                        RemoveAction(action);
-                    }
-
-                    LoadActions();
-                }
-                catch (Exception) { }
-
+                DeleteSelectedActions();
             }
 
             //CTRL + A Pressed
@@ -690,7 +642,7 @@ namespace Tao_Bot_Maker
             if (this.listBoxActions.SelectedItem == null) return;
             if (e.Clicks == 1)
             {
-                UpdateButtons();
+                UpdateButtonState();
                 this.listBoxActions.DoDragDrop(this.listBoxActions.SelectedItem, DragDropEffects.Move);
             }
         }
@@ -723,9 +675,31 @@ namespace Tao_Bot_Maker
        
         private void ListBoxActions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateButtons();
+            UpdateButtonState();
         }
         
+        //------------------------------------------------------------
+        //Combobox SequenceList EVENTS
+        
+        private void FlatComboBoxSequenceList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (flatComboBoxSequenceList.SelectedIndex != -1)
+            {
+                //Load Sequence
+                if (LoadSequence(flatComboBoxSequenceList.SelectedItem.ToString()))
+                {
+                    //Populate ActionListBox
+                    LoadActions();
+                }
+            }
+            else
+            {
+
+            }
+            UpdateButtonState();
+        }
+
+
         //------------------------------------------------------------
         //MainForm EVENTS
 
@@ -779,6 +753,24 @@ namespace Tao_Bot_Maker
                                         CopyPixelOperation.SourceCopy);
 
             return bmpScreenshot;
+        }
+
+
+        private void NewSequence()
+        {
+            //Populate Combobox with all sequences saved
+            LoadSequencesList();
+
+            //Initialize sequenceController
+            sequenceController = new SequenceController();
+
+            //Make sure ActionList is empty
+            LoadActions();
+        }
+
+        public static int Reverse3Bits(int n)
+        {
+            return (0x73516240 >> (n << 2)) & 7;
         }
 
     }

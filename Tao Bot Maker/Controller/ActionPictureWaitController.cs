@@ -5,6 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
 
 namespace Tao_Bot_Maker
@@ -21,12 +22,12 @@ namespace Tao_Bot_Maker
 
             //Moving picture into picture folder
             //Get complete path of selected picture
-            String selectedPictureFullPath = panel.PictureName;
+            String selectedPictureFullPath = panel.OriginalPath;
             String selectedPictureDestinationFullPath = null;
             String selectedPictureName = null;
 
             //Create Pictures folder if not present
-            Directory.CreateDirectory(MainApp.PICTURE_FOLDER_NAME);
+            Directory.CreateDirectory(Constants.PICTURE_FOLDER_NAME);
 
             //Checking if path is correct
             if (File.Exists(selectedPictureFullPath))
@@ -36,7 +37,7 @@ namespace Tao_Bot_Maker
                 selectedPictureName = Path.GetFileName(selectedPictureFullPath);
 
                 //Destination Folder
-                String picturesFolderPath = Directory.GetCurrentDirectory().ToString() + "\\" + MainApp.PICTURE_FOLDER_NAME;
+                String picturesFolderPath = Directory.GetCurrentDirectory().ToString() + "\\" + Constants.PICTURE_FOLDER_NAME;
                 selectedPictureDestinationFullPath = picturesFolderPath + "\\" + selectedPictureName;
 
                 //If not in the same directory

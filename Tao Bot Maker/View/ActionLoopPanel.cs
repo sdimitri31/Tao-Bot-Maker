@@ -17,14 +17,14 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             Localization();
 
-            comboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            flatComboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
         }
         public ActionLoopPanel(Action action)
         {
             InitializeComponent();
             Localization();
 
-            comboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            flatComboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
             SequencePath = ((ActionLoop)action).SequencePath;
             NumberOfRepetitions = ((ActionLoop)action).NumberOfRepetitions;
         }
@@ -40,9 +40,9 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    if (comboBoxPanelActionLoopSequence.SelectedItem != null)
+                    if (flatComboBoxPanelActionLoopSequence.SelectedItem != null)
                     {
-                        String sequenceName = comboBoxPanelActionLoopSequence.SelectedItem.ToString();
+                        String sequenceName = flatComboBoxPanelActionLoopSequence.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return "";
@@ -52,7 +52,7 @@ namespace Tao_Bot_Maker.View
                     return "";
                 }
             }
-            set { comboBoxPanelActionLoopSequence.SelectedItem = value.ToString(); }
+            set { flatComboBoxPanelActionLoopSequence.SelectedItem = value.ToString(); }
         }
 
         public int NumberOfRepetitions

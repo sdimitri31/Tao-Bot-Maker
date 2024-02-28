@@ -12,6 +12,11 @@ namespace Tao_Bot_Maker
     public class ActionController
     {
         public ActionController() { }
+
+        /// <summary>
+        /// Get an array with all actions types names
+        /// </summary>
+        /// <returns></returns>
         public static String[] GetActionTypeNames()
         {
             String[] actionTypeList = new String[Enum.GetValues(typeof(Action.ActionType)).Length];

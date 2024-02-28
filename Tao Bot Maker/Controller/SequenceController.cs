@@ -18,6 +18,11 @@ namespace Tao_Bot_Maker
             this.sequence = new Sequence();
         }
 
+        public static bool DeleteSequence(String sequenceName)
+        {
+            return SequenceXmlManager.DeleteSequence(sequenceName);
+        }
+
         public Sequence Sequence { 
             get { return this.sequence; }
             set { this.sequence = value; }

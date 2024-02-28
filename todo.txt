@@ -1,0 +1,35 @@
+TO DO :
+Try Catch on sequence Load
+Afficher endroit pour le déplacement d'une action
+Inclure Imagesearch dll
+
+ADD ACTION :
+Edit image problème path
+mettre que des nombres dans les TextBox
+PictureBox afficher des grandes images correctement
+Coordonées a analyser pour determiner lequel est XY ou XY2
+Panneaux Images "symétrique"
+Action Attendre intervalle random
+Remplacer dropdown par un menu 
+Actualisation en direct de la zone de recherche ou clic
+Action Attendre ajouter plusieurs unités de temps (Heure; minutes; secondes)
+Afficher controls quand ils sont chargés
+Verifier les coordonées avant recherche image
+
+DONE :
+Correction : possibilité d'avoir plusieurs fois la même combinaison d'hotkey
+Correction : boutons Démarrer et Arrêter le Bot qui n'avaient pas le bon état
+Correction : Fenêtre ajouter une action - Bloquage du redimensionnement par l'utilisateur
+Correction : Actualisation de la localisation sans redémarrer
+Correction : HotkeyView dropdown en dropdownList
+Correction : Panels "attendre image" et "si image" rendus cohérents
+
+Ajout : Fichier - Nouveau
+Ajout : Bouton supprimer actions sélectionnées
+Ajout : Bouton supprimer sequence
+Ajout : Tooltips
+Ajout : Ajout action clic - bouton Effacer Zone
+
+Suppression : logs de débug
+Suppression : messageBox "saved sequence name"
+

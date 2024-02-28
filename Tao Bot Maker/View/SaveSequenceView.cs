@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueMystic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 
 namespace Tao_Bot_Maker.View
 {
@@ -19,6 +21,7 @@ namespace Tao_Bot_Maker.View
         public SaveSequenceView(SequenceController sequenceToSave)
         {
             InitializeComponent();
+            DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
             Localization();
 
             this.mode = 0;
@@ -41,17 +44,17 @@ namespace Tao_Bot_Maker.View
 
         private void LoadSequencesList()
         {
-            comboBox_SelectSave.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            flatComboBox_SelectSave.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
             try
             {
-                comboBox_SelectSave.SelectedIndex = 0;
+                flatComboBox_SelectSave.SelectedIndex = 0;
             }
             catch { }
         }
 
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetMode(tabControl.SelectedIndex);
+            SetMode(flatTabControl1.SelectedIndex);
         }
 
         private void Button_Save_Click(object sender, EventArgs e)
@@ -74,8 +77,9 @@ namespace Tao_Bot_Maker.View
             }
             else
             {
-                SequenceXmlManager.SaveSequence(comboBox_SelectSave.SelectedItem.ToString(), sequenceToSave);
-                ReturnValueSequenceName = textBox_SaveName.Text;
+                string sequenceName = flatComboBox_SelectSave.SelectedItem.ToString();
+                SequenceXmlManager.SaveSequence(sequenceName, sequenceToSave);
+                ReturnValueSequenceName = sequenceName;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

@@ -10,35 +10,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker.View
 {
     public partial class ActionPictureWaitPanel : UserControl
     {
+        String pictureName;
         //Store the picture path before moving
         String originalPath;
         String destinationPath;
         ActionView actionView;
 
+        //New Action
         public ActionPictureWaitPanel(ActionView actionView)
         {
             InitializeComponent();
             Localization();
+            AddHotkeysToLabels();
             originalPath = null;
             destinationPath = null;
             this.actionView = actionView;
-            comboBoxActionPictureWaitSequenceIfExpired.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            flatComboBoxActionPictureWaitSequenceIfExpired.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
         }
+
+        //Editing Action
         public ActionPictureWaitPanel(ActionView actionView, Action action)
         {
             InitializeComponent();
             Localization();
+            AddHotkeysToLabels();
             this.actionView = actionView;
-            originalPath = null;
-            destinationPath = null;
-            comboBoxActionPictureWaitSequenceIfExpired.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            OriginalPath = null;
+            DestinationPath = null;
+            flatComboBoxActionPictureWaitSequenceIfExpired.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
 
-            PictureName = ((ActionPictureWait)action).PictureName;
+            PictureName = Constants.PICTURE_FOLDER_NAME + "//" + ((ActionPictureWait)action).PictureName;
+            pictureBoxActionPictureWaitImage.Image = Image.FromFile(PictureName);
             Threshold = ((ActionPictureWait)action).Threshold;
             X1 = ((ActionPictureWait)action).X1;
             X2 = ((ActionPictureWait)action).X2;
@@ -55,6 +63,18 @@ namespace Tao_Bot_Maker.View
             buttonActionPictureWaitFindImage.Text = Properties.strings.button_FindImage;
             buttonActionPictureWaitImagePath.Text = Properties.strings.button_Picture;
             buttonActionPictureWaitShowZone.Text = Properties.strings.button_ShowDrawingArea;
+        }
+        private void AddHotkeysToLabels()
+        {
+            int modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY()) << 16;
+            Keys hotkeyXY = (Keys)((int)SettingsController.GetHotkeyKeyXY() | modifier);
+            label_X1.Text += " (" + hotkeyXY.ToString() + ")";
+            label_Y1.Text += " (" + hotkeyXY.ToString() + ")";
+
+            modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY2()) << 16;
+            Keys hotkeyXY2 = (Keys)((int)SettingsController.GetHotkeyKeyXY2() | modifier);
+            label_X2.Text += " (" + hotkeyXY2.ToString() + ")";
+            label_Y2.Text += " (" + hotkeyXY2.ToString() + ")";
         }
         public String DestinationPath
         {
@@ -75,7 +95,7 @@ namespace Tao_Bot_Maker.View
             }
             set { destinationPath = value.ToString(); }
         }
-        public String PictureName
+        public String OriginalPath
         {
             get
             {
@@ -92,7 +112,34 @@ namespace Tao_Bot_Maker.View
                     return null;
                 }
             }
-            set { buttonActionPictureWaitImagePath.Text = value.ToString(); }
+            set
+            {
+                originalPath = value;
+            }
+        }
+
+        public String PictureName
+        {
+            get
+            {
+                try
+                {
+                    if (pictureName != null)
+                    {
+                        return pictureName;
+                    }
+                    return null;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            set 
+            { 
+                buttonActionPictureWaitImagePath.Text = value.ToString();
+                pictureName = value;
+            }
         }
         public int Threshold
         {
@@ -100,7 +147,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxPanelActionPictureWaitThreshold.Text);
+                    int numVal = Int32.Parse(numericUpDownActionPictureWaitThreshold.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -108,7 +155,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxPanelActionPictureWaitThreshold.Text = value.ToString(); }
+            set { numericUpDownActionPictureWaitThreshold.Text = value.ToString(); }
         }
         public int X1 
         {
@@ -116,7 +163,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionPictureWaitX1.Text);
+                    int numVal = Int32.Parse(numericUpDownActionPictureWaitX1.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -124,7 +171,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionPictureWaitX1.Text = value.ToString(); }
+            set { numericUpDownActionPictureWaitX1.Text = value.ToString(); }
         }
         public int X2
         {
@@ -132,7 +179,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionPictureWaitX2.Text);
+                    int numVal = Int32.Parse(numericUpDownActionPictureWaitX2.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -140,7 +187,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionPictureWaitX2.Text = value.ToString(); }
+            set { numericUpDownActionPictureWaitX2.Text = value.ToString(); }
         }
         public int Y1
         {
@@ -148,7 +195,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionPictureWaitY1.Text);
+                    int numVal = Int32.Parse(numericUpDownActionPictureWaitY1.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -156,7 +203,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionPictureWaitY1.Text = value.ToString(); }
+            set { numericUpDownActionPictureWaitY1.Text = value.ToString(); }
         }
         public int Y2
         {
@@ -164,7 +211,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionPictureWaitY2.Text);
+                    int numVal = Int32.Parse(numericUpDownActionPictureWaitY2.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -172,7 +219,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionPictureWaitY2.Text = value.ToString(); }
+            set { numericUpDownActionPictureWaitY2.Text = value.ToString(); }
         }
         public int WaitTime
         {
@@ -180,7 +227,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionPictureWaitWaitTime.Text);
+                    int numVal = Int32.Parse(numericUpDownActionPictureWaitWaitTime.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -188,7 +235,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionPictureWaitWaitTime.Text = value.ToString(); }
+            set { numericUpDownActionPictureWaitWaitTime.Text = value.ToString(); }
         }
         public String SequenceIfExpired
         {
@@ -196,9 +243,9 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    if (comboBoxActionPictureWaitSequenceIfExpired.SelectedItem != null)
+                    if (flatComboBoxActionPictureWaitSequenceIfExpired.SelectedItem != null)
                     {
-                        String sequenceName = comboBoxActionPictureWaitSequenceIfExpired.SelectedItem.ToString();
+                        String sequenceName = flatComboBoxActionPictureWaitSequenceIfExpired.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return null;
@@ -208,7 +255,7 @@ namespace Tao_Bot_Maker.View
                     return null;
                 }
             }
-            set { comboBoxActionPictureWaitSequenceIfExpired.SelectedItem = value.ToString(); }
+            set { flatComboBoxActionPictureWaitSequenceIfExpired.SelectedItem = value.ToString(); }
         }
 
         public void DrawFromTextBoxValues()
@@ -227,10 +274,10 @@ namespace Tao_Bot_Maker.View
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of specified file
-                    originalPath = openFileDialog.FileName;
+                    OriginalPath = openFileDialog.FileName;
                     buttonActionPictureWaitImagePath.Text = openFileDialog.SafeFileName;
                     pictureBoxActionPictureWaitImage.Image = Image.FromFile(originalPath);
-                    DestinationPath = Path.Combine(MainApp.PICTURE_FOLDER_NAME, openFileDialog.SafeFileName);
+                    DestinationPath = Path.Combine(Constants.PICTURE_FOLDER_NAME, openFileDialog.SafeFileName);
                 }
             }
         }
@@ -257,13 +304,13 @@ namespace Tao_Bot_Maker.View
 
                 MessageBox.Show("IMG FOUND\r\n " +
                     "Coords X :" + results_if_image[1] + " Y : " + results_if_image[2]);
-                actionView.Log(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
+                //actionView.Log(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
 
             }
             else
             {
                 MessageBox.Show("IMG NOT FOUND");
-                actionView.Log(Log.INFO, "Image introuvable");                
+                //actionView.Log(Log.INFO, "Image introuvable");                
             }
             
         }

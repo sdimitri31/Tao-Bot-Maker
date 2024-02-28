@@ -88,7 +88,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Loop sequence.
+        ///   Recherche une chaîne localisée semblable à Repeat sequence.
         /// </summary>
         internal static string ActionName_Loop {
             get {
@@ -381,6 +381,69 @@ namespace Tao_Bot_Maker.Properties {
         internal static string title_SaveSequenceDialog {
             get {
                 return ResourceManager.GetString("title_SaveSequenceDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add action.
+        /// </summary>
+        internal static string toolTip_Button_AddAction {
+            get {
+                return ResourceManager.GetString("toolTip_Button_AddAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete selected action.
+        /// </summary>
+        internal static string toolTip_Button_DeleteAction {
+            get {
+                return ResourceManager.GetString("toolTip_Button_DeleteAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete sequence.
+        /// </summary>
+        internal static string toolTip_Button_DeleteSequence {
+            get {
+                return ResourceManager.GetString("toolTip_Button_DeleteSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit selected action.
+        /// </summary>
+        internal static string toolTip_Button_EditAction {
+            get {
+                return ResourceManager.GetString("toolTip_Button_EditAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save sequence.
+        /// </summary>
+        internal static string toolTip_Button_SaveSequence {
+            get {
+                return ResourceManager.GetString("toolTip_Button_SaveSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Start Bot.
+        /// </summary>
+        internal static string toolTip_Button_StartBot {
+            get {
+                return ResourceManager.GetString("toolTip_Button_StartBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stop Bot.
+        /// </summary>
+        internal static string toolTip_Button_StopBot {
+            get {
+                return ResourceManager.GetString("toolTip_Button_StopBot", resourceCulture);
             }
         }
         

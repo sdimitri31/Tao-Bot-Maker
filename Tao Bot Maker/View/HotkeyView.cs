@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Tao_Bot_Maker.Controller;
+using BlueMystic;
 
 namespace Tao_Bot_Maker.View
 {
@@ -19,35 +21,37 @@ namespace Tao_Bot_Maker.View
         public Hotkey ReturnHotkeyXY { get; set; }
         public Hotkey ReturnHotkeyXY2 { get; set; }
 
-        public HotkeyView(HotKeyController startBot, HotKeyController stopBot, HotKeyController XY, HotKeyController XY2)
+        public HotkeyView()
         {
             InitializeComponent();
             Localization();
 
-            comboBox_StartBot_Key.DataSource = Enum.GetValues(typeof(Keys));
-            comboBox_StartBot_Key.SelectedItem = startBot.GetKey();
-            Hotkey.KeyModifier modifier = (Hotkey.KeyModifier)startBot.GetModifier();
+            DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
+
+            flatComboBoxStartBotKey.DataSource = Enum.GetValues(typeof(Keys));
+            flatComboBoxStartBotKey.SelectedItem = SettingsController.GetHotkeyKeyStartBot();
+            Hotkey.KeyModifier modifier = (Hotkey.KeyModifier)SettingsController.GetHotkeyModifierStartBot();
             checkBox_StartBot_Ctrl.Checked = (modifier & Hotkey.KeyModifier.Control) != Hotkey.KeyModifier.None;
             checkBox_StartBot_Alt.Checked = (modifier & Hotkey.KeyModifier.Alt) != Hotkey.KeyModifier.None;
             checkBox_StartBot_Shift.Checked = (modifier & Hotkey.KeyModifier.Shift) != Hotkey.KeyModifier.None;
 
-            comboBox_StopBot_Key.DataSource = Enum.GetValues(typeof(Keys));
-            comboBox_StopBot_Key.SelectedItem = stopBot.GetKey();
-            modifier = (Hotkey.KeyModifier)stopBot.GetModifier();
+            flatComboBoxStopBotKey.DataSource = Enum.GetValues(typeof(Keys));
+            flatComboBoxStopBotKey.SelectedItem = SettingsController.GetHotkeyKeyStopBot();
+            modifier = (Hotkey.KeyModifier)SettingsController.GetHotkeyModifierStopBot();
             checkBox_StopBot_Ctrl.Checked = (modifier & Hotkey.KeyModifier.Control) != Hotkey.KeyModifier.None;
             checkBox_StopBot_Alt.Checked = (modifier & Hotkey.KeyModifier.Alt) != Hotkey.KeyModifier.None;
             checkBox_StopBot_Shift.Checked = (modifier & Hotkey.KeyModifier.Shift) != Hotkey.KeyModifier.None;
 
-            comboBox_XY_Key.DataSource = Enum.GetValues(typeof(Keys));
-            comboBox_XY_Key.SelectedItem = XY.GetKey();
-            modifier = (Hotkey.KeyModifier)XY.GetModifier();
+            flatComboBoxXYKey.DataSource = Enum.GetValues(typeof(Keys));
+            flatComboBoxXYKey.SelectedItem = SettingsController.GetHotkeyKeyXY();
+            modifier = (Hotkey.KeyModifier)SettingsController.GetHotkeyModifierXY();
             checkBox_XY_Ctrl.Checked = (modifier & Hotkey.KeyModifier.Control) != Hotkey.KeyModifier.None;
             checkBox_XY_Alt.Checked = (modifier & Hotkey.KeyModifier.Alt) != Hotkey.KeyModifier.None;
             checkBox_XY_Shift.Checked = (modifier & Hotkey.KeyModifier.Shift) != Hotkey.KeyModifier.None;
 
-            comboBox_XY2_Key.DataSource = Enum.GetValues(typeof(Keys));
-            comboBox_XY2_Key.SelectedItem = XY2.GetKey();
-            modifier = (Hotkey.KeyModifier)XY2.GetModifier();
+            flatComboBoxXY2Key.DataSource = Enum.GetValues(typeof(Keys));
+            flatComboBoxXY2Key.SelectedItem = SettingsController.GetHotkeyKeyXY2();
+            modifier = (Hotkey.KeyModifier)SettingsController.GetHotkeyModifierXY2();
             checkBox_XY2_Ctrl.Checked = (modifier & Hotkey.KeyModifier.Control) != Hotkey.KeyModifier.None;
             checkBox_XY2_Alt.Checked = (modifier & Hotkey.KeyModifier.Alt) != Hotkey.KeyModifier.None;
             checkBox_XY2_Shift.Checked = (modifier & Hotkey.KeyModifier.Shift) != Hotkey.KeyModifier.None;
@@ -77,23 +81,67 @@ namespace Tao_Bot_Maker.View
             checkBox_XY2_Shift.Text = Properties.strings.label_Shift;
         }
 
+        private bool IsDuplicate()
+        {
+            int modifier = 0;
+            
+            //StartBot key
+            modifier = MainApp.Reverse3Bits((int)GetStartBotModifier()) << 16;
+            Keys keyStartBot = (Keys)((int)flatComboBoxStartBotKey.SelectedItem | modifier);
+
+            //StopBot key
+            modifier = MainApp.Reverse3Bits((int)GetStopBotModifier()) << 16;
+            Keys keyStopBot = (Keys)((int)flatComboBoxStopBotKey.SelectedItem | modifier);
+
+            //XY key
+            modifier = MainApp.Reverse3Bits((int)GetXYModifier()) << 16;
+            Keys keyXY = (Keys)((int)flatComboBoxXYKey.SelectedItem | modifier);
+
+            //XY2 key
+            modifier = MainApp.Reverse3Bits((int)GetXY2Modifier()) << 16;
+            Keys keyXY2 = (Keys)((int)flatComboBoxXY2Key.SelectedItem | modifier);
+            
+            if(keyStartBot == keyStopBot)
+                return true;
+            else if (keyStartBot == keyXY)
+                return true;
+            else if (keyStartBot == keyXY2)
+                return true;
+            else if (keyStopBot == keyXY) 
+                return true;
+            else if (keyStopBot == keyXY2)
+                return true;
+            else if (keyXY == keyXY2)
+                return true;
+
+            return false;
+        }
+
         private void button_Shortcuts_OK_Click(object sender, EventArgs e)
         {
-            ReturnHotkeyStartBot = new Hotkey(
-                GetStartBotModifier(), 
-                (Keys)comboBox_StartBot_Key.SelectedItem);
+            if (!IsDuplicate())
+            {
+                ReturnHotkeyStartBot = new Hotkey(
+                    GetStartBotModifier(), 
+                    (Keys)flatComboBoxStartBotKey.SelectedItem);
 
-            ReturnHotkeyStopBot = new Hotkey(
-                GetStopBotModifier(),
-                (Keys)comboBox_StopBot_Key.SelectedItem);
+                ReturnHotkeyStopBot = new Hotkey(
+                    GetStopBotModifier(),
+                    (Keys)flatComboBoxStopBotKey.SelectedItem);
 
-            ReturnHotkeyXY = new Hotkey(
-                GetXYModifier(),
-                (Keys)comboBox_XY_Key.SelectedItem);
+                ReturnHotkeyXY = new Hotkey(
+                    GetXYModifier(),
+                    (Keys)flatComboBoxXYKey.SelectedItem);
 
-            ReturnHotkeyXY2 = new Hotkey(
-                GetXY2Modifier(),
-                (Keys)comboBox_XY2_Key.SelectedItem);
+                ReturnHotkeyXY2 = new Hotkey(
+                    GetXY2Modifier(),
+                    (Keys)flatComboBoxXY2Key.SelectedItem);
+            }
+            else
+            {
+                MessageBox.Show("Error : multiple hotkeys have same value");
+                this.DialogResult = DialogResult.None;
+            }
         }
 
         private int GetStartBotModifier()
@@ -164,5 +212,6 @@ namespace Tao_Bot_Maker.View
             }
             return modifier;
         }
+        
     }
 }

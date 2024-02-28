@@ -127,7 +127,7 @@
     <value>Touche</value>
   </data>
   <data name="ActionName_Loop" xml:space="preserve">
-    <value>Boucler une séquence</value>
+    <value>Répéter une séquence</value>
   </data>
   <data name="ActionName_PictureWait" xml:space="preserve">
     <value>Attendre une image</value>
@@ -224,6 +224,27 @@
   </data>
   <data name="title_SaveSequenceDialog" xml:space="preserve">
     <value>Enregistrer la séquence</value>
+  </data>
+  <data name="toolTip_Button_AddAction" xml:space="preserve">
+    <value>Ajouter une action</value>
+  </data>
+  <data name="toolTip_Button_DeleteAction" xml:space="preserve">
+    <value>Supprimer l'action sélectionnée</value>
+  </data>
+  <data name="toolTip_Button_DeleteSequence" xml:space="preserve">
+    <value>Supprimer la séquence</value>
+  </data>
+  <data name="toolTip_Button_EditAction" xml:space="preserve">
+    <value>Editer l'action sélectionnée</value>
+  </data>
+  <data name="toolTip_Button_SaveSequence" xml:space="preserve">
+    <value>Enregistrer la séquence</value>
+  </data>
+  <data name="toolTip_Button_StartBot" xml:space="preserve">
+    <value>Démarrer le Bot</value>
+  </data>
+  <data name="toolTip_Button_StopBot" xml:space="preserve">
+    <value>Arrêter le Bot</value>
   </data>
   <data name="tsm_About" xml:space="preserve">
     <value>A propos</value>

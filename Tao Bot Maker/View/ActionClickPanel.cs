@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 
 namespace Tao_Bot_Maker.View
 {
@@ -17,12 +18,14 @@ namespace Tao_Bot_Maker.View
         {
             InitializeComponent(); 
             Localization();
+            AddHotkeysToLabels();
             this.actionView = actionView;
         }
         public ActionClickPanel(ActionView actionView, Action action)
         {
             InitializeComponent();
             Localization();
+            AddHotkeysToLabels();
             this.actionView = actionView;
             SelectedClick = ((ActionClick)action).SelectedClick;
             X = ((ActionClick)action).X;
@@ -33,8 +36,15 @@ namespace Tao_Bot_Maker.View
             radioButtonPanelActionMouseClick_left.Text = Properties.strings.label_LeftClick;
             radioButtonPanelActionMouseClick_right.Text = Properties.strings.label_RightClick;
             buttonPanelActionMouseClick_ShowZone.Text = Properties.strings.button_ShowDrawingArea;
+            buttonPanelActionMouseClick_ClearZone.Text = Properties.strings.button_ClearZone;
         }
-
+        private void AddHotkeysToLabels()
+        {
+            int modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY()) << 16;
+            Keys hotkeyXY = (Keys)((int)SettingsController.GetHotkeyKeyXY() | modifier);
+            label_X.Text += " (" + hotkeyXY.ToString() + ")";
+            label_Y.Text += " (" + hotkeyXY.ToString() + ")";
+        }
         public String SelectedClick
         {
             get
@@ -103,6 +113,12 @@ namespace Tao_Bot_Maker.View
         private void buttonPanelActionMouseClick_ShowZone_Click(object sender, EventArgs e)
         {
             DrawFromTextBoxValues();
+        }
+
+        private void buttonPanelActionMouseClick_ClearZone_Click(object sender, EventArgs e)
+        {
+            actionView.ClearRectangles();
+            actionView.RefreshRectangles();
         }
     }
 }

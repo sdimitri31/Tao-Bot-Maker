@@ -35,6 +35,11 @@ namespace Tao_Bot_Maker
             this.hotkey = hotkey;
         }
 
+        public Hotkey GetHotkey()
+        {
+            return hotkey;
+        }
+
         public int GetModifier()
         {
             return hotkey.Modifier;

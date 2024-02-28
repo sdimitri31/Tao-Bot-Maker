@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker
 {
@@ -88,6 +89,7 @@ namespace Tao_Bot_Maker
             IsRunning = true;
             this.sequenceController = sequenceController;
             drawingArea.Show();
+            mainApp.UpdateButtonStateBot();
             backgroundThread = new Thread(ts);
             backgroundThread.Start();
         }
@@ -113,9 +115,14 @@ namespace Tao_Bot_Maker
             {
                 Log("Arret du bot", true);
                 IsRunning = false;
+                MethodInvoker mainthread = delegate
+                {
+                    mainApp.UpdateButtonStateBot();
+                };
+                mainApp.BeginInvoke(mainthread);
                 backgroundThread.Abort();
-                drawingArea.ClearRectangles();
-                drawingArea.Refresh();
+                    drawingArea.ClearRectangles();
+                    drawingArea.Refresh();
             }
         }
 
@@ -180,7 +187,7 @@ namespace Tao_Bot_Maker
             Log("Action : Attente d'image " + actionPictureWait.PictureName, true, false, LogFramework.Log.TRACE);
 
             //Get picture size to create borders when found
-            String imageFullPath = MainApp.PICTURE_FOLDER_NAME + "\\" + actionPictureWait.PictureName;
+            String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionPictureWait.PictureName;
             System.Drawing.Image imageWait = System.Drawing.Image.FromFile(imageFullPath);
 
             //Picture searching area
@@ -240,7 +247,7 @@ namespace Tao_Bot_Maker
             Log("Action : si image " + actionIfPicture.PictureName, true, false, LogFramework.Log.TRACE);
 
             //Get picture size to create borders when found
-            String imageFullPath = MainApp.PICTURE_FOLDER_NAME + "\\" + actionIfPicture.PictureName;
+            String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionIfPicture.PictureName;
             System.Drawing.Image img = System.Drawing.Image.FromFile(imageFullPath);
 
             //Recherche de l'image

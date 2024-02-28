@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker
 {
     class SequenceXmlManager
     {
-        public static String SEQUENCES_FOLDER_NAME = "Sequences";
 
         public SequenceXmlManager(){
         }
 
         public static void SaveSequence(String sequenceName, SequenceController sequenceController)
         {
-            System.IO.Directory.CreateDirectory(SEQUENCES_FOLDER_NAME);
+            System.IO.Directory.CreateDirectory(Constants.SEQUENCES_FOLDER_NAME);
             string fileName = sequenceName + @".xml";
 
             //Crée la base du XML
@@ -90,7 +90,7 @@ namespace Tao_Bot_Maker
             }
 
             //Enregistre le document
-            doc.Save(SEQUENCES_FOLDER_NAME + "\\" + fileName);
+            doc.Save(Constants.SEQUENCES_FOLDER_NAME + "\\" + fileName);
 
         }
 
@@ -101,7 +101,7 @@ namespace Tao_Bot_Maker
                 SequenceName = sequenceName
             };
 
-            var doc = XDocument.Load(SEQUENCES_FOLDER_NAME + @"\" + sequenceName + @".xml");
+            var doc = XDocument.Load(Constants.SEQUENCES_FOLDER_NAME + @"\" + sequenceName + @".xml");
 
 
             foreach (XElement xe in doc.Descendants("Sequence"))
@@ -181,8 +181,8 @@ namespace Tao_Bot_Maker
 
         public static List<String> SequencesList()
         {
-            System.IO.Directory.CreateDirectory(SEQUENCES_FOLDER_NAME);
-            DirectoryInfo directory = new DirectoryInfo(SEQUENCES_FOLDER_NAME);
+            System.IO.Directory.CreateDirectory(Constants.SEQUENCES_FOLDER_NAME);
+            DirectoryInfo directory = new DirectoryInfo(Constants.SEQUENCES_FOLDER_NAME);
             FileInfo[] files = directory.GetFiles("*.xml"); //Getting xml files
 
             List<String> sequencesList = new List<String>();
@@ -196,9 +196,23 @@ namespace Tao_Bot_Maker
 
         public static bool IsNameUsed(String name)
         {
-            if(File.Exists(SEQUENCES_FOLDER_NAME + "\\" + name + ".xml")) return true;
+            if(File.Exists(Constants.SEQUENCES_FOLDER_NAME + "\\" + name + ".xml")) return true;
             return false;
         }
 
+        public static bool DeleteSequence(String sequenceName)
+        {
+            string fileName = sequenceName + @".xml";
+            try
+            {
+                File.Delete(Constants.SEQUENCES_FOLDER_NAME + "\\" + fileName);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return false;
+        }
     }
 }

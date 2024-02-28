@@ -113,9 +113,29 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_do_not_disturb_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-do-not-disturb-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_edit_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-edit-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_file_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-file-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +186,16 @@ namespace Tao_Bot_Maker.Properties {
         internal static System.Drawing.Bitmap icons8_language_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-language-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_pencil_drawing_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-pencil-drawing-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

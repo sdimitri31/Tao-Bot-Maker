@@ -1,24 +1,21 @@
-﻿using LogFramework;
+﻿using BlueMystic;
+using LogFramework;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 
 namespace Tao_Bot_Maker.View
 {
     public partial class ActionView : Form
     {
-
         public int ReturnValueActionType { get; set; }
         public Action ReturnValueAction { get; set; }
 
-        MainApp app;
+        private MainApp app;
         private HotKeyController hotkeyXY;
         private HotKeyController hotkeyXY2;
 
-        public void Log(String  message, int level)
-        {
-            app.Log(message, level);
-        }
         public void Log(int level, String message)
         {
             app.Log(message, level);
@@ -31,13 +28,13 @@ namespace Tao_Bot_Maker.View
             try
             {
                 drawingForm.DrawRectangleAtCoords(x1, y1, x2, y2);
-                app.Log("Rectangle drawn at coords", LogFramework.Log.TRACE);
-                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.TRACE);
+                //app.Log("Rectangle drawn at coords", LogFramework.Log.TRACE);
+                //app.Log("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.TRACE);
             }
             catch (ArgumentException e)
             {
-                app.Log(e.Message, LogFramework.Log.ERROR);
-                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.ERROR);
+                //app.Log(e.Message, LogFramework.Log.ERROR);
+                //app.Log("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.ERROR);
             }
         }
         public void DrawRectangle(int x1, int y1, int width, int height)
@@ -46,20 +43,20 @@ namespace Tao_Bot_Maker.View
             try
             {
                 drawingForm.DrawRectangle(x1, y1, width, height);
-                app.Log("Rectangle drawn", LogFramework.Log.TRACE);
-                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.TRACE);
+                //app.Log("Rectangle drawn", LogFramework.Log.TRACE);
+                //app.Log("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.TRACE);
             }
             catch (ArgumentException e)
             {
                 MessageBox.Show(e.Message);
-                app.Log(e.Message, LogFramework.Log.ERROR);
-                app.Log("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.ERROR);
+                //app.Log(e.Message, LogFramework.Log.ERROR);
+                //app.Log("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.ERROR);
             }
         }
         public void ClearRectangles()
         {
             drawingForm.ClearRectangles();
-            app.Log("Rectangles cleared", LogFramework.Log.TRACE);
+            //app.Log("Rectangles cleared", LogFramework.Log.TRACE);
         }
         public void RefreshRectangles()
         {
@@ -79,7 +76,7 @@ namespace Tao_Bot_Maker.View
 
                 if ((modifier == hotkeyXY.GetModifier()) && (key == hotkeyXY.GetKey()))
                 {
-                    switch (comboBoxActions.SelectedIndex)
+                    switch (flatComboBoxActions.SelectedIndex)
                     {
                         case (int)Action.ActionType.PictureWait:
                             //Get Mouse coords
@@ -106,7 +103,7 @@ namespace Tao_Bot_Maker.View
                 }
                 else if ((modifier == hotkeyXY2.GetModifier()) && (key == hotkeyXY2.GetKey()))
                 {
-                    switch (comboBoxActions.SelectedIndex)
+                    switch (flatComboBoxActions.SelectedIndex)
                     {
                         case (int)Action.ActionType.PictureWait:
                             //Get Mouse coords
@@ -127,104 +124,39 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        //Get Key Shortcut when form is Focused
-
-        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        //{
-        //    Keys key = (Keys)(((int)msg.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
-        //    int modifier = ((int)msg.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
-
-        //    if ((modifier == app.GetHotKeyControllerXY().GetModifier()) && (key == app.GetHotKeyControllerXY().GetKey()))
-        //    {
-        //        switch (comboBoxActions.SelectedIndex)
-        //        {
-        //            case (int)Action.ActionType.PictureWait:
-        //                //Get Mouse coords
-        //                ((ActionPictureWaitPanel)actionPanel).X1 = Cursor.Position.X;
-        //                ((ActionPictureWaitPanel)actionPanel).Y1 = Cursor.Position.Y;
-        //                //Try to draw a rectangle
-        //                ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
-        //                break;
-        //            case (int)Action.ActionType.IfPicture:
-        //                //Get Mouse coords
-        //                ((ActionIfPicturePanel)actionPanel).X1 = Cursor.Position.X;
-        //                ((ActionIfPicturePanel)actionPanel).Y1 = Cursor.Position.Y;
-        //                //Try to draw a rectangle
-        //                ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
-        //                break;
-        //            case (int)Action.ActionType.Click:
-        //                //Get Mouse coords
-        //                ((ActionClickPanel)actionPanel).X = Cursor.Position.X;
-        //                ((ActionClickPanel)actionPanel).Y = Cursor.Position.Y;
-        //                //Try to draw a rectangle
-        //                ((ActionClickPanel)actionPanel).DrawFromTextBoxValues();
-        //                break;
-        //        }
-        //    }
-        //    else if ((modifier == app.GetHotKeyControllerXY2().GetModifier()) && (key == app.GetHotKeyControllerXY2().GetKey()))
-        //    {
-        //        switch (comboBoxActions.SelectedIndex)
-        //        {
-        //            case (int)Action.ActionType.PictureWait:
-        //                //Get Mouse coords
-        //                ((ActionPictureWaitPanel)actionPanel).X2 = Cursor.Position.X;
-        //                ((ActionPictureWaitPanel)actionPanel).Y2 = Cursor.Position.Y;
-        //                //Try to draw a rectangle
-        //                ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
-        //                break;
-        //            case (int)Action.ActionType.IfPicture:
-        //                //Get Mouse coords
-        //                ((ActionIfPicturePanel)actionPanel).X2 = Cursor.Position.X;
-        //                ((ActionIfPicturePanel)actionPanel).Y2 = Cursor.Position.Y;
-        //                //Try to draw a rectangle
-        //                ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
-        //                break;
-        //        }
-        //    }
-        //    return base.ProcessCmdKey(ref msg, keyData);
-        //}
-
         Control actionPanel;
 
-        public ActionView(MainApp app)
+        public ActionView(MainApp app, Action action = null)
         {
             InitializeComponent();
-
+            DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
             this.app = app;
+
             //Create a form to enable drawing
             drawingForm = new DrawingRectangle();
             drawingForm.Show();
+
             Localization();
+
+            //Populate combobox with actions
+            flatComboBoxActions.Items.AddRange(ActionController.GetActionTypeNames());
 
             //No panel selected
-            actionPanel = null;
-
-            //Populate combobox with actions
-            comboBoxActions.Items.AddRange(ActionController.GetActionTypeNames());
-            comboBoxActions.SelectedIndex = 0;
-
-            SetupHotkeys();
-        }
-
-        public ActionView(Action action, MainApp app)
-        {
-            InitializeComponent();
-            this.app = app;
-
-            //Create a form to enable drawing
-            drawingForm = new DrawingRectangle();
-            drawingForm.Show();
-            Localization();
-
-            //Populate combobox with actions
-            comboBoxActions.Items.AddRange(ActionController.GetActionTypeNames());
-            comboBoxActions.SelectedIndex = action.Type;
-
-            actionPanel = CreatePanelFromAction(action);
-            ShowPanel(actionPanel);
+            if (action == null)
+            {
+                actionPanel = null;
+                flatComboBoxActions.SelectedIndex = 0;
+            }
+            else
+            {
+                flatComboBoxActions.SelectedIndex = action.Type;
+                actionPanel = CreatePanelFromAction(action);
+                ShowPanel(actionPanel);
+            }
 
             SetupHotkeys();
         }
+
 
         private void Localization()
         {
@@ -235,10 +167,10 @@ namespace Tao_Bot_Maker.View
 
         private void SetupHotkeys()
         {
-            hotkeyXY = new HotKeyController(app.GetHotKeyControllerXY().GetModifier(), app.GetHotKeyControllerXY().GetKey(), this);
+            hotkeyXY = new HotKeyController(SettingsController.GetHotkeyModifierXY(), SettingsController.GetHotkeyKeyXY(), this);
             hotkeyXY.Register();
 
-            hotkeyXY2 = new HotKeyController(app.GetHotKeyControllerXY2().GetModifier(), app.GetHotKeyControllerXY2().GetKey(), this);
+            hotkeyXY2 = new HotKeyController(SettingsController.GetHotkeyModifierXY2(), SettingsController.GetHotkeyKeyXY2(), this);
             hotkeyXY2.Register();
         }
 
@@ -275,19 +207,10 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        private void comboBoxActions_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Show panel of the selected action
-            ClearRectangles();
-            RefreshRectangles();
-            actionPanel = ActionController.GetControlView(comboBoxActions.SelectedIndex, this);
-            ShowPanel(actionPanel);
-        }
-
         private void button_Ok_Click(object sender, EventArgs e)
         {
             //Test if the inputs are valid
-            ReturnValueAction = ActionController.GetActionFromControl(comboBoxActions.SelectedIndex, actionPanel);
+            ReturnValueAction = ActionController.GetActionFromControl(flatComboBoxActions.SelectedIndex, actionPanel);
             if(ReturnValueAction != null)
             {
                 //Send results to the controller
@@ -308,6 +231,16 @@ namespace Tao_Bot_Maker.View
             drawingForm.Close();
             hotkeyXY.Unregiser();
             hotkeyXY2.Unregiser();
+        }
+
+        private void flatComboBoxActions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Show panel of the selected action
+            ClearRectangles();
+            RefreshRectangles();
+            actionPanel = ActionController.GetControlView(flatComboBoxActions.SelectedIndex, this);
+            Size = new System.Drawing.Size(Size.Width, actionPanel.Size.Height + 133);
+            ShowPanel(actionPanel);
         }
     }
 }

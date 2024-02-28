@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker.View
 {
@@ -23,21 +24,27 @@ namespace Tao_Bot_Maker.View
         {
             InitializeComponent();
             Localization();
+            AddHotkeysToLabels();
+
             originalPath = null;
             destinationPath = null;
             this.actionView = actionView;
-            comboBoxActionIfPictureImageFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
-            comboBoxActionIfPictureImageNotFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+
+            flatComboBoxActionIfPictureImageFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            flatComboBoxActionIfPictureImageNotFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
         }
         public ActionIfPicturePanel(ActionView actionView, Action action)
         {
             InitializeComponent();
             Localization();
+            AddHotkeysToLabels();
+
             originalPath = null;
             destinationPath = null;
             this.actionView = actionView;
-            comboBoxActionIfPictureImageFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
-            comboBoxActionIfPictureImageNotFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+
+            flatComboBoxActionIfPictureImageFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            flatComboBoxActionIfPictureImageNotFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
 
             PictureName = ((ActionIfPicture)action).PictureName;
             Threshold = ((ActionIfPicture)action).Threshold;
@@ -48,6 +55,7 @@ namespace Tao_Bot_Maker.View
             SequenceIfFound = ((ActionIfPicture)action).SequenceIfFound;
             SequenceIfNotFound = ((ActionIfPicture)action).SequenceIfNotFound;
         }
+
         private void Localization()
         {
             label_SequenceIfNoPicture.Text = Properties.strings.label_SequenceIfNotFound;
@@ -57,6 +65,19 @@ namespace Tao_Bot_Maker.View
             buttonActionIfPictureFindImage.Text = Properties.strings.button_FindImage;
             buttonActionIfPictureImagePath.Text = Properties.strings.button_Picture;
             buttonActionIfPictureShowZone.Text = Properties.strings.button_ShowDrawingArea;
+        }
+
+        private void AddHotkeysToLabels()
+        {
+            int modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY()) << 16;
+            Keys hotkeyXY = (Keys)((int)SettingsController.GetHotkeyKeyXY() | modifier);
+            label_X1.Text += " (" + hotkeyXY.ToString() + ")";
+            label_Y1.Text += " (" + hotkeyXY.ToString() + ")";
+
+            modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY2()) << 16;
+            Keys hotkeyXY2 = (Keys)((int)SettingsController.GetHotkeyKeyXY2() | modifier);
+            label_X2.Text += " (" + hotkeyXY2.ToString() + ")";
+            label_Y2.Text += " (" + hotkeyXY2.ToString() + ")";
         }
 
         public String DestinationPath
@@ -103,7 +124,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionIfPictureThreshold.Text);
+                    int numVal = Int32.Parse(numericUpDownActionIfPictureThreshold.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -111,7 +132,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionIfPictureThreshold.Text = value.ToString(); }
+            set { numericUpDownActionIfPictureThreshold.Text = value.ToString(); }
         }
         public int X1
         {
@@ -119,7 +140,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionIfPicture_x1.Text);
+                    int numVal = Int32.Parse(numericUpDownActionIfPicture_x1.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -127,7 +148,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionIfPicture_x1.Text = value.ToString(); }
+            set { numericUpDownActionIfPicture_x1.Text = value.ToString(); }
         }
         public int X2
         {
@@ -135,7 +156,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionIfPicture_x2.Text);
+                    int numVal = Int32.Parse(numericUpDownActionIfPicture_x2.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -143,7 +164,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionIfPicture_x2.Text = value.ToString(); }
+            set { numericUpDownActionIfPicture_x2.Text = value.ToString(); }
         }
         public int Y1
         {
@@ -151,7 +172,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionIfPicture_y1.Text);
+                    int numVal = Int32.Parse(numericUpDownActionIfPicture_y1.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -159,7 +180,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionIfPicture_y1.Text = value.ToString(); }
+            set { numericUpDownActionIfPicture_y1.Text = value.ToString(); }
         }
         public int Y2
         {
@@ -167,7 +188,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxActionIfPicture_y2.Text);
+                    int numVal = Int32.Parse(numericUpDownActionIfPicture_y2.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -175,7 +196,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxActionIfPicture_y2.Text = value.ToString(); }
+            set { numericUpDownActionIfPicture_y2.Text = value.ToString(); }
         }
         public String SequenceIfFound
         {
@@ -183,9 +204,9 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    if (comboBoxActionIfPictureImageFound.SelectedItem != null)
+                    if (flatComboBoxActionIfPictureImageFound.SelectedItem != null)
                     {
-                        String sequenceName = comboBoxActionIfPictureImageFound.SelectedItem.ToString();
+                        String sequenceName = flatComboBoxActionIfPictureImageFound.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return null;
@@ -195,7 +216,7 @@ namespace Tao_Bot_Maker.View
                     return null;
                 }
             }
-            set { comboBoxActionIfPictureImageFound.SelectedItem = value.ToString(); }
+            set { flatComboBoxActionIfPictureImageFound.SelectedItem = value.ToString(); }
         }
         public String SequenceIfNotFound
         {
@@ -203,9 +224,9 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    if (comboBoxActionIfPictureImageNotFound.SelectedItem != null)
+                    if (flatComboBoxActionIfPictureImageNotFound.SelectedItem != null)
                     {
-                        String sequenceName = comboBoxActionIfPictureImageNotFound.SelectedItem.ToString();
+                        String sequenceName = flatComboBoxActionIfPictureImageNotFound.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return null;
@@ -215,7 +236,7 @@ namespace Tao_Bot_Maker.View
                     return null;
                 }
             }
-            set { comboBoxActionIfPictureImageNotFound.SelectedItem = value.ToString(); }
+            set { flatComboBoxActionIfPictureImageNotFound.SelectedItem = value.ToString(); }
         }
 
         public void DrawFromTextBoxValues()
@@ -237,7 +258,7 @@ namespace Tao_Bot_Maker.View
                     originalPath = openFileDialog.FileName;
                     buttonActionIfPictureImagePath.Text = openFileDialog.SafeFileName;
                     pictureBoxPanelActionIfImage.Image = Image.FromFile(originalPath);
-                    DestinationPath = Path.Combine(MainApp.PICTURE_FOLDER_NAME, openFileDialog.SafeFileName);
+                    DestinationPath = Path.Combine(Constants.PICTURE_FOLDER_NAME, openFileDialog.SafeFileName);
                 }
             }
         }
@@ -264,13 +285,13 @@ namespace Tao_Bot_Maker.View
 
                 MessageBox.Show("IMG FOUND\r\n " +
                     "Coords X :" + results_if_image[1] + " Y : " + results_if_image[2]);
-                actionView.Log(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
+                //actionView.Log(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
 
             }
             else
             {
                 MessageBox.Show("IMG NOT FOUND");
-                actionView.Log(Log.INFO, "Image introuvable");
+                //actionView.Log(Log.INFO, "Image introuvable");
             }
 
         }
@@ -284,6 +305,11 @@ namespace Tao_Bot_Maker.View
         private void buttonActionIfPictureShowZone_Click(object sender, EventArgs e)
         {
             DrawFromTextBoxValues();
+        }
+
+        private void flatComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
