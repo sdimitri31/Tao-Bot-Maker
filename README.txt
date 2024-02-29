@@ -2,6 +2,7 @@ Changelog :
 
 Version 0.3.0 :
 - Versionning implemented
+- New Icon on exe
 - New action added : Image Search
 - WIP better logs handling
 - DEPRECATED : Action Picture Wait replaced by Action Image Search
