@@ -59,7 +59,7 @@ namespace Tao_Bot_Maker.View
         {
             label_SequenceIfExpired.Text = Properties.strings.label_SequenceIfExpired;
             label_Threshold.Text = Properties.strings.label_Threshold;
-            buttonActionPictureWaitClearDrawing.Text = Properties.strings.button_ClearZone;
+            buttonActionPictureWaitClearDrawing.Text = Properties.strings.button_ClearArea;
             buttonActionPictureWaitFindImage.Text = Properties.strings.button_FindImage;
             buttonActionPictureWaitImagePath.Text = Properties.strings.button_Picture;
             buttonActionPictureWaitShowZone.Text = Properties.strings.button_ShowDrawingArea;

@@ -76,8 +76,13 @@ namespace Tao_Bot_Maker
                         ActionClick actionClick = (ActionClick)action;
                         doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionClick.Type),
                                                                                       new XAttribute("clic", actionClick.SelectedClick),
-                                                                                      new XAttribute("x", actionClick.X),
-                                                                                      new XAttribute("y", actionClick.Y)));
+                                                                                      new XAttribute("x", actionClick.X1),
+                                                                                      new XAttribute("y", actionClick.Y1),
+                                                                                      new XAttribute("x2", actionClick.X2),
+                                                                                      new XAttribute("y2", actionClick.Y2),
+                                                                                      new XAttribute("isDoubleClick", actionClick.IsDoubleClick),
+                                                                                      new XAttribute("isDrag", actionClick.IsDrag),
+                                                                                      new XAttribute("dragSpeed", actionClick.DragSpeed)));
                         break;
 
                     case (int)Action.ActionType.Loop:
@@ -119,6 +124,7 @@ namespace Tao_Bot_Maker
 
             try
             {
+                int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
                 foreach (XElement xe in doc.Descendants("Sequence"))
                 {
                     foreach (XElement xmlAction in xe.Elements("Action"))
@@ -153,15 +159,30 @@ namespace Tao_Bot_Maker
                                 break;
 
                             case (int)Action.DeprecatedActionType.IfPicture:
+                                //Version ajusting and crash prevention
+                                int threshold = 0;
+                                if (xmlAction.Attribute("x1") != null) x1 = Int32.Parse(xmlAction.Attribute("x1").Value);
+                                if (xmlAction.Attribute("y1") != null) y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
+                                if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+                                if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                                if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+
+
+                                string ifTrueSequence = "EMPTY", ifFalseSequence = "EMPTY";
+                                if (xmlAction.Attribute("ifTrueSequence") != null)
+                                    ifTrueSequence = xmlAction.Attribute("ifTrueSequence").Value;
+                                if (xmlAction.Attribute("ifFalseSequence") != null)
+                                    ifFalseSequence = xmlAction.Attribute("ifFalseSequence").Value;
+
                                 ActionIfPicture actionIfPicture = new ActionIfPicture();
                                 actionIfPicture.PictureName = (string)xmlAction;
-                                actionIfPicture.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
-                                actionIfPicture.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-                                actionIfPicture.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
-                                actionIfPicture.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-                                actionIfPicture.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
-                                actionIfPicture.IfFound = xmlAction.Attribute("ifTrueSequence").Value;
-                                actionIfPicture.IfNotFound = xmlAction.Attribute("ifFalseSequence").Value;
+                                actionIfPicture.X1 = x1;
+                                actionIfPicture.X2 = x2;
+                                actionIfPicture.Y1 = y1;
+                                actionIfPicture.Y2 = y2;
+                                actionIfPicture.Threshold = threshold;
+                                actionIfPicture.IfFound = ifTrueSequence;
+                                actionIfPicture.IfNotFound = ifFalseSequence;
                                 newSequence.AddAction(actionIfPicture);
                                 break;
 
@@ -172,10 +193,28 @@ namespace Tao_Bot_Maker
                                 break;
 
                             case (int)Action.ActionType.Click:
-                                ActionClick actionClick = new ActionClick();
-                                actionClick.X = Int32.Parse(xmlAction.Attribute("x").Value);
-                                actionClick.Y = Int32.Parse(xmlAction.Attribute("y").Value);
-                                actionClick.SelectedClick = xmlAction.Attribute("clic").Value;
+                                //Version ajusting and crash prevention
+                                int dragSpeed = 0;
+                                if (xmlAction.Attribute("x") != null) x1 = Int32.Parse(xmlAction.Attribute("x").Value);
+                                if (xmlAction.Attribute("y") != null) y1 = Int32.Parse(xmlAction.Attribute("y").Value);
+                                if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+                                if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                                if (xmlAction.Attribute("dragSpeed") != null) dragSpeed = Int32.Parse(xmlAction.Attribute("dragSpeed").Value);
+
+                                bool isDoubleClick = false, isDrag = false;
+                                if (xmlAction.Attribute("isDoubleClick") != null)
+                                    if (xmlAction.Attribute("isDoubleClick").Value == "true") 
+                                        isDoubleClick = true;
+
+                                if (xmlAction.Attribute("isDrag") != null)
+                                    if (xmlAction.Attribute("isDrag").Value == "true")
+                                        isDrag = true;
+
+                                string selectedClick = "left";
+                                if (xmlAction.Attribute("clic") != null)
+                                    selectedClick = xmlAction.Attribute("clic").Value;
+
+                                ActionClick actionClick = new ActionClick(selectedClick, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
                                 newSequence.AddAction(actionClick);
                                 break;
 

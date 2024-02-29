@@ -153,9 +153,9 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Clear area.
         /// </summary>
-        internal static string button_ClearZone {
+        internal static string button_ClearArea {
             get {
-                return ResourceManager.GetString("button_ClearZone", resourceCulture);
+                return ResourceManager.GetString("button_ClearArea", resourceCulture);
             }
         }
         
@@ -214,6 +214,33 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Double click.
+        /// </summary>
+        internal static string label_DoubleClick {
+            get {
+                return ResourceManager.GetString("label_DoubleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Drag.
+        /// </summary>
+        internal static string label_Drag {
+            get {
+                return ResourceManager.GetString("label_Drag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Drag speed : .
+        /// </summary>
+        internal static string label_DragSpeed {
+            get {
+                return ResourceManager.GetString("label_DragSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key.
         /// </summary>
         internal static string label_Key {
@@ -228,6 +255,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string label_LeftClick {
             get {
                 return ResourceManager.GetString("label_LeftClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Middle click.
+        /// </summary>
+        internal static string label_MiddleClick {
+            get {
+                return ResourceManager.GetString("label_MiddleClick", resourceCulture);
             }
         }
         
@@ -345,6 +381,286 @@ namespace Tao_Bot_Maker.Properties {
         internal static string label_WaitTime {
             get {
                 return ResourceManager.GetString("label_WaitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action added : .
+        /// </summary>
+        internal static string log_ActionAdded {
+            get {
+                return ResourceManager.GetString("log_ActionAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action deleted :  .
+        /// </summary>
+        internal static string log_ActionDeleted {
+            get {
+                return ResourceManager.GetString("log_ActionDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action edited : .
+        /// </summary>
+        internal static string log_ActionEdited {
+            get {
+                return ResourceManager.GetString("log_ActionEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ActionView dialog Add Mode opened.
+        /// </summary>
+        internal static string log_ActionView_AddMode {
+            get {
+                return ResourceManager.GetString("log_ActionView_AddMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ActionView dialog closed.
+        /// </summary>
+        internal static string log_ActionView_Closed {
+            get {
+                return ResourceManager.GetString("log_ActionView_Closed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ActionView dialog Edit Mode opened.
+        /// </summary>
+        internal static string log_ActionView_EditMode {
+            get {
+                return ResourceManager.GetString("log_ActionView_EditMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Panel selected : .
+        /// </summary>
+        internal static string log_ActionView_SelectedPanel {
+            get {
+                return ResourceManager.GetString("log_ActionView_SelectedPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Application closed.
+        /// </summary>
+        internal static string log_ApplicationClosed {
+            get {
+                return ResourceManager.GetString("log_ApplicationClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Application ready to use.
+        /// </summary>
+        internal static string log_ApplicationInitialized {
+            get {
+                return ResourceManager.GetString("log_ApplicationInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Theme applied.
+        /// </summary>
+        internal static string log_AppliedTheme {
+            get {
+                return ResourceManager.GetString("log_AppliedTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à DialogResult : CANCEL.
+        /// </summary>
+        internal static string log_DialogResult_Cancel {
+            get {
+                return ResourceManager.GetString("log_DialogResult_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à DialogResult : NONE.
+        /// </summary>
+        internal static string log_DialogResult_None {
+            get {
+                return ResourceManager.GetString("log_DialogResult_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à DialogResult : OK.
+        /// </summary>
+        internal static string log_DialogResult_Ok {
+            get {
+                return ResourceManager.GetString("log_DialogResult_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Actions loaded.
+        /// </summary>
+        internal static string log_Loaded_Actions {
+            get {
+                return ResourceManager.GetString("log_Loaded_Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Loading action : .
+        /// </summary>
+        internal static string log_Loading_Action {
+            get {
+                return ResourceManager.GetString("log_Loading_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Loading actions.
+        /// </summary>
+        internal static string log_Loading_Actions {
+            get {
+                return ResourceManager.GetString("log_Loading_Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Loading sequence : .
+        /// </summary>
+        internal static string log_Loading_Sequence {
+            get {
+                return ResourceManager.GetString("log_Loading_Sequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Fail to load sequence : .
+        /// </summary>
+        internal static string log_Loading_Sequence_Fail {
+            get {
+                return ResourceManager.GetString("log_Loading_Sequence_Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence loaded.
+        /// </summary>
+        internal static string log_Loading_Sequence_Success {
+            get {
+                return ResourceManager.GetString("log_Loading_Sequence_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Localization updated.
+        /// </summary>
+        internal static string log_LocalizationUpdated {
+            get {
+                return ResourceManager.GetString("log_LocalizationUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence deleted : .
+        /// </summary>
+        internal static string log_Sequence_Deleted {
+            get {
+                return ResourceManager.GetString("log_Sequence_Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence saved : .
+        /// </summary>
+        internal static string log_Sequence_Saved {
+            get {
+                return ResourceManager.GetString("log_Sequence_Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Setting language to :  .
+        /// </summary>
+        internal static string log_SettingLanguage {
+            get {
+                return ResourceManager.GetString("log_SettingLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Setting &quot;SaveLog&quot; value : .
+        /// </summary>
+        internal static string log_SettingSavelogs {
+            get {
+                return ResourceManager.GetString("log_SettingSavelogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Bot&quot; button state updated.
+        /// </summary>
+        internal static string log_UpdateButtonState_Bot {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_Bot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Edit&quot; button state updated.
+        /// </summary>
+        internal static string log_UpdateButtonState_Edit {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Hotkey&quot; button state updated.
+        /// </summary>
+        internal static string log_UpdateButtonState_Hotkey {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_Hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Language&quot; button state updated.
+        /// </summary>
+        internal static string log_UpdateButtonState_Language {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Savelogs&quot; button state updated.
+        /// </summary>
+        internal static string log_UpdateButtonState_SaveLogs {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_SaveLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Theme&quot; button state updated.
+        /// </summary>
+        internal static string log_UpdateButtonState_Theme {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Warning : This will delete the sequence entirely.
+        ///Do you want to proceed ?.
+        /// </summary>
+        internal static string MessageBox_WarningDeleteSequence {
+            get {
+                return ResourceManager.GetString("MessageBox_WarningDeleteSequence", resourceCulture);
             }
         }
         

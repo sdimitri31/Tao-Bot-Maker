@@ -50,15 +50,7 @@ namespace Tao_Bot_Maker
             RightUp = 0x00000010
         }
 
-        public void DoMouseClick()
-        {
-            //Call the imported function with the cursor's current position
-            uint X = (uint)System.Windows.Forms.Cursor.Position.X;
-            uint Y = (uint)System.Windows.Forms.Cursor.Position.Y;
-            mouse_event((int)MouseEventFlags.LeftDown, X, Y, 0, 0);
-            Thread.Sleep(10);
-            mouse_event((int)(int)MouseEventFlags.LeftUp, X, Y, 0, 0);
-        }
+
         
         ThreadStart ts;
         Thread backgroundThread;
@@ -111,7 +103,7 @@ namespace Tao_Bot_Maker
         {
             if (IsRunning)
             {
-                Log.Write("Arret du bot", mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+                Log.Write("Arrêt du bot", mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
                 IsRunning = false;
                 MethodInvoker mainthread = delegate
                 {
@@ -296,11 +288,82 @@ namespace Tao_Bot_Maker
         }
         private void DoActionClick(Action action)
         {
-            ActionClick action_clic = (ActionClick)action;
-            Log.Write("Action : click " + action_clic, mainApp.GetListBoxLog(), LogFramework.Log.TRACE, true);
-            Cursor.Position = new Point(action_clic.X, action_clic.Y);
-            DoMouseClick();
+            ActionClick actionMouse = (ActionClick)action;
+            Log.Write("Action : click " + actionMouse, mainApp.GetListBoxLog(), LogFramework.Log.TRACE, true);
+
+            //Get selected click
+            int mouseDown, mouseUp;
+            switch (actionMouse.SelectedClick)
+            {
+                case "left":
+                    mouseDown = (int)MouseEventFlags.LeftDown;
+                    mouseUp = (int)MouseEventFlags.LeftUp;
+                    break;
+
+                case "right":
+                    mouseDown = (int)MouseEventFlags.RightDown;
+                    mouseUp = (int)MouseEventFlags.RightUp;
+                    break;
+
+                case "middle":
+                    mouseDown = (int)MouseEventFlags.MiddleDown;
+                    mouseUp = (int)MouseEventFlags.MiddleUp;
+                    break;
+
+                default:
+                    mouseDown = (int)MouseEventFlags.LeftDown;
+                    mouseUp = (int)MouseEventFlags.LeftUp;
+                    break;
+            }
+                
+            //Move cursor to XY
+            Cursor.Position = new Point(actionMouse.X1, actionMouse.Y1);
+
+            //Click Down on selected click
+            uint X = (uint)System.Windows.Forms.Cursor.Position.X;
+            uint Y = (uint)System.Windows.Forms.Cursor.Position.Y;
+            mouse_event(mouseDown, X, Y, 0, 0);
+
+            //Check if IsDrag
+            if (actionMouse.IsDrag)
+            {
+                //Move cursor to XY2 according to DragSpeed
+                int nbStep = 100;
+                int stepX = (actionMouse.X2 - actionMouse.X1) / nbStep;
+                int stepY = (actionMouse.Y2 - actionMouse.Y1) / nbStep;
+
+                for(int i = 0; i < nbStep; i++)
+                {
+                    mouse_event((int)MouseEventFlags.Move, (uint)stepX, (uint)stepY, 0, 0);
+
+                    Thread.Sleep(actionMouse.DragSpeed * 10);
+                }
+
+
+            }
+            else if (actionMouse.IsDoubleClick)
+            {
+                Thread.Sleep(20);
+
+                //Release Click
+                mouse_event(mouseUp, X, Y, 0, 0);
+                Thread.Sleep(20);
+
+                //Double click
+                mouse_event(mouseDown, X, Y, 0, 0);
+                Thread.Sleep(20);
+            }
+            else
+            {
+                Thread.Sleep(10);
+            }
+
+            //Release Click
+            X = (uint)System.Windows.Forms.Cursor.Position.X;
+            Y = (uint)System.Windows.Forms.Cursor.Position.Y;
+            mouse_event(mouseUp, X, Y, 0, 0);
         }
+
         private void DoActionLoop(Action action)
         {
             ActionLoop actionLoop = (ActionLoop)action;
@@ -368,7 +431,7 @@ namespace Tao_Bot_Maker
                 }
 
                 //If Expiration elapsed then do an other sequence
-                if (seconds >= actionImageSearch.Expiration)
+                if ((seconds >= actionImageSearch.Expiration) && (results_wait_image == null))
                 {
                     stopwatch.Stop();
                     DoSequence(SequenceXmlManager.LoadSequence(actionImageSearch.IfNotFound), drawingArea);

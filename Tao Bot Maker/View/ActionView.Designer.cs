@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionView));
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_Ok = new System.Windows.Forms.Button();
-            this.panelSelectedAction = new System.Windows.Forms.Panel();
-            this.flatComboBoxActions = new DarkModeForms.FlatComboBox();
+            this.panel_SelectedAction = new System.Windows.Forms.Panel();
+            this.flatComboBox_Actions = new DarkModeForms.FlatComboBox();
             this.SuspendLayout();
             // 
             // button_Cancel
@@ -58,29 +58,29 @@
             this.button_Ok.TabIndex = 5;
             this.button_Ok.Text = "OK";
             this.button_Ok.UseVisualStyleBackColor = true;
-            this.button_Ok.Click += new System.EventHandler(this.button_Ok_Click);
+            this.button_Ok.Click += new System.EventHandler(this.Button_Ok_Click);
             // 
-            // panelSelectedAction
+            // panel_SelectedAction
             // 
-            this.panelSelectedAction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panel_SelectedAction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSelectedAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelSelectedAction.Location = new System.Drawing.Point(12, 43);
-            this.panelSelectedAction.Margin = new System.Windows.Forms.Padding(4);
-            this.panelSelectedAction.Name = "panelSelectedAction";
-            this.panelSelectedAction.Size = new System.Drawing.Size(497, 47);
-            this.panelSelectedAction.TabIndex = 7;
+            this.panel_SelectedAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel_SelectedAction.Location = new System.Drawing.Point(12, 43);
+            this.panel_SelectedAction.Margin = new System.Windows.Forms.Padding(4);
+            this.panel_SelectedAction.Name = "panel_SelectedAction";
+            this.panel_SelectedAction.Size = new System.Drawing.Size(497, 47);
+            this.panel_SelectedAction.TabIndex = 7;
             // 
-            // flatComboBoxActions
+            // flatComboBox_Actions
             // 
-            this.flatComboBoxActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.flatComboBoxActions.FormattingEnabled = true;
-            this.flatComboBoxActions.Location = new System.Drawing.Point(12, 12);
-            this.flatComboBoxActions.Name = "flatComboBoxActions";
-            this.flatComboBoxActions.Size = new System.Drawing.Size(498, 24);
-            this.flatComboBoxActions.TabIndex = 8;
-            this.flatComboBoxActions.SelectedIndexChanged += new System.EventHandler(this.flatComboBoxActions_SelectedIndexChanged);
+            this.flatComboBox_Actions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.flatComboBox_Actions.FormattingEnabled = true;
+            this.flatComboBox_Actions.Location = new System.Drawing.Point(12, 12);
+            this.flatComboBox_Actions.Name = "flatComboBox_Actions";
+            this.flatComboBox_Actions.Size = new System.Drawing.Size(498, 24);
+            this.flatComboBox_Actions.TabIndex = 8;
+            this.flatComboBox_Actions.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_Actions_SelectedIndexChanged);
             // 
             // ActionView
             // 
@@ -89,8 +89,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
             this.ClientSize = new System.Drawing.Size(522, 133);
-            this.Controls.Add(this.flatComboBoxActions);
-            this.Controls.Add(this.panelSelectedAction);
+            this.Controls.Add(this.flatComboBox_Actions);
+            this.Controls.Add(this.panel_SelectedAction);
             this.Controls.Add(this.button_Cancel);
             this.Controls.Add(this.button_Ok);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -110,7 +110,7 @@
         #endregion
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_Ok;
-        private System.Windows.Forms.Panel panelSelectedAction;
-        private DarkModeForms.FlatComboBox flatComboBoxActions;
+        private System.Windows.Forms.Panel panel_SelectedAction;
+        private DarkModeForms.FlatComboBox flatComboBox_Actions;
     }
 }

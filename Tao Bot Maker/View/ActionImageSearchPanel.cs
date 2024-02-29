@@ -66,6 +66,7 @@ namespace Tao_Bot_Maker.View
                 X2 = actionImageSearch.X2;
                 Y1 = actionImageSearch.Y1;
                 Y2 = actionImageSearch.Y2;
+                Expiration = actionImageSearch.Expiration;
                 IfFound = actionImageSearch.IfFound;
                 IfNotFound = actionImageSearch.IfNotFound;
             }
@@ -76,7 +77,7 @@ namespace Tao_Bot_Maker.View
             label__ActionImageSearch_IfNotFound.Text = Properties.strings.label_SequenceIfNotFound;
             label_ActionImageSearch_IfFound.Text = Properties.strings.label_SequenceIfPicture;
             label_ActionImageSearch_Threshold.Text = Properties.strings.label_Threshold;
-            button_ActionImageSearch_ClearArea.Text = Properties.strings.button_ClearZone;
+            button_ActionImageSearch_ClearArea.Text = Properties.strings.button_ClearArea;
             button_ActionImageSearch_FindImage.Text = Properties.strings.button_FindImage;
             button_ActionImageSearch_PathImage.Text = Properties.strings.button_Picture;
             button_ActionImageSearch_ShowArea.Text = Properties.strings.button_ShowDrawingArea;

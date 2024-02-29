@@ -99,7 +99,7 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.Sequence:
                     return new ActionSequencePanel();
                 case (int)Action.ActionType.Click:
-                    return new ActionClickPanel(actionView);
+                    return new panel_ActionClick(actionView);
                 case (int)Action.ActionType.Loop:
                     return new ActionLoopPanel();
                 case (int)Action.ActionType.ImageSearch:
@@ -120,7 +120,7 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.Sequence:
                     return ActionSequenceController.GetActionFromControl((ActionSequencePanel)control);
                 case (int)Action.ActionType.Click:
-                    return ActionClickController.GetActionFromControl((ActionClickPanel)control);
+                    return ActionClickController.GetActionFromControl((panel_ActionClick)control);
                 case (int)Action.ActionType.Loop:
                     return ActionLoopController.GetActionFromControl((ActionLoopPanel)control);
                 case (int)Action.ActionType.ImageSearch:
@@ -141,7 +141,7 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.Sequence:
                     return new ActionSequencePanel(action);
                 case (int)Action.ActionType.Click:
-                    return new ActionClickPanel(actionView, action);
+                    return new panel_ActionClick(actionView, action);
                 case (int)Action.ActionType.Loop:
                     return new ActionLoopPanel(action);
                 case (int)Action.ActionType.ImageSearch:

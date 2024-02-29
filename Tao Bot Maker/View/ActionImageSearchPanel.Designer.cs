@@ -90,11 +90,11 @@
             // button_ActionImageSearch_ShowArea
             // 
             this.button_ActionImageSearch_ShowArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ActionImageSearch_ShowArea.Location = new System.Drawing.Point(3, 288);
+            this.button_ActionImageSearch_ShowArea.Location = new System.Drawing.Point(127, 288);
             this.button_ActionImageSearch_ShowArea.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_ActionImageSearch_ShowArea.Name = "button_ActionImageSearch_ShowArea";
             this.button_ActionImageSearch_ShowArea.Size = new System.Drawing.Size(118, 28);
-            this.button_ActionImageSearch_ShowArea.TabIndex = 11;
+            this.button_ActionImageSearch_ShowArea.TabIndex = 12;
             this.button_ActionImageSearch_ShowArea.Text = "Afficher la zone de recherche";
             this.button_ActionImageSearch_ShowArea.UseVisualStyleBackColor = false;
             this.button_ActionImageSearch_ShowArea.Click += new System.EventHandler(this.Button_ActionImageSearch_ShowArea_Click);
@@ -186,18 +186,18 @@
             this.label_ActionImageSearch_X1.Location = new System.Drawing.Point(3, 92);
             this.label_ActionImageSearch_X1.Name = "label_ActionImageSearch_X1";
             this.label_ActionImageSearch_X1.Size = new System.Drawing.Size(118, 16);
-            this.label_ActionImageSearch_X1.TabIndex = 4;
+            this.label_ActionImageSearch_X1.TabIndex = 2;
             this.label_ActionImageSearch_X1.Text = "x1 :";
             this.label_ActionImageSearch_X1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button_ActionImageSearch_ClearArea
             // 
             this.button_ActionImageSearch_ClearArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ActionImageSearch_ClearArea.Location = new System.Drawing.Point(127, 288);
+            this.button_ActionImageSearch_ClearArea.Location = new System.Drawing.Point(3, 288);
             this.button_ActionImageSearch_ClearArea.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_ActionImageSearch_ClearArea.Name = "button_ActionImageSearch_ClearArea";
             this.button_ActionImageSearch_ClearArea.Size = new System.Drawing.Size(118, 28);
-            this.button_ActionImageSearch_ClearArea.TabIndex = 3;
+            this.button_ActionImageSearch_ClearArea.TabIndex = 11;
             this.button_ActionImageSearch_ClearArea.Text = "Effacer les zones";
             this.button_ActionImageSearch_ClearArea.UseVisualStyleBackColor = false;
             this.button_ActionImageSearch_ClearArea.Click += new System.EventHandler(this.Button_ActionImageSearch_ClearArea_Click);
@@ -210,7 +210,7 @@
             this.button_ActionImageSearch_FindImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_ActionImageSearch_FindImage.Name = "button_ActionImageSearch_FindImage";
             this.button_ActionImageSearch_FindImage.Size = new System.Drawing.Size(242, 28);
-            this.button_ActionImageSearch_FindImage.TabIndex = 2;
+            this.button_ActionImageSearch_FindImage.TabIndex = 10;
             this.button_ActionImageSearch_FindImage.Text = "Chercher l\'image";
             this.button_ActionImageSearch_FindImage.UseVisualStyleBackColor = false;
             this.button_ActionImageSearch_FindImage.Click += new System.EventHandler(this.Button_ActionImageSearch_FindImage_Click);
@@ -222,11 +222,11 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.button_ActionImageSearch_ShowArea, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.button_ActionImageSearch_ShowArea, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_IfFound, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox_ActionImageSearch_Image, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.button_ActionImageSearch_FindImage, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.button_ActionImageSearch_ClearArea, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.button_ActionImageSearch_ClearArea, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_X1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_Y1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_X2, 0, 4);
@@ -255,6 +255,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 325);
             this.tableLayoutPanel1.TabIndex = 27;
             // 
@@ -266,7 +267,7 @@
             this.flatComboBox_ActionImageSearch_IfFound.Location = new System.Drawing.Point(375, 248);
             this.flatComboBox_ActionImageSearch_IfFound.Name = "flatComboBox_ActionImageSearch_IfFound";
             this.flatComboBox_ActionImageSearch_IfFound.Size = new System.Drawing.Size(119, 24);
-            this.flatComboBox_ActionImageSearch_IfFound.TabIndex = 26;
+            this.flatComboBox_ActionImageSearch_IfFound.TabIndex = 8;
             // 
             // flatComboBox_ActionImageSearch_IfNotFound
             // 
@@ -276,7 +277,7 @@
             this.flatComboBox_ActionImageSearch_IfNotFound.Location = new System.Drawing.Point(375, 290);
             this.flatComboBox_ActionImageSearch_IfNotFound.Name = "flatComboBox_ActionImageSearch_IfNotFound";
             this.flatComboBox_ActionImageSearch_IfNotFound.Size = new System.Drawing.Size(119, 24);
-            this.flatComboBox_ActionImageSearch_IfNotFound.TabIndex = 27;
+            this.flatComboBox_ActionImageSearch_IfNotFound.TabIndex = 9;
             // 
             // numericUpDown_ActionImageSearch_X1
             // 
@@ -294,7 +295,7 @@
             -2147483648});
             this.numericUpDown_ActionImageSearch_X1.Name = "numericUpDown_ActionImageSearch_X1";
             this.numericUpDown_ActionImageSearch_X1.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDown_ActionImageSearch_X1.TabIndex = 28;
+            this.numericUpDown_ActionImageSearch_X1.TabIndex = 2;
             // 
             // numericUpDown_ActionImageSearch_Y1
             // 
@@ -312,7 +313,7 @@
             -2147483648});
             this.numericUpDown_ActionImageSearch_Y1.Name = "numericUpDown_ActionImageSearch_Y1";
             this.numericUpDown_ActionImageSearch_Y1.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDown_ActionImageSearch_Y1.TabIndex = 29;
+            this.numericUpDown_ActionImageSearch_Y1.TabIndex = 3;
             // 
             // numericUpDown_ActionImageSearch_X2
             // 
@@ -330,7 +331,7 @@
             -2147483648});
             this.numericUpDown_ActionImageSearch_X2.Name = "numericUpDown_ActionImageSearch_X2";
             this.numericUpDown_ActionImageSearch_X2.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDown_ActionImageSearch_X2.TabIndex = 30;
+            this.numericUpDown_ActionImageSearch_X2.TabIndex = 4;
             // 
             // numericUpDown_ActionImageSearch_Y2
             // 
@@ -348,7 +349,7 @@
             -2147483648});
             this.numericUpDown_ActionImageSearch_Y2.Name = "numericUpDown_ActionImageSearch_Y2";
             this.numericUpDown_ActionImageSearch_Y2.Size = new System.Drawing.Size(118, 22);
-            this.numericUpDown_ActionImageSearch_Y2.TabIndex = 31;
+            this.numericUpDown_ActionImageSearch_Y2.TabIndex = 5;
             // 
             // numericUpDown_ActionImageSearch_Threshold
             // 
@@ -361,7 +362,7 @@
             0});
             this.numericUpDown_ActionImageSearch_Threshold.Name = "numericUpDown_ActionImageSearch_Threshold";
             this.numericUpDown_ActionImageSearch_Threshold.Size = new System.Drawing.Size(119, 22);
-            this.numericUpDown_ActionImageSearch_Threshold.TabIndex = 32;
+            this.numericUpDown_ActionImageSearch_Threshold.TabIndex = 6;
             this.numericUpDown_ActionImageSearch_Threshold.Value = new decimal(new int[] {
             100,
             0,
@@ -395,16 +396,16 @@
             -2147483648});
             this.numericUpDown_ActionImageSearch_Expiration.Name = "numericUpDown_ActionImageSearch_Expiration";
             this.numericUpDown_ActionImageSearch_Expiration.Size = new System.Drawing.Size(119, 22);
-            this.numericUpDown_ActionImageSearch_Expiration.TabIndex = 34;
+            this.numericUpDown_ActionImageSearch_Expiration.TabIndex = 7;
             // 
-            // ActionIfPicturePanel
+            // ActionImageSearchPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.buttonPanelActionIfImage_FindImage);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "ActionIfPicturePanel";
+            this.Name = "ActionImageSearchPanel";
             this.Size = new System.Drawing.Size(497, 325);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ActionImageSearch_Image)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

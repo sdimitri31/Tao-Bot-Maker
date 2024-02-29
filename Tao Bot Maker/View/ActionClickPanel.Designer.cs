@@ -1,6 +1,6 @@
 ﻿namespace Tao_Bot_Maker.View
 {
-    partial class ActionClickPanel
+    partial class panel_ActionClick
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
@@ -28,169 +28,403 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonPanelActionMouseClick_ShowZone = new System.Windows.Forms.Button();
-            this.label_Y = new System.Windows.Forms.Label();
-            this.radioButtonPanelActionMouseClick_right = new System.Windows.Forms.RadioButton();
-            this.radioButtonPanelActionMouseClick_left = new System.Windows.Forms.RadioButton();
-            this.textBoxPanelActionMouseClick_Y = new System.Windows.Forms.TextBox();
-            this.textBoxPanelActionMouseClick_X = new System.Windows.Forms.TextBox();
-            this.label_X = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonPanelActionMouseClick_ClearZone = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.button_ShowArea = new System.Windows.Forms.Button();
+            this.label_Y1 = new System.Windows.Forms.Label();
+            this.radioButton_RightClick = new System.Windows.Forms.RadioButton();
+            this.radioButton_LeftClick = new System.Windows.Forms.RadioButton();
+            this.label_X1 = new System.Windows.Forms.Label();
+            this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.button_ClearArea = new System.Windows.Forms.Button();
+            this.numericUpDown_X1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_Y1 = new System.Windows.Forms.NumericUpDown();
+            this.radioButton_MiddleClick = new System.Windows.Forms.RadioButton();
+            this.checkBox_Drag = new System.Windows.Forms.CheckBox();
+            this.label_X2 = new System.Windows.Forms.Label();
+            this.label_Y2 = new System.Windows.Forms.Label();
+            this.numericUpDown_X2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_Y2 = new System.Windows.Forms.NumericUpDown();
+            this.label_DragSpeed = new System.Windows.Forms.Label();
+            this.trackBar_DragSpeed = new System.Windows.Forms.TrackBar();
+            this.label_LeftClick = new System.Windows.Forms.Label();
+            this.label_MiddleClick = new System.Windows.Forms.Label();
+            this.label_RightClick = new System.Windows.Forms.Label();
+            this.label_Drag = new System.Windows.Forms.Label();
+            this.label_DoubleClick = new System.Windows.Forms.Label();
+            this.checkBox_DoubleClick = new System.Windows.Forms.CheckBox();
+            this.tableLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_X1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_X2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_DragSpeed)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonPanelActionMouseClick_ShowZone
+            // button_ShowArea
             // 
-            this.buttonPanelActionMouseClick_ShowZone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPanelActionMouseClick_ShowZone.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.buttonPanelActionMouseClick_ShowZone, 2);
-            this.buttonPanelActionMouseClick_ShowZone.Location = new System.Drawing.Point(251, 68);
-            this.buttonPanelActionMouseClick_ShowZone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonPanelActionMouseClick_ShowZone.Name = "buttonPanelActionMouseClick_ShowZone";
-            this.buttonPanelActionMouseClick_ShowZone.Size = new System.Drawing.Size(243, 30);
-            this.buttonPanelActionMouseClick_ShowZone.TabIndex = 17;
-            this.buttonPanelActionMouseClick_ShowZone.Text = "Afficher la zone de clic";
-            this.buttonPanelActionMouseClick_ShowZone.UseVisualStyleBackColor = false;
-            this.buttonPanelActionMouseClick_ShowZone.Click += new System.EventHandler(this.buttonPanelActionMouseClick_ShowZone_Click);
+            this.button_ShowArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ShowArea.Location = new System.Drawing.Point(127, 288);
+            this.button_ShowArea.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_ShowArea.Name = "button_ShowArea";
+            this.button_ShowArea.Size = new System.Drawing.Size(118, 28);
+            this.button_ShowArea.TabIndex = 17;
+            this.button_ShowArea.Text = "Afficher la zone de clic";
+            this.button_ShowArea.UseVisualStyleBackColor = false;
+            this.button_ShowArea.Click += new System.EventHandler(this.Button_ShowArea_Click);
             // 
-            // label_Y
+            // label_Y1
             // 
-            this.label_Y.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_Y.AutoSize = true;
-            this.label_Y.Location = new System.Drawing.Point(251, 41);
-            this.label_Y.Name = "label_Y";
-            this.label_Y.Size = new System.Drawing.Size(118, 16);
-            this.label_Y.TabIndex = 21;
-            this.label_Y.Text = "y :";
-            this.label_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_Y1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_Y1.AutoSize = true;
+            this.label_Y1.Location = new System.Drawing.Point(3, 132);
+            this.label_Y1.Name = "label_Y1";
+            this.label_Y1.Size = new System.Drawing.Size(118, 16);
+            this.label_Y1.TabIndex = 21;
+            this.label_Y1.Text = "y1 :";
+            this.label_Y1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // radioButtonPanelActionMouseClick_right
+            // radioButton_RightClick
             // 
-            this.radioButtonPanelActionMouseClick_right.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButtonPanelActionMouseClick_right.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonPanelActionMouseClick_right, 2);
-            this.radioButtonPanelActionMouseClick_right.Location = new System.Drawing.Point(251, 6);
-            this.radioButtonPanelActionMouseClick_right.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButtonPanelActionMouseClick_right.Name = "radioButtonPanelActionMouseClick_right";
-            this.radioButtonPanelActionMouseClick_right.Padding = new System.Windows.Forms.Padding(0, 0, 25, 0);
-            this.radioButtonPanelActionMouseClick_right.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.radioButtonPanelActionMouseClick_right.Size = new System.Drawing.Size(243, 20);
-            this.radioButtonPanelActionMouseClick_right.TabIndex = 1;
-            this.radioButtonPanelActionMouseClick_right.TabStop = true;
-            this.radioButtonPanelActionMouseClick_right.Text = "Clic droit";
-            this.radioButtonPanelActionMouseClick_right.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButtonPanelActionMouseClick_right.UseVisualStyleBackColor = true;
+            this.radioButton_RightClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton_RightClick.AutoSize = true;
+            this.radioButton_RightClick.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton_RightClick.Location = new System.Drawing.Point(375, 92);
+            this.radioButton_RightClick.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButton_RightClick.Name = "radioButton_RightClick";
+            this.radioButton_RightClick.Size = new System.Drawing.Size(119, 16);
+            this.radioButton_RightClick.TabIndex = 1;
+            this.radioButton_RightClick.UseVisualStyleBackColor = true;
             // 
-            // radioButtonPanelActionMouseClick_left
+            // radioButton_LeftClick
             // 
-            this.radioButtonPanelActionMouseClick_left.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButtonPanelActionMouseClick_left.AutoSize = true;
-            this.radioButtonPanelActionMouseClick_left.Checked = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonPanelActionMouseClick_left, 2);
-            this.radioButtonPanelActionMouseClick_left.Location = new System.Drawing.Point(3, 6);
-            this.radioButtonPanelActionMouseClick_left.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButtonPanelActionMouseClick_left.Name = "radioButtonPanelActionMouseClick_left";
-            this.radioButtonPanelActionMouseClick_left.Padding = new System.Windows.Forms.Padding(0, 0, 25, 0);
-            this.radioButtonPanelActionMouseClick_left.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.radioButtonPanelActionMouseClick_left.Size = new System.Drawing.Size(242, 20);
-            this.radioButtonPanelActionMouseClick_left.TabIndex = 0;
-            this.radioButtonPanelActionMouseClick_left.TabStop = true;
-            this.radioButtonPanelActionMouseClick_left.Text = "Clic gauche";
-            this.radioButtonPanelActionMouseClick_left.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButtonPanelActionMouseClick_left.UseVisualStyleBackColor = true;
+            this.radioButton_LeftClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton_LeftClick.AutoSize = true;
+            this.radioButton_LeftClick.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton_LeftClick.Checked = true;
+            this.radioButton_LeftClick.Location = new System.Drawing.Point(375, 12);
+            this.radioButton_LeftClick.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButton_LeftClick.Name = "radioButton_LeftClick";
+            this.radioButton_LeftClick.Size = new System.Drawing.Size(119, 16);
+            this.radioButton_LeftClick.TabIndex = 0;
+            this.radioButton_LeftClick.TabStop = true;
+            this.radioButton_LeftClick.UseVisualStyleBackColor = true;
             // 
-            // textBoxPanelActionMouseClick_Y
+            // label_X1
             // 
-            this.textBoxPanelActionMouseClick_Y.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPanelActionMouseClick_Y.Location = new System.Drawing.Point(375, 38);
-            this.textBoxPanelActionMouseClick_Y.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxPanelActionMouseClick_Y.Name = "textBoxPanelActionMouseClick_Y";
-            this.textBoxPanelActionMouseClick_Y.Size = new System.Drawing.Size(119, 22);
-            this.textBoxPanelActionMouseClick_Y.TabIndex = 19;
+            this.label_X1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_X1.AutoSize = true;
+            this.label_X1.Location = new System.Drawing.Point(3, 92);
+            this.label_X1.Name = "label_X1";
+            this.label_X1.Size = new System.Drawing.Size(118, 16);
+            this.label_X1.TabIndex = 18;
+            this.label_X1.Text = "x1 :";
+            this.label_X1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBoxPanelActionMouseClick_X
+            // tableLayout
             // 
-            this.textBoxPanelActionMouseClick_X.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPanelActionMouseClick_X.Location = new System.Drawing.Point(127, 38);
-            this.textBoxPanelActionMouseClick_X.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxPanelActionMouseClick_X.Name = "textBoxPanelActionMouseClick_X";
-            this.textBoxPanelActionMouseClick_X.Size = new System.Drawing.Size(118, 22);
-            this.textBoxPanelActionMouseClick_X.TabIndex = 17;
+            this.tableLayout.ColumnCount = 4;
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayout.Controls.Add(this.button_ShowArea, 1, 7);
+            this.tableLayout.Controls.Add(this.button_ClearArea, 0, 7);
+            this.tableLayout.Controls.Add(this.label_X1, 0, 2);
+            this.tableLayout.Controls.Add(this.numericUpDown_X1, 1, 2);
+            this.tableLayout.Controls.Add(this.label_Y1, 0, 3);
+            this.tableLayout.Controls.Add(this.numericUpDown_Y1, 1, 3);
+            this.tableLayout.Controls.Add(this.radioButton_MiddleClick, 3, 1);
+            this.tableLayout.Controls.Add(this.radioButton_RightClick, 3, 2);
+            this.tableLayout.Controls.Add(this.radioButton_LeftClick, 3, 0);
+            this.tableLayout.Controls.Add(this.checkBox_Drag, 3, 4);
+            this.tableLayout.Controls.Add(this.label_X2, 0, 4);
+            this.tableLayout.Controls.Add(this.label_Y2, 0, 5);
+            this.tableLayout.Controls.Add(this.numericUpDown_X2, 1, 4);
+            this.tableLayout.Controls.Add(this.numericUpDown_Y2, 1, 5);
+            this.tableLayout.Controls.Add(this.label_DragSpeed, 2, 5);
+            this.tableLayout.Controls.Add(this.trackBar_DragSpeed, 3, 5);
+            this.tableLayout.Controls.Add(this.label_LeftClick, 2, 0);
+            this.tableLayout.Controls.Add(this.label_MiddleClick, 2, 1);
+            this.tableLayout.Controls.Add(this.label_RightClick, 2, 2);
+            this.tableLayout.Controls.Add(this.label_Drag, 2, 4);
+            this.tableLayout.Controls.Add(this.label_DoubleClick, 2, 3);
+            this.tableLayout.Controls.Add(this.checkBox_DoubleClick, 3, 3);
+            this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayout.Location = new System.Drawing.Point(0, 0);
+            this.tableLayout.Name = "tableLayout";
+            this.tableLayout.RowCount = 8;
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayout.Size = new System.Drawing.Size(497, 325);
+            this.tableLayout.TabIndex = 22;
             // 
-            // label_X
+            // button_ClearArea
             // 
-            this.label_X.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_X.AutoSize = true;
-            this.label_X.Location = new System.Drawing.Point(3, 41);
-            this.label_X.Name = "label_X";
-            this.label_X.Size = new System.Drawing.Size(118, 16);
-            this.label_X.TabIndex = 18;
-            this.label_X.Text = "x :";
-            this.label_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_ClearArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ClearArea.Location = new System.Drawing.Point(3, 288);
+            this.button_ClearArea.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_ClearArea.Name = "button_ClearArea";
+            this.button_ClearArea.Size = new System.Drawing.Size(118, 28);
+            this.button_ClearArea.TabIndex = 22;
+            this.button_ClearArea.Text = "Effacer les zones";
+            this.button_ClearArea.UseVisualStyleBackColor = false;
+            this.button_ClearArea.Click += new System.EventHandler(this.Button_ClearArea_Click);
             // 
-            // tableLayoutPanel1
+            // numericUpDown_X1
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.buttonPanelActionMouseClick_ClearZone, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.radioButtonPanelActionMouseClick_right, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxPanelActionMouseClick_Y, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label_Y, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxPanelActionMouseClick_X, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label_X, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.radioButtonPanelActionMouseClick_left, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonPanelActionMouseClick_ShowZone, 2, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 100);
-            this.tableLayoutPanel1.TabIndex = 22;
+            this.numericUpDown_X1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown_X1.Location = new System.Drawing.Point(127, 89);
+            this.numericUpDown_X1.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDown_X1.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_X1.Name = "numericUpDown_X1";
+            this.numericUpDown_X1.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDown_X1.TabIndex = 23;
             // 
-            // buttonPanelActionMouseClick_ClearZone
+            // numericUpDown_Y1
             // 
-            this.buttonPanelActionMouseClick_ClearZone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.buttonPanelActionMouseClick_ClearZone, 2);
-            this.buttonPanelActionMouseClick_ClearZone.Location = new System.Drawing.Point(3, 70);
-            this.buttonPanelActionMouseClick_ClearZone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonPanelActionMouseClick_ClearZone.Name = "buttonPanelActionMouseClick_ClearZone";
-            this.buttonPanelActionMouseClick_ClearZone.Size = new System.Drawing.Size(242, 26);
-            this.buttonPanelActionMouseClick_ClearZone.TabIndex = 22;
-            this.buttonPanelActionMouseClick_ClearZone.Text = "Effacer les zones";
-            this.buttonPanelActionMouseClick_ClearZone.UseVisualStyleBackColor = false;
-            this.buttonPanelActionMouseClick_ClearZone.Click += new System.EventHandler(this.buttonPanelActionMouseClick_ClearZone_Click);
+            this.numericUpDown_Y1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown_Y1.Location = new System.Drawing.Point(127, 129);
+            this.numericUpDown_Y1.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDown_Y1.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_Y1.Name = "numericUpDown_Y1";
+            this.numericUpDown_Y1.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDown_Y1.TabIndex = 24;
             // 
-            // ActionClickPanel
+            // radioButton_MiddleClick
+            // 
+            this.radioButton_MiddleClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton_MiddleClick.AutoSize = true;
+            this.radioButton_MiddleClick.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton_MiddleClick.Location = new System.Drawing.Point(375, 52);
+            this.radioButton_MiddleClick.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButton_MiddleClick.Name = "radioButton_MiddleClick";
+            this.radioButton_MiddleClick.Size = new System.Drawing.Size(119, 16);
+            this.radioButton_MiddleClick.TabIndex = 25;
+            this.radioButton_MiddleClick.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Drag
+            // 
+            this.checkBox_Drag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_Drag.AutoSize = true;
+            this.checkBox_Drag.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox_Drag.Location = new System.Drawing.Point(375, 171);
+            this.checkBox_Drag.Name = "checkBox_Drag";
+            this.checkBox_Drag.Size = new System.Drawing.Size(119, 17);
+            this.checkBox_Drag.TabIndex = 26;
+            this.checkBox_Drag.UseVisualStyleBackColor = true;
+            this.checkBox_Drag.CheckedChanged += new System.EventHandler(this.checkBox_Drag_CheckedChanged);
+            // 
+            // label_X2
+            // 
+            this.label_X2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_X2.AutoSize = true;
+            this.label_X2.Location = new System.Drawing.Point(3, 172);
+            this.label_X2.Name = "label_X2";
+            this.label_X2.Size = new System.Drawing.Size(118, 16);
+            this.label_X2.TabIndex = 27;
+            this.label_X2.Text = "x2 :";
+            this.label_X2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_Y2
+            // 
+            this.label_Y2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_Y2.AutoSize = true;
+            this.label_Y2.Location = new System.Drawing.Point(3, 212);
+            this.label_Y2.Name = "label_Y2";
+            this.label_Y2.Size = new System.Drawing.Size(118, 16);
+            this.label_Y2.TabIndex = 28;
+            this.label_Y2.Text = "y2 :";
+            this.label_Y2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // numericUpDown_X2
+            // 
+            this.numericUpDown_X2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown_X2.Location = new System.Drawing.Point(127, 169);
+            this.numericUpDown_X2.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDown_X2.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_X2.Name = "numericUpDown_X2";
+            this.numericUpDown_X2.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDown_X2.TabIndex = 29;
+            // 
+            // numericUpDown_Y2
+            // 
+            this.numericUpDown_Y2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown_Y2.Location = new System.Drawing.Point(127, 209);
+            this.numericUpDown_Y2.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDown_Y2.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_Y2.Name = "numericUpDown_Y2";
+            this.numericUpDown_Y2.Size = new System.Drawing.Size(118, 22);
+            this.numericUpDown_Y2.TabIndex = 30;
+            // 
+            // label_DragSpeed
+            // 
+            this.label_DragSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_DragSpeed.AutoSize = true;
+            this.label_DragSpeed.Location = new System.Drawing.Point(251, 212);
+            this.label_DragSpeed.Name = "label_DragSpeed";
+            this.label_DragSpeed.Size = new System.Drawing.Size(118, 16);
+            this.label_DragSpeed.TabIndex = 31;
+            this.label_DragSpeed.Text = "Drag speed :";
+            this.label_DragSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // trackBar_DragSpeed
+            // 
+            this.trackBar_DragSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar_DragSpeed.AutoSize = false;
+            this.trackBar_DragSpeed.LargeChange = 1;
+            this.trackBar_DragSpeed.Location = new System.Drawing.Point(375, 206);
+            this.trackBar_DragSpeed.Maximum = 4;
+            this.trackBar_DragSpeed.Name = "trackBar_DragSpeed";
+            this.trackBar_DragSpeed.Size = new System.Drawing.Size(119, 28);
+            this.trackBar_DragSpeed.TabIndex = 32;
+            // 
+            // label_LeftClick
+            // 
+            this.label_LeftClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_LeftClick.AutoSize = true;
+            this.label_LeftClick.Location = new System.Drawing.Point(251, 12);
+            this.label_LeftClick.Name = "label_LeftClick";
+            this.label_LeftClick.Size = new System.Drawing.Size(118, 16);
+            this.label_LeftClick.TabIndex = 33;
+            this.label_LeftClick.Text = "Clic gauche";
+            this.label_LeftClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_MiddleClick
+            // 
+            this.label_MiddleClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_MiddleClick.AutoSize = true;
+            this.label_MiddleClick.Location = new System.Drawing.Point(251, 52);
+            this.label_MiddleClick.Name = "label_MiddleClick";
+            this.label_MiddleClick.Size = new System.Drawing.Size(118, 16);
+            this.label_MiddleClick.TabIndex = 34;
+            this.label_MiddleClick.Text = "Clic molette";
+            this.label_MiddleClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_RightClick
+            // 
+            this.label_RightClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_RightClick.AutoSize = true;
+            this.label_RightClick.Location = new System.Drawing.Point(251, 92);
+            this.label_RightClick.Name = "label_RightClick";
+            this.label_RightClick.Size = new System.Drawing.Size(118, 16);
+            this.label_RightClick.TabIndex = 35;
+            this.label_RightClick.Text = "Clic droit";
+            this.label_RightClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_Drag
+            // 
+            this.label_Drag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_Drag.AutoSize = true;
+            this.label_Drag.Location = new System.Drawing.Point(251, 172);
+            this.label_Drag.Name = "label_Drag";
+            this.label_Drag.Size = new System.Drawing.Size(118, 16);
+            this.label_Drag.TabIndex = 36;
+            this.label_Drag.Text = "Drag";
+            this.label_Drag.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_DoubleClick
+            // 
+            this.label_DoubleClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_DoubleClick.AutoSize = true;
+            this.label_DoubleClick.Location = new System.Drawing.Point(251, 132);
+            this.label_DoubleClick.Name = "label_DoubleClick";
+            this.label_DoubleClick.Size = new System.Drawing.Size(118, 16);
+            this.label_DoubleClick.TabIndex = 37;
+            this.label_DoubleClick.Text = "Double clic";
+            this.label_DoubleClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // checkBox_DoubleClick
+            // 
+            this.checkBox_DoubleClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_DoubleClick.AutoSize = true;
+            this.checkBox_DoubleClick.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox_DoubleClick.Location = new System.Drawing.Point(375, 131);
+            this.checkBox_DoubleClick.Name = "checkBox_DoubleClick";
+            this.checkBox_DoubleClick.Size = new System.Drawing.Size(119, 17);
+            this.checkBox_DoubleClick.TabIndex = 38;
+            this.checkBox_DoubleClick.UseVisualStyleBackColor = true;
+            this.checkBox_DoubleClick.CheckedChanged += new System.EventHandler(this.checkBox_DoubleClick_CheckedChanged);
+            // 
+            // panel_ActionClick
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tableLayout);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "ActionClickPanel";
-            this.Size = new System.Drawing.Size(497, 100);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.Name = "panel_ActionClick";
+            this.Size = new System.Drawing.Size(497, 325);
+            this.tableLayout.ResumeLayout(false);
+            this.tableLayout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_X1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_X2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_DragSpeed)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonPanelActionMouseClick_ShowZone;
-        private System.Windows.Forms.Label label_Y;
-        private System.Windows.Forms.RadioButton radioButtonPanelActionMouseClick_right;
-        private System.Windows.Forms.RadioButton radioButtonPanelActionMouseClick_left;
-        private System.Windows.Forms.TextBox textBoxPanelActionMouseClick_Y;
-        private System.Windows.Forms.TextBox textBoxPanelActionMouseClick_X;
-        private System.Windows.Forms.Label label_X;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button buttonPanelActionMouseClick_ClearZone;
+        private System.Windows.Forms.Button button_ShowArea;
+        private System.Windows.Forms.Label label_Y1;
+        private System.Windows.Forms.RadioButton radioButton_RightClick;
+        private System.Windows.Forms.RadioButton radioButton_LeftClick;
+        private System.Windows.Forms.Label label_X1;
+        private System.Windows.Forms.TableLayoutPanel tableLayout;
+        private System.Windows.Forms.Button button_ClearArea;
+        private System.Windows.Forms.NumericUpDown numericUpDown_X1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Y1;
+        private System.Windows.Forms.RadioButton radioButton_MiddleClick;
+        private System.Windows.Forms.CheckBox checkBox_Drag;
+        private System.Windows.Forms.Label label_X2;
+        private System.Windows.Forms.Label label_Y2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_X2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Y2;
+        private System.Windows.Forms.Label label_DragSpeed;
+        private System.Windows.Forms.TrackBar trackBar_DragSpeed;
+        private System.Windows.Forms.Label label_LeftClick;
+        private System.Windows.Forms.Label label_MiddleClick;
+        private System.Windows.Forms.Label label_RightClick;
+        private System.Windows.Forms.Label label_Drag;
+        private System.Windows.Forms.Label label_DoubleClick;
+        private System.Windows.Forms.CheckBox checkBox_DoubleClick;
     }
 }
