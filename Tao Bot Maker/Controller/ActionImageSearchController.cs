@@ -6,22 +6,23 @@ using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
+using Log = Tao_Bot_Maker.Controller.Log;
 
 namespace Tao_Bot_Maker
 {
-    public class ActionIfPictureController
+    public class ActionImageSearchController
     {
-        public ActionIfPictureController() { }
+        public ActionImageSearchController() { }
         /// <summary>
         /// Validate and process data from ActionIfPicturePanel and send ActionIfPicture to ActionController
         /// </summary>
         /// <param name="panel">ActionIfPicturePanel</param>
         /// <returns>ActionIfPicture if success or null if error</returns>
-        public static Action GetActionFromControl(ActionIfPicturePanel panel)
+        public static Action GetActionFromControl(ActionImageSearchPanel panel)
         {
             int errorCount = 0;
             String errorMessage = "";
-            ActionIfPicture actionIfPicture = null;
+            ActionImageSearch actionImageSearch = null;
 
             //Moving picture into picture folder
 
@@ -59,8 +60,8 @@ namespace Tao_Bot_Maker
                             //Replace
                             try
                             {
-                                Log.Write(Log.INFO, "Source : " + selectedPictureFullPath);
-                                Log.Write(Log.INFO, "Destination : " + targetFullPath);
+                                Log.Write("Source : " + selectedPictureFullPath);
+                                Log.Write("Destination : " + targetFullPath);
 
                                 File.Delete(Path.Combine(targetFolderPath, pictureName));
                                 File.Copy(selectedPictureFullPath, targetFullPath);
@@ -69,7 +70,7 @@ namespace Tao_Bot_Maker
                             {
                                 errorCount++;
                                 errorMessage += "Erreur : Unable to replace the file\r\n";
-                                Log.Write(Log.ERROR, ex.Message.ToString());
+                                Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
                             }
                         }
                         else if (dr == DialogResult.Cancel)
@@ -85,8 +86,8 @@ namespace Tao_Bot_Maker
                                 pictureName = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + ext;
                                 String dest = Path.Combine(targetFolderPath, pictureName);
 
-                                Log.Write(Log.INFO, "Source : " + selectedPictureFullPath);
-                                Log.Write(Log.INFO, "Destination : " + dest);
+                                Log.Write("Source : " + selectedPictureFullPath);
+                                Log.Write("Destination : " + dest);
 
                                 File.Copy(selectedPictureFullPath, dest);
                             }
@@ -94,7 +95,7 @@ namespace Tao_Bot_Maker
                             {
                                 errorCount++;
                                 errorMessage += "Erreur : Unable to rename the file\r\n";
-                                Log.Write(Log.ERROR, ex.Message.ToString());
+                                Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
                             }
                         }
                     }
@@ -104,8 +105,8 @@ namespace Tao_Bot_Maker
                         //Copy the picture in Pictures folder
                         try
                         {
-                            Log.Write(Log.INFO, "Source : " + selectedPictureFullPath);
-                            Log.Write(Log.INFO, "Destination : " + targetFullPath);
+                            Log.Write("Source : " + selectedPictureFullPath);
+                            Log.Write("Destination : " + targetFullPath);
 
                             File.Copy(selectedPictureFullPath, targetFullPath);
                         }
@@ -113,7 +114,7 @@ namespace Tao_Bot_Maker
                         {
                             errorCount++;
                             errorMessage += "Erreur : Unable to copy the file\r\n";
-                            Log.Write(Log.ERROR, ex.Message.ToString());
+                            Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
                         }
                     }
                 }
@@ -198,14 +199,14 @@ namespace Tao_Bot_Maker
 
             if (errorCount == 0)
             {
-                actionIfPicture = new ActionIfPicture(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
+                actionImageSearch = new ActionImageSearch(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
             }
             else
             {
                 MessageBox.Show(errorMessage);
             }
            
-            return actionIfPicture;
+            return actionImageSearch;
         }
 
     }

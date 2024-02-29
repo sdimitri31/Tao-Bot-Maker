@@ -4,6 +4,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static Tao_Bot_Maker.Action;
 
 namespace Tao_Bot_Maker.View
 {
@@ -15,11 +18,6 @@ namespace Tao_Bot_Maker.View
         private MainApp app;
         private HotKeyController hotkeyXY;
         private HotKeyController hotkeyXY2;
-
-        public void Log(int level, String message)
-        {
-            app.Log(message, level);
-        }
 
         DrawingRectangle drawingForm;
         public void DrawRectangleAtCoords(int x1, int y1, int x2, int y2)
@@ -76,21 +74,14 @@ namespace Tao_Bot_Maker.View
 
                 if ((modifier == hotkeyXY.GetModifier()) && (key == hotkeyXY.GetKey()))
                 {
-                    switch (flatComboBoxActions.SelectedIndex)
+                    switch ((int)(flatComboBoxActions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {
-                        case (int)Action.ActionType.PictureWait:
+                        case (int)Action.ActionType.ImageSearch:
                             //Get Mouse coords
-                            ((ActionPictureWaitPanel)actionPanel).X1 = Cursor.Position.X;
-                            ((ActionPictureWaitPanel)actionPanel).Y1 = Cursor.Position.Y;
+                            ((ActionImageSearchPanel)actionPanel).X1 = Cursor.Position.X;
+                            ((ActionImageSearchPanel)actionPanel).Y1 = Cursor.Position.Y;
                             //Try to draw a rectangle
-                            ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
-                            break;
-                        case (int)Action.ActionType.IfPicture:
-                            //Get Mouse coords
-                            ((ActionIfPicturePanel)actionPanel).X1 = Cursor.Position.X;
-                            ((ActionIfPicturePanel)actionPanel).Y1 = Cursor.Position.Y;
-                            //Try to draw a rectangle
-                            ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+                            ((ActionImageSearchPanel)actionPanel).DrawFromTextBoxValues();
                             break;
                         case (int)Action.ActionType.Click:
                             //Get Mouse coords
@@ -103,21 +94,14 @@ namespace Tao_Bot_Maker.View
                 }
                 else if ((modifier == hotkeyXY2.GetModifier()) && (key == hotkeyXY2.GetKey()))
                 {
-                    switch (flatComboBoxActions.SelectedIndex)
+                    switch ((int)(flatComboBoxActions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {
-                        case (int)Action.ActionType.PictureWait:
+                        case (int)Action.ActionType.ImageSearch:
                             //Get Mouse coords
-                            ((ActionPictureWaitPanel)actionPanel).X2 = Cursor.Position.X;
-                            ((ActionPictureWaitPanel)actionPanel).Y2 = Cursor.Position.Y;
+                            ((ActionImageSearchPanel)actionPanel).X2 = Cursor.Position.X;
+                            ((ActionImageSearchPanel)actionPanel).Y2 = Cursor.Position.Y;
                             //Try to draw a rectangle
-                            ((ActionPictureWaitPanel)actionPanel).DrawFromTextBoxValues();
-                            break;
-                        case (int)Action.ActionType.IfPicture:
-                            //Get Mouse coords
-                            ((ActionIfPicturePanel)actionPanel).X2 = Cursor.Position.X;
-                            ((ActionIfPicturePanel)actionPanel).Y2 = Cursor.Position.Y;
-                            //Try to draw a rectangle
-                            ((ActionIfPicturePanel)actionPanel).DrawFromTextBoxValues();
+                            ((ActionImageSearchPanel)actionPanel).DrawFromTextBoxValues();
                             break;
                     }
                 }
@@ -139,7 +123,7 @@ namespace Tao_Bot_Maker.View
             Localization();
 
             //Populate combobox with actions
-            flatComboBoxActions.Items.AddRange(ActionController.GetActionTypeNames());
+            flatComboBoxActions.Items.AddRange(ActionController.GetActionItems());
 
             //No panel selected
             if (action == null)
@@ -149,8 +133,14 @@ namespace Tao_Bot_Maker.View
             }
             else
             {
-                flatComboBoxActions.SelectedIndex = action.Type;
-                actionPanel = CreatePanelFromAction(action);
+                //Get index to select from type name
+                int selectedIndex = flatComboBoxActions.FindStringExact(ActionController.GetTypeName(action.Type));
+                
+                //If no result, probably a deprecated type is being edited
+                if (selectedIndex < 0) selectedIndex = 0;
+
+                flatComboBoxActions.SelectedIndex = selectedIndex;
+                actionPanel = ActionController.CreatePanelFromAction(action, this);
                 ShowPanel(actionPanel);
             }
 
@@ -174,29 +164,6 @@ namespace Tao_Bot_Maker.View
             hotkeyXY2.Register();
         }
 
-        private Control CreatePanelFromAction(Action action)
-        {
-            switch (action.Type)
-            {
-                case (int)Action.ActionType.Key:
-                    return new ActionKeyPanel(action);
-                case (int)Action.ActionType.Wait:
-                    return new ActionWaitPanel(action);
-                case (int)Action.ActionType.PictureWait:
-                    return new ActionPictureWaitPanel(this, action);
-                case (int)Action.ActionType.IfPicture:
-                    return new ActionIfPicturePanel(this, action);
-                case (int)Action.ActionType.Sequence:
-                    return new ActionSequencePanel(action);
-                case (int)Action.ActionType.Click:
-                    return new ActionClickPanel(this, action);
-                case (int)Action.ActionType.Loop:
-                    return new ActionLoopPanel(action);
-                default:
-                    return null;
-            }
-        }
-
         private void ShowPanel(Control panel)
         {
             if (panel != null)
@@ -210,7 +177,7 @@ namespace Tao_Bot_Maker.View
         private void button_Ok_Click(object sender, EventArgs e)
         {
             //Test if the inputs are valid
-            ReturnValueAction = ActionController.GetActionFromControl(flatComboBoxActions.SelectedIndex, actionPanel);
+            ReturnValueAction = ActionController.GetActionFromControl((int)(flatComboBoxActions.SelectedItem as ComboboxItemActionType).ActionTypeId, actionPanel);
             if(ReturnValueAction != null)
             {
                 //Send results to the controller
@@ -238,7 +205,7 @@ namespace Tao_Bot_Maker.View
             //Show panel of the selected action
             ClearRectangles();
             RefreshRectangles();
-            actionPanel = ActionController.GetControlView(flatComboBoxActions.SelectedIndex, this);
+            actionPanel = ActionController.GetControlView((int)(flatComboBoxActions.SelectedItem as ComboboxItemActionType).ActionTypeId, this);
             Size = new System.Drawing.Size(Size.Width, actionPanel.Size.Height + 133);
             ShowPanel(actionPanel);
         }

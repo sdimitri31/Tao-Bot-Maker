@@ -13,21 +13,21 @@ Afficher endroit pour le déplacement d'une action
 Inclure Imagesearch dll
 Log validation suppression séquence
 Séparer d'une ligne vide le log après le démarrage ou arrêt du log
+Ajoouter icone sur l'exe
+Ajouter action type "Texte"
+Focus automatique sur la textBox save
+
 
 ADD ACTION :
 Fusion des panel If image et wait image
-Edit image problème path
 Définir taille écran en XY2 par défaut
 mettre que des nombres dans les TextBox
-PictureBox afficher des grandes images correctement
 Coordonées a analyser pour determiner lequel est XY ou XY2
 Action Attendre intervalle random
 Remplacer dropdown par un menu 
 Actualisation en direct de la zone de recherche ou clic
 Action Attendre ajouter plusieurs unités de temps (Heure; minutes; secondes)
 Afficher controls quand ils sont chargés
-Verifier les coordonées avant recherche image
 
-DONE :
 
 

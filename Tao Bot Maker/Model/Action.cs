@@ -4,16 +4,26 @@ namespace Tao_Bot_Maker
 {
     public class Action
     {
-        //Type d'action : Touche; Attente; Recherche Image;
+        /// <summary>
+        /// Enum containing all action type
+        /// </summary>
         public enum ActionType
         {
             Key = 0,
             Wait = 1,
-            PictureWait = 2,
-            IfPicture = 3,
             Sequence = 4,
             Click = 5,
-            Loop = 6
+            Loop = 6,
+            ImageSearch = 7
+        }
+
+        /// <summary>
+        /// Enum containing all action type no longer supported
+        /// </summary>
+        public enum DeprecatedActionType
+        {
+            PictureWait = 2,
+            IfPicture = 3,
         }
 
         public int Type { get; set; }

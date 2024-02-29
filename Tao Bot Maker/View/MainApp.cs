@@ -25,6 +25,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using BlueMystic;
 using Tao_Bot_Maker.Model;
+using Log = Tao_Bot_Maker.Controller.Log;
 
 namespace Tao_Bot_Maker
 {
@@ -81,9 +82,9 @@ namespace Tao_Bot_Maker
             UpdateButtonState();
             UpdateUIHotkey();
 
-            Log("Setting SaveLogs : " + SettingsController.IsSaveLogs(), LogFramework.Log.INFO);
-            Log("Setting Language : " + SettingsController.GetLanguage(), LogFramework.Log.INFO);
-            Log("Programme initialisé", LogFramework.Log.INFO);
+            Log.Write("Setting SaveLogs : " + SettingsController.IsSaveLogs(), LogFramework.Log.INFO);
+            Log.Write("Setting Language : " + SettingsController.GetLanguage(), LogFramework.Log.INFO);
+            Log.Write("Programme initialisé", listBoxLog, LogFramework.Log.INFO);
         }
 
         //------------------------------------------------------------
@@ -211,55 +212,16 @@ namespace Tao_Bot_Maker
         private void ChangeLanguage(string language)
         {
             SettingsController.SetLanguage(language.ToUpper());
-            Log(LogFramework.Log.INFO, "Setting Language : " + SettingsController.GetLanguage());
+            Log.Write("Changing language to : " + SettingsController.GetLanguage());
             UpdateButtonState();
             SetLanguageUI();
             Localization();
         }
-        public void Log(string message, int level)
-        {
-            Log(message, false, false, level);
-        }
-        public void Log(int level, string message)
-        {
-            Log(message, false, false, level);
-        }
-        public void Log(string logsentence, bool isthread = false, bool isTemporary = false, int logLevel = LogFramework.Log.INFO)
-        {
-            DateTime dateTime = DateTime.Now;
-            String log = dateTime.ToString() + " : " + logsentence;
-            if (isthread == false)
-            {
-                listBoxLog.Items.Add(log);
-                listBoxLog.TopIndex = listBoxLog.Items.Count - 1;
-            }
-            else
-            {
-                if (isTemporary)
-                {
-                    MethodInvoker mainthread = delegate
-                    {
-                        listBoxLog.Items.RemoveAt(listBoxLog.Items.Count - 1);
-                        listBoxLog.Items.Add(log);
-                        listBoxLog.TopIndex = listBoxLog.Items.Count - 1;
-                    };
-                    listBoxLog.BeginInvoke(mainthread);
-                }
-                else
-                {
-                    MethodInvoker mainthread = delegate
-                    {
-                        listBoxLog.Items.Add(log);
-                        listBoxLog.TopIndex = listBoxLog.Items.Count - 1;
-                    };
-                    listBoxLog.BeginInvoke(mainthread);
-                }
-            }
 
-            if (SettingsController.IsSaveLogs())
-                LogFramework.Log.Write(logLevel, logsentence);
+        public ListBox GetListBoxLog()
+        {
+            return listBoxLog;
         }
-
 
         //------------------------------------------------------------
         //SAVING AND LOADING
@@ -269,16 +231,15 @@ namespace Tao_Bot_Maker
         /// </summary>
         private void LoadActions()
         {
-            //Log(LogFramework.Log.INFO, "Loading actions");
+            Log.Write("Loading actions");
             this.listBoxActions.Items.Clear();
             foreach (Action action in sequenceController.GetActions())
             {
-                //Log(LogFramework.Log.INFO, "Loading action : " + action.ToString());
+                Log.Write("Loading action : " + action.ToString());
                 String currentItem = action.ToString();
                 this.listBoxActions.Items.Add(currentItem);
             }
-
-            //Log(LogFramework.Log.INFO, "Loading actions success");
+            Log.Write("Loading actions success");
         }
 
         /// <summary>
@@ -287,15 +248,15 @@ namespace Tao_Bot_Maker
         /// <param name="sequenceName">Name of Sequence XML to load</param>
         private bool LoadSequence(String sequenceName)
         {
-            Log(LogFramework.Log.INFO, "Loading sequence : " + sequenceName);
+            Log.Write("Loading sequence : " + sequenceName);
             if((sequenceName != null) && (sequenceName != ""))
             {
                 //Get Sequence from XML
                 this.sequenceController.Sequence = SequenceXmlManager.LoadSequence(sequenceName);
-                //Log(LogFramework.Log.INFO, "Loading success");
+                Log.Write("Loading success");
                 return true;
             }
-            Log(LogFramework.Log.ERROR, "Loading failed");
+            Log.Write("Loading failed", LogFramework.Log.ERROR);
             return false;
         }
 
@@ -313,7 +274,7 @@ namespace Tao_Bot_Maker
                 LoadSequencesList();
                 flatComboBoxSequenceList.SelectedItem = saveSequenceView.ReturnValueSequenceName;
 
-                Log(LogFramework.Log.INFO, "Sequence saved : " + saveSequenceView.ReturnValueSequenceName);
+                Log.Write("Sequence saved : " + saveSequenceView.ReturnValueSequenceName);
             }
         }
 
@@ -339,15 +300,14 @@ namespace Tao_Bot_Maker
             var result = formPopup.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                //Log(LogFramework.Log.INFO, "Action View OK");
                 sequenceController.AddAction(formPopup.ReturnValueAction);
 
-                Log(LogFramework.Log.INFO, "Action Créé : " + formPopup.ReturnValueAction.ToString());
+                Log.Write("Action Créé : " + formPopup.ReturnValueAction.ToString());
                 LoadActions();
             }
             else
             {
-                //Log(LogFramework.Log.INFO, "Action View CANCEL");
+                Log.Write("Action View CANCEL");
             }
         }
 
@@ -360,15 +320,14 @@ namespace Tao_Bot_Maker
                 var result = formPopup.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    //Log(LogFramework.Log.INFO, "Action View Edit OK");
                     sequenceController.EditAction(selectedActionIndex, formPopup.ReturnValueAction);
 
-                    Log("Action Modifiée : " + sequenceController.GetActions()[selectedActionIndex].ToString());
+                    Log.Write("Action Modifiée : " + sequenceController.GetActions()[selectedActionIndex].ToString());
                     LoadActions();
                 }
                 else
                 {
-                    //Log(LogFramework.Log.INFO, "Action View Edit CANCEL");
+                    Log.Write("Action View Edit CANCEL");
                 }
             }
 
@@ -471,7 +430,7 @@ namespace Tao_Bot_Maker
         {
             //Toggle the settings
             SettingsController.SetSaveLogs(!SettingsController.IsSaveLogs());
-            Log(LogFramework.Log.INFO, "Setting SaveLogs : " + SettingsController.IsSaveLogs());
+            Log.Write("Setting SaveLogs changed to : " + SettingsController.IsSaveLogs());
             UpdateButtonState();
         }
         
@@ -709,7 +668,7 @@ namespace Tao_Bot_Maker
             StopBot();
             hotkeyStartBot.Unregiser();
             hotkeyStopBot.Unregiser();
-            Log("Closing App complete", LogFramework.Log.INFO);
+            Log.Write("Closing App complete");
         }
 
         //HotKey without focus

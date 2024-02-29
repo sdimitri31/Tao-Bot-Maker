@@ -123,6 +123,9 @@
   <data name="ActionName_IfPicture" xml:space="preserve">
     <value>Si une image</value>
   </data>
+  <data name="ActionName_ImageSearch" xml:space="preserve">
+    <value>Rechercher une image</value>
+  </data>
   <data name="ActionName_Key" xml:space="preserve">
     <value>Touche</value>
   </data>

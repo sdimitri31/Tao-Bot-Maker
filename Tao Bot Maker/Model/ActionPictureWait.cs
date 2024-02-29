@@ -4,14 +4,20 @@ namespace Tao_Bot_Maker
 {
     class ActionPictureWait : Action
     {
+        /// <summary>
+        /// DEPRECATED DO NOT USE
+        /// </summary>
         public ActionPictureWait()
         {
-            Type = (int)ActionType.PictureWait;
+            Type = (int)DeprecatedActionType.PictureWait;
         }
 
+        /// <summary>
+        /// DEPRECATED DO NOT USE
+        /// </summary>
         public ActionPictureWait(String picturePath, int threshold, int x1, int x2, int y1, int y2, int waitTime, String sequenceIfExpired)
         {
-            Type = (int)ActionType.PictureWait;
+            Type = (int)DeprecatedActionType.PictureWait;
             PictureName = picturePath;
             Threshold = threshold;
             X1 = x1;
@@ -33,7 +39,7 @@ namespace Tao_Bot_Maker
 
         public override string ToString()
         {
-            return "Action Attente d'image; Image : " + PictureName + "; Tolérance : " + Threshold + "; X1 : " + X1 + "; Y1 : " + Y1 + "; X2 : " + X2 + "; Y2 : " + Y2 + "; Attente max : " + WaitTime + "; Séquence si expiration : " + SequenceIfExpired;
+            return "DEPRECATED ! NEEDS TO BE CHANGED ;Action Attente d'image; Image : " + PictureName + "; Tolérance : " + Threshold + "; X1 : " + X1 + "; Y1 : " + Y1 + "; X2 : " + X2 + "; Y2 : " + Y2 + "; Attente max : " + WaitTime + "; Séquence si expiration : " + SequenceIfExpired;
         }
     }
 }

@@ -79,6 +79,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image search.
+        /// </summary>
+        internal static string ActionName_ImageSearch {
+            get {
+                return ResourceManager.GetString("ActionName_ImageSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key.
         /// </summary>
         internal static string ActionName_Key {
@@ -97,7 +106,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Wait for picture.
+        ///   Recherche une chaîne localisée semblable à Wait for image.
         /// </summary>
         internal static string ActionName_PictureWait {
             get {
@@ -142,7 +151,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Clear zones.
+        ///   Recherche une chaîne localisée semblable à Clear area.
         /// </summary>
         internal static string button_ClearZone {
             get {
@@ -151,7 +160,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Find picture.
+        ///   Recherche une chaîne localisée semblable à Find image.
         /// </summary>
         internal static string button_FindImage {
             get {
@@ -169,7 +178,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Choose picture.
+        ///   Recherche une chaîne localisée semblable à Choose image.
         /// </summary>
         internal static string button_Picture {
             get {

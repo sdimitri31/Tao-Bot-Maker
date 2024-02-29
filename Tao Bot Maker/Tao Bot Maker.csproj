@@ -74,13 +74,13 @@
     <Compile Include="Controller\ActionController.cs" />
     <Compile Include="Controller\ActionClickController.cs" />
     <Compile Include="Controller\ActionLoopController.cs" />
-    <Compile Include="Controller\ActionIfPictureController.cs" />
+    <Compile Include="Controller\ActionImageSearchController.cs" />
     <Compile Include="Controller\ActionSequenceController.cs" />
-    <Compile Include="Controller\ActionPictureWaitController.cs" />
     <Compile Include="Controller\ActionKeyController.cs" />
     <Compile Include="Controller\ActionWaitController.cs" />
     <Compile Include="Controller\ImageSearchController.cs" />
     <Compile Include="Controller\IniFile.cs" />
+    <Compile Include="Controller\Log.cs" />
     <Compile Include="Controller\SequenceController.cs" />
     <Compile Include="Controller\SettingsController.cs" />
     <Compile Include="Import\DarkModeCS.cs" />
@@ -91,6 +91,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Import\Messenger.cs" />
+    <Compile Include="Model\ActionIfPicture.cs" />
+    <Compile Include="Model\ComboboxItemActionType.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Hotkey.cs" />
     <Compile Include="Properties\strings.Designer.cs">
@@ -119,7 +121,7 @@
     <Compile Include="Model\ActionClick.cs" />
     <Compile Include="Model\ActionPictureWait.cs" />
     <Compile Include="Model\ActionSequence.cs" />
-    <Compile Include="Model\ActionIfPicture.cs" />
+    <Compile Include="Model\ActionImageSearch.cs" />
     <Compile Include="Model\ActionKey.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,11 +133,11 @@
     <Compile Include="View\ActionClickPanel.Designer.cs">
       <DependentUpon>ActionClickPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ActionIfPicturePanel.cs">
+    <Compile Include="View\ActionImageSearchPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\ActionIfPicturePanel.Designer.cs">
-      <DependentUpon>ActionIfPicturePanel.cs</DependentUpon>
+    <Compile Include="View\ActionImageSearchPanel.Designer.cs">
+      <DependentUpon>ActionImageSearchPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ActionKeyPanel.cs">
       <SubType>UserControl</SubType>
@@ -212,8 +214,8 @@
     <EmbeddedResource Include="View\ActionClickPanel.resx">
       <DependentUpon>ActionClickPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionIfPicturePanel.resx">
-      <DependentUpon>ActionIfPicturePanel.cs</DependentUpon>
+    <EmbeddedResource Include="View\ActionImageSearchPanel.resx">
+      <DependentUpon>ActionImageSearchPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ActionKeyPanel.resx">
       <DependentUpon>ActionKeyPanel.cs</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogFramework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace Tao_Bot_Maker
                         doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionWait.Type), actionWait.WaitTime));
                         break;
 
-                    case (int)Action.ActionType.PictureWait:
+                    case (int)Action.DeprecatedActionType.PictureWait:
                         ActionPictureWait actionPictureWait = (ActionPictureWait)action;
                         doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionPictureWait.Type),
                                                                                         new XAttribute("tolerance", actionPictureWait.Threshold),
@@ -53,7 +54,7 @@ namespace Tao_Bot_Maker
                                                                                         actionPictureWait.PictureName));
                         break;
 
-                    case (int)Action.ActionType.IfPicture:
+                    case (int)Action.DeprecatedActionType.IfPicture:
                         ActionIfPicture actionIfPicture = (ActionIfPicture)action;
                         doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionIfPicture.Type),
                                                                                         new XAttribute("tolerance", actionIfPicture.Threshold),
@@ -61,8 +62,8 @@ namespace Tao_Bot_Maker
                                                                                         new XAttribute("y1", actionIfPicture.Y1),
                                                                                         new XAttribute("x2", actionIfPicture.X2),
                                                                                         new XAttribute("y2", actionIfPicture.Y2),
-                                                                                        new XAttribute("ifTrueSequence", actionIfPicture.SequenceIfFound),
-                                                                                        new XAttribute("ifFalseSequence", actionIfPicture.SequenceIfNotFound),
+                                                                                        new XAttribute("ifFound", actionIfPicture.IfFound),
+                                                                                        new XAttribute("ifNotFound", actionIfPicture.IfNotFound),
                                                                                         actionIfPicture.PictureName));
                         break;
 
@@ -86,6 +87,19 @@ namespace Tao_Bot_Maker
                                                                                       actionLoop.SequencePath));
                         break;
 
+                    case (int)Action.ActionType.ImageSearch:
+                        ActionImageSearch actionImageSearch = (ActionImageSearch)action;
+                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionImageSearch.Type),
+                                                                                        new XAttribute("tolerance", actionImageSearch.Threshold),
+                                                                                        new XAttribute("x1", actionImageSearch.X1),
+                                                                                        new XAttribute("y1", actionImageSearch.Y1),
+                                                                                        new XAttribute("x2", actionImageSearch.X2),
+                                                                                        new XAttribute("y2", actionImageSearch.Y2),
+                                                                                        new XAttribute("expiration", actionImageSearch.Expiration),
+                                                                                        new XAttribute("ifFound", actionImageSearch.IfFound),
+                                                                                        new XAttribute("ifNotFound", actionImageSearch.IfNotFound),
+                                                                                        actionImageSearch.PictureName));
+                        break;
                 }
             }
 
@@ -103,80 +117,98 @@ namespace Tao_Bot_Maker
 
             var doc = XDocument.Load(Constants.SEQUENCES_FOLDER_NAME + @"\" + sequenceName + @".xml");
 
-
-            foreach (XElement xe in doc.Descendants("Sequence"))
-            {               
-                foreach (XElement xmlAction in xe.Elements("Action"))
+            try
+            {
+                foreach (XElement xe in doc.Descendants("Sequence"))
                 {
-
-                    int actionType = Int32.Parse(xmlAction.Attribute("type").Value);
-                    switch (actionType)
+                    foreach (XElement xmlAction in xe.Elements("Action"))
                     {
-                        case (int)Action.ActionType.Key:
-                            ActionKey actionKey = new ActionKey();
-                            actionKey.Key = (string)xmlAction;
-                            newSequence.AddAction(actionKey);
-                            break;
 
-                        case (int)Action.ActionType.Wait:
-                            ActionWait actionWait = new ActionWait();
-                            actionWait.WaitTime = (int)xmlAction;
-                            newSequence.AddAction(actionWait);
-                            break;
+                        int actionType = Int32.Parse(xmlAction.Attribute("type").Value);
+                        switch (actionType)
+                        {
+                            case (int)Action.ActionType.Key:
+                                ActionKey actionKey = new ActionKey();
+                                actionKey.Key = (string)xmlAction;
+                                newSequence.AddAction(actionKey);
+                                break;
 
-                        case (int)Action.ActionType.PictureWait:
-                            ActionPictureWait actionPictureWait = new ActionPictureWait();
-                            actionPictureWait.PictureName     = (string)xmlAction;
-                            actionPictureWait.X1         = Int32.Parse(xmlAction.Attribute("x1").Value);
-                            actionPictureWait.X2         = Int32.Parse(xmlAction.Attribute("x2").Value);
-                            actionPictureWait.Y1         = Int32.Parse(xmlAction.Attribute("y1").Value);
-                            actionPictureWait.Y2         = Int32.Parse(xmlAction.Attribute("y2").Value);
-                            actionPictureWait.Threshold  = Int32.Parse(xmlAction.Attribute("tolerance").Value);
-                            actionPictureWait.WaitTime   = Int32.Parse(xmlAction.Attribute("waitTime").Value);
-                            actionPictureWait.SequenceIfExpired = xmlAction.Attribute("sequenceIfExpired").Value;
-                            newSequence.AddAction(actionPictureWait);
-                            break;
+                            case (int)Action.ActionType.Wait:
+                                ActionWait actionWait = new ActionWait();
+                                actionWait.WaitTime = (int)xmlAction;
+                                newSequence.AddAction(actionWait);
+                                break;
 
-                        case (int)Action.ActionType.IfPicture:
-                            ActionIfPicture actionIfPicture = new ActionIfPicture();
-                            actionIfPicture.PictureName  = (string)xmlAction;
-                            actionIfPicture.X1      = Int32.Parse(xmlAction.Attribute("x1").Value);
-                            actionIfPicture.X2      = Int32.Parse(xmlAction.Attribute("x2").Value);
-                            actionIfPicture.Y1      = Int32.Parse(xmlAction.Attribute("y1").Value);
-                            actionIfPicture.Y2      = Int32.Parse(xmlAction.Attribute("y2").Value);
-                            actionIfPicture.Threshold       = Int32.Parse(xmlAction.Attribute("tolerance").Value);
-                            actionIfPicture.SequenceIfFound  = xmlAction.Attribute("ifTrueSequence").Value;
-                            actionIfPicture.SequenceIfNotFound = xmlAction.Attribute("ifFalseSequence").Value;
-                            newSequence.AddAction(actionIfPicture);
-                            break;
+                            case (int)Action.DeprecatedActionType.PictureWait:
+                                ActionPictureWait actionPictureWait = new ActionPictureWait();
+                                actionPictureWait.PictureName = (string)xmlAction;
+                                actionPictureWait.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
+                                actionPictureWait.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+                                actionPictureWait.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
+                                actionPictureWait.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                                actionPictureWait.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
+                                actionPictureWait.WaitTime = Int32.Parse(xmlAction.Attribute("waitTime").Value);
+                                actionPictureWait.SequenceIfExpired = xmlAction.Attribute("sequenceIfExpired").Value;
+                                newSequence.AddAction(actionPictureWait);
+                                break;
 
-                        case (int)Action.ActionType.Sequence:
-                            ActionSequence actionSequence = new ActionSequence();
-                            actionSequence.SequencePath = (string)xmlAction;
-                            newSequence.AddAction(actionSequence);
-                            break;
+                            case (int)Action.DeprecatedActionType.IfPicture:
+                                ActionIfPicture actionIfPicture = new ActionIfPicture();
+                                actionIfPicture.PictureName = (string)xmlAction;
+                                actionIfPicture.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
+                                actionIfPicture.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+                                actionIfPicture.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
+                                actionIfPicture.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                                actionIfPicture.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
+                                actionIfPicture.IfFound = xmlAction.Attribute("ifTrueSequence").Value;
+                                actionIfPicture.IfNotFound = xmlAction.Attribute("ifFalseSequence").Value;
+                                newSequence.AddAction(actionIfPicture);
+                                break;
 
-                        case (int)Action.ActionType.Click:
-                            ActionClick actionClick = new ActionClick();
-                            actionClick.X = Int32.Parse(xmlAction.Attribute("x").Value);
-                            actionClick.Y = Int32.Parse(xmlAction.Attribute("y").Value);
-                            actionClick.SelectedClick = xmlAction.Attribute("clic").Value;
-                            newSequence.AddAction(actionClick);
-                            break;
+                            case (int)Action.ActionType.Sequence:
+                                ActionSequence actionSequence = new ActionSequence();
+                                actionSequence.SequencePath = (string)xmlAction;
+                                newSequence.AddAction(actionSequence);
+                                break;
 
-                        case (int)Action.ActionType.Loop:
-                            ActionLoop actionLoop = new ActionLoop();
-                            actionLoop.SequencePath = (string)xmlAction;
-                            actionLoop.NumberOfRepetitions = Int32.Parse(xmlAction.Attribute("nbRepetition").Value);
-                            newSequence.AddAction(actionLoop);
-                            break;
+                            case (int)Action.ActionType.Click:
+                                ActionClick actionClick = new ActionClick();
+                                actionClick.X = Int32.Parse(xmlAction.Attribute("x").Value);
+                                actionClick.Y = Int32.Parse(xmlAction.Attribute("y").Value);
+                                actionClick.SelectedClick = xmlAction.Attribute("clic").Value;
+                                newSequence.AddAction(actionClick);
+                                break;
+
+                            case (int)Action.ActionType.Loop:
+                                ActionLoop actionLoop = new ActionLoop();
+                                actionLoop.SequencePath = (string)xmlAction;
+                                actionLoop.NumberOfRepetitions = Int32.Parse(xmlAction.Attribute("nbRepetition").Value);
+                                newSequence.AddAction(actionLoop);
+                                break;
+
+                            case (int)Action.ActionType.ImageSearch:
+                                ActionImageSearch actionImageSearch = new ActionImageSearch();
+                                actionImageSearch.PictureName = (string)xmlAction;
+                                actionImageSearch.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
+                                actionImageSearch.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+                                actionImageSearch.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
+                                actionImageSearch.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                                actionImageSearch.Expiration = Int32.Parse(xmlAction.Attribute("expiration").Value);
+                                actionImageSearch.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
+                                actionImageSearch.IfFound = xmlAction.Attribute("ifFound").Value;
+                                actionImageSearch.IfNotFound = xmlAction.Attribute("ifNotFound").Value;
+                                newSequence.AddAction(actionImageSearch);
+                                break;
+                        }
                     }
-
-                }     
+                }
             }
-
+            catch (Exception ex) 
+            { 
+                Log.Write(Log.ERROR, ex.ToString());
+                MessageBox.Show("ERROR Loading sequence");
+            }
             return newSequence.Sequence;
-
         }
 
         public static List<String> SequencesList()
