@@ -32,7 +32,6 @@ namespace Tao_Bot_Maker
 
     public partial class MainApp : Form
     {
-        private DarkModeCS DM = null;
         //DLL Drawing
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
@@ -44,6 +43,7 @@ namespace Tao_Bot_Maker
         static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
 
         //Private Members
+        private DarkModeCS DM = null;
         private SequenceController sequenceController;
         private Bot bot;
         private HotKeyController hotkeyStartBot;
@@ -138,11 +138,17 @@ namespace Tao_Bot_Maker
         }
         private void UpdateAllButtonState()
         {
-            //Enable Edit Button
+            //Edit Button
             UpdateButtonStateEdit();
+
+            //Delete Button
+            UpdateButtonStateDeleteAction();
 
             //Enable Bot Start or Stop
             UpdateButtonStateBot();
+
+            //Delete sequence button
+            UpdateButtonStateDeleteSequence();
 
             //Check SaveLogs menu
             UpdateButtonStateSaveLogs();
@@ -163,7 +169,25 @@ namespace Tao_Bot_Maker
             else
                 button_EditAction.Enabled = true;
 
-            Log.Write(Properties.strings.log_UpdateButtonState_Edit, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Edit + button_EditAction.Enabled, LogFramework.Log.TRACE);
+        }
+        private void UpdateButtonStateDeleteAction()
+        {
+            if (listBoxActions.SelectedIndex == -1)
+                button_DeleteSelectedAction.Enabled = false;
+            else
+                button_DeleteSelectedAction.Enabled = true;
+
+            Log.Write(Properties.strings.log_UpdateButtonState_DeleteAction + button_DeleteSelectedAction.Enabled, LogFramework.Log.TRACE);
+        }
+        private void UpdateButtonStateDeleteSequence()
+        {
+            if (flatComboBoxSequenceList.SelectedIndex == -1)
+                button_DeleteSequence.Enabled = false;
+            else
+                button_DeleteSequence.Enabled = true;
+
+            Log.Write(Properties.strings.log_UpdateButtonState_DeleteSequence + button_DeleteSequence.Enabled, LogFramework.Log.TRACE);
         }
         public void UpdateButtonStateBot()
         {
@@ -178,17 +202,18 @@ namespace Tao_Bot_Maker
                 button_StopBot.Enabled = true;
                 tsm_Bot_Stop.Enabled = true;
             }
-            else
+            //Enable START If bot is running or there is actions in the list
+            else if (bot.IsRunning || (listBoxActions.Items.Count > 0))
             {
                 button_StartBot.Enabled = true;
                 tsm_Bot_Start.Enabled = true;
             }
-            Log.Write(Properties.strings.log_UpdateButtonState_Bot, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Bot + bot.IsRunning, LogFramework.Log.TRACE);
         }
         private void UpdateButtonStateSaveLogs()
         {
             tsm_Settings_Logs.Checked = SettingsController.IsSaveLogs();
-            Log.Write(Properties.strings.log_UpdateButtonState_SaveLogs, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_SaveLogs + tsm_Settings_Logs.Checked, LogFramework.Log.TRACE);
         }
         private void UpdateButtonStateLanguage()
         {
@@ -202,7 +227,7 @@ namespace Tao_Bot_Maker
                 tsm_Settings_Language_Francais.Checked = true;
             else
                 tsm_Settings_Language_English.Checked = true;
-            Log.Write(Properties.strings.log_UpdateButtonState_Language, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Language + language, LogFramework.Log.TRACE);
         }
         private void UpdateButtonStateTheme()
         {
@@ -217,12 +242,11 @@ namespace Tao_Bot_Maker
                 tsm_Settings_Theme_Light.Checked = true;
             else
                 tsm_Settings_Theme_Auto.Checked = true; 
-            Log.Write(Properties.strings.log_UpdateButtonState_Theme, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Theme + themeMode, LogFramework.Log.TRACE);
         }
         private void UpdateButtonStateHotkey()
         {
             int modifier = 0;
-
             //Reversing alt and shift modifier because of a bug in UI 
             modifier = Reverse3Bits((int)hotkeyStartBot.GetModifier()) << 16;
             tsm_Bot_Start.ShortcutKeys = (Keys)((int)hotkeyStartBot.GetKey() | modifier);
@@ -262,11 +286,11 @@ namespace Tao_Bot_Maker
             this.listBoxActions.Items.Clear();
             foreach (Action action in sequenceController.GetActions())
             {
-                Log.Write(Properties.strings.log_Loading_Action + action.ToString());
+                Log.Write(Properties.strings.log_Loading_Action + action.ToString(), LogFramework.Log.TRACE);
                 String currentItem = action.ToString();
                 this.listBoxActions.Items.Add(currentItem);
             }
-            Log.Write(Properties.strings.log_Loaded_Actions);
+            Log.Write(Properties.strings.log_Loaded_Actions, LogFramework.Log.TRACE);
         }
 
         /// <summary>
@@ -362,9 +386,9 @@ namespace Tao_Bot_Maker
                     sequenceController.EditAction(selectedActionIndex, formPopup.ReturnValueAction);
                     Log.Write(Properties.strings.log_ActionEdited + formPopup.ReturnValueAction.ToString(), GetListBoxLog());
                     LoadActions();
+                    listBoxActions.SelectedIndex = selectedActionIndex;
                 }
             }
-
         }
         
         private void DeleteAction(Action selectedAction)
@@ -391,6 +415,10 @@ namespace Tao_Bot_Maker
                 }
 
                 LoadActions();
+
+                listBoxActions.SelectedIndex = -1;
+
+                UpdateAllButtonState();
             }
             catch (Exception) { }
         }
@@ -706,8 +734,8 @@ namespace Tao_Bot_Maker
             hotkeyStopBot.Unregiser();
 
             //Blank line to separate logs between starts
-            Log.Write("", listBoxLog, LogFramework.Log.INFO);
             Log.Write(Properties.strings.log_ApplicationClosed);
+            Log.Write("", listBoxLog, LogFramework.Log.INFO);
         }
 
         //HotKey without focus

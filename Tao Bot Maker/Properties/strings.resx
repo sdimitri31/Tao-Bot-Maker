@@ -298,22 +298,28 @@
     <value>Setting "SaveLog" value : </value>
   </data>
   <data name="log_UpdateButtonState_Bot" xml:space="preserve">
-    <value>"Bot" button state updated</value>
+    <value>"Bot" button state updated : </value>
+  </data>
+  <data name="log_UpdateButtonState_DeleteAction" xml:space="preserve">
+    <value>"Delete" button state updated : </value>
+  </data>
+  <data name="log_UpdateButtonState_DeleteSequence" xml:space="preserve">
+    <value>"Delete sequence" button state updated : </value>
   </data>
   <data name="log_UpdateButtonState_Edit" xml:space="preserve">
-    <value>"Edit" button state updated</value>
+    <value>"Edit" button state updated : </value>
   </data>
   <data name="log_UpdateButtonState_Hotkey" xml:space="preserve">
-    <value>"Hotkey" button state updated</value>
+    <value>"Hotkey" button updated</value>
   </data>
   <data name="log_UpdateButtonState_Language" xml:space="preserve">
-    <value>"Language" button state updated</value>
+    <value>"Language" button state updated : </value>
   </data>
   <data name="log_UpdateButtonState_SaveLogs" xml:space="preserve">
-    <value>"Savelogs" button state updated</value>
+    <value>"Savelogs" button state updated : </value>
   </data>
   <data name="log_UpdateButtonState_Theme" xml:space="preserve">
-    <value>"Theme" button state updated</value>
+    <value>"Theme" button state updated : </value>
   </data>
   <data name="MessageBox_WarningDeleteSequence" xml:space="preserve">
     <value>"Warning : This will delete the sequence entirely.

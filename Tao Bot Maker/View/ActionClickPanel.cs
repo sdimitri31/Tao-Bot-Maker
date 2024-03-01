@@ -5,9 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using static Tao_Bot_Maker.Bot;
 
 namespace Tao_Bot_Maker.View
 {
@@ -21,6 +23,7 @@ namespace Tao_Bot_Maker.View
             Localization();
             AddHotkeysToLabels();
             this.actionView = actionView;
+            UpdateButtonState();
 
             //Not null = Editing existing action
             if (action != null)
@@ -33,8 +36,9 @@ namespace Tao_Bot_Maker.View
                 IsDoubleClick = ((ActionClick)action).IsDoubleClick;
                 IsDrag = ((ActionClick)action).IsDrag;
                 DragSpeed = ((ActionClick)action).DragSpeed;
+                UpdateButtonStateDrag();
+                UpdateButtonStateDoubleClick();
             }
-            UpdateButtonState();
         }
         private void Localization()
         {
@@ -172,7 +176,6 @@ namespace Tao_Bot_Maker.View
             DrawFromTextBoxValues();
         }
 
-
         public void DrawFromTextBoxValues()
         {
             actionView.ClearRectangles();
@@ -204,5 +207,6 @@ namespace Tao_Bot_Maker.View
             UpdateButtonState();
             UpdateButtonStateDrag();
         }
+
     }
 }

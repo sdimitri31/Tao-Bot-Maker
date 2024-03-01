@@ -25,6 +25,7 @@ namespace Tao_Bot_Maker.View
             Localization();
 
             this.mode = 0;
+            this.ActiveControl = textBox_SaveName;
             this.sequenceToSave = sequenceToSave;
             LoadSequencesList();
         }
@@ -40,6 +41,10 @@ namespace Tao_Bot_Maker.View
         private void SetMode(int tabIndex)
         {
             this.mode = tabIndex;
+            if(this.mode == 0)
+            {
+                this.ActiveControl = textBox_SaveName;
+            }
         }
 
         private void LoadSequencesList()

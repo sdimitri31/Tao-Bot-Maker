@@ -64,25 +64,30 @@
             this.button_DeleteSequence = new System.Windows.Forms.Button();
             this.button_StartBot = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxActions
             // 
             this.listBoxActions.AllowDrop = true;
-            this.listBoxActions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxActions.BackColor = System.Drawing.Color.DimGray;
+            this.listBoxActions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxActions.ForeColor = System.Drawing.Color.White;
             this.listBoxActions.FormattingEnabled = true;
+            this.listBoxActions.HorizontalScrollbar = true;
+            this.listBoxActions.IntegralHeight = false;
             this.listBoxActions.ItemHeight = 16;
-            this.listBoxActions.Location = new System.Drawing.Point(0, 84);
+            this.listBoxActions.Location = new System.Drawing.Point(0, 0);
             this.listBoxActions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBoxActions.Name = "listBoxActions";
             this.listBoxActions.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxActions.Size = new System.Drawing.Size(644, 388);
+            this.listBoxActions.Size = new System.Drawing.Size(645, 423);
             this.listBoxActions.TabIndex = 5;
             this.listBoxActions.SelectedIndexChanged += new System.EventHandler(this.ListBoxActions_SelectedIndexChanged);
             this.listBoxActions.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBoxActions_DragDrop);
@@ -93,17 +98,17 @@
             // 
             // listBoxLog
             // 
-            this.listBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxLog.BackColor = System.Drawing.Color.DimGray;
+            this.listBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxLog.ForeColor = System.Drawing.Color.White;
             this.listBoxLog.FormattingEnabled = true;
+            this.listBoxLog.IntegralHeight = false;
             this.listBoxLog.ItemHeight = 16;
-            this.listBoxLog.Location = new System.Drawing.Point(0, 480);
+            this.listBoxLog.Location = new System.Drawing.Point(0, 0);
             this.listBoxLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBoxLog.Name = "listBoxLog";
             this.listBoxLog.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxLog.Size = new System.Drawing.Size(644, 148);
+            this.listBoxLog.Size = new System.Drawing.Size(645, 122);
             this.listBoxLog.TabIndex = 8;
             // 
             // menuStrip
@@ -117,7 +122,7 @@
             this.tsm_Help});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(645, 28);
+            this.menuStrip.Size = new System.Drawing.Size(645, 30);
             this.menuStrip.TabIndex = 22;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -131,7 +136,7 @@
             this.tsm_File_Exit});
             this.tsm_File.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_File.Name = "tsm_File";
-            this.tsm_File.Size = new System.Drawing.Size(46, 24);
+            this.tsm_File.Size = new System.Drawing.Size(46, 26);
             this.tsm_File.Text = "File";
             // 
             // tsm_File_New
@@ -183,7 +188,7 @@
             this.tsm_Bot_Stop});
             this.tsm_Bot.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Bot.Name = "tsm_Bot";
-            this.tsm_Bot.Size = new System.Drawing.Size(46, 24);
+            this.tsm_Bot.Size = new System.Drawing.Size(46, 26);
             this.tsm_Bot.Text = "Bot";
             // 
             // tsm_Bot_Start
@@ -213,7 +218,7 @@
             this.tsm_Settings_Logs});
             this.tsm_Settings.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Settings.Name = "tsm_Settings";
-            this.tsm_Settings.Size = new System.Drawing.Size(76, 24);
+            this.tsm_Settings.Size = new System.Drawing.Size(76, 26);
             this.tsm_Settings.Text = "Settings";
             // 
             // tsm_Settings_Language
@@ -295,7 +300,7 @@
             this.tsm_About});
             this.tsm_Help.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Help.Name = "tsm_Help";
-            this.tsm_Help.Size = new System.Drawing.Size(30, 24);
+            this.tsm_Help.Size = new System.Drawing.Size(30, 26);
             this.tsm_Help.Text = "?";
             // 
             // tsm_About
@@ -437,14 +442,33 @@
             this.button_StartBot.UseVisualStyleBackColor = false;
             this.button_StartBot.Click += new System.EventHandler(this.Button_StartBot_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(0, 78);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.listBoxActions);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.listBoxLog);
+            this.splitContainer1.Size = new System.Drawing.Size(645, 549);
+            this.splitContainer1.SplitterDistance = 423;
+            this.splitContainer1.TabIndex = 24;
+            // 
             // MainApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(645, 629);
-            this.Controls.Add(this.listBoxActions);
-            this.Controls.Add(this.listBoxLog);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip);
             this.ForeColor = System.Drawing.Color.White;
@@ -458,6 +482,10 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,6 +526,7 @@
         private System.Windows.Forms.Button button_DeleteSelectedAction;
         private System.Windows.Forms.ToolStripMenuItem tsm_File_New;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

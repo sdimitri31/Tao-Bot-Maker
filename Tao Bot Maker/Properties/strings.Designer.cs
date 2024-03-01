@@ -601,7 +601,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Bot&quot; button state updated.
+        ///   Recherche une chaîne localisée semblable à &quot;Bot&quot; button state updated : .
         /// </summary>
         internal static string log_UpdateButtonState_Bot {
             get {
@@ -610,7 +610,25 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Edit&quot; button state updated.
+        ///   Recherche une chaîne localisée semblable à &quot;Delete&quot; button state updated : .
+        /// </summary>
+        internal static string log_UpdateButtonState_DeleteAction {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_DeleteAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Delete sequence&quot; button state updated : .
+        /// </summary>
+        internal static string log_UpdateButtonState_DeleteSequence {
+            get {
+                return ResourceManager.GetString("log_UpdateButtonState_DeleteSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Edit&quot; button state updated : .
         /// </summary>
         internal static string log_UpdateButtonState_Edit {
             get {
@@ -619,7 +637,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Hotkey&quot; button state updated.
+        ///   Recherche une chaîne localisée semblable à &quot;Hotkey&quot; button updated.
         /// </summary>
         internal static string log_UpdateButtonState_Hotkey {
             get {
@@ -628,7 +646,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Language&quot; button state updated.
+        ///   Recherche une chaîne localisée semblable à &quot;Language&quot; button state updated : .
         /// </summary>
         internal static string log_UpdateButtonState_Language {
             get {
@@ -637,7 +655,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Savelogs&quot; button state updated.
+        ///   Recherche une chaîne localisée semblable à &quot;Savelogs&quot; button state updated : .
         /// </summary>
         internal static string log_UpdateButtonState_SaveLogs {
             get {
@@ -646,7 +664,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Theme&quot; button state updated.
+        ///   Recherche une chaîne localisée semblable à &quot;Theme&quot; button state updated : .
         /// </summary>
         internal static string log_UpdateButtonState_Theme {
             get {

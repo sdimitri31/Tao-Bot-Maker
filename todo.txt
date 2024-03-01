@@ -1,31 +1,22 @@
 TO DO :
-Crash quand img non trouvée après expiration
-Désactiver le bouton supprimer l'action quand rien n'est sélectionné
-Désactiver le bouton Editer quand rien n'est sélectionné
-Désactiver le bouton start quand séquence vide
-Bloquer le redim de la hotkeyView
-Ajouter des couleurs pour les hotkeys dupliqués
-Espacer les hotkey start/stop de XY
-Localiser les logs
+Verifier si la séquence est sauvegardée avant fermeture
 Bloquer InfiniteLoop si séquence name = séquence sélectionnée
-Try Catch on sequence Load
-Afficher endroit pour le déplacement d'une action
-Inclure Imagesearch dll
-Log validation suppression séquence
-Séparer d'une ligne vide le log après le démarrage ou arrêt du log
-Ajoouter icone sur l'exe
-Ajouter action type "Texte"
-Focus automatique sur la textBox save
+Ajouter des couleurs pour les hotkeys dupliqués
+Afficher barre pour le déplacement d'une action
 
+Localiser les logs
+Verifier les valeurs lors d'un chargement de séquence pour eviter les crash et les changements entre les versions
+Crash quand img non trouvée après expiration
+Inclure Imagesearch dll
 
 ADD ACTION :
-Fusion des panel If image et wait image
 Définir taille écran en XY2 par défaut
 mettre que des nombres dans les TextBox
-Coordonées a analyser pour determiner lequel est XY ou XY2
-Action Attendre intervalle random
+Coordonées a analyser pour determiner lequel est XY ou XY2 dans le dessin de la zone
+Ajouter action type "Texte"
 Remplacer dropdown par un menu 
 Actualisation en direct de la zone de recherche ou clic
+Action Attendre intervalle random
 Action Attendre ajouter plusieurs unités de temps (Heure; minutes; secondes)
 Afficher controls quand ils sont chargés
 

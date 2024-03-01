@@ -318,6 +318,7 @@ namespace Tao_Bot_Maker
                 
             //Move cursor to XY
             Cursor.Position = new Point(actionMouse.X1, actionMouse.Y1);
+            Log.Write("Cursor.Position " + Cursor.Position.ToString(), LogFramework.Log.TRACE);
 
             //Click Down on selected click
             uint X = (uint)System.Windows.Forms.Cursor.Position.X;
@@ -328,17 +329,60 @@ namespace Tao_Bot_Maker
             if (actionMouse.IsDrag)
             {
                 //Move cursor to XY2 according to DragSpeed
-                int nbStep = 100;
-                int stepX = (actionMouse.X2 - actionMouse.X1) / nbStep;
-                int stepY = (actionMouse.Y2 - actionMouse.Y1) / nbStep;
 
-                for(int i = 0; i < nbStep; i++)
+                int gapX = (actionMouse.X2 - actionMouse.X1);
+                int gapY = (actionMouse.Y2 - actionMouse.Y1);
+                int smallerGap = Math.Min(Math.Abs(gapX), Math.Abs(gapY));
+                int nbStep;
+
+                Log.Write("gapX " + gapX, LogFramework.Log.TRACE);
+                Log.Write("gapY " + gapY, LogFramework.Log.TRACE);
+                Log.Write("smallerGap " + smallerGap, LogFramework.Log.TRACE);
+
+                if (smallerGap > 50 )
                 {
-                    mouse_event((int)MouseEventFlags.Move, (uint)stepX, (uint)stepY, 0, 0);
-
-                    Thread.Sleep(actionMouse.DragSpeed * 10);
+                    decimal calc = (smallerGap / 10);
+                    nbStep = (int)Math.Floor(calc);
+                }
+                else
+                {
+                    nbStep = smallerGap;
+                    if (nbStep == 0)
+                        nbStep = 1;
                 }
 
+                int stepX = (int)Math.Floor((double)(gapX / nbStep));
+                int stepY = (int)Math.Floor((double)(gapY / nbStep));
+                int resteX = (int)Math.Floor((double)(gapX % nbStep));
+                int resteY = (int)Math.Floor((double)(gapY % nbStep));
+
+                Log.Write("nbStep " + nbStep, LogFramework.Log.TRACE);
+                Log.Write("stepX " + stepX, LogFramework.Log.TRACE);
+                Log.Write("resteX " + resteX, LogFramework.Log.TRACE); 
+                Log.Write("stepY " + stepY, LogFramework.Log.TRACE);
+                Log.Write("resteY " + resteY, LogFramework.Log.TRACE);
+
+                int cursorPosX = actionMouse.X1;
+                int cursorPosY = actionMouse.Y1;
+
+                for (int i = 0; i < nbStep; i++)
+                {
+                    cursorPosX += stepX;
+                    cursorPosY += stepY;
+                    Cursor.Position = new Point(cursorPosX, cursorPosY);
+                    mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
+
+                    Log.Write("Cursor.Position " + Cursor.Position.ToString() + " i " + i, LogFramework.Log.TRACE);
+
+                    Thread.Sleep(Math.Abs(actionMouse.DragSpeed) * 30);
+                }
+
+                cursorPosX += resteX;
+                cursorPosY += resteY;
+                Cursor.Position = new Point(cursorPosX, cursorPosY);
+                mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
+
+                Log.Write("Cursor.Position " + Cursor.Position.ToString(), LogFramework.Log.TRACE);
 
             }
             else if (actionMouse.IsDoubleClick)

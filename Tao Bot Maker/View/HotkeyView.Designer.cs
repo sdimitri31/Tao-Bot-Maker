@@ -120,7 +120,7 @@
             this.groupBox_XY.Controls.Add(this.checkBox_XY_Shift);
             this.groupBox_XY.Controls.Add(this.checkBox_XY_Alt);
             this.groupBox_XY.Controls.Add(this.checkBox_XY_Ctrl);
-            this.groupBox_XY.Location = new System.Drawing.Point(17, 113);
+            this.groupBox_XY.Location = new System.Drawing.Point(17, 132);
             this.groupBox_XY.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox_XY.Name = "groupBox_XY";
             this.groupBox_XY.Padding = new System.Windows.Forms.Padding(4);
@@ -177,7 +177,7 @@
             this.groupBox_XY2.Controls.Add(this.checkBox_XY2_Shift);
             this.groupBox_XY2.Controls.Add(this.checkBox_XY2_Alt);
             this.groupBox_XY2.Controls.Add(this.checkBox_XY2_Ctrl);
-            this.groupBox_XY2.Location = new System.Drawing.Point(292, 113);
+            this.groupBox_XY2.Location = new System.Drawing.Point(292, 132);
             this.groupBox_XY2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox_XY2.Name = "groupBox_XY2";
             this.groupBox_XY2.Padding = new System.Windows.Forms.Padding(4);
@@ -231,7 +231,7 @@
             // button_Shortcuts_OK
             // 
             this.button_Shortcuts_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button_Shortcuts_OK.Location = new System.Drawing.Point(459, 210);
+            this.button_Shortcuts_OK.Location = new System.Drawing.Point(459, 229);
             this.button_Shortcuts_OK.Margin = new System.Windows.Forms.Padding(4);
             this.button_Shortcuts_OK.Name = "button_Shortcuts_OK";
             this.button_Shortcuts_OK.Size = new System.Drawing.Size(100, 28);
@@ -243,7 +243,7 @@
             // button_Shortcuts_Cancel
             // 
             this.button_Shortcuts_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Shortcuts_Cancel.Location = new System.Drawing.Point(351, 210);
+            this.button_Shortcuts_Cancel.Location = new System.Drawing.Point(351, 229);
             this.button_Shortcuts_Cancel.Margin = new System.Windows.Forms.Padding(4);
             this.button_Shortcuts_Cancel.Name = "button_Shortcuts_Cancel";
             this.button_Shortcuts_Cancel.Size = new System.Drawing.Size(100, 28);
@@ -314,15 +314,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Shortcuts_Cancel;
-            this.ClientSize = new System.Drawing.Size(575, 251);
+            this.ClientSize = new System.Drawing.Size(575, 271);
             this.Controls.Add(this.button_Shortcuts_Cancel);
             this.Controls.Add(this.button_Shortcuts_OK);
             this.Controls.Add(this.groupBox_XY2);
             this.Controls.Add(this.groupBox_XY);
             this.Controls.Add(this.groupBox_StopBot);
             this.Controls.Add(this.groupBox_StartBot);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HotkeyView";
             this.Text = "Hotkeys";
             this.groupBox_StopBot.ResumeLayout(false);
