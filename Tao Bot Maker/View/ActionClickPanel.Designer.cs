@@ -310,12 +310,12 @@
             this.trackBar_DragSpeed.AutoSize = false;
             this.trackBar_DragSpeed.LargeChange = 1;
             this.trackBar_DragSpeed.Location = new System.Drawing.Point(375, 206);
-            this.trackBar_DragSpeed.Maximum = -1;
-            this.trackBar_DragSpeed.Minimum = -5;
+            this.trackBar_DragSpeed.Maximum = 5;
+            this.trackBar_DragSpeed.Minimum = 1;
             this.trackBar_DragSpeed.Name = "trackBar_DragSpeed";
             this.trackBar_DragSpeed.Size = new System.Drawing.Size(119, 28);
             this.trackBar_DragSpeed.TabIndex = 32;
-            this.trackBar_DragSpeed.Value = -1;
+            this.trackBar_DragSpeed.Value = 1;
             // 
             // label_LeftClick
             // 

@@ -26,6 +26,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using BlueMystic;
 using Tao_Bot_Maker.Model;
 using Log = Tao_Bot_Maker.Controller.Log;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace Tao_Bot_Maker
 {
@@ -48,6 +49,9 @@ namespace Tao_Bot_Maker
         private Bot bot;
         private HotKeyController hotkeyStartBot;
         private HotKeyController hotkeyStopBot;
+
+        private bool IsSequenceSaved = true;
+        private int LastIndexSequenceLoaded = 0;
 
         public MainApp()
         {
@@ -330,6 +334,7 @@ namespace Tao_Bot_Maker
                 //MessageBox.Show(saveSequenceView.ReturnValueSequenceName);
                 LoadSequencesList();
                 flatComboBoxSequenceList.SelectedItem = saveSequenceView.ReturnValueSequenceName;
+                IsSequenceSaved = true;
 
                 Log.Write(Properties.strings.log_Sequence_Saved + saveSequenceView.ReturnValueSequenceName, GetListBoxLog());
             }
@@ -343,6 +348,7 @@ namespace Tao_Bot_Maker
             if(flatComboBoxSequenceList.SelectedItem != null)
             {
                 SequenceXmlManager.SaveSequence(flatComboBoxSequenceList.SelectedItem.ToString(), this.sequenceController);
+                IsSequenceSaved = true;
                 Log.Write(Properties.strings.log_Sequence_Saved + flatComboBoxSequenceList.SelectedItem.ToString(), GetListBoxLog());
             }
             else
@@ -363,6 +369,8 @@ namespace Tao_Bot_Maker
             //Make sure ActionList is empty
             LoadActions();
 
+            IsSequenceSaved = true;
+
             UpdateAllButtonState();
         }
 
@@ -376,6 +384,7 @@ namespace Tao_Bot_Maker
                 sequenceController.AddAction(formPopup.ReturnValueAction);
                 Log.Write(Properties.strings.log_ActionAdded + formPopup.ReturnValueAction.ToString(), GetListBoxLog());
                 LoadActions();
+                IsSequenceSaved = false;
             }
         }
 
@@ -392,6 +401,7 @@ namespace Tao_Bot_Maker
                     Log.Write(Properties.strings.log_ActionEdited + formPopup.ReturnValueAction.ToString(), GetListBoxLog());
                     LoadActions();
                     listBoxActions.SelectedIndex = selectedActionIndex;
+                    IsSequenceSaved = false;
                 }
             }
         }
@@ -399,6 +409,7 @@ namespace Tao_Bot_Maker
         private void DeleteAction(Action selectedAction)
         {
             sequenceController.RemoveAction(selectedAction);
+            IsSequenceSaved = false;
             Log.Write(Properties.strings.log_ActionDeleted + selectedAction.ToString(), GetListBoxLog());
         }
         
@@ -711,19 +722,38 @@ namespace Tao_Bot_Maker
         
         private void FlatComboBoxSequenceList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (flatComboBoxSequenceList.SelectedIndex != -1)
-            {
-                //Load Sequence
-                if (LoadSequence(flatComboBoxSequenceList.SelectedItem.ToString()))
+            //If selected index equals the last successfully loaded sequence
+            //User probably clicked on No in the dialogbox
+            //No need to reload
+            if(!(flatComboBoxSequenceList.SelectedIndex == LastIndexSequenceLoaded))
+                if (flatComboBoxSequenceList.SelectedIndex != -1)
                 {
-                    //Populate ActionListBox
-                    LoadActions();
-                }
-            }
-            else
-            {
+                    bool loadSequence = true;
 
-            }
+                    if (!IsSequenceSaved)
+                    {
+                        DialogResult dr = MessageBox.Show(Properties.strings.MessageBox_WarningSequenceNotSaved, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        //Prevent closing
+                        if (dr == DialogResult.No)
+                        {
+                            loadSequence = false;
+                            flatComboBoxSequenceList.SelectedIndex = LastIndexSequenceLoaded;
+                        }
+
+                    }
+
+                    if (loadSequence)
+                    {
+                        //Load Sequence
+                        if (LoadSequence(flatComboBoxSequenceList.SelectedItem.ToString()))
+                        {
+                            //Populate ActionListBox
+                            LoadActions();
+                            LastIndexSequenceLoaded = flatComboBoxSequenceList.SelectedIndex;
+                        }
+                    }
+                }
             UpdateAllButtonState();
         }
 
@@ -733,14 +763,32 @@ namespace Tao_Bot_Maker
 
         private void MainApp_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bool close = true;
+
             StopBot();
 
-            hotkeyStartBot.Unregiser();
-            hotkeyStopBot.Unregiser();
+            //If the sequence has not been saved
+            if(!IsSequenceSaved)
+            {
+                DialogResult dr = MessageBox.Show(Properties.strings.MessageBox_WarningSequenceNotSaved, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            //Blank line to separate logs between starts
-            Log.Write(Properties.strings.log_ApplicationClosed);
-            Log.Write("", listBoxLog, LogFramework.Log.INFO);
+                //Prevent closing
+                if (dr == DialogResult.No)
+                {
+                    close = false;
+                    e.Cancel = true;
+                }
+            }
+
+            if(close)
+            {
+                hotkeyStartBot.Unregiser();
+                hotkeyStopBot.Unregiser();
+
+                Log.Write(Properties.strings.log_ApplicationClosed);
+                //Blank line to separate logs between starts
+                Log.Write("", listBoxLog, LogFramework.Log.INFO);
+            }
         }
 
         //HotKey without focus

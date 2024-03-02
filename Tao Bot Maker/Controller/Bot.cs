@@ -377,7 +377,7 @@ namespace Tao_Bot_Maker
 
                     Log.Write("Cursor.Position " + Cursor.Position.ToString() + " i " + i, LogFramework.Log.TRACE);
 
-                    Thread.Sleep(Math.Abs(actionMouse.DragSpeed) * 30);
+                    Thread.Sleep((int)(30 / Math.Abs(actionMouse.DragSpeed)));
                 }
 
                 cursorPosX += resteX;

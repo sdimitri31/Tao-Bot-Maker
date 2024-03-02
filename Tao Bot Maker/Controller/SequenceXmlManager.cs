@@ -200,6 +200,9 @@ namespace Tao_Bot_Maker
                                 if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
                                 if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
                                 if (xmlAction.Attribute("dragSpeed") != null) dragSpeed = Int32.Parse(xmlAction.Attribute("dragSpeed").Value);
+                                
+                                if ((dragSpeed > 5) || (dragSpeed < 1))
+                                    dragSpeed = 1;
 
                                 bool isDoubleClick = false, isDrag = false;
                                 if (xmlAction.Attribute("isDoubleClick") != null)

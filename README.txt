@@ -1,4 +1,7 @@
 Changelog :
+Version 0.4.3 :
+- Add : Check if there is unsaved changes before closing
+- Add : Check if there is unsaved changes before changing sequence
 
 Version 0.4.2 :
 - Fix : Bot cannot be started multiple times while running

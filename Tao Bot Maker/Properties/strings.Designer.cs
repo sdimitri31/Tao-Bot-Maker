@@ -683,6 +683,16 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à &quot;Warning : Unsaved changes will be lost.
+        ///Do you want to exit ?.
+        /// </summary>
+        internal static string MessageBox_WarningSequenceNotSaved {
+            get {
+                return ResourceManager.GetString("MessageBox_WarningSequenceNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à New sequence.
         /// </summary>
         internal static string tab_NewSequence {

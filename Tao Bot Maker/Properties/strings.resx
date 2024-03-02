@@ -325,6 +325,10 @@
     <value>"Warning : This will delete the sequence entirely.
 Do you want to proceed ?</value>
   </data>
+  <data name="MessageBox_WarningSequenceNotSaved" xml:space="preserve">
+    <value>"Warning : Unsaved changes will be lost.
+Do you want to exit ?</value>
+  </data>
   <data name="tab_NewSequence" xml:space="preserve">
     <value>New sequence</value>
   </data>

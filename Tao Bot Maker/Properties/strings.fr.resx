@@ -322,6 +322,10 @@
     <value>Attention : La séquence va être supprimée.
 Voulez-vous continuer ?</value>
   </data>
+  <data name="MessageBox_WarningSequenceNotSaved" xml:space="preserve">
+    <value>Attention : Les modifications non enregistrées vont être perdues.
+Voulez-vous quitter ?</value>
+  </data>
   <data name="tab_NewSequence" xml:space="preserve">
     <value>Nouvelle séquence</value>
   </data>
