@@ -95,13 +95,18 @@ namespace Tao_Bot_Maker.View
                 if (selectedIndex < 0) selectedIndex = 0;
 
                 flatComboBox_Actions.SelectedIndex = selectedIndex;
-                actionPanel = ActionController.CreatePanelFromAction(action, this);
+                actionPanel = ActionController.CreatePanel(action.Type, this, action);
+
                 ShowPanel(actionPanel);
             }
 
             SetupHotkeys();
         }
 
+        public string GetLoadedSequenceName()
+        {
+            return app.LoadedSequenceName;
+        }
 
         private void Localization()
         {
@@ -165,10 +170,11 @@ namespace Tao_Bot_Maker.View
             //Show panel of the selected action
             ClearRectangles();
             RefreshRectangles();
-            actionPanel = ActionController.GetControlView((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, this);
+            actionPanel = ActionController.CreatePanel((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, this);
             Size = new System.Drawing.Size(Size.Width, actionPanel.Size.Height + 133);
             ShowPanel(actionPanel);
         }
+        
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);

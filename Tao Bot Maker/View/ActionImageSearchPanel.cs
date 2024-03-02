@@ -39,8 +39,16 @@ namespace Tao_Bot_Maker.View
             originalPath = null;
             this.actionView = actionView;
 
-            flatComboBox_ActionImageSearch_IfFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
-            flatComboBox_ActionImageSearch_IfNotFound.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+            List<string> sequenceListFiltered = new List<string>();
+            foreach (string sequence in SequenceXmlManager.SequencesList())
+            {
+                //Add sequence to list if it's not the current sequence loaded to prevent Infinite loop
+                if (sequence != actionView.GetLoadedSequenceName())
+                    sequenceListFiltered.Add(sequence);
+            }
+
+            flatComboBox_ActionImageSearch_IfFound.Items.AddRange(sequenceListFiltered.ToArray());
+            flatComboBox_ActionImageSearch_IfNotFound.Items.AddRange(sequenceListFiltered.ToArray());
 
             //Not null = Editing existing action
             if(action != null)

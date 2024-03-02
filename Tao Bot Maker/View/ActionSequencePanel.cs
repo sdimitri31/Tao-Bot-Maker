@@ -12,20 +12,27 @@ namespace Tao_Bot_Maker.View
 {
     public partial class ActionSequencePanel : UserControl
     {
-        public ActionSequencePanel()
+        public ActionSequencePanel(ActionView actionView, Action action = null)
         {
             InitializeComponent();
             Localization();
-            flatComboBoxPanelActionSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+
+            List<string> sequenceListFiltered = new List<string>();
+            foreach(string sequence in SequenceXmlManager.SequencesList())
+            {
+                //Add sequence to list if it's not the current sequence loaded to prevent Infinite loop
+                if(sequence != actionView.GetLoadedSequenceName())
+                    sequenceListFiltered.Add(sequence);
+            }
+
+            flatComboBoxPanelActionSequence.Items.AddRange(sequenceListFiltered.ToArray());
+            
+            if (action != null)
+            {
+                SequencePath = ((ActionSequence)action).SequencePath;
+            }
         }
 
-        public ActionSequencePanel(Action action)
-        {
-            InitializeComponent();
-            Localization();
-            flatComboBoxPanelActionSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
-            SequencePath = ((ActionSequence)action).SequencePath;
-        }
         private void Localization()
         {
             label_Sequence.Text = Properties.strings.label_Sequence;

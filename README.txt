@@ -1,4 +1,8 @@
 Changelog :
+
+Version 0.4.4 :
+- Fix : Removed currently loaded sequence from being selectable in action view "Sequence" and "ImageSearch" to prevent unwanted infinite loop
+
 Version 0.4.3 :
 - Add : Check if there is unsaved changes before closing
 - Add : Check if there is unsaved changes before changing sequence

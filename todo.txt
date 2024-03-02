@@ -1,9 +1,7 @@
 TO DO :
-Verifier si la séquence est sauvegardée avant fermeture
-Bloquer InfiniteLoop si séquence name = séquence sélectionnée
+Ajuster le déplacement pour le "reste" dans action Click
 Ajouter des couleurs pour les hotkeys dupliqués
 Afficher barre pour le déplacement d'une action
-
 Localiser les logs
 Verifier les valeurs lors d'un chargement de séquence pour eviter les crash et les changements entre les versions
 Crash quand img non trouvée après expiration
@@ -18,6 +16,8 @@ Remplacer dropdown par un menu
 Actualisation en direct de la zone de recherche ou clic
 Action Attendre intervalle random
 Action Attendre ajouter plusieurs unités de temps (Heure; minutes; secondes)
+Action ImageSearch pouvoir cliquer sur l'image quand trouvée
+Action Répéter séquence ajouter boucle infinie
 Afficher controls quand ils sont chargés
 
 

@@ -88,27 +88,6 @@ namespace Tao_Bot_Maker
             else return -1;
         }
 
-        public static Control GetControlView(int type, ActionView actionView)
-        {
-            switch (type)
-            {
-                case (int)Action.ActionType.Key:
-                    return new ActionKeyPanel();
-                case (int)Action.ActionType.Wait:
-                    return new ActionWaitPanel();
-                case (int)Action.ActionType.Sequence:
-                    return new ActionSequencePanel();
-                case (int)Action.ActionType.Click:
-                    return new panel_ActionClick(actionView);
-                case (int)Action.ActionType.Loop:
-                    return new ActionLoopPanel();
-                case (int)Action.ActionType.ImageSearch:
-                    return new ActionImageSearchPanel(actionView);
-                default:
-                    return null;
-            }
-        }
-
         public static Action GetActionFromControl(int type, Control control)
         {
             switch (type)
@@ -130,16 +109,16 @@ namespace Tao_Bot_Maker
             }
         }
 
-        public static Control CreatePanelFromAction(Action action, ActionView actionView)
+        public static Control CreatePanel(int type, ActionView actionView, Action action = null)
         {
-            switch (action.Type)
+            switch (type)
             {
                 case (int)Action.ActionType.Key:
                     return new ActionKeyPanel(action);
                 case (int)Action.ActionType.Wait:
                     return new ActionWaitPanel(action);
                 case (int)Action.ActionType.Sequence:
-                    return new ActionSequencePanel(action);
+                    return new ActionSequencePanel(actionView, action);
                 case (int)Action.ActionType.Click:
                     return new panel_ActionClick(actionView, action);
                 case (int)Action.ActionType.Loop:
