@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.2 :
+- Fix : Bot cannot be started multiple times while running
+- Fix : Updating buttons "Start/Stop", "Edit action" and "Delete selected actions" state if there is no action in the list
+
 Version 0.4.1 :
 - Change : No longer possible to resize HotKey View
 - Fix : Updating button "Delete selected actions" state when no action is selected

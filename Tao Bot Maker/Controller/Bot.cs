@@ -76,12 +76,15 @@ namespace Tao_Bot_Maker
 
         public void Start(SequenceController sequenceController)
         {
-            IsRunning = true;
-            this.sequenceController = sequenceController;
-            drawingArea.Show();
-            mainApp.UpdateButtonStateBot();
-            backgroundThread = new Thread(ts);
-            backgroundThread.Start();
+            if(IsRunning == false)
+            {
+                IsRunning = true;
+                this.sequenceController = sequenceController;
+                drawingArea.Show();
+                mainApp.UpdateButtonStateBot();
+                backgroundThread = new Thread(ts);
+                backgroundThread.Start();
+            }
         }
 
         private void StartBotting()

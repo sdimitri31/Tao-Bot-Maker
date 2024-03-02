@@ -290,6 +290,11 @@ namespace Tao_Bot_Maker
                 String currentItem = action.ToString();
                 this.listBoxActions.Items.Add(currentItem);
             }
+
+            UpdateButtonStateEdit();
+            UpdateButtonStateDeleteAction();
+            UpdateButtonStateBot();
+
             Log.Write(Properties.strings.log_Loaded_Actions, LogFramework.Log.TRACE);
         }
 
