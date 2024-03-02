@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 
 namespace Tao_Bot_Maker
 {
@@ -24,11 +25,11 @@ namespace Tao_Bot_Maker
 
 
         public List<Rectangle> rectangles;
+        public List<KnownColor> colors;
 
 
         public DrawingRectangle()
         {
-            rectangles = new List<Rectangle> { };
             SetProcessDPIAware();
             TopMost = true;
             ShowInTaskbar = false;
@@ -39,6 +40,9 @@ namespace Tao_Bot_Maker
             this.Location = new Point(0, 0);
             Width = Screen.PrimaryScreen.Bounds.Width;
             Height = Screen.PrimaryScreen.Bounds.Height;
+
+            rectangles = new List<Rectangle> { };
+            colors = new List<KnownColor> { };
 
             /*
             // Use the helper function to get the current dpi.
@@ -53,23 +57,36 @@ namespace Tao_Bot_Maker
 
         void HalloForm_Paint(object sender, PaintEventArgs e)
         {
-            Pen pen = new Pen(Color.Red, 2);
-            pen.Alignment = PenAlignment.Inset;
-            foreach (Rectangle rect in rectangles)
-                e.Graphics.DrawRectangle(pen, rect.X, rect.Y, rect.Width, rect.Height);
+            Pen pen = new Pen(Color.Red, 2)
+            {                
+                Alignment = PenAlignment.Inset
+            };
+
+            for (int i = 0;  i < rectangles.Count; i++)
+            {
+                pen.Color = Color.FromKnownColor(colors[i]);
+                e.Graphics.DrawRectangle(pen, rectangles[i].X, rectangles[i].Y, rectangles[i].Width, rectangles[i].Height);
+            }
         }
 
-        public void DrawRectangle(int x, int y, int width, int height)
+        public void DrawRectangle(int x, int y, int width, int height, KnownColor color = KnownColor.Red)
         {
             if (width == 0 || height == 0)
             {
+                Log.Write("Width and height must be greater than 0", LogFramework.Log.ERROR);
+                Log.Write("x = " + x + "; y = " + y + "; width = " + width + "; height = " + height + "; Color = " + color, LogFramework.Log.ERROR);
                 throw new ArgumentException("Width and height must be greater than 0");
             }
             else
             {
+                Log.Write("Rectangle added : ", LogFramework.Log.TRACE);
+                Log.Write("x = " + x + "; y = " + y + "; width = " + width + "; height = " + height + "; Color = " + color, LogFramework.Log.TRACE);
                 rectangles.Add(new Rectangle(x, y, width, height));
+                colors.Add(color);
+                Refresh();
             }
         }
+
         public void DrawRectangleAtCoords(int x1, int y1, int x2, int y2)
         {
             //Calculate the height and witdh of the bottom right corner
@@ -81,6 +98,8 @@ namespace Tao_Bot_Maker
         public void ClearRectangles()
         {
             rectangles.Clear();
+            colors.Clear();
+            Refresh();
         }
 
         public static SizeF GetCurrentDpi()

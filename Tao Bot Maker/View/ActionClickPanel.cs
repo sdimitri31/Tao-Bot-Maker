@@ -13,17 +13,19 @@ using static Tao_Bot_Maker.Bot;
 
 namespace Tao_Bot_Maker.View
 {
-    public partial class panel_ActionClick : UserControl
+    public partial class ActionClickPanel : UserControl
     {
-        ActionView actionView;
+        readonly ActionView actionView;
+        readonly KnownColor colorXY = KnownColor.BlueViolet;
+        readonly KnownColor colorXY2 = KnownColor.Aqua;
 
-        public panel_ActionClick(ActionView actionView, Action action = null)
+        public ActionClickPanel(ActionView actionView, Action action = null)
         {
             InitializeComponent();
             Localization();
             AddHotkeysToLabels();
-            this.actionView = actionView;
             UpdateButtonState();
+            this.actionView = actionView;
 
             //Not null = Editing existing action
             if (action != null)
@@ -39,17 +41,13 @@ namespace Tao_Bot_Maker.View
                 UpdateButtonStateDrag();
                 UpdateButtonStateDoubleClick();
             }
+            UpdateLabelsColor();
         }
-        private void Localization()
-        {
-            label_Drag.Text = Properties.strings.label_Drag;
-            label_DragSpeed.Text = Properties.strings.label_DragSpeed;
-            label_LeftClick.Text = Properties.strings.label_LeftClick;
-            label_MiddleClick.Text = Properties.strings.label_MiddleClick;
-            label_RightClick.Text = Properties.strings.label_RightClick;
-            button_ShowArea.Text = Properties.strings.button_ShowDrawingArea;
-            button_ClearArea.Text = Properties.strings.button_ClearArea;
-        }
+
+        //----------------------------------------------
+        // Public
+        //
+
         public String SelectedClick
         {
             get
@@ -84,41 +82,107 @@ namespace Tao_Bot_Maker.View
                 }
             }
         }
-        public bool IsDoubleClick
-        {
-            get { return checkBox_DoubleClick.Checked; }
-            set { checkBox_DoubleClick.Checked = value; }
-        }
+
         public int X1
         {
             get { return ((int)numericUpDown_X1.Value); }
             set { numericUpDown_X1.Value = value; }
         }
+
         public int Y1
         {
             get { return ((int)numericUpDown_Y1.Value); }
             set { numericUpDown_Y1.Value = value; }
         }
+
         public int X2
         {
             get { return ((int)numericUpDown_X2.Value); }
             set { numericUpDown_X2.Value = value; }
         }
+
         public int Y2
         {
             get { return ((int)numericUpDown_Y2.Value); }
             set { numericUpDown_Y2.Value = value; }
         }
+
+        public bool IsDoubleClick
+        {
+            get { return checkBox_DoubleClick.Checked; }
+            set { checkBox_DoubleClick.Checked = value; }
+        }
+
         public bool IsDrag
         {
             get { return checkBox_Drag.Checked; }
             set { checkBox_Drag.Checked = value; }
         }
+
         public int DragSpeed
         {
             get { return trackBar_DragSpeed.Value; }
             set { trackBar_DragSpeed.Value = value; }
         }
+
+        /// <summary>
+        /// Assign values in numboxX1 and numboxY1
+        /// </summary>
+        /// <param name="x">Value for X1</param>
+        /// <param name="y">Value for Y1</param>
+        public void HotkeyXY(int x, int y)
+        {
+            X1 = x;
+            Y1 = y;
+            DrawArea();
+        }
+
+        /// <summary>
+        /// Assign values in numboxX2 and numboxY2
+        /// </summary>
+        /// <param name="x">Value for X2</param>
+        /// <param name="y">Value for Y2</param>
+        public void HotkeyXY2(int x, int y)
+        {
+            if(IsDrag)
+            {
+                X2 = x; 
+                Y2 = y;
+                DrawArea();
+            }
+        }
+
+        /// <summary>
+        /// Draw rectangles from coords using values X1, Y1, X2 and Y2
+        /// </summary>
+        public void DrawArea()
+        {
+            ClearArea();
+            actionView.DrawRectangle(X1 - 5, Y1 - 5, 10, 10, colorXY);
+            if (IsDrag)
+                actionView.DrawRectangle(X2 - 5, Y2 - 5, 10, 10, colorXY2);
+        }
+
+        public void ClearArea()
+        {
+            actionView.ClearRectangles();
+        }
+
+        //----------------------------------------------
+        // Private 
+        //
+
+        private void Localization()
+        {
+            label_Drag.Text = Properties.strings.label_Drag;
+            label_DragSpeed.Text = Properties.strings.label_DragSpeed;
+            label_LeftClick.Text = Properties.strings.label_LeftClick;
+            label_MiddleClick.Text = Properties.strings.label_MiddleClick;
+            label_RightClick.Text = Properties.strings.label_RightClick;
+            button_ShowArea.Text = Properties.strings.button_ShowDrawingArea;
+            button_ClearArea.Text = Properties.strings.button_ClearArea;
+        }
+
         private void AddHotkeysToLabels()
         {
             int modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY()) << 16;
@@ -131,20 +195,18 @@ namespace Tao_Bot_Maker.View
             label_X2.Text += " (" + hotkeyXY2.ToString() + ")";
             label_Y2.Text += " (" + hotkeyXY2.ToString() + ")";
         }
-        public void HotkeyXY(int x, int y)
-        {
-            X1 = x;
-            Y1 = y;
-            DrawFromTextBoxValues();
-        }
 
-        public void HotkeyXY2(int x, int y)
+        private void UpdateLabelsColor()
         {
-            if(IsDrag)
+            label_X1.ForeColor = Color.FromKnownColor(colorXY);
+            label_Y1.ForeColor = Color.FromKnownColor(colorXY);
+            label_X2.ForeColor = SystemColors.GrayText;
+            label_Y2.ForeColor = SystemColors.GrayText;
+
+            if (IsDrag)
             {
-                X2 = x; 
-                Y2 = y;
-                DrawFromTextBoxValues();
+                label_X2.ForeColor = Color.FromKnownColor(colorXY2);
+                label_Y2.ForeColor = Color.FromKnownColor(colorXY2);
             }
         }
 
@@ -154,6 +216,7 @@ namespace Tao_Bot_Maker.View
             numericUpDown_X2.Enabled = false;
             numericUpDown_Y2.Enabled = false;
         }
+
         private void UpdateButtonStateDoubleClick()
         {
             if (IsDoubleClick)
@@ -164,6 +227,7 @@ namespace Tao_Bot_Maker.View
                 numericUpDown_Y2.Enabled = false;
             }
         }
+
         private void UpdateButtonStateDrag()
         {
             if(IsDrag)
@@ -173,40 +237,39 @@ namespace Tao_Bot_Maker.View
                 numericUpDown_X2.Enabled = true;
                 numericUpDown_Y2.Enabled = true;
             }
-            DrawFromTextBoxValues();
+            DrawArea();
         }
 
-        public void DrawFromTextBoxValues()
-        {
-            actionView.ClearRectangles();
-            actionView.DrawRectangleAtCoords(X1 - 5, Y1 - 5, X1 + 5, Y1 + 5);
-            if(IsDrag)
-                actionView.DrawRectangleAtCoords(X2 - 5, Y2 - 5, X2 + 5, Y2 + 5);
-            actionView.RefreshRectangles();
-        }
+        //----------------------------------------------
+        // EVENTS
 
         private void Button_ShowArea_Click(object sender, EventArgs e)
         {
-            DrawFromTextBoxValues();
+            DrawArea();
         }
 
         private void Button_ClearArea_Click(object sender, EventArgs e)
         {
-            actionView.ClearRectangles();
-            actionView.RefreshRectangles();
+            ClearArea();
         }
 
-        private void checkBox_DoubleClick_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox_DoubleClick_CheckedChanged(object sender, EventArgs e)
         {
             UpdateButtonState();
             UpdateButtonStateDoubleClick();
+            UpdateLabelsColor();
         }
 
-        private void checkBox_Drag_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox_Drag_CheckedChanged(object sender, EventArgs e)
         {
             UpdateButtonState();
             UpdateButtonStateDrag();
+            UpdateLabelsColor();
         }
 
+        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            DrawArea();
+        }
     }
 }

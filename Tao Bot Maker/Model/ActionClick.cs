@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tao_Bot_Maker
 {
-    class ActionClick : Action
+    public class ActionClick : Action
     {
         public ActionClick()
         {
@@ -36,8 +36,18 @@ namespace Tao_Bot_Maker
 
         public override string ToString()
         {
-            return "Action Clic; Clic : " + SelectedClick + "; X : " + X1 + "; Y : " + Y1 +
-                "; X2 : " + X2 + "; Y2 : " + Y2 + "; IsDoubleClick : " + IsDoubleClick + "; IsDrag : " + IsDrag + "; DragSpeed : " + DragSpeed;
+            string text = "";
+            text +=         Properties.strings.action_Click_ToString;
+            text += " | " + Properties.strings.action_Member_Click + " : " + SelectedClick;
+            text += " | " + Properties.strings.action_Member_X1 + " : " + X1;
+            text += " | " + Properties.strings.action_Member_Y1 + " : " + Y1;
+            text += " | " + Properties.strings.action_Member_X2 + " : " + X2;
+            text += " | " + Properties.strings.action_Member_Y2 + " : " + Y2;
+            text += " | " + Properties.strings.action_Member_IsDoubleClick + " : " + IsDoubleClick;
+            text += " | " + Properties.strings.action_Member_IsDrag + " : " + IsDrag;
+            text += " | " + Properties.strings.action_Member_DragSpeed + " : " + DragSpeed;
+
+            return text;
         }
     }
 }

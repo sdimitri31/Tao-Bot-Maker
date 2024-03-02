@@ -61,6 +61,114 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action : Click.
+        /// </summary>
+        internal static string action_Click_ToString {
+            get {
+                return ResourceManager.GetString("action_Click_ToString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Click button must be selected.
+        /// </summary>
+        internal static string action_ErrorMessage_ClickNotSelected {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_ClickNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Drag speed must be a number between 1 and 5.
+        /// </summary>
+        internal static string action_ErrorMessage_DragSpeedWrongInterval {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_DragSpeedWrongInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Coordinates must be a number between -999999 and 999999.
+        /// </summary>
+        internal static string action_ErrorMessage_InvalidCoords {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_InvalidCoords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click.
+        /// </summary>
+        internal static string action_Member_Click {
+            get {
+                return ResourceManager.GetString("action_Member_Click", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Drag speed.
+        /// </summary>
+        internal static string action_Member_DragSpeed {
+            get {
+                return ResourceManager.GetString("action_Member_DragSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Double click.
+        /// </summary>
+        internal static string action_Member_IsDoubleClick {
+            get {
+                return ResourceManager.GetString("action_Member_IsDoubleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Drag.
+        /// </summary>
+        internal static string action_Member_IsDrag {
+            get {
+                return ResourceManager.GetString("action_Member_IsDrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à X1.
+        /// </summary>
+        internal static string action_Member_X1 {
+            get {
+                return ResourceManager.GetString("action_Member_X1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à X2.
+        /// </summary>
+        internal static string action_Member_X2 {
+            get {
+                return ResourceManager.GetString("action_Member_X2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Y1.
+        /// </summary>
+        internal static string action_Member_Y1 {
+            get {
+                return ResourceManager.GetString("action_Member_Y1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Y2.
+        /// </summary>
+        internal static string action_Member_Y2 {
+            get {
+                return ResourceManager.GetString("action_Member_Y2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click.
         /// </summary>
         internal static string ActionName_Click {

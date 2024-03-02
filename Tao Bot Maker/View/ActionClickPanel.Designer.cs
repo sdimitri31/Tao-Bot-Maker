@@ -1,6 +1,6 @@
 ﻿namespace Tao_Bot_Maker.View
 {
-    partial class panel_ActionClick
+    partial class ActionClickPanel
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
@@ -192,6 +192,7 @@
             this.numericUpDown_X1.Name = "numericUpDown_X1";
             this.numericUpDown_X1.Size = new System.Drawing.Size(118, 22);
             this.numericUpDown_X1.TabIndex = 23;
+            this.numericUpDown_X1.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
             // 
             // numericUpDown_Y1
             // 
@@ -210,6 +211,7 @@
             this.numericUpDown_Y1.Name = "numericUpDown_Y1";
             this.numericUpDown_Y1.Size = new System.Drawing.Size(118, 22);
             this.numericUpDown_Y1.TabIndex = 24;
+            this.numericUpDown_Y1.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
             // 
             // radioButton_MiddleClick
             // 
@@ -233,7 +235,7 @@
             this.checkBox_Drag.Size = new System.Drawing.Size(119, 17);
             this.checkBox_Drag.TabIndex = 26;
             this.checkBox_Drag.UseVisualStyleBackColor = true;
-            this.checkBox_Drag.CheckedChanged += new System.EventHandler(this.checkBox_Drag_CheckedChanged);
+            this.checkBox_Drag.CheckedChanged += new System.EventHandler(this.CheckBox_Drag_CheckedChanged);
             // 
             // label_X2
             // 
@@ -274,6 +276,7 @@
             this.numericUpDown_X2.Name = "numericUpDown_X2";
             this.numericUpDown_X2.Size = new System.Drawing.Size(118, 22);
             this.numericUpDown_X2.TabIndex = 29;
+            this.numericUpDown_X2.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
             // 
             // numericUpDown_Y2
             // 
@@ -292,6 +295,7 @@
             this.numericUpDown_Y2.Name = "numericUpDown_Y2";
             this.numericUpDown_Y2.Size = new System.Drawing.Size(118, 22);
             this.numericUpDown_Y2.TabIndex = 30;
+            this.numericUpDown_Y2.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
             // 
             // label_DragSpeed
             // 
@@ -382,15 +386,15 @@
             this.checkBox_DoubleClick.Size = new System.Drawing.Size(119, 17);
             this.checkBox_DoubleClick.TabIndex = 38;
             this.checkBox_DoubleClick.UseVisualStyleBackColor = true;
-            this.checkBox_DoubleClick.CheckedChanged += new System.EventHandler(this.checkBox_DoubleClick_CheckedChanged);
+            this.checkBox_DoubleClick.CheckedChanged += new System.EventHandler(this.CheckBox_DoubleClick_CheckedChanged);
             // 
-            // panel_ActionClick
+            // ActionClickPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayout);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "panel_ActionClick";
+            this.Name = "ActionClickPanel";
             this.Size = new System.Drawing.Size(497, 325);
             this.tableLayout.ResumeLayout(false);
             this.tableLayout.PerformLayout();

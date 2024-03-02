@@ -144,6 +144,42 @@
   <data name="ActionName_Wait" xml:space="preserve">
     <value>Wait</value>
   </data>
+  <data name="action_Click_ToString" xml:space="preserve">
+    <value>Action : Click</value>
+  </data>
+  <data name="action_ErrorMessage_ClickNotSelected" xml:space="preserve">
+    <value>Error : Click button must be selected</value>
+  </data>
+  <data name="action_ErrorMessage_DragSpeedWrongInterval" xml:space="preserve">
+    <value>Error : Drag speed must be a number between 1 and 5</value>
+  </data>
+  <data name="action_ErrorMessage_InvalidCoords" xml:space="preserve">
+    <value>Error : Coordinates must be a number between -999999 and 999999</value>
+  </data>
+  <data name="action_Member_Click" xml:space="preserve">
+    <value>Click</value>
+  </data>
+  <data name="action_Member_DragSpeed" xml:space="preserve">
+    <value>Drag speed</value>
+  </data>
+  <data name="action_Member_IsDoubleClick" xml:space="preserve">
+    <value>Double click</value>
+  </data>
+  <data name="action_Member_IsDrag" xml:space="preserve">
+    <value>Drag</value>
+  </data>
+  <data name="action_Member_X1" xml:space="preserve">
+    <value>X1</value>
+  </data>
+  <data name="action_Member_X2" xml:space="preserve">
+    <value>X2</value>
+  </data>
+  <data name="action_Member_Y1" xml:space="preserve">
+    <value>Y1</value>
+  </data>
+  <data name="action_Member_Y2" xml:space="preserve">
+    <value>Y2</value>
+  </data>
   <data name="button_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>

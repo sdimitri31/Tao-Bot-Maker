@@ -1,6 +1,7 @@
 ﻿using BlueMystic;
 using LogFramework;
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
@@ -37,27 +38,34 @@ namespace Tao_Bot_Maker.View
                 Log.Write("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.ERROR);
             }
         }
-        public void DrawRectangle(int x1, int y1, int width, int height)
+
+        /// <summary>
+        /// Draw a rectangle from top left angle
+        /// </summary>
+        /// <param name="x1">Top left coord X</param>
+        /// <param name="y1">Top left coord Y</param>
+        /// <param name="width">Width : must be greater than 0</param>
+        /// <param name="height">Height : must be greater than 0</param>
+        /// <returns>true if drawing success. false if there is an error in parameters</returns>
+        public bool DrawRectangle(int x1, int y1, int width, int height, KnownColor color = KnownColor.Red)
         {
-            //Draw a rectangle at coordinates
             try
             {
-                drawingForm.DrawRectangle(x1, y1, width, height);
-                //app.Log("Rectangle drawn", LogFramework.Log.TRACE);
-                //app.Log("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.TRACE);
+                drawingForm.DrawRectangle(x1, y1, width, height, color);
+                return true;
             }
-            catch (ArgumentException e)
+            catch
             {
-                MessageBox.Show(e.Message);
-                Log.Write(e.Message, LogFramework.Log.ERROR);
-                Log.Write("x1 = " + x1 + "; y1 = " + y1 + "; width = " + width + "; height = " + height, LogFramework.Log.ERROR);
+
             }
+            return false;
         }
+        
         public void ClearRectangles()
         {
             drawingForm.ClearRectangles();
-            //app.Log("Rectangles cleared", LogFramework.Log.TRACE);
         }
+        
         public void RefreshRectangles()
         {
             drawingForm.Refresh();
@@ -199,7 +207,7 @@ namespace Tao_Bot_Maker.View
                             break;
                         case (int)Action.ActionType.Click:
                             //Send info hotkeyXY2 has been pressed
-                            ((panel_ActionClick)actionPanel).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
+                            ((ActionClickPanel)actionPanel).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
                             break;
                     }
                 }
@@ -217,7 +225,7 @@ namespace Tao_Bot_Maker.View
 
                         case (int)Action.ActionType.Click:
                             //Send info hotkeyXY2 has been pressed
-                            ((panel_ActionClick)actionPanel).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
+                            ((ActionClickPanel)actionPanel).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
                             break;
                     }
                 }

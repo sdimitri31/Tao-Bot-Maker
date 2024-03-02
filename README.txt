@@ -1,5 +1,12 @@
 Changelog :
 
+Version 0.4.5 :
+- Add : Areas can now be colored
+- Add : Colored labels and rectangles in "Action Click" panel
+- Add : Areas updating position when coordinates changes in "Action Click" panel
+- Change : Cleaning code for ActionClick classes
+- Add : Progress on localization
+
 Version 0.4.4 :
 - Fix : Removed currently loaded sequence from being selectable in action view "Sequence" and "ImageSearch" to prevent unwanted infinite loop
 
