@@ -33,7 +33,19 @@ namespace Tao_Bot_Maker
 
         public override string ToString()
         {
-            return "Action Si Image; Image : " + PictureName + "; Tolérance : " + Threshold + "; X1 : " + X1 + "; Y1 : " + Y1 + "; X2 : " + X2 + "; Y2 : " + Y2 + "; Expiration : " + Expiration + "; Si : " + IfFound + "; Sinon : " + IfNotFound;
+            string text = "";
+            text +=         Properties.strings.action_ImageSearch_ToString;
+            text += " | " + Properties.strings.action_Member_PictureName + " : " + PictureName;
+            text += " | " + Properties.strings.action_Member_Threshold + " : " + Threshold;
+            text += " | " + Properties.strings.action_Member_X1 + " : " + X1;
+            text += " | " + Properties.strings.action_Member_Y1 + " : " + Y1;
+            text += " | " + Properties.strings.action_Member_X2 + " : " + X2;
+            text += " | " + Properties.strings.action_Member_Y2 + " : " + Y2;
+            text += " | " + Properties.strings.action_Member_Expiration + " : " + Expiration;
+            text += " | " + Properties.strings.action_Member_IfFound + " : " + IfFound;
+            text += " | " + Properties.strings.action_Member_IfNotFound + " : " + IfNotFound;
+
+            return text;
         }
     }
 }

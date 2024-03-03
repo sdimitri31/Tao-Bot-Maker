@@ -156,17 +156,35 @@
   <data name="action_ErrorMessage_InvalidCoords" xml:space="preserve">
     <value>Error : Coordinates must be a number between -999999 and 999999</value>
   </data>
+  <data name="action_ImageSearch_ToString" xml:space="preserve">
+    <value>Action : Image search</value>
+  </data>
   <data name="action_Member_Click" xml:space="preserve">
     <value>Click</value>
   </data>
   <data name="action_Member_DragSpeed" xml:space="preserve">
     <value>Drag speed</value>
   </data>
+  <data name="action_Member_Expiration" xml:space="preserve">
+    <value>Expiration</value>
+  </data>
+  <data name="action_Member_IfFound" xml:space="preserve">
+    <value>Action if found</value>
+  </data>
+  <data name="action_Member_IfNotFound" xml:space="preserve">
+    <value>Action if not found</value>
+  </data>
   <data name="action_Member_IsDoubleClick" xml:space="preserve">
     <value>Double click</value>
   </data>
   <data name="action_Member_IsDrag" xml:space="preserve">
     <value>Drag</value>
+  </data>
+  <data name="action_Member_PictureName" xml:space="preserve">
+    <value>Picture name</value>
+  </data>
+  <data name="action_Member_Threshold" xml:space="preserve">
+    <value>Threshold</value>
   </data>
   <data name="action_Member_X1" xml:space="preserve">
     <value>X1</value>

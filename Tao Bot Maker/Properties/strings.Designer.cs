@@ -97,6 +97,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action : Image search.
+        /// </summary>
+        internal static string action_ImageSearch_ToString {
+            get {
+                return ResourceManager.GetString("action_ImageSearch_ToString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click.
         /// </summary>
         internal static string action_Member_Click {
@@ -115,6 +124,33 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Expiration.
+        /// </summary>
+        internal static string action_Member_Expiration {
+            get {
+                return ResourceManager.GetString("action_Member_Expiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action if found.
+        /// </summary>
+        internal static string action_Member_IfFound {
+            get {
+                return ResourceManager.GetString("action_Member_IfFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action if not found.
+        /// </summary>
+        internal static string action_Member_IfNotFound {
+            get {
+                return ResourceManager.GetString("action_Member_IfNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Double click.
         /// </summary>
         internal static string action_Member_IsDoubleClick {
@@ -129,6 +165,24 @@ namespace Tao_Bot_Maker.Properties {
         internal static string action_Member_IsDrag {
             get {
                 return ResourceManager.GetString("action_Member_IsDrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Picture name.
+        /// </summary>
+        internal static string action_Member_PictureName {
+            get {
+                return ResourceManager.GetString("action_Member_PictureName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Threshold.
+        /// </summary>
+        internal static string action_Member_Threshold {
+            get {
+                return ResourceManager.GetString("action_Member_Threshold", resourceCulture);
             }
         }
         

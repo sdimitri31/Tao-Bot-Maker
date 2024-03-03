@@ -57,7 +57,10 @@ namespace Tao_Bot_Maker
 
             //Return Error message if there is an error
             if (actionClick == null)
+            {
+                Log.Write(errorMessage, LogFramework.Log.ERROR);
                 return (null, errorMessage);
+            }
             //Or ActionClick if no error
             else
                 return (actionClick, "");
@@ -117,18 +120,11 @@ namespace Tao_Bot_Maker
             }
         }
 
-        public static Action GetActionFromControl(ActionClickPanel panel)
+        public static (Action action, string errorMessage) GetActionFromControl(ActionClickPanel panel)
         {
             var (actionClick, errorMessage) = CreateActionClick(panel.SelectedClick, panel.X1, panel.Y1, panel.X2, panel.Y2, panel.IsDoubleClick, panel.IsDrag, panel.DragSpeed); ;
 
-            if (string.IsNullOrEmpty(errorMessage))
-                return actionClick;
-            else
-            {
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                MessageBox.Show(errorMessage);
-            }
-            return null;
+            return (actionClick, errorMessage);
         }
 
     }

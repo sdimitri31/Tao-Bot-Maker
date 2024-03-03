@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace Tao_Bot_Maker.Model
 {
     public class Constants
     {
-        public const string VERSION = "0.4.5";
+        public const string VERSION = "0.4.6";
 
         public const string PICTURE_FOLDER_NAME     = "Pictures";
         public const string SEQUENCES_FOLDER_NAME   = "Sequences";
@@ -30,5 +31,8 @@ namespace Tao_Bot_Maker.Model
         public const string SETTINGS_KEY_HOTKEY_XY2_MODIFIER        = "XY2Modifier";
 
         public const int WM_HOTKEY_MSG_ID = 0x0312;
+
+        public const KnownColor COLOR_LABEL_XY = KnownColor.BlueViolet;
+        public const KnownColor COLOR_LABEL_XY2 = KnownColor.Aqua;
     }
 }

@@ -148,18 +148,22 @@ namespace Tao_Bot_Maker.View
         private void Button_Ok_Click(object sender, EventArgs e)
         {
             //Test if the inputs are valid
-            ReturnValueAction = ActionController.GetActionFromControl((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, actionPanel);
-            if(ReturnValueAction != null)
+            var (action, errorMessage) = ActionController.GetActionFromControl((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, actionPanel);
+            
+            //if valid action has been created
+            if(string.IsNullOrEmpty(errorMessage))
             {
                 //Send results to the controller
+                ReturnValueAction = action;
                 Log.Write(Properties.strings.log_DialogResult_Ok, LogFramework.Log.TRACE);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-
             }
             else
             {
                 //Prevent closing
+                MessageBox.Show(errorMessage);
+                ReturnValueAction = null;
                 Log.Write(Properties.strings.log_DialogResult_None, LogFramework.Log.TRACE);
                 this.DialogResult = DialogResult.None;
             }

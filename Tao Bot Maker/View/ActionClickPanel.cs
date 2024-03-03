@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Model;
 using static Tao_Bot_Maker.Bot;
 
 namespace Tao_Bot_Maker.View
@@ -16,8 +17,6 @@ namespace Tao_Bot_Maker.View
     public partial class ActionClickPanel : UserControl
     {
         readonly ActionView actionView;
-        readonly KnownColor colorXY = KnownColor.BlueViolet;
-        readonly KnownColor colorXY2 = KnownColor.Aqua;
 
         public ActionClickPanel(ActionView actionView, Action action = null)
         {
@@ -158,9 +157,9 @@ namespace Tao_Bot_Maker.View
         public void DrawArea()
         {
             ClearArea();
-            actionView.DrawRectangle(X1 - 5, Y1 - 5, 10, 10, colorXY);
+            actionView.DrawRectangle(X1 - 5, Y1 - 5, 10, 10, Constants.COLOR_LABEL_XY);
             if (IsDrag)
-                actionView.DrawRectangle(X2 - 5, Y2 - 5, 10, 10, colorXY2);
+                actionView.DrawRectangle(X2 - 5, Y2 - 5, 10, 10, Constants.COLOR_LABEL_XY2);
         }
 
         public void ClearArea()
@@ -198,15 +197,15 @@ namespace Tao_Bot_Maker.View
 
         private void UpdateLabelsColor()
         {
-            label_X1.ForeColor = Color.FromKnownColor(colorXY);
-            label_Y1.ForeColor = Color.FromKnownColor(colorXY);
+            label_X1.ForeColor = Color.FromKnownColor(Constants.COLOR_LABEL_XY);
+            label_Y1.ForeColor = Color.FromKnownColor(Constants.COLOR_LABEL_XY);
             label_X2.ForeColor = SystemColors.GrayText;
             label_Y2.ForeColor = SystemColors.GrayText;
 
             if (IsDrag)
             {
-                label_X2.ForeColor = Color.FromKnownColor(colorXY2);
-                label_Y2.ForeColor = Color.FromKnownColor(colorXY2);
+                label_X2.ForeColor = Color.FromKnownColor(Constants.COLOR_LABEL_XY2);
+                label_Y2.ForeColor = Color.FromKnownColor(Constants.COLOR_LABEL_XY2);
             }
         }
 

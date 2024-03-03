@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.6 :
+- Fix : Preventing crash when selecting action "Wait" or "Repeat sequence" in Action View
+- Add : Constant for coloring label and areas XY and XY2
+
 Version 0.4.5 :
 - Add : Areas can now be colored
 - Add : Colored labels and rectangles in "Action Click" panel

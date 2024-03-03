@@ -88,24 +88,24 @@ namespace Tao_Bot_Maker
             else return -1;
         }
 
-        public static Action GetActionFromControl(int type, Control control)
+        public static (Action action, string errorMessage) GetActionFromControl(int type, Control control)
         {
             switch (type)
             {
                 case (int)Action.ActionType.Key:
-                    return ActionKeyController.GetActionFromControl((ActionKeyPanel)control);
+                    return (ActionKeyController.GetActionFromControl((ActionKeyPanel)control), "");
                 case (int)Action.ActionType.Wait:
-                    return ActionWaitController.GetActionFromControl((ActionWaitPanel)control);
+                    return (ActionWaitController.GetActionFromControl((ActionWaitPanel)control), "");
                 case (int)Action.ActionType.Sequence:
-                    return ActionSequenceController.GetActionFromControl((ActionSequencePanel)control);
+                    return (ActionSequenceController.GetActionFromControl((ActionSequencePanel)control), "");
                 case (int)Action.ActionType.Click:
                     return ActionClickController.GetActionFromControl((ActionClickPanel)control);
                 case (int)Action.ActionType.Loop:
-                    return ActionLoopController.GetActionFromControl((ActionLoopPanel)control);
+                    return (ActionLoopController.GetActionFromControl((ActionLoopPanel)control), "");
                 case (int)Action.ActionType.ImageSearch:
-                    return ActionImageSearchController.GetActionFromControl((ActionImageSearchPanel)control);
+                    return (ActionImageSearchController.GetActionFromControl((ActionImageSearchPanel)control), "");
                 default:
-                    return null;
+                    return (null, "Not found");
             }
         }
 

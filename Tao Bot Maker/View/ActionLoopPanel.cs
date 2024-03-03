@@ -19,14 +19,17 @@ namespace Tao_Bot_Maker.View
 
             flatComboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
         }
-        public ActionLoopPanel(Action action)
+        public ActionLoopPanel(Action action = null)
         {
             InitializeComponent();
             Localization();
 
-            flatComboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
-            SequencePath = ((ActionLoop)action).SequencePath;
-            NumberOfRepetitions = ((ActionLoop)action).NumberOfRepetitions;
+            if (action != null)
+            {
+                flatComboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
+                SequencePath = ((ActionLoop)action).SequencePath;
+                NumberOfRepetitions = ((ActionLoop)action).NumberOfRepetitions;
+            }
         }
         private void Localization()
         {

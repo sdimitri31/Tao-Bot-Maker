@@ -19,11 +19,12 @@ namespace Tao_Bot_Maker.View
             Localization();
         }
 
-        public ActionWaitPanel(Action action)
+        public ActionWaitPanel(Action action = null)
         {
             InitializeComponent();
             Localization();
-            WaitTime = ((ActionWait)action).WaitTime;
+            if (action != null)
+                WaitTime = ((ActionWait)action).WaitTime;
         }
         private void Localization()
         {

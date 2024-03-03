@@ -17,7 +17,7 @@ Actualisation en direct de la zone de recherche ou clic
 Action Attendre intervalle random
 Action Attendre ajouter plusieurs unités de temps (Heure; minutes; secondes)
 Action ImageSearch pouvoir cliquer sur l'image quand trouvée
-Action Répéter séquence ajouter boucle infinie
+Action "Répéter séquence" ajouter boucle infinie
 Afficher controls quand ils sont chargés
 
 
