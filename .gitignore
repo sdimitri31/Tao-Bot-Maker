@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+*.zip
+/TaoBotMaker_v0.4.9.zip
