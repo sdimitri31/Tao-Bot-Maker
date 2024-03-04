@@ -76,7 +76,6 @@
             // listBoxActions
             // 
             this.listBoxActions.AllowDrop = true;
-            this.listBoxActions.BackColor = System.Drawing.Color.DimGray;
             this.listBoxActions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxActions.ForeColor = System.Drawing.Color.White;
             this.listBoxActions.FormattingEnabled = true;
@@ -98,7 +97,6 @@
             // 
             // listBoxLog
             // 
-            this.listBoxLog.BackColor = System.Drawing.Color.DimGray;
             this.listBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxLog.ForeColor = System.Drawing.Color.White;
             this.listBoxLog.FormattingEnabled = true;
@@ -113,7 +111,6 @@
             // 
             // menuStrip
             // 
-            this.menuStrip.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsm_File,
@@ -122,7 +119,7 @@
             this.tsm_Help});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(645, 30);
+            this.menuStrip.Size = new System.Drawing.Size(645, 28);
             this.menuStrip.TabIndex = 22;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -136,7 +133,7 @@
             this.tsm_File_Exit});
             this.tsm_File.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_File.Name = "tsm_File";
-            this.tsm_File.Size = new System.Drawing.Size(46, 26);
+            this.tsm_File.Size = new System.Drawing.Size(46, 24);
             this.tsm_File.Text = "File";
             // 
             // tsm_File_New
@@ -188,7 +185,7 @@
             this.tsm_Bot_Stop});
             this.tsm_Bot.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Bot.Name = "tsm_Bot";
-            this.tsm_Bot.Size = new System.Drawing.Size(46, 26);
+            this.tsm_Bot.Size = new System.Drawing.Size(46, 24);
             this.tsm_Bot.Text = "Bot";
             // 
             // tsm_Bot_Start
@@ -218,7 +215,7 @@
             this.tsm_Settings_Logs});
             this.tsm_Settings.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Settings.Name = "tsm_Settings";
-            this.tsm_Settings.Size = new System.Drawing.Size(76, 26);
+            this.tsm_Settings.Size = new System.Drawing.Size(76, 24);
             this.tsm_Settings.Text = "Settings";
             // 
             // tsm_Settings_Language
@@ -228,7 +225,7 @@
             this.tsm_Settings_Language_Francais});
             this.tsm_Settings_Language.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_language_48;
             this.tsm_Settings_Language.Name = "tsm_Settings_Language";
-            this.tsm_Settings_Language.Size = new System.Drawing.Size(157, 26);
+            this.tsm_Settings_Language.Size = new System.Drawing.Size(224, 26);
             this.tsm_Settings_Language.Text = "Language";
             // 
             // tsm_Settings_Language_English
@@ -251,7 +248,7 @@
             // 
             this.tsm_Settings_Hotkeys.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
             this.tsm_Settings_Hotkeys.Name = "tsm_Settings_Hotkeys";
-            this.tsm_Settings_Hotkeys.Size = new System.Drawing.Size(157, 26);
+            this.tsm_Settings_Hotkeys.Size = new System.Drawing.Size(224, 26);
             this.tsm_Settings_Hotkeys.Text = "Shortcuts";
             this.tsm_Settings_Hotkeys.Click += new System.EventHandler(this.Tsm_Settings_Hotkeys_Click);
             // 
@@ -263,7 +260,7 @@
             this.tsm_Settings_Theme_Dark});
             this.tsm_Settings_Theme.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_change_theme_48;
             this.tsm_Settings_Theme.Name = "tsm_Settings_Theme";
-            this.tsm_Settings_Theme.Size = new System.Drawing.Size(157, 26);
+            this.tsm_Settings_Theme.Size = new System.Drawing.Size(224, 26);
             this.tsm_Settings_Theme.Text = "Theme";
             // 
             // tsm_Settings_Theme_Auto
@@ -290,7 +287,7 @@
             // tsm_Settings_Logs
             // 
             this.tsm_Settings_Logs.Name = "tsm_Settings_Logs";
-            this.tsm_Settings_Logs.Size = new System.Drawing.Size(157, 26);
+            this.tsm_Settings_Logs.Size = new System.Drawing.Size(224, 26);
             this.tsm_Settings_Logs.Text = "Save logs";
             this.tsm_Settings_Logs.Click += new System.EventHandler(this.Tsm_Settings_Logs_Click);
             // 
@@ -300,7 +297,7 @@
             this.tsm_About});
             this.tsm_Help.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Help.Name = "tsm_Help";
-            this.tsm_Help.Size = new System.Drawing.Size(30, 26);
+            this.tsm_Help.Size = new System.Drawing.Size(30, 24);
             this.tsm_Help.Text = "?";
             // 
             // tsm_About
@@ -315,7 +312,6 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.SystemColors.Menu;
             this.panel1.Controls.Add(this.button_DeleteSelectedAction);
             this.panel1.Controls.Add(this.flatComboBoxSequenceList);
             this.panel1.Controls.Add(this.button_SaveSequence);
@@ -466,7 +462,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(645, 629);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);

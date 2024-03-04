@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.12 :
+- Change : Add/Edit Action form redesigned
+- Change : UI colors improved
+
 Version 0.4.11 :
 - Fix : First sequence not loading when selected for the first time
 - Fix : MessageBox alerting for changes showing everytime after an action was edited even when no changes were made after loading

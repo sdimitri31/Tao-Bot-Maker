@@ -303,11 +303,42 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        public void DrawFromTextBoxValues()
+        /// <summary>
+        /// Assign values in numboxX1 and numboxY1
+        /// </summary>
+        /// <param name="x">Value for X1</param>
+        /// <param name="y">Value for Y1</param>
+        public void HotkeyXY(int x, int y)
+        {
+            X1 = x;
+            Y1 = y;
+            DrawArea();
+        }
+
+        /// <summary>
+        /// Assign values in numboxX2 and numboxY2
+        /// </summary>
+        /// <param name="x">Value for X2</param>
+        /// <param name="y">Value for Y2</param>
+        public void HotkeyXY2(int x, int y)
+        {
+            X2 = x;
+            Y2 = y;
+            DrawArea();
+        }
+
+        /// <summary>
+        /// Draw rectangles from coords using values X1, Y1, X2 and Y2
+        /// </summary>
+        public void DrawArea()
+        {
+            ClearArea();
+            actionView.DrawRectangle(X1, Y1, X2 - X1, Y2 - Y1, Constants.COLOR_LABEL_XY);
+        }
+
+        public void ClearArea()
         {
             actionView.ClearRectangles();
-            actionView.DrawRectangleAtCoords(X1, Y1, X2, Y2);
-            actionView.RefreshRectangles();
         }
 
         private void Button_ActionImageSearch_PathImage_Click(object sender, EventArgs e)
@@ -377,7 +408,7 @@ namespace Tao_Bot_Maker.View
 
         private void Button_ActionImageSearch_ShowArea_Click(object sender, EventArgs e)
         {
-            DrawFromTextBoxValues();
+            DrawArea();
         }
     }
 }

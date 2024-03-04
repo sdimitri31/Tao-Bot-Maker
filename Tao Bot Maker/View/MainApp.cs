@@ -268,6 +268,7 @@ namespace Tao_Bot_Maker
         private void ApplyTheme()
         {
             DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
+            this.Refresh();
             Log.Write(Properties.strings.log_AppliedTheme, LogFramework.Log.TRACE);
         }
         private void ChangeLanguage(string language)

@@ -214,6 +214,8 @@ namespace Tao_Bot_Maker.View
             trackBar_DragSpeed.Enabled = false;
             numericUpDown_X2.Enabled = false;
             numericUpDown_Y2.Enabled = false;
+            label_X2.Enabled = false;
+            label_Y2.Enabled = false;
         }
 
         private void UpdateButtonStateDoubleClick()
@@ -235,6 +237,8 @@ namespace Tao_Bot_Maker.View
                 trackBar_DragSpeed.Enabled = true;
                 numericUpDown_X2.Enabled = true;
                 numericUpDown_Y2.Enabled = true;
+                label_X2.Enabled = true; 
+                label_Y2.Enabled = true;
             }
             DrawArea();
         }

@@ -122,7 +122,7 @@ namespace Tao_Bot_Maker
 
         public static (ActionClick action, string errorMessage) GetActionFromControl(ActionClickPanel panel)
         {
-            var (actionClick, errorMessage) = CreateAction(panel.SelectedClick, panel.X1, panel.Y1, panel.X2, panel.Y2, panel.IsDoubleClick, panel.IsDrag, panel.DragSpeed); ;
+            var (actionClick, errorMessage) = CreateAction(panel.SelectedClick, panel.X1, panel.Y1, panel.X2, panel.Y2, panel.IsDoubleClick, panel.IsDrag, panel.DragSpeed);
 
             return (actionClick, errorMessage);
         }

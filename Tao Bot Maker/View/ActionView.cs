@@ -1,6 +1,7 @@
 ﻿using BlueMystic;
 using LogFramework;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -21,6 +22,7 @@ namespace Tao_Bot_Maker.View
         private HotKeyController hotkeyXY;
         private HotKeyController hotkeyXY2;
         private Control actionPanel; //Action panel shown
+        private List<Control> panelList;
 
         DrawingRectangle drawingForm;
         public void DrawRectangleAtCoords(int x1, int y1, int x2, int y2)
@@ -83,30 +85,31 @@ namespace Tao_Bot_Maker.View
 
             Localization();
 
-            //Populate combobox with actions
-            flatComboBox_Actions.Items.AddRange(ActionController.GetActionItems());
+            //Populate listBox with actions names
+            listBox_Actions.Items.AddRange(ActionController.GetActionItems());
+
+            //Load all panels to prevent flickering
+            LoadPanels(action);
 
             //No panel selected
             if (action == null)
             {
                 Log.Write(Properties.strings.log_ActionView_AddMode, LogFramework.Log.TRACE);
-                actionPanel = null;
-                flatComboBox_Actions.SelectedIndex = 0;
+                listBox_Actions.SelectedIndex = 0;
             }
             else
             {
                 Log.Write(Properties.strings.log_ActionView_EditMode, LogFramework.Log.TRACE);
                 //Get index to select from type name
-                int selectedIndex = flatComboBox_Actions.FindStringExact(ActionController.GetTypeName(action.Type));
-                
+                int selectedIndex = listBox_Actions.FindStringExact(ActionController.GetTypeName(action.Type));
+
                 //If no result, probably a deprecated type is being edited
                 if (selectedIndex < 0) selectedIndex = 0;
 
-                flatComboBox_Actions.SelectedIndex = selectedIndex;
-                actionPanel = ActionController.CreatePanel(action.Type, this, action);
-
-                ShowPanel(actionPanel);
+                listBox_Actions.SelectedIndex = selectedIndex;
             }
+
+            ShowPanel(listBox_Actions.SelectedIndex);
 
             SetupHotkeys();
         }
@@ -134,21 +137,42 @@ namespace Tao_Bot_Maker.View
             hotkeyXY2.Register();
         }
 
-        private void ShowPanel(Control panel)
+        private void LoadPanels(Action action = null)
         {
-            if (panel != null)
+            panelList = new List<Control>();
+
+            foreach (int actionType in Enum.GetValues(typeof(Action.ActionType)))
             {
-                panel_SelectedAction.Controls.Clear();
-                panel_SelectedAction.Controls.Add(panel);
-                panel.Show();
-                Log.Write(Properties.strings.log_ActionView_SelectedPanel + panel.Name, LogFramework.Log.TRACE);
+                Control panel;
+
+                if ((action != null) && (action.Type == actionType))
+                    panel = ActionController.CreatePanel(actionType, this, action);
+                else
+                    panel = ActionController.CreatePanel(actionType, this);
+
+                panel.Visible = false;
+                panelList.Add(panel);
             }
+            panel_SelectedAction.Controls.AddRange(panelList.ToArray());
+        }
+
+        void HidePanel(Control panel)
+        {
+            panel.Visible = false;
+        }
+
+        private void ShowPanel(int selectedIndex = 0)
+        {
+            panelList.ForEach(HidePanel);
+            panelList[selectedIndex].Visible = true;
+
+            Log.Write(Properties.strings.log_ActionView_SelectedPanel + panelList[selectedIndex].Name, LogFramework.Log.TRACE);
         }
 
         private void Button_Ok_Click(object sender, EventArgs e)
         {
             //Test if the inputs are valid
-            var (action, errorMessage) = ActionController.GetActionFromControl((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, actionPanel);
+            var (action, errorMessage) = ActionController.GetActionFromControl((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, panelList[listBox_Actions.SelectedIndex]);
             
             //if valid action has been created
             if(string.IsNullOrEmpty(errorMessage))
@@ -181,10 +205,7 @@ namespace Tao_Bot_Maker.View
         {
             //Show panel of the selected action
             ClearRectangles();
-            RefreshRectangles();
-            actionPanel = ActionController.CreatePanel((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, this);
-            Size = new System.Drawing.Size(Size.Width, actionPanel.Size.Height + 133);
-            ShowPanel(actionPanel);
+            ShowPanel(listBox_Actions.SelectedIndex);
         }
         
         protected override void WndProc(ref Message m)
@@ -200,36 +221,30 @@ namespace Tao_Bot_Maker.View
 
                 if ((modifier == hotkeyXY.GetModifier()) && (key == hotkeyXY.GetKey()))
                 {
-                    switch ((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
+                    switch ((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {
                         case (int)Action.ActionType.ImageSearch:
-                            //Get Mouse coords
-                            ((ActionImageSearchPanel)actionPanel).X1 = Cursor.Position.X;
-                            ((ActionImageSearchPanel)actionPanel).Y1 = Cursor.Position.Y;
-                            //Try to draw a rectangle
-                            ((ActionImageSearchPanel)actionPanel).DrawFromTextBoxValues();
+                            //Send info hotkeyXY has been pressed
+                            ((ActionImageSearchPanel)panelList[listBox_Actions.SelectedIndex]).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
                             break;
                         case (int)Action.ActionType.Click:
-                            //Send info hotkeyXY2 has been pressed
-                            ((ActionClickPanel)actionPanel).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
+                            //Send info hotkeyXY has been pressed
+                            ((ActionClickPanel)panelList[listBox_Actions.SelectedIndex]).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
                             break;
                     }
                 }
                 else if ((modifier == hotkeyXY2.GetModifier()) && (key == hotkeyXY2.GetKey()))
                 {
-                    switch ((int)(flatComboBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
+                    switch ((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {
                         case (int)Action.ActionType.ImageSearch:
-                            //Get Mouse coords
-                            ((ActionImageSearchPanel)actionPanel).X2 = Cursor.Position.X;
-                            ((ActionImageSearchPanel)actionPanel).Y2 = Cursor.Position.Y;
-                            //Try to draw a rectangle
-                            ((ActionImageSearchPanel)actionPanel).DrawFromTextBoxValues();
+                            //Send info hotkeyXY2 has been pressed
+                            ((ActionImageSearchPanel)panelList[listBox_Actions.SelectedIndex]).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
                             break;
 
                         case (int)Action.ActionType.Click:
                             //Send info hotkeyXY2 has been pressed
-                            ((ActionClickPanel)actionPanel).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
+                            ((ActionClickPanel)panelList[listBox_Actions.SelectedIndex]).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
                             break;
                     }
                 }

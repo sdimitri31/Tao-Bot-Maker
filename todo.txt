@@ -2,18 +2,17 @@ TO DO :
 Ajuster le déplacement pour le "reste" dans action Click
 Ajouter des couleurs pour les hotkeys dupliqués
 Afficher barre pour le déplacement d'une action
+Settings couleur zones
 Localiser les logs
 Verifier les valeurs lors d'un chargement de séquence pour eviter les crash et les changements entre les versions
 Crash quand img non trouvée après expiration
-Inclure Imagesearch dll
 
 ADD ACTION :
 Définir taille écran en XY2 par défaut
-mettre que des nombres dans les TextBox
 Coordonées a analyser pour determiner lequel est XY ou XY2 dans le dessin de la zone
-Ajouter action type "Texte"
 Remplacer dropdown par un menu 
-Actualisation en direct de la zone de recherche ou clic
+Actualisation en direct de la zone de recherche image
+Ajouter action type "Texte"
 Action Attendre intervalle random
 Action Attendre ajouter plusieurs unités de temps (Heure; minutes; secondes)
 Action ImageSearch pouvoir cliquer sur l'image quand trouvée

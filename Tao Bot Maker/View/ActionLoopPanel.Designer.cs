@@ -41,9 +41,9 @@
             // 
             this.label_Sequence.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label_Sequence.AutoSize = true;
-            this.label_Sequence.Location = new System.Drawing.Point(3, 67);
+            this.label_Sequence.Location = new System.Drawing.Point(3, 55);
             this.label_Sequence.Name = "label_Sequence";
-            this.label_Sequence.Size = new System.Drawing.Size(242, 16);
+            this.label_Sequence.Size = new System.Drawing.Size(234, 16);
             this.label_Sequence.TabIndex = 2;
             this.label_Sequence.Text = "Séquence :";
             this.label_Sequence.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -52,9 +52,9 @@
             // 
             this.label_RepeatNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label_RepeatNumber.AutoSize = true;
-            this.label_RepeatNumber.Location = new System.Drawing.Point(3, 17);
+            this.label_RepeatNumber.Location = new System.Drawing.Point(3, 13);
             this.label_RepeatNumber.Name = "label_RepeatNumber";
-            this.label_RepeatNumber.Size = new System.Drawing.Size(242, 16);
+            this.label_RepeatNumber.Size = new System.Drawing.Size(234, 16);
             this.label_RepeatNumber.TabIndex = 0;
             this.label_RepeatNumber.Text = "Nombre de répétitions :";
             this.label_RepeatNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -64,9 +64,9 @@
             this.flatComboBox_SequenceName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.flatComboBox_SequenceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.flatComboBox_SequenceName.FormattingEnabled = true;
-            this.flatComboBox_SequenceName.Location = new System.Drawing.Point(251, 63);
+            this.flatComboBox_SequenceName.Location = new System.Drawing.Point(243, 51);
             this.flatComboBox_SequenceName.Name = "flatComboBox_SequenceName";
-            this.flatComboBox_SequenceName.Size = new System.Drawing.Size(243, 24);
+            this.flatComboBox_SequenceName.Size = new System.Drawing.Size(235, 24);
             this.flatComboBox_SequenceName.TabIndex = 4;
             // 
             // tableLayout
@@ -79,18 +79,18 @@
             this.tableLayout.Controls.Add(this.label_Sequence, 0, 1);
             this.tableLayout.Controls.Add(this.numericUpDown_RepeatNumber, 1, 0);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayout.Location = new System.Drawing.Point(0, 0);
+            this.tableLayout.Location = new System.Drawing.Point(8, 8);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.RowCount = 2;
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayout.Size = new System.Drawing.Size(497, 100);
+            this.tableLayout.Size = new System.Drawing.Size(481, 84);
             this.tableLayout.TabIndex = 5;
             // 
             // numericUpDown_RepeatNumber
             // 
             this.numericUpDown_RepeatNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown_RepeatNumber.Location = new System.Drawing.Point(251, 14);
+            this.numericUpDown_RepeatNumber.Location = new System.Drawing.Point(243, 10);
             this.numericUpDown_RepeatNumber.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -102,7 +102,7 @@
             0,
             -2147483648});
             this.numericUpDown_RepeatNumber.Name = "numericUpDown_RepeatNumber";
-            this.numericUpDown_RepeatNumber.Size = new System.Drawing.Size(243, 22);
+            this.numericUpDown_RepeatNumber.Size = new System.Drawing.Size(235, 22);
             this.numericUpDown_RepeatNumber.TabIndex = 5;
             this.numericUpDown_RepeatNumber.Value = new decimal(new int[] {
             1,
@@ -117,6 +117,7 @@
             this.Controls.Add(this.tableLayout);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ActionLoopPanel";
+            this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(497, 100);
             this.tableLayout.ResumeLayout(false);
             this.tableLayout.PerformLayout();

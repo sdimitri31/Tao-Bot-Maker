@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -320,8 +321,9 @@ namespace BlueMystic
         /// <param name="control">Can be a Form or any Winforms Control.</param>
         public void ThemeControl(Control control)
 		{
-			BorderStyle BStyle = (IsDarkMode ? BorderStyle.FixedSingle : BorderStyle.Fixed3D);
-			FlatStyle FStyle = FlatStyle.Flat;
+			//BorderStyle BStyle = (IsDarkMode ? BorderStyle.FixedSingle : BorderStyle.Fixed3D);
+            BorderStyle BStyle = BorderStyle.FixedSingle;
+            FlatStyle FStyle = FlatStyle.Flat;
 
             //FlatStyle FStyle = (IsDarkMode ? FlatStyle.Flat : FlatStyle.Standard);
 
@@ -334,9 +336,16 @@ namespace BlueMystic
 			{
 				control.GetType().GetProperty("ForeColor")?.SetValue(control, OScolors.TextActive);
 			}
-			control.GetType().GetProperty("BorderStyle")?.SetValue(control, BStyle);
+			if (control.GetType().GetProperty("BorderStyle") != null)
+            {
+                //if value is not equal None(Control have border)
+                if (!(control.GetType().GetProperty("BorderStyle").GetValue(control).Equals(BorderStyle.None)))
+                {
+                    control.GetType().GetProperty("BorderStyle").SetValue(control, BStyle, null);
+                }
+			}
 
-			control.HandleCreated += (object sender, EventArgs e) =>
+            control.HandleCreated += (object sender, EventArgs e) =>
 			{
 				ApplySystemDarkTheme(control, IsDarkMode);
 			};
@@ -345,7 +354,12 @@ namespace BlueMystic
 				ThemeControl(e.Control);
 			};
 
-			if (control is TextBox tb)
+			if (control is ListBox listBox)
+			{
+				listBox.ForeColor = OScolors.TextActive;
+				listBox.BackColor = OScolors.Surface;
+            }
+            if (control is TextBox tb)
 			{
 				//SetRoundBorders(tb, 4, OScolors.SurfaceDark, 1);
 			}
@@ -353,7 +367,6 @@ namespace BlueMystic
 			{
 				// Process the panel within the container
 				panel.BackColor = OScolors.Surface;
-				panel.BorderStyle = BorderStyle.None;
 
 				if ( !(panel.Parent is TabControl) || !(panel.Parent is TableLayoutPanel))
 				{
@@ -436,14 +449,16 @@ namespace BlueMystic
 			{
 				button.FlatStyle = FStyle;
 				button.FlatAppearance.CheckedBackColor = OScolors.Accent;
-				button.BackColor = OScolors.Control;
 				button.FlatAppearance.BorderColor = (OwnerForm.AcceptButton == button) ?
-					OScolors.Accent : OScolors.Control;
+					OScolors.Accent : OScolors.ControlLight;
+				button.BackColor = OScolors.Control;
+				button.ForeColor = OScolors.TextActive;
 				//SetRoundBorders(button, 4, OScolors.SurfaceDark, 1);
 			}
 			if (control is Label label)
 			{
-				label.BorderStyle = BorderStyle.None;
+                label.ForeColor = OScolors.TextActive;
+                label.BorderStyle = BorderStyle.None;
 			}
 			if (control is LinkLabel link)
 			{
@@ -619,17 +634,17 @@ namespace BlueMystic
                 _ret.BackgroundDark = SystemColors.ControlDark;
                 _ret.BackgroundLight = SystemColors.ControlLight;
 
-				_ret.Surface = SystemColors.ControlLightLight;      //<- Gris Oscuro
-				_ret.SurfaceLight = SystemColors.ControlLight;
-				_ret.SurfaceDark = Color.White;
+				_ret.Surface = Color.FromArgb(251, 251, 251);      //<- Gris Oscuro
+                _ret.SurfaceLight = Color.FromArgb(243, 243, 243);
+				_ret.SurfaceDark = SystemColors.ControlLightLight;
 
 				_ret.TextActive = SystemColors.ControlText;
                 _ret.TextInactive = SystemColors.GrayText;  //<- Blanco Palido
                 _ret.TextInAccent = SystemColors.HighlightText;
 
-                _ret.Control = SystemColors.ButtonFace;       //<- Gris Oscuro
+                _ret.Control = Color.FromArgb(254, 254, 254);       //<- Gris Oscuro
                 _ret.ControlDark = SystemColors.ButtonShadow;
-                _ret.ControlLight = SystemColors.ButtonHighlight;
+                _ret.ControlLight = Color.FromArgb(230, 230, 230);
 
                 _ret.Primary = SystemColors.Highlight;   //<- Verde Pastel
                 _ret.Secondary = SystemColors.HotTrack;         //<- Magenta Claro				

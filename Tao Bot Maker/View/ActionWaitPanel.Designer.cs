@@ -39,10 +39,10 @@
             // 
             this.label_WaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label_WaitTime.AutoSize = true;
-            this.label_WaitTime.Location = new System.Drawing.Point(3, 17);
+            this.label_WaitTime.Location = new System.Drawing.Point(3, 9);
             this.label_WaitTime.Name = "label_WaitTime";
             this.label_WaitTime.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.label_WaitTime.Size = new System.Drawing.Size(242, 16);
+            this.label_WaitTime.Size = new System.Drawing.Size(234, 16);
             this.label_WaitTime.TabIndex = 6;
             this.label_WaitTime.Text = "Délai (ms) :";
             this.label_WaitTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -55,18 +55,18 @@
             this.tableLayout.Controls.Add(this.label_WaitTime, 0, 0);
             this.tableLayout.Controls.Add(this.numericUpDown_WaitTime, 1, 0);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayout.Location = new System.Drawing.Point(0, 0);
+            this.tableLayout.Location = new System.Drawing.Point(8, 8);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.RowCount = 1;
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayout.Size = new System.Drawing.Size(497, 50);
+            this.tableLayout.Size = new System.Drawing.Size(481, 34);
             this.tableLayout.TabIndex = 7;
             // 
             // numericUpDown_WaitTime
             // 
             this.numericUpDown_WaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown_WaitTime.Location = new System.Drawing.Point(251, 14);
+            this.numericUpDown_WaitTime.Location = new System.Drawing.Point(243, 6);
             this.numericUpDown_WaitTime.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -78,7 +78,7 @@
             0,
             0});
             this.numericUpDown_WaitTime.Name = "numericUpDown_WaitTime";
-            this.numericUpDown_WaitTime.Size = new System.Drawing.Size(243, 22);
+            this.numericUpDown_WaitTime.Size = new System.Drawing.Size(235, 22);
             this.numericUpDown_WaitTime.TabIndex = 7;
             this.numericUpDown_WaitTime.Value = new decimal(new int[] {
             1,
@@ -93,6 +93,7 @@
             this.Controls.Add(this.tableLayout);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ActionWaitPanel";
+            this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(497, 50);
             this.tableLayout.ResumeLayout(false);
             this.tableLayout.PerformLayout();
