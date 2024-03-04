@@ -13,7 +13,7 @@ namespace Tao_Bot_Maker
     public class ActionClickController
     {
         /// <summary>
-        /// Check if every data needed to create an ActionClick are in range
+        /// Check if every data needed to create an ActionClick are in specs
         /// </summary>
         /// <param name="click">Expected : "left", "middle" or "right"</param>
         /// <param name="x1">Expected : int between -999999 and 999999</param>
@@ -24,10 +24,10 @@ namespace Tao_Bot_Maker
         /// <param name="isDrag">Expected : true or false</param>
         /// <param name="dragSpeed">Expected : int between 1 and 5</param>
         /// <returns>ActionClick if all test passed. string errorMessage if something was wrong</returns>
-        public static (ActionClick actionClick, string errorMessage) CreateActionClick(String click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed)
+        public static (ActionClick actionClick, string errorMessage) CreateAction(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed)
         {
             int errorCount = 0;
-            String errorMessage = "";
+            string errorMessage = "";
 
             int[] array2 = { x1, x2, y1, y2 };
             if (!ValidateCoord(array2, out string error))
@@ -120,9 +120,9 @@ namespace Tao_Bot_Maker
             }
         }
 
-        public static (Action action, string errorMessage) GetActionFromControl(ActionClickPanel panel)
+        public static (ActionClick action, string errorMessage) GetActionFromControl(ActionClickPanel panel)
         {
-            var (actionClick, errorMessage) = CreateActionClick(panel.SelectedClick, panel.X1, panel.Y1, panel.X2, panel.Y2, panel.IsDoubleClick, panel.IsDrag, panel.DragSpeed); ;
+            var (actionClick, errorMessage) = CreateAction(panel.SelectedClick, panel.X1, panel.Y1, panel.X2, panel.Y2, panel.IsDoubleClick, panel.IsDrag, panel.DragSpeed); ;
 
             return (actionClick, errorMessage);
         }

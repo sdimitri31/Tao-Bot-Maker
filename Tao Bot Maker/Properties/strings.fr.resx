@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="action" xml:space="preserve">
+    <value>Action</value>
+  </data>
   <data name="ActionName_Click" xml:space="preserve">
     <value>Clic</value>
   </data>
@@ -144,20 +147,38 @@
   <data name="ActionName_Wait" xml:space="preserve">
     <value>Attendre</value>
   </data>
-  <data name="action_Click_ToString" xml:space="preserve">
-    <value>Action : Clic</value>
-  </data>
   <data name="action_ErrorMessage_ClickNotSelected" xml:space="preserve">
     <value>Erreur : Un bouton de clic doit être sélectionné</value>
   </data>
   <data name="action_ErrorMessage_DragSpeedWrongInterval" xml:space="preserve">
     <value>Erreur : La vitesse doit être compris entre 1 et 5</value>
   </data>
+  <data name="action_ErrorMessage_ExpirationWrongInterval" xml:space="preserve">
+    <value>Erreur : Expiration doit être compris entre -1 et 999999</value>
+  </data>
+  <data name="action_ErrorMessage_IfFound" xml:space="preserve">
+    <value>Erreur : Action "Si trouvée" doit être choisie</value>
+  </data>
+  <data name="action_ErrorMessage_IfNotFound" xml:space="preserve">
+    <value>Erreur : Action "Si pas trouvée" doit être choisie</value>
+  </data>
+  <data name="action_ErrorMessage_ImageName" xml:space="preserve">
+    <value>Erreur : Une image doit être choisie</value>
+  </data>
   <data name="action_ErrorMessage_InvalidCoords" xml:space="preserve">
     <value>Erreur : Les coordonnées doivent être comprises entre -999999 et 999999</value>
   </data>
-  <data name="action_ImageSearch_ToString" xml:space="preserve">
-    <value>Action : Rechercher une image</value>
+  <data name="action_ErrorMessage_Key" xml:space="preserve">
+    <value>Erreur : Une touche doit être entrée</value>
+  </data>
+  <data name="action_ErrorMessage_RepeatNumber" xml:space="preserve">
+    <value>Erreur : Le nombre de répétitions doit être compris entre -1 et 999999</value>
+  </data>
+  <data name="action_ErrorMessage_SequenceName" xml:space="preserve">
+    <value>Erreur : Une séquence doit être sélectionnée</value>
+  </data>
+  <data name="action_ErrorMessage_ThresholdWrongInterval" xml:space="preserve">
+    <value>Erreur : Tolérance doit être compris entre 0 et 255</value>
   </data>
   <data name="action_Member_Click" xml:space="preserve">
     <value>Click</value>
@@ -180,8 +201,17 @@
   <data name="action_Member_IsDrag" xml:space="preserve">
     <value>Glisser</value>
   </data>
+  <data name="action_Member_Key" xml:space="preserve">
+    <value>Touche</value>
+  </data>
   <data name="action_Member_PictureName" xml:space="preserve">
     <value>Nom de l'image</value>
+  </data>
+  <data name="action_Member_RepeatNumber" xml:space="preserve">
+    <value>Nombre de répetitions</value>
+  </data>
+  <data name="action_Member_Sequence" xml:space="preserve">
+    <value>Séquence</value>
   </data>
   <data name="action_Member_Threshold" xml:space="preserve">
     <value>Tolérance</value>
@@ -231,6 +261,9 @@
   <data name="label_DragSpeed" xml:space="preserve">
     <value>Vitesse de déplacement : </value>
   </data>
+  <data name="label_Expiration" xml:space="preserve">
+    <value>Expiration (s)</value>
+  </data>
   <data name="label_Key" xml:space="preserve">
     <value>Touche</value>
   </data>
@@ -240,7 +273,7 @@
   <data name="label_MiddleClick" xml:space="preserve">
     <value>Clic molette</value>
   </data>
-  <data name="label_RepetitionNumber" xml:space="preserve">
+  <data name="label_RepeatNumber" xml:space="preserve">
     <value>Nombre de répétitions</value>
   </data>
   <data name="label_RightClick" xml:space="preserve">
@@ -250,13 +283,13 @@
     <value>Séquence</value>
   </data>
   <data name="label_SequenceIfExpired" xml:space="preserve">
-    <value>Sequence si expiré</value>
+    <value>Si expiré</value>
   </data>
   <data name="label_SequenceIfNotFound" xml:space="preserve">
-    <value>Séquence si image introuvable</value>
+    <value>Si image introuvable</value>
   </data>
   <data name="label_SequenceIfPicture" xml:space="preserve">
-    <value>Séquence si image trouvée</value>
+    <value>Si image trouvée</value>
   </data>
   <data name="label_SetXY" xml:space="preserve">
     <value>Définir X Y à la position du curseur</value>
@@ -371,6 +404,22 @@
   </data>
   <data name="log_UpdateButtonState_Theme" xml:space="preserve">
     <value>"Theme" button state updated : </value>
+  </data>
+  <data name="MessageBox_ImageAlreadyInFolder_Caption" xml:space="preserve">
+    <value>Remplacer l'image ?</value>
+  </data>
+  <data name="MessageBox_ImageAlreadyInFolder_Message" xml:space="preserve">
+    <value>est déjà présent dans le dossier.
+Voulez-vous la remplacer ?
+
+Oui : l'image va être remplacée.
+Non : l'image va être importée avec un autre nom.</value>
+  </data>
+  <data name="MessageBox_ImageFound" xml:space="preserve">
+    <value>Image trouvée aux coordonnées : </value>
+  </data>
+  <data name="MessageBox_ImageNotFound" xml:space="preserve">
+    <value>Image non trouvée</value>
   </data>
   <data name="MessageBox_WarningDeleteSequence" xml:space="preserve">
     <value>Attention : La séquence va être supprimée.

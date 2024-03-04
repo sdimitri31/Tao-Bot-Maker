@@ -12,40 +12,36 @@ namespace Tao_Bot_Maker.View
 {
     public partial class ActionLoopPanel : UserControl
     {
-        public ActionLoopPanel()
+        public ActionLoopPanel(ActionView actionView, Action action = null)
         {
             InitializeComponent();
             Localization();
 
-            flatComboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
-        }
-        public ActionLoopPanel(Action action = null)
-        {
-            InitializeComponent();
-            Localization();
+            List<string> sequenceListFiltered = SequenceXmlManager.SequencesListFiltered(actionView.GetLoadedSequenceName());
+            flatComboBox_SequenceName.Items.AddRange(sequenceListFiltered.ToArray());
 
             if (action != null)
             {
-                flatComboBoxPanelActionLoopSequence.Items.AddRange(SequenceXmlManager.SequencesList().ToArray());
-                SequencePath = ((ActionLoop)action).SequencePath;
-                NumberOfRepetitions = ((ActionLoop)action).NumberOfRepetitions;
+                SequenceName = ((ActionLoop)action).SequenceName;
+                RepeatNumber = ((ActionLoop)action).RepeatNumber;
             }
         }
+
         private void Localization()
         {
-            label_NumberRepetitions.Text = Properties.strings.label_RepetitionNumber;
+            label_RepeatNumber.Text = Properties.strings.label_RepeatNumber;
             label_Sequence.Text = Properties.strings.label_Sequence;
         }
 
-        public String SequencePath
+        public string SequenceName
         {
             get
             {
                 try
                 {
-                    if (flatComboBoxPanelActionLoopSequence.SelectedItem != null)
+                    if (flatComboBox_SequenceName.SelectedItem != null)
                     {
-                        String sequenceName = flatComboBoxPanelActionLoopSequence.SelectedItem.ToString();
+                        string sequenceName = flatComboBox_SequenceName.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return "";
@@ -55,19 +51,19 @@ namespace Tao_Bot_Maker.View
                     return "";
                 }
             }
-            set { flatComboBoxPanelActionLoopSequence.SelectedItem = value.ToString(); }
+            set { flatComboBox_SequenceName.SelectedItem = value.ToString(); }
         }
 
-        public int NumberOfRepetitions
+        public int RepeatNumber
         {
             get
             {
                 try
                 {
-                    if (textBoxPanelBoucle_NbRepetition.Text != null)
+                    if (numericUpDown_RepeatNumber.Text != null)
                     {
-                        int numberOfRepetition = Int32.Parse(textBoxPanelBoucle_NbRepetition.Text);
-                        return numberOfRepetition;
+                        int repeatNumber = Int32.Parse(numericUpDown_RepeatNumber.Text);
+                        return repeatNumber;
                     }
                     return -1;
                 }
@@ -76,7 +72,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxPanelBoucle_NbRepetition.Text = value.ToString(); }
+            set { numericUpDown_RepeatNumber.Text = value.ToString(); }
         }
     }
 }

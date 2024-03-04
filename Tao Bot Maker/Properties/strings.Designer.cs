@@ -61,11 +61,11 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Action : Click.
+        ///   Recherche une chaîne localisée semblable à Action.
         /// </summary>
-        internal static string action_Click_ToString {
+        internal static string action {
             get {
-                return ResourceManager.GetString("action_Click_ToString", resourceCulture);
+                return ResourceManager.GetString("action", resourceCulture);
             }
         }
         
@@ -88,6 +88,42 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Expiration must be a number between -1 and 999999.
+        /// </summary>
+        internal static string action_ErrorMessage_ExpirationWrongInterval {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_ExpirationWrongInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Action &quot;If found&quot; must be selected.
+        /// </summary>
+        internal static string action_ErrorMessage_IfFound {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_IfFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Action &quot;If not found&quot; must be selected.
+        /// </summary>
+        internal static string action_ErrorMessage_IfNotFound {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_IfNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Image must be selected.
+        /// </summary>
+        internal static string action_ErrorMessage_ImageName {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_ImageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error : Coordinates must be a number between -999999 and 999999.
         /// </summary>
         internal static string action_ErrorMessage_InvalidCoords {
@@ -97,11 +133,38 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Action : Image search.
+        ///   Recherche une chaîne localisée semblable à Error : Key must be entered.
         /// </summary>
-        internal static string action_ImageSearch_ToString {
+        internal static string action_ErrorMessage_Key {
             get {
-                return ResourceManager.GetString("action_ImageSearch_ToString", resourceCulture);
+                return ResourceManager.GetString("action_ErrorMessage_Key", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Repeat number must be between -1 and 999999.
+        /// </summary>
+        internal static string action_ErrorMessage_RepeatNumber {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_RepeatNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Sequence must be selected.
+        /// </summary>
+        internal static string action_ErrorMessage_SequenceName {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_SequenceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Threshold must be a number between 0 and 255.
+        /// </summary>
+        internal static string action_ErrorMessage_ThresholdWrongInterval {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_ThresholdWrongInterval", resourceCulture);
             }
         }
         
@@ -169,11 +232,38 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Key.
+        /// </summary>
+        internal static string action_Member_Key {
+            get {
+                return ResourceManager.GetString("action_Member_Key", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Picture name.
         /// </summary>
         internal static string action_Member_PictureName {
             get {
                 return ResourceManager.GetString("action_Member_PictureName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Number of repetitions.
+        /// </summary>
+        internal static string action_Member_RepeatNumber {
+            get {
+                return ResourceManager.GetString("action_Member_RepeatNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence.
+        /// </summary>
+        internal static string action_Member_Sequence {
+            get {
+                return ResourceManager.GetString("action_Member_Sequence", resourceCulture);
             }
         }
         
@@ -394,11 +484,20 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Drag speed : .
+        ///   Recherche une chaîne localisée semblable à Drag speed.
         /// </summary>
         internal static string label_DragSpeed {
             get {
                 return ResourceManager.GetString("label_DragSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Expiration (s).
+        /// </summary>
+        internal static string label_Expiration {
+            get {
+                return ResourceManager.GetString("label_Expiration", resourceCulture);
             }
         }
         
@@ -432,9 +531,9 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Number of repetitions.
         /// </summary>
-        internal static string label_RepetitionNumber {
+        internal static string label_RepeatNumber {
             get {
-                return ResourceManager.GetString("label_RepetitionNumber", resourceCulture);
+                return ResourceManager.GetString("label_RepeatNumber", resourceCulture);
             }
         }
         
@@ -457,7 +556,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sequence if expired.
+        ///   Recherche une chaîne localisée semblable à If expired.
         /// </summary>
         internal static string label_SequenceIfExpired {
             get {
@@ -466,7 +565,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sequence if not found.
+        ///   Recherche une chaîne localisée semblable à If not found.
         /// </summary>
         internal static string label_SequenceIfNotFound {
             get {
@@ -475,7 +574,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sequence if found.
+        ///   Recherche une chaîne localisée semblable à If found.
         /// </summary>
         internal static string label_SequenceIfPicture {
             get {
@@ -835,7 +934,47 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Warning : This will delete the sequence entirely.
+        ///   Recherche une chaîne localisée semblable à Replace image ?.
+        /// </summary>
+        internal static string MessageBox_ImageAlreadyInFolder_Caption {
+            get {
+                return ResourceManager.GetString("MessageBox_ImageAlreadyInFolder_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à is already present in Pictures folder.
+        ///Do you want to replace it ?
+        ///
+        ///Yes : Image will be replaced.
+        ///No : Image will be imported with a new name..
+        /// </summary>
+        internal static string MessageBox_ImageAlreadyInFolder_Message {
+            get {
+                return ResourceManager.GetString("MessageBox_ImageAlreadyInFolder_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image found at coords : .
+        /// </summary>
+        internal static string MessageBox_ImageFound {
+            get {
+                return ResourceManager.GetString("MessageBox_ImageFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image not found.
+        /// </summary>
+        internal static string MessageBox_ImageNotFound {
+            get {
+                return ResourceManager.GetString("MessageBox_ImageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Warning : This will delete the sequence entirely.
         ///Do you want to proceed ?.
         /// </summary>
         internal static string MessageBox_WarningDeleteSequence {
@@ -845,7 +984,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &quot;Warning : Unsaved changes will be lost.
+        ///   Recherche une chaîne localisée semblable à Warning : Unsaved changes will be lost.
         ///Do you want to exit ?.
         /// </summary>
         internal static string MessageBox_WarningSequenceNotSaved {

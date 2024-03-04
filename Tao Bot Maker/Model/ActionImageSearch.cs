@@ -2,13 +2,13 @@
 
 namespace Tao_Bot_Maker
 {
-    class ActionImageSearch : Action
+    public class ActionImageSearch : Action
     {
         public ActionImageSearch()
         {
             Type = (int)ActionType.ImageSearch;
         }
-        public ActionImageSearch(String pictureName, int threshold, int x1, int x2, int y1, int y2, int expiration, String ifFound, String ifNotFound)
+        public ActionImageSearch(string pictureName, int threshold, int x1, int x2, int y1, int y2, int expiration, string ifFound, string ifNotFound)
         {
             Type = (int)ActionType.ImageSearch;
             PictureName = pictureName;
@@ -21,20 +21,20 @@ namespace Tao_Bot_Maker
             IfFound = ifFound;
             IfNotFound = ifNotFound;
         }
-        public String PictureName { get; set; }
+        public string PictureName { get; set; }
         public int Threshold { get; set; }
         public int X1 { get; set; }
         public int X2 { get; set; }
         public int Y1 { get; set; }
         public int Y2 { get; set; }
         public int Expiration { get; set; }
-        public String IfFound { get; set; }
-        public String IfNotFound { get; set; }
+        public string IfFound { get; set; }
+        public string IfNotFound { get; set; }
 
         public override string ToString()
         {
             string text = "";
-            text +=         Properties.strings.action_ImageSearch_ToString;
+            text +=         Properties.strings.action + " : " + Properties.strings.ActionName_ImageSearch;
             text += " | " + Properties.strings.action_Member_PictureName + " : " + PictureName;
             text += " | " + Properties.strings.action_Member_Threshold + " : " + Threshold;
             text += " | " + Properties.strings.action_Member_X1 + " : " + X1;

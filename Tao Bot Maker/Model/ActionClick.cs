@@ -12,7 +12,7 @@ namespace Tao_Bot_Maker
         {
             Type = (int)ActionType.Click;
         }
-        public ActionClick(String click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed)
+        public ActionClick(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed)
         {
             Type = (int)ActionType.Click;
             SelectedClick = click;
@@ -25,7 +25,7 @@ namespace Tao_Bot_Maker
             DragSpeed = dragSpeed;
         }
 
-        public String SelectedClick { get; set; }
+        public string SelectedClick { get; set; }
         public int X1 { get; set; }
         public int Y1 { get; set; }
         public int X2 { get; set; }
@@ -37,7 +37,7 @@ namespace Tao_Bot_Maker
         public override string ToString()
         {
             string text = "";
-            text +=         Properties.strings.action_Click_ToString;
+            text +=         Properties.strings.action + " : " + Properties.strings.ActionName_Click;
             text += " | " + Properties.strings.action_Member_Click + " : " + SelectedClick;
             text += " | " + Properties.strings.action_Member_X1 + " : " + X1;
             text += " | " + Properties.strings.action_Member_Y1 + " : " + Y1;

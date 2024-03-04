@@ -1,5 +1,16 @@
 Changelog :
 
+Version 0.4.8 :
+- Change : Cleaning code for ActionRepeatSequence classes
+- Add : Sequence can be repeated infinitly in Action "Repeat sequence"
+- Add : Progress on localization
+
+Version 0.4.7 :
+- Add : PostBuild script to create a .zip containing all files needed to run
+- Change : Cleaning code for ActionKey classes
+- Change : Cleaning code for ActionImageSearch classes
+- Add : Progress on localization
+
 Version 0.4.6 :
 - Fix : Preventing crash when selecting action "Wait" or "Repeat sequence" in Action View
 - Add : Constant for coloring label and areas XY and XY2

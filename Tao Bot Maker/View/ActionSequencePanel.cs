@@ -17,14 +17,7 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             Localization();
 
-            List<string> sequenceListFiltered = new List<string>();
-            foreach(string sequence in SequenceXmlManager.SequencesList())
-            {
-                //Add sequence to list if it's not the current sequence loaded to prevent Infinite loop
-                if(sequence != actionView.GetLoadedSequenceName())
-                    sequenceListFiltered.Add(sequence);
-            }
-
+            List<string> sequenceListFiltered = SequenceXmlManager.SequencesListFiltered(actionView.GetLoadedSequenceName());
             flatComboBoxPanelActionSequence.Items.AddRange(sequenceListFiltered.ToArray());
             
             if (action != null)

@@ -31,7 +31,7 @@
             this.pictureBox_ActionImageSearch_Image = new System.Windows.Forms.PictureBox();
             this.buttonPanelActionIfImage_FindImage = new System.Windows.Forms.Button();
             this.button_ActionImageSearch_ShowArea = new System.Windows.Forms.Button();
-            this.label__ActionImageSearch_IfNotFound = new System.Windows.Forms.Label();
+            this.label_ActionImageSearch_IfNotFound = new System.Windows.Forms.Label();
             this.label_ActionImageSearch_IfFound = new System.Windows.Forms.Label();
             this.label_ActionImageSearch_Threshold = new System.Windows.Forms.Label();
             this.label_ActionImageSearch_Y2 = new System.Windows.Forms.Label();
@@ -99,16 +99,16 @@
             this.button_ActionImageSearch_ShowArea.UseVisualStyleBackColor = false;
             this.button_ActionImageSearch_ShowArea.Click += new System.EventHandler(this.Button_ActionImageSearch_ShowArea_Click);
             // 
-            // label__ActionImageSearch_IfNotFound
+            // label_ActionImageSearch_IfNotFound
             // 
-            this.label__ActionImageSearch_IfNotFound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label__ActionImageSearch_IfNotFound.AutoSize = true;
-            this.label__ActionImageSearch_IfNotFound.Location = new System.Drawing.Point(251, 294);
-            this.label__ActionImageSearch_IfNotFound.Name = "label__ActionImageSearch_IfNotFound";
-            this.label__ActionImageSearch_IfNotFound.Size = new System.Drawing.Size(118, 16);
-            this.label__ActionImageSearch_IfNotFound.TabIndex = 15;
-            this.label__ActionImageSearch_IfNotFound.Text = "Sinon séquence :";
-            this.label__ActionImageSearch_IfNotFound.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_ActionImageSearch_IfNotFound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_ActionImageSearch_IfNotFound.AutoSize = true;
+            this.label_ActionImageSearch_IfNotFound.Location = new System.Drawing.Point(251, 294);
+            this.label_ActionImageSearch_IfNotFound.Name = "label_ActionImageSearch_IfNotFound";
+            this.label_ActionImageSearch_IfNotFound.Size = new System.Drawing.Size(118, 16);
+            this.label_ActionImageSearch_IfNotFound.TabIndex = 15;
+            this.label_ActionImageSearch_IfNotFound.Text = "Sinon séquence :";
+            this.label_ActionImageSearch_IfNotFound.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_ActionImageSearch_IfFound
             // 
@@ -232,7 +232,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_X2, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_Y2, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_Threshold, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label__ActionImageSearch_IfNotFound, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label_ActionImageSearch_IfNotFound, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.flatComboBox_ActionImageSearch_IfFound, 3, 6);
             this.tableLayoutPanel1.Controls.Add(this.flatComboBox_ActionImageSearch_IfNotFound, 3, 7);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDown_ActionImageSearch_X1, 1, 2);
@@ -424,7 +424,7 @@
         private System.Windows.Forms.PictureBox pictureBox_ActionImageSearch_Image;
         private System.Windows.Forms.Button buttonPanelActionIfImage_FindImage;
         private System.Windows.Forms.Button button_ActionImageSearch_ShowArea;
-        private System.Windows.Forms.Label label__ActionImageSearch_IfNotFound;
+        private System.Windows.Forms.Label label_ActionImageSearch_IfNotFound;
         private System.Windows.Forms.Label label_ActionImageSearch_IfFound;
         private System.Windows.Forms.Label label_ActionImageSearch_Threshold;
         private System.Windows.Forms.Label label_ActionImageSearch_Y2;

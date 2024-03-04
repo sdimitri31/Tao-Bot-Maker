@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxPanelActionKey = new System.Windows.Forms.TextBox();
+            this.textBox_Key = new System.Windows.Forms.TextBox();
             this.label_Key = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayout.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBoxPanelActionKey
+            // textBox_Key
             // 
-            this.textBoxPanelActionKey.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxPanelActionKey.Location = new System.Drawing.Point(251, 14);
-            this.textBoxPanelActionKey.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxPanelActionKey.MaxLength = 1;
-            this.textBoxPanelActionKey.Name = "textBoxPanelActionKey";
-            this.textBoxPanelActionKey.Size = new System.Drawing.Size(243, 22);
-            this.textBoxPanelActionKey.TabIndex = 1;
+            this.textBox_Key.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBox_Key.Location = new System.Drawing.Point(251, 14);
+            this.textBox_Key.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Key.MaxLength = 1;
+            this.textBox_Key.Name = "textBox_Key";
+            this.textBox_Key.Size = new System.Drawing.Size(243, 22);
+            this.textBox_Key.TabIndex = 1;
             // 
             // label_Key
             // 
@@ -56,40 +56,40 @@
             this.label_Key.Text = "Touche :";
             this.label_Key.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanel1
+            // tableLayout
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.textBoxPanelActionKey, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label_Key, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 50);
-            this.tableLayoutPanel1.TabIndex = 3;
+            this.tableLayout.ColumnCount = 2;
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayout.Controls.Add(this.textBox_Key, 1, 0);
+            this.tableLayout.Controls.Add(this.label_Key, 0, 0);
+            this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayout.Location = new System.Drawing.Point(0, 0);
+            this.tableLayout.Name = "tableLayout";
+            this.tableLayout.RowCount = 1;
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayout.Size = new System.Drawing.Size(497, 50);
+            this.tableLayout.TabIndex = 3;
             // 
             // ActionKeyPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tableLayout);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ActionKeyPanel";
             this.Size = new System.Drawing.Size(497, 50);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayout.ResumeLayout(false);
+            this.tableLayout.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxPanelActionKey;
+        private System.Windows.Forms.TextBox textBox_Key;
         private System.Windows.Forms.Label label_Key;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayout;
     }
 }

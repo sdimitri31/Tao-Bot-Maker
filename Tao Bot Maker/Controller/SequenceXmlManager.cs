@@ -88,8 +88,8 @@ namespace Tao_Bot_Maker
                     case (int)Action.ActionType.Loop:
                         ActionLoop actionLoop = (ActionLoop)action;
                         doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionLoop.Type),
-                                                                                      new XAttribute("nbRepetition", actionLoop.NumberOfRepetitions),
-                                                                                      actionLoop.SequencePath));
+                                                                                      new XAttribute("nbRepetition", actionLoop.RepeatNumber),
+                                                                                      actionLoop.SequenceName));
                         break;
 
                     case (int)Action.ActionType.ImageSearch:
@@ -223,8 +223,8 @@ namespace Tao_Bot_Maker
 
                             case (int)Action.ActionType.Loop:
                                 ActionLoop actionLoop = new ActionLoop();
-                                actionLoop.SequencePath = (string)xmlAction;
-                                actionLoop.NumberOfRepetitions = Int32.Parse(xmlAction.Attribute("nbRepetition").Value);
+                                actionLoop.SequenceName = (string)xmlAction;
+                                actionLoop.RepeatNumber = Int32.Parse(xmlAction.Attribute("nbRepetition").Value);
                                 newSequence.AddAction(actionLoop);
                                 break;
 
@@ -266,6 +266,18 @@ namespace Tao_Bot_Maker
                 sequencesList.Add(Path.GetFileNameWithoutExtension(file.FullName));
             }
             return sequencesList;
+        }
+
+        public static List<String> SequencesListFiltered(string nameToExclude)
+        {
+            List<string> sequenceListFiltered = new List<string>();
+            foreach (string sequence in SequenceXmlManager.SequencesList())
+            {
+                //Add sequence to list if it's not the current sequence loaded to prevent Infinite loop
+                if (sequence != nameToExclude)
+                    sequenceListFiltered.Add(sequence);
+            }
+            return sequenceListFiltered;
         }
 
         public static bool IsNameUsed(String name)

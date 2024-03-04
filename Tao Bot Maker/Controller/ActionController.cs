@@ -93,7 +93,7 @@ namespace Tao_Bot_Maker
             switch (type)
             {
                 case (int)Action.ActionType.Key:
-                    return (ActionKeyController.GetActionFromControl((ActionKeyPanel)control), "");
+                    return ActionKeyController.GetActionFromControl((ActionKeyPanel)control);
                 case (int)Action.ActionType.Wait:
                     return (ActionWaitController.GetActionFromControl((ActionWaitPanel)control), "");
                 case (int)Action.ActionType.Sequence:
@@ -101,9 +101,9 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.Click:
                     return ActionClickController.GetActionFromControl((ActionClickPanel)control);
                 case (int)Action.ActionType.Loop:
-                    return (ActionLoopController.GetActionFromControl((ActionLoopPanel)control), "");
+                    return ActionLoopController.GetActionFromControl((ActionLoopPanel)control);
                 case (int)Action.ActionType.ImageSearch:
-                    return (ActionImageSearchController.GetActionFromControl((ActionImageSearchPanel)control), "");
+                    return ActionImageSearchController.GetActionFromControl((ActionImageSearchPanel)control);
                 default:
                     return (null, "Not found");
             }
@@ -122,7 +122,7 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.Click:
                     return new ActionClickPanel(actionView, action);
                 case (int)Action.ActionType.Loop:
-                    return new ActionLoopPanel(action);
+                    return new ActionLoopPanel(actionView, action);
                 case (int)Action.ActionType.ImageSearch:
                     return new ActionImageSearchPanel(actionView, action);
                 default:

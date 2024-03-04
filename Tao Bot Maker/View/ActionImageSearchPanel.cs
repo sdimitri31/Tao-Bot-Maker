@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,16 +18,16 @@ namespace Tao_Bot_Maker.View
 {
     public partial class ActionImageSearchPanel : UserControl
     {
-        private String originalPath;    //Full path before moving
-        private String pictureName;     //Text to show on the button
+        private string originalPath;    //Full path before moving
+        private string pictureName;     //Text to show on the button
         private int threshold;
         private int x1;
         private int y1;
         private int x2;
         private int y2;
         private int expiration;
-        private String ifFound;
-        private String ifNotFound;
+        private string ifFound;
+        private string ifNotFound;
 
         ActionView actionView;
 
@@ -39,13 +40,7 @@ namespace Tao_Bot_Maker.View
             originalPath = null;
             this.actionView = actionView;
 
-            List<string> sequenceListFiltered = new List<string>();
-            foreach (string sequence in SequenceXmlManager.SequencesList())
-            {
-                //Add sequence to list if it's not the current sequence loaded to prevent Infinite loop
-                if (sequence != actionView.GetLoadedSequenceName())
-                    sequenceListFiltered.Add(sequence);
-            }
+            List<string> sequenceListFiltered = SequenceXmlManager.SequencesListFiltered(actionView.GetLoadedSequenceName());
 
             flatComboBox_ActionImageSearch_IfFound.Items.AddRange(sequenceListFiltered.ToArray());
             flatComboBox_ActionImageSearch_IfNotFound.Items.AddRange(sequenceListFiltered.ToArray());
@@ -82,9 +77,10 @@ namespace Tao_Bot_Maker.View
 
         private void Localization()
         {
-            label__ActionImageSearch_IfNotFound.Text = Properties.strings.label_SequenceIfNotFound;
+            label_ActionImageSearch_IfNotFound.Text = Properties.strings.label_SequenceIfNotFound;
             label_ActionImageSearch_IfFound.Text = Properties.strings.label_SequenceIfPicture;
             label_ActionImageSearch_Threshold.Text = Properties.strings.label_Threshold;
+            label_ActionImageSearch_Expiration.Text = Properties.strings.label_Expiration;
             button_ActionImageSearch_ClearArea.Text = Properties.strings.button_ClearArea;
             button_ActionImageSearch_FindImage.Text = Properties.strings.button_FindImage;
             button_ActionImageSearch_PathImage.Text = Properties.strings.button_Picture;
@@ -104,7 +100,7 @@ namespace Tao_Bot_Maker.View
             label_ActionImageSearch_Y2.Text += " (" + hotkeyXY2.ToString() + ")";
         }
 
-        public String OriginalPath
+        public string OriginalPath
         {
             get
             {
@@ -119,7 +115,7 @@ namespace Tao_Bot_Maker.View
             }
             set { originalPath = value.ToString(); }
         }
-        public String PictureName
+        public string PictureName
         {
             get
             {
@@ -258,7 +254,7 @@ namespace Tao_Bot_Maker.View
                 numericUpDown_ActionImageSearch_Expiration.Text = value.ToString();
             }
         }
-        public String IfFound
+        public string IfFound
         {
             get
             {
@@ -266,7 +262,7 @@ namespace Tao_Bot_Maker.View
                 {
                     if (flatComboBox_ActionImageSearch_IfFound.SelectedItem != null)
                     {
-                        String sequenceName = flatComboBox_ActionImageSearch_IfFound.SelectedItem.ToString();
+                        string sequenceName = flatComboBox_ActionImageSearch_IfFound.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return null;
@@ -282,7 +278,7 @@ namespace Tao_Bot_Maker.View
                 flatComboBox_ActionImageSearch_IfFound.SelectedItem = value.ToString(); 
             }
         }
-        public String IfNotFound
+        public string IfNotFound
         {
             get
             {
@@ -290,7 +286,7 @@ namespace Tao_Bot_Maker.View
                 {
                     if (flatComboBox_ActionImageSearch_IfNotFound.SelectedItem != null)
                     {
-                        String sequenceName = flatComboBox_ActionImageSearch_IfNotFound.SelectedItem.ToString();
+                        string sequenceName = flatComboBox_ActionImageSearch_IfNotFound.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return null;
@@ -343,7 +339,7 @@ namespace Tao_Bot_Maker.View
         private void Button_ActionImageSearch_FindImage_Click(object sender, EventArgs e)
         {
             //Looking for image
-            String[] results_if_image = ImageSearchController.FindImage(originalPath, Threshold, X1, Y1, X2, Y2);
+            string[] results_if_image = ImageSearchController.FindImage(originalPath, Threshold, X1, Y1, X2, Y2);
 
             //If something is found
             if (results_if_image != null)
@@ -358,17 +354,18 @@ namespace Tao_Bot_Maker.View
                     Int32.Parse(results_if_image[2]) - 15,
                     img.Width + 30,
                     img.Height + 30);
-                actionView.RefreshRectangles();
 
-                MessageBox.Show("IMG FOUND\r\n " +
-                    "Coords X :" + results_if_image[1] + " Y : " + results_if_image[2]);
-                //actionView.Log(Log.INFO, "Image trouvée X : " + results_if_image[1] + " Y : " + results_if_image[2]);
+                string message = Properties.strings.MessageBox_ImageFound + "\r\n " +
+                    "X : " + results_if_image[1] + " Y : " + results_if_image[2];
+
+                MessageBox.Show(message);
+                Log.Write(message, LogFramework.Log.TRACE);
 
             }
             else
             {
-                MessageBox.Show("IMG NOT FOUND");
-                //actionView.Log(Log.INFO, "Image introuvable");
+                MessageBox.Show(Properties.strings.MessageBox_ImageNotFound);
+                Log.Write(Properties.strings.MessageBox_ImageNotFound, LogFramework.Log.TRACE);
             }
 
         }
@@ -376,7 +373,6 @@ namespace Tao_Bot_Maker.View
         private void Button_ActionImageSearch_ClearArea_Click(object sender, EventArgs e)
         {
             actionView.ClearRectangles();
-            actionView.RefreshRectangles();
         }
 
         private void Button_ActionImageSearch_ShowArea_Click(object sender, EventArgs e)

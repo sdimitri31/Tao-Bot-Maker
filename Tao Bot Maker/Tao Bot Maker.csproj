@@ -291,4 +291,12 @@
     <Content Include="Resources\tao.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd "Tao Bot Maker"\bin\Release
+xcopy /Y ..\..\..\README.txt
+xcopy /Y C:\ImageSearchDLL.dll
+del *.pdb *.config *.zip
+tar -acvf ..\..\..\TaoBotMaker_v0.4.7.zip *
+cd ..\..\..</PostBuildEvent>
+  </PropertyGroup>
 </Project>

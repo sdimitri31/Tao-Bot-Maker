@@ -47,7 +47,7 @@ namespace Tao_Bot_Maker.View
         // Public
         //
 
-        public String SelectedClick
+        public string SelectedClick
         {
             get
             {

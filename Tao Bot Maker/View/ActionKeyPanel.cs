@@ -27,15 +27,15 @@ namespace Tao_Bot_Maker.View
             label_Key.Text = Properties.strings.label_Key;
         }
 
-        public String Key
+        public string Key
         {
             get
             {
                 try
                 {
-                    if (textBoxPanelActionKey.Text != null)
+                    if (textBox_Key.Text != null)
                     {
-                        String Key = textBoxPanelActionKey.Text;
+                        string Key = textBox_Key.Text;
                         return Key;
                     }
                     return "";
@@ -45,7 +45,7 @@ namespace Tao_Bot_Maker.View
                     return "";
                 }
             }
-            set { textBoxPanelActionKey.Text = value.ToString(); }
+            set { textBox_Key.Text = value.ToString(); }
         }
     }
 }

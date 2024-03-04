@@ -2,23 +2,27 @@
 
 namespace Tao_Bot_Maker
 {
-    class ActionKey : Action
+    public class ActionKey : Action
     {
         public ActionKey()
         {
             Type = (int) ActionType.Key;
         }
-        public ActionKey(String key)
+        public ActionKey(string key)
         {
             Type = (int)ActionType.Key;
             Key = key;
         }
 
-        public String Key { get; set; }
+        public string Key { get; set; }
 
         public override string ToString()
         {
-            return "Action Touche; Touche : " + Key;
+            string text = "";
+            text +=         Properties.strings.action + " : " + Properties.strings.ActionName_Key;
+            text += " | " + Properties.strings.action_Member_Key + " : " + Key;
+
+            return text;
         }
     }
 }
