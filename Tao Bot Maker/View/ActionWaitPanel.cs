@@ -13,19 +13,15 @@ namespace Tao_Bot_Maker.View
 {
     public partial class ActionWaitPanel : UserControl
     {
-        public ActionWaitPanel()
-        {
-            InitializeComponent();
-            Localization();
-        }
-
         public ActionWaitPanel(Action action = null)
         {
             InitializeComponent();
             Localization();
+
             if (action != null)
                 WaitTime = ((ActionWait)action).WaitTime;
         }
+
         private void Localization()
         {
             label_WaitTime.Text = Properties.strings.label_WaitTime;
@@ -37,7 +33,7 @@ namespace Tao_Bot_Maker.View
             {
                 try
                 {
-                    int numVal = Int32.Parse(textBoxWaitTime.Text);
+                    int numVal = Int32.Parse(numericUpDown_WaitTime.Text);
                     return numVal;
                 }
                 catch (FormatException)
@@ -45,7 +41,7 @@ namespace Tao_Bot_Maker.View
                     return -1;
                 }
             }
-            set { textBoxWaitTime.Text = value.ToString(); }
+            set { numericUpDown_WaitTime.Text = value.ToString(); }
         }
     }
 }

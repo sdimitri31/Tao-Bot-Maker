@@ -169,6 +169,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Delay must be between 1 and 999999.
+        /// </summary>
+        internal static string action_ErrorMessage_WaitTime {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_WaitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click.
         /// </summary>
         internal static string action_Member_Click {
@@ -273,6 +282,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string action_Member_Threshold {
             get {
                 return ResourceManager.GetString("action_Member_Threshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delay (ms).
+        /// </summary>
+        internal static string action_Member_WaitTime {
+            get {
+                return ResourceManager.GetString("action_Member_WaitTime", resourceCulture);
             }
         }
         

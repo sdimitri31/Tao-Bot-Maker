@@ -180,6 +180,9 @@
   <data name="action_ErrorMessage_ThresholdWrongInterval" xml:space="preserve">
     <value>Erreur : Tolérance doit être compris entre 0 et 255</value>
   </data>
+  <data name="action_ErrorMessage_WaitTime" xml:space="preserve">
+    <value>Erreur : L'attente doit être comprise entre 1 et 999999</value>
+  </data>
   <data name="action_Member_Click" xml:space="preserve">
     <value>Click</value>
   </data>
@@ -215,6 +218,9 @@
   </data>
   <data name="action_Member_Threshold" xml:space="preserve">
     <value>Tolérance</value>
+  </data>
+  <data name="action_Member_WaitTime" xml:space="preserve">
+    <value>Attendre (ms)</value>
   </data>
   <data name="action_Member_X1" xml:space="preserve">
     <value>X1</value>

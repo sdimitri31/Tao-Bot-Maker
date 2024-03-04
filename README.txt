@@ -1,5 +1,12 @@
 Changelog :
 
+Version 0.4.10 :
+- Change : Cleaning code for ActionWait classes
+- Add : Progress on localization
+
+Version 0.4.9 :
+- Change : Cleaning code for ActionSequence classes
+
 Version 0.4.8 :
 - Change : Cleaning code for ActionRepeatSequence classes
 - Add : Sequence can be repeated infinitly in Action "Repeat sequence"

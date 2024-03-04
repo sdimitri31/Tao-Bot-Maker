@@ -1,27 +1,63 @@
 ﻿
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 
 namespace Tao_Bot_Maker
 {
     public class ActionWaitController
     {
-        public ActionWaitController() { }
-
-        public static Action GetActionFromControl(ActionWaitPanel panel)
+        public static (ActionWait actionWait, string errorMessage) CreateAction(int waitTime)
         {
-            int waitTime = panel.WaitTime;
+            int errorCount = 0;
+            string errorMessage = "";
+
+            if (!ValidateWaitTime(waitTime, out string error))
+            {
+                errorCount++;
+                errorMessage += error + "\r\n";
+            }
+
             ActionWait actionWait = null;
-            if (waitTime > 0)
+
+            if (errorCount == 0)
             {
                 actionWait = new ActionWait(waitTime);
             }
+
+            //Return Error message if there is an error
+            if (actionWait == null)
+            {
+                Log.Write(errorMessage, LogFramework.Log.ERROR);
+                return (null, errorMessage);
+            }
+            //Or ActionClick if no error
+            else
+                return (actionWait, "");
+        }
+
+        private static bool ValidateWaitTime(int waitTime, out string errorMessage)
+        {
+            errorMessage = "";
+
+            if ((waitTime >= 0) && (waitTime <= 999999))
+            {
+                Log.Write("ValidateWaitTime(" + waitTime + ") Result : true", LogFramework.Log.TRACE);
+                return true;
+            }
             else
             {
-                MessageBox.Show("Error : Wait time should be a number greater than 0");
+                errorMessage = Properties.strings.action_ErrorMessage_RepeatNumber;
+                Log.Write("ValidatValidateWaitTimeeRepeatNumber(" + waitTime + ") Result : false", LogFramework.Log.ERROR);
+                return false;
             }
+        }
 
-            return actionWait;
+        public static (ActionWait actionWait, string errorMessage) GetActionFromControl(ActionWaitPanel panel)
+        {
+            var (actionWait, errorMessage) = CreateAction(panel.WaitTime);
+
+            return (actionWait, errorMessage);
         }
 
     }

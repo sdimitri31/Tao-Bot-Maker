@@ -1,6 +1,6 @@
 ﻿namespace Tao_Bot_Maker
 {
-    class ActionWait : Action
+    public class ActionWait : Action
     {
         public ActionWait()
         {
@@ -17,7 +17,11 @@
 
         public override string ToString()
         {
-            return "Action Wait; Wait time : " + WaitTime + "ms";
+            string text = "";
+            text += Properties.strings.action + " : " + Properties.strings.ActionName_Wait;
+            text += " | " + Properties.strings.action_Member_WaitTime + " : " + WaitTime;
+
+            return text;
         }
     }
 }
