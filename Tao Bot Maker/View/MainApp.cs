@@ -316,11 +316,12 @@ namespace Tao_Bot_Maker
         {
             Log.Write(Properties.strings.log_Loading_Sequence + sequenceName, LogFramework.Log.TRACE);
 
-            if((sequenceName != null) && (sequenceName != ""))
+            if(!string.IsNullOrEmpty(sequenceName))
             {
                 //Get Sequence from XML
                 this.sequenceController.Sequence = SequenceXmlManager.LoadSequence(sequenceName);
                 LoadedSequenceName = sequenceName;
+                isSequenceSaved = true;
                 Log.Write(Properties.strings.log_Loading_Sequence_Success, LogFramework.Log.TRACE);
                 return true;
             }
@@ -379,7 +380,7 @@ namespace Tao_Bot_Maker
             LoadActions();
 
             isSequenceSaved = true;
-            lastIndexSequenceLoaded = 0;
+            lastIndexSequenceLoaded = -1;
             LoadedSequenceName = "";
 
             UpdateAllButtonState();
@@ -743,7 +744,7 @@ namespace Tao_Bot_Maker
 
                     if (!isSequenceSaved)
                     {
-                        DialogResult dr = MessageBox.Show(Properties.strings.MessageBox_WarningSequenceNotSaved, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult dr = MessageBox.Show(Properties.strings.MessageBox_WarningSequenceNotSaved_ChangeSequence, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                         //Prevent closing
                         if (dr == DialogResult.No)
@@ -781,7 +782,7 @@ namespace Tao_Bot_Maker
             //If the sequence has not been saved
             if(!isSequenceSaved)
             {
-                DialogResult dr = MessageBox.Show(Properties.strings.MessageBox_WarningSequenceNotSaved, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dr = MessageBox.Show(Properties.strings.MessageBox_WarningSequenceNotSaved_Exit, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 //Prevent closing
                 if (dr == DialogResult.No)

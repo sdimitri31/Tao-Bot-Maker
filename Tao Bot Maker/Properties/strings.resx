@@ -434,7 +434,11 @@ No : Image will be imported with a new name.</value>
     <value>Warning : This will delete the sequence entirely.
 Do you want to proceed ?</value>
   </data>
-  <data name="MessageBox_WarningSequenceNotSaved" xml:space="preserve">
+  <data name="MessageBox_WarningSequenceNotSaved_ChangeSequence" xml:space="preserve">
+    <value>Warning : Unsaved changes will be lost.
+Do you want to load selected sequence ?</value>
+  </data>
+  <data name="MessageBox_WarningSequenceNotSaved_Exit" xml:space="preserve">
     <value>Warning : Unsaved changes will be lost.
 Do you want to exit ?</value>
   </data>

@@ -431,7 +431,11 @@ Non : l'image va être importée avec un autre nom.</value>
     <value>Attention : La séquence va être supprimée.
 Voulez-vous continuer ?</value>
   </data>
-  <data name="MessageBox_WarningSequenceNotSaved" xml:space="preserve">
+  <data name="MessageBox_WarningSequenceNotSaved_ChangeSequence" xml:space="preserve">
+    <value>Attention : Les modifications non enregistrées vont être perdues.
+Voulez-vous charger la sequence ?</value>
+  </data>
+  <data name="MessageBox_WarningSequenceNotSaved_Exit" xml:space="preserve">
     <value>Attention : Les modifications non enregistrées vont être perdues.
 Voulez-vous quitter ?</value>
   </data>

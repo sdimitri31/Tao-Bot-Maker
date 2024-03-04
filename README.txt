@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.11 :
+- Fix : First sequence not loading when selected for the first time
+- Fix : MessageBox alerting for changes showing everytime after an action was edited even when no changes were made after loading
+
 Version 0.4.10 :
 - Change : Cleaning code for ActionWait classes
 - Add : Progress on localization

@@ -1003,11 +1003,21 @@ namespace Tao_Bot_Maker.Properties {
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Warning : Unsaved changes will be lost.
+        ///Do you want to load selected sequence ?.
+        /// </summary>
+        internal static string MessageBox_WarningSequenceNotSaved_ChangeSequence {
+            get {
+                return ResourceManager.GetString("MessageBox_WarningSequenceNotSaved_ChangeSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Warning : Unsaved changes will be lost.
         ///Do you want to exit ?.
         /// </summary>
-        internal static string MessageBox_WarningSequenceNotSaved {
+        internal static string MessageBox_WarningSequenceNotSaved_Exit {
             get {
-                return ResourceManager.GetString("MessageBox_WarningSequenceNotSaved", resourceCulture);
+                return ResourceManager.GetString("MessageBox_WarningSequenceNotSaved_Exit", resourceCulture);
             }
         }
         
