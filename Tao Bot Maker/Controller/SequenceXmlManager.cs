@@ -69,7 +69,7 @@ namespace Tao_Bot_Maker
 
                     case (int)Action.ActionType.Sequence:
                         ActionSequence actionSequence = (ActionSequence)action;
-                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionSequence.Type), actionSequence.SequencePath));
+                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionSequence.Type), actionSequence.SequenceName));
                         break;
 
                     case (int)Action.ActionType.Click:
@@ -188,7 +188,7 @@ namespace Tao_Bot_Maker
 
                             case (int)Action.ActionType.Sequence:
                                 ActionSequence actionSequence = new ActionSequence();
-                                actionSequence.SequencePath = (string)xmlAction;
+                                actionSequence.SequenceName = (string)xmlAction;
                                 newSequence.AddAction(actionSequence);
                                 break;
 

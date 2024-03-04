@@ -18,11 +18,11 @@ namespace Tao_Bot_Maker.View
             Localization();
 
             List<string> sequenceListFiltered = SequenceXmlManager.SequencesListFiltered(actionView.GetLoadedSequenceName());
-            flatComboBoxPanelActionSequence.Items.AddRange(sequenceListFiltered.ToArray());
+            flatComboBox_SequenceName.Items.AddRange(sequenceListFiltered.ToArray());
             
             if (action != null)
             {
-                SequencePath = ((ActionSequence)action).SequencePath;
+                SequenceName = ((ActionSequence)action).SequenceName;
             }
         }
 
@@ -31,15 +31,15 @@ namespace Tao_Bot_Maker.View
             label_Sequence.Text = Properties.strings.label_Sequence;
         }
 
-        public String SequencePath
+        public string SequenceName
         {
             get
             {
                 try
                 {
-                    if (flatComboBoxPanelActionSequence.SelectedItem != null)
+                    if (flatComboBox_SequenceName.SelectedItem != null)
                     {
-                        String sequenceName = flatComboBoxPanelActionSequence.SelectedItem.ToString();
+                        string sequenceName = flatComboBox_SequenceName.SelectedItem.ToString();
                         return sequenceName;
                     }
                     return "";
@@ -49,7 +49,7 @@ namespace Tao_Bot_Maker.View
                     return null;
                 }
             }
-            set { flatComboBoxPanelActionSequence.SelectedItem = value.ToString(); }
+            set { flatComboBox_SequenceName.SelectedItem = value.ToString(); }
         }
     }
 }

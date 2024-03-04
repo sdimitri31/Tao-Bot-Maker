@@ -150,12 +150,6 @@
     <Compile Include="View\ActionLoopPanel.Designer.cs">
       <DependentUpon>ActionLoopPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ActionPictureWaitPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionPictureWaitPanel.Designer.cs">
-      <DependentUpon>ActionPictureWaitPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\ActionSequencePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -221,9 +215,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ActionLoopPanel.resx">
       <DependentUpon>ActionLoopPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionPictureWaitPanel.resx">
-      <DependentUpon>ActionPictureWaitPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ActionSequencePanel.resx">
       <DependentUpon>ActionSequencePanel.cs</DependentUpon>
@@ -296,7 +287,7 @@
 xcopy /Y ..\..\..\README.txt
 xcopy /Y C:\ImageSearchDLL.dll
 del *.pdb *.config *.zip
-tar -acvf ..\..\..\TaoBotMaker_v0.4.7.zip *
+tar -acvf ..\..\..\TaoBotMaker_v0.4.9.zip *
 cd ..\..\..</PostBuildEvent>
   </PropertyGroup>
 </Project>

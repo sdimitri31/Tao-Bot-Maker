@@ -2,23 +2,27 @@
 
 namespace Tao_Bot_Maker
 {
-    class ActionSequence : Action
+    public class ActionSequence : Action
     {
         public ActionSequence()
         {
             Type = (int)ActionType.Sequence;
         }
 
-        public ActionSequence(String sequencePath)
+        public ActionSequence(string sequenceName)
         {
             Type = (int)ActionType.Sequence;
-            SequencePath = sequencePath;
+            SequenceName = sequenceName;
         }
-        public String SequencePath { get; set; }
+        public string SequenceName { get; set; }
 
         public override string ToString()
         {
-            return "Action Sequence; Séquence : " + SequencePath;
+            string text = "";
+            text += Properties.strings.action + " : " + Properties.strings.ActionName_Sequence;
+            text += " | " + Properties.strings.action_Member_Sequence + " : " + SequenceName;
+            
+            return text;
         }
     }
 }

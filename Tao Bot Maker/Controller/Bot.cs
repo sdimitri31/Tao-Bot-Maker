@@ -284,8 +284,13 @@ namespace Tao_Bot_Maker
         private void DoActionSequence(Action action)
         {
             ActionSequence actionSequence = (ActionSequence)action;
-            Log.Write("Action : sequence " + actionSequence.SequencePath, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
-            DoSequence(SequenceXmlManager.LoadSequence(actionSequence.SequencePath), drawingArea);
+
+            string text = "";
+            text += Properties.strings.action + " : " + Properties.strings.ActionName_Sequence;
+            text += " | " + Properties.strings.action_Member_Sequence + " : " + actionSequence.SequenceName;
+            Log.Write(text, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+
+            DoSequence(SequenceXmlManager.LoadSequence(actionSequence.SequenceName), drawingArea);
         }
         
         private void DoActionClick(Action action)

@@ -97,7 +97,7 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.Wait:
                     return (ActionWaitController.GetActionFromControl((ActionWaitPanel)control), "");
                 case (int)Action.ActionType.Sequence:
-                    return (ActionSequenceController.GetActionFromControl((ActionSequencePanel)control), "");
+                    return ActionSequenceController.GetActionFromControl((ActionSequencePanel)control);
                 case (int)Action.ActionType.Click:
                     return ActionClickController.GetActionFromControl((ActionClickPanel)control);
                 case (int)Action.ActionType.Loop:
