@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.13 :
+- Fix : Labels X and Y were not properly coloring 
+- Add : HotKey View now color duplicated hotkeys
+
 Version 0.4.12 :
 - Change : Add/Edit Action form redesigned
 - Change : UI colors improved

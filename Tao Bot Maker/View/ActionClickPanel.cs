@@ -274,5 +274,10 @@ namespace Tao_Bot_Maker.View
         {
             DrawArea();
         }
+
+        private void ActionClickPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            UpdateLabelsColor();
+        }
     }
 }

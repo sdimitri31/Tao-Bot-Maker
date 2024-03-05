@@ -397,6 +397,7 @@
             this.Name = "ActionClickPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(497, 325);
+            this.VisibleChanged += new System.EventHandler(this.ActionClickPanel_VisibleChanged);
             this.tableLayout.ResumeLayout(false);
             this.tableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_X1)).EndInit();

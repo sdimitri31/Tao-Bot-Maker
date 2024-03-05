@@ -16,6 +16,8 @@ namespace Tao_Bot_Maker.View
 {
     public partial class HotkeyView : Form
     {
+        Color textColor;
+
         public Hotkey ReturnHotkeyStartBot { get; set; }
         public Hotkey ReturnHotkeyStopBot { get; set; }
         public Hotkey ReturnHotkeyXY { get; set; }
@@ -27,6 +29,7 @@ namespace Tao_Bot_Maker.View
             Localization();
 
             DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
+            textColor = groupBox_StartBot.ForeColor;
 
             flatComboBoxStartBotKey.DataSource = Enum.GetValues(typeof(Keys));
             flatComboBoxStartBotKey.SelectedItem = SettingsController.GetHotkeyKeyStartBot();
@@ -83,36 +86,75 @@ namespace Tao_Bot_Maker.View
 
         private bool IsDuplicate()
         {
-            int modifier = 0;
-            
-            //StartBot key
-            modifier = MainApp.Reverse3Bits((int)GetStartBotModifier()) << 16;
-            Keys keyStartBot = (Keys)((int)flatComboBoxStartBotKey.SelectedItem | modifier);
+            if ((flatComboBoxStartBotKey.SelectedItem != null) &&
+                (flatComboBoxStopBotKey.SelectedItem != null) &&
+                (flatComboBoxXYKey.SelectedItem != null) &&
+                (flatComboBoxXY2Key.SelectedItem != null))
+            {
+                int modifier;
 
-            //StopBot key
-            modifier = MainApp.Reverse3Bits((int)GetStopBotModifier()) << 16;
-            Keys keyStopBot = (Keys)((int)flatComboBoxStopBotKey.SelectedItem | modifier);
+                //StartBot key
+                modifier = MainApp.Reverse3Bits((int)GetStartBotModifier()) << 16;
+                Keys keyStartBot = (Keys)((int)flatComboBoxStartBotKey.SelectedItem | modifier);
 
-            //XY key
-            modifier = MainApp.Reverse3Bits((int)GetXYModifier()) << 16;
-            Keys keyXY = (Keys)((int)flatComboBoxXYKey.SelectedItem | modifier);
+                //StopBot key
+                modifier = MainApp.Reverse3Bits((int)GetStopBotModifier()) << 16;
+                Keys keyStopBot = (Keys)((int)flatComboBoxStopBotKey.SelectedItem | modifier);
 
-            //XY2 key
-            modifier = MainApp.Reverse3Bits((int)GetXY2Modifier()) << 16;
-            Keys keyXY2 = (Keys)((int)flatComboBoxXY2Key.SelectedItem | modifier);
-            
-            if(keyStartBot == keyStopBot)
-                return true;
-            else if (keyStartBot == keyXY)
-                return true;
-            else if (keyStartBot == keyXY2)
-                return true;
-            else if (keyStopBot == keyXY) 
-                return true;
-            else if (keyStopBot == keyXY2)
-                return true;
-            else if (keyXY == keyXY2)
-                return true;
+                //XY key
+                modifier = MainApp.Reverse3Bits((int)GetXYModifier()) << 16;
+                Keys keyXY = (Keys)((int)flatComboBoxXYKey.SelectedItem | modifier);
+
+                //XY2 key
+                modifier = MainApp.Reverse3Bits((int)GetXY2Modifier()) << 16;
+                Keys keyXY2 = (Keys)((int)flatComboBoxXY2Key.SelectedItem | modifier);
+
+                bool isDuplicate = false;
+
+                groupBox_StartBot.ForeColor = textColor;
+                groupBox_StopBot.ForeColor = textColor;
+                groupBox_XY.ForeColor = textColor;
+                groupBox_XY2.ForeColor = textColor;
+
+                if (keyStartBot == keyStopBot)
+                {
+                    groupBox_StartBot.ForeColor = Color.Red;
+                    groupBox_StopBot.ForeColor = Color.Red;
+                    isDuplicate = true;
+                }
+                if (keyStartBot == keyXY)
+                {
+                    groupBox_StartBot.ForeColor = Color.Red;
+                    groupBox_XY.ForeColor = Color.Red;
+                    isDuplicate = true;
+                }
+                if (keyStartBot == keyXY2)
+                {
+                    groupBox_StartBot.ForeColor = Color.Red;
+                    groupBox_XY2.ForeColor = Color.Red;
+                    isDuplicate = true;
+                }
+                if (keyStopBot == keyXY)
+                {
+                    groupBox_StopBot.ForeColor = Color.Red;
+                    groupBox_XY.ForeColor = Color.Red;
+                    isDuplicate = true;
+                }
+                if (keyStopBot == keyXY2)
+                {
+                    groupBox_StopBot.ForeColor = Color.Red;
+                    groupBox_XY2.ForeColor = Color.Red;
+                    isDuplicate = true;
+                }
+                if (keyXY == keyXY2)
+                {
+                    groupBox_XY.ForeColor = Color.Red;
+                    groupBox_XY2.ForeColor = Color.Red;
+                    isDuplicate = true;
+                }
+
+                return isDuplicate;
+            }
 
             return false;
         }
@@ -212,6 +254,15 @@ namespace Tao_Bot_Maker.View
             }
             return modifier;
         }
-        
+
+        private void FlatComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IsDuplicate();
+        }
+
+        private void CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            IsDuplicate();
+        }
     }
 }

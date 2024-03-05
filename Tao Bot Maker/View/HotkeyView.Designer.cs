@@ -80,6 +80,7 @@
             this.flatComboBoxStopBotKey.Name = "flatComboBoxStopBotKey";
             this.flatComboBoxStopBotKey.Size = new System.Drawing.Size(248, 24);
             this.flatComboBoxStopBotKey.TabIndex = 4;
+            this.flatComboBoxStopBotKey.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
             // 
             // checkBox_StopBot_Shift
             // 
@@ -91,6 +92,7 @@
             this.checkBox_StopBot_Shift.TabIndex = 3;
             this.checkBox_StopBot_Shift.Text = "Shift";
             this.checkBox_StopBot_Shift.UseVisualStyleBackColor = true;
+            this.checkBox_StopBot_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_StopBot_Alt
             // 
@@ -102,6 +104,7 @@
             this.checkBox_StopBot_Alt.TabIndex = 2;
             this.checkBox_StopBot_Alt.Text = "Alt";
             this.checkBox_StopBot_Alt.UseVisualStyleBackColor = true;
+            this.checkBox_StopBot_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_StopBot_Ctrl
             // 
@@ -113,6 +116,7 @@
             this.checkBox_StopBot_Ctrl.TabIndex = 1;
             this.checkBox_StopBot_Ctrl.Text = "Ctrl";
             this.checkBox_StopBot_Ctrl.UseVisualStyleBackColor = true;
+            this.checkBox_StopBot_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // groupBox_XY
             // 
@@ -137,6 +141,7 @@
             this.flatComboBoxXYKey.Name = "flatComboBoxXYKey";
             this.flatComboBoxXYKey.Size = new System.Drawing.Size(241, 24);
             this.flatComboBoxXYKey.TabIndex = 4;
+            this.flatComboBoxXYKey.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
             // 
             // checkBox_XY_Shift
             // 
@@ -148,6 +153,7 @@
             this.checkBox_XY_Shift.TabIndex = 3;
             this.checkBox_XY_Shift.Text = "Shift";
             this.checkBox_XY_Shift.UseVisualStyleBackColor = true;
+            this.checkBox_XY_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_XY_Alt
             // 
@@ -159,6 +165,7 @@
             this.checkBox_XY_Alt.TabIndex = 2;
             this.checkBox_XY_Alt.Text = "Alt";
             this.checkBox_XY_Alt.UseVisualStyleBackColor = true;
+            this.checkBox_XY_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_XY_Ctrl
             // 
@@ -170,6 +177,7 @@
             this.checkBox_XY_Ctrl.TabIndex = 1;
             this.checkBox_XY_Ctrl.Text = "Ctrl";
             this.checkBox_XY_Ctrl.UseVisualStyleBackColor = true;
+            this.checkBox_XY_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // groupBox_XY2
             // 
@@ -194,6 +202,7 @@
             this.flatComboBoxXY2Key.Name = "flatComboBoxXY2Key";
             this.flatComboBoxXY2Key.Size = new System.Drawing.Size(241, 24);
             this.flatComboBoxXY2Key.TabIndex = 4;
+            this.flatComboBoxXY2Key.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
             // 
             // checkBox_XY2_Shift
             // 
@@ -205,6 +214,7 @@
             this.checkBox_XY2_Shift.TabIndex = 3;
             this.checkBox_XY2_Shift.Text = "Shift";
             this.checkBox_XY2_Shift.UseVisualStyleBackColor = true;
+            this.checkBox_XY2_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_XY2_Alt
             // 
@@ -216,6 +226,7 @@
             this.checkBox_XY2_Alt.TabIndex = 2;
             this.checkBox_XY2_Alt.Text = "Alt";
             this.checkBox_XY2_Alt.UseVisualStyleBackColor = true;
+            this.checkBox_XY2_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_XY2_Ctrl
             // 
@@ -227,6 +238,7 @@
             this.checkBox_XY2_Ctrl.TabIndex = 1;
             this.checkBox_XY2_Ctrl.Text = "Ctrl";
             this.checkBox_XY2_Ctrl.UseVisualStyleBackColor = true;
+            this.checkBox_XY2_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // button_Shortcuts_OK
             // 
@@ -261,6 +273,7 @@
             this.checkBox_StartBot_Ctrl.TabIndex = 1;
             this.checkBox_StartBot_Ctrl.Text = "Ctrl";
             this.checkBox_StartBot_Ctrl.UseVisualStyleBackColor = true;
+            this.checkBox_StartBot_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_StartBot_Alt
             // 
@@ -272,6 +285,7 @@
             this.checkBox_StartBot_Alt.TabIndex = 2;
             this.checkBox_StartBot_Alt.Text = "Alt";
             this.checkBox_StartBot_Alt.UseVisualStyleBackColor = true;
+            this.checkBox_StartBot_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // checkBox_StartBot_Shift
             // 
@@ -283,6 +297,7 @@
             this.checkBox_StartBot_Shift.TabIndex = 3;
             this.checkBox_StartBot_Shift.Text = "Shift";
             this.checkBox_StartBot_Shift.UseVisualStyleBackColor = true;
+            this.checkBox_StartBot_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // groupBox_StartBot
             // 
@@ -307,6 +322,7 @@
             this.flatComboBoxStartBotKey.Name = "flatComboBoxStartBotKey";
             this.flatComboBoxStartBotKey.Size = new System.Drawing.Size(248, 24);
             this.flatComboBoxStartBotKey.TabIndex = 4;
+            this.flatComboBoxStartBotKey.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
             // 
             // HotkeyView
             // 

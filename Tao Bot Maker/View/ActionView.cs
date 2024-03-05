@@ -76,8 +76,12 @@ namespace Tao_Bot_Maker.View
         public ActionView(MainApp app, Action action = null)
         {
             InitializeComponent();
-            DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
             this.app = app;
+
+            //Load all panels to prevent flickering
+            LoadPanels(action);
+
+            DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
 
             //Create a form to enable drawing
             drawingForm = new DrawingRectangle();
@@ -88,8 +92,6 @@ namespace Tao_Bot_Maker.View
             //Populate listBox with actions names
             listBox_Actions.Items.AddRange(ActionController.GetActionItems());
 
-            //Load all panels to prevent flickering
-            LoadPanels(action);
 
             //No panel selected
             if (action == null)
