@@ -84,26 +84,23 @@ namespace Tao_Bot_Maker.View
 
         public int X1
         {
-            get { return ((int)numericUpDown_X1.Value); }
-            set { numericUpDown_X1.Value = value; }
+            get => (int)numericUpDown_X1.Value;
+            set => numericUpDown_X1.Value = value;
         }
-
-        public int Y1
-        {
-            get { return ((int)numericUpDown_Y1.Value); }
-            set { numericUpDown_Y1.Value = value; }
-        }
-
         public int X2
         {
-            get { return ((int)numericUpDown_X2.Value); }
-            set { numericUpDown_X2.Value = value; }
+            get => (int)numericUpDown_X2.Value;
+            set => numericUpDown_X2.Value = value;
         }
-
+        public int Y1
+        {
+            get => (int)numericUpDown_Y1.Value;
+            set => numericUpDown_Y1.Value = value;
+        }
         public int Y2
         {
-            get { return ((int)numericUpDown_Y2.Value); }
-            set { numericUpDown_Y2.Value = value; }
+            get => (int)numericUpDown_Y2.Value;
+            set => numericUpDown_Y2.Value = value;
         }
 
         public bool IsDoubleClick

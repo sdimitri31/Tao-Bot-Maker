@@ -56,23 +56,8 @@ namespace Tao_Bot_Maker.View
 
         public int RepeatNumber
         {
-            get
-            {
-                try
-                {
-                    if (numericUpDown_RepeatNumber.Text != null)
-                    {
-                        int repeatNumber = Int32.Parse(numericUpDown_RepeatNumber.Text);
-                        return repeatNumber;
-                    }
-                    return -1;
-                }
-                catch
-                {
-                    return -1;
-                }
-            }
-            set { numericUpDown_RepeatNumber.Text = value.ToString(); }
+            get => (int)numericUpDown_RepeatNumber.Value;
+            set => numericUpDown_RepeatNumber.Value = value;
         }
     }
 }

@@ -1,5 +1,8 @@
 Changelog :
 
+Version 0.4.14 :
+- Fix : Prevent crash when entering value above int32 range
+
 Version 0.4.13 :
 - Fix : Labels X and Y were not properly coloring 
 - Add : HotKey View now color duplicated hotkeys

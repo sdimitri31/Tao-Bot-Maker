@@ -29,19 +29,8 @@ namespace Tao_Bot_Maker.View
 
         public int WaitTime
         {
-            get 
-            {
-                try
-                {
-                    int numVal = Int32.Parse(numericUpDown_WaitTime.Text);
-                    return numVal;
-                }
-                catch (FormatException)
-                {
-                    return -1;
-                }
-            }
-            set { numericUpDown_WaitTime.Text = value.ToString(); }
+            get => (int)numericUpDown_WaitTime.Value;
+            set => numericUpDown_WaitTime.Value = value;
         }
     }
 }
