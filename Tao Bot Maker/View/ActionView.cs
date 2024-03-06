@@ -78,14 +78,15 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             this.app = app;
 
+            //Create a form to enable drawing
+            drawingForm = new DrawingRectangle();
+            drawingForm.Show();
+
             //Load all panels to prevent flickering
             LoadPanels(action);
 
             DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
 
-            //Create a form to enable drawing
-            drawingForm = new DrawingRectangle();
-            drawingForm.Show();
 
             Localization();
 

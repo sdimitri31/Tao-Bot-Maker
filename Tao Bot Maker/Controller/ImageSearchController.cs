@@ -50,7 +50,11 @@ namespace Tao_Bot_Maker.Controller
 
             if (File.Exists(path))
             {
-                results_if_image = ImageSearchController.UseImageSearchArea(path, Threshold.ToString(), X1, Y1, X2, Y2);
+                //Determine where are the corners
+                int[] xy = Utils.GetTopLeftCoords(X1, Y1, X2, Y2);
+                int[] xy2 = Utils.GetBottomRightCoords(X1, Y1, X2, Y2);
+
+                results_if_image = ImageSearchController.UseImageSearchArea(path, Threshold.ToString(), xy[0], xy[1], xy2[0], xy2[1]);
             }
             return results_if_image;
         }

@@ -283,6 +283,7 @@
             this.numericUpDown_X1.Name = "numericUpDown_X1";
             this.numericUpDown_X1.Size = new System.Drawing.Size(114, 22);
             this.numericUpDown_X1.TabIndex = 2;
+            this.numericUpDown_X1.ValueChanged += new System.EventHandler(this.NumericUpDown_Coords_ValueChanged);
             // 
             // numericUpDown_Y1
             // 
@@ -301,6 +302,7 @@
             this.numericUpDown_Y1.Name = "numericUpDown_Y1";
             this.numericUpDown_Y1.Size = new System.Drawing.Size(114, 22);
             this.numericUpDown_Y1.TabIndex = 3;
+            this.numericUpDown_Y1.ValueChanged += new System.EventHandler(this.NumericUpDown_Coords_ValueChanged);
             // 
             // numericUpDown_X2
             // 
@@ -319,6 +321,7 @@
             this.numericUpDown_X2.Name = "numericUpDown_X2";
             this.numericUpDown_X2.Size = new System.Drawing.Size(114, 22);
             this.numericUpDown_X2.TabIndex = 4;
+            this.numericUpDown_X2.ValueChanged += new System.EventHandler(this.NumericUpDown_Coords_ValueChanged);
             // 
             // numericUpDown_Y2
             // 
@@ -337,6 +340,7 @@
             this.numericUpDown_Y2.Name = "numericUpDown_Y2";
             this.numericUpDown_Y2.Size = new System.Drawing.Size(114, 22);
             this.numericUpDown_Y2.TabIndex = 5;
+            this.numericUpDown_Y2.ValueChanged += new System.EventHandler(this.NumericUpDown_Coords_ValueChanged);
             // 
             // numericUpDown_Threshold
             // 
@@ -394,6 +398,7 @@
             this.Name = "ActionImageSearchPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(497, 325);
+            this.VisibleChanged += new System.EventHandler(this.ActionImageSearchPanel_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Image)).EndInit();
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
+using Tao_Bot_Maker.View;
 using Log = Tao_Bot_Maker.Controller.Log;
 
 namespace Tao_Bot_Maker
@@ -192,7 +193,8 @@ namespace Tao_Bot_Maker
 
             //Picture searching area
             ClearRectangles();
-            DrawRectangle(actionPictureWait.X1, actionPictureWait.Y1, actionPictureWait.X2 - actionPictureWait.X1, actionPictureWait.Y2 - actionPictureWait.Y1);
+            int[] coordsHeightWidth = Utils.GetCoordsHeightWidth(actionPictureWait.X1, actionPictureWait.Y1, actionPictureWait.X2, actionPictureWait.Y2);
+            DrawRectangle(coordsHeightWidth[0] - 5, coordsHeightWidth[1] - 5, coordsHeightWidth[2] + 5, coordsHeightWidth[3] + 5);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -203,14 +205,17 @@ namespace Tao_Bot_Maker
             int secondsLastLoop = 0;
             while (results_wait_image == null)
             {
+                int[] xy = Utils.GetTopLeftCoords(actionPictureWait.X1, actionPictureWait.Y1, actionPictureWait.X2, actionPictureWait.Y2);
+                int[] xy2 = Utils.GetBottomRightCoords(actionPictureWait.X1, actionPictureWait.Y1, actionPictureWait.X2, actionPictureWait.Y2);
+                
                 //Searching picture in the area
                 results_wait_image = ImageSearchController.FindImage(
                     imageFullPath, 
-                    actionPictureWait.Threshold, 
-                    actionPictureWait.X1, 
-                    actionPictureWait.Y1, 
-                    actionPictureWait.X2, 
-                    actionPictureWait.Y2);
+                    actionPictureWait.Threshold,
+                    xy[0],
+                    xy[1],
+                    xy2[0],
+                    xy2[1]);
                 Thread.Sleep(10);
 
                 //Counting elapsed time searching for it
@@ -443,12 +448,9 @@ namespace Tao_Bot_Maker
             System.Drawing.Image imageWait = System.Drawing.Image.FromFile(imageFullPath);
 
             //Picture searching area with offset to prevent drawing over the target
-            ClearRectangles();
-            DrawRectangle(
-                actionImageSearch.X1 - 5,
-                actionImageSearch.Y1 - 5,
-                (actionImageSearch.X2 - actionImageSearch.X1) + 5,
-                (actionImageSearch.Y2 - actionImageSearch.Y1) + 5);
+            ClearRectangles(); 
+            int[] coordsHeightWidth = Utils.GetCoordsHeightWidth(actionImageSearch.X1, actionImageSearch.Y1, actionImageSearch.X2, actionImageSearch.Y2);
+            DrawRectangle(coordsHeightWidth[0] - 5, coordsHeightWidth[1] - 5, coordsHeightWidth[2] + 5, coordsHeightWidth[3] + 5);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -459,14 +461,17 @@ namespace Tao_Bot_Maker
             int secondsLastLoop = 0;
             while (results_wait_image == null)
             {
+                int[] xy = Utils.GetTopLeftCoords(actionImageSearch.X1, actionImageSearch.Y1, actionImageSearch.X2, actionImageSearch.Y2);
+                int[] xy2 = Utils.GetBottomRightCoords(actionImageSearch.X1, actionImageSearch.Y1, actionImageSearch.X2, actionImageSearch.Y2);
+
                 //Searching picture in the area
                 results_wait_image = ImageSearchController.FindImage(
                     imageFullPath,
                     actionImageSearch.Threshold,
-                    actionImageSearch.X1,
-                    actionImageSearch.Y1,
-                    actionImageSearch.X2,
-                    actionImageSearch.Y2);
+                    xy[0],
+                    xy[1],
+                    xy2[0],
+                    xy2[1]);
                 Thread.Sleep(10);
 
                 //Counting elapsed time searching for it

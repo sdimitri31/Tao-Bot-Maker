@@ -21,6 +21,8 @@ namespace Tao_Bot_Maker.View
         public ActionClickPanel(ActionView actionView, Action action = null)
         {
             InitializeComponent();
+            this.Visible = false;
+
             Localization();
             AddHotkeysToLabels();
             UpdateButtonState();
@@ -269,12 +271,17 @@ namespace Tao_Bot_Maker.View
 
         private void NumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            DrawArea();
+            if (this.Visible == true)
+                DrawArea();
         }
 
         private void ActionClickPanel_VisibleChanged(object sender, EventArgs e)
         {
-            UpdateLabelsColor();
+            if (this.Visible == true)
+            {
+                DrawArea();
+                UpdateLabelsColor();
+            }
         }
     }
 }

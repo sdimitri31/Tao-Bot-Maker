@@ -82,6 +82,7 @@
     <Compile Include="Controller\Log.cs" />
     <Compile Include="Controller\SequenceController.cs" />
     <Compile Include="Controller\SettingsController.cs" />
+    <Compile Include="Controller\Utils.cs" />
     <Compile Include="Import\DarkModeCS.cs" />
     <Compile Include="Import\FlatComboBox.cs">
       <SubType>Component</SubType>
@@ -287,7 +288,7 @@
 xcopy /Y ..\..\..\README.txt
 xcopy /Y C:\ImageSearchDLL.dll
 del *.pdb *.config *.zip
-tar -acvf ..\..\..\TaoBotMaker_v0.4.14.1.zip *
+tar -acvf ..\..\..\TaoBotMaker_v0.4.15.zip *
 cd ..\..\..</PostBuildEvent>
   </PropertyGroup>
 </Project>

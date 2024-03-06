@@ -1,5 +1,11 @@
 Changelog :
 
+Version 0.4.15 :
+- Add : Default value for XY2 in action ImageSearch View set to max screen size
+- Add : Search area and clic area drawn when selected in action add/edit view
+- Add : Search area and clic area drawn when coords are changed
+- Add : Coordinates doesn't needs to be top left and bottom right corners anymore when looking for image
+
 Version 0.4.14.1 :
 - Fix : Prevent crash when loading corrupted sequence
 

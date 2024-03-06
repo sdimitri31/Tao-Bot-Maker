@@ -26,14 +26,20 @@ namespace Tao_Bot_Maker.View
         public ActionImageSearchPanel(ActionView actionView, Action action = null)
         {
             InitializeComponent();
+            this.Visible = false;
+
             Localization();
             AddHotkeysToLabels();
 
             originalPath = null;
             this.actionView = actionView;
 
-            List<string> sequenceListFiltered = SequenceXmlManager.SequencesListFiltered(actionView.GetLoadedSequenceName());
+            //Defaulting XY2 values to max screen size
+            X2 = Screen.PrimaryScreen.Bounds.Width;
+            Y2 = Screen.PrimaryScreen.Bounds.Height;
 
+            //Loading sequences list without current selected sequence to prevent infinite loops
+            List<string> sequenceListFiltered = SequenceXmlManager.SequencesListFiltered(actionView.GetLoadedSequenceName());
             flatComboBox_IfFound.Items.AddRange(sequenceListFiltered.ToArray());
             flatComboBox_IfNotFound.Items.AddRange(sequenceListFiltered.ToArray());
 
@@ -233,7 +239,10 @@ namespace Tao_Bot_Maker.View
         public void DrawArea()
         {
             ClearArea();
-            actionView.DrawRectangle(X1, Y1, X2 - X1, Y2 - Y1, Constants.COLOR_LABEL_XY);
+
+            int[] xy = Utils.GetCoordsHeightWidth(X1, Y1, X2, Y2);
+
+            actionView.DrawRectangle(xy[0], xy[1], xy[2], xy[3], Constants.COLOR_LABEL_XY);
         }
 
         public void ClearArea()
@@ -309,6 +318,18 @@ namespace Tao_Bot_Maker.View
         private void Button_ShowArea_Click(object sender, EventArgs e)
         {
             DrawArea();
+        }
+
+        private void NumericUpDown_Coords_ValueChanged(object sender, EventArgs e)
+        {
+            if(this.Visible == true)
+                DrawArea();
+        }
+
+        private void ActionImageSearchPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+                DrawArea();
         }
     }
 }
