@@ -952,6 +952,16 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Couldn&apos;t load sequence.
+        ///File might be corrupted..
+        /// </summary>
+        internal static string MessageBox_Error_LoadingSequence {
+            get {
+                return ResourceManager.GetString("MessageBox_Error_LoadingSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Replace image ?.
         /// </summary>
         internal static string MessageBox_ImageAlreadyInFolder_Caption {

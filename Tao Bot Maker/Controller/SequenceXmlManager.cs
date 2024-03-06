@@ -120,10 +120,11 @@ namespace Tao_Bot_Maker
                 SequenceName = sequenceName
             };
 
-            var doc = XDocument.Load(Constants.SEQUENCES_FOLDER_NAME + @"\" + sequenceName + @".xml");
 
             try
             {
+                var doc = XDocument.Load(Constants.SEQUENCES_FOLDER_NAME + @"\" + sequenceName + @".xml");
+                
                 int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
                 foreach (XElement xe in doc.Descendants("Sequence"))
                 {
@@ -248,7 +249,7 @@ namespace Tao_Bot_Maker
             catch (Exception ex) 
             { 
                 Log.Write(Log.ERROR, ex.ToString());
-                MessageBox.Show("ERROR Loading sequence");
+                MessageBox.Show(Properties.strings.MessageBox_Error_LoadingSequence);
             }
             return newSequence.Sequence;
         }

@@ -1,5 +1,8 @@
 Changelog :
 
+Version 0.4.14.1 :
+- Fix : Prevent crash when loading corrupted sequence
+
 Version 0.4.14 :
 - Fix : Prevent crash when entering value above int32 range
 

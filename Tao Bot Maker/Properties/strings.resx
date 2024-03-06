@@ -414,6 +414,10 @@
   <data name="log_UpdateButtonState_Theme" xml:space="preserve">
     <value>"Theme" button state updated : </value>
   </data>
+  <data name="MessageBox_Error_LoadingSequence" xml:space="preserve">
+    <value>Couldn't load sequence.
+File might be corrupted.</value>
+  </data>
   <data name="MessageBox_ImageAlreadyInFolder_Caption" xml:space="preserve">
     <value>Replace image ?</value>
   </data>
