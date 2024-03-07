@@ -162,13 +162,19 @@
   <data name="action_ErrorMessage_IfNotFound" xml:space="preserve">
     <value>Error : Action "If not found" must be selected</value>
   </data>
-  <data name="action_ErrorMessage_ImageName" xml:space="preserve">
+  <data name="action_ErrorMessage_Image_NameEmpty" xml:space="preserve">
     <value>Error : Image must be selected</value>
+  </data>
+  <data name="action_ErrorMessage_Image_NotFound" xml:space="preserve">
+    <value>Error : Image not found</value>
   </data>
   <data name="action_ErrorMessage_InvalidCoords" xml:space="preserve">
     <value>Error : Coordinates must be a number between -999999 and 999999</value>
   </data>
-  <data name="action_ErrorMessage_Key" xml:space="preserve">
+  <data name="action_ErrorMessage_Key_Lenght" xml:space="preserve">
+    <value>Error : Key must be one letter</value>
+  </data>
+  <data name="action_ErrorMessage_Key_NotEntered" xml:space="preserve">
     <value>Error : Key must be entered</value>
   </data>
   <data name="action_ErrorMessage_RepeatNumber" xml:space="preserve">

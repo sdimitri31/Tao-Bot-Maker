@@ -162,13 +162,19 @@
   <data name="action_ErrorMessage_IfNotFound" xml:space="preserve">
     <value>Erreur : Action "Si pas trouvée" doit être choisie</value>
   </data>
-  <data name="action_ErrorMessage_ImageName" xml:space="preserve">
+  <data name="action_ErrorMessage_Image_NameEmpty" xml:space="preserve">
     <value>Erreur : Une image doit être choisie</value>
+  </data>
+  <data name="action_ErrorMessage_Image_NotFound" xml:space="preserve">
+    <value>Erreur : Image introuvable</value>
   </data>
   <data name="action_ErrorMessage_InvalidCoords" xml:space="preserve">
     <value>Erreur : Les coordonnées doivent être comprises entre -999999 et 999999</value>
   </data>
-  <data name="action_ErrorMessage_Key" xml:space="preserve">
+  <data name="action_ErrorMessage_Key_Lenght" xml:space="preserve">
+    <value>Erreur : La touche doit contenir un seul caractère</value>
+  </data>
+  <data name="action_ErrorMessage_Key_NotEntered" xml:space="preserve">
     <value>Erreur : Une touche doit être entrée</value>
   </data>
   <data name="action_ErrorMessage_RepeatNumber" xml:space="preserve">

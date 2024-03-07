@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 
@@ -7,44 +8,34 @@ namespace Tao_Bot_Maker
 {
     public class ActionLoopController
     {
-        public static (ActionLoop actionLoop, string errorMessage) CreateAction(string sequenceName, int repeatNumber)
-        {
-            int errorCount = 0;
-            string errorMessage = "";
+        //Default values
+        private static readonly string  _defaultName = "";
+        private static readonly int     _defaultRepeatNumber = 1;
 
-            if (!ValidateSequenceName(sequenceName, out string error))
+        public static (ActionLoop actionLoop, string errorMessage) CreateAction(string name, int repeatNumber)
+        {
+            string errorMessage = string.Empty;
+
+            if (!ValidateSequenceName(name, out string error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                name = _defaultName;
             }
 
             if (!ValidateRepeatNumber(repeatNumber, out error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                repeatNumber = _defaultRepeatNumber;
             }
 
-            ActionLoop actionLoop = null;
+            ActionLoop actionLoop = new ActionLoop(name, repeatNumber);
 
-            if (errorCount == 0)
-            {
-                actionLoop = new ActionLoop(sequenceName, repeatNumber);
-            }
-
-            //Return Error message if there is an error
-            if (actionLoop == null)
-            {
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                return (null, errorMessage);
-            }
-            //Or ActionClick if no error
-            else
-                return (actionLoop, "");
+            return (actionLoop, errorMessage);
         }
 
         private static bool ValidateSequenceName(string sequenceName, out string errorMessage)
         {
-            errorMessage = "";
+            errorMessage = string.Empty;
 
             if (!string.IsNullOrEmpty(sequenceName))
             {
@@ -61,7 +52,7 @@ namespace Tao_Bot_Maker
 
         private static bool ValidateRepeatNumber(int repeatNumber, out string errorMessage)
         {
-            errorMessage = "";
+            errorMessage = string.Empty;
 
             if ((repeatNumber >= -1) && (repeatNumber <= 999999))
             {
@@ -83,5 +74,17 @@ namespace Tao_Bot_Maker
             return (actionClick, errorMessage);
         }
 
+        public static (ActionLoop action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        {
+            string name = (string)xmlAction;
+            int repeatNumber = _defaultRepeatNumber;
+
+            //Version ajusting and crash prevention
+            if (xmlAction.Attribute("nbRepetition") != null) repeatNumber = Int32.Parse(xmlAction.Attribute("nbRepetition").Value);
+
+            var (actionLoop, errorMessage) = CreateAction(name, repeatNumber);
+
+            return (actionLoop, errorMessage);
+        }
     }
 }

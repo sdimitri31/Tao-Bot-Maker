@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 
@@ -8,49 +9,51 @@ namespace Tao_Bot_Maker
 {
     public class ActionKeyController
     {
+        //Default values
+        private static readonly string _defaultKey = "A";
+
+        /// <summary>
+        /// Create an action with given parameters
+        /// </summary>
+        /// <param name="key">Key to press</param>
+        /// <returns>ActionKey : with given parameters or default value if error. ErrorMessage : empty if no error or details about it</returns>
         public static (ActionKey actionKey, string errorMessage) CreateAction(string key)
         {
-            int errorCount = 0;
-            string errorMessage = "";
+            string errorMessage = string.Empty;
 
             if (!ValidateKey(key, out string error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                key = _defaultKey;
             }
 
-            ActionKey actionKey = null;
+            ActionKey actionKey = new ActionKey(key);
 
-            if (errorCount == 0)
-            {
-                actionKey = new ActionKey(key);
-            }
-
-            //Return Error message if there is an error
-            if (actionKey == null)
-            {
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                return (null, errorMessage);
-            }
-            //Or ActionClick if no error
-            else
-                return (actionKey, "");
+            return (actionKey, errorMessage);
         }
 
         private static bool ValidateKey(string key, out string errorMessage)
         {
-            errorMessage = "";
+            errorMessage = string.Empty;
 
-            if (!string.IsNullOrEmpty(key))
+            //If key not entered
+            if (string.IsNullOrEmpty(key))
             {
-                Log.Write("ValidateKey(" + key + ") Result : true", LogFramework.Log.TRACE);
-                return true;
+                errorMessage = Properties.strings.action_ErrorMessage_Key_NotEntered;
+                Log.Write("ValidateKey(" + key + ") Result : false", Log.ERROR);
+                return false;
+            }
+            //If too many chars
+            else if (key.Length > 1) 
+            {
+                errorMessage = Properties.strings.action_ErrorMessage_Key_Lenght;
+                Log.Write("ValidateKey(" + key + ") Result : false", Log.ERROR);
+                return false;
             }
             else
             {
-                errorMessage = Properties.strings.action_ErrorMessage_Key;
-                Log.Write("ValidateKey(" + key + ") Result : false", LogFramework.Log.ERROR);
-                return false;
+                Log.Write("ValidateKey(" + key + ") Result : true", Log.TRACE);
+                return true;
             }
         }
 
@@ -61,5 +64,13 @@ namespace Tao_Bot_Maker
             return (actionClick, errorMessage);
         }
 
+        public static (ActionKey action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        {
+            string key = (string)xmlAction;
+
+            var (actionClick, errorMessage) = CreateAction(key);
+
+            return (actionClick, errorMessage);
+        }
     }
 }

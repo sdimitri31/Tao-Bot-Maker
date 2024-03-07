@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
@@ -13,6 +14,16 @@ namespace Tao_Bot_Maker
 {
     public class ActionImageSearchController
     {
+        //Default values
+        private static readonly string  _defaultPictureName = "";
+        private static readonly int     _defaultThreshold = 100;
+        private static readonly int     _defaultX1 = 0;
+        private static readonly int     _defaultX2 = 1;
+        private static readonly int     _defaultY1 = 0;
+        private static readonly int     _defaultY2 = 1;
+        private static readonly int     _defaultExpiration = 1;
+        private static readonly string  _defaultIfFound = "";
+        private static readonly string  _defaultIfNotFound = "";
 
         /// <summary>
         /// Check if every data needed to create an ActionImageSearch are in specs
@@ -29,78 +40,74 @@ namespace Tao_Bot_Maker
         /// <returns>ActionImageSearch if all test passed. string errorMessage if something was wrong</returns>
         public static (ActionImageSearch actionImageSearch, string errorMessage) CreateAction(string pictureName, int threshold, int x1, int x2, int y1, int y2, int expiration, string ifFound, string ifNotFound)
         {
-            int errorCount = 0;
-            string errorMessage = "";
+            string errorMessage = string.Empty;
 
             if (!ValidateImage(pictureName, out string error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                pictureName = _defaultPictureName;
             }
             
             if (!ValidateThreshold(threshold, out error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                threshold = _defaultThreshold;
             }
 
             int[] array2 = { x1, x2, y1, y2 };
             if (!ValidateCoord(array2, out error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                x1 = _defaultX1;
+                x2 = _defaultX2;
+                y1 = _defaultY1;
+                y2 = _defaultY2;
             }
 
             if (!ValidateExpiration(expiration, out error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                expiration = _defaultExpiration;
             }
 
             if (!ValidateIfFound(ifFound, out error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                ifFound = _defaultIfFound;
             }
 
             if (!ValidateIfNotFound(ifNotFound, out error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                ifNotFound = _defaultIfNotFound;
             }
 
-            ActionImageSearch actionImageSearch = null;
+            ActionImageSearch actionImageSearch = new ActionImageSearch(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
 
-            if (errorCount == 0)
-            {
-                actionImageSearch = new ActionImageSearch(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
-            }
-
-            //Return Error message if there is an error
-            if (actionImageSearch == null)
-            {
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                return (null, errorMessage);
-            }
-            //Or actionImageSearch if no error
-            else
-                return (actionImageSearch, "");
+            return (actionImageSearch, errorMessage);
         }
 
         private static bool ValidateImage(string imageName, out string errorMessage)
         {
-            errorMessage = "";
+            errorMessage = string.Empty;
 
-            if (!string.IsNullOrEmpty(imageName))
+            if (string.IsNullOrEmpty(imageName))
             {
-                Log.Write("ValidateImage(" + imageName + ") Result : true", LogFramework.Log.TRACE);
-                return true;
+                errorMessage = Properties.strings.action_ErrorMessage_Image_NameEmpty;
+                Log.Write("ValidateImage(" + imageName + ") Result : false", LogFramework.Log.ERROR);
+                return false;
+
+            }
+            else if (!File.Exists(Path.Combine(Constants.PICTURE_FOLDER_NAME, imageName)))
+            {
+                errorMessage = Properties.strings.action_ErrorMessage_Image_NotFound;
+                Log.Write("ValidateImage(" + imageName + ") Result : false", LogFramework.Log.ERROR);
+                return false;
             }
             else
             {
-                errorMessage = Properties.strings.action_ErrorMessage_ImageName;
-                Log.Write("ValidateImage(" + imageName + ") Result : false", LogFramework.Log.ERROR);
-                return false;
+                Log.Write("ValidateImage(" + imageName + ") Result : true", LogFramework.Log.TRACE);
+                return true;
             }
         }
 
@@ -341,6 +348,33 @@ namespace Tao_Bot_Maker
                 return (null, error);
             }
         }
+
+        public static (ActionImageSearch action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        {
+            string pictureName = (string)xmlAction;
+
+            //Version ajusting and crash prevention
+            int expiration = _defaultExpiration;
+            int threshold = _defaultThreshold;
+            int x1 = _defaultX1, x2 = _defaultX2, y1 = _defaultY1, y2 = _defaultY2;
+            if (xmlAction.Attribute("x1") != null) x1 = Int32.Parse(xmlAction.Attribute("x1").Value);
+            if (xmlAction.Attribute("y1") != null) y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
+            if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+            if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+            if (xmlAction.Attribute("expiration") != null) expiration = Int32.Parse(xmlAction.Attribute("expiration").Value); 
+            if (xmlAction.Attribute("threshold") != null) threshold = Int32.Parse(xmlAction.Attribute("threshold").Value); 
+
+            string ifFound = _defaultIfFound, ifNotFound = _defaultIfNotFound;
+            if (xmlAction.Attribute("ifFound") != null)
+                ifFound = xmlAction.Attribute("ifFound").Value;
+            if (xmlAction.Attribute("ifNotFound") != null)
+                ifNotFound = xmlAction.Attribute("ifNotFound").Value;
+
+            var (actionSequence, errorMessage) = CreateAction(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
+
+            return (actionSequence, errorMessage);
+        }
+
 
     }
 }

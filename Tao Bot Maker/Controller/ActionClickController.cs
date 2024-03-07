@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 using static System.Windows.Forms.LinkLabel;
@@ -12,6 +13,16 @@ namespace Tao_Bot_Maker
 {
     public class ActionClickController
     {
+        //Default values
+        private static readonly string  _defaultClick = "left";
+        private static readonly int     _defaultX1 = 0;
+        private static readonly int     _defaultX2 = 0;
+        private static readonly int     _defaultY1 = 0;
+        private static readonly int     _defaultY2 = 0;
+        private static readonly bool    _defaultIsDoubleClick = false;
+        private static readonly bool    _defaultIsDrag = false;
+        private static readonly int     _defaultDragSpeed = 1;
+
         /// <summary>
         /// Check if every data needed to create an ActionClick are in specs
         /// </summary>
@@ -26,44 +37,33 @@ namespace Tao_Bot_Maker
         /// <returns>ActionClick if all test passed. string errorMessage if something was wrong</returns>
         public static (ActionClick actionClick, string errorMessage) CreateAction(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed)
         {
-            int errorCount = 0;
-            string errorMessage = "";
+            string errorMessage = string.Empty;
 
-            int[] array2 = { x1, x2, y1, y2 };
-            if (!ValidateCoord(array2, out string error))
+            if (!ValidateClick(click, out string error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                click = _defaultClick;
             }
 
-            if (!ValidateClick(click, out error))
+            int[] array2 = { x1, x2, y1, y2 };
+            if (!ValidateCoord(array2, out error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                x1 = _defaultX1;
+                x2 = _defaultX2;
+                y1 = _defaultY1;
+                y2 = _defaultY2;
             }
 
             if(!ValidateDragSpeed(dragSpeed, out error))
             {
-                errorCount++;
                 errorMessage += error;
+                dragSpeed = _defaultDragSpeed;
             }
 
-            ActionClick actionClick = null;
+            ActionClick actionClick = new ActionClick(click, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
 
-            if (errorCount == 0)
-            {
-                actionClick = new ActionClick(click, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
-            }
-
-            //Return Error message if there is an error
-            if (actionClick == null)
-            {
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                return (null, errorMessage);
-            }
-            //Or ActionClick if no error
-            else
-                return (actionClick, "");
+            return (actionClick, errorMessage);
         }
 
         private static bool ValidateCoord(int[] coords, out string errorMessage)
@@ -127,5 +127,33 @@ namespace Tao_Bot_Maker
             return (actionClick, errorMessage);
         }
 
+        public static (ActionClick action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        {
+            //Version ajusting and crash prevention
+            int dragSpeed = _defaultDragSpeed;
+            int x1 = _defaultX1, x2 = _defaultX2, y1 = _defaultY1, y2 = _defaultY2;
+            if (xmlAction.Attribute("x") != null) x1 = Int32.Parse(xmlAction.Attribute("x").Value);
+            if (xmlAction.Attribute("y") != null) y1 = Int32.Parse(xmlAction.Attribute("y").Value);
+            if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+            if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+            if (xmlAction.Attribute("dragSpeed") != null) dragSpeed = Int32.Parse(xmlAction.Attribute("dragSpeed").Value);
+
+            bool isDoubleClick = _defaultIsDoubleClick, isDrag = _defaultIsDrag;
+            if (xmlAction.Attribute("isDoubleClick") != null)
+                if (xmlAction.Attribute("isDoubleClick").Value == "true")
+                    isDoubleClick = true;
+
+            if (xmlAction.Attribute("isDrag") != null)
+                if (xmlAction.Attribute("isDrag").Value == "true")
+                    isDrag = true;
+
+            string selectedClick = _defaultClick;
+            if (xmlAction.Attribute("clic") != null)
+                selectedClick = xmlAction.Attribute("clic").Value;
+
+            var (actionSequence, errorMessage) = CreateAction(selectedClick.ToLower(), x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
+
+            return (actionSequence, errorMessage);
+        }
     }
 }

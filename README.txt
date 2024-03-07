@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.16 :
+- Fix : MessageBox doesn't show anymore when saving a new sequence
+- Fix : Loading sequence doesn't cause crash anymore when loading action with invalid parameters
+
 Version 0.4.15 :
 - Add : Default value for XY2 in action ImageSearch View set to max screen size
 - Add : Search area and clic area drawn when selected in action add/edit view

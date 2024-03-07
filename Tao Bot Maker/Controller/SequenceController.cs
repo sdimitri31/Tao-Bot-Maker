@@ -18,33 +18,26 @@ namespace Tao_Bot_Maker
             this.sequence = new Sequence();
         }
 
-        public static bool DeleteSequence(String sequenceName)
+        public Sequence Sequence
         {
-            return SequenceXmlManager.DeleteSequence(sequenceName);
+            get => this.sequence;
+            set => this.sequence = value;
         }
 
-        public Sequence Sequence { 
-            get { return this.sequence; }
-            set { this.sequence = value; }
+        public string SequenceName
+        {
+            get => sequence.Name;
+            set => sequence.Name = value;
         }
 
-        public String SequenceName 
-        { 
-            set 
-            {
-                sequence.SequenceName = value;
-            } 
-            get
-            {
-                return sequence.SequenceName;
-            }
-        }
+        public List<Action> GetActions() => sequence.Actions;
 
-        public List<Action> GetActions() { return sequence.Actions; }
+        public List<string> GetErrors() => sequence.Errors;
 
-        public void AddAction(Action newAction)
+        public void AddAction(Action newAction, string errorMessage = null)
         {
             sequence.Actions.Add(newAction);
+            sequence.Errors.Add(errorMessage);
         }
 
         public void RemoveAction(Action action)
@@ -66,6 +59,11 @@ namespace Tao_Bot_Maker
         public void InsertAction(int indexAction, Action action)
         {
             sequence.Actions.Insert(indexAction, action);
+        }
+
+        public static bool DeleteSequence(string sequenceName)
+        {
+            return SequenceXmlManager.DeleteSequence(sequenceName);
         }
 
         public void ClearActions()

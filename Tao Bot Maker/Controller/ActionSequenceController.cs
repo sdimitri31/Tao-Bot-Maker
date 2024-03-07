@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 
@@ -6,38 +7,27 @@ namespace Tao_Bot_Maker
 {
     public class ActionSequenceController
     {
-        public static (ActionSequence actionSequence, string errorMessage) CreateAction(string sequenceName)
+        //Default values
+        private static readonly string _defaultName = "";
+
+        public static (ActionSequence actionSequence, string errorMessage) CreateAction(string name)
         {
-            int errorCount = 0;
-            string errorMessage = "";
+            string errorMessage = string.Empty;
 
-            if (!ValidateSequenceName(sequenceName, out string error))
+            if (!ValidateSequenceName(name, out string error))
             {
-                errorCount++;
                 errorMessage += error + "\r\n";
+                name = _defaultName;
             }
 
-            ActionSequence actionSequence = null;
+            ActionSequence actionSequence = new ActionSequence(name);
 
-            if (errorCount == 0)
-            {
-                actionSequence = new ActionSequence(sequenceName);
-            }
-
-            //Return Error message if there is an error
-            if (actionSequence == null)
-            {
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                return (null, errorMessage);
-            }
-            //Or ActionClick if no error
-            else
-                return (actionSequence, "");
+            return (actionSequence, errorMessage);
         }
 
         private static bool ValidateSequenceName(string sequenceName, out string errorMessage)
         {
-            errorMessage = "";
+            errorMessage = string.Empty;
 
             if (!string.IsNullOrEmpty(sequenceName))
             {
@@ -59,5 +49,13 @@ namespace Tao_Bot_Maker
             return (actionSequence, errorMessage);
         }
 
+        public static (ActionSequence action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        {
+            string sequence = (string)xmlAction;
+
+            var (actionSequence, errorMessage) = CreateAction(sequence);
+
+            return (actionSequence, errorMessage);
+        }
     }
 }

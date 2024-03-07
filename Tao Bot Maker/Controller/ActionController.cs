@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
 
@@ -104,6 +105,27 @@ namespace Tao_Bot_Maker
                     return ActionLoopController.GetActionFromControl((ActionLoopPanel)control);
                 case (int)Action.ActionType.ImageSearch:
                     return ActionImageSearchController.GetActionFromControl((ActionImageSearchPanel)control);
+                default:
+                    return (null, "Not found");
+            }
+        }
+
+        public static (Action action, string errorMessage) GetActionFromXElement(int type, XElement xmlAction)
+        {
+            switch (type)
+            {
+                case (int)Action.ActionType.Key:
+                    return ActionKeyController.GetActionFromXElement(xmlAction);
+                case (int)Action.ActionType.Wait:
+                    return ActionWaitController.GetActionFromXElement(xmlAction);
+                case (int)Action.ActionType.Sequence:
+                    return ActionSequenceController.GetActionFromXElement(xmlAction);
+                case (int)Action.ActionType.Click:
+                    return ActionClickController.GetActionFromXElement(xmlAction);
+                case (int)Action.ActionType.Loop:
+                    return ActionLoopController.GetActionFromXElement(xmlAction);
+                case (int)Action.ActionType.ImageSearch:
+                    return ActionImageSearchController.GetActionFromXElement(xmlAction);
                 default:
                     return (null, "Not found");
             }

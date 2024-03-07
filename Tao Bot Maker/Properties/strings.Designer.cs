@@ -117,9 +117,18 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Error : Image must be selected.
         /// </summary>
-        internal static string action_ErrorMessage_ImageName {
+        internal static string action_ErrorMessage_Image_NameEmpty {
             get {
-                return ResourceManager.GetString("action_ErrorMessage_ImageName", resourceCulture);
+                return ResourceManager.GetString("action_ErrorMessage_Image_NameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Image not found.
+        /// </summary>
+        internal static string action_ErrorMessage_Image_NotFound {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_Image_NotFound", resourceCulture);
             }
         }
         
@@ -133,11 +142,20 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Key must be one letter.
+        /// </summary>
+        internal static string action_ErrorMessage_Key_Lenght {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_Key_Lenght", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error : Key must be entered.
         /// </summary>
-        internal static string action_ErrorMessage_Key {
+        internal static string action_ErrorMessage_Key_NotEntered {
             get {
-                return ResourceManager.GetString("action_ErrorMessage_Key", resourceCulture);
+                return ResourceManager.GetString("action_ErrorMessage_Key_NotEntered", resourceCulture);
             }
         }
         

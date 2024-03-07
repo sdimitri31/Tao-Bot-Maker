@@ -295,11 +295,20 @@ namespace Tao_Bot_Maker
         {
             Log.Write(Properties.strings.log_Loading_Actions, LogFramework.Log.TRACE);
             this.listBoxActions.Items.Clear();
-            foreach (Action action in sequenceController.GetActions())
+
+            for(int i = 0; i < sequenceController.GetActions().Count; i++)
             {
-                Log.Write(Properties.strings.log_Loading_Action + action.ToString(), LogFramework.Log.TRACE);
-                String currentItem = action.ToString();
-                this.listBoxActions.Items.Add(currentItem);
+                string actionToString = sequenceController.GetActions().ToArray()[i].ToString();
+                
+                //if error on this action
+                if (!string.IsNullOrEmpty(sequenceController.GetErrors().ToArray()[i]))
+                {
+                    actionToString = "# " + sequenceController.GetErrors().ToArray()[i].ToString() + " # " + actionToString;
+                }
+
+                Log.Write(Properties.strings.log_Loading_Action + actionToString, LogFramework.Log.TRACE);
+                this.listBoxActions.Items.Add(actionToString);
+
             }
 
             UpdateButtonStateEdit();
@@ -344,8 +353,8 @@ namespace Tao_Bot_Maker
             {
                 //MessageBox.Show(saveSequenceView.ReturnValueSequenceName);
                 LoadSequencesList();
-                flatComboBoxSequenceList.SelectedItem = saveSequenceView.ReturnValueSequenceName;
                 isSequenceSaved = true;
+                flatComboBoxSequenceList.SelectedItem = saveSequenceView.ReturnValueSequenceName;
 
                 Log.Write(Properties.strings.log_Sequence_Saved + saveSequenceView.ReturnValueSequenceName, GetListBoxLog());
             }

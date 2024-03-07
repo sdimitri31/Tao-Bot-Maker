@@ -1,5 +1,4 @@
-﻿using LogFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker
@@ -120,135 +120,111 @@ namespace Tao_Bot_Maker
                 SequenceName = sequenceName
             };
 
-
             try
             {
-                var doc = XDocument.Load(Constants.SEQUENCES_FOLDER_NAME + @"\" + sequenceName + @".xml");
+                string sequencePath = Path.Combine(Constants.SEQUENCES_FOLDER_NAME, sequenceName + ".xml");
+                var doc = XDocument.Load(sequencePath);
                 
                 int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
                 foreach (XElement xe in doc.Descendants("Sequence"))
                 {
                     foreach (XElement xmlAction in xe.Elements("Action"))
                     {
+                        int actionType = -1;
 
-                        int actionType = Int32.Parse(xmlAction.Attribute("type").Value);
-                        switch (actionType)
+                        //Prevent crash if attribute "type" doesn't exists
+                        if (xmlAction.Attribute("type") != null)
                         {
-                            case (int)Action.ActionType.Key:
-                                ActionKey actionKey = new ActionKey();
-                                actionKey.Key = (string)xmlAction;
-                                newSequence.AddAction(actionKey);
-                                break;
+                            //Prevent crash if attribute "type" is not parsable as int
+                            try
+                            {
+                                actionType = Int32.Parse(xmlAction.Attribute("type").Value);
+                            }
+                            catch(Exception e) 
+                            {
+                                Log.Write(e.Message, Log.ERROR);
+                            }
+                        }
 
-                            case (int)Action.ActionType.Wait:
-                                ActionWait actionWait = new ActionWait();
-                                actionWait.WaitTime = (int)xmlAction;
-                                newSequence.AddAction(actionWait);
-                                break;
+                        //Type read successfully, continue loading
+                        if(actionType != -1)
+                        {
+                            bool isTypeSupported = false;
 
-                            case (int)Action.DeprecatedActionType.PictureWait:
-                                ActionPictureWait actionPictureWait = new ActionPictureWait();
-                                actionPictureWait.PictureName = (string)xmlAction;
-                                actionPictureWait.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
-                                actionPictureWait.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-                                actionPictureWait.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
-                                actionPictureWait.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-                                actionPictureWait.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
-                                actionPictureWait.WaitTime = Int32.Parse(xmlAction.Attribute("waitTime").Value);
-                                actionPictureWait.SequenceIfExpired = xmlAction.Attribute("sequenceIfExpired").Value;
-                                newSequence.AddAction(actionPictureWait);
-                                break;
+                            //Check if type is supported
+                            foreach(int type in Enum.GetValues(typeof(Action.ActionType)))
+                            {
+                                if(type == actionType)
+                                {
+                                    isTypeSupported = true;
+                                    continue;
+                                }
+                            }
 
-                            case (int)Action.DeprecatedActionType.IfPicture:
-                                //Version ajusting and crash prevention
-                                int threshold = 0;
-                                if (xmlAction.Attribute("x1") != null) x1 = Int32.Parse(xmlAction.Attribute("x1").Value);
-                                if (xmlAction.Attribute("y1") != null) y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
-                                if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-                                if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-                                if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                            //If supported
+                            if(isTypeSupported)
+                            {
+                                (Action action, string errorMessage) = ActionController.GetActionFromXElement(actionType, xmlAction);
+                                newSequence.AddAction(action, errorMessage);
+                            }
+                            //Else try to load old types
+                            else
+                            {
+                                switch (actionType)
+                                {
+                                    case (int)Action.DeprecatedActionType.PictureWait:
+                                        ActionPictureWait actionPictureWait = new ActionPictureWait();
+                                        actionPictureWait.PictureName = (string)xmlAction;
+                                        actionPictureWait.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
+                                        actionPictureWait.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+                                        actionPictureWait.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
+                                        actionPictureWait.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                                        actionPictureWait.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
+                                        actionPictureWait.WaitTime = Int32.Parse(xmlAction.Attribute("waitTime").Value);
+                                        actionPictureWait.SequenceIfExpired = xmlAction.Attribute("sequenceIfExpired").Value;
+                                        newSequence.AddAction(actionPictureWait);
+                                        break;
+
+                                    case (int)Action.DeprecatedActionType.IfPicture:
+                                        //Version ajusting and crash prevention
+                                        int threshold = 0;
+                                        if (xmlAction.Attribute("x1") != null) x1 = Int32.Parse(xmlAction.Attribute("x1").Value);
+                                        if (xmlAction.Attribute("y1") != null) y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
+                                        if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
+                                        if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
+                                        if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
 
 
-                                string ifTrueSequence = "EMPTY", ifFalseSequence = "EMPTY";
-                                if (xmlAction.Attribute("ifTrueSequence") != null)
-                                    ifTrueSequence = xmlAction.Attribute("ifTrueSequence").Value;
-                                if (xmlAction.Attribute("ifFalseSequence") != null)
-                                    ifFalseSequence = xmlAction.Attribute("ifFalseSequence").Value;
+                                        string ifTrueSequence = "EMPTY", ifFalseSequence = "EMPTY";
+                                        if (xmlAction.Attribute("ifTrueSequence") != null)
+                                            ifTrueSequence = xmlAction.Attribute("ifTrueSequence").Value;
+                                        if (xmlAction.Attribute("ifFalseSequence") != null)
+                                            ifFalseSequence = xmlAction.Attribute("ifFalseSequence").Value;
 
-                                ActionIfPicture actionIfPicture = new ActionIfPicture();
-                                actionIfPicture.PictureName = (string)xmlAction;
-                                actionIfPicture.X1 = x1;
-                                actionIfPicture.X2 = x2;
-                                actionIfPicture.Y1 = y1;
-                                actionIfPicture.Y2 = y2;
-                                actionIfPicture.Threshold = threshold;
-                                actionIfPicture.IfFound = ifTrueSequence;
-                                actionIfPicture.IfNotFound = ifFalseSequence;
-                                newSequence.AddAction(actionIfPicture);
-                                break;
+                                        ActionIfPicture actionIfPicture = new ActionIfPicture();
+                                        actionIfPicture.PictureName = (string)xmlAction;
+                                        actionIfPicture.X1 = x1;
+                                        actionIfPicture.X2 = x2;
+                                        actionIfPicture.Y1 = y1;
+                                        actionIfPicture.Y2 = y2;
+                                        actionIfPicture.Threshold = threshold;
+                                        actionIfPicture.IfFound = ifTrueSequence;
+                                        actionIfPicture.IfNotFound = ifFalseSequence;
+                                        newSequence.AddAction(actionIfPicture);
+                                        break;
 
-                            case (int)Action.ActionType.Sequence:
-                                ActionSequence actionSequence = new ActionSequence();
-                                actionSequence.SequenceName = (string)xmlAction;
-                                newSequence.AddAction(actionSequence);
-                                break;
-
-                            case (int)Action.ActionType.Click:
-                                //Version ajusting and crash prevention
-                                int dragSpeed = 0;
-                                if (xmlAction.Attribute("x") != null) x1 = Int32.Parse(xmlAction.Attribute("x").Value);
-                                if (xmlAction.Attribute("y") != null) y1 = Int32.Parse(xmlAction.Attribute("y").Value);
-                                if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-                                if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-                                if (xmlAction.Attribute("dragSpeed") != null) dragSpeed = Int32.Parse(xmlAction.Attribute("dragSpeed").Value);
-                                
-                                if ((dragSpeed > 5) || (dragSpeed < 1))
-                                    dragSpeed = 1;
-
-                                bool isDoubleClick = false, isDrag = false;
-                                if (xmlAction.Attribute("isDoubleClick") != null)
-                                    if (xmlAction.Attribute("isDoubleClick").Value == "true") 
-                                        isDoubleClick = true;
-
-                                if (xmlAction.Attribute("isDrag") != null)
-                                    if (xmlAction.Attribute("isDrag").Value == "true")
-                                        isDrag = true;
-
-                                string selectedClick = "left";
-                                if (xmlAction.Attribute("clic") != null)
-                                    selectedClick = xmlAction.Attribute("clic").Value;
-
-                                ActionClick actionClick = new ActionClick(selectedClick, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
-                                newSequence.AddAction(actionClick);
-                                break;
-
-                            case (int)Action.ActionType.Loop:
-                                ActionLoop actionLoop = new ActionLoop();
-                                actionLoop.SequenceName = (string)xmlAction;
-                                actionLoop.RepeatNumber = Int32.Parse(xmlAction.Attribute("nbRepetition").Value);
-                                newSequence.AddAction(actionLoop);
-                                break;
-
-                            case (int)Action.ActionType.ImageSearch:
-                                ActionImageSearch actionImageSearch = new ActionImageSearch();
-                                actionImageSearch.PictureName = (string)xmlAction;
-                                actionImageSearch.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
-                                actionImageSearch.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-                                actionImageSearch.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
-                                actionImageSearch.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-                                actionImageSearch.Expiration = Int32.Parse(xmlAction.Attribute("expiration").Value);
-                                actionImageSearch.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
-                                actionImageSearch.IfFound = xmlAction.Attribute("ifFound").Value;
-                                actionImageSearch.IfNotFound = xmlAction.Attribute("ifNotFound").Value;
-                                newSequence.AddAction(actionImageSearch);
-                                break;
+                                    default:
+                                        newSequence.AddAction(null, "Type unknown");
+                                        break;
+                                }
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex) 
             { 
-                Log.Write(Log.ERROR, ex.ToString());
+                Log.Write(ex.ToString(), Log.ERROR);
                 MessageBox.Show(Properties.strings.MessageBox_Error_LoadingSequence);
             }
             return newSequence.Sequence;

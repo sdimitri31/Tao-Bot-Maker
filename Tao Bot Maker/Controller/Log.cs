@@ -10,21 +10,28 @@ namespace Tao_Bot_Maker.Controller
 {
     internal class Log
     {
+        public const int DEACTIVATE = LogFramework.Log.DEACTIVATE;
+        public const int CRITICAL_ERROR = LogFramework.Log.CRITICAL_ERROR;
+        public const int ERROR = LogFramework.Log.ERROR;
+        public const int WARNING = LogFramework.Log.WARNING;
+        public const int INFO = LogFramework.Log.INFO;
+        public const int TRACE = LogFramework.Log.TRACE;
+
         /// <summary>
         /// Write a message in debug logs if settings allows it
         /// </summary>
         /// <param name="level">LogFramework level</param>
         /// <param name="message">string containing info for debugging</param>
-        public static void Write(string message, int level = LogFramework.Log.INFO) 
+        public static void Write(string message, int level = INFO) 
         { 
             if(SettingsController.IsSaveLogs())
                 LogFramework.Log.Write(level, message);
         }
 
-        public static void Write(string message, ListBox listBox, int level = LogFramework.Log.INFO, bool isthread = false, bool isTemporary = false)
+        public static void Write(string message, ListBox listBox, int level = INFO, bool isthread = false, bool isTemporary = false)
         {
             DateTime dateTime = DateTime.Now;
-            String log = dateTime.ToString() + " : " + message;
+            string log = dateTime.ToString() + " : " + message;
 
             if (isthread == false)
             {
