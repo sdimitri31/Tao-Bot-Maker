@@ -288,7 +288,7 @@
 xcopy /Y ..\..\..\README.txt
 xcopy /Y C:\ImageSearchDLL.dll
 del *.pdb *.config *.zip
-tar -acvf ..\..\..\TaoBotMaker_v0.4.17.zip *
+tar -acvf ..\..\..\TaoBotMaker_v0.4.18.zip *
 cd ..\..\..</PostBuildEvent>
   </PropertyGroup>
 </Project>

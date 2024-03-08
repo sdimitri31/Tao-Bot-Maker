@@ -260,7 +260,7 @@ namespace Tao_Bot_Maker
             catch (Exception ex) 
             { 
                 Log.Write(ex.ToString(), Log.ERROR);
-                MessageBox.Show(Properties.strings.MessageBox_Error_LoadingSequence);
+                return null;
             }
             return newSequence.Sequence;
         }

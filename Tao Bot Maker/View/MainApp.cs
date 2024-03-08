@@ -53,6 +53,7 @@ namespace Tao_Bot_Maker
         private int lastIndexSequenceLoaded;
         private string loadedSequenceName;
 
+        //Needed to filter current loaded sequence
         public string LoadedSequenceName
         {
             get { return loadedSequenceName; }
@@ -329,14 +330,27 @@ namespace Tao_Bot_Maker
             if(!string.IsNullOrEmpty(sequenceName))
             {
                 //Get Sequence from XML
-                this.sequenceController.Sequence = SequenceXmlManager.LoadSequence(sequenceName);
-                LoadedSequenceName = sequenceName;
-                isSequenceSaved = true;
-                Log.Write(Properties.strings.log_Loading_Sequence_Success, LogFramework.Log.TRACE);
-                return true;
+                Sequence sequenceResult = SequenceXmlManager.LoadSequence(sequenceName);
+                if(sequenceResult != null)
+                {
+                    this.sequenceController.Sequence = sequenceResult;
+                    LoadedSequenceName = sequenceName;
+                    lastIndexSequenceLoaded = flatComboBoxSequenceList.SelectedIndex;
+                    isSequenceSaved = true;
+                    Log.Write(Properties.strings.log_Loading_Sequence_Success, LogFramework.Log.TRACE);
+                    return true;
+                }
             }
 
-            LoadedSequenceName = "";
+            //An error occured during loading
+            //Displaying an error message and loading last successfully loaded sequence
+            MessageBox.Show(Properties.strings.MessageBox_Error_LoadingSequence);
+            flatComboBoxSequenceList.SelectedIndex = lastIndexSequenceLoaded;
+            if(lastIndexSequenceLoaded == -1)
+                LoadedSequenceName = "";
+            else
+                LoadedSequenceName = flatComboBoxSequenceList.SelectedItem.ToString();
+
             Log.Write(Properties.strings.log_Loading_Sequence_Fail + sequenceName, LogFramework.Log.ERROR);
             return false;
         }

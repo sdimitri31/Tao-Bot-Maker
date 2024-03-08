@@ -9,7 +9,7 @@ namespace Tao_Bot_Maker.Model
 {
     public class Constants
     {
-        public const string VERSION = "0.4.17";
+        public const string VERSION = "0.4.18";
 
         public const string PICTURE_FOLDER_NAME     = "Pictures";
         public const string SEQUENCES_FOLDER_NAME   = "Sequences";

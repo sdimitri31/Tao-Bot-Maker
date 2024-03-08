@@ -1,5 +1,7 @@
 Changelog :
 
+- Fix : Selecting the previous successfully loaded sequence when there is an error loading an other sequence
+
 Version 0.4.17 :
 - Add : Now possible to move the mouse without making any click
 - Add : Now possible to do a click where the mouse is currently located
