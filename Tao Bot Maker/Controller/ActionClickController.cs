@@ -19,6 +19,7 @@ namespace Tao_Bot_Maker
         private static readonly int     _defaultX2 = 0;
         private static readonly int     _defaultY1 = 0;
         private static readonly int     _defaultY2 = 0;
+        private static readonly bool    _defaultIsCurrentPosClick = false;
         private static readonly bool    _defaultIsDoubleClick = false;
         private static readonly bool    _defaultIsDrag = false;
         private static readonly int     _defaultDragSpeed = 1;
@@ -35,7 +36,7 @@ namespace Tao_Bot_Maker
         /// <param name="isDrag">Expected : true or false</param>
         /// <param name="dragSpeed">Expected : int between 1 and 5</param>
         /// <returns>ActionClick if all test passed. string errorMessage if something was wrong</returns>
-        public static (ActionClick actionClick, string errorMessage) CreateAction(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed)
+        public static (ActionClick actionClick, string errorMessage) CreateAction(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed, bool isCurrentPosClick)
         {
             string errorMessage = string.Empty;
 
@@ -61,7 +62,7 @@ namespace Tao_Bot_Maker
                 dragSpeed = _defaultDragSpeed;
             }
 
-            ActionClick actionClick = new ActionClick(click, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
+            ActionClick actionClick = new ActionClick(click, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed, isCurrentPosClick);
 
             return (actionClick, errorMessage);
         }
@@ -76,13 +77,13 @@ namespace Tao_Bot_Maker
                 if ((coord < -999999) || (coord > 999999))
                 {
                     errorMessage = Properties.strings.action_ErrorMessage_InvalidCoords;
-                    Log.Write("ValidateCoord(" + coord + ") Result : false", LogFramework.Log.ERROR);
+                    Log.Write("ValidateCoord(" + coord + ") Result : false", Log.ERROR);
                     return false;
                 }
                 coordsList += coord + ", ";
             }
 
-            Log.Write("ValidateCoord(" + coordsList + ") Result : true", LogFramework.Log.TRACE);
+            Log.Write("ValidateCoord(" + coordsList + ") Result : true", Log.TRACE);
             return true;
         }
 
@@ -90,15 +91,15 @@ namespace Tao_Bot_Maker
         {
             errorMessage = "";
 
-            if ((click != null) && ((click == "left") || (click == "middle") || (click == "right")))
+            if ((click != null) && ((click == "left") || (click == "middle") || (click == "right") || (click == "move")))
             {
-                Log.Write("ValidateClick(" + click + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateClick(" + click + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_ClickNotSelected;
-                Log.Write("ValidateClick(" + click + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateClick(" + click + ") Result : false", Log.ERROR);
                 return false;
             }
         }
@@ -109,20 +110,20 @@ namespace Tao_Bot_Maker
 
             if ((dragSpeed >= 1) && (dragSpeed <= 5))
             {
-                Log.Write("ValidateDragSpeed(" + dragSpeed + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateDragSpeed(" + dragSpeed + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_DragSpeedWrongInterval;
-                Log.Write("ValidateDragSpeed(" + dragSpeed + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateDragSpeed(" + dragSpeed + ") Result : false", Log.ERROR);
                 return false;
             }
         }
 
         public static (ActionClick action, string errorMessage) GetActionFromControl(ActionClickPanel panel)
         {
-            var (actionClick, errorMessage) = CreateAction(panel.SelectedClick, panel.X1, panel.Y1, panel.X2, panel.Y2, panel.IsDoubleClick, panel.IsDrag, panel.DragSpeed);
+            var (actionClick, errorMessage) = CreateAction(panel.SelectedClick, panel.X1, panel.Y1, panel.X2, panel.Y2, panel.IsDoubleClick, panel.IsDrag, panel.DragSpeed, panel.IsCurrentPosClick);
 
             return (actionClick, errorMessage);
         }
@@ -247,7 +248,19 @@ namespace Tao_Bot_Maker
                     Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
             }
 
-            var (actionSequence, errorMessage) = CreateAction(selectedClick, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
+            bool isCurrentPosClick = _defaultIsCurrentPosClick;
+            if (xmlAction.Attribute("isCurrentPosClick") != null)
+            {
+                if (xmlAction.Attribute("isCurrentPosClick").Value.ToLower() == "true")
+                    isCurrentPosClick = true;
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_IsCurrentPosClick + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+            
+            var (actionSequence, errorMessage) = CreateAction(selectedClick, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed, isCurrentPosClick);
 
             errors += errorMessage;
 

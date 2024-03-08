@@ -82,7 +82,8 @@ namespace Tao_Bot_Maker
                                                                                       new XAttribute("y2", actionClick.Y2),
                                                                                       new XAttribute("isDoubleClick", actionClick.IsDoubleClick),
                                                                                       new XAttribute("isDrag", actionClick.IsDrag),
-                                                                                      new XAttribute("dragSpeed", actionClick.DragSpeed)));
+                                                                                      new XAttribute("dragSpeed", actionClick.DragSpeed),
+                                                                                      new XAttribute("isCurrentPosClick", actionClick.IsCurrentPosClick)));
                         break;
 
                     case (int)Action.ActionType.Loop:

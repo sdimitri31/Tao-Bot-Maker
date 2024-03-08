@@ -259,6 +259,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Current position click.
+        /// </summary>
+        internal static string action_Member_IsCurrentPosClick {
+            get {
+                return ResourceManager.GetString("action_Member_IsCurrentPosClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Double click.
         /// </summary>
         internal static string action_Member_IsDoubleClick {
@@ -529,6 +538,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click at current position.
+        /// </summary>
+        internal static string label_CurrentPosClick {
+            get {
+                return ResourceManager.GetString("label_CurrentPosClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Double click.
         /// </summary>
         internal static string label_DoubleClick {
@@ -588,6 +606,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string label_MiddleClick {
             get {
                 return ResourceManager.GetString("label_MiddleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Move.
+        /// </summary>
+        internal static string label_MoveClick {
+            get {
+                return ResourceManager.GetString("label_MoveClick", resourceCulture);
             }
         }
         

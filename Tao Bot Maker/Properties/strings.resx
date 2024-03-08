@@ -210,6 +210,9 @@
   <data name="action_Member_IfNotFound" xml:space="preserve">
     <value>Action if not found</value>
   </data>
+  <data name="action_Member_IsCurrentPosClick" xml:space="preserve">
+    <value>Current position click</value>
+  </data>
   <data name="action_Member_IsDoubleClick" xml:space="preserve">
     <value>Double click</value>
   </data>
@@ -273,6 +276,9 @@
   <data name="label_Ctrl" xml:space="preserve">
     <value>Ctrl</value>
   </data>
+  <data name="label_CurrentPosClick" xml:space="preserve">
+    <value>Click at current position</value>
+  </data>
   <data name="label_DoubleClick" xml:space="preserve">
     <value>Double click</value>
   </data>
@@ -293,6 +299,9 @@
   </data>
   <data name="label_MiddleClick" xml:space="preserve">
     <value>Middle click</value>
+  </data>
+  <data name="label_MoveClick" xml:space="preserve">
+    <value>Move</value>
   </data>
   <data name="label_RepeatNumber" xml:space="preserve">
     <value>Number of repetitions</value>

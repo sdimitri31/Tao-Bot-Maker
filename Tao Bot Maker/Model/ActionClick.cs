@@ -12,7 +12,7 @@ namespace Tao_Bot_Maker
         {
             Type = (int)ActionType.Click;
         }
-        public ActionClick(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed)
+        public ActionClick(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed, bool isCurrentPosClick)
         {
             Type = (int)ActionType.Click;
             SelectedClick = click;
@@ -23,6 +23,7 @@ namespace Tao_Bot_Maker
             IsDoubleClick = isDoubleClick;
             IsDrag = isDrag;
             DragSpeed = dragSpeed;
+            IsCurrentPosClick = isCurrentPosClick;
         }
 
         public string SelectedClick { get; set; }
@@ -30,6 +31,7 @@ namespace Tao_Bot_Maker
         public int Y1 { get; set; }
         public int X2 { get; set; }
         public int Y2 { get; set; }
+        public bool IsCurrentPosClick { get; set; }
         public bool IsDoubleClick { get; set; }
         public bool IsDrag { get; set; }
         public int DragSpeed { get; set; }
@@ -43,6 +45,7 @@ namespace Tao_Bot_Maker
             text += " | " + Properties.strings.action_Member_Y1 + " : " + Y1;
             text += " | " + Properties.strings.action_Member_X2 + " : " + X2;
             text += " | " + Properties.strings.action_Member_Y2 + " : " + Y2;
+            text += " | " + Properties.strings.action_Member_IsCurrentPosClick + " : " + IsCurrentPosClick;
             text += " | " + Properties.strings.action_Member_IsDoubleClick + " : " + IsDoubleClick;
             text += " | " + Properties.strings.action_Member_IsDrag + " : " + IsDrag;
             text += " | " + Properties.strings.action_Member_DragSpeed + " : " + DragSpeed;

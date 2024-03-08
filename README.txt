@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.17 :
+- Add : Now possible to move the mouse without making any click
+- Add : Now possible to do a click where the mouse is currently located
+
 Version 0.4.16.1 :
 - Fix : Improved verifications on loading xml
 

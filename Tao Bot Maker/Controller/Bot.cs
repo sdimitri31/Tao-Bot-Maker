@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
+using static System.Net.Mime.MediaTypeNames;
 using Log = Tao_Bot_Maker.Controller.Log;
 
 namespace Tao_Bot_Maker
@@ -301,7 +302,7 @@ namespace Tao_Bot_Maker
         private void DoActionClick(Action action)
         {
             ActionClick actionMouse = (ActionClick)action;
-            Log.Write("Action : click " + actionMouse, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+            Log.Write(actionMouse.ToString(), mainApp.GetListBoxLog(), Log.INFO, true);
 
             //Get selected click
             int mouseDown, mouseUp;
@@ -322,20 +323,36 @@ namespace Tao_Bot_Maker
                     mouseUp = (int)MouseEventFlags.MiddleUp;
                     break;
 
+                case "move":
+                    mouseDown = (int)MouseEventFlags.Move;
+                    mouseUp = (int)MouseEventFlags.Move;
+                    break;
+
                 default:
                     mouseDown = (int)MouseEventFlags.LeftDown;
                     mouseUp = (int)MouseEventFlags.LeftUp;
                     break;
             }
                 
-            //Move cursor to XY
-            Cursor.Position = new Point(actionMouse.X1, actionMouse.Y1);
-            Log.Write("Cursor.Position " + Cursor.Position.ToString(), LogFramework.Log.TRACE);
+            //Move cursor to XY if "IsCurrentPosClick == false"
+            if(!actionMouse.IsCurrentPosClick)
+                Cursor.Position = new Point(actionMouse.X1, actionMouse.Y1);
+            else
+            {
+                actionMouse.X1 = Cursor.Position.X;
+                actionMouse.Y1 = Cursor.Position.Y;
+            }
+            Log.Write("Start Cursor.Position : " + Cursor.Position.ToString(), Log.TRACE);
 
-            //Click Down on selected click
-            uint X = (uint)System.Windows.Forms.Cursor.Position.X;
-            uint Y = (uint)System.Windows.Forms.Cursor.Position.Y;
-            mouse_event(mouseDown, X, Y, 0, 0);
+            uint X = (uint)Cursor.Position.X;
+            uint Y = (uint)Cursor.Position.Y;
+
+            //Click down if selectectedClick is not "move"
+            if (!(actionMouse.SelectedClick == "move"))
+            {
+                //Click Down on selected click
+                mouse_event(mouseDown, X, Y, 0, 0);
+            }
 
             //Check if IsDrag
             if (actionMouse.IsDrag)
@@ -368,11 +385,11 @@ namespace Tao_Bot_Maker
                 int resteX = (int)Math.Floor((double)(gapX % nbStep));
                 int resteY = (int)Math.Floor((double)(gapY % nbStep));
 
-                Log.Write("nbStep " + nbStep, LogFramework.Log.TRACE);
-                Log.Write("stepX " + stepX, LogFramework.Log.TRACE);
-                Log.Write("resteX " + resteX, LogFramework.Log.TRACE); 
-                Log.Write("stepY " + stepY, LogFramework.Log.TRACE);
-                Log.Write("resteY " + resteY, LogFramework.Log.TRACE);
+                Log.Write("nbStep " + nbStep, Log.TRACE);
+                Log.Write("stepX " + stepX, Log.TRACE);
+                Log.Write("resteX " + resteX, Log.TRACE); 
+                Log.Write("stepY " + stepY, Log.TRACE);
+                Log.Write("resteY " + resteY, Log.TRACE);
 
                 int cursorPosX = actionMouse.X1;
                 int cursorPosY = actionMouse.Y1;
@@ -381,27 +398,30 @@ namespace Tao_Bot_Maker
                 {
                     cursorPosX += stepX;
                     cursorPosY += stepY;
-                    Cursor.Position = new Point(cursorPosX, cursorPosY);
+                    Cursor.Position = new Point(cursorPosX - 1, cursorPosY);
                     mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
 
-                    Log.Write("Cursor.Position " + Cursor.Position.ToString() + " i " + i, LogFramework.Log.TRACE);
+                    Log.Write("Cursor.Position " + Cursor.Position.ToString() + " i " + i, Log.TRACE);
 
                     Thread.Sleep((int)(30 / Math.Abs(actionMouse.DragSpeed)));
                 }
 
                 cursorPosX += resteX;
                 cursorPosY += resteY;
-                Cursor.Position = new Point(cursorPosX, cursorPosY);
+                Cursor.Position = new Point(cursorPosX - 1, cursorPosY);
                 mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
 
-                Log.Write("Cursor.Position " + Cursor.Position.ToString(), LogFramework.Log.TRACE);
+                Log.Write("Cursor.Position " + Cursor.Position.ToString(), Log.TRACE);
 
             }
-            else if (actionMouse.IsDoubleClick)
+            //Double click if "IsDoubleClick == true" and "IsDrag == false"
+            else if ((actionMouse.IsDoubleClick) && (!actionMouse.IsDrag))
             {
                 Thread.Sleep(20);
 
                 //Release Click
+                X = (uint)Cursor.Position.X;
+                Y = (uint)Cursor.Position.Y;
                 mouse_event(mouseUp, X, Y, 0, 0);
                 Thread.Sleep(20);
 
@@ -414,10 +434,14 @@ namespace Tao_Bot_Maker
                 Thread.Sleep(10);
             }
 
-            //Release Click
-            X = (uint)System.Windows.Forms.Cursor.Position.X;
-            Y = (uint)System.Windows.Forms.Cursor.Position.Y;
-            mouse_event(mouseUp, X, Y, 0, 0);
+            //Click up if selectectedClick is not "move"
+            if (!(actionMouse.SelectedClick == "move"))
+            {
+                //Release Click
+                X = (uint)Cursor.Position.X;
+                Y = (uint)Cursor.Position.Y;
+                mouse_event(mouseUp, X, Y, 0, 0);
+            }
         }
 
         private void DoActionLoop(Action action)
