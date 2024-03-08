@@ -38,7 +38,11 @@ namespace Tao_Bot_Maker
 
                     case (int)Action.ActionType.Wait:
                         ActionWait actionWait = (ActionWait)action;
-                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionWait.Type), actionWait.WaitTime));
+                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", 
+                            new XAttribute("type", actionWait.Type),
+                            new XAttribute("waitTime", actionWait.WaitTime), 
+                            new XAttribute("waitTimeMax", actionWait.WaitTimeMax), 
+                            new XAttribute("isRandomInterval", actionWait.IsRandomInterval)));
                         break;
 
                     case (int)Action.DeprecatedActionType.PictureWait:

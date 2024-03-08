@@ -71,5 +71,21 @@ namespace Tao_Bot_Maker.Controller
             return new int[] { xy[0], xy[1], width, height };
         }
 
+        public static int GetMaxIntValueFromTimeUnitInMS(string unit)
+        {
+            switch (unit)
+            {
+                case "ms":
+                    return 2147483646;
+                case "s":
+                    return (int)Math.Floor((decimal)(2147483646 / 1000));
+                case "min":
+                    return (int)Math.Floor((decimal)(2147483646 / 1000 / 60));
+                case "h":
+                    return (int)Math.Floor((decimal)(2147483646 / 1000 / 60 / 60));
+                default: return 2147483646;
+            }
+        }
+
     }
 }

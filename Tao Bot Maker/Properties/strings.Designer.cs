@@ -205,11 +205,20 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Error : Delay must be between 1 and 999999.
+        ///   Recherche une chaîne localisée semblable à Error : Wait time must be between 0 and 2147483646ms.
         /// </summary>
         internal static string action_ErrorMessage_WaitTime {
             get {
                 return ResourceManager.GetString("action_ErrorMessage_WaitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Wait time maximum must be greater than wait time.
+        /// </summary>
+        internal static string action_ErrorMessage_WaitTimeMax {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_WaitTimeMax", resourceCulture);
             }
         }
         
@@ -286,6 +295,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Is random interval.
+        /// </summary>
+        internal static string action_Member_IsRandomInterval {
+            get {
+                return ResourceManager.GetString("action_Member_IsRandomInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key.
         /// </summary>
         internal static string action_Member_Key {
@@ -336,6 +354,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string action_Member_WaitTime {
             get {
                 return ResourceManager.GetString("action_Member_WaitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Maximum wait time.
+        /// </summary>
+        internal static string action_Member_WaitTimeMax {
+            get {
+                return ResourceManager.GetString("action_Member_WaitTimeMax", resourceCulture);
             }
         }
         
@@ -583,6 +610,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Random interval.
+        /// </summary>
+        internal static string label_IsRandomInterval {
+            get {
+                return ResourceManager.GetString("label_IsRandomInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key.
         /// </summary>
         internal static string label_Key {
@@ -727,11 +763,20 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delay (ms).
+        ///   Recherche une chaîne localisée semblable à Wait time.
         /// </summary>
         internal static string label_WaitTime {
             get {
                 return ResourceManager.GetString("label_WaitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Wait time max.
+        /// </summary>
+        internal static string label_WaitTimeMax {
+            get {
+                return ResourceManager.GetString("label_WaitTimeMax", resourceCulture);
             }
         }
         

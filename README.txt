@@ -1,5 +1,8 @@
 Changelog :
 
+Version 0.4.18 :
+- Add : Action "Wait" can now be between 2 values
+- Add : Different units of time can be selected in Action "Wait" 
 - Fix : Selecting the previous successfully loaded sequence when there is an error loading an other sequence
 
 Version 0.4.17 :

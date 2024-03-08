@@ -7,19 +7,27 @@
             Type = (int)ActionType.Wait;
         }
 
-        public ActionWait(int waitTime)
+        public ActionWait(int waitTime, int waitTimeMax, bool isRandomInterval)
         {
             Type = (int)ActionType.Wait;
             WaitTime = waitTime;
+            WaitTimeMax = waitTimeMax;
+            IsRandomInterval = isRandomInterval;
         }
 
         public int WaitTime { get; set; }
+
+        public int WaitTimeMax { get; set; }
+
+        public bool IsRandomInterval { get; set; }
 
         public override string ToString()
         {
             string text = "";
             text += Properties.strings.action + " : " + Properties.strings.ActionName_Wait;
             text += " | " + Properties.strings.action_Member_WaitTime + " : " + WaitTime;
+            text += " | " + Properties.strings.action_Member_WaitTimeMax + " : " + WaitTimeMax;
+            text += " | " + Properties.strings.action_Member_IsRandomInterval + " : " + IsRandomInterval;
 
             return text;
         }

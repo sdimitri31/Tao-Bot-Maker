@@ -1,20 +1,13 @@
-﻿using LogFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
-using Tao_Bot_Maker.View;
-using static System.Net.Mime.MediaTypeNames;
 using Log = Tao_Bot_Maker.Controller.Log;
 
 namespace Tao_Bot_Maker
@@ -101,14 +94,14 @@ namespace Tao_Bot_Maker
 
             Stop();
 
-            Log.Write("Fin de la séquence de bot", mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+            Log.Write("Fin de la séquence de bot", mainApp.GetListBoxLog(), Log.INFO, true);
         }
 
         public void Stop()
         {
             if (IsRunning)
             {
-                Log.Write("Arrêt du bot", mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+                Log.Write("Arrêt du bot", mainApp.GetListBoxLog(), Log.INFO, true);
                 IsRunning = false;
                 MethodInvoker mainthread = delegate
                 {
@@ -169,14 +162,27 @@ namespace Tao_Bot_Maker
         private void DoActionKey(Action action)
         {
             ActionKey actionKey = (ActionKey)action;
-            Log.Write("Action : Touche " + actionKey.Key, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+            Log.Write("Action : Touche " + actionKey.Key, mainApp.GetListBoxLog(), Log.INFO, true);
             SendKeys.SendWait(PrepareForSendKeys(actionKey.Key));
         }
+
         private void DoActionWait(Action action)
         {
             ActionWait actionWait = (ActionWait)action;
-            Log.Write("Action : Attente " + actionWait.WaitTime, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
-            Thread.Sleep(actionWait.WaitTime);
+
+            Log.Write(actionWait.ToString(), mainApp.GetListBoxLog(), Log.INFO, true);
+
+            int waitTime = actionWait.WaitTime;
+
+            if (actionWait.IsRandomInterval)
+            {
+                var random = new Random();
+                waitTime = random.Next(actionWait.WaitTime, actionWait.WaitTimeMax);
+                string message = Properties.strings.label_WaitTime + " : " + waitTime + "ms";
+                Log.Write(message, mainApp.GetListBoxLog(), Log.INFO, true);
+            }
+
+            Thread.Sleep(waitTime);
         }
         
         /// <summary>
@@ -186,7 +192,7 @@ namespace Tao_Bot_Maker
         private void DoActionPictureWait(Action action)
         {
             ActionPictureWait actionPictureWait = (ActionPictureWait)action;
-            Log.Write("Action : Attente d'image " + actionPictureWait.PictureName, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+            Log.Write("Action : Attente d'image " + actionPictureWait.PictureName, mainApp.GetListBoxLog(), Log.INFO, true);
 
             //Get picture size to create borders when found
             String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionPictureWait.PictureName;
@@ -199,7 +205,7 @@ namespace Tao_Bot_Maker
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            Log.Write("0s ", mainApp.GetListBoxLog(), LogFramework.Log.TRACE, true);
+            Log.Write("0s ", mainApp.GetListBoxLog(), Log.TRACE, true);
 
             //Searching picture
             String[] results_wait_image = null;
@@ -225,7 +231,7 @@ namespace Tao_Bot_Maker
                 //Updating log
                 if (seconds != secondsLastLoop)
                 {
-                    Log.Write(seconds + "s", mainApp.GetListBoxLog(), LogFramework.Log.INFO, true, true);
+                    Log.Write(seconds + "s", mainApp.GetListBoxLog(), Log.INFO, true, true);
                     secondsLastLoop = seconds;
                 }
 
@@ -244,7 +250,7 @@ namespace Tao_Bot_Maker
 
 
             Log.Write("Action : Image trouvée X :" + results_wait_image[1] + " Y : " + results_wait_image[2], 
-                mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+                mainApp.GetListBoxLog(), Log.INFO, true);
 
         }
 
@@ -255,7 +261,7 @@ namespace Tao_Bot_Maker
         private void DoActionIfPicture(Action action)
         {
             ActionIfPicture actionIfPicture = (ActionIfPicture)action;
-            Log.Write("Action : si image " + actionIfPicture.PictureName, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+            Log.Write("Action : si image " + actionIfPicture.PictureName, mainApp.GetListBoxLog(), Log.INFO, true);
 
             //Get picture size to create borders when found
             String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionIfPicture.PictureName;
@@ -273,12 +279,12 @@ namespace Tao_Bot_Maker
             //Si on ne trouve pas l'image
             if (results_if_image == null)
             {
-                Log.Write("Action : Image pas trouvée execution de la séquence : " + actionIfPicture.IfNotFound, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+                Log.Write("Action : Image pas trouvée execution de la séquence : " + actionIfPicture.IfNotFound, mainApp.GetListBoxLog(), Log.INFO, true);
                 DoSequence(SequenceXmlManager.LoadSequence(actionIfPicture.IfNotFound), drawingArea);
             }
             else
             {
-                Log.Write("Action : Image trouvée X :" + results_if_image[1] + " Y : " + results_if_image[2] + " Execution de la séquence : " + actionIfPicture.IfFound, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+                Log.Write("Action : Image trouvée X :" + results_if_image[1] + " Y : " + results_if_image[2] + " Execution de la séquence : " + actionIfPicture.IfFound, mainApp.GetListBoxLog(), Log.INFO, true);
 
                 ClearRectangles();
                 DrawRectangle(Int32.Parse(results_if_image[1]) - 15, Int32.Parse(results_if_image[2]) - 15, img.Width + 30, img.Height + 30);
@@ -294,7 +300,7 @@ namespace Tao_Bot_Maker
             string text = "";
             text += Properties.strings.action + " : " + Properties.strings.ActionName_Sequence;
             text += " | " + Properties.strings.action_Member_Sequence + " : " + actionSequence.SequenceName;
-            Log.Write(text, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+            Log.Write(text, mainApp.GetListBoxLog(), Log.INFO, true);
 
             DoSequence(SequenceXmlManager.LoadSequence(actionSequence.SequenceName), drawingArea);
         }
@@ -364,9 +370,9 @@ namespace Tao_Bot_Maker
                 int smallerGap = Math.Min(Math.Abs(gapX), Math.Abs(gapY));
                 int nbStep;
 
-                Log.Write("gapX " + gapX, LogFramework.Log.TRACE);
-                Log.Write("gapY " + gapY, LogFramework.Log.TRACE);
-                Log.Write("smallerGap " + smallerGap, LogFramework.Log.TRACE);
+                Log.Write("gapX " + gapX, Log.TRACE);
+                Log.Write("gapY " + gapY, Log.TRACE);
+                Log.Write("smallerGap " + smallerGap, Log.TRACE);
 
                 if (smallerGap > 50 )
                 {
@@ -455,7 +461,7 @@ namespace Tao_Bot_Maker
                 text += " | " + Properties.strings.action_Member_Sequence + " : " + actionLoop.SequenceName;
                 text += " | " + Properties.strings.action_Member_RepeatNumber + " : " ;
                 text += i + " / " + actionLoop.RepeatNumber;
-                Log.Write(text, mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+                Log.Write(text, mainApp.GetListBoxLog(), Log.INFO, true);
 
                 DoSequence(SequenceXmlManager.LoadSequence(actionLoop.SequenceName), drawingArea);
                 i++;
@@ -465,7 +471,7 @@ namespace Tao_Bot_Maker
         private void DoActionImageSearch(Action action)
         {
             ActionImageSearch actionImageSearch = (ActionImageSearch)action;
-            Log.Write("Action : Image Search " + actionImageSearch.PictureName, mainApp.GetListBoxLog(), LogFramework.Log.TRACE, true);
+            Log.Write("Action : Image Search " + actionImageSearch.PictureName, mainApp.GetListBoxLog(), Log.TRACE, true);
 
             //Get picture size to create borders when found
             String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionImageSearch.PictureName;
@@ -478,7 +484,7 @@ namespace Tao_Bot_Maker
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            Log.Write("0s ", mainApp.GetListBoxLog(), LogFramework.Log.TRACE, true);
+            Log.Write("0s ", mainApp.GetListBoxLog(), Log.TRACE, true);
 
             //Searching picture
             String[] results_wait_image = null;
@@ -504,7 +510,7 @@ namespace Tao_Bot_Maker
                 //Updating log
                 if (seconds != secondsLastLoop)
                 {
-                    Log.Write(seconds + "s", mainApp.GetListBoxLog(), LogFramework.Log.INFO, true, true);
+                    Log.Write(seconds + "s", mainApp.GetListBoxLog(), Log.INFO, true, true);
                     secondsLastLoop = seconds;
                 }
 
@@ -522,7 +528,7 @@ namespace Tao_Bot_Maker
                     return;
                 }
             }
-            Log.Write("Action : Image trouvée X :" + results_wait_image[1] + " Y : " + results_wait_image[2], mainApp.GetListBoxLog(), LogFramework.Log.INFO, true);
+            Log.Write("Action : Image trouvée X :" + results_wait_image[1] + " Y : " + results_wait_image[2], mainApp.GetListBoxLog(), Log.INFO, true);
 
             stopwatch.Stop();
 

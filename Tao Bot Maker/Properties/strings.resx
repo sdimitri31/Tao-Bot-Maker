@@ -193,7 +193,10 @@
     <value>Error : Threshold must be a number between 0 and 255</value>
   </data>
   <data name="action_ErrorMessage_WaitTime" xml:space="preserve">
-    <value>Error : Delay must be between 1 and 999999</value>
+    <value>Error : Wait time must be between 0 and 2147483646ms</value>
+  </data>
+  <data name="action_ErrorMessage_WaitTimeMax" xml:space="preserve">
+    <value>Error : Wait time maximum must be greater than wait time</value>
   </data>
   <data name="action_Member_Click" xml:space="preserve">
     <value>Click</value>
@@ -219,6 +222,9 @@
   <data name="action_Member_IsDrag" xml:space="preserve">
     <value>Drag</value>
   </data>
+  <data name="action_Member_IsRandomInterval" xml:space="preserve">
+    <value>Is random interval</value>
+  </data>
   <data name="action_Member_Key" xml:space="preserve">
     <value>Key</value>
   </data>
@@ -236,6 +242,9 @@
   </data>
   <data name="action_Member_WaitTime" xml:space="preserve">
     <value>Delay (ms)</value>
+  </data>
+  <data name="action_Member_WaitTimeMax" xml:space="preserve">
+    <value>Maximum wait time</value>
   </data>
   <data name="action_Member_X1" xml:space="preserve">
     <value>X1</value>
@@ -291,6 +300,9 @@
   <data name="label_Expiration" xml:space="preserve">
     <value>Expiration (s)</value>
   </data>
+  <data name="label_IsRandomInterval" xml:space="preserve">
+    <value>Random interval</value>
+  </data>
   <data name="label_Key" xml:space="preserve">
     <value>Key</value>
   </data>
@@ -340,7 +352,10 @@
     <value>Threshold</value>
   </data>
   <data name="label_WaitTime" xml:space="preserve">
-    <value>Delay (ms)</value>
+    <value>Wait time</value>
+  </data>
+  <data name="label_WaitTimeMax" xml:space="preserve">
+    <value>Wait time max</value>
   </data>
   <data name="log_ActionAdded" xml:space="preserve">
     <value>Action added : </value>

@@ -193,7 +193,10 @@
     <value>Erreur : Tolérance doit être compris entre 0 et 255</value>
   </data>
   <data name="action_ErrorMessage_WaitTime" xml:space="preserve">
-    <value>Erreur : L'attente doit être comprise entre 1 et 999999</value>
+    <value>Erreur : L'attente doit être comprise entre 0 et 2147483646ms</value>
+  </data>
+  <data name="action_ErrorMessage_WaitTimeMax" xml:space="preserve">
+    <value>Erreur : L'attente maximum doit être supérieure à l'attente</value>
   </data>
   <data name="action_Member_Click" xml:space="preserve">
     <value>Click</value>
@@ -219,6 +222,9 @@
   <data name="action_Member_IsDrag" xml:space="preserve">
     <value>Glisser</value>
   </data>
+  <data name="action_Member_IsRandomInterval" xml:space="preserve">
+    <value>Interval aléatoire</value>
+  </data>
   <data name="action_Member_Key" xml:space="preserve">
     <value>Touche</value>
   </data>
@@ -236,6 +242,9 @@
   </data>
   <data name="action_Member_WaitTime" xml:space="preserve">
     <value>Attendre (ms)</value>
+  </data>
+  <data name="action_Member_WaitTimeMax" xml:space="preserve">
+    <value>Attente maximum</value>
   </data>
   <data name="action_Member_X1" xml:space="preserve">
     <value>X1</value>
@@ -291,6 +300,9 @@
   <data name="label_Expiration" xml:space="preserve">
     <value>Expiration (s)</value>
   </data>
+  <data name="label_IsRandomInterval" xml:space="preserve">
+    <value>Interval aléatoire</value>
+  </data>
   <data name="label_Key" xml:space="preserve">
     <value>Touche</value>
   </data>
@@ -340,7 +352,10 @@
     <value>Tolérance</value>
   </data>
   <data name="label_WaitTime" xml:space="preserve">
-    <value>Attendre (ms)</value>
+    <value>Attente</value>
+  </data>
+  <data name="label_WaitTimeMax" xml:space="preserve">
+    <value>Attente maximum</value>
   </data>
   <data name="log_ActionAdded" xml:space="preserve">
     <value>Action ajoutée : </value>
