@@ -77,14 +77,31 @@ namespace Tao_Bot_Maker
         public static (ActionLoop action, string errorMessage) GetActionFromXElement(XElement xmlAction)
         {
             string name = (string)xmlAction;
-            int repeatNumber = _defaultRepeatNumber;
 
             //Version ajusting and crash prevention
-            if (xmlAction.Attribute("nbRepetition") != null) repeatNumber = Int32.Parse(xmlAction.Attribute("nbRepetition").Value);
+            string errors = string.Empty;
+
+            int repeatNumber = _defaultRepeatNumber;
+            if (xmlAction.Attribute("nbRepetition") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("nbRepetition").Value, out repeatNumber))
+                {
+                    errors += Properties.strings.action_Member_RepeatNumber + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_RepeatNumber + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
 
             var (actionLoop, errorMessage) = CreateAction(name, repeatNumber);
 
-            return (actionLoop, errorMessage);
+            errors += errorMessage;
+
+            return (actionLoop, errors);
         }
     }
 }

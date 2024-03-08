@@ -18,7 +18,7 @@ namespace Tao_Bot_Maker
         public SequenceXmlManager(){
         }
 
-        public static void SaveSequence(String sequenceName, SequenceController sequenceController)
+        public static void SaveSequence(string sequenceName, SequenceController sequenceController)
         {
             System.IO.Directory.CreateDirectory(Constants.SEQUENCES_FOLDER_NAME);
             string fileName = sequenceName + @".xml";
@@ -95,7 +95,7 @@ namespace Tao_Bot_Maker
                     case (int)Action.ActionType.ImageSearch:
                         ActionImageSearch actionImageSearch = (ActionImageSearch)action;
                         doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionImageSearch.Type),
-                                                                                        new XAttribute("tolerance", actionImageSearch.Threshold),
+                                                                                        new XAttribute("threshold", actionImageSearch.Threshold),
                                                                                         new XAttribute("x1", actionImageSearch.X1),
                                                                                         new XAttribute("y1", actionImageSearch.Y1),
                                                                                         new XAttribute("x2", actionImageSearch.X2),
@@ -113,7 +113,7 @@ namespace Tao_Bot_Maker
 
         }
 
-        public static Sequence LoadSequence(String sequenceName)
+        public static Sequence LoadSequence(string sequenceName)
         {
             SequenceController newSequence = new SequenceController
             {
@@ -125,7 +125,6 @@ namespace Tao_Bot_Maker
                 string sequencePath = Path.Combine(Constants.SEQUENCES_FOLDER_NAME, sequenceName + ".xml");
                 var doc = XDocument.Load(sequencePath);
                 
-                int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
                 foreach (XElement xe in doc.Descendants("Sequence"))
                 {
                     foreach (XElement xmlAction in xe.Elements("Action"))
@@ -173,27 +172,58 @@ namespace Tao_Bot_Maker
                                 switch (actionType)
                                 {
                                     case (int)Action.DeprecatedActionType.PictureWait:
-                                        ActionPictureWait actionPictureWait = new ActionPictureWait();
-                                        actionPictureWait.PictureName = (string)xmlAction;
-                                        actionPictureWait.X1 = Int32.Parse(xmlAction.Attribute("x1").Value);
-                                        actionPictureWait.X2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-                                        actionPictureWait.Y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
-                                        actionPictureWait.Y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-                                        actionPictureWait.Threshold = Int32.Parse(xmlAction.Attribute("tolerance").Value);
-                                        actionPictureWait.WaitTime = Int32.Parse(xmlAction.Attribute("waitTime").Value);
-                                        actionPictureWait.SequenceIfExpired = xmlAction.Attribute("sequenceIfExpired").Value;
-                                        newSequence.AddAction(actionPictureWait);
+                                        {
+                                            //Version ajusting and crash prevention
+                                            int threshold = 0, waitTime = 0;
+                                            int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+                                            if (xmlAction.Attribute("x1") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("x1").Value, out x1);
+                                            if (xmlAction.Attribute("y1") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("y1").Value, out y1);
+                                            if (xmlAction.Attribute("x2") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("x2").Value, out x2);
+                                            if (xmlAction.Attribute("y2") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("y2").Value, out y2);
+                                            if (xmlAction.Attribute("tolerance") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("tolerance").Value, out threshold);
+                                            if (xmlAction.Attribute("waitTime") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("waitTime").Value, out waitTime);
+                                            
+                                            string sequenceIfExpired = "EMPTY";
+                                            if (xmlAction.Attribute("sequenceIfExpired") != null)
+                                                sequenceIfExpired = xmlAction.Attribute("sequenceIfExpired").Value;
+
+                                            ActionPictureWait actionPictureWait = new ActionPictureWait
+                                            {
+                                                PictureName = (string)xmlAction,
+                                                X1 = x1,
+                                                X2 = x2,
+                                                Y1 = y1,
+                                                Y2 = y2,
+                                                Threshold = threshold,
+                                                WaitTime = waitTime,
+                                                SequenceIfExpired = sequenceIfExpired
+                                            };
+                                            newSequence.AddAction(actionPictureWait);                                        
+                                        }
                                         break;
 
                                     case (int)Action.DeprecatedActionType.IfPicture:
+                                        {
+
                                         //Version ajusting and crash prevention
                                         int threshold = 0;
-                                        if (xmlAction.Attribute("x1") != null) x1 = Int32.Parse(xmlAction.Attribute("x1").Value);
-                                        if (xmlAction.Attribute("y1") != null) y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
-                                        if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-                                        if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-                                        if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-
+                                        int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+                                        if (xmlAction.Attribute("x1") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("x1").Value, out x1);
+                                        if (xmlAction.Attribute("y1") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("y1").Value, out y1);
+                                        if (xmlAction.Attribute("x2") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("x2").Value, out x2);
+                                        if (xmlAction.Attribute("y2") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("y2").Value, out y2);
+                                        if (xmlAction.Attribute("tolerance") != null) 
+                                                Int32.TryParse(xmlAction.Attribute("tolerance").Value, out threshold);
 
                                         string ifTrueSequence = "EMPTY", ifFalseSequence = "EMPTY";
                                         if (xmlAction.Attribute("ifTrueSequence") != null)
@@ -201,16 +231,20 @@ namespace Tao_Bot_Maker
                                         if (xmlAction.Attribute("ifFalseSequence") != null)
                                             ifFalseSequence = xmlAction.Attribute("ifFalseSequence").Value;
 
-                                        ActionIfPicture actionIfPicture = new ActionIfPicture();
-                                        actionIfPicture.PictureName = (string)xmlAction;
-                                        actionIfPicture.X1 = x1;
-                                        actionIfPicture.X2 = x2;
-                                        actionIfPicture.Y1 = y1;
-                                        actionIfPicture.Y2 = y2;
-                                        actionIfPicture.Threshold = threshold;
-                                        actionIfPicture.IfFound = ifTrueSequence;
-                                        actionIfPicture.IfNotFound = ifFalseSequence;
-                                        newSequence.AddAction(actionIfPicture);
+                                            ActionIfPicture actionIfPicture = new ActionIfPicture
+                                            {
+                                                PictureName = (string)xmlAction,
+                                                X1 = x1,
+                                                X2 = x2,
+                                                Y1 = y1,
+                                                Y2 = y2,
+                                                Threshold = threshold,
+                                                IfFound = ifTrueSequence,
+                                                IfNotFound = ifFalseSequence
+                                            };
+                                            newSequence.AddAction(actionIfPicture);
+
+                                        }
                                         break;
 
                                     default:
@@ -230,13 +264,13 @@ namespace Tao_Bot_Maker
             return newSequence.Sequence;
         }
 
-        public static List<String> SequencesList()
+        public static List<string> SequencesList()
         {
-            System.IO.Directory.CreateDirectory(Constants.SEQUENCES_FOLDER_NAME);
+            Directory.CreateDirectory(Constants.SEQUENCES_FOLDER_NAME);
             DirectoryInfo directory = new DirectoryInfo(Constants.SEQUENCES_FOLDER_NAME);
             FileInfo[] files = directory.GetFiles("*.xml"); //Getting xml files
 
-            List<String> sequencesList = new List<String>();
+            List<string> sequencesList = new List<string>();
 
             foreach (FileInfo file in files)
             {
@@ -245,7 +279,7 @@ namespace Tao_Bot_Maker
             return sequencesList;
         }
 
-        public static List<String> SequencesListFiltered(string nameToExclude)
+        public static List<string> SequencesListFiltered(string nameToExclude)
         {
             List<string> sequenceListFiltered = new List<string>();
             foreach (string sequence in SequenceXmlManager.SequencesList())
@@ -257,23 +291,22 @@ namespace Tao_Bot_Maker
             return sequenceListFiltered;
         }
 
-        public static bool IsNameUsed(String name)
+        public static bool IsNameUsed(string name)
         {
-            if(File.Exists(Constants.SEQUENCES_FOLDER_NAME + "\\" + name + ".xml")) return true;
-            return false;
+            return File.Exists(Path.Combine(Constants.SEQUENCES_FOLDER_NAME, name + ".xml"));
         }
 
-        public static bool DeleteSequence(String sequenceName)
+        public static bool DeleteSequence(string sequenceName)
         {
             string fileName = sequenceName + @".xml";
             try
             {
-                File.Delete(Constants.SEQUENCES_FOLDER_NAME + "\\" + fileName);
+                File.Delete(Path.Combine(Constants.SEQUENCES_FOLDER_NAME, fileName));
                 return true;
             }
             catch (Exception ex)
             {
-
+                Log.Write(ex.Message, Log.ERROR);
             }
             return false;
         }

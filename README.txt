@@ -1,5 +1,7 @@
 Changelog :
 
+- Fix : Improved verifications on loading xml
+
 Version 0.4.16 :
 - Fix : MessageBox doesn't show anymore when saving a new sequence
 - Fix : Loading sequence doesn't cause crash anymore when loading action with invalid parameters

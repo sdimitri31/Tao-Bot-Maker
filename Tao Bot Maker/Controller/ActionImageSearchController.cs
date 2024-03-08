@@ -354,25 +354,138 @@ namespace Tao_Bot_Maker
             string pictureName = (string)xmlAction;
 
             //Version ajusting and crash prevention
-            int expiration = _defaultExpiration;
-            int threshold = _defaultThreshold;
-            int x1 = _defaultX1, x2 = _defaultX2, y1 = _defaultY1, y2 = _defaultY2;
-            if (xmlAction.Attribute("x1") != null) x1 = Int32.Parse(xmlAction.Attribute("x1").Value);
-            if (xmlAction.Attribute("y1") != null) y1 = Int32.Parse(xmlAction.Attribute("y1").Value);
-            if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-            if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-            if (xmlAction.Attribute("expiration") != null) expiration = Int32.Parse(xmlAction.Attribute("expiration").Value); 
-            if (xmlAction.Attribute("threshold") != null) threshold = Int32.Parse(xmlAction.Attribute("threshold").Value); 
+            string errors = string.Empty;
 
-            string ifFound = _defaultIfFound, ifNotFound = _defaultIfNotFound;
+            string ifFound = _defaultIfFound;
             if (xmlAction.Attribute("ifFound") != null)
-                ifFound = xmlAction.Attribute("ifFound").Value;
+            {
+                ifFound = xmlAction.Attribute("ifFound").Value.ToLower();
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_IfFound + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            string ifNotFound = _defaultIfNotFound;
             if (xmlAction.Attribute("ifNotFound") != null)
-                ifNotFound = xmlAction.Attribute("ifNotFound").Value;
+            {
+                ifNotFound = xmlAction.Attribute("ifNotFound").Value.ToLower();
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_IfNotFound + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int x1 = _defaultX1;
+            if (xmlAction.Attribute("x1") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("x1").Value, out x1))
+                {
+                    errors += Properties.strings.action_Member_X1 + " : " +
+                        Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_X1 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int y1 = _defaultY1;
+            if (xmlAction.Attribute("y1") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("y1").Value, out y1))
+                {
+                    errors += Properties.strings.action_Member_Y1 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_Y1 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int x2 = _defaultX2;
+            if (xmlAction.Attribute("x2") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("x2").Value, out x2))
+                {
+                    errors += Properties.strings.action_Member_X2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_X2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int y2 = _defaultY2;
+            if (xmlAction.Attribute("y2") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("y2").Value, out y2))
+                {
+                    errors += Properties.strings.action_Member_Y2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_Y2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int expiration = _defaultExpiration;
+            if (xmlAction.Attribute("expiration") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("expiration").Value, out expiration))
+                {
+                    errors += Properties.strings.action_Member_Expiration + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_Expiration + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int threshold = _defaultThreshold;
+            //Check for all names used for storing "Threshold" value
+            if ((xmlAction.Attribute("threshold") != null) || (xmlAction.Attribute("tolerance") != null))
+            {
+                if (xmlAction.Attribute("threshold") != null)
+                    if (!int.TryParse(xmlAction.Attribute("threshold").Value, out threshold))
+                    {
+                        errors += Properties.strings.action_Member_Threshold + " : " +
+                        Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                    }
+                else if (xmlAction.Attribute("tolerance") != null)
+                    if (!int.TryParse(xmlAction.Attribute("tolerance").Value, out threshold))
+                    {
+                        errors += Properties.strings.action_Member_Threshold + " : " +
+                        Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                    }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_Threshold + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
 
             var (actionSequence, errorMessage) = CreateAction(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
 
-            return (actionSequence, errorMessage);
+            errors += errorMessage;
+
+            return (actionSequence, errors);
         }
 
 

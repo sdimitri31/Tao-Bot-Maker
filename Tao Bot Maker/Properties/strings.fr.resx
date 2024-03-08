@@ -147,6 +147,12 @@
   <data name="ActionName_Wait" xml:space="preserve">
     <value>Attendre</value>
   </data>
+  <data name="action_ErrorMessage_AttributeNotFound" xml:space="preserve">
+    <value>Attribut introuvable, valeur définie par défaut</value>
+  </data>
+  <data name="action_ErrorMessage_AttributeParsingError" xml:space="preserve">
+    <value>Attribut impossible à convertir en nombre entier,  valeur définie par défaut</value>
+  </data>
   <data name="action_ErrorMessage_ClickNotSelected" xml:space="preserve">
     <value>Erreur : Un bouton de clic doit être sélectionné</value>
   </data>
@@ -257,6 +263,9 @@
   </data>
   <data name="button_ShowDrawingArea" xml:space="preserve">
     <value>Afficher la zone</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erreur</value>
   </data>
   <data name="label_Alt" xml:space="preserve">
     <value>Alt</value>

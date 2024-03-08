@@ -52,11 +52,22 @@ namespace Tao_Bot_Maker
 
         public static (ActionWait action, string errorMessage) GetActionFromXElement(XElement xmlAction)
         {
-            int waitTime = (int)xmlAction;
+            //Version ajusting and crash prevention
+            string errors = string.Empty;
+
+            int waitTime = _defaultWaitTime;
+            //If parsing error
+            if (!int.TryParse(xmlAction.Value, out waitTime))
+            {
+                errors += Properties.strings.action_Member_WaitTime + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+            }
 
             var (actionWait, errorMessage) = CreateAction(waitTime);
 
-            return (actionWait, errorMessage);
+            errors += errorMessage;
+
+            return (actionWait, errors);
         }
 
     }

@@ -130,30 +130,128 @@ namespace Tao_Bot_Maker
         public static (ActionClick action, string errorMessage) GetActionFromXElement(XElement xmlAction)
         {
             //Version ajusting and crash prevention
-            int dragSpeed = _defaultDragSpeed;
-            int x1 = _defaultX1, x2 = _defaultX2, y1 = _defaultY1, y2 = _defaultY2;
-            if (xmlAction.Attribute("x") != null) x1 = Int32.Parse(xmlAction.Attribute("x").Value);
-            if (xmlAction.Attribute("y") != null) y1 = Int32.Parse(xmlAction.Attribute("y").Value);
-            if (xmlAction.Attribute("x2") != null) x2 = Int32.Parse(xmlAction.Attribute("x2").Value);
-            if (xmlAction.Attribute("y2") != null) y2 = Int32.Parse(xmlAction.Attribute("y2").Value);
-            if (xmlAction.Attribute("dragSpeed") != null) dragSpeed = Int32.Parse(xmlAction.Attribute("dragSpeed").Value);
-
-            bool isDoubleClick = _defaultIsDoubleClick, isDrag = _defaultIsDrag;
-            if (xmlAction.Attribute("isDoubleClick") != null)
-                if (xmlAction.Attribute("isDoubleClick").Value == "true")
-                    isDoubleClick = true;
-
-            if (xmlAction.Attribute("isDrag") != null)
-                if (xmlAction.Attribute("isDrag").Value == "true")
-                    isDrag = true;
+            string errors = string.Empty;
 
             string selectedClick = _defaultClick;
             if (xmlAction.Attribute("clic") != null)
-                selectedClick = xmlAction.Attribute("clic").Value;
+            {
+                selectedClick = xmlAction.Attribute("clic").Value.ToLower();
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_Click + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
 
-            var (actionSequence, errorMessage) = CreateAction(selectedClick.ToLower(), x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
+            int x1 = _defaultX1;
+            if (xmlAction.Attribute("x") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("x").Value, out x1))
+                {
+                    errors += Properties.strings.action_Member_X1 + " : " +
+                        Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_X1 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
 
-            return (actionSequence, errorMessage);
+            int y1 = _defaultY1;
+            if (xmlAction.Attribute("y") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("y").Value, out y1))
+                {
+                    errors += Properties.strings.action_Member_Y1 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_Y1 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int x2 = _defaultX2;
+            if (xmlAction.Attribute("x2") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("x2").Value, out x2))
+                {
+                    errors += Properties.strings.action_Member_X2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_X2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int y2 = _defaultY2;
+            if (xmlAction.Attribute("y2") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("y2").Value, out y2))
+                {
+                    errors += Properties.strings.action_Member_Y2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_Y2 + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            int dragSpeed = _defaultDragSpeed;
+            if (xmlAction.Attribute("dragSpeed") != null)
+            {
+                //If parsing error
+                if (!int.TryParse(xmlAction.Attribute("dragSpeed").Value, out dragSpeed))
+                {
+                    errors += Properties.strings.action_Member_DragSpeed + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeParsingError + " \r\n";
+                }
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_DragSpeed + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            bool isDoubleClick = _defaultIsDoubleClick;
+            if (xmlAction.Attribute("isDoubleClick") != null)
+            {
+                if (xmlAction.Attribute("isDoubleClick").Value.ToLower() == "true")
+                    isDoubleClick = true;
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_IsDoubleClick + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            bool isDrag = _defaultIsDrag;
+            if (xmlAction.Attribute("isDrag") != null)
+            {
+                if (xmlAction.Attribute("isDrag").Value.ToLower() == "true")
+                    isDrag = true;
+            }
+            else
+            {
+                errors += Properties.strings.action_Member_IsDrag + " : " +
+                    Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
+            }
+
+            var (actionSequence, errorMessage) = CreateAction(selectedClick, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed);
+
+            errors += errorMessage;
+
+            return (actionSequence, errors);
         }
     }
 }

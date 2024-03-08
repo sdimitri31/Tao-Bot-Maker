@@ -147,6 +147,12 @@
   <data name="ActionName_Wait" xml:space="preserve">
     <value>Wait</value>
   </data>
+  <data name="action_ErrorMessage_AttributeNotFound" xml:space="preserve">
+    <value>Attribute not found, value has been defaulted</value>
+  </data>
+  <data name="action_ErrorMessage_AttributeParsingError" xml:space="preserve">
+    <value>Attribute couldn't be parsed as integer, value has been defaulted</value>
+  </data>
   <data name="action_ErrorMessage_ClickNotSelected" xml:space="preserve">
     <value>Error : Click button must be selected</value>
   </data>
@@ -257,6 +263,9 @@
   </data>
   <data name="button_ShowDrawingArea" xml:space="preserve">
     <value>Show area</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="label_Alt" xml:space="preserve">
     <value>Alt</value>

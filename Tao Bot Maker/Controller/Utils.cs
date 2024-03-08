@@ -32,6 +32,7 @@ namespace Tao_Bot_Maker.Controller
 
             return new int[] { x, y };
         }
+        
         public static int[] GetBottomRightCoords(int x1, int y1, int x2, int y2)
         {
             int x, y;
@@ -69,5 +70,6 @@ namespace Tao_Bot_Maker.Controller
 
             return new int[] { xy[0], xy[1], width, height };
         }
+
     }
 }

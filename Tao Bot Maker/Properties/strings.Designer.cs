@@ -70,6 +70,24 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Attribute not found, value has been defaulted.
+        /// </summary>
+        internal static string action_ErrorMessage_AttributeNotFound {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_AttributeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Attribute couldn&apos;t be parsed as integer, value has been defaulted.
+        /// </summary>
+        internal static string action_ErrorMessage_AttributeParsingError {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_AttributeParsingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error : Click button must be selected.
         /// </summary>
         internal static string action_ErrorMessage_ClickNotSelected {
@@ -480,6 +498,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string button_ShowDrawingArea {
             get {
                 return ResourceManager.GetString("button_ShowDrawingArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
