@@ -2,19 +2,16 @@
 
 namespace Tao_Bot_Maker
 {
+    /// <summary>
+    /// DEPRECATED DO NOT USE
+    /// </summary>
     class ActionIfPicture : Action
     {
-        /// <summary>
-        /// DEPRECATED DO NOT USE
-        /// </summary>
         public ActionIfPicture()
         {
             Type = (int)DeprecatedActionType.IfPicture;
         }
 
-        /// <summary>
-        /// DEPRECATED DO NOT USE
-        /// </summary>
         public ActionIfPicture(String pictureName, int threshold, int x1, int x2, int y1, int y2, String ifFound, String ifNotFound)
         {
             Type = (int)DeprecatedActionType.IfPicture;
@@ -38,7 +35,9 @@ namespace Tao_Bot_Maker
 
         public override string ToString()
         {
-            return "DEPRECATED ! NEEDS TO BE CHANGED ;Action Si Image; Image : " + PictureName + "; Tolérance : " + Threshold + "; X1 : " + X1 + "; Y1 : " + Y1 + "; X2 : " + X2 + "; Y2 : " + Y2 + "; Si : " + IfFound + "; Sinon : " + IfNotFound;
+            string text = Properties.strings.action_ErrorMessage_DeprecatedType;
+            text += " | Action Si Image; Image: " + PictureName + "; Tolérance: " + Threshold + "; X1: " + X1 + "; Y1: " + Y1 + "; X2: " + X2 + "; Y2: " + Y2 + "; Si: " + IfFound + "; Sinon: " + IfNotFound;
+            return text;
         }
     }
 }

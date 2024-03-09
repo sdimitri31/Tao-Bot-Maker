@@ -140,7 +140,7 @@ namespace Tao_Bot_Maker
                         DoActionIfPicture(action);
                         break;
 
-                    case (int)Action.ActionType.Sequence:
+                    case (int)Action.DeprecatedActionType.Sequence:
                         DoActionSequence(action);
                         break;
 

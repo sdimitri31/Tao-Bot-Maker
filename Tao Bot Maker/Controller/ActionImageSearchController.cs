@@ -38,7 +38,7 @@ namespace Tao_Bot_Maker
         /// <param name="ifFound">Expected : not null or empty string</param>
         /// <param name="ifNotFound">Expected : not null or empty string</param>
         /// <returns>ActionImageSearch if all test passed. string errorMessage if something was wrong</returns>
-        public static (ActionImageSearch actionImageSearch, string errorMessage) CreateAction(string pictureName, int threshold, int x1, int x2, int y1, int y2, int expiration, string ifFound, string ifNotFound)
+        public static ActionImageSearch CreateAction(string pictureName, int threshold, int x1, int x2, int y1, int y2, int expiration, string ifFound, string ifNotFound)
         {
             string errorMessage = string.Empty;
 
@@ -82,9 +82,9 @@ namespace Tao_Bot_Maker
                 ifNotFound = _defaultIfNotFound;
             }
 
-            ActionImageSearch actionImageSearch = new ActionImageSearch(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
+            ActionImageSearch actionImageSearch = new ActionImageSearch(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound, errorMessage);
 
-            return (actionImageSearch, errorMessage);
+            return actionImageSearch;
         }
 
         private static bool ValidateImage(string imageName, out string errorMessage)
@@ -333,23 +333,23 @@ namespace Tao_Bot_Maker
         /// </summary>
         /// <param name="panel">ActionImageSearchPanel</param>
         /// <returns>ActionImageSearchPanel : if success or null if error. ErrorMessage empty if success or error details</returns>
-        public static (ActionImageSearch action, string errorMessage) GetActionFromControl(ActionImageSearchPanel panel)
+        public static ActionImageSearch GetActionFromControl(ActionImageSearchPanel panel)
         {
             //Moving picture into picture folder
             string pictureName = ImportPicture(panel.OriginalPath, out string error);
             if (pictureName != null)
             {
-                var (actionImageSearch, errorMessage) = CreateAction(pictureName, panel.Threshold, panel.X1, panel.X2, panel.Y1, panel.Y2, panel.Expiration, panel.IfFound, panel.IfNotFound);
+                ActionImageSearch actionImageSearch = CreateAction(pictureName, panel.Threshold, panel.X1, panel.X2, panel.Y1, panel.Y2, panel.Expiration, panel.IfFound, panel.IfNotFound);
 
-                return (actionImageSearch, errorMessage);
+                return actionImageSearch;
             }
             else
             {
-                return (null, error);
+                return new ActionImageSearch(error);
             }
         }
 
-        public static (ActionImageSearch action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        public static ActionImageSearch GetActionFromXElement(XElement xmlAction)
         {
             string pictureName = (string)xmlAction;
 
@@ -481,11 +481,11 @@ namespace Tao_Bot_Maker
                     Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
             }
 
-            var (actionSequence, errorMessage) = CreateAction(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
+            ActionImageSearch action = CreateAction(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound);
 
-            errors += errorMessage;
+            action.ErrorMessage = errors + action.ErrorMessage;
 
-            return (actionSequence, errors);
+            return action;
         }
 
 

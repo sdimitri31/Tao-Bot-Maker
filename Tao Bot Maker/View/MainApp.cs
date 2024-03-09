@@ -297,19 +297,16 @@ namespace Tao_Bot_Maker
             Log.Write(Properties.strings.log_Loading_Actions, LogFramework.Log.TRACE);
             this.listBoxActions.Items.Clear();
 
-            for(int i = 0; i < sequenceController.GetActions().Count; i++)
+            foreach(Action action in sequenceController.GetActions())
             {
-                string actionToString = sequenceController.GetActions().ToArray()[i].ToString();
-                
-                //if error on this action
-                if (!string.IsNullOrEmpty(sequenceController.GetErrors().ToArray()[i]))
+                string error = "";
+                if (!string.IsNullOrEmpty(action.ErrorMessage))
                 {
-                    actionToString = "# " + sequenceController.GetErrors().ToArray()[i].ToString() + " # " + actionToString;
+                    error = "# " + action.ErrorMessage + " #";
                 }
 
-                Log.Write(Properties.strings.log_Loading_Action + actionToString, LogFramework.Log.TRACE);
-                this.listBoxActions.Items.Add(actionToString);
-
+                Log.Write(Properties.strings.log_Loading_Action + action, Log.TRACE);
+                this.listBoxActions.Items.Add(error + action);
             }
 
             UpdateButtonStateEdit();
@@ -412,13 +409,13 @@ namespace Tao_Bot_Maker
 
         private void AddAction()
         {
-            var formPopup = new ActionView(this);
-            formPopup.StartPosition = FormStartPosition.CenterParent;
-            var result = formPopup.ShowDialog(this);
+            var actionView = new ActionView(this);
+            actionView.StartPosition = FormStartPosition.CenterParent;
+            var result = actionView.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                sequenceController.AddAction(formPopup.ReturnValueAction);
-                Log.Write(Properties.strings.log_ActionAdded + formPopup.ReturnValueAction.ToString(), GetListBoxLog());
+                sequenceController.AddAction(actionView.ReturnValueAction);
+                Log.Write(Properties.strings.log_ActionAdded + actionView.ReturnValueAction.ToString(), GetListBoxLog());
                 LoadActions();
                 isSequenceSaved = false;
             }

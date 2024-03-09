@@ -4,13 +4,15 @@ namespace Tao_Bot_Maker
 {
     public class ActionImageSearch : Action
     {
-        public ActionImageSearch()
+        public ActionImageSearch(string errorMessage = "")
         {
             Type = (int)ActionType.ImageSearch;
+            ErrorMessage = errorMessage;
         }
-        public ActionImageSearch(string pictureName, int threshold, int x1, int x2, int y1, int y2, int expiration, string ifFound, string ifNotFound)
+        public ActionImageSearch(string pictureName, int threshold, int x1, int x2, int y1, int y2, int expiration, string ifFound, string ifNotFound, string errorMessage = "")
         {
             Type = (int)ActionType.ImageSearch;
+            ErrorMessage = errorMessage;
             PictureName = pictureName;
             Threshold = threshold;
             X1 = x1;

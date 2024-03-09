@@ -32,12 +32,9 @@ namespace Tao_Bot_Maker
 
         public List<Action> GetActions() => sequence.Actions;
 
-        public List<string> GetErrors() => sequence.Errors;
-
-        public void AddAction(Action newAction, string errorMessage = null)
+        public void AddAction(Action newAction)
         {
             sequence.Actions.Add(newAction);
-            sequence.Errors.Add(errorMessage);
         }
 
         public void RemoveAction(Action action)

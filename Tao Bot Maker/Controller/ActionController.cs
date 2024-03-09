@@ -62,7 +62,7 @@ namespace Tao_Bot_Maker
                     return Properties.strings.ActionName_PictureWait;
                 case (int)Action.DeprecatedActionType.IfPicture:
                     return Properties.strings.ActionName_IfPicture;
-                case (int)Action.ActionType.Sequence:
+                case (int)Action.DeprecatedActionType.Sequence:
                     return Properties.strings.ActionName_Sequence;
                 case (int)Action.ActionType.Click:
                     return Properties.strings.ActionName_Click;
@@ -82,14 +82,14 @@ namespace Tao_Bot_Maker
             else if (typeName == Properties.strings.ActionName_Wait) return (int)Action.ActionType.Wait;
             else if (typeName == Properties.strings.ActionName_PictureWait) return (int)Action.DeprecatedActionType.PictureWait;
             else if (typeName == Properties.strings.ActionName_IfPicture) return (int)Action.DeprecatedActionType.IfPicture;
-            else if (typeName == Properties.strings.ActionName_Sequence) return (int)Action.ActionType.Sequence;
+            else if (typeName == Properties.strings.ActionName_Sequence) return (int)Action.DeprecatedActionType.Sequence;
             else if (typeName == Properties.strings.ActionName_Click) return (int)Action.ActionType.Click;
             else if (typeName == Properties.strings.ActionName_Loop) return (int)Action.ActionType.Loop;
             else if (typeName == Properties.strings.ActionName_ImageSearch) return (int)Action.ActionType.ImageSearch;
             else return -1;
         }
 
-        public static (Action action, string errorMessage) GetActionFromControl(int type, Control control)
+        public static Action GetActionFromControl(int type, Control control)
         {
             switch (type)
             {
@@ -97,7 +97,7 @@ namespace Tao_Bot_Maker
                     return ActionKeyController.GetActionFromControl((ActionKeyPanel)control);
                 case (int)Action.ActionType.Wait:
                     return ActionWaitController.GetActionFromControl((ActionWaitPanel)control);
-                case (int)Action.ActionType.Sequence:
+                case (int)Action.DeprecatedActionType.Sequence:
                     return ActionSequenceController.GetActionFromControl((ActionSequencePanel)control);
                 case (int)Action.ActionType.Click:
                     return ActionClickController.GetActionFromControl((ActionClickPanel)control);
@@ -106,11 +106,11 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.ImageSearch:
                     return ActionImageSearchController.GetActionFromControl((ActionImageSearchPanel)control);
                 default:
-                    return (null, "Not found");
+                    return new Action("INVALID ACTION TYPE");
             }
         }
 
-        public static (Action action, string errorMessage) GetActionFromXElement(int type, XElement xmlAction)
+        public static Action GetActionFromXElement(int type, XElement xmlAction)
         {
             switch (type)
             {
@@ -118,7 +118,7 @@ namespace Tao_Bot_Maker
                     return ActionKeyController.GetActionFromXElement(xmlAction);
                 case (int)Action.ActionType.Wait:
                     return ActionWaitController.GetActionFromXElement(xmlAction);
-                case (int)Action.ActionType.Sequence:
+                case (int)Action.DeprecatedActionType.Sequence:
                     return ActionSequenceController.GetActionFromXElement(xmlAction);
                 case (int)Action.ActionType.Click:
                     return ActionClickController.GetActionFromXElement(xmlAction);
@@ -127,7 +127,7 @@ namespace Tao_Bot_Maker
                 case (int)Action.ActionType.ImageSearch:
                     return ActionImageSearchController.GetActionFromXElement(xmlAction);
                 default:
-                    return (null, "Not found");
+                    return new Action("INVALID ACTION TYPE");
             }
         }
 
@@ -139,7 +139,7 @@ namespace Tao_Bot_Maker
                     return new ActionKeyPanel(action);
                 case (int)Action.ActionType.Wait:
                     return new ActionWaitPanel(action);
-                case (int)Action.ActionType.Sequence:
+                case (int)Action.DeprecatedActionType.Sequence:
                     return new ActionSequencePanel(actionView, action);
                 case (int)Action.ActionType.Click:
                     return new ActionClickPanel(actionView, action);

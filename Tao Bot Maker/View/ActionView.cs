@@ -175,10 +175,10 @@ namespace Tao_Bot_Maker.View
         private void Button_Ok_Click(object sender, EventArgs e)
         {
             //Test if the inputs are valid
-            var (action, errorMessage) = ActionController.GetActionFromControl((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, panelList[listBox_Actions.SelectedIndex]);
+            Action action = ActionController.GetActionFromControl((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId, panelList[listBox_Actions.SelectedIndex]);
             
             //if valid action has been created
-            if(string.IsNullOrEmpty(errorMessage))
+            if(string.IsNullOrEmpty(action.ErrorMessage))
             {
                 //Send results to the controller
                 ReturnValueAction = action;
@@ -189,7 +189,7 @@ namespace Tao_Bot_Maker.View
             else
             {
                 //Prevent closing
-                MessageBox.Show(errorMessage);
+                MessageBox.Show(action.ErrorMessage);
                 ReturnValueAction = null;
                 Log.Write(Properties.strings.log_DialogResult_None, LogFramework.Log.TRACE);
                 this.DialogResult = DialogResult.None;

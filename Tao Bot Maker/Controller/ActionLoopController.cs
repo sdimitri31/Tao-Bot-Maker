@@ -12,7 +12,7 @@ namespace Tao_Bot_Maker
         private static readonly string  _defaultName = "";
         private static readonly int     _defaultRepeatNumber = 1;
 
-        public static (ActionLoop actionLoop, string errorMessage) CreateAction(string name, int repeatNumber)
+        public static ActionLoop CreateAction(string name, int repeatNumber)
         {
             string errorMessage = string.Empty;
 
@@ -28,9 +28,9 @@ namespace Tao_Bot_Maker
                 repeatNumber = _defaultRepeatNumber;
             }
 
-            ActionLoop actionLoop = new ActionLoop(name, repeatNumber);
+            ActionLoop actionLoop = new ActionLoop(name, repeatNumber, errorMessage);
 
-            return (actionLoop, errorMessage);
+            return actionLoop;
         }
 
         private static bool ValidateSequenceName(string sequenceName, out string errorMessage)
@@ -67,14 +67,14 @@ namespace Tao_Bot_Maker
             }
         }
 
-        public static (ActionLoop actionLoop, string errorMessage) GetActionFromControl(ActionLoopPanel panel)
+        public static ActionLoop GetActionFromControl(ActionLoopPanel panel)
         {
-            var (actionClick, errorMessage) = CreateAction(panel.SequenceName, panel.RepeatNumber);
+            ActionLoop actionLoop = CreateAction(panel.SequenceName, panel.RepeatNumber);
 
-            return (actionClick, errorMessage);
+            return actionLoop;
         }
 
-        public static (ActionLoop action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        public static ActionLoop GetActionFromXElement(XElement xmlAction)
         {
             string name = (string)xmlAction;
 
@@ -97,11 +97,11 @@ namespace Tao_Bot_Maker
                     Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
             }
 
-            var (actionLoop, errorMessage) = CreateAction(name, repeatNumber);
+            ActionLoop action = CreateAction(name, repeatNumber);
 
-            errors += errorMessage;
+            action.ErrorMessage = errors + action.ErrorMessage;
 
-            return (actionLoop, errors);
+            return action;
         }
     }
 }

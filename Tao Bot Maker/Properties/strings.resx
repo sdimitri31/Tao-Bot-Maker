@@ -156,6 +156,9 @@
   <data name="action_ErrorMessage_ClickNotSelected" xml:space="preserve">
     <value>Error : Click button must be selected</value>
   </data>
+  <data name="action_ErrorMessage_DeprecatedType" xml:space="preserve">
+    <value>DEPRECATED TYPE : might cause crash when executed</value>
+  </data>
   <data name="action_ErrorMessage_DragSpeedWrongInterval" xml:space="preserve">
     <value>Error : Drag speed must be a number between 1 and 5</value>
   </data>

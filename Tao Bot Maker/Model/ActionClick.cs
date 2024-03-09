@@ -8,13 +8,15 @@ namespace Tao_Bot_Maker
 {
     public class ActionClick : Action
     {
-        public ActionClick()
+        public ActionClick(string errorMessage = "")
         {
             Type = (int)ActionType.Click;
+            ErrorMessage = errorMessage;
         }
-        public ActionClick(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed, bool isCurrentPosClick)
+        public ActionClick(string click, int x1, int y1, int x2, int y2, bool isDoubleClick, bool isDrag, int dragSpeed, bool isCurrentPosClick, string errorMessage = "")
         {
             Type = (int)ActionType.Click;
+            ErrorMessage = errorMessage;
             SelectedClick = click;
             X1 = x1;
             Y1 = y1;

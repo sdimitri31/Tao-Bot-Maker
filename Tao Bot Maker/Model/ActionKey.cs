@@ -4,13 +4,15 @@ namespace Tao_Bot_Maker
 {
     public class ActionKey : Action
     {
-        public ActionKey()
+        public ActionKey(string errorMessage = "")
         {
             Type = (int) ActionType.Key;
+            ErrorMessage = errorMessage;
         }
-        public ActionKey(string key)
+        public ActionKey(string key, string errorMessage = "")
         {
             Type = (int)ActionType.Key;
+            ErrorMessage = errorMessage;
             Key = key;
         }
 

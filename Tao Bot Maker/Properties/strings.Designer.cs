@@ -97,6 +97,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à DEPRECATED TYPE : might cause crash when executed.
+        /// </summary>
+        internal static string action_ErrorMessage_DeprecatedType {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_DeprecatedType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error : Drag speed must be a number between 1 and 5.
         /// </summary>
         internal static string action_ErrorMessage_DragSpeedWrongInterval {

@@ -5,12 +5,15 @@ using Tao_Bot_Maker.View;
 
 namespace Tao_Bot_Maker
 {
+    /// <summary>
+    /// DEPRECATED DO NOT USE
+    /// </summary>
     public class ActionSequenceController
     {
         //Default values
         private static readonly string _defaultName = "";
 
-        public static (ActionSequence actionSequence, string errorMessage) CreateAction(string name)
+        public static ActionSequence CreateAction(string name)
         {
             string errorMessage = string.Empty;
 
@@ -20,9 +23,9 @@ namespace Tao_Bot_Maker
                 name = _defaultName;
             }
 
-            ActionSequence actionSequence = new ActionSequence(name);
+            ActionSequence actionSequence = new ActionSequence(name, errorMessage);
 
-            return (actionSequence, errorMessage);
+            return actionSequence;
         }
 
         private static bool ValidateSequenceName(string sequenceName, out string errorMessage)
@@ -42,20 +45,20 @@ namespace Tao_Bot_Maker
             }
         }
 
-        public static (ActionSequence actionSequence, string errorMessage) GetActionFromControl(ActionSequencePanel panel)
+        public static ActionSequence GetActionFromControl(ActionSequencePanel panel)
         {
-            var (actionSequence, errorMessage) = CreateAction(panel.SequenceName);
+            ActionSequence action = CreateAction(panel.SequenceName);
 
-            return (actionSequence, errorMessage);
+            return action;
         }
 
-        public static (ActionSequence action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        public static ActionSequence GetActionFromXElement(XElement xmlAction)
         {
             string sequence = (string)xmlAction;
 
-            var (actionSequence, errorMessage) = CreateAction(sequence);
+            ActionSequence action = CreateAction(sequence);
 
-            return (actionSequence, errorMessage);
+            return action;
         }
     }
 }

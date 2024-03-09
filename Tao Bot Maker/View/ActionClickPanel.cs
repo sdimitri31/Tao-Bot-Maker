@@ -320,6 +320,8 @@ namespace Tao_Bot_Maker.View
 
                 label_MoveClick.Enabled = false;
                 radioButton_MoveClick.Enabled = false;
+
+                radioButton_LeftClick.Checked = true;
             }
         }
 
@@ -354,6 +356,7 @@ namespace Tao_Bot_Maker.View
                     //Changing selection to left click
                     radioButton_LeftClick.Checked = true;
             }
+            UpdateLabelsColor();
             DrawArea();
         }
 

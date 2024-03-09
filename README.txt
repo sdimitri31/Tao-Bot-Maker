@@ -1,5 +1,13 @@
 Changelog :
 
+Version 0.4.19 :
+- Add : Action "Sequence" now deprecated, use action "Repeat sequence" instead
+- Add : New version of LogFramework.dll
+- Fix : Action "Wait" wasn't recovering old data in xml properly
+- Fix : Error message when loading action was still showing after editing
+- Fix : Labels X2 and Y2 not coloring in action "Click" view
+- Fix : "Move Click" not selected anymore when checking "Double Click" in action "Click" view
+
 Version 0.4.18 :
 - Add : Action "Wait" can now be between 2 values
 - Add : Different units of time can be selected in Action "Wait" 

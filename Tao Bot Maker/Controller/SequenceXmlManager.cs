@@ -71,7 +71,7 @@ namespace Tao_Bot_Maker
                                                                                         actionIfPicture.PictureName));
                         break;
 
-                    case (int)Action.ActionType.Sequence:
+                    case (int)Action.DeprecatedActionType.Sequence:
                         ActionSequence actionSequence = (ActionSequence)action;
                         doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionSequence.Type), actionSequence.SequenceName));
                         break;
@@ -168,8 +168,8 @@ namespace Tao_Bot_Maker
                             //If supported
                             if(isTypeSupported)
                             {
-                                (Action action, string errorMessage) = ActionController.GetActionFromXElement(actionType, xmlAction);
-                                newSequence.AddAction(action, errorMessage);
+                                Action action = ActionController.GetActionFromXElement(actionType, xmlAction);
+                                newSequence.AddAction(action);
                             }
                             //Else try to load old types
                             else
@@ -252,8 +252,15 @@ namespace Tao_Bot_Maker
                                         }
                                         break;
 
+                                    case (int)Action.DeprecatedActionType.Sequence:
+                                        {
+                                            Action action = ActionController.GetActionFromXElement(actionType, xmlAction);
+                                            newSequence.AddAction(action);
+                                        }
+                                        break;
+
                                     default:
-                                        newSequence.AddAction(null, "Type unknown");
+                                        newSequence.AddAction(new Action("Type unknown"));
                                         break;
                                 }
                             }

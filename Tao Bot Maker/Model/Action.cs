@@ -11,7 +11,6 @@ namespace Tao_Bot_Maker
         {
             Key = 0,
             Wait = 1,
-            Sequence = 4,
             Click = 5,
             Loop = 6,
             ImageSearch = 7
@@ -24,13 +23,24 @@ namespace Tao_Bot_Maker
         {
             PictureWait = 2,
             IfPicture = 3,
+            Sequence = 4,
         }
 
         public int Type { get; set; }
 
+        /// <summary>
+        /// Store a message containing details about errors when creating an action
+        /// </summary>
+        public string ErrorMessage { get; set; }
+
         public override string ToString()
         {
             return "Main Class Action";
+        }
+
+        public Action(string errorMessage = "")
+        {
+            ErrorMessage = errorMessage;
         }
 
     }

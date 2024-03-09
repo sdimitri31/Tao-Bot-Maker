@@ -5,14 +5,16 @@ namespace Tao_Bot_Maker
 {
     public class ActionLoop : Action
     {
-        public ActionLoop()
+        public ActionLoop(string errorMessage = "")
         {
             Type = (int)ActionType.Loop;
+            ErrorMessage = errorMessage;
         }
 
-        public ActionLoop(string sequenceName, int repeatNumber)
+        public ActionLoop(string sequenceName, int repeatNumber, string errorMessage = "")
         {
             Type = (int)ActionType.Loop;
+            ErrorMessage= errorMessage;
             SequenceName = sequenceName;
             RepeatNumber = repeatNumber;
         }

@@ -10,10 +10,10 @@ namespace Tao_Bot_Maker
     {
         //Default values
         private static readonly int _defaultWaitTime = 0;
-        private static readonly int _defaultWaitTimeMax = 0;
+        private static readonly int _defaultWaitTimeMax = 1;
         private static readonly bool _defaultIsRandomInterval = false;
 
-        public static (ActionWait actionWait, string errorMessage) CreateAction(int waitTime, int waitTimeMax, bool isRandomInterval)
+        public static ActionWait CreateAction(int waitTime, int waitTimeMax, bool isRandomInterval)
         {
             string errorMessage = string.Empty;
 
@@ -23,15 +23,14 @@ namespace Tao_Bot_Maker
                 waitTime = _defaultWaitTime;
             }
 
-            if (!ValidateWaitTimeMax(waitTimeMax, waitTime, out error))
-            {
-                errorMessage += error + "\r\n";
-                waitTime = _defaultWaitTime;
-            }
+            if(isRandomInterval)
+                if (!ValidateWaitTimeMax(waitTimeMax, waitTime, out error))
+                {
+                    errorMessage += error + "\r\n";
+                    waitTimeMax = _defaultWaitTimeMax;
+                }
 
-            ActionWait actionWait = new ActionWait(waitTime, waitTimeMax, isRandomInterval);
-
-            return (actionWait, errorMessage);
+            return new ActionWait(waitTime, waitTimeMax, isRandomInterval, errorMessage);
         }
 
         private static bool ValidateWaitTime(int waitTime, out string errorMessage)
@@ -84,17 +83,17 @@ namespace Tao_Bot_Maker
             }
         }
 
-        public static (ActionWait actionWait, string errorMessage) GetActionFromControl(ActionWaitPanel panel)
+        public static ActionWait GetActionFromControl(ActionWaitPanel panel)
         {
             int waitTimeInMS = ConvertWaitTimeInMS(panel.WaitTime, panel.WaitTimeUnit);
             int waitTimeMaxInMS = ConvertWaitTimeInMS(panel.WaitTimeMax, panel.WaitTimeMaxUnit);
 
-            var (actionWait, errorMessage) = CreateAction(waitTimeInMS, waitTimeMaxInMS, panel.IsRandomInterval);
+            ActionWait action = CreateAction(waitTimeInMS, waitTimeMaxInMS, panel.IsRandomInterval);
 
-            return (actionWait, errorMessage);
+            return action;
         }
 
-        public static (ActionWait action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        public static ActionWait GetActionFromXElement(XElement xmlAction)
         {
             //Version ajusting and crash prevention
             string errors = string.Empty;
@@ -152,11 +151,11 @@ namespace Tao_Bot_Maker
                     Properties.strings.action_ErrorMessage_AttributeNotFound + " \r\n";
             }
 
-            var (actionWait, errorMessage) = CreateAction(waitTime, waitTimeMax, isRandomInterval);
+            ActionWait action = CreateAction(waitTime, waitTimeMax, isRandomInterval);
 
-            errors += errorMessage;
+            action.ErrorMessage = errors + action.ErrorMessage;
 
-            return (actionWait, errors);
+            return action;
         }
 
     }

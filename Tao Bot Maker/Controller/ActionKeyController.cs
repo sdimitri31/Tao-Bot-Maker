@@ -17,7 +17,7 @@ namespace Tao_Bot_Maker
         /// </summary>
         /// <param name="key">Key to press</param>
         /// <returns>ActionKey : with given parameters or default value if error. ErrorMessage : empty if no error or details about it</returns>
-        public static (ActionKey actionKey, string errorMessage) CreateAction(string key)
+        public static ActionKey CreateAction(string key)
         {
             string errorMessage = string.Empty;
 
@@ -27,9 +27,9 @@ namespace Tao_Bot_Maker
                 key = _defaultKey;
             }
 
-            ActionKey actionKey = new ActionKey(key);
+            ActionKey actionKey = new ActionKey(key, errorMessage);
 
-            return (actionKey, errorMessage);
+            return actionKey;
         }
 
         private static bool ValidateKey(string key, out string errorMessage)
@@ -57,20 +57,20 @@ namespace Tao_Bot_Maker
             }
         }
 
-        public static (ActionKey action, string errorMessage) GetActionFromControl(ActionKeyPanel panel)
+        public static ActionKey GetActionFromControl(ActionKeyPanel panel)
         {
-            var (actionClick, errorMessage) = CreateAction(panel.Key);
+            ActionKey actionKey = CreateAction(panel.Key);
 
-            return (actionClick, errorMessage);
+            return actionKey;
         }
 
-        public static (ActionKey action, string errorMessage) GetActionFromXElement(XElement xmlAction)
+        public static ActionKey GetActionFromXElement(XElement xmlAction)
         {
             string key = (string)xmlAction;
 
-            var (actionClick, errorMessage) = CreateAction(key);
+            ActionKey actionKey = CreateAction(key);
 
-            return (actionClick, errorMessage);
+            return actionKey;
         }
     }
 }

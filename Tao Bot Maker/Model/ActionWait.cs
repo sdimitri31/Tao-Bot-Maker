@@ -2,14 +2,16 @@
 {
     public class ActionWait : Action
     {
-        public ActionWait()
+        public ActionWait(string errorMessage = "")
         {
             Type = (int)ActionType.Wait;
+            ErrorMessage = errorMessage;
         }
 
-        public ActionWait(int waitTime, int waitTimeMax, bool isRandomInterval)
+        public ActionWait(int waitTime, int waitTimeMax, bool isRandomInterval, string errorMessage = "")
         {
             Type = (int)ActionType.Wait;
+            ErrorMessage = errorMessage;
             WaitTime = waitTime;
             WaitTimeMax = waitTimeMax;
             IsRandomInterval = isRandomInterval;
