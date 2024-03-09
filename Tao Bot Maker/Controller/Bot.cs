@@ -84,7 +84,7 @@ namespace Tao_Bot_Maker
 
         private void StartBotting()
         {
-            Log.Write("Début de la séquence de bot", mainApp.GetListBoxLog(), default, true);
+            Log.Write("Début de la séquence de bot", mainApp.GetListBoxLog(), Log.INFO, true);
 
             //Execute la séquence chargée
             if (sequenceController != null)
@@ -363,61 +363,64 @@ namespace Tao_Bot_Maker
             //Check if IsDrag
             if (actionMouse.IsDrag)
             {
-                //Move cursor to XY2 according to DragSpeed
+                double deltaX = (actionMouse.X2 - actionMouse.X1);
+                double deltaY = (actionMouse.Y2 - actionMouse.Y1);
 
-                int gapX = (actionMouse.X2 - actionMouse.X1);
-                int gapY = (actionMouse.Y2 - actionMouse.Y1);
-                int smallerGap = Math.Min(Math.Abs(gapX), Math.Abs(gapY));
-                int nbStep;
-
-                Log.Write("gapX " + gapX, Log.TRACE);
-                Log.Write("gapY " + gapY, Log.TRACE);
-                Log.Write("smallerGap " + smallerGap, Log.TRACE);
-
-                if (smallerGap > 50 )
+                //avoid dividing by 0
+                if (deltaX != 0)
                 {
-                    decimal calc = (smallerGap / 10);
-                    nbStep = (int)Math.Floor(calc);
+                    //Calculate function y = ax + b
+                    //Step 1 : determine "a"
+                    double a = (deltaY / deltaX);
+
+                    //Step 2 : determine "b"
+                    // b = y - (a * x)
+                    double b = actionMouse.Y1 - (a * actionMouse.X1);
+
+                    Log.Write("y = " + a + " * x + " + b, Log.TRACE);
+
+                    //Loop through delta X
+                    for (int i = 1; i < 11; i++)
+                    {
+                        //Calculate y 
+                        double x = (actionMouse.X1 + (i * (deltaX /10)));
+                        double y = a * x + b;
+                        x = Math.Round(x);
+                        y = Math.Round(y);
+
+                        Log.Write("x : " + x + " y : " + y , Log.TRACE);
+
+                        //Move mouse to coords (x - 1, y)
+                        // - 1 to compensate + 1 in move event 
+                        Cursor.Position = new Point(Convert.ToInt32(x) - 1, Convert.ToInt32(y));
+                        mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
+
+                        //Wait depending on dragspeed
+                        Thread.Sleep((int)(50 / Math.Abs(actionMouse.DragSpeed)));
+                    }
                 }
+                //Moving on Y axis
                 else
                 {
-                    nbStep = smallerGap;
-                    if (nbStep == 0)
-                        nbStep = 1;
+                    //Loop through delta Y
+                    for (int i = 1; i < 11; i++)
+                    {
+                        //Calculate y 
+                        double x = actionMouse.X1;
+                        double y = actionMouse.Y1 + (i * (deltaY / 10));
+                        x = Math.Round(x);
+                        y = Math.Round(y);
+
+                        //Move mouse to coords (x - 1, y)
+                        // - 1 to compensate + 1 in move event 
+                        Cursor.Position = new Point(Convert.ToInt32(x) - 1, Convert.ToInt32(y));
+                        mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
+
+                        //Wait depending on dragspeed
+                        Thread.Sleep((int)(50 / Math.Abs(actionMouse.DragSpeed)));
+                    }
                 }
-
-                int stepX = (int)Math.Floor((double)(gapX / nbStep));
-                int stepY = (int)Math.Floor((double)(gapY / nbStep));
-                int resteX = (int)Math.Floor((double)(gapX % nbStep));
-                int resteY = (int)Math.Floor((double)(gapY % nbStep));
-
-                Log.Write("nbStep " + nbStep, Log.TRACE);
-                Log.Write("stepX " + stepX, Log.TRACE);
-                Log.Write("resteX " + resteX, Log.TRACE); 
-                Log.Write("stepY " + stepY, Log.TRACE);
-                Log.Write("resteY " + resteY, Log.TRACE);
-
-                int cursorPosX = actionMouse.X1;
-                int cursorPosY = actionMouse.Y1;
-
-                for (int i = 0; i < nbStep; i++)
-                {
-                    cursorPosX += stepX;
-                    cursorPosY += stepY;
-                    Cursor.Position = new Point(cursorPosX - 1, cursorPosY);
-                    mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
-
-                    Log.Write("Cursor.Position " + Cursor.Position.ToString() + " i " + i, Log.TRACE);
-
-                    Thread.Sleep((int)(30 / Math.Abs(actionMouse.DragSpeed)));
-                }
-
-                cursorPosX += resteX;
-                cursorPosY += resteY;
-                Cursor.Position = new Point(cursorPosX - 1, cursorPosY);
-                mouse_event((int)MouseEventFlags.Move, 1, 0, 0, 0);
-
-                Log.Write("Cursor.Position " + Cursor.Position.ToString(), Log.TRACE);
+                Log.Write("End Cursor.Position " + Cursor.Position.ToString(), Log.TRACE);
 
             }
             //Double click if "IsDoubleClick == true" and "IsDrag == false"
