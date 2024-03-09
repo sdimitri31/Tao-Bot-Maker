@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tao_Bot_Maker
+﻿namespace Tao_Bot_Maker
 {
     public class ActionKey : Action
     {

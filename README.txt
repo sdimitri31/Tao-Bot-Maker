@@ -1,5 +1,9 @@
 Changelog :
 
+Version 0.4.19.1 :
+- Fix : Improved localization about saving sequence, action "wait" and action names
+- Fix : Cleaning code
+
 Version 0.4.19 :
 - Add : Action "Sequence" now deprecated, use action "Repeat sequence" instead
 - Add : New version of LogFramework.dll

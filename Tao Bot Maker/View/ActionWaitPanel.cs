@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Tao_Bot_Maker.View
 {
@@ -78,6 +70,14 @@ namespace Tao_Bot_Maker.View
             numericUpDown_WaitTimeMax.Enabled = IsRandomInterval; 
             flatComboBox_WaitTimeMaxUnits.Enabled = IsRandomInterval;
             label_WaitTimeMax.Enabled = IsRandomInterval;
+            if (IsRandomInterval)
+            {
+                label_WaitTime.Text = Properties.strings.label_WaitTimeMin;
+            }
+            else
+            {
+                label_WaitTime.Text = Properties.strings.label_WaitTime;
+            }
         }
 
         private void CheckBox_IsRandomInterval_CheckedChanged(object sender, EventArgs e)

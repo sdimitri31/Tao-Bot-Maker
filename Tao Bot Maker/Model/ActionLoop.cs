@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace Tao_Bot_Maker
+﻿namespace Tao_Bot_Maker
 {
     public class ActionLoop : Action
     {

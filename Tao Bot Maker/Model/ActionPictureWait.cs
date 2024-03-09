@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tao_Bot_Maker
+﻿namespace Tao_Bot_Maker
 {
     /// <summary>
     /// DEPRECATED DO NOT USE
@@ -12,7 +10,7 @@ namespace Tao_Bot_Maker
             Type = (int)DeprecatedActionType.PictureWait;
         }
 
-        public ActionPictureWait(String picturePath, int threshold, int x1, int x2, int y1, int y2, int waitTime, String sequenceIfExpired)
+        public ActionPictureWait(string picturePath, int threshold, int x1, int x2, int y1, int y2, int waitTime, string sequenceIfExpired)
         {
             Type = (int)DeprecatedActionType.PictureWait;
             PictureName = picturePath;
@@ -25,14 +23,14 @@ namespace Tao_Bot_Maker
             SequenceIfExpired = sequenceIfExpired;
         }
 
-        public String PictureName { get; set; }
+        public string PictureName { get; set; }
         public int Threshold { get; set; }
         public int X1 { get; set; }
         public int X2 { get; set; }
         public int Y1 { get; set; }
         public int Y2 { get; set; }
         public int WaitTime { get; set; }
-        public String SequenceIfExpired { get; set; }
+        public string SequenceIfExpired { get; set; }
 
         public override string ToString()
         {

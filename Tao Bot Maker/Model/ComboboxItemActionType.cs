@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tao_Bot_Maker.Model
+﻿namespace Tao_Bot_Maker.Model
 {
     public class ComboboxItemActionType
     {   

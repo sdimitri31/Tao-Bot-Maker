@@ -127,13 +127,13 @@
     <value>If picture</value>
   </data>
   <data name="ActionName_ImageSearch" xml:space="preserve">
-    <value>Image search</value>
+    <value>Image</value>
   </data>
   <data name="ActionName_Key" xml:space="preserve">
     <value>Key</value>
   </data>
   <data name="ActionName_Loop" xml:space="preserve">
-    <value>Repeat sequence</value>
+    <value>Sequence</value>
   </data>
   <data name="ActionName_PictureWait" xml:space="preserve">
     <value>Wait for image</value>
@@ -244,7 +244,7 @@
     <value>Threshold</value>
   </data>
   <data name="action_Member_WaitTime" xml:space="preserve">
-    <value>Delay (ms)</value>
+    <value>Wait time</value>
   </data>
   <data name="action_Member_WaitTimeMax" xml:space="preserve">
     <value>Maximum wait time</value>
@@ -360,6 +360,9 @@
   <data name="label_WaitTimeMax" xml:space="preserve">
     <value>Wait time max</value>
   </data>
+  <data name="label_WaitTimeMin" xml:space="preserve">
+    <value>Wait time min</value>
+  </data>
   <data name="log_ActionAdded" xml:space="preserve">
     <value>Action added : </value>
   </data>
@@ -460,6 +463,10 @@
     <value>Couldn't load sequence.
 File might be corrupted.</value>
   </data>
+  <data name="MessageBox_Error_SaveSequence_NameUsed" xml:space="preserve">
+    <value>Name already used.
+Please choose an other name.</value>
+  </data>
   <data name="MessageBox_ImageAlreadyInFolder_Caption" xml:space="preserve">
     <value>Replace image ?</value>
   </data>
@@ -489,10 +496,10 @@ Do you want to load selected sequence ?</value>
 Do you want to exit ?</value>
   </data>
   <data name="tab_NewSequence" xml:space="preserve">
-    <value>New sequence</value>
+    <value>New</value>
   </data>
   <data name="tab_ReplaceSequence" xml:space="preserve">
-    <value>Replace sequence</value>
+    <value>Replace</value>
   </data>
   <data name="title_Hotkeys" xml:space="preserve">
     <value>Hotkeys</value>

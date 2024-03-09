@@ -358,7 +358,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delay (ms).
+        ///   Recherche une chaîne localisée semblable à Wait time.
         /// </summary>
         internal static string action_Member_WaitTime {
             get {
@@ -430,7 +430,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Image search.
+        ///   Recherche une chaîne localisée semblable à Image.
         /// </summary>
         internal static string ActionName_ImageSearch {
             get {
@@ -448,7 +448,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Repeat sequence.
+        ///   Recherche une chaîne localisée semblable à Sequence.
         /// </summary>
         internal static string ActionName_Loop {
             get {
@@ -790,6 +790,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Wait time min.
+        /// </summary>
+        internal static string label_WaitTimeMin {
+            get {
+                return ResourceManager.GetString("label_WaitTimeMin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Action added : .
         /// </summary>
         internal static string log_ActionAdded {
@@ -1088,6 +1097,16 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Name already used.
+        ///Please choose an other name..
+        /// </summary>
+        internal static string MessageBox_Error_SaveSequence_NameUsed {
+            get {
+                return ResourceManager.GetString("MessageBox_Error_SaveSequence_NameUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Replace image ?.
         /// </summary>
         internal static string MessageBox_ImageAlreadyInFolder_Caption {
@@ -1158,7 +1177,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à New sequence.
+        ///   Recherche une chaîne localisée semblable à New.
         /// </summary>
         internal static string tab_NewSequence {
             get {
@@ -1167,7 +1186,7 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Replace sequence.
+        ///   Recherche une chaîne localisée semblable à Replace.
         /// </summary>
         internal static string tab_ReplaceSequence {
             get {

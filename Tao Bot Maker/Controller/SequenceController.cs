@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static Tao_Bot_Maker.Action;
+﻿using System.Collections.Generic;
 
 namespace Tao_Bot_Maker
 {

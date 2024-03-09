@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 
@@ -73,14 +70,14 @@ namespace Tao_Bot_Maker
         {
             if (width == 0 || height == 0)
             {
-                Log.Write("Width and height must be greater than 0", LogFramework.Log.ERROR);
-                Log.Write("x = " + x + "; y = " + y + "; width = " + width + "; height = " + height + "; Color = " + color, LogFramework.Log.ERROR);
+                Log.Write("Width and height must be greater than 0", Log.ERROR);
+                Log.Write("x = " + x + "; y = " + y + "; width = " + width + "; height = " + height + "; Color = " + color, Log.ERROR);
                 throw new ArgumentException("Width and height must be greater than 0");
             }
             else
             {
-                Log.Write("Rectangle added : ", LogFramework.Log.TRACE);
-                Log.Write("x = " + x + "; y = " + y + "; width = " + width + "; height = " + height + "; Color = " + color, LogFramework.Log.TRACE);
+                Log.Write("Rectangle added : ", Log.TRACE);
+                Log.Write("x = " + x + "; y = " + y + "; width = " + width + "; height = " + height + "; Color = " + color, Log.TRACE);
                 rectangles.Add(new Rectangle(x, y, width, height));
                 colors.Add(color);
                 Refresh();

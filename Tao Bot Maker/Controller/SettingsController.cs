@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Model;
 
@@ -10,19 +6,19 @@ namespace Tao_Bot_Maker.Controller
 {
     public class SettingsController
     {
-        private static void WriteSetting(String key, String value, String section)
+        private static void WriteSetting(string key, string value, string section)
         {
             var MyIni = new IniFile(Constants.SETTINGS_INI_NAME);
             MyIni.Write(key, value, section);
         }
 
-        private static void WriteSetting(String key, String value)
+        private static void WriteSetting(string key, string value)
         {
             var MyIni = new IniFile(Constants.SETTINGS_INI_NAME);
             MyIni.Write(key, value);
         }
 
-        private static String ReadSetting(String key, String section)
+        private static string ReadSetting(string key, string section)
         {
             var MyIni = new IniFile(Constants.SETTINGS_INI_NAME);
             var value = MyIni.Read(key, section);
@@ -31,7 +27,7 @@ namespace Tao_Bot_Maker.Controller
 
         public static bool IsSaveLogs()
         {
-            String value = ReadSetting(Constants.SETTINGS_KEY_SAVELOGS, Constants.SETTINGS_SECTION_GENERAL);
+            string value = ReadSetting(Constants.SETTINGS_KEY_SAVELOGS, Constants.SETTINGS_SECTION_GENERAL);
             if (value.ToLower() == "true")
                 return true;
 
@@ -43,7 +39,7 @@ namespace Tao_Bot_Maker.Controller
             WriteSetting(Constants.SETTINGS_KEY_SAVELOGS, isSaved.ToString(), Constants.SETTINGS_SECTION_GENERAL);
         }
 
-        public static String GetLanguage()
+        public static string GetLanguage()
         {
             string language = ReadSetting(Constants.SETTINGS_KEY_LANGUAGE, Constants.SETTINGS_SECTION_GENERAL);
             if (language == "")
@@ -51,7 +47,7 @@ namespace Tao_Bot_Maker.Controller
             return language.ToUpper();
         }
 
-        public static void SetLanguage(String language)
+        public static void SetLanguage(string language)
         {
             WriteSetting(Constants.SETTINGS_KEY_LANGUAGE, language.ToUpper(), Constants.SETTINGS_SECTION_GENERAL);
         }

@@ -1,12 +1,5 @@
 ﻿using BlueMystic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 
@@ -14,7 +7,7 @@ namespace Tao_Bot_Maker.View
 {
     public partial class SaveSequenceView : Form
     {
-        public String ReturnValueSequenceName { get; set; }
+        public string ReturnValueSequenceName { get; set; }
         private int mode;
         private SequenceController sequenceToSave;
 
@@ -64,9 +57,15 @@ namespace Tao_Bot_Maker.View
 
         private void Button_Save_Click(object sender, EventArgs e)
         {
+            //If saving new file
             if (mode == 0)
             {
-                if(!SequenceXmlManager.IsNameUsed(textBox_SaveName.Text))
+                if (string.IsNullOrEmpty(textBox_SaveName.Text))
+                {
+                    //Prevent closing
+                    this.DialogResult = DialogResult.None;
+                }
+                else if(!SequenceXmlManager.IsNameUsed(textBox_SaveName.Text))
                 {
                     SequenceXmlManager.SaveSequence(textBox_SaveName.Text, sequenceToSave);
                     ReturnValueSequenceName = textBox_SaveName.Text;
@@ -76,7 +75,7 @@ namespace Tao_Bot_Maker.View
                 else
                 {
                     //Prevent closing
-                    MessageBox.Show("Name already used");
+                    MessageBox.Show(Properties.strings.MessageBox_Error_SaveSequence_NameUsed);
                     this.DialogResult = DialogResult.None;
                 }
             }

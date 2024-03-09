@@ -1,45 +1,24 @@
 ﻿using BlueMystic;
-using LogFramework;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static Tao_Bot_Maker.Action;
 using Log = Tao_Bot_Maker.Controller.Log;
 
 namespace Tao_Bot_Maker.View
 {
     public partial class ActionView : Form
     {
-        public int ReturnValueActionType { get; set; }
         public Action ReturnValueAction { get; set; }
 
         private MainApp app;
         private HotKeyController hotkeyXY;
         private HotKeyController hotkeyXY2;
-        private Control actionPanel; //Action panel shown
         private List<Control> panelList;
 
-        DrawingRectangle drawingForm;
-        public void DrawRectangleAtCoords(int x1, int y1, int x2, int y2)
-        {
-            //Draw a rectangle at coordinates
-            try
-            {
-                drawingForm.DrawRectangleAtCoords(x1, y1, x2, y2);
-                //app.Log("Rectangle drawn at coords", LogFramework.Log.TRACE);
-                //app.Log("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.TRACE);
-            }
-            catch (ArgumentException e)
-            {
-                Log.Write(e.Message, LogFramework.Log.ERROR);
-                Log.Write("x1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2, LogFramework.Log.ERROR);
-            }
-        }
+        readonly DrawingRectangle drawingForm;
 
         /// <summary>
         /// Draw a rectangle from top left angle
@@ -67,11 +46,6 @@ namespace Tao_Bot_Maker.View
         {
             drawingForm.ClearRectangles();
         }
-        
-        public void RefreshRectangles()
-        {
-            drawingForm.Refresh();
-        }
 
         public ActionView(MainApp app, Action action = null)
         {
@@ -87,22 +61,20 @@ namespace Tao_Bot_Maker.View
 
             DarkModeCS DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
 
-
             Localization();
 
             //Populate listBox with actions names
             listBox_Actions.Items.AddRange(ActionController.GetActionItems());
 
-
             //No panel selected
             if (action == null)
             {
-                Log.Write(Properties.strings.log_ActionView_AddMode, LogFramework.Log.TRACE);
+                Log.Write(Properties.strings.log_ActionView_AddMode, Log.TRACE);
                 listBox_Actions.SelectedIndex = 0;
             }
             else
             {
-                Log.Write(Properties.strings.log_ActionView_EditMode, LogFramework.Log.TRACE);
+                Log.Write(Properties.strings.log_ActionView_EditMode, Log.TRACE);
                 //Get index to select from type name
                 int selectedIndex = listBox_Actions.FindStringExact(ActionController.GetTypeName(action.Type));
 
@@ -128,7 +100,7 @@ namespace Tao_Bot_Maker.View
             button_Ok.Text = Properties.strings.button_OK;
             Text = Properties.strings.title_NewActionDialog;
             
-            Log.Write(Properties.strings.log_LocalizationUpdated, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_LocalizationUpdated, Log.TRACE);
         }
 
         private void SetupHotkeys()
@@ -169,7 +141,7 @@ namespace Tao_Bot_Maker.View
             panelList.ForEach(HidePanel);
             panelList[selectedIndex].Visible = true;
 
-            Log.Write(Properties.strings.log_ActionView_SelectedPanel + panelList[selectedIndex].Name, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_ActionView_SelectedPanel + panelList[selectedIndex].Name, Log.TRACE);
         }
 
         private void Button_Ok_Click(object sender, EventArgs e)
@@ -182,7 +154,7 @@ namespace Tao_Bot_Maker.View
             {
                 //Send results to the controller
                 ReturnValueAction = action;
-                Log.Write(Properties.strings.log_DialogResult_Ok, LogFramework.Log.TRACE);
+                Log.Write(Properties.strings.log_DialogResult_Ok, Log.TRACE);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -191,7 +163,7 @@ namespace Tao_Bot_Maker.View
                 //Prevent closing
                 MessageBox.Show(action.ErrorMessage);
                 ReturnValueAction = null;
-                Log.Write(Properties.strings.log_DialogResult_None, LogFramework.Log.TRACE);
+                Log.Write(Properties.strings.log_DialogResult_None, Log.TRACE);
                 this.DialogResult = DialogResult.None;
             }
         }
@@ -201,7 +173,7 @@ namespace Tao_Bot_Maker.View
             drawingForm.Close();
             hotkeyXY.Unregiser();
             hotkeyXY2.Unregiser();
-            Log.Write(Properties.strings.log_ActionView_Closed, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_ActionView_Closed, Log.TRACE);
         }
 
         private void FlatComboBox_Actions_SelectedIndexChanged(object sender, EventArgs e)

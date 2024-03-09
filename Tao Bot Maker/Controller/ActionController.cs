@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Tao_Bot_Maker.Model;
@@ -19,10 +14,10 @@ namespace Tao_Bot_Maker
         /// Get an array with all actions types names
         /// </summary>
         /// <returns></returns>
-        public static String[] GetActionTypeNames()
+        public static string[] GetActionTypeNames()
         {
             int typeCount = Enum.GetValues(typeof(Action.ActionType)).Length;
-            String[] actionTypeList = new String[typeCount];
+            string[] actionTypeList = new string[typeCount];
 
             int i = 0;
             foreach (int typeId in Enum.GetValues(typeof(Action.ActionType)))
@@ -41,16 +36,18 @@ namespace Tao_Bot_Maker
             int i = 0;
             foreach (int typeId in Enum.GetValues(typeof(Action.ActionType)))
             {
-                ComboboxItemActionType actionType = new ComboboxItemActionType();
-                actionType.ActionTypeId = typeId;
-                actionType.DisplayText = GetTypeName(typeId);
+                ComboboxItemActionType actionType = new ComboboxItemActionType
+                {
+                    ActionTypeId = typeId,
+                    DisplayText = GetTypeName(typeId)
+                };
                 actionTypeList[i] = actionType;
                 i++;
             }
             return actionTypeList;
         }
 
-        public static String GetTypeName(int type)
+        public static string GetTypeName(int type)
         {
             switch (type)
             {

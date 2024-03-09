@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tao_Bot_Maker.Controller
 {
@@ -44,7 +40,7 @@ namespace Tao_Bot_Maker.Controller
         /// <param name="X2">Bottom right X</param>
         /// <param name="Y2">Bottom right Y</param>
         /// <returns>String Array with coords</returns>
-        public static String[] FindImage(String path, int Threshold, int X1, int Y1, int X2, int Y2)
+        public static String[] FindImage(string path, int Threshold, int X1, int Y1, int X2, int Y2)
         {
             String[] results_if_image = null;
 

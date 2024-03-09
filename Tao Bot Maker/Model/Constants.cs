@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Tao_Bot_Maker.Model
 {
     public class Constants
     {
-        public const string VERSION = "0.4.19";
+        public const string VERSION = "0.4.19.1";
 
         public const string PICTURE_FOLDER_NAME     = "Pictures";
         public const string SEQUENCES_FOLDER_NAME   = "Sequences";

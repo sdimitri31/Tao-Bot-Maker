@@ -1,6 +1,4 @@
-﻿
-using System.Windows.Forms;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 
@@ -30,7 +28,9 @@ namespace Tao_Bot_Maker
                     waitTimeMax = _defaultWaitTimeMax;
                 }
 
-            return new ActionWait(waitTime, waitTimeMax, isRandomInterval, errorMessage);
+            ActionWait action = new ActionWait(waitTime, waitTimeMax, isRandomInterval, errorMessage);
+
+            return action;
         }
 
         private static bool ValidateWaitTime(int waitTime, out string errorMessage)

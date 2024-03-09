@@ -127,13 +127,13 @@
     <value>Si une image</value>
   </data>
   <data name="ActionName_ImageSearch" xml:space="preserve">
-    <value>Rechercher une image</value>
+    <value>Image</value>
   </data>
   <data name="ActionName_Key" xml:space="preserve">
     <value>Touche</value>
   </data>
   <data name="ActionName_Loop" xml:space="preserve">
-    <value>Répéter une séquence</value>
+    <value>Séquence</value>
   </data>
   <data name="ActionName_PictureWait" xml:space="preserve">
     <value>Attendre une image</value>
@@ -226,7 +226,7 @@
     <value>Glisser</value>
   </data>
   <data name="action_Member_IsRandomInterval" xml:space="preserve">
-    <value>Interval aléatoire</value>
+    <value>Intervalle aléatoire</value>
   </data>
   <data name="action_Member_Key" xml:space="preserve">
     <value>Touche</value>
@@ -304,7 +304,7 @@
     <value>Expiration (s)</value>
   </data>
   <data name="label_IsRandomInterval" xml:space="preserve">
-    <value>Interval aléatoire</value>
+    <value>Intervalle aléatoire</value>
   </data>
   <data name="label_Key" xml:space="preserve">
     <value>Touche</value>
@@ -359,6 +359,9 @@
   </data>
   <data name="label_WaitTimeMax" xml:space="preserve">
     <value>Attente maximum</value>
+  </data>
+  <data name="label_WaitTimeMin" xml:space="preserve">
+    <value>Attente minimum</value>
   </data>
   <data name="log_ActionAdded" xml:space="preserve">
     <value>Action ajoutée : </value>
@@ -457,6 +460,10 @@
     <value>Impossible de charger la séquence.
 Le fichier est peut-être corrompu.</value>
   </data>
+  <data name="MessageBox_Error_SaveSequence_NameUsed" xml:space="preserve">
+    <value>Nom déjà utilisé.
+Veuillez entrer un autre nom.</value>
+  </data>
   <data name="MessageBox_ImageAlreadyInFolder_Caption" xml:space="preserve">
     <value>Remplacer l'image ?</value>
   </data>
@@ -486,10 +493,10 @@ Voulez-vous charger la sequence ?</value>
 Voulez-vous quitter ?</value>
   </data>
   <data name="tab_NewSequence" xml:space="preserve">
-    <value>Nouvelle séquence</value>
+    <value>Nouvelle</value>
   </data>
   <data name="tab_ReplaceSequence" xml:space="preserve">
-    <value>Remplacer une séquence</value>
+    <value>Remplacer</value>
   </data>
   <data name="title_Hotkeys" xml:space="preserve">
     <value>Raccourcis</value>

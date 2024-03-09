@@ -1,13 +1,9 @@
-﻿using LogFramework;
-using System;
+﻿using System;
 using System.IO;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
-using static System.Windows.Forms.LinkLabel;
 using Log = Tao_Bot_Maker.Controller.Log;
 
 namespace Tao_Bot_Maker
@@ -82,9 +78,9 @@ namespace Tao_Bot_Maker
                 ifNotFound = _defaultIfNotFound;
             }
 
-            ActionImageSearch actionImageSearch = new ActionImageSearch(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound, errorMessage);
+            ActionImageSearch action = new ActionImageSearch(pictureName, threshold, x1, x2, y1, y2, expiration, ifFound, ifNotFound, errorMessage);
 
-            return actionImageSearch;
+            return action;
         }
 
         private static bool ValidateImage(string imageName, out string errorMessage)
@@ -94,19 +90,19 @@ namespace Tao_Bot_Maker
             if (string.IsNullOrEmpty(imageName))
             {
                 errorMessage = Properties.strings.action_ErrorMessage_Image_NameEmpty;
-                Log.Write("ValidateImage(" + imageName + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateImage(" + imageName + ") Result : false", Log.ERROR);
                 return false;
 
             }
             else if (!File.Exists(Path.Combine(Constants.PICTURE_FOLDER_NAME, imageName)))
             {
                 errorMessage = Properties.strings.action_ErrorMessage_Image_NotFound;
-                Log.Write("ValidateImage(" + imageName + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateImage(" + imageName + ") Result : false", Log.ERROR);
                 return false;
             }
             else
             {
-                Log.Write("ValidateImage(" + imageName + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateImage(" + imageName + ") Result : true", Log.TRACE);
                 return true;
             }
         }
@@ -121,13 +117,13 @@ namespace Tao_Bot_Maker
                 if ((coord < -999999) || (coord > 999999))
                 {
                     errorMessage = Properties.strings.action_ErrorMessage_InvalidCoords;
-                    Log.Write("ValidateCoord(" + coord + ") Result : false", LogFramework.Log.ERROR);
+                    Log.Write("ValidateCoord(" + coord + ") Result : false", Log.ERROR);
                     return false;
                 }
                 coordsList += coord + ", ";
             }
 
-            Log.Write("ValidateCoord(" + coordsList + ") Result : true", LogFramework.Log.TRACE);
+            Log.Write("ValidateCoord(" + coordsList + ") Result : true", Log.TRACE);
             return true;
         }
 
@@ -137,13 +133,13 @@ namespace Tao_Bot_Maker
 
             if (ifFound != null)
             {
-                Log.Write("ValidateIf(" + ifFound + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateIf(" + ifFound + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_IfFound;
-                Log.Write("ValidateIf(" + ifFound + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateIf(" + ifFound + ") Result : false", Log.ERROR);
                 return false;
             }
         }
@@ -154,13 +150,13 @@ namespace Tao_Bot_Maker
 
             if (ifNotFound != null)
             {
-                Log.Write("ValidateIfNotFound(" + ifNotFound + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateIfNotFound(" + ifNotFound + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_IfNotFound;
-                Log.Write("ValidateIfNotFound(" + ifNotFound + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateIfNotFound(" + ifNotFound + ") Result : false", Log.ERROR);
                 return false;
             }
         }
@@ -171,13 +167,13 @@ namespace Tao_Bot_Maker
 
             if ((threshold >= 0) && (threshold <= 255))
             {
-                Log.Write("ValidateThreshold(" + threshold + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateThreshold(" + threshold + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_ThresholdWrongInterval;
-                Log.Write("ValidateThreshold(" + threshold + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateThreshold(" + threshold + ") Result : false", Log.ERROR);
                 return false;
             }
         }
@@ -188,13 +184,13 @@ namespace Tao_Bot_Maker
 
             if ((expiration >= -1) && (expiration <= 999999))
             {
-                Log.Write("ValidateExpiration(" + expiration + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateExpiration(" + expiration + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_ExpirationWrongInterval;
-                Log.Write("ValidateExpiration(" + expiration + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateExpiration(" + expiration + ") Result : false", Log.ERROR);
                 return false;
             }
         }
@@ -236,8 +232,8 @@ namespace Tao_Bot_Maker
                             //Replace
                             try
                             {
-                                Log.Write("Source : " + selectedPictureFullPath, LogFramework.Log.TRACE);
-                                Log.Write("Destination : " + targetFullPath, LogFramework.Log.TRACE);
+                                Log.Write("Source : " + selectedPictureFullPath, Log.TRACE);
+                                Log.Write("Destination : " + targetFullPath, Log.TRACE);
 
                                 //Delete image in target folder
                                 File.Delete(Path.Combine(targetFolderPath, pictureName));
@@ -245,13 +241,13 @@ namespace Tao_Bot_Maker
                                 //Replace it by source image
                                 File.Copy(selectedPictureFullPath, targetFullPath);
 
-                                Log.Write("Replacing image success", LogFramework.Log.TRACE);
+                                Log.Write("Replacing image success", Log.TRACE);
                             }
                             catch (Exception ex)
                             {
                                 errorMessage += "Erreur : Unable to replace the file\r\n";
-                                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                                Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
+                                Log.Write(errorMessage, Log.ERROR);
+                                Log.Write(ex.Message.ToString(), Log.ERROR);
                                 return null;
                             }
                         }
@@ -266,22 +262,22 @@ namespace Tao_Bot_Maker
                             try
                             {
                                 //Set a new name based on current dateTime
-                                String ext = Path.GetExtension(selectedPictureFullPath);
+                                string ext = Path.GetExtension(selectedPictureFullPath);
                                 pictureName = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + ext;
-                                String dest = Path.Combine(targetFolderPath, pictureName);
+                                string dest = Path.Combine(targetFolderPath, pictureName);
 
                                 Log.Write("Source : " + selectedPictureFullPath);
                                 Log.Write("Destination : " + dest);
 
                                 File.Copy(selectedPictureFullPath, dest);
 
-                                Log.Write("Renaming image success", LogFramework.Log.TRACE);
+                                Log.Write("Renaming image success", Log.TRACE);
                             }
                             catch (Exception ex)
                             {
                                 errorMessage += "Erreur : Unable to rename the file\r\n";
-                                Log.Write(errorMessage, LogFramework.Log.ERROR);
-                                Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
+                                Log.Write(errorMessage, Log.ERROR);
+                                Log.Write(ex.Message.ToString(), Log.ERROR);
                                 return null;
                             }
                         }
@@ -297,13 +293,13 @@ namespace Tao_Bot_Maker
 
                             File.Copy(selectedPictureFullPath, targetFullPath);
 
-                            Log.Write("Copying image success", LogFramework.Log.TRACE);
+                            Log.Write("Copying image success", Log.TRACE);
                         }
                         catch (Exception ex)
                         {
                             errorMessage += "Erreur : Unable to copy the file\r\n";
-                            Log.Write(errorMessage, LogFramework.Log.ERROR);
-                            Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
+                            Log.Write(errorMessage, Log.ERROR);
+                            Log.Write(ex.Message.ToString(), Log.ERROR);
                             return null;
                         }
                     }
@@ -312,19 +308,19 @@ namespace Tao_Bot_Maker
             else
             {
                 errorMessage += "Erreur : File not found\r\n";
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
+                Log.Write(errorMessage, Log.ERROR);
                 return null;
             }
 
             if (targetFullPath == null)
             {
                 errorMessage += "Erreur : Invalid picture destination\r\n";
-                Log.Write(errorMessage, LogFramework.Log.ERROR);
+                Log.Write(errorMessage, Log.ERROR);
                 return null;
             }
 
 
-            Log.Write("Importing image success. Picture name : " + pictureName, LogFramework.Log.TRACE);
+            Log.Write("Importing image success. Picture name : " + pictureName, Log.TRACE);
             return pictureName;
         }
 
@@ -339,9 +335,9 @@ namespace Tao_Bot_Maker
             string pictureName = ImportPicture(panel.OriginalPath, out string error);
             if (pictureName != null)
             {
-                ActionImageSearch actionImageSearch = CreateAction(pictureName, panel.Threshold, panel.X1, panel.X2, panel.Y1, panel.Y2, panel.Expiration, panel.IfFound, panel.IfNotFound);
+                ActionImageSearch action = CreateAction(pictureName, panel.Threshold, panel.X1, panel.X2, panel.Y1, panel.Y2, panel.Expiration, panel.IfFound, panel.IfNotFound);
 
-                return actionImageSearch;
+                return action;
             }
             else
             {

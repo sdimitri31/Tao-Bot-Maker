@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
-using static Tao_Bot_Maker.Bot;
 
 namespace Tao_Bot_Maker.View
 {
@@ -321,7 +313,10 @@ namespace Tao_Bot_Maker.View
                 label_MoveClick.Enabled = false;
                 radioButton_MoveClick.Enabled = false;
 
-                radioButton_LeftClick.Checked = true;
+                //Not possible to select moveclick
+                if (radioButton_MoveClick.Checked)
+                    //Changing selection to left click
+                    radioButton_LeftClick.Checked = true;
             }
         }
 

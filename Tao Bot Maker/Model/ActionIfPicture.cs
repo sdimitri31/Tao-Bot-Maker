@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tao_Bot_Maker
+﻿namespace Tao_Bot_Maker
 {
     /// <summary>
     /// DEPRECATED DO NOT USE
@@ -12,7 +10,7 @@ namespace Tao_Bot_Maker
             Type = (int)DeprecatedActionType.IfPicture;
         }
 
-        public ActionIfPicture(String pictureName, int threshold, int x1, int x2, int y1, int y2, String ifFound, String ifNotFound)
+        public ActionIfPicture(string pictureName, int threshold, int x1, int x2, int y1, int y2, string ifFound, string ifNotFound)
         {
             Type = (int)DeprecatedActionType.IfPicture;
             PictureName = pictureName;
@@ -24,14 +22,14 @@ namespace Tao_Bot_Maker
             IfFound = ifFound;
             IfNotFound = ifNotFound;
         }
-        public String PictureName { get; set; }
+        public string PictureName { get; set; }
         public int Threshold { get; set; }
         public int X1 { get; set; }
         public int X2 { get; set; }
         public int Y1 { get; set; }
         public int Y2 { get; set; }
-        public String IfFound { get; set; }
-        public String IfNotFound { get; set; }
+        public string IfFound { get; set; }
+        public string IfNotFound { get; set; }
 
         public override string ToString()
         {

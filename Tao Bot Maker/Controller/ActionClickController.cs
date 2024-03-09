@@ -1,13 +1,6 @@
-﻿
-using System;
-using System.Drawing;
-using System.IO;
-using System.Security.Cryptography;
-using System.Windows.Forms;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
-using static System.Windows.Forms.LinkLabel;
 
 namespace Tao_Bot_Maker
 {
@@ -62,9 +55,9 @@ namespace Tao_Bot_Maker
                 dragSpeed = _defaultDragSpeed;
             }
 
-            ActionClick actionClick = new ActionClick(click, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed, isCurrentPosClick, errorMessage);
+            ActionClick action = new ActionClick(click, x1, y1, x2, y2, isDoubleClick, isDrag, dragSpeed, isCurrentPosClick, errorMessage);
 
-            return actionClick;
+            return action;
         }
 
         private static bool ValidateCoord(int[] coords, out string errorMessage)

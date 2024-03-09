@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Windows.Forms;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 
@@ -27,9 +24,9 @@ namespace Tao_Bot_Maker
                 key = _defaultKey;
             }
 
-            ActionKey actionKey = new ActionKey(key, errorMessage);
+            ActionKey action = new ActionKey(key, errorMessage);
 
-            return actionKey;
+            return action;
         }
 
         private static bool ValidateKey(string key, out string errorMessage)
@@ -59,18 +56,18 @@ namespace Tao_Bot_Maker
 
         public static ActionKey GetActionFromControl(ActionKeyPanel panel)
         {
-            ActionKey actionKey = CreateAction(panel.Key);
+            ActionKey action = CreateAction(panel.Key);
 
-            return actionKey;
+            return action;
         }
 
         public static ActionKey GetActionFromXElement(XElement xmlAction)
         {
             string key = (string)xmlAction;
 
-            ActionKey actionKey = CreateAction(key);
+            ActionKey action = CreateAction(key);
 
-            return actionKey;
+            return action;
         }
     }
 }

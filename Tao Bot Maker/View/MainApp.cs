@@ -1,32 +1,15 @@
-﻿using System;
+﻿using BlueMystic;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Resources;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Globalization;
-using LogFramework;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using BlueMystic;
-using Tao_Bot_Maker.Model;
 using Log = Tao_Bot_Maker.Controller.Log;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace Tao_Bot_Maker
 {
@@ -91,7 +74,7 @@ namespace Tao_Bot_Maker
             NewSequence();
 
 
-            Log.Write(Properties.strings.log_ApplicationInitialized, listBoxLog, LogFramework.Log.INFO);
+            Log.Write(Properties.strings.log_ApplicationInitialized, listBoxLog, Log.INFO);
         }
 
         //------------------------------------------------------------
@@ -115,7 +98,7 @@ namespace Tao_Bot_Maker
                     Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
                     break;
             }
-            Log.Write(message + language, LogFramework.Log.TRACE);
+            Log.Write(message + language, Log.TRACE);
         }
         private void Localization()
         {            
@@ -145,7 +128,7 @@ namespace Tao_Bot_Maker
             toolTip.SetToolTip(this.button_SaveSequence, Properties.strings.toolTip_Button_SaveSequence);
             toolTip.SetToolTip(this.button_DeleteSequence, Properties.strings.toolTip_Button_DeleteSequence);
 
-            Log.Write(Properties.strings.log_LocalizationUpdated, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_LocalizationUpdated, Log.TRACE);
         }
         private void UpdateAllButtonState()
         {
@@ -180,7 +163,7 @@ namespace Tao_Bot_Maker
             else
                 button_EditAction.Enabled = true;
 
-            Log.Write(Properties.strings.log_UpdateButtonState_Edit + button_EditAction.Enabled, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Edit + button_EditAction.Enabled, Log.TRACE);
         }
         private void UpdateButtonStateDeleteAction()
         {
@@ -189,7 +172,7 @@ namespace Tao_Bot_Maker
             else
                 button_DeleteSelectedAction.Enabled = true;
 
-            Log.Write(Properties.strings.log_UpdateButtonState_DeleteAction + button_DeleteSelectedAction.Enabled, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_DeleteAction + button_DeleteSelectedAction.Enabled, Log.TRACE);
         }
         private void UpdateButtonStateDeleteSequence()
         {
@@ -198,7 +181,7 @@ namespace Tao_Bot_Maker
             else
                 button_DeleteSequence.Enabled = true;
 
-            Log.Write(Properties.strings.log_UpdateButtonState_DeleteSequence + button_DeleteSequence.Enabled, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_DeleteSequence + button_DeleteSequence.Enabled, Log.TRACE);
         }
         public void UpdateButtonStateBot()
         {
@@ -219,16 +202,16 @@ namespace Tao_Bot_Maker
                 button_StartBot.Enabled = true;
                 tsm_Bot_Start.Enabled = true;
             }
-            Log.Write(Properties.strings.log_UpdateButtonState_Bot + bot.IsRunning, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Bot + bot.IsRunning, Log.TRACE);
         }
         private void UpdateButtonStateSaveLogs()
         {
             tsm_Settings_Logs.Checked = SettingsController.IsSaveLogs();
-            Log.Write(Properties.strings.log_UpdateButtonState_SaveLogs + tsm_Settings_Logs.Checked, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_SaveLogs + tsm_Settings_Logs.Checked, Log.TRACE);
         }
         private void UpdateButtonStateLanguage()
         {
-            String language = SettingsController.GetLanguage();
+            string language = SettingsController.GetLanguage();
             tsm_Settings_Language_Francais.Checked = false;
             tsm_Settings_Language_English.Checked = false;
 
@@ -238,7 +221,7 @@ namespace Tao_Bot_Maker
                 tsm_Settings_Language_Francais.Checked = true;
             else
                 tsm_Settings_Language_English.Checked = true;
-            Log.Write(Properties.strings.log_UpdateButtonState_Language + language, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Language + language, Log.TRACE);
         }
         private void UpdateButtonStateTheme()
         {
@@ -253,7 +236,7 @@ namespace Tao_Bot_Maker
                 tsm_Settings_Theme_Light.Checked = true;
             else
                 tsm_Settings_Theme_Auto.Checked = true; 
-            Log.Write(Properties.strings.log_UpdateButtonState_Theme + themeMode, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Theme + themeMode, Log.TRACE);
         }
         private void UpdateButtonStateHotkey()
         {
@@ -264,13 +247,13 @@ namespace Tao_Bot_Maker
 
             modifier = Reverse3Bits((int)hotkeyStopBot.GetModifier()) << 16;
             tsm_Bot_Stop.ShortcutKeys = (Keys)((int)hotkeyStopBot.GetKey() | modifier);
-            Log.Write(Properties.strings.log_UpdateButtonState_Hotkey, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_UpdateButtonState_Hotkey, Log.TRACE);
         }
         private void ApplyTheme()
         {
             DM = new DarkModeCS(this, SettingsController.GetTheme(), false);
             this.Refresh();
-            Log.Write(Properties.strings.log_AppliedTheme, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_AppliedTheme, Log.TRACE);
         }
         private void ChangeLanguage(string language)
         {
@@ -294,7 +277,7 @@ namespace Tao_Bot_Maker
         /// </summary>
         private void LoadActions()
         {
-            Log.Write(Properties.strings.log_Loading_Actions, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_Loading_Actions, Log.TRACE);
             this.listBoxActions.Items.Clear();
 
             foreach(Action action in sequenceController.GetActions())
@@ -313,16 +296,16 @@ namespace Tao_Bot_Maker
             UpdateButtonStateDeleteAction();
             UpdateButtonStateBot();
 
-            Log.Write(Properties.strings.log_Loaded_Actions, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_Loaded_Actions, Log.TRACE);
         }
 
         /// <summary>
         /// Load an XML File into a Sequence Object 
         /// </summary>
         /// <param name="sequenceName">Name of Sequence XML to load</param>
-        private bool LoadSequence(String sequenceName)
+        private bool LoadSequence(string sequenceName)
         {
-            Log.Write(Properties.strings.log_Loading_Sequence + sequenceName, LogFramework.Log.TRACE);
+            Log.Write(Properties.strings.log_Loading_Sequence + sequenceName, Log.TRACE);
 
             if(!string.IsNullOrEmpty(sequenceName))
             {
@@ -334,7 +317,7 @@ namespace Tao_Bot_Maker
                     LoadedSequenceName = sequenceName;
                     lastIndexSequenceLoaded = flatComboBoxSequenceList.SelectedIndex;
                     isSequenceSaved = true;
-                    Log.Write(Properties.strings.log_Loading_Sequence_Success, LogFramework.Log.TRACE);
+                    Log.Write(Properties.strings.log_Loading_Sequence_Success, Log.TRACE);
                     return true;
                 }
             }
@@ -348,7 +331,7 @@ namespace Tao_Bot_Maker
             else
                 LoadedSequenceName = flatComboBoxSequenceList.SelectedItem.ToString();
 
-            Log.Write(Properties.strings.log_Loading_Sequence_Fail + sequenceName, LogFramework.Log.ERROR);
+            Log.Write(Properties.strings.log_Loading_Sequence_Fail + sequenceName, Log.ERROR);
             return false;
         }
 
@@ -820,7 +803,7 @@ namespace Tao_Bot_Maker
 
                 Log.Write(Properties.strings.log_ApplicationClosed);
                 //Blank line to separate logs between starts
-                Log.Write("", listBoxLog, LogFramework.Log.INFO);
+                Log.Write("", listBoxLog, Log.INFO);
             }
         }
 

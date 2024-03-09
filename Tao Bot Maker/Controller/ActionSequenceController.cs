@@ -23,9 +23,9 @@ namespace Tao_Bot_Maker
                 name = _defaultName;
             }
 
-            ActionSequence actionSequence = new ActionSequence(name, errorMessage);
+            ActionSequence action = new ActionSequence(name, errorMessage);
 
-            return actionSequence;
+            return action;
         }
 
         private static bool ValidateSequenceName(string sequenceName, out string errorMessage)
@@ -34,13 +34,13 @@ namespace Tao_Bot_Maker
 
             if (!string.IsNullOrEmpty(sequenceName))
             {
-                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_SequenceName;
-                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : false", Log.ERROR);
                 return false;
             }
         }

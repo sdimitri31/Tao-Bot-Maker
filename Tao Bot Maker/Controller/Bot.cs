@@ -195,7 +195,7 @@ namespace Tao_Bot_Maker
             Log.Write("Action : Attente d'image " + actionPictureWait.PictureName, mainApp.GetListBoxLog(), Log.INFO, true);
 
             //Get picture size to create borders when found
-            String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionPictureWait.PictureName;
+            string imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionPictureWait.PictureName;
             System.Drawing.Image imageWait = System.Drawing.Image.FromFile(imageFullPath);
 
             //Picture searching area
@@ -264,7 +264,7 @@ namespace Tao_Bot_Maker
             Log.Write("Action : si image " + actionIfPicture.PictureName, mainApp.GetListBoxLog(), Log.INFO, true);
 
             //Get picture size to create borders when found
-            String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionIfPicture.PictureName;
+            string imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionIfPicture.PictureName;
             System.Drawing.Image img = System.Drawing.Image.FromFile(imageFullPath);
 
             //Recherche de l'image
@@ -474,7 +474,7 @@ namespace Tao_Bot_Maker
             Log.Write("Action : Image Search " + actionImageSearch.PictureName, mainApp.GetListBoxLog(), Log.TRACE, true);
 
             //Get picture size to create borders when found
-            String imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionImageSearch.PictureName;
+            string imageFullPath = Constants.PICTURE_FOLDER_NAME + "\\" + actionImageSearch.PictureName;
             System.Drawing.Image imageWait = System.Drawing.Image.FromFile(imageFullPath);
 
             //Picture searching area with offset to prevent drawing over the target

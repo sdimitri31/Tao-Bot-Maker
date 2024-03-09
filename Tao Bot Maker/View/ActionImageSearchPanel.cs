@@ -1,14 +1,7 @@
-﻿using LogFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
@@ -59,7 +52,7 @@ namespace Tao_Bot_Maker.View
                 }
                 catch (Exception ex)
                 {
-                    if (SettingsController.IsSaveLogs()) Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
+                    if (SettingsController.IsSaveLogs()) Log.Write(ex.Message.ToString(), Log.ERROR);
                 }
 
                 Threshold = actionImageSearch.Threshold;
@@ -270,7 +263,7 @@ namespace Tao_Bot_Maker.View
                     }
                     catch (Exception ex)
                     {
-                        if (SettingsController.IsSaveLogs()) Log.Write(ex.Message.ToString(), LogFramework.Log.ERROR);
+                        if (SettingsController.IsSaveLogs()) Log.Write(ex.Message.ToString(), Log.ERROR);
                     }
                 }
             }
@@ -299,13 +292,13 @@ namespace Tao_Bot_Maker.View
                     "X : " + results_if_image[1] + " Y : " + results_if_image[2];
 
                 MessageBox.Show(message);
-                Log.Write(message, LogFramework.Log.TRACE);
+                Log.Write(message, Log.TRACE);
 
             }
             else
             {
                 MessageBox.Show(Properties.strings.MessageBox_ImageNotFound);
-                Log.Write(Properties.strings.MessageBox_ImageNotFound, LogFramework.Log.TRACE);
+                Log.Write(Properties.strings.MessageBox_ImageNotFound, Log.TRACE);
             }
 
         }

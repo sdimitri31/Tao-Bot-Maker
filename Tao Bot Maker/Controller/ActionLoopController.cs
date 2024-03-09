@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View;
 
@@ -28,9 +26,9 @@ namespace Tao_Bot_Maker
                 repeatNumber = _defaultRepeatNumber;
             }
 
-            ActionLoop actionLoop = new ActionLoop(name, repeatNumber, errorMessage);
+            ActionLoop action = new ActionLoop(name, repeatNumber, errorMessage);
 
-            return actionLoop;
+            return action;
         }
 
         private static bool ValidateSequenceName(string sequenceName, out string errorMessage)
@@ -39,13 +37,13 @@ namespace Tao_Bot_Maker
 
             if (!string.IsNullOrEmpty(sequenceName))
             {
-                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_SequenceName;
-                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateSequenceName(" + sequenceName + ") Result : false", Log.ERROR);
                 return false;
             }
         }
@@ -56,22 +54,22 @@ namespace Tao_Bot_Maker
 
             if ((repeatNumber >= -1) && (repeatNumber <= 999999))
             {
-                Log.Write("ValidateRepeatNumber(" + repeatNumber + ") Result : true", LogFramework.Log.TRACE);
+                Log.Write("ValidateRepeatNumber(" + repeatNumber + ") Result : true", Log.TRACE);
                 return true;
             }
             else
             {
                 errorMessage = Properties.strings.action_ErrorMessage_RepeatNumber;
-                Log.Write("ValidateRepeatNumber(" + repeatNumber + ") Result : false", LogFramework.Log.ERROR);
+                Log.Write("ValidateRepeatNumber(" + repeatNumber + ") Result : false", Log.ERROR);
                 return false;
             }
         }
 
         public static ActionLoop GetActionFromControl(ActionLoopPanel panel)
         {
-            ActionLoop actionLoop = CreateAction(panel.SequenceName, panel.RepeatNumber);
+            ActionLoop action = CreateAction(panel.SequenceName, panel.RepeatNumber);
 
-            return actionLoop;
+            return action;
         }
 
         public static ActionLoop GetActionFromXElement(XElement xmlAction)
