@@ -124,8 +124,8 @@ namespace Tao_Bot_Maker
             {
                 switch (action.Type)
                 {
-                    case (int)Action.ActionType.Key:
-                        DoActionKey(action);
+                    case (int)Action.ActionType.Text:
+                        DoActionText(action);
                         break;
 
                     case (int)Action.ActionType.Wait:
@@ -159,11 +159,11 @@ namespace Tao_Bot_Maker
             }
         }
 
-        private void DoActionKey(Action action)
+        private void DoActionText(Action action)
         {
-            ActionKey actionKey = (ActionKey)action;
-            Log.Write("Action : Touche " + actionKey.Key, mainApp.GetListBoxLog(), Log.INFO, true);
-            SendKeys.SendWait(PrepareForSendKeys(actionKey.Key));
+            ActionText actionText = (ActionText)action;
+            Log.Write(actionText.ToString(), mainApp.GetListBoxLog(), Log.INFO, true);
+            SendKeys.SendWait(PrepareForSendKeys(actionText.Text));
         }
 
         private void DoActionWait(Action action)
@@ -292,7 +292,11 @@ namespace Tao_Bot_Maker
                 DoSequence(SequenceXmlManager.LoadSequence(actionIfPicture.IfFound), drawingArea);
             }
         }
-        
+
+        /// <summary>
+        /// Deprecated Type might crash
+        /// </summary>
+        /// <param name="action"></param>
         private void DoActionSequence(Action action)
         {
             ActionSequence actionSequence = (ActionSequence)action;
@@ -555,7 +559,10 @@ namespace Tao_Bot_Maker
             });
             input = input.Replace(c1, "{");
             input = input.Replace(c2, "}");
+            input = input.Replace("\r\n", "\r");
             return input;
+        
+
         }
 
         private void DrawRectangle(int x1 ,int y1, int width, int height, KnownColor color = Constants.COLOR_LABEL_XY)

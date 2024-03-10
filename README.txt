@@ -1,5 +1,8 @@
 Changelog :
 
+Version 0.4.20 :
+- Add : Action "Key" has been changed to "Text"
+
 Version 0.4.19.2 :
 - Fix : Better calculation for mouse drag
 

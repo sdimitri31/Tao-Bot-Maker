@@ -141,6 +141,9 @@
   <data name="ActionName_Sequence" xml:space="preserve">
     <value>Séquence</value>
   </data>
+  <data name="ActionName_Text" xml:space="preserve">
+    <value>Texte</value>
+  </data>
   <data name="ActionName_Unknown" xml:space="preserve">
     <value>Inconnu</value>
   </data>
@@ -183,14 +186,14 @@
   <data name="action_ErrorMessage_Key_Lenght" xml:space="preserve">
     <value>Erreur : La touche doit contenir un seul caractère</value>
   </data>
-  <data name="action_ErrorMessage_Key_NotEntered" xml:space="preserve">
-    <value>Erreur : Une touche doit être entrée</value>
-  </data>
   <data name="action_ErrorMessage_RepeatNumber" xml:space="preserve">
     <value>Erreur : Le nombre de répétitions doit être compris entre -1 et 999999</value>
   </data>
   <data name="action_ErrorMessage_SequenceName" xml:space="preserve">
     <value>Erreur : Une séquence doit être sélectionnée</value>
+  </data>
+  <data name="action_ErrorMessage_Text_NotEntered" xml:space="preserve">
+    <value>Erreur : Un texte doit être entré</value>
   </data>
   <data name="action_ErrorMessage_ThresholdWrongInterval" xml:space="preserve">
     <value>Erreur : Tolérance doit être compris entre 0 et 255</value>
@@ -239,6 +242,9 @@
   </data>
   <data name="action_Member_Sequence" xml:space="preserve">
     <value>Séquence</value>
+  </data>
+  <data name="action_Member_Text" xml:space="preserve">
+    <value>Texte</value>
   </data>
   <data name="action_Member_Threshold" xml:space="preserve">
     <value>Tolérance</value>
@@ -350,6 +356,9 @@
   </data>
   <data name="label_StopBot" xml:space="preserve">
     <value>Arrêter le Bot</value>
+  </data>
+  <data name="label_Text" xml:space="preserve">
+    <value>Texte</value>
   </data>
   <data name="label_Threshold" xml:space="preserve">
     <value>Tolérance</value>

@@ -124,9 +124,11 @@ namespace Tao_Bot_Maker.View
                     panel = ActionController.CreatePanel(actionType, this, action);
                 else
                     panel = ActionController.CreatePanel(actionType, this);
-
-                panel.Visible = false;
-                panelList.Add(panel);
+                if(panel != null)
+                {
+                    panel.Visible = false;
+                    panelList.Add(panel);
+                }
             }
             panel_SelectedAction.Controls.AddRange(panelList.ToArray());
         }

@@ -178,15 +178,6 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Error : Key must be entered.
-        /// </summary>
-        internal static string action_ErrorMessage_Key_NotEntered {
-            get {
-                return ResourceManager.GetString("action_ErrorMessage_Key_NotEntered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error : Repeat number must be between -1 and 999999.
         /// </summary>
         internal static string action_ErrorMessage_RepeatNumber {
@@ -201,6 +192,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string action_ErrorMessage_SequenceName {
             get {
                 return ResourceManager.GetString("action_ErrorMessage_SequenceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Text must be entered.
+        /// </summary>
+        internal static string action_ErrorMessage_Text_NotEntered {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_Text_NotEntered", resourceCulture);
             }
         }
         
@@ -349,6 +349,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Text.
+        /// </summary>
+        internal static string action_Member_Text {
+            get {
+                return ResourceManager.GetString("action_Member_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Threshold.
         /// </summary>
         internal static string action_Member_Threshold {
@@ -471,6 +480,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string ActionName_Sequence {
             get {
                 return ResourceManager.GetString("ActionName_Sequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Text.
+        /// </summary>
+        internal static string ActionName_Text {
+            get {
+                return ResourceManager.GetString("ActionName_Text", resourceCulture);
             }
         }
         
@@ -759,6 +777,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string label_StopBot {
             get {
                 return ResourceManager.GetString("label_StopBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Text.
+        /// </summary>
+        internal static string label_Text {
+            get {
+                return ResourceManager.GetString("label_Text", resourceCulture);
             }
         }
         

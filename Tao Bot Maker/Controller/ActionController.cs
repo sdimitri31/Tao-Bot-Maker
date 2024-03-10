@@ -51,8 +51,8 @@ namespace Tao_Bot_Maker
         {
             switch (type)
             {
-                case (int)Action.ActionType.Key:
-                    return Properties.strings.ActionName_Key;
+                case (int)Action.ActionType.Text:
+                    return Properties.strings.ActionName_Text;
                 case (int)Action.ActionType.Wait:
                     return Properties.strings.ActionName_Wait;
                 case (int)Action.DeprecatedActionType.PictureWait:
@@ -67,6 +67,8 @@ namespace Tao_Bot_Maker
                     return Properties.strings.ActionName_Loop;
                 case (int)Action.ActionType.ImageSearch:
                     return Properties.strings.ActionName_ImageSearch;
+                case (int)Action.ActionType.Key:
+                    return Properties.strings.ActionName_Key;
                 default:
                     return Properties.strings.ActionName_Unknown;
 
@@ -75,7 +77,7 @@ namespace Tao_Bot_Maker
 
         public static int GetTypeFromName(string typeName)
         {
-            if (typeName == Properties.strings.ActionName_Key) return (int)Action.ActionType.Key;
+            if (typeName == Properties.strings.ActionName_Text) return (int)Action.ActionType.Text;
             else if (typeName == Properties.strings.ActionName_Wait) return (int)Action.ActionType.Wait;
             else if (typeName == Properties.strings.ActionName_PictureWait) return (int)Action.DeprecatedActionType.PictureWait;
             else if (typeName == Properties.strings.ActionName_IfPicture) return (int)Action.DeprecatedActionType.IfPicture;
@@ -83,6 +85,7 @@ namespace Tao_Bot_Maker
             else if (typeName == Properties.strings.ActionName_Click) return (int)Action.ActionType.Click;
             else if (typeName == Properties.strings.ActionName_Loop) return (int)Action.ActionType.Loop;
             else if (typeName == Properties.strings.ActionName_ImageSearch) return (int)Action.ActionType.ImageSearch;
+            else if (typeName == Properties.strings.ActionName_Key) return (int)Action.ActionType.Key;
             else return -1;
         }
 
@@ -90,8 +93,8 @@ namespace Tao_Bot_Maker
         {
             switch (type)
             {
-                case (int)Action.ActionType.Key:
-                    return ActionKeyController.GetActionFromControl((ActionKeyPanel)control);
+                case (int)Action.ActionType.Text:
+                    return ActionTextController.GetActionFromControl((ActionTextPanel)control);
                 case (int)Action.ActionType.Wait:
                     return ActionWaitController.GetActionFromControl((ActionWaitPanel)control);
                 case (int)Action.DeprecatedActionType.Sequence:
@@ -111,8 +114,8 @@ namespace Tao_Bot_Maker
         {
             switch (type)
             {
-                case (int)Action.ActionType.Key:
-                    return ActionKeyController.GetActionFromXElement(xmlAction);
+                case (int)Action.ActionType.Text:
+                    return ActionTextController.GetActionFromXElement(xmlAction);
                 case (int)Action.ActionType.Wait:
                     return ActionWaitController.GetActionFromXElement(xmlAction);
                 case (int)Action.DeprecatedActionType.Sequence:
@@ -132,8 +135,8 @@ namespace Tao_Bot_Maker
         {
             switch (type)
             {
-                case (int)Action.ActionType.Key:
-                    return new ActionKeyPanel(action);
+                case (int)Action.ActionType.Text:
+                    return new ActionTextPanel(actionView, action);
                 case (int)Action.ActionType.Wait:
                     return new ActionWaitPanel(action);
                 case (int)Action.DeprecatedActionType.Sequence:

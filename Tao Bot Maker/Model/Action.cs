@@ -9,11 +9,12 @@ namespace Tao_Bot_Maker
         /// </summary>
         public enum ActionType
         {
-            Key = 0,
+            Text = 0,
             Wait = 1,
             Click = 5,
             Loop = 6,
-            ImageSearch = 7
+            ImageSearch = 7,
+            Key = 8
         }
 
         /// <summary>

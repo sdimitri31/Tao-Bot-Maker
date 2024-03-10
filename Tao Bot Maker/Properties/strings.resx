@@ -141,6 +141,9 @@
   <data name="ActionName_Sequence" xml:space="preserve">
     <value>Sequence</value>
   </data>
+  <data name="ActionName_Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
   <data name="ActionName_Unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
@@ -183,14 +186,14 @@
   <data name="action_ErrorMessage_Key_Lenght" xml:space="preserve">
     <value>Error : Key must be one letter</value>
   </data>
-  <data name="action_ErrorMessage_Key_NotEntered" xml:space="preserve">
-    <value>Error : Key must be entered</value>
-  </data>
   <data name="action_ErrorMessage_RepeatNumber" xml:space="preserve">
     <value>Error : Repeat number must be between -1 and 999999</value>
   </data>
   <data name="action_ErrorMessage_SequenceName" xml:space="preserve">
     <value>Error : Sequence must be selected</value>
+  </data>
+  <data name="action_ErrorMessage_Text_NotEntered" xml:space="preserve">
+    <value>Error : Text must be entered</value>
   </data>
   <data name="action_ErrorMessage_ThresholdWrongInterval" xml:space="preserve">
     <value>Error : Threshold must be a number between 0 and 255</value>
@@ -239,6 +242,9 @@
   </data>
   <data name="action_Member_Sequence" xml:space="preserve">
     <value>Sequence</value>
+  </data>
+  <data name="action_Member_Text" xml:space="preserve">
+    <value>Text</value>
   </data>
   <data name="action_Member_Threshold" xml:space="preserve">
     <value>Threshold</value>
@@ -350,6 +356,9 @@
   </data>
   <data name="label_StopBot" xml:space="preserve">
     <value>Stop Bot</value>
+  </data>
+  <data name="label_Text" xml:space="preserve">
+    <value>Text</value>
   </data>
   <data name="label_Threshold" xml:space="preserve">
     <value>Threshold</value>

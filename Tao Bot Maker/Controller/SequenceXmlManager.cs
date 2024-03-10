@@ -27,9 +27,9 @@ namespace Tao_Bot_Maker
             {
                 switch (action.Type)
                 {
-                    case (int)Action.ActionType.Key:
-                        ActionKey actionKey = (ActionKey)action;
-                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionKey.Type), actionKey.Key));
+                    case (int)Action.ActionType.Text:
+                        ActionText actionKey = (ActionText)action;
+                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionKey.Type), actionKey.Text));
                         break;
 
                     case (int)Action.ActionType.Wait:
