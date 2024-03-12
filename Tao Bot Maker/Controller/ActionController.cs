@@ -105,6 +105,8 @@ namespace Tao_Bot_Maker
                     return ActionLoopController.GetActionFromControl((ActionLoopPanel)control);
                 case (int)Action.ActionType.ImageSearch:
                     return ActionImageSearchController.GetActionFromControl((ActionImageSearchPanel)control);
+                case (int)Action.ActionType.Key:
+                    return ActionKeyController.GetActionFromControl((ActionKeyPanel)control);
                 default:
                     return new Action("INVALID ACTION TYPE");
             }
@@ -126,6 +128,8 @@ namespace Tao_Bot_Maker
                     return ActionLoopController.GetActionFromXElement(xmlAction);
                 case (int)Action.ActionType.ImageSearch:
                     return ActionImageSearchController.GetActionFromXElement(xmlAction);
+                case (int)Action.ActionType.Key:
+                    return ActionKeyController.GetActionFromXElement(xmlAction);
                 default:
                     return new Action("INVALID ACTION TYPE");
             }
@@ -147,6 +151,8 @@ namespace Tao_Bot_Maker
                     return new ActionLoopPanel(actionView, action);
                 case (int)Action.ActionType.ImageSearch:
                     return new ActionImageSearchPanel(actionView, action);
+                case (int)Action.ActionType.Key:
+                    return new ActionKeyPanel(action);
                 default:
                     return null;
             }

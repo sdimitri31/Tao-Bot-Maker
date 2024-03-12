@@ -186,6 +186,9 @@
   <data name="action_ErrorMessage_Key_Lenght" xml:space="preserve">
     <value>Erreur : La touche doit contenir un seul caractère</value>
   </data>
+  <data name="action_ErrorMessage_Key_NotEntered" xml:space="preserve">
+    <value>Erreur : Une touche doit être entrée</value>
+  </data>
   <data name="action_ErrorMessage_RepeatNumber" xml:space="preserve">
     <value>Erreur : Le nombre de répétitions doit être compris entre -1 et 999999</value>
   </data>
@@ -275,6 +278,9 @@
   </data>
   <data name="button_FindImage" xml:space="preserve">
     <value>Chercher l'image</value>
+  </data>
+  <data name="button_Key_Unassigned" xml:space="preserve">
+    <value>Non assignée</value>
   </data>
   <data name="button_OK" xml:space="preserve">
     <value>OK</value>

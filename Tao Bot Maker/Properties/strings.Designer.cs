@@ -178,6 +178,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Key must be entered.
+        /// </summary>
+        internal static string action_ErrorMessage_Key_NotEntered {
+            get {
+                return ResourceManager.GetString("action_ErrorMessage_Key_NotEntered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error : Repeat number must be between -1 and 999999.
         /// </summary>
         internal static string action_ErrorMessage_RepeatNumber {
@@ -534,6 +543,15 @@ namespace Tao_Bot_Maker.Properties {
         internal static string button_FindImage {
             get {
                 return ResourceManager.GetString("button_FindImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unassigned.
+        /// </summary>
+        internal static string button_Key_Unassigned {
+            get {
+                return ResourceManager.GetString("button_Key_Unassigned", resourceCulture);
             }
         }
         

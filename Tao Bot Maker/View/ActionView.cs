@@ -12,6 +12,10 @@ namespace Tao_Bot_Maker.View
     public partial class ActionView : Form
     {
         public Action ReturnValueAction { get; set; }
+        public Control GetPanel()
+        {
+            return panel_SelectedAction;
+        }
 
         private MainApp app;
         private HotKeyController hotkeyXY;

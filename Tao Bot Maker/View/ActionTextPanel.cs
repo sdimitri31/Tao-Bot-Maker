@@ -10,6 +10,7 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             Localization();
             this.actionView = actionView;
+
             if( action != null)
             {
                 Text = ((ActionText)action).Text;

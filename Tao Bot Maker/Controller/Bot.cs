@@ -155,6 +155,10 @@ namespace Tao_Bot_Maker
                     case (int)Action.ActionType.ImageSearch:
                         DoActionImageSearch(action);
                         break;
+
+                    case (int)Action.ActionType.Key:
+                        DoActionKey(action);
+                        break;
                 }
             }
         }
@@ -547,6 +551,53 @@ namespace Tao_Bot_Maker
 
         }
 
+        private void DoActionKey(Action action)
+        {
+            ActionKey actionKey = (ActionKey)action;
+            Log.Write(actionKey.ToString(), mainApp.GetListBoxLog(), Log.INFO, true);
+
+            string prepare = PrepareForSendKeys(actionKey.Key);
+
+            SendKeys.SendWait(prepare);
+        }
+
+        string PrepareForSendKeys(Keys input)
+        {
+            //Delete spaces
+            string preparedString = input.ToString().Replace(" ", "");
+
+            //Split key from modifiers
+            string[] keysSplited = preparedString.Split(',');
+
+            //Prepare modifiers
+            string preparedModifiers = string.Empty;
+
+            for (int i = 1; i < keysSplited.Length; i++)
+            {
+                keysSplited[i] = keysSplited[i].Replace("Control", "^");
+                keysSplited[i] = keysSplited[i].Replace("Alt", "%");
+                keysSplited[i] = keysSplited[i].Replace("Shift", "+");
+                preparedModifiers += keysSplited[i];
+            }
+
+            //If no modifiers
+            if (preparedModifiers == string.Empty)
+            {
+                preparedString = PrepareForSendKeys(Utils.KeysToString(input));
+            }
+            else
+            {
+                Enum.TryParse(keysSplited[0], out Keys key);
+                preparedString = PrepareForSendKeys(Utils.KeysToString(key));
+
+                preparedString = preparedModifiers + "(" + preparedString + ")";
+            }
+
+            Log.Write("Prepared String : " + preparedString, Log.TRACE);
+
+            return preparedString;
+        }
+
         string PrepareForSendKeys(string input)
         {
             var specialChars = "+^%~(){}";
@@ -561,8 +612,6 @@ namespace Tao_Bot_Maker
             input = input.Replace(c2, "}");
             input = input.Replace("\r\n", "\r");
             return input;
-        
-
         }
 
         private void DrawRectangle(int x1 ,int y1, int width, int height, KnownColor color = Constants.COLOR_LABEL_XY)

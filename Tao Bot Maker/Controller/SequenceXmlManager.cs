@@ -28,8 +28,9 @@ namespace Tao_Bot_Maker
                 switch (action.Type)
                 {
                     case (int)Action.ActionType.Text:
-                        ActionText actionKey = (ActionText)action;
-                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", new XAttribute("type", actionKey.Type), actionKey.Text));
+                        ActionText actionText = (ActionText)action;
+                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", 
+                            new XAttribute("type", actionText.Type), actionText.Text));
                         break;
 
                     case (int)Action.ActionType.Wait:
@@ -105,6 +106,12 @@ namespace Tao_Bot_Maker
                                                                                         new XAttribute("ifFound", actionImageSearch.IfFound),
                                                                                         new XAttribute("ifNotFound", actionImageSearch.IfNotFound),
                                                                                         actionImageSearch.PictureName));
+                        break;
+
+                    case (int)Action.ActionType.Key:
+                        ActionKey actionKey = (ActionKey)action;
+                        doc.XPathSelectElement("Sequence").Add(new XElement("Action", 
+                            new XAttribute("type", actionKey.Type), (int)actionKey.Key));
                         break;
                 }
             }

@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ActionKeyController.cs" />
     <Compile Include="Controller\Bot.cs" />
     <Compile Include="Controller\HotKeyController.cs" />
     <Compile Include="Controller\ActionController.cs" />
@@ -92,6 +93,7 @@
     </Compile>
     <Compile Include="Import\Messenger.cs" />
     <Compile Include="Model\ActionIfPicture.cs" />
+    <Compile Include="Model\ActionKey.cs" />
     <Compile Include="Model\ComboboxItemActionType.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Hotkey.cs" />
@@ -105,6 +107,12 @@
     </Compile>
     <Compile Include="View\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ActionKeyPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\ActionKeyPanel.Designer.cs">
+      <DependentUpon>ActionKeyPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="View\DrawingRectangle.cs">
       <SubType>Form</SubType>
@@ -188,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ActionKeyPanel.resx">
+      <DependentUpon>ActionKeyPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\DrawingRectangle.resx">
       <DependentUpon>DrawingRectangle.cs</DependentUpon>
@@ -288,7 +299,7 @@
 xcopy /Y ..\..\..\README.txt
 xcopy /Y C:\ImageSearchDLL.dll
 del *.pdb *.config *.zip
-tar -acvf ..\..\..\TaoBotMaker_v0.4.20.zip *
+tar -acvf ..\..\..\TaoBotMaker_v0.4.21.zip *
 cd ..\..\..</PostBuildEvent>
   </PropertyGroup>
 </Project>
