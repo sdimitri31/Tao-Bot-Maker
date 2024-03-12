@@ -91,22 +91,30 @@ namespace Tao_Bot_Maker.Controller
         /// <returns>String in a format : Ctrl + Alt + Shift + Key</returns>
         public static string GetFormatedKeysString(Keys key)
         {
-            string formatedName = string.Empty; 
-            
-            string[] keys = key.ToString().Split(',');
-            
+            string formatedName = key.ToString();
+
+            //Clean name when there is only a modifier
+            formatedName = formatedName.ToString().Replace("ControlKey, Control", Properties.strings.label_Ctrl);
+            formatedName = formatedName.ToString().Replace("AltKey, Alt", Properties.strings.label_Alt);
+            formatedName = formatedName.ToString().Replace("ShiftKey, Shift", Properties.strings.label_Shift);
+
+            //Split key from modifiers
+            string[] keys = formatedName.Split(',');
+            string modifiers = "";
+
             //Skip the key
             for (int i = 1; i < keys.Length; i++)
             {
-                formatedName += keys[i] + " + ";
+                modifiers += keys[i].Replace(" ", "") + " + ";
             }
 
-            formatedName = formatedName.Replace("Control", Properties.strings.label_Ctrl);
-            formatedName = formatedName.Replace("Alt", Properties.strings.label_Alt);
-            formatedName = formatedName.Replace("Shift", Properties.strings.label_Shift);
-            formatedName = formatedName.Replace(",", "");
+            //Clean modifier names
+            modifiers = modifiers.Replace("Control", Properties.strings.label_Ctrl);
+            modifiers = modifiers.Replace("Alt", Properties.strings.label_Alt);
+            modifiers = modifiers.Replace("Shift", Properties.strings.label_Shift);
+            modifiers = modifiers.Replace(",", "");
 
-            return formatedName + KeysToString(key);
+            return modifiers + keys[0];
         }
 
         /// <summary>

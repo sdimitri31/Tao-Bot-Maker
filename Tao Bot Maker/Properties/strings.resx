@@ -474,6 +474,9 @@
   <data name="log_UpdateButtonState_Theme" xml:space="preserve">
     <value>"Theme" button state updated : </value>
   </data>
+  <data name="MessageBox_Error_HotkeyDuplicate" xml:space="preserve">
+    <value>Error : Multiple hotkeys have the same value.</value>
+  </data>
   <data name="MessageBox_Error_LoadingSequence" xml:space="preserve">
     <value>Couldn't load sequence.
 File might be corrupted.</value>

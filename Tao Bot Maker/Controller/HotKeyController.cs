@@ -16,27 +16,22 @@ namespace Tao_Bot_Maker
         private IntPtr hWnd;
         private int id;
 
-        public HotKeyController(int modifier, Keys key, Form form)
+        public HotKeyController(Keys key, Form form)
         {
-            hotkey = new Hotkey(modifier, key);
+            hotkey = new Hotkey(key);
 
             this.hWnd = form.Handle;
             id = this.GetHashCode();
         }
 
-        public void SetHotkey(Hotkey hotkey)
+        public void SetHotkey(Keys hotkey)
         {
-            this.hotkey = hotkey;
+            this.hotkey.Key = hotkey;
         }
 
         public Hotkey GetHotkey()
         {
             return hotkey;
-        }
-
-        public int GetModifier()
-        {
-            return hotkey.Modifier;
         }
 
         public Keys GetKey()
@@ -46,12 +41,14 @@ namespace Tao_Bot_Maker
 
         public override int GetHashCode()
         {
-            return (int)hotkey.Modifier ^ (int)hotkey.Key ^ hWnd.ToInt32();
+            return (int)hotkey.Key ^ hWnd.ToInt32();
         }
 
         public bool Register()
         {
-            return RegisterHotKey(hWnd, id, (int)hotkey.Modifier, (int)hotkey.Key);
+            Keys key = hotkey.Key & Keys.KeyCode;
+            Keys modifiers = hotkey.Key & Keys.Modifiers;
+            return RegisterHotKey(hWnd, id, (int)modifiers, (int)key);
         }
 
         public bool Unregiser()

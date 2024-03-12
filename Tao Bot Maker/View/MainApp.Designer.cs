@@ -119,7 +119,7 @@
             this.tsm_Help});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(645, 28);
+            this.menuStrip.Size = new System.Drawing.Size(645, 30);
             this.menuStrip.TabIndex = 22;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -133,7 +133,7 @@
             this.tsm_File_Exit});
             this.tsm_File.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_File.Name = "tsm_File";
-            this.tsm_File.Size = new System.Drawing.Size(46, 24);
+            this.tsm_File.Size = new System.Drawing.Size(46, 26);
             this.tsm_File.Text = "File";
             // 
             // tsm_File_New
@@ -185,7 +185,7 @@
             this.tsm_Bot_Stop});
             this.tsm_Bot.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Bot.Name = "tsm_Bot";
-            this.tsm_Bot.Size = new System.Drawing.Size(46, 24);
+            this.tsm_Bot.Size = new System.Drawing.Size(46, 26);
             this.tsm_Bot.Text = "Bot";
             // 
             // tsm_Bot_Start
@@ -193,7 +193,7 @@
             this.tsm_Bot_Start.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_play_48;
             this.tsm_Bot_Start.Name = "tsm_Bot_Start";
             this.tsm_Bot_Start.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.tsm_Bot_Start.Size = new System.Drawing.Size(147, 26);
+            this.tsm_Bot_Start.Size = new System.Drawing.Size(224, 26);
             this.tsm_Bot_Start.Text = "Start";
             this.tsm_Bot_Start.Click += new System.EventHandler(this.Tsm_Bot_Start_Click);
             // 
@@ -202,7 +202,7 @@
             this.tsm_Bot_Stop.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_stop_48;
             this.tsm_Bot_Stop.Name = "tsm_Bot_Stop";
             this.tsm_Bot_Stop.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.tsm_Bot_Stop.Size = new System.Drawing.Size(147, 26);
+            this.tsm_Bot_Stop.Size = new System.Drawing.Size(224, 26);
             this.tsm_Bot_Stop.Text = "Stop";
             this.tsm_Bot_Stop.Click += new System.EventHandler(this.Tsm_Bot_Stop_Click);
             // 
@@ -215,7 +215,7 @@
             this.tsm_Settings_Logs});
             this.tsm_Settings.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Settings.Name = "tsm_Settings";
-            this.tsm_Settings.Size = new System.Drawing.Size(76, 24);
+            this.tsm_Settings.Size = new System.Drawing.Size(76, 26);
             this.tsm_Settings.Text = "Settings";
             // 
             // tsm_Settings_Language
@@ -225,7 +225,7 @@
             this.tsm_Settings_Language_Francais});
             this.tsm_Settings_Language.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_language_48;
             this.tsm_Settings_Language.Name = "tsm_Settings_Language";
-            this.tsm_Settings_Language.Size = new System.Drawing.Size(224, 26);
+            this.tsm_Settings_Language.Size = new System.Drawing.Size(157, 26);
             this.tsm_Settings_Language.Text = "Language";
             // 
             // tsm_Settings_Language_English
@@ -248,7 +248,7 @@
             // 
             this.tsm_Settings_Hotkeys.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
             this.tsm_Settings_Hotkeys.Name = "tsm_Settings_Hotkeys";
-            this.tsm_Settings_Hotkeys.Size = new System.Drawing.Size(224, 26);
+            this.tsm_Settings_Hotkeys.Size = new System.Drawing.Size(157, 26);
             this.tsm_Settings_Hotkeys.Text = "Shortcuts";
             this.tsm_Settings_Hotkeys.Click += new System.EventHandler(this.Tsm_Settings_Hotkeys_Click);
             // 
@@ -260,7 +260,7 @@
             this.tsm_Settings_Theme_Dark});
             this.tsm_Settings_Theme.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_change_theme_48;
             this.tsm_Settings_Theme.Name = "tsm_Settings_Theme";
-            this.tsm_Settings_Theme.Size = new System.Drawing.Size(224, 26);
+            this.tsm_Settings_Theme.Size = new System.Drawing.Size(157, 26);
             this.tsm_Settings_Theme.Text = "Theme";
             // 
             // tsm_Settings_Theme_Auto
@@ -287,7 +287,7 @@
             // tsm_Settings_Logs
             // 
             this.tsm_Settings_Logs.Name = "tsm_Settings_Logs";
-            this.tsm_Settings_Logs.Size = new System.Drawing.Size(224, 26);
+            this.tsm_Settings_Logs.Size = new System.Drawing.Size(157, 26);
             this.tsm_Settings_Logs.Text = "Save logs";
             this.tsm_Settings_Logs.Click += new System.EventHandler(this.Tsm_Settings_Logs_Click);
             // 
@@ -297,7 +297,7 @@
             this.tsm_About});
             this.tsm_Help.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Help.Name = "tsm_Help";
-            this.tsm_Help.Size = new System.Drawing.Size(30, 24);
+            this.tsm_Help.Size = new System.Drawing.Size(30, 26);
             this.tsm_Help.Text = "?";
             // 
             // tsm_About

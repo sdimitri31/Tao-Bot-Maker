@@ -6,16 +6,10 @@ namespace Tao_Bot_Maker.Controller
 {
     public class SettingsController
     {
-        private static void WriteSetting(string key, string value, string section)
+        private static void WriteSetting(string key, string value, string section = null)
         {
             var MyIni = new IniFile(Constants.SETTINGS_INI_NAME);
             MyIni.Write(key, value, section);
-        }
-
-        private static void WriteSetting(string key, string value)
-        {
-            var MyIni = new IniFile(Constants.SETTINGS_INI_NAME);
-            MyIni.Write(key, value);
         }
 
         private static string ReadSetting(string key, string section)
@@ -23,6 +17,12 @@ namespace Tao_Bot_Maker.Controller
             var MyIni = new IniFile(Constants.SETTINGS_INI_NAME);
             var value = MyIni.Read(key, section);
             return value.ToString();
+        }
+
+        private static void DeleteSetting(string Key, string Section = null)
+        {
+            var MyIni = new IniFile(Constants.SETTINGS_INI_NAME);
+            MyIni.DeleteKey(Key, Section);
         }
 
         public static bool IsSaveLogs()
@@ -72,22 +72,10 @@ namespace Tao_Bot_Maker.Controller
 
         //---------------------------------------------------------
         //HOTKEY
-        public static int GetHotkeyModifier(string settingName)
-        {
-            int value = 0;
-            try
-            {
-                value = Int32.Parse(ReadSetting(settingName, Constants.SETTINGS_SECTION_HOTKEY));
-            }
-            catch
-            { }
-            return value;
-        }
         
-        public static Keys GetHotkeyKey(string settingName)
+        public static Keys GetHotkey(string settingName)
         {
-            Keys key;
-            bool result = Enum.TryParse(ReadSetting(settingName, Constants.SETTINGS_SECTION_HOTKEY), out key);
+            bool result = Enum.TryParse(ReadSetting(settingName, Constants.SETTINGS_SECTION_HOTKEY), out Keys key);
             if (result)
                 return key;
             else
@@ -104,74 +92,94 @@ namespace Tao_Bot_Maker.Controller
             return Keys.None;
         }
 
-        public static void SetHotkey(string hotkeyKeyName, string hotkeyModifierName, Hotkey hotkey)
+        public static void SetHotkey(string settingName, Keys key)
         {
-            WriteSetting(hotkeyKeyName, hotkey.Key.ToString(), Constants.SETTINGS_SECTION_HOTKEY);
-            WriteSetting(hotkeyModifierName, hotkey.Modifier.ToString(), Constants.SETTINGS_SECTION_HOTKEY);
+            WriteSetting(settingName, ((int)key).ToString(), Constants.SETTINGS_SECTION_HOTKEY);
         }
 
         //HOTKEY : STARTBOT
-        public static int GetHotkeyModifierStartBot()
+        public static Keys GetHotkeyStartBot()
         {
-            return GetHotkeyModifier(Constants.SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER);
+            //If there is a modifier we need to update to new format
+            if (ReadSetting(Constants.SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY) != "")
+            {
+                DeleteSetting(Constants.SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY);
+                return Keys.F6;
+            }
+            else
+            {
+                Keys hotkey = GetHotkey(Constants.SETTINGS_KEY_HOTKEY_STARTBOT_KEY);
+                return hotkey;
+            }
         }
 
-        public static Keys GetHotkeyKeyStartBot()
+        public static void SetHotkeyStartBot(Keys key)
         {
-            return GetHotkeyKey(Constants.SETTINGS_KEY_HOTKEY_STARTBOT_KEY);
-        }
-
-        public static void SetHotkeyStartBot(Hotkey hotkey)
-        {
-            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_STARTBOT_KEY, Constants.SETTINGS_KEY_HOTKEY_STARTBOT_MODIFIER, hotkey);
+            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_STARTBOT_KEY, key);
         }
 
         //HOTKEY : STOPBOT
-        public static int GetHotkeyModifierStopBot()
-        {
-            return GetHotkeyModifier(Constants.SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER);
-        }
 
-        public static Keys GetHotkeyKeyStopBot()
+        public static Keys GetHotkeyStopBot()
         {
-            return GetHotkeyKey(Constants.SETTINGS_KEY_HOTKEY_STOPBOT_KEY);
+            //If there is a modifier we need to update to new format
+            if (ReadSetting(Constants.SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY) != "")
+            {
+                DeleteSetting(Constants.SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY);
+                return Keys.F7;
+            }
+            else
+            {
+                Keys hotkey = GetHotkey(Constants.SETTINGS_KEY_HOTKEY_STOPBOT_KEY);
+                return hotkey;
+            }
         }
         
-        public static void SetHotkeyStopBot(Hotkey hotkey)
+        public static void SetHotkeyStopBot(Keys key)
         {
-            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_STOPBOT_KEY, Constants.SETTINGS_KEY_HOTKEY_STOPBOT_MODIFIER, hotkey);
+            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_STOPBOT_KEY, key);
         }
 
         //HOTKEY : XY
-        public static int GetHotkeyModifierXY()
+        public static Keys GetHotkeyXY()
         {
-            return GetHotkeyModifier(Constants.SETTINGS_KEY_HOTKEY_XY_MODIFIER);
+            //If there is a modifier we need to update to new format
+            if (ReadSetting(Constants.SETTINGS_KEY_HOTKEY_XY_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY) != "")
+            {
+                DeleteSetting(Constants.SETTINGS_KEY_HOTKEY_XY_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY);
+                return Keys.F1;
+            }
+            else
+            {
+                Keys hotkey = GetHotkey(Constants.SETTINGS_KEY_HOTKEY_XY_KEY);
+                return hotkey;
+            }
         }
 
-        public static Keys GetHotkeyKeyXY()
+        public static void SetHotkeyXY(Keys key)
         {
-            return GetHotkeyKey(Constants.SETTINGS_KEY_HOTKEY_XY_KEY);
-        }
-
-        public static void SetHotkeyXY(Hotkey hotkey)
-        {
-            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_XY_KEY, Constants.SETTINGS_KEY_HOTKEY_XY_MODIFIER, hotkey);
+            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_XY_KEY, key);
         }
 
         //HOTKEY : XY2
-        public static int GetHotkeyModifierXY2()
+        public static Keys GetHotkeyXY2()
         {
-            return GetHotkeyModifier(Constants.SETTINGS_KEY_HOTKEY_XY2_MODIFIER);
+            //If there is a modifier we need to update to new format
+            if (ReadSetting(Constants.SETTINGS_KEY_HOTKEY_XY2_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY) != "")
+            {
+                DeleteSetting(Constants.SETTINGS_KEY_HOTKEY_XY2_MODIFIER, Constants.SETTINGS_SECTION_HOTKEY);
+                return Keys.F2;
+            }
+            else
+            {
+                Keys hotkey = GetHotkey(Constants.SETTINGS_KEY_HOTKEY_XY2_KEY);
+                return hotkey;
+            }
         }
 
-        public static Keys GetHotkeyKeyXY2()
+        public static void SetHotkeyXY2(Keys key)
         {
-            return GetHotkeyKey(Constants.SETTINGS_KEY_HOTKEY_XY2_KEY);
-        }
-
-        public static void SetHotkeyXY2(Hotkey hotkey)
-        {
-            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_XY2_KEY, Constants.SETTINGS_KEY_HOTKEY_XY2_MODIFIER, hotkey);
+            SetHotkey(Constants.SETTINGS_KEY_HOTKEY_XY2_KEY, key);
         }
 
     }

@@ -15,18 +15,16 @@ namespace Tao_Bot_Maker
             WinKey = 8
         }
 
-        public int Modifier {  get; set; }
         public Keys Key { get; set; }
 
-        public Hotkey(int modifier, Keys key) 
+        public Hotkey(Keys key) 
         { 
-            Modifier = modifier;
             Key = key;
         }
 
         public override string ToString()
         {
-            return Modifier.ToString() + "+" + Key.ToString();
+            return Key.ToString();
         }
 
     }

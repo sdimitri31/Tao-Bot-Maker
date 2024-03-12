@@ -109,10 +109,10 @@ namespace Tao_Bot_Maker.View
 
         private void SetupHotkeys()
         {
-            hotkeyXY = new HotKeyController(SettingsController.GetHotkeyModifierXY(), SettingsController.GetHotkeyKeyXY(), this);
+            hotkeyXY = new HotKeyController(SettingsController.GetHotkeyXY(), this);
             hotkeyXY.Register();
 
-            hotkeyXY2 = new HotKeyController(SettingsController.GetHotkeyModifierXY2(), SettingsController.GetHotkeyKeyXY2(), this);
+            hotkeyXY2 = new HotKeyController(SettingsController.GetHotkeyXY2(), this);
             hotkeyXY2.Register();
         }
 
@@ -195,12 +195,9 @@ namespace Tao_Bot_Maker.View
 
             if (m.Msg == 0x0312)
             {
-                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
-                int modifier = ((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
-                int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
+                Keys pressedKey = (Keys)(int)m.LParam;
 
-
-                if ((modifier == hotkeyXY.GetModifier()) && (key == hotkeyXY.GetKey()))
+                if (pressedKey == hotkeyXY.GetKey())
                 {
                     switch ((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {
@@ -214,7 +211,7 @@ namespace Tao_Bot_Maker.View
                             break;
                     }
                 }
-                else if ((modifier == hotkeyXY2.GetModifier()) && (key == hotkeyXY2.GetKey()))
+                else if (pressedKey == hotkeyXY2.GetKey())
                 {
                     switch ((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {

@@ -59,16 +59,10 @@ namespace Tao_Bot_Maker
 
             bot = new Bot(this);
 
-            hotkeyStartBot = new HotKeyController(
-                SettingsController.GetHotkeyModifierStartBot(),
-                SettingsController.GetHotkeyKeyStartBot(), 
-                this);
+            hotkeyStartBot = new HotKeyController(SettingsController.GetHotkeyStartBot(), this);
             hotkeyStartBot.Register();
 
-            hotkeyStopBot = new HotKeyController(
-                SettingsController.GetHotkeyModifierStopBot(),
-                SettingsController.GetHotkeyKeyStopBot(),
-                this);
+            hotkeyStopBot = new HotKeyController(SettingsController.GetHotkeyStopBot(), this);
             hotkeyStopBot.Register();
 
             NewSequence();
@@ -240,13 +234,8 @@ namespace Tao_Bot_Maker
         }
         private void UpdateButtonStateHotkey()
         {
-            int modifier = 0;
-            //Reversing alt and shift modifier because of a bug in UI 
-            modifier = Reverse3Bits((int)hotkeyStartBot.GetModifier()) << 16;
-            tsm_Bot_Start.ShortcutKeys = (Keys)((int)hotkeyStartBot.GetKey() | modifier);
-
-            modifier = Reverse3Bits((int)hotkeyStopBot.GetModifier()) << 16;
-            tsm_Bot_Stop.ShortcutKeys = (Keys)((int)hotkeyStopBot.GetKey() | modifier);
+            tsm_Bot_Start.ShortcutKeyDisplayString = Utils.GetFormatedKeysString(hotkeyStartBot.GetKey());
+            tsm_Bot_Stop.ShortcutKeyDisplayString = Utils.GetFormatedKeysString(hotkeyStopBot.GetKey());
             Log.Write(Properties.strings.log_UpdateButtonState_Hotkey, Log.TRACE);
         }
         private void ApplyTheme()
@@ -576,24 +565,30 @@ namespace Tao_Bot_Maker
         //Hotkey Dialog
         private void Tsm_Settings_Hotkeys_Click(object sender, EventArgs e)
         {
-            HotkeyView shortcutsView = new HotkeyView();
-            shortcutsView.StartPosition = FormStartPosition.CenterParent;
-            var result = shortcutsView.ShowDialog(this);
+
+            HotkeyView hotkeyView = new HotkeyView
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
+
+            hotkeyStartBot.Unregiser();
+            hotkeyStopBot.Unregiser();
+
+            var result = hotkeyView.ShowDialog(this);
+
             if (result == DialogResult.OK)
             {
-                hotkeyStartBot.Unregiser();
-                hotkeyStartBot.SetHotkey(shortcutsView.ReturnHotkeyStartBot);
+                hotkeyStartBot.SetHotkey(hotkeyView.HotkeyStartBot);
                 hotkeyStartBot.Register();
-                SettingsController.SetHotkeyStartBot(hotkeyStartBot.GetHotkey());
+                SettingsController.SetHotkeyStartBot(hotkeyView.HotkeyStartBot);
 
-                hotkeyStopBot.Unregiser();
-                hotkeyStopBot.SetHotkey(shortcutsView.ReturnHotkeyStopBot);
+                hotkeyStopBot.SetHotkey(hotkeyView.HotkeyStopBot);
                 hotkeyStopBot.Register();
-                SettingsController.SetHotkeyStopBot(hotkeyStopBot.GetHotkey());
+                SettingsController.SetHotkeyStopBot(hotkeyView.HotkeyStopBot);
 
-                SettingsController.SetHotkeyXY(shortcutsView.ReturnHotkeyXY);
+                SettingsController.SetHotkeyXY(hotkeyView.HotkeyXY);
 
-                SettingsController.SetHotkeyXY2(shortcutsView.ReturnHotkeyXY2);
+                SettingsController.SetHotkeyXY2(hotkeyView.HotkeyXY2);
 
                 UpdateButtonStateHotkey();
             }
@@ -814,15 +809,17 @@ namespace Tao_Bot_Maker
 
             if (m.Msg == 0x0312)
             {
-                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);  // The key of the hotkey that was pressed.
-                int modifier = ((int)m.LParam & 0xFFFF);            // The modifier of the hotkey that was pressed.
-                int id = m.WParam.ToInt32();                        // The id of the hotkey that was pressed.
+                //Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);  // The key of the hotkey that was pressed.
+                //int modifier = ((int)m.LParam & 0xFFFF);            // The modifier of the hotkey that was pressed.
+                //int id = m.WParam.ToInt32();                        // The id of the hotkey that was pressed.
+                
+                Keys pressedKey = (Keys)(int)m.LParam;
 
-                if ((modifier == hotkeyStartBot.GetModifier()) && (key == hotkeyStartBot.GetKey()))
+                if (pressedKey == hotkeyStartBot.GetKey())
                 {
                     StartBot();
                 }
-                if ((modifier == hotkeyStopBot.GetModifier()) && (key == hotkeyStopBot.GetKey()))
+                if (pressedKey == hotkeyStopBot.GetKey())
                 {
                     StopBot();
                 }

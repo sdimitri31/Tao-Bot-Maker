@@ -196,15 +196,13 @@ namespace Tao_Bot_Maker.View
 
         private void AddHotkeysToLabels()
         {
-            int modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY()) << 16;
-            Keys hotkeyXY = (Keys)((int)SettingsController.GetHotkeyKeyXY() | modifier);
-            label_X1.Text += " (" + hotkeyXY.ToString() + ")";
-            label_Y1.Text += " (" + hotkeyXY.ToString() + ")";
+            string hotkeyXY = Utils.GetFormatedKeysString((Keys)((int)SettingsController.GetHotkeyXY()));
+            label_X1.Text += " (" + hotkeyXY + ")";
+            label_Y1.Text += " (" + hotkeyXY + ")";
 
-            modifier = MainApp.Reverse3Bits((int)SettingsController.GetHotkeyModifierXY2()) << 16;
-            Keys hotkeyXY2 = (Keys)((int)SettingsController.GetHotkeyKeyXY2() | modifier);
-            label_X2.Text += " (" + hotkeyXY2.ToString() + ")";
-            label_Y2.Text += " (" + hotkeyXY2.ToString() + ")";
+            string hotkeyXY2 = Utils.GetFormatedKeysString((Keys)((int)SettingsController.GetHotkeyXY2()));
+            label_X2.Text += " (" + hotkeyXY2 + ")";
+            label_Y2.Text += " (" + hotkeyXY2 + ")";
         }
 
         private void UpdateLabelsColor()

@@ -29,314 +29,165 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HotkeyView));
-            this.groupBox_StopBot = new System.Windows.Forms.GroupBox();
-            this.flatComboBoxStopBotKey = new DarkModeForms.FlatComboBox();
-            this.checkBox_StopBot_Shift = new System.Windows.Forms.CheckBox();
-            this.checkBox_StopBot_Alt = new System.Windows.Forms.CheckBox();
-            this.checkBox_StopBot_Ctrl = new System.Windows.Forms.CheckBox();
-            this.groupBox_XY = new System.Windows.Forms.GroupBox();
-            this.flatComboBoxXYKey = new DarkModeForms.FlatComboBox();
-            this.checkBox_XY_Shift = new System.Windows.Forms.CheckBox();
-            this.checkBox_XY_Alt = new System.Windows.Forms.CheckBox();
-            this.checkBox_XY_Ctrl = new System.Windows.Forms.CheckBox();
-            this.groupBox_XY2 = new System.Windows.Forms.GroupBox();
-            this.flatComboBoxXY2Key = new DarkModeForms.FlatComboBox();
-            this.checkBox_XY2_Shift = new System.Windows.Forms.CheckBox();
-            this.checkBox_XY2_Alt = new System.Windows.Forms.CheckBox();
-            this.checkBox_XY2_Ctrl = new System.Windows.Forms.CheckBox();
-            this.button_Shortcuts_OK = new System.Windows.Forms.Button();
-            this.button_Shortcuts_Cancel = new System.Windows.Forms.Button();
-            this.checkBox_StartBot_Ctrl = new System.Windows.Forms.CheckBox();
-            this.checkBox_StartBot_Alt = new System.Windows.Forms.CheckBox();
-            this.checkBox_StartBot_Shift = new System.Windows.Forms.CheckBox();
-            this.groupBox_StartBot = new System.Windows.Forms.GroupBox();
-            this.flatComboBoxStartBotKey = new DarkModeForms.FlatComboBox();
-            this.groupBox_StopBot.SuspendLayout();
-            this.groupBox_XY.SuspendLayout();
-            this.groupBox_XY2.SuspendLayout();
-            this.groupBox_StartBot.SuspendLayout();
+            this.button_OK = new System.Windows.Forms.Button();
+            this.button_Cancel = new System.Windows.Forms.Button();
+            this.button_StartBot = new System.Windows.Forms.Button();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.label_StopBot = new System.Windows.Forms.Label();
+            this.label_StartBot = new System.Windows.Forms.Label();
+            this.button_StopBot = new System.Windows.Forms.Button();
+            this.button_XY = new System.Windows.Forms.Button();
+            this.button_XY2 = new System.Windows.Forms.Button();
+            this.label_XY = new System.Windows.Forms.Label();
+            this.label_XY2 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox_StopBot
+            // button_OK
             // 
-            this.groupBox_StopBot.Controls.Add(this.flatComboBoxStopBotKey);
-            this.groupBox_StopBot.Controls.Add(this.checkBox_StopBot_Shift);
-            this.groupBox_StopBot.Controls.Add(this.checkBox_StopBot_Alt);
-            this.groupBox_StopBot.Controls.Add(this.checkBox_StopBot_Ctrl);
-            this.groupBox_StopBot.Location = new System.Drawing.Point(292, 16);
-            this.groupBox_StopBot.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox_StopBot.Name = "groupBox_StopBot";
-            this.groupBox_StopBot.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox_StopBot.Size = new System.Drawing.Size(267, 90);
-            this.groupBox_StopBot.TabIndex = 1;
-            this.groupBox_StopBot.TabStop = false;
-            this.groupBox_StopBot.Text = "Stop bot";
+            this.button_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button_OK.Location = new System.Drawing.Point(459, 229);
+            this.button_OK.Margin = new System.Windows.Forms.Padding(4);
+            this.button_OK.Name = "button_OK";
+            this.button_OK.Size = new System.Drawing.Size(100, 28);
+            this.button_OK.TabIndex = 4;
+            this.button_OK.Text = "OK";
+            this.button_OK.UseVisualStyleBackColor = true;
+            this.button_OK.Click += new System.EventHandler(this.Button_OK_Click);
             // 
-            // flatComboBoxStopBotKey
+            // button_Cancel
             // 
-            this.flatComboBoxStopBotKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.flatComboBoxStopBotKey.FormattingEnabled = true;
-            this.flatComboBoxStopBotKey.Location = new System.Drawing.Point(9, 23);
-            this.flatComboBoxStopBotKey.Name = "flatComboBoxStopBotKey";
-            this.flatComboBoxStopBotKey.Size = new System.Drawing.Size(248, 24);
-            this.flatComboBoxStopBotKey.TabIndex = 4;
-            this.flatComboBoxStopBotKey.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
+            this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button_Cancel.Location = new System.Drawing.Point(351, 229);
+            this.button_Cancel.Margin = new System.Windows.Forms.Padding(4);
+            this.button_Cancel.Name = "button_Cancel";
+            this.button_Cancel.Size = new System.Drawing.Size(100, 28);
+            this.button_Cancel.TabIndex = 5;
+            this.button_Cancel.Text = "Cancel";
+            this.button_Cancel.UseVisualStyleBackColor = true;
             // 
-            // checkBox_StopBot_Shift
+            // button_StartBot
             // 
-            this.checkBox_StopBot_Shift.AutoSize = true;
-            this.checkBox_StopBot_Shift.Location = new System.Drawing.Point(196, 58);
-            this.checkBox_StopBot_Shift.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_StopBot_Shift.Name = "checkBox_StopBot_Shift";
-            this.checkBox_StopBot_Shift.Size = new System.Drawing.Size(54, 20);
-            this.checkBox_StopBot_Shift.TabIndex = 3;
-            this.checkBox_StopBot_Shift.Text = "Shift";
-            this.checkBox_StopBot_Shift.UseVisualStyleBackColor = true;
-            this.checkBox_StopBot_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.button_StartBot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_StartBot.Location = new System.Drawing.Point(278, 9);
+            this.button_StartBot.Name = "button_StartBot";
+            this.button_StartBot.Size = new System.Drawing.Size(270, 28);
+            this.button_StartBot.TabIndex = 0;
+            this.button_StartBot.Text = "F6";
+            this.button_StartBot.UseVisualStyleBackColor = true;
+            this.button_StartBot.Click += new System.EventHandler(this.Button_StartBot_Click);
             // 
-            // checkBox_StopBot_Alt
+            // tableLayoutPanel
             // 
-            this.checkBox_StopBot_Alt.AutoSize = true;
-            this.checkBox_StopBot_Alt.Location = new System.Drawing.Point(104, 58);
-            this.checkBox_StopBot_Alt.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_StopBot_Alt.Name = "checkBox_StopBot_Alt";
-            this.checkBox_StopBot_Alt.Size = new System.Drawing.Size(44, 20);
-            this.checkBox_StopBot_Alt.TabIndex = 2;
-            this.checkBox_StopBot_Alt.Text = "Alt";
-            this.checkBox_StopBot_Alt.UseVisualStyleBackColor = true;
-            this.checkBox_StopBot_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.tableLayoutPanel.ColumnCount = 2;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.Controls.Add(this.label_StopBot, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.button_StartBot, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.label_StartBot, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.button_StopBot, 1, 1);
+            this.tableLayoutPanel.Controls.Add(this.button_XY, 1, 3);
+            this.tableLayoutPanel.Controls.Add(this.button_XY2, 1, 4);
+            this.tableLayoutPanel.Controls.Add(this.label_XY, 0, 3);
+            this.tableLayoutPanel.Controls.Add(this.label_XY2, 0, 4);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 5;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.72727F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.72727F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.72727F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.72727F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(551, 210);
+            this.tableLayoutPanel.TabIndex = 6;
             // 
-            // checkBox_StopBot_Ctrl
+            // label_StopBot
             // 
-            this.checkBox_StopBot_Ctrl.AutoSize = true;
-            this.checkBox_StopBot_Ctrl.Location = new System.Drawing.Point(9, 58);
-            this.checkBox_StopBot_Ctrl.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_StopBot_Ctrl.Name = "checkBox_StopBot_Ctrl";
-            this.checkBox_StopBot_Ctrl.Size = new System.Drawing.Size(48, 20);
-            this.checkBox_StopBot_Ctrl.TabIndex = 1;
-            this.checkBox_StopBot_Ctrl.Text = "Ctrl";
-            this.checkBox_StopBot_Ctrl.UseVisualStyleBackColor = true;
-            this.checkBox_StopBot_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.label_StopBot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_StopBot.AutoSize = true;
+            this.label_StopBot.Location = new System.Drawing.Point(3, 62);
+            this.label_StopBot.Name = "label_StopBot";
+            this.label_StopBot.Size = new System.Drawing.Size(269, 16);
+            this.label_StopBot.TabIndex = 5;
+            this.label_StopBot.Text = "Stop bot";
+            this.label_StopBot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox_XY
+            // label_StartBot
             // 
-            this.groupBox_XY.Controls.Add(this.flatComboBoxXYKey);
-            this.groupBox_XY.Controls.Add(this.checkBox_XY_Shift);
-            this.groupBox_XY.Controls.Add(this.checkBox_XY_Alt);
-            this.groupBox_XY.Controls.Add(this.checkBox_XY_Ctrl);
-            this.groupBox_XY.Location = new System.Drawing.Point(17, 132);
-            this.groupBox_XY.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox_XY.Name = "groupBox_XY";
-            this.groupBox_XY.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox_XY.Size = new System.Drawing.Size(267, 90);
-            this.groupBox_XY.TabIndex = 2;
-            this.groupBox_XY.TabStop = false;
-            this.groupBox_XY.Text = "Set X Y at cursor position";
+            this.label_StartBot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_StartBot.AutoSize = true;
+            this.label_StartBot.Location = new System.Drawing.Point(3, 15);
+            this.label_StartBot.Name = "label_StartBot";
+            this.label_StartBot.Size = new System.Drawing.Size(269, 16);
+            this.label_StartBot.TabIndex = 1;
+            this.label_StartBot.Text = "Start bot";
+            this.label_StartBot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flatComboBoxXYKey
+            // button_StopBot
             // 
-            this.flatComboBoxXYKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.flatComboBoxXYKey.FormattingEnabled = true;
-            this.flatComboBoxXYKey.Location = new System.Drawing.Point(9, 23);
-            this.flatComboBoxXYKey.Name = "flatComboBoxXYKey";
-            this.flatComboBoxXYKey.Size = new System.Drawing.Size(241, 24);
-            this.flatComboBoxXYKey.TabIndex = 4;
-            this.flatComboBoxXYKey.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
+            this.button_StopBot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_StopBot.Location = new System.Drawing.Point(278, 56);
+            this.button_StopBot.Name = "button_StopBot";
+            this.button_StopBot.Size = new System.Drawing.Size(270, 28);
+            this.button_StopBot.TabIndex = 2;
+            this.button_StopBot.Text = "F7";
+            this.button_StopBot.UseVisualStyleBackColor = true;
+            this.button_StopBot.Click += new System.EventHandler(this.Button_StopBot_Click);
             // 
-            // checkBox_XY_Shift
+            // button_XY
             // 
-            this.checkBox_XY_Shift.AutoSize = true;
-            this.checkBox_XY_Shift.Location = new System.Drawing.Point(196, 58);
-            this.checkBox_XY_Shift.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_XY_Shift.Name = "checkBox_XY_Shift";
-            this.checkBox_XY_Shift.Size = new System.Drawing.Size(54, 20);
-            this.checkBox_XY_Shift.TabIndex = 3;
-            this.checkBox_XY_Shift.Text = "Shift";
-            this.checkBox_XY_Shift.UseVisualStyleBackColor = true;
-            this.checkBox_XY_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.button_XY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_XY.Location = new System.Drawing.Point(278, 122);
+            this.button_XY.Name = "button_XY";
+            this.button_XY.Size = new System.Drawing.Size(270, 28);
+            this.button_XY.TabIndex = 3;
+            this.button_XY.Text = "F1";
+            this.button_XY.UseVisualStyleBackColor = true;
+            this.button_XY.Click += new System.EventHandler(this.Button_XY_Click);
             // 
-            // checkBox_XY_Alt
+            // button_XY2
             // 
-            this.checkBox_XY_Alt.AutoSize = true;
-            this.checkBox_XY_Alt.Location = new System.Drawing.Point(104, 58);
-            this.checkBox_XY_Alt.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_XY_Alt.Name = "checkBox_XY_Alt";
-            this.checkBox_XY_Alt.Size = new System.Drawing.Size(44, 20);
-            this.checkBox_XY_Alt.TabIndex = 2;
-            this.checkBox_XY_Alt.Text = "Alt";
-            this.checkBox_XY_Alt.UseVisualStyleBackColor = true;
-            this.checkBox_XY_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.button_XY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_XY2.Location = new System.Drawing.Point(278, 171);
+            this.button_XY2.Name = "button_XY2";
+            this.button_XY2.Size = new System.Drawing.Size(270, 28);
+            this.button_XY2.TabIndex = 4;
+            this.button_XY2.Text = "F2";
+            this.button_XY2.UseVisualStyleBackColor = true;
+            this.button_XY2.Click += new System.EventHandler(this.Button_XY2_Click);
             // 
-            // checkBox_XY_Ctrl
+            // label_XY
             // 
-            this.checkBox_XY_Ctrl.AutoSize = true;
-            this.checkBox_XY_Ctrl.Location = new System.Drawing.Point(9, 58);
-            this.checkBox_XY_Ctrl.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_XY_Ctrl.Name = "checkBox_XY_Ctrl";
-            this.checkBox_XY_Ctrl.Size = new System.Drawing.Size(48, 20);
-            this.checkBox_XY_Ctrl.TabIndex = 1;
-            this.checkBox_XY_Ctrl.Text = "Ctrl";
-            this.checkBox_XY_Ctrl.UseVisualStyleBackColor = true;
-            this.checkBox_XY_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.label_XY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_XY.AutoSize = true;
+            this.label_XY.Location = new System.Drawing.Point(3, 128);
+            this.label_XY.Name = "label_XY";
+            this.label_XY.Size = new System.Drawing.Size(269, 16);
+            this.label_XY.TabIndex = 6;
+            this.label_XY.Text = "XY";
+            this.label_XY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox_XY2
+            // label_XY2
             // 
-            this.groupBox_XY2.Controls.Add(this.flatComboBoxXY2Key);
-            this.groupBox_XY2.Controls.Add(this.checkBox_XY2_Shift);
-            this.groupBox_XY2.Controls.Add(this.checkBox_XY2_Alt);
-            this.groupBox_XY2.Controls.Add(this.checkBox_XY2_Ctrl);
-            this.groupBox_XY2.Location = new System.Drawing.Point(292, 132);
-            this.groupBox_XY2.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox_XY2.Name = "groupBox_XY2";
-            this.groupBox_XY2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox_XY2.Size = new System.Drawing.Size(267, 90);
-            this.groupBox_XY2.TabIndex = 3;
-            this.groupBox_XY2.TabStop = false;
-            this.groupBox_XY2.Text = "Set X2 Y2 at cursor position";
-            // 
-            // flatComboBoxXY2Key
-            // 
-            this.flatComboBoxXY2Key.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.flatComboBoxXY2Key.FormattingEnabled = true;
-            this.flatComboBoxXY2Key.Location = new System.Drawing.Point(9, 23);
-            this.flatComboBoxXY2Key.Name = "flatComboBoxXY2Key";
-            this.flatComboBoxXY2Key.Size = new System.Drawing.Size(241, 24);
-            this.flatComboBoxXY2Key.TabIndex = 4;
-            this.flatComboBoxXY2Key.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
-            // 
-            // checkBox_XY2_Shift
-            // 
-            this.checkBox_XY2_Shift.AutoSize = true;
-            this.checkBox_XY2_Shift.Location = new System.Drawing.Point(196, 58);
-            this.checkBox_XY2_Shift.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_XY2_Shift.Name = "checkBox_XY2_Shift";
-            this.checkBox_XY2_Shift.Size = new System.Drawing.Size(54, 20);
-            this.checkBox_XY2_Shift.TabIndex = 3;
-            this.checkBox_XY2_Shift.Text = "Shift";
-            this.checkBox_XY2_Shift.UseVisualStyleBackColor = true;
-            this.checkBox_XY2_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // checkBox_XY2_Alt
-            // 
-            this.checkBox_XY2_Alt.AutoSize = true;
-            this.checkBox_XY2_Alt.Location = new System.Drawing.Point(104, 58);
-            this.checkBox_XY2_Alt.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_XY2_Alt.Name = "checkBox_XY2_Alt";
-            this.checkBox_XY2_Alt.Size = new System.Drawing.Size(44, 20);
-            this.checkBox_XY2_Alt.TabIndex = 2;
-            this.checkBox_XY2_Alt.Text = "Alt";
-            this.checkBox_XY2_Alt.UseVisualStyleBackColor = true;
-            this.checkBox_XY2_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // checkBox_XY2_Ctrl
-            // 
-            this.checkBox_XY2_Ctrl.AutoSize = true;
-            this.checkBox_XY2_Ctrl.Location = new System.Drawing.Point(9, 58);
-            this.checkBox_XY2_Ctrl.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_XY2_Ctrl.Name = "checkBox_XY2_Ctrl";
-            this.checkBox_XY2_Ctrl.Size = new System.Drawing.Size(48, 20);
-            this.checkBox_XY2_Ctrl.TabIndex = 1;
-            this.checkBox_XY2_Ctrl.Text = "Ctrl";
-            this.checkBox_XY2_Ctrl.UseVisualStyleBackColor = true;
-            this.checkBox_XY2_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // button_Shortcuts_OK
-            // 
-            this.button_Shortcuts_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button_Shortcuts_OK.Location = new System.Drawing.Point(459, 229);
-            this.button_Shortcuts_OK.Margin = new System.Windows.Forms.Padding(4);
-            this.button_Shortcuts_OK.Name = "button_Shortcuts_OK";
-            this.button_Shortcuts_OK.Size = new System.Drawing.Size(100, 28);
-            this.button_Shortcuts_OK.TabIndex = 4;
-            this.button_Shortcuts_OK.Text = "OK";
-            this.button_Shortcuts_OK.UseVisualStyleBackColor = true;
-            this.button_Shortcuts_OK.Click += new System.EventHandler(this.button_Shortcuts_OK_Click);
-            // 
-            // button_Shortcuts_Cancel
-            // 
-            this.button_Shortcuts_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Shortcuts_Cancel.Location = new System.Drawing.Point(351, 229);
-            this.button_Shortcuts_Cancel.Margin = new System.Windows.Forms.Padding(4);
-            this.button_Shortcuts_Cancel.Name = "button_Shortcuts_Cancel";
-            this.button_Shortcuts_Cancel.Size = new System.Drawing.Size(100, 28);
-            this.button_Shortcuts_Cancel.TabIndex = 5;
-            this.button_Shortcuts_Cancel.Text = "Cancel";
-            this.button_Shortcuts_Cancel.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_StartBot_Ctrl
-            // 
-            this.checkBox_StartBot_Ctrl.AutoSize = true;
-            this.checkBox_StartBot_Ctrl.Location = new System.Drawing.Point(9, 58);
-            this.checkBox_StartBot_Ctrl.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_StartBot_Ctrl.Name = "checkBox_StartBot_Ctrl";
-            this.checkBox_StartBot_Ctrl.Size = new System.Drawing.Size(48, 20);
-            this.checkBox_StartBot_Ctrl.TabIndex = 1;
-            this.checkBox_StartBot_Ctrl.Text = "Ctrl";
-            this.checkBox_StartBot_Ctrl.UseVisualStyleBackColor = true;
-            this.checkBox_StartBot_Ctrl.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // checkBox_StartBot_Alt
-            // 
-            this.checkBox_StartBot_Alt.AutoSize = true;
-            this.checkBox_StartBot_Alt.Location = new System.Drawing.Point(104, 58);
-            this.checkBox_StartBot_Alt.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_StartBot_Alt.Name = "checkBox_StartBot_Alt";
-            this.checkBox_StartBot_Alt.Size = new System.Drawing.Size(44, 20);
-            this.checkBox_StartBot_Alt.TabIndex = 2;
-            this.checkBox_StartBot_Alt.Text = "Alt";
-            this.checkBox_StartBot_Alt.UseVisualStyleBackColor = true;
-            this.checkBox_StartBot_Alt.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // checkBox_StartBot_Shift
-            // 
-            this.checkBox_StartBot_Shift.AutoSize = true;
-            this.checkBox_StartBot_Shift.Location = new System.Drawing.Point(196, 58);
-            this.checkBox_StartBot_Shift.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_StartBot_Shift.Name = "checkBox_StartBot_Shift";
-            this.checkBox_StartBot_Shift.Size = new System.Drawing.Size(54, 20);
-            this.checkBox_StartBot_Shift.TabIndex = 3;
-            this.checkBox_StartBot_Shift.Text = "Shift";
-            this.checkBox_StartBot_Shift.UseVisualStyleBackColor = true;
-            this.checkBox_StartBot_Shift.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // groupBox_StartBot
-            // 
-            this.groupBox_StartBot.Controls.Add(this.flatComboBoxStartBotKey);
-            this.groupBox_StartBot.Controls.Add(this.checkBox_StartBot_Shift);
-            this.groupBox_StartBot.Controls.Add(this.checkBox_StartBot_Alt);
-            this.groupBox_StartBot.Controls.Add(this.checkBox_StartBot_Ctrl);
-            this.groupBox_StartBot.Location = new System.Drawing.Point(17, 16);
-            this.groupBox_StartBot.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox_StartBot.Name = "groupBox_StartBot";
-            this.groupBox_StartBot.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox_StartBot.Size = new System.Drawing.Size(267, 90);
-            this.groupBox_StartBot.TabIndex = 0;
-            this.groupBox_StartBot.TabStop = false;
-            this.groupBox_StartBot.Text = "Start bot";
-            // 
-            // flatComboBoxStartBotKey
-            // 
-            this.flatComboBoxStartBotKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.flatComboBoxStartBotKey.FormattingEnabled = true;
-            this.flatComboBoxStartBotKey.Location = new System.Drawing.Point(9, 23);
-            this.flatComboBoxStartBotKey.Name = "flatComboBoxStartBotKey";
-            this.flatComboBoxStartBotKey.Size = new System.Drawing.Size(248, 24);
-            this.flatComboBoxStartBotKey.TabIndex = 4;
-            this.flatComboBoxStartBotKey.SelectedIndexChanged += new System.EventHandler(this.FlatComboBox_SelectedIndexChanged);
+            this.label_XY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_XY2.AutoSize = true;
+            this.label_XY2.Location = new System.Drawing.Point(3, 177);
+            this.label_XY2.Name = "label_XY2";
+            this.label_XY2.Size = new System.Drawing.Size(269, 16);
+            this.label_XY2.TabIndex = 7;
+            this.label_XY2.Text = "XY2";
+            this.label_XY2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // HotkeyView
             // 
-            this.AcceptButton = this.button_Shortcuts_OK;
+            this.AcceptButton = this.button_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.button_Shortcuts_Cancel;
+            this.CancelButton = this.button_Cancel;
             this.ClientSize = new System.Drawing.Size(575, 271);
-            this.Controls.Add(this.button_Shortcuts_Cancel);
-            this.Controls.Add(this.button_Shortcuts_OK);
-            this.Controls.Add(this.groupBox_XY2);
-            this.Controls.Add(this.groupBox_XY);
-            this.Controls.Add(this.groupBox_StopBot);
-            this.Controls.Add(this.groupBox_StartBot);
+            this.Controls.Add(this.tableLayoutPanel);
+            this.Controls.Add(this.button_Cancel);
+            this.Controls.Add(this.button_OK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -344,40 +195,23 @@
             this.MinimizeBox = false;
             this.Name = "HotkeyView";
             this.Text = "Hotkeys";
-            this.groupBox_StopBot.ResumeLayout(false);
-            this.groupBox_StopBot.PerformLayout();
-            this.groupBox_XY.ResumeLayout(false);
-            this.groupBox_XY.PerformLayout();
-            this.groupBox_XY2.ResumeLayout(false);
-            this.groupBox_XY2.PerformLayout();
-            this.groupBox_StartBot.ResumeLayout(false);
-            this.groupBox_StartBot.PerformLayout();
+            this.tableLayoutPanel.ResumeLayout(false);
+            this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox groupBox_StopBot;
-        private System.Windows.Forms.CheckBox checkBox_StopBot_Shift;
-        private System.Windows.Forms.CheckBox checkBox_StopBot_Alt;
-        private System.Windows.Forms.CheckBox checkBox_StopBot_Ctrl;
-        private System.Windows.Forms.GroupBox groupBox_XY;
-        private System.Windows.Forms.CheckBox checkBox_XY_Shift;
-        private System.Windows.Forms.CheckBox checkBox_XY_Alt;
-        private System.Windows.Forms.CheckBox checkBox_XY_Ctrl;
-        private System.Windows.Forms.GroupBox groupBox_XY2;
-        private System.Windows.Forms.CheckBox checkBox_XY2_Shift;
-        private System.Windows.Forms.CheckBox checkBox_XY2_Alt;
-        private System.Windows.Forms.CheckBox checkBox_XY2_Ctrl;
-        private System.Windows.Forms.Button button_Shortcuts_OK;
-        private System.Windows.Forms.Button button_Shortcuts_Cancel;
-        private System.Windows.Forms.CheckBox checkBox_StartBot_Ctrl;
-        private System.Windows.Forms.CheckBox checkBox_StartBot_Alt;
-        private System.Windows.Forms.CheckBox checkBox_StartBot_Shift;
-        private System.Windows.Forms.GroupBox groupBox_StartBot;
-        private DarkModeForms.FlatComboBox flatComboBoxStartBotKey;
-        private DarkModeForms.FlatComboBox flatComboBoxStopBotKey;
-        private DarkModeForms.FlatComboBox flatComboBoxXYKey;
-        private DarkModeForms.FlatComboBox flatComboBoxXY2Key;
+        private System.Windows.Forms.Button button_OK;
+        private System.Windows.Forms.Button button_Cancel;
+        private System.Windows.Forms.Button button_StartBot;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.Button button_XY;
+        private System.Windows.Forms.Label label_StartBot;
+        private System.Windows.Forms.Button button_StopBot;
+        private System.Windows.Forms.Label label_StopBot;
+        private System.Windows.Forms.Button button_XY2;
+        private System.Windows.Forms.Label label_XY;
+        private System.Windows.Forms.Label label_XY2;
     }
 }

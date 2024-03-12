@@ -1,5 +1,11 @@
 Changelog :
 
+Version 0.4.22 :
+- Add : Hotkey system redesigned
+
+Version 0.4.21 :
+- Add : Action "Key" added
+
 Version 0.4.20 :
 - Add : Action "Key" has been changed to "Text"
 

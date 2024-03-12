@@ -471,6 +471,9 @@
   <data name="log_UpdateButtonState_Theme" xml:space="preserve">
     <value>"Theme" button state updated : </value>
   </data>
+  <data name="MessageBox_Error_HotkeyDuplicate" xml:space="preserve">
+    <value>Erreur : Plusieurs raccourcis on la même touche.</value>
+  </data>
   <data name="MessageBox_Error_LoadingSequence" xml:space="preserve">
     <value>Impossible de charger la séquence.
 Le fichier est peut-être corrompu.</value>

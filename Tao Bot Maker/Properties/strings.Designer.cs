@@ -1132,6 +1132,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error : Multiple hotkeys have the same value..
+        /// </summary>
+        internal static string MessageBox_Error_HotkeyDuplicate {
+            get {
+                return ResourceManager.GetString("MessageBox_Error_HotkeyDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Couldn&apos;t load sequence.
         ///File might be corrupted..
         /// </summary>
