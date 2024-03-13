@@ -48,7 +48,11 @@ namespace Tao_Bot_Maker
         {
             Keys key = hotkey.Key & Keys.KeyCode;
             Keys modifiers = hotkey.Key & Keys.Modifiers;
-            return RegisterHotKey(hWnd, id, (int)modifiers, (int)key);
+            
+            //Flag for hotkey modifier are reversed compared to Keys modifier
+            int modifiersConverted = Controller.Utils.Reverse3Bits((int)modifiers >> 16);
+
+            return RegisterHotKey(hWnd, id, modifiersConverted, (int)key);
         }
 
         public bool Unregiser()

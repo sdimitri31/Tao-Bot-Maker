@@ -212,22 +212,67 @@ namespace Tao_Bot_Maker.View
 
         private void Button_StartBot_Click(object sender, EventArgs e)
         {
-            modifyingHotkey = "startbot";
+            //Toggle hotkey capture
+            if(modifyingHotkey == "startbot")
+                SetModifyingHotkey("");
+            else
+                SetModifyingHotkey("startbot");
         }
 
         private void Button_StopBot_Click(object sender, EventArgs e)
         {
-            modifyingHotkey = "stopbot";
+            //Toggle hotkey capture
+            if (modifyingHotkey == "stopbot")
+                SetModifyingHotkey("");
+            else
+                SetModifyingHotkey("stopbot");
         }
 
         private void Button_XY_Click(object sender, EventArgs e)
         {
-            modifyingHotkey = "xy";
+            //Toggle hotkey capture
+            if (modifyingHotkey == "xy")
+                SetModifyingHotkey("");
+            else
+                SetModifyingHotkey("xy");
         }
 
         private void Button_XY2_Click(object sender, EventArgs e)
         {
-            modifyingHotkey = "xy2";
+            if (modifyingHotkey == "xy2")
+                SetModifyingHotkey("");
+            else
+                SetModifyingHotkey("xy2");
+        }
+
+        private void SetModifyingHotkey(string modifying)
+        {
+            //Reset buttons
+            HotkeyStartBot = hotkeyStartBot;
+            HotkeyStopBot = hotkeyStopBot;
+            HotkeyXY = hotkeyXY;
+            HotkeyXY2 = hotkeyXY2;
+
+            modifyingHotkey = modifying;
+
+            switch (modifyingHotkey)
+            {
+                case "startbot":
+                    button_StartBot.Text = Properties.strings.button_Key_WaitForInput;
+                    break;
+
+                case "stopbot":
+                    button_StopBot.Text = Properties.strings.button_Key_WaitForInput;
+                    break;
+
+                case "xy":
+                    button_XY.Text = Properties.strings.button_Key_WaitForInput;
+                    break;
+
+                case "xy2":
+                    button_XY2.Text = Properties.strings.button_Key_WaitForInput;
+                    break;
+            }
         }
     }
 }

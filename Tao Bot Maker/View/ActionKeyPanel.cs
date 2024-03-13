@@ -38,7 +38,19 @@ namespace Tao_Bot_Maker.View
 
         private void Button_Key_Click(object sender, EventArgs e)
         {
-            isDetection = true;
+            if(isDetection)
+            {
+                isDetection = false;
+                if(Key == Keys.None) 
+                    button_Key.Text = Properties.strings.button_Key_Unassigned;
+                else
+                    button_Key.Text = Controller.Utils.GetFormatedKeysString(Key);
+            }
+            else
+            {
+                isDetection = true;
+                button_Key.Text = Properties.strings.button_Key_WaitForInput;
+            }
         }
 
         protected override bool ProcessKeyPreview(ref Message m)

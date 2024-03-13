@@ -1,5 +1,10 @@
 Changelog :
 
+Version 0.4.22.1 :
+- Fix : Hotkey not working properly
+- Fix : Action "Key" not sending Keys properly
+- Add : Improved UI for buttons when registering keys
+
 Version 0.4.22 :
 - Add : Hotkey system redesigned
 

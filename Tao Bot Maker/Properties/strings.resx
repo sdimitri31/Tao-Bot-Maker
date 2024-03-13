@@ -282,6 +282,9 @@
   <data name="button_Key_Unassigned" xml:space="preserve">
     <value>Unassigned</value>
   </data>
+  <data name="button_Key_WaitForInput" xml:space="preserve">
+    <value>Waiting for input</value>
+  </data>
   <data name="button_OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -293,6 +296,48 @@
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="Key_AltKey" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="Key_Backspace" xml:space="preserve">
+    <value>Backspace</value>
+  </data>
+  <data name="Key_CapsLock" xml:space="preserve">
+    <value>CapsLock</value>
+  </data>
+  <data name="Key_ControlKey" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="Key_Delete" xml:space="preserve">
+    <value>Del</value>
+  </data>
+  <data name="Key_Down" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="Key_End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="Key_Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="Key_Escape" xml:space="preserve">
+    <value>Esc</value>
+  </data>
+  <data name="Key_Left" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="Key_Right" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="Key_ShiftKey" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="Key_Space" xml:space="preserve">
+    <value>Space</value>
+  </data>
+  <data name="Key_Up" xml:space="preserve">
+    <value>Up</value>
   </data>
   <data name="label_Alt" xml:space="preserve">
     <value>Alt</value>

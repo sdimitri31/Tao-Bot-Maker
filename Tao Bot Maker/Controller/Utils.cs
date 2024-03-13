@@ -85,10 +85,20 @@ namespace Tao_Bot_Maker.Controller
         }
 
         /// <summary>
+        /// Reverse modifiers flag to detect Shift and Alt properly
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static int Reverse3Bits(int n)
+        {
+            return (0x73516240 >> (n << 2)) & 7;
+        }
+
+        /// <summary>
         /// Transform a Keys to a more user friendly string 
         /// </summary>
         /// <param name="key">Keys to process</param>
-        /// <returns>String in a format : Ctrl + Alt + Shift + Key</returns>
+        /// <returns>String in a format ": Ctrl + Alt + Shift + Key</returns>
         public static string GetFormatedKeysString(Keys key)
         {
             string formatedName = key.ToString();
@@ -114,7 +124,207 @@ namespace Tao_Bot_Maker.Controller
             modifiers = modifiers.Replace("Shift", Properties.strings.label_Shift);
             modifiers = modifiers.Replace(",", "");
 
-            return modifiers + keys[0];
+            return modifiers + KeyStringTranslate(keys[0]);
+        }
+
+        public static string KeyStringTranslate(string key)
+        {
+            string keyboardLocale = InputLanguage.CurrentInputLanguage.Culture.Name;
+
+            Log.Write("keyboardLocale : " + keyboardLocale, Log.TRACE);
+
+            //Common accross locales
+            switch (key)
+            {
+                case "Back":
+                    return Properties.strings.Key_Backspace;
+                case "Separator":
+                    return "{BREAK}";
+                case "Capital":
+                    return Properties.strings.Key_CapsLock;
+                case "Delete":
+                    return Properties.strings.Key_Delete;
+                case "Down":
+                    return Properties.strings.Key_Down;
+                case "End":
+                    return Properties.strings.Key_End;
+                case "Return":
+                    return Properties.strings.Key_Enter;
+                case "Escape":
+                    return Properties.strings.Key_Escape;
+                case "Help":
+                    return "HELP";
+                case "Home":
+                    return "HOME";
+                case "Insert":
+                    return "INSERT";
+                case "Left":
+                    return Properties.strings.Key_Left;
+                case "NumLock":
+                    return "NUMLOCK";
+                case "PageDown":
+                    return "PGDN";
+                case "PageUp":
+                    return "PGUP";
+                case "PrintScreen":
+                    return "PRTSC";
+                case "Right":
+                    return Properties.strings.Key_Right;
+                case "Scroll":
+                    return "SCROLLLOCK";
+                case "Tab":
+                    return "TAB";
+                case "Up":
+                    return Properties.strings.Key_Up;
+                case "F1":
+                    return "F1";
+                case "F2":
+                    return "F2";
+                case "F3":
+                    return "F3";
+                case "F4":
+                    return "F4";
+                case "F5":
+                    return "F5";
+                case "F6":
+                    return "F6";
+                case "F7":
+                    return "F7";
+                case "F8":
+                    return "F8";
+                case "F9":
+                    return "F9";
+                case "F10":
+                    return "F10";
+                case "F11":
+                    return "F11";
+                case "F12":
+                    return "F12";
+                case "F13":
+                    return "F13";
+                case "F14":
+                    return "F14";
+                case "F15":
+                    return "F15";
+                case "F16":
+                    return "F16";
+                case "Add":
+                    return "+";
+                case "Subtract":
+                    return "-";
+                case "Multiply":
+                    return "*";
+                case "Divide":
+                    return "/";
+                case "ShiftKey":
+                    return Properties.strings.Key_ShiftKey;
+                case "ControlKey":
+                    return Properties.strings.Key_ControlKey;
+                case "AltKey":
+                    return Properties.strings.Key_AltKey;
+                case "Space":
+                    return Properties.strings.Key_Space;
+            }
+
+            if (keyboardLocale.Equals("fr-FR"))
+            {
+                switch (key)
+                {
+                    case "OemBackslash":
+                        return "<";
+                    case "OemOpenBrackets":
+                        return ")";
+                    case "Oemplus":
+                        return "=";
+                    case "Oem1":
+                        return "$";
+                    case "Oem5":
+                        return "*";
+                    case "Oem6":
+                        return "^";
+                    case "Oem7":
+                        return "²";
+                    case "Oem8":
+                        return "!";
+                    case "Oemtilde":
+                        return "ù";
+                    case "Oemcomma":
+                        return ",";
+                    case "OemPeriod":
+                        return ";";
+                    case "OemQuestion":
+                        return ":";
+                    case "D1":
+                        return "&&";
+                    case "D2":
+                        return "é";
+                    case "D3":
+                        return "\"";
+                    case "D4":
+                        return "'";
+                    case "D5":
+                        return "(";
+                    case "D6":
+                        return "-";
+                    case "D7":
+                        return "è";
+                    case "D8":
+                        return "_";
+                    case "D9":
+                        return "ç";
+                    case "D0":
+                        return "à";
+                }
+            }
+
+            else if (keyboardLocale.Equals("en-US") || keyboardLocale.Equals("en-GB"))
+            {
+                switch (key)
+                {
+                    case "OemOpenBrackets":
+                        return "[";
+                    case "Oemplus":
+                        return "=";
+                    case "Oem1":
+                        return ";";
+                    case "Oem5":
+                        return "\\";
+                    case "Oem6":
+                        return "]";
+                    case "Oem7":
+                        return "'";
+                    case "Oemtilde":
+                        return "`";
+                    case "Oemcomma":
+                        return ",";
+                    case "OemPeriod":
+                        return ".";
+                    case "OemQuestion":
+                        return "/";
+                    case "D1":
+                        return "1";
+                    case "D2":
+                        return "2";
+                    case "D3":
+                        return "3";
+                    case "D4":
+                        return "4";
+                    case "D5":
+                        return "5";
+                    case "D6":
+                        return "6";
+                    case "D7":
+                        return "7";
+                    case "D8":
+                        return "8";
+                    case "D9":
+                        return "9";
+                    case "D0":
+                        return "0";
+                }
+            }
+
+            return key.ToString();
         }
 
         /// <summary>
@@ -225,6 +435,8 @@ namespace Tao_Bot_Maker.Controller
             {
                 switch (key)
                 {
+                    case Keys.OemBackslash:
+                        return "<";
                     case Keys.OemOpenBrackets:
                         return ")";
                     case Keys.Oemplus:

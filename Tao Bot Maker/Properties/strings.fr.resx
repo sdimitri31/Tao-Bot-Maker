@@ -282,6 +282,9 @@
   <data name="button_Key_Unassigned" xml:space="preserve">
     <value>Non assignée</value>
   </data>
+  <data name="button_Key_WaitForInput" xml:space="preserve">
+    <value>Attente d'une touche</value>
+  </data>
   <data name="button_OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -293,6 +296,48 @@
   </data>
   <data name="Error" xml:space="preserve">
     <value>Erreur</value>
+  </data>
+  <data name="Key_AltKey" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="Key_Backspace" xml:space="preserve">
+    <value>Ret. Arr.</value>
+  </data>
+  <data name="Key_CapsLock" xml:space="preserve">
+    <value>Verr. Maj</value>
+  </data>
+  <data name="Key_ControlKey" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="Key_Delete" xml:space="preserve">
+    <value>Suppr</value>
+  </data>
+  <data name="Key_Down" xml:space="preserve">
+    <value>Bas</value>
+  </data>
+  <data name="Key_End" xml:space="preserve">
+    <value>Fin</value>
+  </data>
+  <data name="Key_Enter" xml:space="preserve">
+    <value>Entrée</value>
+  </data>
+  <data name="Key_Escape" xml:space="preserve">
+    <value>Échap</value>
+  </data>
+  <data name="Key_Left" xml:space="preserve">
+    <value>Gauche</value>
+  </data>
+  <data name="Key_Right" xml:space="preserve">
+    <value>Droite</value>
+  </data>
+  <data name="Key_ShiftKey" xml:space="preserve">
+    <value>Maj</value>
+  </data>
+  <data name="Key_Space" xml:space="preserve">
+    <value>Espace</value>
+  </data>
+  <data name="Key_Up" xml:space="preserve">
+    <value>Haut</value>
   </data>
   <data name="label_Alt" xml:space="preserve">
     <value>Alt</value>
@@ -535,7 +580,7 @@ Voulez-vous quitter ?</value>
     <value>Supprimer la séquence</value>
   </data>
   <data name="toolTip_Button_EditAction" xml:space="preserve">
-    <value>Editer l'action sélectionnée</value>
+    <value>Éditer l'action sélectionnée</value>
   </data>
   <data name="toolTip_Button_SaveSequence" xml:space="preserve">
     <value>Enregistrer la séquence</value>

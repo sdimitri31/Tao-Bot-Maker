@@ -556,6 +556,15 @@ namespace Tao_Bot_Maker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Waiting for input.
+        /// </summary>
+        internal static string button_Key_WaitForInput {
+            get {
+                return ResourceManager.GetString("button_Key_WaitForInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à OK.
         /// </summary>
         internal static string button_OK {
@@ -588,6 +597,132 @@ namespace Tao_Bot_Maker.Properties {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Alt.
+        /// </summary>
+        internal static string Key_AltKey {
+            get {
+                return ResourceManager.GetString("Key_AltKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backspace.
+        /// </summary>
+        internal static string Key_Backspace {
+            get {
+                return ResourceManager.GetString("Key_Backspace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à CapsLock.
+        /// </summary>
+        internal static string Key_CapsLock {
+            get {
+                return ResourceManager.GetString("Key_CapsLock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ctrl.
+        /// </summary>
+        internal static string Key_ControlKey {
+            get {
+                return ResourceManager.GetString("Key_ControlKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Del.
+        /// </summary>
+        internal static string Key_Delete {
+            get {
+                return ResourceManager.GetString("Key_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Down.
+        /// </summary>
+        internal static string Key_Down {
+            get {
+                return ResourceManager.GetString("Key_Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à End.
+        /// </summary>
+        internal static string Key_End {
+            get {
+                return ResourceManager.GetString("Key_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter.
+        /// </summary>
+        internal static string Key_Enter {
+            get {
+                return ResourceManager.GetString("Key_Enter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Esc.
+        /// </summary>
+        internal static string Key_Escape {
+            get {
+                return ResourceManager.GetString("Key_Escape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Left.
+        /// </summary>
+        internal static string Key_Left {
+            get {
+                return ResourceManager.GetString("Key_Left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Right.
+        /// </summary>
+        internal static string Key_Right {
+            get {
+                return ResourceManager.GetString("Key_Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Shift.
+        /// </summary>
+        internal static string Key_ShiftKey {
+            get {
+                return ResourceManager.GetString("Key_ShiftKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Space.
+        /// </summary>
+        internal static string Key_Space {
+            get {
+                return ResourceManager.GetString("Key_Space", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Up.
+        /// </summary>
+        internal static string Key_Up {
+            get {
+                return ResourceManager.GetString("Key_Up", resourceCulture);
             }
         }
         

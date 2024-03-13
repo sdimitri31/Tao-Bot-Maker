@@ -583,12 +583,12 @@ namespace Tao_Bot_Maker
             //If no modifiers
             if (preparedModifiers == string.Empty)
             {
-                preparedString = PrepareForSendKeys(Utils.KeysToString(input));
+                preparedString = Utils.KeysToString(input);
             }
             else
             {
                 Enum.TryParse(keysSplited[0], out Keys key);
-                preparedString = PrepareForSendKeys(Utils.KeysToString(key));
+                preparedString = Utils.KeysToString(key);
 
                 preparedString = preparedModifiers + "(" + preparedString + ")";
             }

@@ -195,9 +195,15 @@ namespace Tao_Bot_Maker.View
 
             if (m.Msg == 0x0312)
             {
-                Keys pressedKey = (Keys)(int)m.LParam;
+                //Keys pressedKey = (Keys)(int)m.LParam;
 
-                if (pressedKey == hotkeyXY.GetKey())
+                Keys pressedKey = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                Keys pressedModifier = (Keys)Utils.Reverse3Bits(((int)m.LParam & 0xFFFF));
+
+                //Converting to same format as regular Keys
+                Keys pressedHotkey = (Keys)(((int)pressedModifier << 16) | (int)pressedKey);
+
+                if (pressedHotkey == hotkeyXY.GetKey())
                 {
                     switch ((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {
@@ -211,7 +217,7 @@ namespace Tao_Bot_Maker.View
                             break;
                     }
                 }
-                else if (pressedKey == hotkeyXY2.GetKey())
+                else if (pressedHotkey == hotkeyXY2.GetKey())
                 {
                     switch ((int)(listBox_Actions.SelectedItem as ComboboxItemActionType).ActionTypeId)
                     {
