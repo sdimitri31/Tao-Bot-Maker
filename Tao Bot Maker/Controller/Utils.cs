@@ -105,7 +105,7 @@ namespace Tao_Bot_Maker.Controller
 
             //Clean name when there is only a modifier
             formatedName = formatedName.ToString().Replace("ControlKey, Control", Properties.strings.label_Ctrl);
-            formatedName = formatedName.ToString().Replace("AltKey, Alt", Properties.strings.label_Alt);
+            formatedName = formatedName.ToString().Replace("Menu, Alt", Properties.strings.label_Alt);
             formatedName = formatedName.ToString().Replace("ShiftKey, Shift", Properties.strings.label_Shift);
 
             //Split key from modifiers

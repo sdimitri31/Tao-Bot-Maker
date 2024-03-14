@@ -182,9 +182,9 @@ namespace Tao_Bot_Maker.View
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            //Detects which keys are pressed
-            if (msg.Msg == Constants.WM_KEYDOWN)
-            {
+            ////Detects which keys are pressed
+            //if (msg.Msg == Constants.WM_KEYDOWN)
+            //{
                 //Saving input
                 switch (modifyingHotkey)
                 {
@@ -205,7 +205,7 @@ namespace Tao_Bot_Maker.View
                         return true;
                 }
 
-            }
+            //}
 
             return base.ProcessCmdKey(ref msg, keyData);
         }

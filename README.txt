@@ -1,5 +1,8 @@
 Changelog :
 
+Version 0.4.22.2 :
+- Fix : "Alt" key wasn't detected when creating an action "Key" or setting a hotkey
+
 Version 0.4.22.1 :
 - Fix : Hotkey not working properly
 - Fix : Action "Key" not sending Keys properly

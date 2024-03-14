@@ -59,7 +59,6 @@ namespace Tao_Bot_Maker.View
             if (m.Msg == Constants.WM_KEYUP && isDetection)
             {
                 isDetection = false;
-                button_Key.Text = Controller.Utils.GetFormatedKeysString(Key);
                 return true;
             }
 
@@ -69,10 +68,13 @@ namespace Tao_Bot_Maker.View
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //Detects which keys are pressed
-            if (msg.Msg == Constants.WM_KEYDOWN && isDetection)
+            //if (msg.Msg == Constants.WM_KEYDOWN && isDetection)
+            if (isDetection)
             {
                 //Saving input
                 Key = keyData;
+
+                button_Key.Text = Controller.Utils.GetFormatedKeysString(Key);
 
                 return true;
             }
