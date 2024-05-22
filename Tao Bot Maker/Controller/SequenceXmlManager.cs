@@ -14,7 +14,7 @@ namespace Tao_Bot_Maker
         public SequenceXmlManager(){
         }
 
-        public static void SaveSequence(string sequenceName, SequenceController sequenceController)
+        public static bool SaveSequence(string sequenceName, SequenceController sequenceController)
         {
             System.IO.Directory.CreateDirectory(Constants.SEQUENCES_FOLDER_NAME);
             string fileName = sequenceName + @".xml";
@@ -118,15 +118,15 @@ namespace Tao_Bot_Maker
 
             //Enregistre le document
             doc.Save(Constants.SEQUENCES_FOLDER_NAME + "\\" + fileName);
-
+            return true;
         }
 
         public static Sequence LoadSequence(string sequenceName)
         {
-            SequenceController newSequence = new SequenceController
-            {
-                SequenceName = sequenceName
-            };
+            if (string.IsNullOrEmpty(sequenceName))
+                return null;
+
+            Sequence newSequence = new Sequence(sequenceName, null, true);
 
             try
             {
@@ -172,7 +172,7 @@ namespace Tao_Bot_Maker
                             if(isTypeSupported)
                             {
                                 Action action = ActionController.GetActionFromXElement(actionType, xmlAction);
-                                newSequence.AddAction(action);
+                                newSequence.Actions.Add(action);
                             }
                             //Else try to load old types
                             else
@@ -212,7 +212,7 @@ namespace Tao_Bot_Maker
                                                 WaitTime = waitTime,
                                                 SequenceIfExpired = sequenceIfExpired
                                             };
-                                            newSequence.AddAction(actionPictureWait);                                        
+                                            newSequence.Actions.Add(actionPictureWait);                                        
                                         }
                                         break;
 
@@ -250,7 +250,7 @@ namespace Tao_Bot_Maker
                                                 IfFound = ifTrueSequence,
                                                 IfNotFound = ifFalseSequence
                                             };
-                                            newSequence.AddAction(actionIfPicture);
+                                            newSequence.Actions.Add(actionIfPicture);
 
                                         }
                                         break;
@@ -258,12 +258,12 @@ namespace Tao_Bot_Maker
                                     case (int)Action.DeprecatedActionType.Sequence:
                                         {
                                             Action action = ActionController.GetActionFromXElement(actionType, xmlAction);
-                                            newSequence.AddAction(action);
+                                            newSequence.Actions.Add(action);
                                         }
                                         break;
 
                                     default:
-                                        newSequence.AddAction(new Action("Type unknown"));
+                                        newSequence.Actions.Add(new Action("Type unknown"));
                                         break;
                                 }
                             }
@@ -276,7 +276,7 @@ namespace Tao_Bot_Maker
                 Log.Write(ex.ToString(), Log.ERROR);
                 return null;
             }
-            return newSequence.Sequence;
+            return newSequence;
         }
 
         public static List<string> SequencesList()

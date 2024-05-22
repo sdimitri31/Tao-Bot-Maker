@@ -6,21 +6,18 @@ namespace Tao_Bot_Maker
     {
         public string Name { get; set; }
 
-        /// <summary>
-        /// Contains all actions in this sequence
-        /// </summary>
         public List<Action> Actions { get; set; }
         
-        /// <summary>
-        /// Contains error messages when action is not added with valid values
-        /// </summary>
-        public List<string> Errors { get; set; }
+        public bool IsSaved { get; set; }
 
-        public Sequence() 
-        { 
-            this.Name = "";
-            this.Actions = new List<Action>();
-            this.Errors = new List<string>();
+        public Sequence(string name = "", List<Action> actions = null, bool isSaved = true)
+        {
+            this.Name = name;
+
+            if (actions != null) this.Actions = actions;
+            else this.Actions = new List<Action>();
+
+            this.IsSaved = isSaved;
         }
 
     }

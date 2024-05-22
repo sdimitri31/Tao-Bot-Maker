@@ -1,4 +1,9 @@
 Changelog :
+Version 0.4.24 :
+- Add : Better design of Sequences classes
+
+Version 0.4.23 :
+- Add : Only one instance can be executed at once
 
 Version 0.4.22.2 :
 - Fix : "Alt" key wasn't detected when creating an action "Key" or setting a hotkey
