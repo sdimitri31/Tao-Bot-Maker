@@ -461,9 +461,6 @@ namespace Tao_Bot_Maker
         //Close
         private void Tsm_File_Exit_Click(object sender, EventArgs e)
         {
-            // TO DO : 
-            // Check if Sequence is saved before closing
-
             this.Close();
         }
 

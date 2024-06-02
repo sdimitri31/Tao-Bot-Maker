@@ -1,4 +1,5 @@
 ﻿using BlueMystic;
+using System.Security.Policy;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
@@ -21,6 +22,16 @@ namespace Tao_Bot_Maker.View
                 return true;
             }
             return base.ProcessDialogKey(keyData);
+        }
+
+        private void linkLabelDarkMode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/BlueMystical/Dark-Mode-Forms");
+        }
+
+        private void linkLabelAboutWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/sdimitri31/Tao-Bot-Maker");
         }
     }
 }
