@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Model;
+using Tao_Bot_Maker.View;
 
 namespace Tao_Bot_Maker
 {
@@ -69,7 +70,7 @@ namespace Tao_Bot_Maker
                     // Start app
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new MainApp());
+                    Application.Run(new MainForm());
                 }
                 finally
                 {
