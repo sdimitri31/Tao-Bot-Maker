@@ -6,20 +6,59 @@ using System.Threading.Tasks;
 
 namespace Tao_Bot_Maker.Model
 {
-    public class WaitAction : BotAction
+    public class WaitAction : Action
     {
-        private int milliseconds;
+        public override string ActionType { get; set; }
+        public int MinimumWait { get; set; }
+        public int MaximumWait { get; set; }
+        public bool RandomizeWait { get; set; }
 
-        public WaitAction(int milliseconds)
+        public WaitAction(int minimumWait = 0, int maximumWait = 0, bool randomizeWait = false)
         {
-            this.milliseconds = milliseconds;
+            ActionType = ActionTypes.WaitAction.ToString();
+            MinimumWait = minimumWait;
+            MaximumWait = maximumWait;
+            RandomizeWait = randomizeWait;
         }
 
         public override async Task Execute()
         {
-            // Attente du nombre de millisecondes spécifié
-            await Task.Delay(milliseconds);
-            Console.WriteLine($"Wait action executed for {milliseconds} ms.");
+            int waitTime = MinimumWait;
+            if (RandomizeWait)
+            {
+                waitTime = new Random().Next(waitTime, MaximumWait);
+            }
+            Console.WriteLine($"Wait action will be executed for {waitTime} ms.");
+            await Task.Delay(waitTime);
+            Console.WriteLine($"Wait action done.");
+        }
+
+        public override string ToString()
+        {
+            if (RandomizeWait)
+            {
+                return $"Wait between {MinimumWait} and {MaximumWait} ms";
+            }
+            return $"Wait {MinimumWait} ms";
+        }
+
+        public override bool Validate(out string errorMessage)
+        {
+            if (MinimumWait < 0)
+            {
+                errorMessage = "Minimum wait time cannot be less than 0.";
+                return false;
+            }
+
+            if (RandomizeWait)
+                if (MaximumWait < MinimumWait)
+                {
+                    errorMessage = "Maximum wait time cannot be less than minimum wait time.";
+                    return false;
+                }
+
+            errorMessage = string.Empty;
+            return true;
         }
     }
 }

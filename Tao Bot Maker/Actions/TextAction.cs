@@ -1,26 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
-    public class TextAction : BotAction
+    public class TextAction : Action
     {
-        private string textToType;
+        public override string ActionType { get; set; }
+        public string TextToType { get; set; }
+        public string TypingSpeed { get; set; }
 
-        public TextAction(string textToType)
+        private readonly KeyboardSimulator keyboardSimulator;
+
+        public TextAction(string textToType = "", string typingSpeed = "Medium")
         {
-            this.textToType = textToType;
+            ActionType = ActionTypes.TextAction.ToString();
+            TextToType = textToType;
+            TypingSpeed = typingSpeed;
+            keyboardSimulator = new KeyboardSimulator();
         }
 
         public override async Task Execute()
         {
-            // Simulation de la saisie de texte
-            Console.WriteLine($"Typing text: {textToType}");
-            // Code pour simuler la frappe au clavier
-            await Task.Delay(100); // Exemple : attente de 100 ms
+            Console.WriteLine($"Typing text: {TextToType}");
+            await keyboardSimulator.TypeText(TextToType, TypingSpeed);
+        }
+
+        public override string ToString()
+        {
+            return $"Text: {TextToType} TypingSpeed: {TypingSpeed}";
+        }
+
+        public override bool Validate(out string errorMessage)
+        {
+            if (string.IsNullOrEmpty(TextToType))
+            {
+                errorMessage = "Text to type cannot be empty.";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(TypingSpeed))
+            {
+                errorMessage = "Typing speed cannot be empty.";
+                return false;
+            }
+
+            errorMessage = string.Empty;
+            return true;
         }
     }
 }

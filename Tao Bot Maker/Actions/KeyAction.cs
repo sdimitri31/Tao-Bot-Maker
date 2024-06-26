@@ -1,26 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
-    public class KeyAction : BotAction
+    public class KeyAction : Action
     {
-        private ConsoleKey keyToPress;
+        public override string ActionType { get; set; }
+        public Keys Key { get; set; }
 
-        public KeyAction(ConsoleKey keyToPress)
+        private readonly KeyboardSimulator keyboardSimulator;
+
+        public KeyAction(Keys keyToPress)
         {
-            this.keyToPress = keyToPress;
+            ActionType = ActionTypes.KeyAction.ToString();
+            Key = keyToPress;
+            keyboardSimulator = new KeyboardSimulator();
         }
 
         public override async Task Execute()
         {
-            // Simulation d'appui sur une touche
-            Console.WriteLine($"Pressing key: {keyToPress}");
-            // Code pour simuler la pression de la touche
-            await Task.Delay(100); // Exemple : attente de 100 ms
+            Console.WriteLine($"Pressing key: {Key}");
+            await keyboardSimulator.PressKey(Key);
         }
+
+        public override string ToString()
+        {
+            return $"Pressing key: {Key}";
+        }
+
+        public override bool Validate(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+            return true;
+        }
+
     }
 }
