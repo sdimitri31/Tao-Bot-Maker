@@ -7,5 +7,7 @@ namespace Tao_Bot_Maker.View
     {
         Action GetAction();
 
+        void SetAction(Action action);
+
     }
 }

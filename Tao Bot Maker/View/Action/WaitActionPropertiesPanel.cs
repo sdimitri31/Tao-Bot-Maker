@@ -30,5 +30,15 @@ namespace Tao_Bot_Maker.View
 ;
         }
 
+        public void SetAction(Action action)
+        {
+            if (action != null && action is WaitAction waitAction)
+            {
+                this.minimumWaitNumericUpDown.Value = waitAction.MinimumWait;
+                this.maximumWaitNumericUpDown.Value = waitAction.MaximumWait;
+                this.randomizeWaitCheckBox.Checked = waitAction.RandomizeWait;
+            }
+        }
+
     }
 }

@@ -32,5 +32,14 @@ namespace Tao_Bot_Maker.View
             });
         }
 
+        public void SetAction(Action action)
+        {
+            if (action != null && action is TextAction textAction)
+            {
+                this.textToTypeTextBox.Text = textAction.TextToType;
+                this.speedComboBox.SelectedItem = textAction.TypingSpeed;
+            }
+        }
+
     }
 }

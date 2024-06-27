@@ -2,17 +2,29 @@
 using System.Net.Http.Headers;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Model;
+using static Tao_Bot_Maker.Model.MouseAction;
 using Action = Tao_Bot_Maker.Model.Action;
 
 namespace Tao_Bot_Maker.View
 {
     public partial class MouseActionPropertiesPanel : UserControl, IActionPropertiesPanel
     {
-        public MouseActionPropertiesPanel()
+        private bool isFromImageAction;
+
+        public MouseActionPropertiesPanel(bool isFromImageAction = false)
         {
             InitializeComponent();
             InitializeMoveSpeed();
             leftClickRadioButton.Checked = true;
+            this.isFromImageAction = isFromImageAction;
+            ShowCoordsFromImage(isFromImageAction);
+        }
+
+        private void ShowCoordsFromImage(bool isFromImageAction)
+        {
+            useImageCoordsLabel.Visible = isFromImageAction;
+            startImageCoordCheckBox.Visible = isFromImageAction;
+            endImageCoordCheckBox.Visible = isFromImageAction;
         }
 
         /// <summary>
@@ -46,15 +58,39 @@ namespace Tao_Bot_Maker.View
                 dragAndDrop: dragAndDropCheckBox.Enabled ? dragAndDropCheckBox.Checked : false,
                 startX: (int)startXCoordinateNumericUpDown.Value,
                 startY: (int)startYCoordinateNumericUpDown.Value,
+                useImageCoordsAsStart: startImageCoordCheckBox.Visible ? startImageCoordCheckBox.Checked : false,
+                useImageCoordsAsEnd: endImageCoordCheckBox.Visible ? endImageCoordCheckBox.Checked : false,
                 useCurrentPosition: useCurrentPositionCheckBox.Enabled ? useCurrentPositionCheckBox.Checked : false,
                 endX: endXCoordinateNumericUpDown.Enabled ? (int?)endXCoordinateNumericUpDown.Value : null,
                 endY: endYCoordinateNumericUpDown.Enabled ? (int?)endYCoordinateNumericUpDown.Value : null,
                 moveSpeed: speedComboBox.SelectedItem != null ? speedComboBox.SelectedItem.ToString() : null,
-                scrollDuration: (int)scrollDurationNumericUpDown.Value,
+                scrollAmount: (int)scrollAmountNumericUpDown.Value,
                 clickDuration: (int)clickDurationNumericUpDown.Value
             );
 
             return mouseAction;
+        }
+
+        public void SetAction(Action action)
+        {
+            if (action != null && action is MouseAction mouseAction)
+            {
+                SetMouseActionType(mouseAction.ClickType);
+                doubleClickCheckBox.Checked = mouseAction.DoubleClick;
+                scrollCheckBox.Checked = mouseAction.Scroll;
+                dragAndDropCheckBox.Checked = mouseAction.DragAndDrop;
+                startXCoordinateNumericUpDown.Value = mouseAction.StartX;
+                startYCoordinateNumericUpDown.Value = mouseAction.StartY;
+                startImageCoordCheckBox.Checked = mouseAction.UseImageCoordsAsStart;
+                endImageCoordCheckBox.Checked = mouseAction.UseImageCoordsAsEnd;
+                useCurrentPositionCheckBox.Checked = mouseAction.UseCurrentPosition;
+                endXCoordinateNumericUpDown.Value = mouseAction.EndX ?? 0;
+                endYCoordinateNumericUpDown.Value = mouseAction.EndY ?? 0;
+                speedComboBox.SelectedItem = mouseAction.MoveSpeed;
+                scrollAmountNumericUpDown.Value = mouseAction.ScrollAmount;
+                clickDurationNumericUpDown.Value = mouseAction.ClickDuration;
+                UpdateControlStates();
+            }
         }
 
         private MouseAction.MouseActionType GetMouseActionType()
@@ -65,6 +101,25 @@ namespace Tao_Bot_Maker.View
             return MouseAction.MouseActionType.NoClick;
         }
 
+        private void SetMouseActionType(MouseActionType mouseActionType)
+        {
+            switch (mouseActionType)
+            {
+                case MouseActionType.LeftClick:
+                    leftClickRadioButton.Checked = true;
+                    break;
+                case MouseActionType.MiddleClick:
+                    middleClickRadioButton.Checked = true;
+                    break;
+                case MouseActionType.RightClick:
+                    rightClickRadioButton.Checked = true;
+                    break;
+                default:
+                    noneClickRadioButton.Checked = true;
+                    break;
+            }
+        }
+
         public void InitializeMoveSpeed()
         {
             this.speedComboBox.Items.AddRange(new object[] {
@@ -73,11 +128,6 @@ namespace Tao_Bot_Maker.View
                 "Fast"
             });
             this.speedComboBox.SelectedIndex = 0;
-        }
-
-        private void UseCurrentPositionCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateControlStates();
         }
 
         private void ClickRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -106,18 +156,24 @@ namespace Tao_Bot_Maker.View
             bool isDragAndDrop = dragAndDropCheckBox.Checked;
             bool isScroll = scrollCheckBox.Checked;
             bool isDoubleClick = doubleClickCheckBox.Checked;
+            bool isStartImageCoord = startImageCoordCheckBox.Checked;
+            bool isEndImageCoord = endImageCoordCheckBox.Checked;
 
-            startXCoordinateNumericUpDown.Enabled = !useCurrentPositionCheckBox.Checked;
-            startYCoordinateNumericUpDown.Enabled = !useCurrentPositionCheckBox.Checked;
+            startXCoordinateNumericUpDown.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
+            startYCoordinateNumericUpDown.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
+            startXCoordinateLabel.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
+            startYCoordinateLabel.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
 
-            endXCoordinateNumericUpDown.Enabled = isDragAndDrop;
-            endYCoordinateNumericUpDown.Enabled = isDragAndDrop;
+            endXCoordinateNumericUpDown.Enabled = isDragAndDrop && !isEndImageCoord;
+            endYCoordinateNumericUpDown.Enabled = isDragAndDrop && !isEndImageCoord;
             endCoordinateLabel.Enabled = isDragAndDrop;
-            endXCoordinateLabel.Enabled = isDragAndDrop;
-            endYCoordinateLabel.Enabled = isDragAndDrop;
+            endXCoordinateLabel.Enabled = isDragAndDrop && !isEndImageCoord;
+            endYCoordinateLabel.Enabled = isDragAndDrop && !isEndImageCoord;
+
+            endImageCoordCheckBox.Enabled = isDragAndDrop;
 
             scrollAmountLabel.Enabled = isScroll;
-            scrollDurationNumericUpDown.Enabled = isScroll;
+            scrollAmountNumericUpDown.Enabled = isScroll;
 
             clickDurationLabel.Enabled = isClickSelected || isNoClickSelected;
             clickDurationNumericUpDown.Enabled = isClickSelected || isNoClickSelected;
@@ -131,6 +187,7 @@ namespace Tao_Bot_Maker.View
                 rightClickRadioButton.Enabled = false;
                 doubleClickCheckBox.Checked = false;
                 dragAndDropCheckBox.Checked = false;
+                endImageCoordCheckBox.Checked = false;
             }
             else
             {
@@ -152,6 +209,11 @@ namespace Tao_Bot_Maker.View
             {
                 leftClickRadioButton.Checked = true;
             }
+
+            if(!isDragAndDrop)
+            {
+                endImageCoordCheckBox.Checked = false;
+            }
         }
 
         private void DeselectOtherRadioButtons(RadioButton selectedRadioButton)
@@ -172,18 +234,32 @@ namespace Tao_Bot_Maker.View
             {
                 scrollCheckBox.Checked = false;
                 dragAndDropCheckBox.Checked = false;
+                endImageCoordCheckBox.Checked = false;
             }
             else if (selectedCheckBox == scrollCheckBox && selectedCheckBox.Checked)
             {
                 doubleClickCheckBox.Checked = false;
                 dragAndDropCheckBox.Checked = false;
+                endImageCoordCheckBox.Checked = false;
             }
             else if (selectedCheckBox == dragAndDropCheckBox && selectedCheckBox.Checked)
             {
                 doubleClickCheckBox.Checked = false;
                 scrollCheckBox.Checked = false;
             }
+            else if (selectedCheckBox == startImageCoordCheckBox && selectedCheckBox.Checked)
+            {
+                endImageCoordCheckBox.Checked = false;
+                useCurrentPositionCheckBox.Checked = false;
+            }
+            else if (selectedCheckBox == endImageCoordCheckBox && selectedCheckBox.Checked)
+            {
+                startImageCoordCheckBox.Checked = false;
+            }
+            else if (selectedCheckBox == useCurrentPositionCheckBox && selectedCheckBox.Checked)
+            {
+                startImageCoordCheckBox.Checked = false;
+            }
         }
-
     }
 }

@@ -12,13 +12,15 @@ namespace Tao_Bot_Maker.View
 {
     public partial class ImageActionPropertiesPanel : UserControl, IActionPropertiesPanel
     {
+        private ActionForm addActionForm;
         private Action actionIfFound;
         private Action actionNotFound;
         private string selectedImageName;
 
-        public ImageActionPropertiesPanel()
+        public ImageActionPropertiesPanel(ActionForm addActionForm)
         {
             InitializeComponent();
+            this.addActionForm = addActionForm;
         }
 
         public Action GetAction()
@@ -30,6 +32,7 @@ namespace Tao_Bot_Maker.View
                 endX: (int)this.endXCoordinateNumericUpDown.Value,
                 endY: (int)this.endYCoordinateNumericUpDown.Value,
                 threshold: (int)this.thresholdNumericUpDown.Value,
+                expiration: (int)this.expirationNumericUpDown.Value,
                 actionIfFound: this.actionIfFound,
                 actionIfNotFound: this.actionNotFound
             );
@@ -37,10 +40,35 @@ namespace Tao_Bot_Maker.View
             return imageAction;
         }
 
+        public void SetAction(Action action)
+        {
+            if (action != null && action is ImageAction imageAction)
+            {
+                SetImageName(imageAction.ImageName);
+                SetPictureFromName(imageAction.ImageName);
+                this.startXCoordinateNumericUpDown.Value = imageAction.StartX;
+                this.startYCoordinateNumericUpDown.Value = imageAction.StartY;
+                this.endXCoordinateNumericUpDown.Value = imageAction.EndX;
+                this.endYCoordinateNumericUpDown.Value = imageAction.EndY;
+                this.thresholdNumericUpDown.Value = imageAction.Threshold;
+                this.expirationNumericUpDown.Value = imageAction.Expiration;
+                this.actionIfFound = imageAction.ActionIfFound;
+                actionIfFoundButton.Text = actionIfFound.Type.ToString();
+                this.actionNotFound = imageAction.ActionIfNotFound;
+                actionIfNotFoundButton.Text = actionNotFound.Type.ToString();
+            }
+        }
+
         private void SetImageName(string imageName)
         {
             this.selectedImageNameLabel.Text = imageName;
             selectedImageName = imageName;
+        }
+
+        private void SetPictureFromName(string imageName)
+        {
+            string imagePath = Path.Combine(ImageAction.imagesFolderPath, imageName);
+            selectedImagePictureBox.Image = Image.FromFile(imagePath);
         }
 
         private void SelectImageButton_Click(object sender, EventArgs e)
@@ -59,10 +87,8 @@ namespace Tao_Bot_Maker.View
 
                     if (!string.IsNullOrEmpty(importedImageName))
                     {
-                        // Display the imported image in the PictureBox
-                        string importedImagePath = Path.Combine(ImageAction.imagesFolderPath, importedImageName);
-                        selectedImagePictureBox.Image = Image.FromFile(importedImagePath);
                         SetImageName(importedImageName);
+                        SetPictureFromName(importedImageName);
                     }
                     else
                     {
@@ -229,28 +255,33 @@ namespace Tao_Bot_Maker.View
             endYCoordinateNumericUpDown.Value = y;
         }
 
+
         private void ActionIfFoundButton_Click(object sender, EventArgs e)
         {
-            using (var addActionForm = new AddActionForm())
+            addActionForm.UnregisterHotkeys();
+            using (var addActionForm = new ActionForm(true, actionIfFound))
             {
                 if (addActionForm.ShowDialog() == DialogResult.OK)
                 {
                     actionIfFound = addActionForm.Action;
-                    actionIfFoundButton.Text = actionIfFound.ActionType.ToString();
+                    actionIfFoundButton.Text = actionIfFound.Type.ToString();
                 }
             }
+            addActionForm.RegisterHotkeys();
         }
 
         private void ActionIfNotFoundButton_Click(object sender, EventArgs e)
         {
-            using (var addActionForm = new AddActionForm())
+            addActionForm.UnregisterHotkeys();
+            using (var addActionForm = new ActionForm(false, actionNotFound))
             {
                 if (addActionForm.ShowDialog() == DialogResult.OK)
                 {
                     actionNotFound = addActionForm.Action;
-                    actionIfNotFoundButton.Text = actionNotFound.ActionType.ToString();
+                    actionIfNotFoundButton.Text = actionNotFound.Type.ToString();
                 }
             }
+            addActionForm.RegisterHotkeys();
         }
     }
 }

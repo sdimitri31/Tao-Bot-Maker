@@ -1,6 +1,6 @@
 ﻿namespace Tao_Bot_Maker.View
 {
-    partial class AddActionForm
+    partial class ActionForm
     {
         /// <summary>
         /// Required designer variable.

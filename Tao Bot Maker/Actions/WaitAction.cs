@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
     public class WaitAction : Action
     {
-        public override string ActionType { get; set; }
+        public override ActionType Type { get; set; }
         public int MinimumWait { get; set; }
         public int MaximumWait { get; set; }
         public bool RandomizeWait { get; set; }
 
         public WaitAction(int minimumWait = 0, int maximumWait = 0, bool randomizeWait = false)
         {
-            ActionType = ActionTypes.WaitAction.ToString();
+            Type = ActionType.WaitAction;
             MinimumWait = minimumWait;
             MaximumWait = maximumWait;
             RandomizeWait = randomizeWait;
@@ -28,9 +29,14 @@ namespace Tao_Bot_Maker.Model
             {
                 waitTime = new Random().Next(waitTime, MaximumWait);
             }
-            Console.WriteLine($"Wait action will be executed for {waitTime} ms.");
+            Logger.Log($"Waiting for {waitTime} ms.");
             await Task.Delay(waitTime);
-            Console.WriteLine($"Wait action done.");
+            Logger.Log("Wait action completed.");
+        }
+
+        public override async Task Execute(int x, int y)
+        {
+            await Execute();
         }
 
         public override string ToString()
@@ -59,6 +65,18 @@ namespace Tao_Bot_Maker.Model
 
             errorMessage = string.Empty;
             return true;
+        }
+
+        public override void Update(Action newAction)
+        {
+            base.Update(newAction);
+            var newWaitAction = newAction as WaitAction;
+            if (newWaitAction != null)
+            {
+                this.MinimumWait = newWaitAction.MinimumWait;
+                this.MaximumWait = newWaitAction.MaximumWait;
+                this.RandomizeWait = newWaitAction.RandomizeWait;
+            }
         }
     }
 }

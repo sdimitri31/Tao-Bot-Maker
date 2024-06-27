@@ -16,13 +16,15 @@ namespace Tao_Bot_Maker.Model
             MiddleClick,
             NoClick
         }
-        public override string ActionType { get; set; }
+        public override ActionType Type { get; set; }
         public MouseActionType ClickType { get; set; }
         public bool DoubleClick { get; set; }
         public bool Scroll { get; set; }
         public bool DragAndDrop { get; set; }
         public int StartX { get; set; }
         public int StartY { get; set; }
+        public bool UseImageCoordsAsStart { get; set; }
+        public bool UseImageCoordsAsEnd { get; set; }
         public bool UseCurrentPosition { get; set; }
         public int? EndX { get; set; }
         public int? EndY { get; set; }
@@ -39,37 +41,63 @@ namespace Tao_Bot_Maker.Model
             bool dragAndDrop = false,
             int startX = 0,
             int startY = 0,
+            bool useImageCoordsAsStart = false,
+            bool useImageCoordsAsEnd = false,
             bool useCurrentPosition = false,
             int? endX = null,
             int? endY = null,
             string moveSpeed = "Medium",
-            int scrollDuration = 0,
+            int scrollAmount = 0,
             int clickDuration = 0)
         {
-            ActionType = ActionTypes.MouseAction.ToString();
+            Type = ActionType.MouseAction;
             ClickType = clickType;
             DoubleClick = doubleClick;
             Scroll = scroll;
             DragAndDrop = dragAndDrop;
             StartX = startX;
             StartY = startY;
+            UseImageCoordsAsStart = useImageCoordsAsStart;
+            UseImageCoordsAsEnd = useImageCoordsAsEnd;
             UseCurrentPosition = useCurrentPosition;
             EndX = endX;
             EndY = endY;
             MoveSpeed = moveSpeed;
-            ScrollAmount = scrollDuration;
+            ScrollAmount = scrollAmount;
             ClickDuration = clickDuration;
             mouseSimulator = new MouseSimulator();
         }
-
         public override async Task Execute()
         {
-            int startX = UseCurrentPosition ? Cursor.Position.X : StartX;
-            int startY = UseCurrentPosition ? Cursor.Position.Y : StartY;
+            await Execute(0, 0);
+        }
+
+        public override async Task Execute(int x, int y)
+        {
+            int startX, startY;
+            if (UseImageCoordsAsStart)
+            {
+                startX = x;
+                startY = y;
+            }
+            else
+            {
+                startX = UseCurrentPosition ? Cursor.Position.X : StartX;
+                startY = UseCurrentPosition ? Cursor.Position.Y : StartY;
+            }
 
             // Set the end coordinates for drag and drop or move actions
-            int? endX = EndX.HasValue ? EndX.Value : (int?)null;
-            int? endY = EndY.HasValue ? EndY.Value : (int?)null;
+            int? endX, endY;
+            if (UseImageCoordsAsEnd)
+            {
+                endX = x;
+                endY = y;
+            }
+            else
+            {
+                endX = EndX.HasValue ? EndX.Value : (int?)null;
+                endY = EndY.HasValue ? EndY.Value : (int?)null;
+            }
 
             // Determine the move speed
             int moveSpeed;
@@ -89,23 +117,27 @@ namespace Tao_Bot_Maker.Model
                     break;
             }
 
+            // Move to start position if not using current position
+            if (!UseCurrentPosition)
+            {
+                Logger.Log($"Moving cursor to ({startX}, {startY})");
+                await mouseSimulator.Move(startX, startY, moveSpeed);
+            }
+
             // Perform the mouse action
             if (Scroll)
             {
+                Logger.Log($"Scrolling by {ScrollAmount}");
                 await mouseSimulator.Scroll(ScrollAmount, ClickDuration);
             }
             else if (DragAndDrop && endX.HasValue && endY.HasValue)
             {
+                Logger.Log($"Drag and drop from ({startX}, {startY}) to ({endX.Value}, {endY.Value})");
                 await mouseSimulator.DragAndDrop(startX, startY, endX.Value, endY.Value, moveSpeed, ClickDuration);
             }
             else if (ClickType != MouseActionType.NoClick)
             {
-                // Move to start position if not using current position
-                if (!UseCurrentPosition)
-                {
-                    await mouseSimulator.Move(startX, startY, moveSpeed);
-                }
-
+                Logger.Log($"Performing {ClickType} click");
                 // Perform the click
                 if (DoubleClick)
                 {
@@ -142,18 +174,12 @@ namespace Tao_Bot_Maker.Model
                     }
                 }
             }
-            else if (endX.HasValue && endY.HasValue)
-            {
-                // Move without clicking
-                await mouseSimulator.Move(endX.Value, endY.Value, moveSpeed);
-            }
         }
-
 
         public override string ToString()
         {
             // Affiche les informations de l'action de la souris
-            return $"Mouse action: {ActionType} ({StartX}, {StartY}) -> ({EndX}, {EndY})";
+            return $"Mouse action: {ClickType} ({StartX}, {StartY}) -> ({EndX}, {EndY})";
         }
 
         public override bool Validate(out string errorMessage)
@@ -183,6 +209,29 @@ namespace Tao_Bot_Maker.Model
 
             errorMessage = string.Empty;
             return true;
+        }
+
+        public override void Update(Action newAction)
+        {
+            base.Update(newAction);
+            var newMouseAction = newAction as MouseAction;
+            if (newMouseAction != null)
+            {
+                this.ClickType = newMouseAction.ClickType;
+                this.StartX = newMouseAction.StartX;
+                this.StartY = newMouseAction.StartY;
+                this.EndX = newMouseAction.EndX;
+                this.EndY = newMouseAction.EndY;
+                this.DragAndDrop = newMouseAction.DragAndDrop;
+                this.DoubleClick = newMouseAction.DoubleClick;
+                this.Scroll = newMouseAction.Scroll;
+                this.ScrollAmount = newMouseAction.ScrollAmount;
+                this.ClickDuration = newMouseAction.ClickDuration;
+                this.UseCurrentPosition = newMouseAction.UseCurrentPosition;
+                this.UseImageCoordsAsStart = newMouseAction.UseImageCoordsAsStart;
+                this.UseImageCoordsAsEnd = newMouseAction.UseImageCoordsAsEnd;
+                this.MoveSpeed = newMouseAction.MoveSpeed;
+            }
         }
     }
 }

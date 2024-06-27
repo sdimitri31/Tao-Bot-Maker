@@ -25,5 +25,11 @@ namespace Tao_Bot_Maker.Model
         {
             Actions.Clear();
         }
+
+        internal void UpdateAction(Action oldAction, Action newAction)
+        {
+            int index = Actions.IndexOf(oldAction);
+            Actions[index] = newAction;
+        }
     }
 }

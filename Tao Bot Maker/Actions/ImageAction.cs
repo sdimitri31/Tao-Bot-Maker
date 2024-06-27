@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Helpers;
 
@@ -7,7 +9,7 @@ namespace Tao_Bot_Maker.Model
     public class ImageAction : Action
     {
         public const string imagesFolderPath = "Images";
-        public override string ActionType { get; set; }
+        public override ActionType Type { get; set; }
         public string ImageName { get; set; }
         public int StartX { get; set; }
         public int StartY { get; set; }
@@ -30,7 +32,7 @@ namespace Tao_Bot_Maker.Model
             Action actionIfNotFound = null
             )
         {
-            ActionType = ActionTypes.ImageAction.ToString();
+            Type = ActionType.ImageAction;
             ImageName = imageFilePath;
             StartX = startX;
             StartY = startY;
@@ -48,27 +50,66 @@ namespace Tao_Bot_Maker.Model
             string imagePath = Path.Combine(imagesFolderPath, ImageName);
             if (!File.Exists(imagePath))
             {
+                Logger.Log($"Error - Image not found at path: {imagePath}.", TraceEventType.Error);
                 throw new FileNotFoundException($"Image not found at path: {imagePath}");
             }
 
-            // Search for the image on the screen
-            var result = ImageSearchHelper.FindImageCenter(imagePath, Threshold, StartX, StartY, EndX, EndY);
+            // Create a CancellationTokenSource for the expiration
+            using (var cts = new CancellationTokenSource(Expiration))
+            {
+                var stopwatch = Stopwatch.StartNew();
+                var timer = new System.Timers.Timer(1000); // Timer to update logs every second
 
-            // If the image is found
-            if (result != null)
-            {
-                if (ActionIfFound != null)
+                timer.Elapsed += (sender, args) =>
                 {
-                    await ActionIfFound.Execute();
+                    Logger.Log($"Searching for image... {stopwatch.ElapsedMilliseconds} ms elapsed.", TraceEventType.Information);
+                };
+                timer.Start();
+
+                try
+                {
+                    // Search for the image on the screen
+                    var result = await Task.Run(() => ImageSearchHelper.FindImageCenter(imagePath, Threshold, StartX, StartY, EndX, EndY, cts.Token), cts.Token);
+
+                    stopwatch.Stop();
+                    timer.Stop();
+                    timer.Dispose();
+
+                    // If the image is found
+                    if (result != null)
+                    {
+                        Logger.Log($"Image found at coordinates: ({result[0]}, {result[1]}) after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Information);
+                        if (ActionIfFound != null)
+                        {
+                            await ActionIfFound.Execute(result[0], result[1]); // Pass the found coordinates
+                        }
+                    }
+                    else // If the image is not found
+                    {
+                        Logger.Log($"Image not found after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
+                        if (ActionIfNotFound != null)
+                        {
+                            await ActionIfNotFound.Execute();
+                        }
+                    }
+                }
+                catch (TaskCanceledException)
+                {
+                    stopwatch.Stop();
+                    timer.Stop();
+                    timer.Dispose();
+                    Logger.Log($"Image search timed out after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
+                    if (ActionIfNotFound != null)
+                    {
+                        await ActionIfNotFound.Execute();
+                    }
                 }
             }
-            else // If the image is not found
-            {
-                if (ActionIfNotFound != null)
-                {
-                    await ActionIfNotFound.Execute();
-                }
-            }
+        }
+
+        public override async Task Execute(int x, int y)
+        {
+            await Execute();
         }
 
         public override string ToString()
@@ -88,19 +129,6 @@ namespace Tao_Bot_Maker.Model
                 return false;
             }
 
-            // Validate coordinates
-            if (StartX < 0 || StartY < 0 || EndX < 0 || EndY < 0)
-            {
-                errorMessage = "Coordinates must be non-negative.";
-                return false;
-            }
-
-            if (StartX > EndX || StartY > EndY)
-            {
-                errorMessage = "Start coordinates must be less than end coordinates.";
-                return false;
-            }
-
             // Validate threshold
             if (Threshold < 0 || Threshold > 255)
             {
@@ -109,6 +137,24 @@ namespace Tao_Bot_Maker.Model
             }
 
             return true;
+        }
+
+        public override void Update(Action newAction)
+        {
+            base.Update(newAction);
+            var newImageAction = newAction as ImageAction;
+            if (newImageAction != null)
+            {
+                this.ImageName = newImageAction.ImageName;
+                this.StartX = newImageAction.StartX;
+                this.StartY = newImageAction.StartY;
+                this.EndX = newImageAction.EndX;
+                this.EndY = newImageAction.EndY;
+                this.Threshold = newImageAction.Threshold;
+                this.Expiration = newImageAction.Expiration;
+                this.ActionIfFound = newImageAction.ActionIfFound;
+                this.ActionIfNotFound = newImageAction.ActionIfNotFound;
+            }
         }
     }
 }

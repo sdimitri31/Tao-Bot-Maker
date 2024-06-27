@@ -2,32 +2,39 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
+using static System.Windows.Forms.AxHost;
 
 namespace Tao_Bot_Maker.Model
 {
     public class KeyAction : Action
     {
-        public override string ActionType { get; set; }
+        public override ActionType Type { get; set; }
         public Keys Key { get; set; }
 
         private readonly KeyboardSimulator keyboardSimulator;
 
-        public KeyAction(Keys keyToPress)
+        public KeyAction(Keys key = Keys.None)
         {
-            ActionType = ActionTypes.KeyAction.ToString();
-            Key = keyToPress;
+            Type = ActionType.KeyAction;
+            Key = key;
             keyboardSimulator = new KeyboardSimulator();
         }
 
         public override async Task Execute()
         {
-            Console.WriteLine($"Pressing key: {Key}");
+            string keyName = KeyboardSimulator.GetFormatedKeysString(Key);
+            Logger.Log($"Pressing key: {keyName}");
             await keyboardSimulator.PressKey(Key);
+        }
+
+        public override async Task Execute(int x, int y)
+        {
+            await Execute();
         }
 
         public override string ToString()
         {
-            return $"Pressing key: {Key}";
+            return $"Action key: {KeyboardSimulator.GetFormatedKeysString(Key)}";
         }
 
         public override bool Validate(out string errorMessage)
@@ -35,6 +42,14 @@ namespace Tao_Bot_Maker.Model
             errorMessage = string.Empty;
             return true;
         }
-
+        public override void Update(Action newAction)
+        {
+            base.Update(newAction);
+            var newKeyAction = newAction as KeyAction;
+            if (newKeyAction != null)
+            {
+                this.Key = newKeyAction.Key;
+            }
+        }
     }
 }

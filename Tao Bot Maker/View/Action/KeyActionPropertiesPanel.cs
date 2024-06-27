@@ -9,20 +9,31 @@ namespace Tao_Bot_Maker.View
 {
     public partial class KeyActionPropertiesPanel : UserControl, IActionPropertiesPanel
     {
+        private ActionForm addActionForm;
         private bool isDetection;
 
         public Keys Key { get; set; }
 
-        public KeyActionPropertiesPanel()
+        public KeyActionPropertiesPanel(ActionForm addActionForm)
         {
             InitializeComponent();
+            this.addActionForm = addActionForm;
         }
 
         public Action GetAction()
         {
-            KeyAction sequenceAction = new KeyAction(keyToPress: Key);
+            KeyAction keyAction = new KeyAction(key: Key);
 
-            return sequenceAction;
+            return keyAction;
+        }
+
+        public void SetAction(Action action)
+        {
+            if(action != null && action is KeyAction keyAction)
+            {
+                Key = keyAction.Key;
+                keyButton.Text = KeyboardSimulator.GetFormatedKeysString(Key);
+            }
         }
 
         private void KeyButton_Click(object sender, EventArgs e)
@@ -37,6 +48,7 @@ namespace Tao_Bot_Maker.View
             }
             else
             {
+                addActionForm.UnregisterHotkeys();
                 isDetection = true;
                 keyButton.Text = Properties.strings.button_Key_WaitForInput;
             }
@@ -47,6 +59,7 @@ namespace Tao_Bot_Maker.View
             //Stops detection when a key is released
             if (m.Msg == KeyboardSimulator.WM_KEYUP && isDetection)
             {
+                addActionForm.RegisterHotkeys();
                 isDetection = false;
                 return true;
             }

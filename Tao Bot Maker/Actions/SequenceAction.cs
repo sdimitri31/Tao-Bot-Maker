@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
     public class SequenceAction : Action
     {
-        public override string ActionType { get; set; }
+        public override ActionType Type { get; set; }
         public string SequenceName { get; set; }
         public int RepeatCount { get; set; }
         private Sequence sequence;
 
         public SequenceAction(string sequenceName = "", int repeatCount = 1)
         {
-            ActionType = ActionTypes.SequenceAction.ToString();
+            Type = ActionType.SequenceAction;
             SequenceName = sequenceName;
             RepeatCount = repeatCount;
 
@@ -26,14 +27,21 @@ namespace Tao_Bot_Maker.Model
 
         public override async Task Execute()
         {
+            Logger.Log($"Repeating sequence: {SequenceName} {RepeatCount} times");
             // Exécute chaque action dans la séquence le nombre de fois spécifié
             for (int i = 0; i < RepeatCount; i++)
             {
+                Logger.Log($"Loop {i + 1} of {RepeatCount}");
                 foreach (var action in sequence.Actions)
                 {
                     await action.Execute();
                 }
             }
+            Logger.Log($"Repeating sequence completed.");
+        }
+        public override async Task Execute(int x, int y)
+        {
+            await Execute();
         }
 
         public override string ToString()
@@ -58,6 +66,17 @@ namespace Tao_Bot_Maker.Model
 
             errorMessage = string.Empty;
             return true;
+        }
+
+        public override void Update(Action newAction)
+        {
+            base.Update(newAction);
+            var newSequenceAction = newAction as SequenceAction;
+            if (newSequenceAction != null)
+            {
+                this.SequenceName = newSequenceAction.SequenceName;
+                this.RepeatCount = newSequenceAction.RepeatCount;
+            }
         }
     }
 }

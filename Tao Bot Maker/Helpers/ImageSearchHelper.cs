@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Drawing;
 
 namespace Tao_Bot_Maker.Helpers
 {
@@ -83,6 +86,36 @@ namespace Tao_Bot_Maker.Helpers
             int centerY = y + (imageHeight / 2);
 
             return new int[] { centerX, centerY };
+        }
+
+        public static async Task<int[]> FindImageCenter(string path, int threshold, int x1, int y1, int x2, int y2, CancellationToken cancellationToken)
+        {
+            return await Task.Run(() =>
+            {
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    var result = FindImage(path, threshold, x1, y1, x2, y2);
+
+                    if (result != null)
+                    {
+                        // Assuming the result format is "1|x|y"
+                        int x = int.Parse(result[1]);
+                        int y = int.Parse(result[2]);
+
+                        // Get the image dimensions
+                        var image = Image.FromFile(path);
+                        int imageWidth = image.Width;
+                        int imageHeight = image.Height;
+
+                        // Calculate the center coordinates
+                        int centerX = x + (imageWidth / 2);
+                        int centerY = y + (imageHeight / 2);
+
+                        return new int[] { centerX, centerY };
+                    }
+                }
+                return null;
+            }, cancellationToken);
         }
     }
 }

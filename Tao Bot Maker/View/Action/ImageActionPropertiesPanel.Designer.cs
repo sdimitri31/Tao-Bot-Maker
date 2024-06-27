@@ -260,6 +260,11 @@
             this.thresholdNumericUpDown.Name = "thresholdNumericUpDown";
             this.thresholdNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.thresholdNumericUpDown.TabIndex = 12;
+            this.thresholdNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // expirationNumericUpDown
             // 
@@ -270,11 +275,6 @@
             0,
             0,
             0});
-            this.expirationNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
             this.expirationNumericUpDown.Name = "expirationNumericUpDown";
             this.expirationNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.expirationNumericUpDown.TabIndex = 13;

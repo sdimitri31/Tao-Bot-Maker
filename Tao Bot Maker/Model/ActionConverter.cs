@@ -22,21 +22,21 @@ namespace Tao_Bot_Maker.Model
                 case "MouseAction":
                     target = new MouseAction();
                     break;
-                //case "WaitAction":
-                //    target = new WaitAction();
-                //    break;
+                case "WaitAction":
+                    target = new WaitAction();
+                    break;
                 case "TextAction":
                     target = new TextAction();
                     break;
-                //case "KeyAction":
-                //    target = new KeyAction();
-                //    break;
-                //case "SequenceAction":
-                //    target = new SequenceAction();
-                //    break;
-                //case "ImageAction":
-                //    target = new ImageAction();
-                //    break;
+                case "KeyAction":
+                    target = new KeyAction();
+                    break;
+                case "SequenceAction":
+                    target = new SequenceAction();
+                    break;
+                case "ImageAction":
+                    target = new ImageAction();
+                    break;
             }  
 
             serializer.Populate(jsonObject.CreateReader(), target);

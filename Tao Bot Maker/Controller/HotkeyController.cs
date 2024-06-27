@@ -56,7 +56,7 @@ namespace Tao_Bot_Maker.Controller
             return RegisterHotKey(hWnd, id, modifiersConverted, (int)key);
         }
 
-        public bool Unregiser()
+        public bool Unregister()
         {
             return UnregisterHotKey(hWnd, id);
         }

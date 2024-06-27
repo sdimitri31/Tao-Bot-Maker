@@ -41,7 +41,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.françaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.francaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shortcutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -170,7 +170,7 @@
             // 
             this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.englishToolStripMenuItem,
-            this.françaisToolStripMenuItem});
+            this.francaisToolStripMenuItem});
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
             this.languageToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.languageToolStripMenuItem.Text = "Language";
@@ -182,12 +182,12 @@
             this.englishToolStripMenuItem.Text = "English";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.EnglishToolStripMenuItem_Click);
             // 
-            // françaisToolStripMenuItem
+            // francaisToolStripMenuItem
             // 
-            this.françaisToolStripMenuItem.Name = "françaisToolStripMenuItem";
-            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.françaisToolStripMenuItem.Text = "Français";
-            this.françaisToolStripMenuItem.Click += new System.EventHandler(this.FrenchToolStripMenuItem_Click);
+            this.francaisToolStripMenuItem.Name = "francaisToolStripMenuItem";
+            this.francaisToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.francaisToolStripMenuItem.Text = "Français";
+            this.francaisToolStripMenuItem.Click += new System.EventHandler(this.FrenchToolStripMenuItem_Click);
             // 
             // shortcutsToolStripMenuItem
             // 
@@ -237,7 +237,7 @@
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
             this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.settingsToolStripMenuItem1.Text = "Settings";
-            this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.SettingsToolStripMenuItem1_Click);
+            this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -291,6 +291,7 @@
             this.editActionToolStripButton.Name = "editActionToolStripButton";
             this.editActionToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.editActionToolStripButton.Text = "Edit";
+            this.editActionToolStripButton.Click += new System.EventHandler(this.EditActionToolStripButton_Click);
             // 
             // deleteActionToolStripButton
             // 
@@ -300,6 +301,7 @@
             this.deleteActionToolStripButton.Name = "deleteActionToolStripButton";
             this.deleteActionToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.deleteActionToolStripButton.Text = "Delete";
+            this.deleteActionToolStripButton.Click += new System.EventHandler(this.DeleteActionToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -324,6 +326,7 @@
             this.stopBotToolStripButton.Name = "stopBotToolStripButton";
             this.stopBotToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.stopBotToolStripButton.Text = "Stop bot";
+            this.stopBotToolStripButton.Click += new System.EventHandler(this.StopBotToolStripButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -345,6 +348,7 @@
             this.saveSequenceToolStripButton.Name = "saveSequenceToolStripButton";
             this.saveSequenceToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveSequenceToolStripButton.Text = "Save";
+            this.saveSequenceToolStripButton.Click += new System.EventHandler(this.SaveSequenceToolStripButton_Click);
             // 
             // deleteSequenceToolStripButton
             // 
@@ -354,6 +358,7 @@
             this.deleteSequenceToolStripButton.Name = "deleteSequenceToolStripButton";
             this.deleteSequenceToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.deleteSequenceToolStripButton.Text = "Delete sequence";
+            this.deleteSequenceToolStripButton.Click += new System.EventHandler(this.DeleteSequenceToolStripButton_Click);
             // 
             // splitContainer
             // 
@@ -377,6 +382,7 @@
             // 
             this.actionsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.actionsListBox.FormattingEnabled = true;
+            this.actionsListBox.IntegralHeight = false;
             this.actionsListBox.Location = new System.Drawing.Point(0, 0);
             this.actionsListBox.Name = "actionsListBox";
             this.actionsListBox.Size = new System.Drawing.Size(784, 248);
@@ -403,6 +409,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "Tao\'s Bot Maker";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -448,7 +455,7 @@
         private System.Windows.Forms.ListBox actionsListBox;
         private System.Windows.Forms.TextBox eventLogTextBox;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem françaisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem francaisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem darkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lightToolStripMenuItem;

@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Security.Policy;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime;
+using System.Threading;
 using System.Threading.Tasks;
+using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
+using Tao_Bot_Maker.Properties;
+using Action = Tao_Bot_Maker.Model.Action;
 
 namespace Tao_Bot_Maker.Controller
 {
@@ -11,11 +16,28 @@ namespace Tao_Bot_Maker.Controller
         private Sequence currentSequence;
         private string currentSequenceName;
 
+        private SettingsController settingsController;
+
         public MainFormController()
         {
             sequenceController = new SequenceController();
             currentSequence = new Sequence();
             currentSequenceName = null;
+            settingsController = new SettingsController();
+        }
+
+        public void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
+        {
+            settingsController.OpenSettingsForm(settingsType);
+        }
+        public void SetSettingValue(string name, string value, SettingsType type)
+        {
+            settingsController.SetSettingValue(name, value, type);
+        }
+
+        public T GetSettingValue<T>(string name)
+        {
+            return settingsController.GetSettingValue<T>(name);
         }
 
         public List<string> GetAllSequenceNames()
@@ -23,18 +45,30 @@ namespace Tao_Bot_Maker.Controller
             return sequenceController.GetAllSequenceNames();
         }
 
-        public void RemoveSequence(string name)
+        public bool RemoveSequence()
         {
-            sequenceController.RemoveSequence(name);
+            return sequenceController.RemoveSequence(currentSequenceName);
         }
 
-        public void LoadSequence(string sequenceName)
+        public async Task LoadSequenceAsync(string sequenceName, CancellationToken token)
         {
-            currentSequence = sequenceController.GetSequence(sequenceName);
-            if (currentSequence != null)
+            // Exemple d'une méthode asynchrone qui prend en compte l'annulation
+            // Vous devez adapter cette méthode à votre logique de chargement
+
+            token.ThrowIfCancellationRequested();
+            await Task.Run(() =>
             {
-                currentSequenceName = sequenceName;
-            }
+                token.ThrowIfCancellationRequested(); // Vérifie si l'annulation est demandée avant de commencer l'opération
+                try
+                {
+                    currentSequence = sequenceController.GetSequence(sequenceName);
+                    currentSequenceName = currentSequence != null ? sequenceName : null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message); // Lève une nouvelle exception avec le message de l'exception capturée
+                }
+            }, token);
         }
 
         public Sequence GetCurrentSequence()
@@ -47,11 +81,27 @@ namespace Tao_Bot_Maker.Controller
             return currentSequenceName;
         }
 
-        public void AddActionToCurrentSequence(Action action)
+        public void AddAction()
         {
             if (currentSequence != null)
             {
-                sequenceController.AddActionToSequence(currentSequence, action);
+                sequenceController.AddActionToSequence(currentSequence);
+            }
+        }
+
+        public void UpdateAction(Action oldAction)
+        {
+            if (currentSequence != null)
+            {
+                sequenceController.UpdateActionInSequence(currentSequence, oldAction);
+            }
+        }
+
+        public void RemoveActionFromCurrentSequence(Action action)
+        {
+            if (currentSequence != null)
+            {
+                sequenceController.RemoveActionFromSequence(currentSequence, action);
             }
         }
 
@@ -63,14 +113,21 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
-        public void SaveAsCurrentSequence(string name)
+        public void SaveAsCurrentSequence()
         {
-            sequenceController.SaveSequence(currentSequence, name);
+            if (currentSequence != null)
+            {
+                currentSequenceName = sequenceController.SaveSequence(currentSequence, null);
+            }
         }
 
         public async Task ExecuteSequence(Sequence sequence)
         {
+            Logger.Log($"Sequence {currentSequenceName} started");
+
             await sequenceController.ExecuteSequence(sequence);
+
+            Logger.Log($"Sequence {currentSequenceName} ended");
         }
     }
 }

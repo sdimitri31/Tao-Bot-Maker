@@ -34,5 +34,14 @@ namespace Tao_Bot_Maker.View
             }
         }
 
+        public void SetAction(Action action)
+        {
+            if (action != null && action is SequenceAction sequenceAction)
+            {
+                sequenceComboBox.SelectedItem = sequenceAction.SequenceName;
+                repeatCountNumericUpDown.Value = sequenceAction.RepeatCount;
+            }
+        }
+
     }
 }
