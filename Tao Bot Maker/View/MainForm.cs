@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
@@ -39,7 +40,8 @@ namespace Tao_Bot_Maker.View
             // Mettre à jour la TextBox eventLogTextBox avec les messages de log
             if (eventLogTextBox.InvokeRequired)
             {
-                eventLogTextBox.Invoke((MethodInvoker)delegate {
+                eventLogTextBox.Invoke((MethodInvoker)delegate
+                {
                     eventLogTextBox.AppendText(message + Environment.NewLine);
                 });
             }
@@ -68,7 +70,8 @@ namespace Tao_Bot_Maker.View
             autoToolStripMenuItem.Checked = false;
             lightToolStripMenuItem.Checked = false;
             darkToolStripMenuItem.Checked = false;
-            switch (theme) {
+            switch (theme)
+            {
                 case "Auto":
                     autoToolStripMenuItem.Checked = true;
                     break;
@@ -83,7 +86,7 @@ namespace Tao_Bot_Maker.View
 
         private async void LoadSequence(string sequenceName)
         {
-            // Annuler toute opération en cours
+            // Cancel any ongoing task
             cancellationTokenSource.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
             var token = cancellationTokenSource.Token;
@@ -91,26 +94,32 @@ namespace Tao_Bot_Maker.View
             try
             {
                 await mainFormController.LoadSequenceAsync(sequenceName, token);
+
                 var loadedSequence = mainFormController.GetCurrentSequence();
-                if (loadedSequence != null)
+                if (loadedSequence == null)
                 {
-                    LoadActions();
+                    MessageBox.Show($"Error loading sequence : {mainFormController.GetCurrentSequenceName()}");
                 }
+
+                LoadActions();
             }
             catch (OperationCanceledException)
             {
-                // Chargement annulé, on peut ignorer cette exception
+                Console.WriteLine("Loading sequence was cancelled.");
             }
             catch (Exception ex)
             {
-                // Gérer d'autres exceptions si nécessaire
-                MessageBox.Show($"Erreur lors du chargement de la séquence : {ex.Message}");
+                MessageBox.Show($"Erreur : {ex.Message}");
             }
         }
 
         private void LoadActions()
         {
             actionsListBox.Items.Clear();
+
+            if(mainFormController.GetCurrentSequence() == null) 
+                return;
+
             foreach (var action in mainFormController.GetCurrentSequence().Actions)
             {
                 actionsListBox.Items.Add(action);
@@ -277,7 +286,7 @@ namespace Tao_Bot_Maker.View
 
         private void DeleteSequenceToolStripButton_Click(object sender, EventArgs e)
         {
-            if(mainFormController.RemoveSequence())
+            if (mainFormController.RemoveSequence(sequenceComboBox.SelectedItem.ToString()))
                 New();
         }
     }

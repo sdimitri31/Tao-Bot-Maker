@@ -59,7 +59,7 @@ namespace Tao_Bot_Maker.Model
                     });
                 } catch
                 {
-                    throw new Exception("Error loading sequence");
+                    throw new Exception("Corrupted sequence file.");
                 }
             }
             return null;

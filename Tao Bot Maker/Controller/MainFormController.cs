@@ -45,30 +45,47 @@ namespace Tao_Bot_Maker.Controller
             return sequenceController.GetAllSequenceNames();
         }
 
-        public bool RemoveSequence()
+        public bool RemoveSequence(string sequenceName)
         {
-            return sequenceController.RemoveSequence(currentSequenceName);
+            return sequenceController.RemoveSequence(sequenceName);
+        }
+
+        public void LoadSequence(string sequenceName)
+        {
+            try
+            {
+                currentSequence = sequenceController.GetSequence(sequenceName);
+                currentSequenceName = currentSequence != null ? sequenceName : null;
+            }
+            catch (Exception e)
+            {
+                currentSequence = null;
+                currentSequenceName = sequenceName;
+                Console.WriteLine($"Error loading sequence '{sequenceName}': {e.Message}");
+            }
         }
 
         public async Task LoadSequenceAsync(string sequenceName, CancellationToken token)
         {
-            // Exemple d'une méthode asynchrone qui prend en compte l'annulation
-            // Vous devez adapter cette méthode à votre logique de chargement
-
-            token.ThrowIfCancellationRequested();
-            await Task.Run(() =>
+            try
             {
-                token.ThrowIfCancellationRequested(); // Vérifie si l'annulation est demandée avant de commencer l'opération
-                try
+                token.ThrowIfCancellationRequested();
+                await Task.Run(() =>
                 {
-                    currentSequence = sequenceController.GetSequence(sequenceName);
-                    currentSequenceName = currentSequence != null ? sequenceName : null;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message); // Lève une nouvelle exception avec le message de l'exception capturée
-                }
-            }, token);
+                    LoadSequence(sequenceName);
+                }, token);
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine($"LoadSequenceAsync OperationCanceledException");
+                throw new OperationCanceledException(e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"LoadSequenceAsync Error loading sequence '{sequenceName}': {e.Message}");
+                throw new Exception($"Error loading sequence '{sequenceName}': {e.Message}", e);
+            }
+
         }
 
         public Sequence GetCurrentSequence()
