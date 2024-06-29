@@ -141,7 +141,8 @@ namespace Tao_Bot_Maker.Model
                 stopwatch.Stop();
                 timer.Stop();
                 timer.Dispose();
-                Logger.Log($"Operation canceled: {e.Message}", TraceEventType.Warning);
+                throw new OperationCanceledException(e.Message, e);
+                //Logger.Log($"Operation canceled: {e.Message}", TraceEventType.Warning);
             }
 
         }

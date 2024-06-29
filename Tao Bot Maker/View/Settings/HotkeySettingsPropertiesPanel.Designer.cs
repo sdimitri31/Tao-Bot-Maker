@@ -37,6 +37,8 @@
             this.hotkeyStopSequenceButton = new System.Windows.Forms.Button();
             this.hotkeyEndCoordsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.hotkeyTogglePauseSequenceLabel = new System.Windows.Forms.Label();
+            this.hotkeyTogglePauseButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +46,7 @@
             // 
             this.hotkeyStartCoordsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.hotkeyStartCoordsLabel.AutoSize = true;
-            this.hotkeyStartCoordsLabel.Location = new System.Drawing.Point(2, 98);
+            this.hotkeyStartCoordsLabel.Location = new System.Drawing.Point(2, 128);
             this.hotkeyStartCoordsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.hotkeyStartCoordsLabel.Name = "hotkeyStartCoordsLabel";
             this.hotkeyStartCoordsLabel.Size = new System.Drawing.Size(96, 13);
@@ -79,7 +81,7 @@
             // hotkeyStartCoordsButton
             // 
             this.hotkeyStartCoordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.hotkeyStartCoordsButton.Location = new System.Drawing.Point(202, 93);
+            this.hotkeyStartCoordsButton.Location = new System.Drawing.Point(202, 123);
             this.hotkeyStartCoordsButton.Margin = new System.Windows.Forms.Padding(2);
             this.hotkeyStartCoordsButton.Name = "hotkeyStartCoordsButton";
             this.hotkeyStartCoordsButton.Size = new System.Drawing.Size(96, 23);
@@ -91,7 +93,7 @@
             // hotkeyEndCoordsButton
             // 
             this.hotkeyEndCoordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.hotkeyEndCoordsButton.Location = new System.Drawing.Point(202, 123);
+            this.hotkeyEndCoordsButton.Location = new System.Drawing.Point(202, 153);
             this.hotkeyEndCoordsButton.Margin = new System.Windows.Forms.Padding(2);
             this.hotkeyEndCoordsButton.Name = "hotkeyEndCoordsButton";
             this.hotkeyEndCoordsButton.Size = new System.Drawing.Size(96, 23);
@@ -104,7 +106,7 @@
             // 
             this.hotkeyStopSequenceLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.hotkeyStopSequenceLabel.AutoSize = true;
-            this.hotkeyStopSequenceLabel.Location = new System.Drawing.Point(2, 38);
+            this.hotkeyStopSequenceLabel.Location = new System.Drawing.Point(2, 68);
             this.hotkeyStopSequenceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.hotkeyStopSequenceLabel.Name = "hotkeyStopSequenceLabel";
             this.hotkeyStopSequenceLabel.Size = new System.Drawing.Size(96, 13);
@@ -115,7 +117,7 @@
             // hotkeyStopSequenceButton
             // 
             this.hotkeyStopSequenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.hotkeyStopSequenceButton.Location = new System.Drawing.Point(202, 33);
+            this.hotkeyStopSequenceButton.Location = new System.Drawing.Point(202, 63);
             this.hotkeyStopSequenceButton.Margin = new System.Windows.Forms.Padding(2);
             this.hotkeyStopSequenceButton.Name = "hotkeyStopSequenceButton";
             this.hotkeyStopSequenceButton.Size = new System.Drawing.Size(96, 23);
@@ -128,7 +130,7 @@
             // 
             this.hotkeyEndCoordsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.hotkeyEndCoordsLabel.AutoSize = true;
-            this.hotkeyEndCoordsLabel.Location = new System.Drawing.Point(2, 128);
+            this.hotkeyEndCoordsLabel.Location = new System.Drawing.Point(2, 158);
             this.hotkeyEndCoordsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.hotkeyEndCoordsLabel.Name = "hotkeyEndCoordsLabel";
             this.hotkeyEndCoordsLabel.Size = new System.Drawing.Size(96, 13);
@@ -145,13 +147,15 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.Controls.Add(this.hotkeyStartSequenceLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.hotkeyStopSequenceLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.hotkeyStartSequenceButton, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.hotkeyStopSequenceButton, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.hotkeyStartCoordsButton, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.hotkeyEndCoordsButton, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.hotkeyEndCoordsLabel, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.hotkeyStartCoordsLabel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyEndCoordsLabel, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyEndCoordsButton, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyStartCoordsLabel, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyStartCoordsButton, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyStopSequenceLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyStopSequenceButton, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyTogglePauseSequenceLabel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.hotkeyTogglePauseButton, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -169,6 +173,30 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(500, 300);
             this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // hotkeyTogglePauseSequenceLabel
+            // 
+            this.hotkeyTogglePauseSequenceLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.hotkeyTogglePauseSequenceLabel.AutoSize = true;
+            this.hotkeyTogglePauseSequenceLabel.Location = new System.Drawing.Point(2, 38);
+            this.hotkeyTogglePauseSequenceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.hotkeyTogglePauseSequenceLabel.Name = "hotkeyTogglePauseSequenceLabel";
+            this.hotkeyTogglePauseSequenceLabel.Size = new System.Drawing.Size(96, 13);
+            this.hotkeyTogglePauseSequenceLabel.TabIndex = 17;
+            this.hotkeyTogglePauseSequenceLabel.Text = "Toggle pause";
+            this.hotkeyTogglePauseSequenceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // hotkeyTogglePauseButton
+            // 
+            this.hotkeyTogglePauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.hotkeyTogglePauseButton.Location = new System.Drawing.Point(202, 33);
+            this.hotkeyTogglePauseButton.Margin = new System.Windows.Forms.Padding(2);
+            this.hotkeyTogglePauseButton.Name = "hotkeyTogglePauseButton";
+            this.hotkeyTogglePauseButton.Size = new System.Drawing.Size(96, 23);
+            this.hotkeyTogglePauseButton.TabIndex = 18;
+            this.hotkeyTogglePauseButton.Text = "F5";
+            this.hotkeyTogglePauseButton.UseVisualStyleBackColor = true;
+            this.hotkeyTogglePauseButton.Click += new System.EventHandler(this.HotkeyTogglePauseButton_Click);
             // 
             // HotkeySettingsPropertiesPanel
             // 
@@ -194,5 +222,7 @@
         private System.Windows.Forms.Button hotkeyStopSequenceButton;
         private System.Windows.Forms.Label hotkeyEndCoordsLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label hotkeyTogglePauseSequenceLabel;
+        private System.Windows.Forms.Button hotkeyTogglePauseButton;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 
@@ -11,6 +12,7 @@ namespace Tao_Bot_Maker.View.Setting
         private readonly Color textColor; //Default label color
         private string modifyingHotkey = ""; //Store current hotkey beeing assigned
         private Keys hotkeyStartSequence = Keys.None;
+        private Keys hotkeyPauseSequence = Keys.None;
         private Keys hotkeyStopSequence = Keys.None;
         private Keys hotkeyStartCoords = Keys.None;
         private Keys hotkeyEndCoords = Keys.None;
@@ -24,11 +26,13 @@ namespace Tao_Bot_Maker.View.Setting
         public void LoadSettings(Settings settings)
         {
             hotkeyStartSequence = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE);
+            hotkeyPauseSequence = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE);
             hotkeyStopSequence = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE);
             hotkeyStartCoords = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTCOORDS);
             hotkeyEndCoords = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYENDCOORDS);
 
             hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartSequence);
+            hotkeyTogglePauseButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
             hotkeyStopSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStopSequence);
             hotkeyStartCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartCoords);
             hotkeyEndCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyEndCoords);
@@ -37,6 +41,7 @@ namespace Tao_Bot_Maker.View.Setting
         public void SaveSettings(Settings settings)
         {
             settings.SetSettingValue(Settings.SETTING_HOTKEYSTARTSEQUENCE, (int)hotkeyStartSequence, SettingsType.Hotkeys);
+            settings.SetSettingValue(Settings.SETTING_HOTKEYPAUSESEQUENCE, (int)hotkeyPauseSequence, SettingsType.Hotkeys);
             settings.SetSettingValue(Settings.SETTING_HOTKEYSTOPSEQUENCE, (int)hotkeyStopSequence, SettingsType.Hotkeys);
             settings.SetSettingValue(Settings.SETTING_HOTKEYSTARTCOORDS, (int)hotkeyStartCoords, SettingsType.Hotkeys);
             settings.SetSettingValue(Settings.SETTING_HOTKEYENDCOORDS, (int)hotkeyEndCoords, SettingsType.Hotkeys);
@@ -51,50 +56,40 @@ namespace Tao_Bot_Maker.View.Setting
         {
             bool isDuplicate = false;
 
+            // Reset all label colors
             hotkeyStartSequenceLabel.ForeColor = textColor;
+            hotkeyTogglePauseSequenceLabel.ForeColor = textColor;
             hotkeyStopSequenceLabel.ForeColor = textColor;
             hotkeyStartCoordsLabel.ForeColor = textColor;
             hotkeyEndCoordsLabel.ForeColor = textColor;
 
-            if (hotkeyStartSequence == hotkeyStopSequence)
+            // Define hotkeys and corresponding labels
+            var hotkeys = new (Keys Key, Label Label)[]
             {
-                hotkeyStartSequenceLabel.ForeColor = Color.Red;
-                hotkeyStopSequenceLabel.ForeColor = Color.Red;
-                isDuplicate = true;
-            }
-            if (hotkeyStartSequence == hotkeyStartCoords)
+                (hotkeyStartSequence, hotkeyStartSequenceLabel),
+                (hotkeyPauseSequence, hotkeyTogglePauseSequenceLabel),
+                (hotkeyStopSequence, hotkeyStopSequenceLabel),
+                (hotkeyStartCoords, hotkeyStartCoordsLabel),
+                (hotkeyEndCoords, hotkeyEndCoordsLabel)
+            };
+
+            // Check for duplicates
+            for (int i = 0; i < hotkeys.Length; i++)
             {
-                hotkeyStartSequenceLabel.ForeColor = Color.Red;
-                hotkeyStartCoordsLabel.ForeColor = Color.Red;
-                isDuplicate = true;
-            }
-            if (hotkeyStartSequence == hotkeyEndCoords)
-            {
-                hotkeyStartSequenceLabel.ForeColor = Color.Red;
-                hotkeyEndCoordsLabel.ForeColor = Color.Red;
-                isDuplicate = true;
-            }
-            if (hotkeyStopSequence == hotkeyStartCoords)
-            {
-                hotkeyStopSequenceLabel.ForeColor = Color.Red;
-                hotkeyStartCoordsLabel.ForeColor = Color.Red;
-                isDuplicate = true;
-            }
-            if (hotkeyStopSequence == hotkeyEndCoords)
-            {
-                hotkeyStopSequenceLabel.ForeColor = Color.Red;
-                hotkeyEndCoordsLabel.ForeColor = Color.Red;
-                isDuplicate = true;
-            }
-            if (hotkeyStartCoordsLabel == hotkeyEndCoordsLabel)
-            {
-                hotkeyStartCoordsLabel.ForeColor = Color.Red;
-                hotkeyEndCoordsLabel.ForeColor = Color.Red;
-                isDuplicate = true;
+                for (int j = i + 1; j < hotkeys.Length; j++)
+                {
+                    if (hotkeys[i].Key == hotkeys[j].Key)
+                    {
+                        hotkeys[i].Label.ForeColor = Color.Red;
+                        hotkeys[j].Label.ForeColor = Color.Red;
+                        isDuplicate = true;
+                    }
+                }
             }
 
             return isDuplicate;
         }
+
 
         protected override bool ProcessKeyPreview(ref Message m)
         {
@@ -106,6 +101,12 @@ namespace Tao_Bot_Maker.View.Setting
                     case Settings.SETTING_HOTKEYSTARTSEQUENCE:
                         modifyingHotkey = "";
                         hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartSequence);
+                        IsDuplicate();
+                        return true;
+
+                    case Settings.SETTING_HOTKEYPAUSESEQUENCE:
+                        modifyingHotkey = "";
+                        hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
                         IsDuplicate();
                         return true;
 
@@ -138,6 +139,10 @@ namespace Tao_Bot_Maker.View.Setting
             {
                 case Settings.SETTING_HOTKEYSTARTSEQUENCE:
                     hotkeyStartSequence = keyData;
+                    return true;
+
+                case Settings.SETTING_HOTKEYPAUSESEQUENCE:
+                    hotkeyPauseSequence = keyData;
                     return true;
 
                 case Settings.SETTING_HOTKEYSTOPSEQUENCE:
@@ -195,6 +200,7 @@ namespace Tao_Bot_Maker.View.Setting
         {
             //Reset buttons
             hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartSequence);
+            hotkeyTogglePauseButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
             hotkeyStopSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStopSequence);
             hotkeyStartCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartCoords);
             hotkeyEndCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyEndCoords);
@@ -205,6 +211,10 @@ namespace Tao_Bot_Maker.View.Setting
             {
                 case Settings.SETTING_HOTKEYSTARTSEQUENCE:
                     hotkeyStartSequenceButton.Text = Properties.strings.button_Key_WaitForInput;
+                    break;
+
+                case Settings.SETTING_HOTKEYPAUSESEQUENCE:
+                    hotkeyTogglePauseButton.Text = Properties.strings.button_Key_WaitForInput;
                     break;
 
                 case Settings.SETTING_HOTKEYSTOPSEQUENCE:
@@ -219,6 +229,14 @@ namespace Tao_Bot_Maker.View.Setting
                     hotkeyEndCoordsButton.Text = Properties.strings.button_Key_WaitForInput;
                     break;
             }
+        }
+
+        private void HotkeyTogglePauseButton_Click(object sender, EventArgs e)
+        {
+            if (modifyingHotkey == Settings.SETTING_HOTKEYPAUSESEQUENCE)
+                SetModifyingHotkey("");
+            else
+                SetModifyingHotkey(Settings.SETTING_HOTKEYPAUSESEQUENCE);
         }
     }
 }

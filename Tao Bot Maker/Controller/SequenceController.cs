@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace Tao_Bot_Maker.Controller
     {
         private ISequenceRepository sequenceRepository;
         private Sequence sequence;
+
+        private CancellationTokenSource sequenceExecutionToken = new CancellationTokenSource();
         private static bool isPaused;
 
         public SequenceController()
@@ -107,37 +110,40 @@ namespace Tao_Bot_Maker.Controller
             return name;
         }
 
-        public async Task ExecuteSequence(CancellationToken token)
+        public async Task StartSequence()
         {
+            sequenceExecutionToken.Cancel();
+            sequenceExecutionToken = new CancellationTokenSource();
+            var token = sequenceExecutionToken.Token;
+            isPaused = false;
+
             try
             {
                 Logger.Log("Execution started");
-                isPaused = false;
                 await Task.Run(async () =>
                 {
-                    foreach (var action in sequence.Actions)
+                    try
                     {
-                        token.ThrowIfCancellationRequested();
-
-                        await PauseIfRequested();
-
-                        try { 
-                            await ExecuteAction(action, 0, 0, token); 
+                        foreach (var action in sequence.Actions)
+                        {
+                            await ExecuteAction(action, 0, 0, token);
                         }
-                        catch (OperationCanceledException e) { Console.WriteLine($"SequenceController OperationCanceledException  {e.Message}"); }
-                        catch (Exception e) { Console.WriteLine($"SequenceController Error : {e.Message}"); }
+                    }
+                    catch (OperationCanceledException ex)
+                    {
+                        Logger.Log($"Operation cancelled : {ex.Message}", TraceEventType.Warning);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"SequenceController Error : {ex.Message}");
                     }
                 }, token);
 
                 Logger.Log("Execution completed");
             }
-            catch (OperationCanceledException e)
+            catch (Exception ex)
             {
-                throw new OperationCanceledException(e.Message);
-            }
-            catch (Exception e)
-            {
-                throw new Exception($"SequenceController Error : {e.Message}", e);
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -151,15 +157,14 @@ namespace Tao_Bot_Maker.Controller
 
                 await action.Execute(x, y, token);
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException ex)
             {
-                Console.WriteLine($"SequenceController ExecuteAction OperationCanceledException  {e.Message}");
-                throw new OperationCanceledException(e.Message);
+                throw new OperationCanceledException(ex.Message);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine($"SequenceController ExecuteAction Error : {e.Message}");
-                throw new Exception($"SequenceController Error : {e.Message}", e);
+                Logger.Log($"Error executing action : {ex.Message}", TraceEventType.Error);
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -193,9 +198,9 @@ namespace Tao_Bot_Maker.Controller
             Logger.Log($"Execution {message}");
         }
 
-        public void StopSequence(CancellationTokenSource token)
+        public void StopSequence()
         {
-            token.Cancel();
+            sequenceExecutionToken.Cancel();
             Logger.Log($"Execution stopped");
         }
 

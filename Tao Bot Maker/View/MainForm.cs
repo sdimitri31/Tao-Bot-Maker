@@ -13,7 +13,6 @@ namespace Tao_Bot_Maker.View
     public partial class MainForm : Form
     {
         private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        private CancellationTokenSource cancellationTokenSequenceExecution = new CancellationTokenSource();
 
         private MainFormController mainFormController;
 
@@ -23,6 +22,7 @@ namespace Tao_Bot_Maker.View
             Logger.LogMessageReceived += OnLogMessageReceived;
 
             mainFormController = new MainFormController();
+            mainFormController.InitializeHotkeys(this);
             LoadSettings();
             LoadSequenceNames();
 
@@ -290,18 +290,9 @@ namespace Tao_Bot_Maker.View
 
         private async void StartSequence()
         {
-            Console.WriteLine("StartSequence clicked.");
-            cancellationTokenSequenceExecution.Cancel();
-            cancellationTokenSequenceExecution = new CancellationTokenSource();
-            var token = cancellationTokenSequenceExecution.Token;
-
             try
             {
-                await mainFormController.ExecuteSequence(token);
-            }
-            catch (OperationCanceledException)
-            {
-                Console.WriteLine("Execution of sequence was cancelled.");
+                await mainFormController.StartSequence();
             }
             catch (Exception ex)
             {
@@ -316,7 +307,18 @@ namespace Tao_Bot_Maker.View
 
         private void StopSequence()
         {
-            mainFormController.StopSequence(cancellationTokenSequenceExecution);
+            mainFormController.StopSequence();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+
+            if (m.Msg == 0x0312)
+            {
+                mainFormController.HotkeySend(m.LParam);
+                return;
+            }
         }
     }
 }

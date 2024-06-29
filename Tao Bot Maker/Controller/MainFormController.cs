@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.Properties;
+using Tao_Bot_Maker.View;
 using Action = Tao_Bot_Maker.Model.Action;
 
 namespace Tao_Bot_Maker.Controller
 {
     public class MainFormController
     {
+        private HotKeyController hotkeyStartSequence;
+        private HotKeyController hotkeyPauseSequence;
+        private HotKeyController hotkeyStopSequence;
+
         private SequenceController sequenceController;
         private string currentSequenceName;
 
@@ -24,6 +30,44 @@ namespace Tao_Bot_Maker.Controller
             sequenceController = new SequenceController();
             currentSequenceName = null;
             settingsController = new SettingsController();
+        }
+
+        public void InitializeHotkeys(MainForm mainForm)
+        {
+            hotkeyStartSequence?.Unregister();
+            hotkeyStartSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStartSequence"), mainForm);
+            hotkeyStartSequence.Register();
+
+            hotkeyPauseSequence?.Unregister();
+            hotkeyPauseSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyPauseSequence"), mainForm);
+            hotkeyPauseSequence.Register();
+
+            hotkeyStopSequence?.Unregister();
+            hotkeyStopSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStopSequence"), mainForm);
+            hotkeyStopSequence.Register();
+        }
+
+        public void HotkeySend(IntPtr LParam)
+        {
+            //m.LParam = 0xKKKKMMMM, K is Key, M is modifier
+            Keys pressedKey = (Keys)(((int)LParam >> 16) & 0xFFFF);
+            Keys pressedModifier = (Keys)HotKeyController.Reverse3Bits(((int)LParam & 0xFFFF));
+
+            //Converting to same format as regular Keys
+            Keys pressedHotkey = (Keys)(((int)pressedModifier << 16) | (int)pressedKey);
+
+            if (hotkeyStartSequence.GetKey() == pressedHotkey)
+            {
+                StartSequence();
+            }
+            else if (hotkeyPauseSequence.GetKey() == pressedHotkey)
+            {
+                TogglePause();
+            }
+            else if (hotkeyStopSequence.GetKey() == pressedHotkey)
+            {
+                StopSequence();
+            }
         }
 
         public void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
@@ -122,27 +166,15 @@ namespace Tao_Bot_Maker.Controller
             currentSequenceName = sequenceController.SaveSequence(null);
         }
 
-        public async Task ExecuteSequence(CancellationToken token)
+        public async Task StartSequence()
         {
-            Console.WriteLine("Starting execution of sequence.");
             try
             {
-                if (token.IsCancellationRequested)
-                {
-                    token.ThrowIfCancellationRequested();
-                }
-
-                try { await sequenceController.ExecuteSequence(token); }
-                catch (OperationCanceledException) { Console.WriteLine("Execution of sequence was cancelled."); }
-                catch (Exception e) { Console.WriteLine(e.Message); }
-            }
-            catch (OperationCanceledException)
-            {
-                Console.WriteLine("Execution of sequence was cancelled.");
+                await sequenceController.StartSequence();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur : {ex.Message}");
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -161,9 +193,10 @@ namespace Tao_Bot_Maker.Controller
             sequenceController.TogglePause();
         }
 
-        public void StopSequence(CancellationTokenSource cancellationTokenSource)
+        public void StopSequence()
         {
-            sequenceController.StopSequence(cancellationTokenSource);
+            sequenceController.StopSequence();
         }
+
     }
 }
