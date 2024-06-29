@@ -32,7 +32,7 @@ namespace Tao_Bot_Maker.View.Setting
             hotkeyEndCoords = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYENDCOORDS);
 
             hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartSequence);
-            hotkeyTogglePauseButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
+            hotkeyPauseSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
             hotkeyStopSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStopSequence);
             hotkeyStartCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartCoords);
             hotkeyEndCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyEndCoords);
@@ -58,7 +58,7 @@ namespace Tao_Bot_Maker.View.Setting
 
             // Reset all label colors
             hotkeyStartSequenceLabel.ForeColor = textColor;
-            hotkeyTogglePauseSequenceLabel.ForeColor = textColor;
+            hotkeyPauseSequenceLabel.ForeColor = textColor;
             hotkeyStopSequenceLabel.ForeColor = textColor;
             hotkeyStartCoordsLabel.ForeColor = textColor;
             hotkeyEndCoordsLabel.ForeColor = textColor;
@@ -67,7 +67,7 @@ namespace Tao_Bot_Maker.View.Setting
             var hotkeys = new (Keys Key, Label Label)[]
             {
                 (hotkeyStartSequence, hotkeyStartSequenceLabel),
-                (hotkeyPauseSequence, hotkeyTogglePauseSequenceLabel),
+                (hotkeyPauseSequence, hotkeyPauseSequenceLabel),
                 (hotkeyStopSequence, hotkeyStopSequenceLabel),
                 (hotkeyStartCoords, hotkeyStartCoordsLabel),
                 (hotkeyEndCoords, hotkeyEndCoordsLabel)
@@ -106,7 +106,7 @@ namespace Tao_Bot_Maker.View.Setting
 
                     case Settings.SETTING_HOTKEYPAUSESEQUENCE:
                         modifyingHotkey = "";
-                        hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
+                        hotkeyPauseSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
                         IsDuplicate();
                         return true;
 
@@ -200,7 +200,7 @@ namespace Tao_Bot_Maker.View.Setting
         {
             //Reset buttons
             hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartSequence);
-            hotkeyTogglePauseButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
+            hotkeyPauseSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
             hotkeyStopSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStopSequence);
             hotkeyStartCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartCoords);
             hotkeyEndCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyEndCoords);
@@ -214,7 +214,7 @@ namespace Tao_Bot_Maker.View.Setting
                     break;
 
                 case Settings.SETTING_HOTKEYPAUSESEQUENCE:
-                    hotkeyTogglePauseButton.Text = Properties.strings.button_Key_WaitForInput;
+                    hotkeyPauseSequenceButton.Text = Properties.strings.button_Key_WaitForInput;
                     break;
 
                 case Settings.SETTING_HOTKEYSTOPSEQUENCE:

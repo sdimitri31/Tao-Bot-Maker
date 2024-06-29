@@ -21,8 +21,8 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             Logger.LogMessageReceived += OnLogMessageReceived;
 
-            mainFormController = new MainFormController();
-            mainFormController.InitializeHotkeys(this);
+            mainFormController = new MainFormController(this);
+            mainFormController.InitializeHotkeys();
             LoadSettings();
             LoadSequenceNames();
 
@@ -31,7 +31,7 @@ namespace Tao_Bot_Maker.View
 
         private void New()
         {
-            mainFormController = new MainFormController();
+            mainFormController.NewSequence();
             LoadSequenceNames();
             LoadActions();
         }
@@ -263,6 +263,8 @@ namespace Tao_Bot_Maker.View
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            mainFormController.StopSequence();
+            mainFormController.UnregisterHotkeys();
             Logger.LogMessageReceived -= OnLogMessageReceived;
         }
 
@@ -288,11 +290,11 @@ namespace Tao_Bot_Maker.View
                 New();
         }
 
-        private async void StartSequence()
+        private void StartSequence()
         {
             try
             {
-                await mainFormController.StartSequence();
+                mainFormController.StartSequence();
             }
             catch (Exception ex)
             {

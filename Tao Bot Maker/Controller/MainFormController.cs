@@ -15,6 +15,8 @@ namespace Tao_Bot_Maker.Controller
 {
     public class MainFormController
     {
+        private readonly MainForm mainForm;
+
         private HotKeyController hotkeyStartSequence;
         private HotKeyController hotkeyPauseSequence;
         private HotKeyController hotkeyStopSequence;
@@ -22,29 +24,40 @@ namespace Tao_Bot_Maker.Controller
         private SequenceController sequenceController;
         private string currentSequenceName;
 
-        private SettingsController settingsController;
+        private readonly SettingsController settingsController;
 
 
-        public MainFormController()
+        public MainFormController(MainForm mainForm)
+        {
+            NewSequence();
+            settingsController = new SettingsController();
+            this.mainForm = mainForm;
+        }
+
+        public void NewSequence()
         {
             sequenceController = new SequenceController();
             currentSequenceName = null;
-            settingsController = new SettingsController();
         }
 
-        public void InitializeHotkeys(MainForm mainForm)
+        public void InitializeHotkeys()
         {
-            hotkeyStartSequence?.Unregister();
+            UnregisterHotkeys();
             hotkeyStartSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStartSequence"), mainForm);
             hotkeyStartSequence.Register();
 
-            hotkeyPauseSequence?.Unregister();
             hotkeyPauseSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyPauseSequence"), mainForm);
             hotkeyPauseSequence.Register();
 
-            hotkeyStopSequence?.Unregister();
             hotkeyStopSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStopSequence"), mainForm);
             hotkeyStopSequence.Register();
+        }
+
+        public void UnregisterHotkeys()
+        {
+            hotkeyStartSequence?.Unregister();
+            hotkeyPauseSequence?.Unregister();
+            hotkeyStopSequence?.Unregister();
         }
 
         public void HotkeySend(IntPtr LParam)
@@ -72,7 +85,9 @@ namespace Tao_Bot_Maker.Controller
 
         public void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
         {
+            UnregisterHotkeys();
             settingsController.OpenSettingsForm(settingsType);
+            InitializeHotkeys();
         }
 
         public void SetSettingValue(string name, string value, SettingsType type)
@@ -143,12 +158,16 @@ namespace Tao_Bot_Maker.Controller
 
         public void AddAction()
         {
+            UnregisterHotkeys();
             sequenceController.AddAction();
+            InitializeHotkeys();
         }
 
         public void UpdateAction(Action oldAction)
         {
+            UnregisterHotkeys();
             sequenceController.UpdateAction(oldAction);
+            InitializeHotkeys();
         }
 
         public void RemoveActionFromCurrentSequence(Action action)
@@ -166,7 +185,7 @@ namespace Tao_Bot_Maker.Controller
             currentSequenceName = sequenceController.SaveSequence(null);
         }
 
-        public async Task StartSequence()
+        public async void StartSequence()
         {
             try
             {
