@@ -15,6 +15,7 @@ namespace Tao_Bot_Maker.Model
         public override ActionType Type { get; set; }
         public string SequenceName { get; set; }
         public int RepeatCount { get; set; }
+
         private Sequence sequence;
 
         public SequenceAction(string sequenceName = "", int repeatCount = 1)
@@ -23,8 +24,12 @@ namespace Tao_Bot_Maker.Model
             SequenceName = sequenceName;
             RepeatCount = repeatCount;
 
-            SequenceController sequenceController = new SequenceController();
-            sequence = sequenceController.LoadSequence(sequenceName);
+            try { sequence = SequenceController.GetSequence(sequenceName); }
+            catch (Exception ex) 
+            { 
+                sequence = null; 
+                Logger.Log($"Failed to load sequence {sequenceName}: {ex.Message}", System.Diagnostics.TraceEventType.Error);
+            }
         }
 
         public override async Task Execute(CancellationToken token)
@@ -62,7 +67,14 @@ namespace Tao_Bot_Maker.Model
                 return false;
             }
 
-            if((RepeatCount < -1 || RepeatCount > 999999) && RepeatCount != 0)
+            try { SequenceController.GetSequence(SequenceName); }
+            catch (Exception ex)
+            {
+                errorMessage = $"Failed to load sequence {SequenceName}: {ex.Message}";
+                return false;
+            }
+
+            if ((RepeatCount < -1 || RepeatCount > 999999) && RepeatCount != 0)
             {
                 errorMessage = "Repeat count must be between -1 and 999999, and cannot be 0.";
                 return false;

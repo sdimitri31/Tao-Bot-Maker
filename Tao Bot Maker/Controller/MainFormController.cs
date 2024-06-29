@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
-using Tao_Bot_Maker.Properties;
 using Tao_Bot_Maker.View;
 using Action = Tao_Bot_Maker.Model.Action;
 
@@ -26,7 +21,6 @@ namespace Tao_Bot_Maker.Controller
 
         private readonly SettingsController settingsController;
 
-
         public MainFormController(MainForm mainForm)
         {
             NewSequence();
@@ -34,25 +28,32 @@ namespace Tao_Bot_Maker.Controller
             this.mainForm = mainForm;
         }
 
-        public void NewSequence()
-        {
-            sequenceController = new SequenceController();
-            currentSequenceName = null;
-        }
+        #region Hotkey
 
+        /// <summary>
+        /// Initializes the hotkeys by unregistering existing hotkeys and registering new hotkeys based on settings.
+        /// </summary>
         public void InitializeHotkeys()
         {
+            // Unregister existing hotkeys
             UnregisterHotkeys();
+
+            // Initialize and register hotkey for starting the sequence
             hotkeyStartSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStartSequence"), mainForm);
             hotkeyStartSequence.Register();
 
+            // Initialize and register hotkey for pausing the sequence
             hotkeyPauseSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyPauseSequence"), mainForm);
             hotkeyPauseSequence.Register();
 
+            // Initialize and register hotkey for stopping the sequence
             hotkeyStopSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStopSequence"), mainForm);
             hotkeyStopSequence.Register();
         }
 
+        /// <summary>
+        /// Unregisters the existing hotkeys for starting, pausing, and stopping sequences.
+        /// </summary>
         public void UnregisterHotkeys()
         {
             hotkeyStartSequence?.Unregister();
@@ -60,7 +61,11 @@ namespace Tao_Bot_Maker.Controller
             hotkeyStopSequence?.Unregister();
         }
 
-        public void HotkeySend(IntPtr LParam)
+        /// <summary>
+        /// Executes the action associated with the provided hotkey.
+        /// </summary>
+        /// <param name="LParam">The parameter containing information about the pressed key and modifier.</param>
+        public void ExecuteHotkey(IntPtr LParam)
         {
             //m.LParam = 0xKKKKMMMM, K is Key, M is modifier
             Keys pressedKey = (Keys)(((int)LParam >> 16) & 0xFFFF);
@@ -83,6 +88,14 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
+        #endregion
+
+        #region Settings
+
+        /// <summary>
+        /// Opens the settings form.
+        /// </summary>
+        /// <param name="settingsType">The type of settings to open the form for.</param>
         public void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
         {
             UnregisterHotkeys();
@@ -90,72 +103,121 @@ namespace Tao_Bot_Maker.Controller
             InitializeHotkeys();
         }
 
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="name">The name of the setting.</param>
+        /// <param name="value">The value of the setting.</param>
+        /// <param name="type">The type of the setting.</param>
         public void SetSettingValue(string name, string value, SettingsType type)
         {
             settingsController.SetSettingValue(name, value, type);
         }
 
+        /// <summary>
+        /// Gets the value of a setting.
+        /// </summary>
+        /// <param name="name">The name of the setting.</param>
+        /// <returns>The value of the setting.</returns>
         public T GetSettingValue<T>(string name)
         {
             return settingsController.GetSettingValue<T>(name);
         }
 
+        #endregion
+
+        #region Sequence
+
+        /// <summary>
+        /// Gets all sequence names.
+        /// </summary>
+        /// <returns>A list of all sequence names.</returns>
         public List<string> GetAllSequenceNames()
         {
             return sequenceController.GetAllSequenceNames();
         }
 
-        public bool RemoveSequence(string sequenceName)
-        {
-            return sequenceController.RemoveSequence(sequenceName);
-        }
-
-        public void LoadSequence(string sequenceName)
-        {
-            try
-            {
-                currentSequenceName = sequenceController.LoadSequence(sequenceName) != null ? sequenceName : null;
-            }
-            catch (Exception e)
-            {
-                currentSequenceName = sequenceName;
-                Console.WriteLine($"Error loading sequence '{sequenceName}': {e.Message}");
-            }
-        }
-
-        public async Task LoadSequenceAsync(string sequenceName, CancellationToken token)
-        {
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Run(() =>
-                {
-                    LoadSequence(sequenceName);
-                }, token);
-            }
-            catch (OperationCanceledException e)
-            {
-                Console.WriteLine($"LoadSequenceAsync OperationCanceledException");
-                throw new OperationCanceledException(e.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"LoadSequenceAsync Error loading sequence '{sequenceName}': {e.Message}");
-                throw new Exception($"Error loading sequence '{sequenceName}': {e.Message}", e);
-            }
-
-        }
-
-        public Sequence GetCurrentSequence()
-        {
-            return sequenceController.GetSequence();
-        }
-
+        /// <summary>
+        /// Gets the name of the current sequence.
+        /// </summary>
+        /// <returns>The name of the current sequence.</returns>
         public string GetCurrentSequenceName()
         {
             return currentSequenceName;
         }
 
+        /// <summary>
+        /// Gets the current sequence from the sequence controller.
+        /// </summary>
+        /// <returns>The current sequence.</returns>
+        public Sequence GetSequence()
+        {
+            return sequenceController.GetSequence();
+        }
+
+        /// <summary>
+        /// Creates a new sequence by instantiating a SequenceController and resetting the current sequence name.
+        /// </summary>
+        public void NewSequence()
+        {
+            sequenceController = new SequenceController();
+            currentSequenceName = null;
+        }
+
+        /// <summary>
+        /// Removes a sequence by name.
+        /// </summary>
+        /// <param name="sequenceName">The name of the sequence to be removed.</param>
+        /// <returns>True if the sequence was successfully removed, otherwise false.</returns>
+        public bool RemoveSequence(string sequenceName)
+        {
+            return sequenceController.RemoveSequence(sequenceName);
+        }
+
+        /// <summary>
+        /// Loads a sequence asynchronously based on the provided sequence name.
+        /// </summary>
+        /// <param name="sequenceName">The name of the sequence to load.</param>
+        public async Task LoadSequenceAsync(string sequenceName)
+        {
+            try
+            {
+                currentSequenceName = await sequenceController.LoadSequenceAsync(sequenceName) != null ? sequenceName : null;
+            }
+            catch (OperationCanceledException ex)
+            {
+                throw new OperationCanceledException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+
+        }
+
+        /// <summary>
+        /// Saves the current sequence.
+        /// </summary>
+        public void SaveSequence()
+        {
+            sequenceController.SaveSequence(currentSequenceName);
+        }
+
+        /// <summary>
+        /// Saves the current sequence as a new sequence.
+        /// </summary>
+        public void SaveAsSequence()
+        {
+            currentSequenceName = sequenceController.SaveSequence(null);
+        }
+
+        #endregion
+
+        #region Actions
+
+        /// <summary>
+        /// Open form to add an action.
+        /// </summary>
         public void AddAction()
         {
             UnregisterHotkeys();
@@ -163,6 +225,10 @@ namespace Tao_Bot_Maker.Controller
             InitializeHotkeys();
         }
 
+        /// <summary>
+        /// Open form to update an action.
+        /// </summary>
+        /// <param name="oldAction">Action to update.</param>
         public void UpdateAction(Action oldAction)
         {
             UnregisterHotkeys();
@@ -170,21 +236,23 @@ namespace Tao_Bot_Maker.Controller
             InitializeHotkeys();
         }
 
-        public void RemoveActionFromCurrentSequence(Action action)
+        /// <summary>
+        /// Removes an action.
+        /// </summary>
+        /// <param name="action">Action to remove.</param>
+        public void RemoveAction(Action action)
         {
             sequenceController.RemoveAction(action);
         }
 
-        public void SaveCurrentSequence()
-        {
-            sequenceController.SaveSequence(currentSequenceName);
-        }
+        #endregion
 
-        public void SaveAsCurrentSequence()
-        {
-            currentSequenceName = sequenceController.SaveSequence(null);
-        }
+        #region Sequence execution
 
+        /// <summary>
+        /// Starts the sequence.
+        /// </summary>
+        /// <exception cref="Exception">Exception thrown if there is an error during sequence execution.</exception>
         public async void StartSequence()
         {
             try
@@ -197,25 +265,22 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
-        public void PauseSequence()
-        {
-            sequenceController.PauseSequence();
-        }
-
-        public void ResumeSequence()
-        {
-            sequenceController.ResumeSequence();
-        }
-
+        /// <summary>
+        /// Toggles the pause of the sequence.
+        /// </summary>
         public void TogglePause()
         {
             sequenceController.TogglePause();
         }
 
+        /// <summary>
+        /// Stops the sequence.
+        /// </summary>
         public void StopSequence()
         {
             sequenceController.StopSequence();
         }
 
+        #endregion
     }
 }

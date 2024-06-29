@@ -15,6 +15,7 @@ namespace Tao_Bot_Maker.Controller
 {
     public class SequenceController
     {
+        private CancellationTokenSource sequenceLoadingToken = new CancellationTokenSource();
         private ISequenceRepository sequenceRepository;
         private Sequence sequence;
 
@@ -42,17 +43,39 @@ namespace Tao_Bot_Maker.Controller
             return sequence;
         }
 
-        public Sequence LoadSequence(string name)
+        public static Sequence GetSequence(string name)
         {
             try
             {
-                sequence = sequenceRepository.LoadSequence(name);
+                return new SequenceRepository().GetSequence(name);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        public async Task<Sequence> LoadSequenceAsync(string name)
+        {
+            // Cancel any ongoing task
+            sequenceLoadingToken.Cancel();
+            sequenceLoadingToken = new CancellationTokenSource();
+            var token = sequenceLoadingToken.Token;
+
+            try
+            {
+                sequence = await sequenceRepository.LoadSequenceAsync(name, token);
                 return sequence;
             }
-            catch (Exception e)
+            catch (OperationCanceledException ex)
             {
                 sequence = null;
-                throw new Exception(e.Message);
+                throw new OperationCanceledException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                sequence = null;
+                throw new Exception(ex.Message, ex);
             }
         }
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Xml.Linq;
 using System.IO;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Tao_Bot_Maker.Model
 {
@@ -42,27 +44,55 @@ namespace Tao_Bot_Maker.Model
             return false;
         }
 
-        public Sequence LoadSequence(string name)
+        public async Task<Sequence> LoadSequenceAsync(string name, CancellationToken token)
         {
-            if (name == null) return null;
-
-            string filePath = Path.Combine(sequencesFolderPath, $"{name}.json");
-            if (File.Exists(filePath))
+            try
             {
-                try
+                token.ThrowIfCancellationRequested();
+                Exception loadingException = null;
+
+                if (name == null) return null;
+
+                Sequence sequence = await Task.Run(() =>
                 {
-                    string json = File.ReadAllText(filePath);
-                    return JsonConvert.DeserializeObject<Sequence>(json, new JsonSerializerSettings
+                    string filePath = Path.Combine(sequencesFolderPath, $"{name}.json");
+                    if (!File.Exists(filePath))
                     {
-                        TypeNameHandling = TypeNameHandling.Auto,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-                } catch
+                        loadingException = new Exception($"Cannot locate file at : \"{filePath}\"");
+                        return null;
+                    }
+
+                    try
+                    {
+                        string json = File.ReadAllText(filePath);
+                        return JsonConvert.DeserializeObject<Sequence>(json, new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.Auto,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
+                    }
+                    catch
+                    {
+                        loadingException = new Exception($"Cannot load sequence \"{name}\", file is corrupted");
+                        return null;
+                    }
+                }, token);
+
+                if (loadingException != null)
                 {
-                    throw new Exception("Corrupted sequence file.");
+                    throw loadingException;
                 }
+
+                return sequence;
             }
-            return null;
+            catch (OperationCanceledException ex)
+            {
+                throw new OperationCanceledException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public void SaveSequence(Sequence sequence, string name)
@@ -76,5 +106,29 @@ namespace Tao_Bot_Maker.Model
             File.WriteAllText(filePath, json);
         }
 
+        public Sequence GetSequence(string name)
+        {
+            if (name == null) return null;
+
+            string filePath = Path.Combine(sequencesFolderPath, $"{name}.json");
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException($"Cannot locate file at : \"{filePath}\"");
+            }
+
+            try
+            {
+                string json = File.ReadAllText(filePath);
+                return JsonConvert.DeserializeObject<Sequence>(json, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Auto,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            }
+            catch
+            {
+                throw new Exception($"Cannot load sequence \"{name}\", file is corrupted");
+            }
+        }
     }
 }

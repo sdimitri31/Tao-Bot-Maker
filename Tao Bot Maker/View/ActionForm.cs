@@ -119,7 +119,7 @@ namespace Tao_Bot_Maker.View
                 actionPropertiesPanel.Controls.Add(panel);
             }
         }
-        
+
         private void FillActionTypeListBox()
         {
             foreach (ActionType actionType in Enum.GetValues(typeof(ActionType)))
@@ -136,12 +136,19 @@ namespace Tao_Bot_Maker.View
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            IActionPropertiesPanel panel = actionPropertiesPanel.Controls[0] as IActionPropertiesPanel;
-            if (panel != null)
+            if (actionPropertiesPanel.Controls[0] is IActionPropertiesPanel panel)
             {
                 var newAction = panel.GetAction();
-                Action = newAction;
-                DialogResult = DialogResult.OK;
+
+                if (newAction == null)
+                {
+                    DialogResult = DialogResult.None;
+                }
+                else
+                {
+                    Action = newAction;
+                    DialogResult = DialogResult.OK;
+                }
             }
         }
 

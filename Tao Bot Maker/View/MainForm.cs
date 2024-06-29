@@ -12,7 +12,6 @@ namespace Tao_Bot_Maker.View
 {
     public partial class MainForm : Form
     {
-        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         private MainFormController mainFormController;
 
@@ -85,24 +84,11 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        private async void LoadSequence(string sequenceName)
+        private async void LoadSequenceAsync(string sequenceName)
         {
-            // Cancel any ongoing task
-            cancellationTokenSource.Cancel();
-            cancellationTokenSource = new CancellationTokenSource();
-            var token = cancellationTokenSource.Token;
-
             try
             {
-                await mainFormController.LoadSequenceAsync(sequenceName, token);
-
-                var loadedSequence = mainFormController.GetCurrentSequence();
-                if (loadedSequence == null)
-                {
-                    MessageBox.Show($"Error loading sequence : {mainFormController.GetCurrentSequenceName()}");
-                }
-
-                LoadActions();
+                await mainFormController.LoadSequenceAsync(sequenceName);
             }
             catch (OperationCanceledException)
             {
@@ -110,18 +96,21 @@ namespace Tao_Bot_Maker.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur : {ex.Message}");
+                Logger.Log($"Error : {ex.Message}", TraceEventType.Error);
+                MessageBox.Show($"Error : {ex.Message}");
             }
+
+            LoadActions();
         }
 
         private void LoadActions()
         {
             actionsListBox.Items.Clear();
 
-            if (mainFormController.GetCurrentSequence() == null)
+            if (mainFormController.GetSequence() == null)
                 return;
 
-            foreach (var action in mainFormController.GetCurrentSequence().Actions)
+            foreach (var action in mainFormController.GetSequence().Actions)
             {
                 actionsListBox.Items.Add(action);
             }
@@ -143,7 +132,7 @@ namespace Tao_Bot_Maker.View
 
         private void SaveAsSequence()
         {
-            mainFormController.SaveAsCurrentSequence();
+            mainFormController.SaveAsSequence();
             if (mainFormController.GetCurrentSequenceName() != null)
             {
                 LoadSequenceNames();
@@ -159,7 +148,7 @@ namespace Tao_Bot_Maker.View
             }
             else
             {
-                mainFormController.SaveCurrentSequence();
+                mainFormController.SaveSequence();
             }
         }
 
@@ -240,7 +229,7 @@ namespace Tao_Bot_Maker.View
             string selectedSequenceName = sequenceComboBox.SelectedItem as string;
             if (!string.IsNullOrEmpty(selectedSequenceName))
             {
-                LoadSequence(selectedSequenceName);
+                LoadSequenceAsync(selectedSequenceName);
             }
         }
 
@@ -257,7 +246,7 @@ namespace Tao_Bot_Maker.View
 
         private void DeleteActionToolStripButton_Click(object sender, EventArgs e)
         {
-            mainFormController.RemoveActionFromCurrentSequence((Action)actionsListBox.SelectedItem);
+            mainFormController.RemoveAction((Action)actionsListBox.SelectedItem);
             LoadActions();
         }
 
@@ -318,7 +307,7 @@ namespace Tao_Bot_Maker.View
 
             if (m.Msg == 0x0312)
             {
-                mainFormController.HotkeySend(m.LParam);
+                mainFormController.ExecuteHotkey(m.LParam);
                 return;
             }
         }

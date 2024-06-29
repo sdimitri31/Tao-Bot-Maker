@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Tao_Bot_Maker.Model
 {
@@ -6,7 +8,8 @@ namespace Tao_Bot_Maker.Model
     {
         IEnumerable<string> GetAllSequenceNames();
         bool RemoveSequence(string name);
-        Sequence LoadSequence(string name);
+        Task<Sequence> LoadSequenceAsync(string name, CancellationToken token);
         void SaveSequence(Sequence sequence, string name);
+        Sequence GetSequence(string name);
     }
 }

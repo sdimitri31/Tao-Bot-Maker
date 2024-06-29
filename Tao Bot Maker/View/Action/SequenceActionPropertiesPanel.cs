@@ -21,6 +21,12 @@ namespace Tao_Bot_Maker.View
                 repeatCount: (int)repeatCountNumericUpDown.Value
             );
 
+            if(!sequenceAction.Validate(out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+
             return sequenceAction;
         }
 
