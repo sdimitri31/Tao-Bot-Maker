@@ -93,6 +93,8 @@ namespace Tao_Bot_Maker.Model
                         return null;
                     }, token);
 
+                    token.ThrowIfCancellationRequested();
+
                     if (SequenceController.GetIsPaused())
                     {
                         stopwatch.Stop();
@@ -111,7 +113,6 @@ namespace Tao_Bot_Maker.Model
                         timer.Dispose();
                         if (ActionIfFound != null)
                         {
-                            token.ThrowIfCancellationRequested();
                             await SequenceController.PauseIfRequested();
                             await SequenceController.ExecuteAction(ActionIfFound, result[0], result[1], token);
                         }
@@ -133,6 +134,7 @@ namespace Tao_Bot_Maker.Model
                         break;
                     }
                 }
+                token.ThrowIfCancellationRequested();
             }
             catch (OperationCanceledException e)
             {
@@ -140,12 +142,6 @@ namespace Tao_Bot_Maker.Model
                 timer.Stop();
                 timer.Dispose();
                 Logger.Log($"Operation canceled: {e.Message}", TraceEventType.Warning);
-                Logger.Log($"Image search timed out or canceled after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
-                if (ActionIfNotFound != null)
-                {
-                    await SequenceController.PauseIfRequested();
-                    await ActionIfNotFound.Execute(token);
-                }
             }
 
         }
