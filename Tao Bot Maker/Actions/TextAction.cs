@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Helpers;
 
@@ -20,16 +22,18 @@ namespace Tao_Bot_Maker.Model
             keyboardSimulator = new KeyboardSimulator();
         }
 
-        public override async Task Execute()
+        public override async Task Execute(CancellationToken token)
         {
-            Logger.Log($"Typing text: {TextToType}");
+            token.ThrowIfCancellationRequested();
+
+            Logger.Log($"Executing Text action. Text: {TextToType} TypingSpeed: {TypingSpeed}");
             await keyboardSimulator.TypeText(TextToType, TypingSpeed);
             Logger.Log("Typing text completed.");
         }
 
-        public override async Task Execute(int x, int y)
+        public override async Task Execute(int x, int y, CancellationToken token)
         {
-            await Execute();
+            await Execute(token);
         }
 
         public override string ToString()

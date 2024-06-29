@@ -136,21 +136,11 @@ namespace Tao_Bot_Maker.View
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            var panel = actionPropertiesPanel.Controls[0] as IActionPropertiesPanel;
+            IActionPropertiesPanel panel = actionPropertiesPanel.Controls[0] as IActionPropertiesPanel;
             if (panel != null)
             {
                 var newAction = panel.GetAction();
-                if (Action != null)
-                {
-                    // Mettre à jour l'action existante
-                    Action.Update(newAction);
-                }
-                else
-                {
-                    // Créer une nouvelle action
-                    Action = newAction;
-                }
-
+                Action = newAction;
                 DialogResult = DialogResult.OK;
             }
         }

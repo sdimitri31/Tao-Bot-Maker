@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Linq;
-using LogFramework;
 
 namespace Tao_Bot_Maker.Helpers
 {

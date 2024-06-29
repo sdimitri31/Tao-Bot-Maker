@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
@@ -44,8 +47,10 @@ namespace Tao_Bot_Maker.Model
             ActionIfNotFound = actionIfNotFound;
         }
 
-        public override async Task Execute()
+        public override async Task Execute(CancellationToken token)
         {
+            Logger.Log($"Executing image action. Image: {ImageName}, between coords ({StartX},{StartY}) and ({EndX},{EndY})");
+
             // Validate the image path
             string imagePath = Path.Combine(imagesFolderPath, ImageName);
             if (!File.Exists(imagePath))
@@ -54,62 +59,100 @@ namespace Tao_Bot_Maker.Model
                 throw new FileNotFoundException($"Image not found at path: {imagePath}");
             }
 
-            // Create a CancellationTokenSource for the expiration
-            using (var cts = new CancellationTokenSource(Expiration))
+            var stopwatch = Stopwatch.StartNew();
+            var timer = new System.Timers.Timer(1000); // Timer to update logs every second
+
+            timer.Elapsed += (sender, args) =>
             {
-                var stopwatch = Stopwatch.StartNew();
-                var timer = new System.Timers.Timer(1000); // Timer to update logs every second
+                Logger.Log($"Searching for image... {stopwatch.ElapsedMilliseconds} ms elapsed.", TraceEventType.Information);
+            };
+            timer.Start();
 
-                timer.Elapsed += (sender, args) =>
+            try
+            {
+                while (!token.IsCancellationRequested)
                 {
-                    Logger.Log($"Searching for image... {stopwatch.ElapsedMilliseconds} ms elapsed.", TraceEventType.Information);
-                };
-                timer.Start();
+                    var result = await Task.Run(() =>
+                    {
+                        token.ThrowIfCancellationRequested();
 
-                try
-                {
-                    // Search for the image on the screen
-                    var result = await Task.Run(() => ImageSearchHelper.FindImageCenter(imagePath, Threshold, StartX, StartY, EndX, EndY, cts.Token), cts.Token);
+                        // Recherche de l'image
+                        var imageCoords = ImageSearchHelper.FindImage(imagePath, Threshold, StartX, StartY, EndX, EndY);
 
-                    stopwatch.Stop();
-                    timer.Stop();
-                    timer.Dispose();
+                        if (imageCoords != null)
+                        {
+                            int x = int.Parse(imageCoords[1]);
+                            int y = int.Parse(imageCoords[2]);
+                            var image = Image.FromFile(imagePath);
+                            int centerX = x + (image.Width / 2);
+                            int centerY = y + (image.Height / 2);
 
-                    // If the image is found
+                            return new int[] { centerX, centerY };
+                        }
+
+                        return null;
+                    }, token);
+
+                    if (SequenceController.GetIsPaused())
+                    {
+                        stopwatch.Stop();
+                        timer.Stop();
+                        await SequenceController.PauseIfRequested();
+                        stopwatch.Start();
+                        timer.Start();
+                    }
+
                     if (result != null)
                     {
                         Logger.Log($"Image found at coordinates: ({result[0]}, {result[1]}) after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Information);
+
+                        stopwatch.Stop();
+                        timer.Stop();
+                        timer.Dispose();
                         if (ActionIfFound != null)
                         {
-                            await ActionIfFound.Execute(result[0], result[1]); // Pass the found coordinates
+                            token.ThrowIfCancellationRequested();
+                            await SequenceController.PauseIfRequested();
+                            await SequenceController.ExecuteAction(ActionIfFound, result[0], result[1], token);
                         }
+                        break;
                     }
-                    else // If the image is not found
+
+                    if (stopwatch.ElapsedMilliseconds >= Expiration)
                     {
-                        Logger.Log($"Image not found after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
+                        Logger.Log($"Image search timed out after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
+
+                        stopwatch.Stop();
+                        timer.Stop();
+                        timer.Dispose();
                         if (ActionIfNotFound != null)
                         {
-                            await ActionIfNotFound.Execute();
+                            await SequenceController.PauseIfRequested();
+                            await ActionIfNotFound.Execute(token);
                         }
-                    }
-                }
-                catch (TaskCanceledException)
-                {
-                    stopwatch.Stop();
-                    timer.Stop();
-                    timer.Dispose();
-                    Logger.Log($"Image search timed out after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
-                    if (ActionIfNotFound != null)
-                    {
-                        await ActionIfNotFound.Execute();
+                        break;
                     }
                 }
             }
+            catch (OperationCanceledException e)
+            {
+                stopwatch.Stop();
+                timer.Stop();
+                timer.Dispose();
+                Logger.Log($"Operation canceled: {e.Message}", TraceEventType.Warning);
+                Logger.Log($"Image search timed out or canceled after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
+                if (ActionIfNotFound != null)
+                {
+                    await SequenceController.PauseIfRequested();
+                    await ActionIfNotFound.Execute(token);
+                }
+            }
+
         }
 
-        public override async Task Execute(int x, int y)
+        public override async Task Execute(int x, int y, CancellationToken token)
         {
-            await Execute();
+            await Execute(token);
         }
 
         public override string ToString()

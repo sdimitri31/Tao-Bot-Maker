@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +66,7 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.actionsListBox = new System.Windows.Forms.ListBox();
             this.eventLogTextBox = new System.Windows.Forms.TextBox();
+            this.pauseBotToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -262,6 +264,7 @@
             this.deleteActionToolStripButton,
             this.toolStripSeparator1,
             this.startBotToolStripButton,
+            this.pauseBotToolStripButton,
             this.stopBotToolStripButton,
             this.toolStripSeparator2,
             this.sequenceComboBox,
@@ -398,6 +401,16 @@
             this.eventLogTextBox.Size = new System.Drawing.Size(784, 110);
             this.eventLogTextBox.TabIndex = 0;
             // 
+            // pauseBotToolStripButton
+            // 
+            this.pauseBotToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pauseBotToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pauseBotToolStripButton.Image")));
+            this.pauseBotToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pauseBotToolStripButton.Name = "pauseBotToolStripButton";
+            this.pauseBotToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.pauseBotToolStripButton.Text = "Pause bot";
+            this.pauseBotToolStripButton.Click += new System.EventHandler(this.PauseBotToolStripButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -463,5 +476,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton pauseBotToolStripButton;
     }
 }

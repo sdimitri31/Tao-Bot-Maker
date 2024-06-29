@@ -42,7 +42,7 @@ namespace Tao_Bot_Maker.Model
             return false;
         }
 
-        public Sequence GetSequence(string name)
+        public Sequence LoadSequence(string name)
         {
             if (name == null) return null;
 

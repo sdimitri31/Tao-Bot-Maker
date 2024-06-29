@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.Properties;
@@ -13,15 +14,14 @@ namespace Tao_Bot_Maker.Controller
     public class MainFormController
     {
         private SequenceController sequenceController;
-        private Sequence currentSequence;
         private string currentSequenceName;
 
         private SettingsController settingsController;
 
+
         public MainFormController()
         {
             sequenceController = new SequenceController();
-            currentSequence = new Sequence();
             currentSequenceName = null;
             settingsController = new SettingsController();
         }
@@ -30,6 +30,7 @@ namespace Tao_Bot_Maker.Controller
         {
             settingsController.OpenSettingsForm(settingsType);
         }
+
         public void SetSettingValue(string name, string value, SettingsType type)
         {
             settingsController.SetSettingValue(name, value, type);
@@ -54,12 +55,10 @@ namespace Tao_Bot_Maker.Controller
         {
             try
             {
-                currentSequence = sequenceController.GetSequence(sequenceName);
-                currentSequenceName = currentSequence != null ? sequenceName : null;
+                currentSequenceName = sequenceController.LoadSequence(sequenceName) != null ? sequenceName : null;
             }
             catch (Exception e)
             {
-                currentSequence = null;
                 currentSequenceName = sequenceName;
                 Console.WriteLine($"Error loading sequence '{sequenceName}': {e.Message}");
             }
@@ -90,7 +89,7 @@ namespace Tao_Bot_Maker.Controller
 
         public Sequence GetCurrentSequence()
         {
-            return currentSequence;
+            return sequenceController.GetSequence();
         }
 
         public string GetCurrentSequenceName()
@@ -100,51 +99,71 @@ namespace Tao_Bot_Maker.Controller
 
         public void AddAction()
         {
-            if (currentSequence != null)
-            {
-                sequenceController.AddActionToSequence(currentSequence);
-            }
+            sequenceController.AddAction();
         }
 
         public void UpdateAction(Action oldAction)
         {
-            if (currentSequence != null)
-            {
-                sequenceController.UpdateActionInSequence(currentSequence, oldAction);
-            }
+            sequenceController.UpdateAction(oldAction);
         }
 
         public void RemoveActionFromCurrentSequence(Action action)
         {
-            if (currentSequence != null)
-            {
-                sequenceController.RemoveActionFromSequence(currentSequence, action);
-            }
+            sequenceController.RemoveAction(action);
         }
 
         public void SaveCurrentSequence()
         {
-            if (currentSequence != null)
-            {
-                sequenceController.SaveSequence(currentSequence, currentSequenceName);
-            }
+            sequenceController.SaveSequence(currentSequenceName);
         }
 
         public void SaveAsCurrentSequence()
         {
-            if (currentSequence != null)
+            currentSequenceName = sequenceController.SaveSequence(null);
+        }
+
+        public async Task ExecuteSequence(CancellationToken token)
+        {
+            Console.WriteLine("Starting execution of sequence.");
+            try
             {
-                currentSequenceName = sequenceController.SaveSequence(currentSequence, null);
+                if (token.IsCancellationRequested)
+                {
+                    token.ThrowIfCancellationRequested();
+                }
+
+                try { await sequenceController.ExecuteSequence(token); }
+                catch (OperationCanceledException) { Console.WriteLine("Execution of sequence was cancelled."); }
+                catch (Exception e) { Console.WriteLine(e.Message); }
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("Execution of sequence was cancelled.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur : {ex.Message}");
             }
         }
 
-        public async Task ExecuteSequence(Sequence sequence)
+        public void PauseSequence()
         {
-            Logger.Log($"Sequence {currentSequenceName} started");
+            sequenceController.PauseSequence();
+        }
 
-            await sequenceController.ExecuteSequence(sequence);
+        public void ResumeSequence()
+        {
+            sequenceController.ResumeSequence();
+        }
 
-            Logger.Log($"Sequence {currentSequenceName} ended");
+        public void TogglePause()
+        {
+            sequenceController.TogglePause();
+        }
+
+        public void StopSequence(CancellationTokenSource cancellationTokenSource)
+        {
+            sequenceController.StopSequence(cancellationTokenSource);
         }
     }
 }

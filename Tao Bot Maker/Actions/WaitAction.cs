@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Helpers;
 
@@ -22,21 +24,22 @@ namespace Tao_Bot_Maker.Model
             RandomizeWait = randomizeWait;
         }
 
-        public override async Task Execute()
+        public override async Task Execute(CancellationToken token)
         {
-            int waitTime = MinimumWait;
-            if (RandomizeWait)
-            {
-                waitTime = new Random().Next(waitTime, MaximumWait);
-            }
-            Logger.Log($"Waiting for {waitTime} ms.");
+            token.ThrowIfCancellationRequested();
+
+            int waitTime = RandomizeWait ? new Random().Next(MinimumWait, MaximumWait) : MinimumWait;
+
+            Logger.Log($"Executing wait action. Waiting for {waitTime} ms.");
+
             await Task.Delay(waitTime);
+
             Logger.Log("Wait action completed.");
         }
 
-        public override async Task Execute(int x, int y)
+        public override async Task Execute(int x, int y, CancellationToken token)
         {
-            await Execute();
+            await Execute(token);
         }
 
         public override string ToString()

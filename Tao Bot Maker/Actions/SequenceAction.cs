@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
@@ -22,26 +24,28 @@ namespace Tao_Bot_Maker.Model
             RepeatCount = repeatCount;
 
             SequenceController sequenceController = new SequenceController();
-            sequence = sequenceController.GetSequence(sequenceName);
+            sequence = sequenceController.LoadSequence(sequenceName);
         }
 
-        public override async Task Execute()
+        public override async Task Execute(CancellationToken token)
         {
-            Logger.Log($"Repeating sequence: {SequenceName} {RepeatCount} times");
-            // Exécute chaque action dans la séquence le nombre de fois spécifié
+            token.ThrowIfCancellationRequested();
+
+            Logger.Log($"Executing sequence action. {SequenceName} {RepeatCount} times");
+
             for (int i = 0; i < RepeatCount; i++)
             {
                 Logger.Log($"Loop {i + 1} of {RepeatCount}");
                 foreach (var action in sequence.Actions)
                 {
-                    await action.Execute();
+                    await action.Execute(token);
                 }
             }
             Logger.Log($"Repeating sequence completed.");
         }
-        public override async Task Execute(int x, int y)
+        public override async Task Execute(int x, int y, CancellationToken token)
         {
-            await Execute();
+            await Execute(token);
         }
 
         public override string ToString()

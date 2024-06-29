@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.Properties;
 using Tao_Bot_Maker.View;
@@ -13,10 +15,13 @@ namespace Tao_Bot_Maker.Controller
     public class SequenceController
     {
         private ISequenceRepository sequenceRepository;
+        private Sequence sequence;
+        private static bool isPaused;
 
         public SequenceController()
         {
             sequenceRepository = new SequenceRepository();
+            sequence = new Sequence();
         }
 
         public List<string> GetAllSequenceNames()
@@ -29,20 +34,26 @@ namespace Tao_Bot_Maker.Controller
             return sequenceRepository.RemoveSequence(name);
         }
 
-        public Sequence GetSequence(string name)
+        public Sequence GetSequence()
+        {
+            return sequence;
+        }
+
+        public Sequence LoadSequence(string name)
         {
             try
             {
-                return sequenceRepository.GetSequence(name);
+                sequence = sequenceRepository.LoadSequence(name);
+                return sequence;
             }
             catch (Exception e)
             {
+                sequence = null;
                 throw new Exception(e.Message);
             }
         }
 
-
-        public void AddActionToSequence(Sequence sequence)
+        public void AddAction()
         {
             using (var addActionForm = new ActionForm())
             {
@@ -53,12 +64,23 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
-        public void RemoveActionFromSequence(Sequence sequence, Action action)
+        internal void UpdateAction(Action oldAction)
+        {
+            using (var addActionForm = new ActionForm(false, oldAction))
+            {
+                if (addActionForm.ShowDialog() == DialogResult.OK)
+                {
+                    sequence.UpdateAction(oldAction, addActionForm.Action);
+                }
+            }
+        }
+
+        public void RemoveAction(Action action)
         {
             sequence.RemoveAction(action);
         }
 
-        public string SaveSequence(Sequence sequence, string name = null)
+        public string SaveSequence(string name = null)
         {
             if (sequence == null)
             {
@@ -85,23 +107,97 @@ namespace Tao_Bot_Maker.Controller
             return name;
         }
 
-        public async Task ExecuteSequence(Sequence sequence)
+        public async Task ExecuteSequence(CancellationToken token)
         {
-            foreach (var action in sequence.Actions)
+            try
             {
-                await action.Execute();
+                Logger.Log("Execution started");
+                isPaused = false;
+                await Task.Run(async () =>
+                {
+                    foreach (var action in sequence.Actions)
+                    {
+                        token.ThrowIfCancellationRequested();
+
+                        await PauseIfRequested();
+
+                        try { 
+                            await ExecuteAction(action, 0, 0, token); 
+                        }
+                        catch (OperationCanceledException e) { Console.WriteLine($"SequenceController OperationCanceledException  {e.Message}"); }
+                        catch (Exception e) { Console.WriteLine($"SequenceController Error : {e.Message}"); }
+                    }
+                }, token);
+
+                Logger.Log("Execution completed");
+            }
+            catch (OperationCanceledException e)
+            {
+                throw new OperationCanceledException(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"SequenceController Error : {e.Message}", e);
             }
         }
 
-        internal void UpdateActionInSequence(Sequence sequence, Action oldAction)
+        public static async Task ExecuteAction(Action action, int x, int y, CancellationToken token)
         {
-            using (var addActionForm = new ActionForm(false, oldAction))
+            try
             {
-                if (addActionForm.ShowDialog() == DialogResult.OK)
-                {
-                    sequence.UpdateAction(oldAction, addActionForm.Action);
-                }
+                token.ThrowIfCancellationRequested();
+
+                await PauseIfRequested();
+
+                await action.Execute(x, y, token);
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine($"SequenceController ExecuteAction OperationCanceledException  {e.Message}");
+                throw new OperationCanceledException(e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"SequenceController ExecuteAction Error : {e.Message}");
+                throw new Exception($"SequenceController Error : {e.Message}", e);
             }
         }
+
+        public static bool GetIsPaused()
+        {
+            return isPaused;
+        }
+
+        public static async Task PauseIfRequested()
+        {
+            while (GetIsPaused())
+            {
+                await Task.Delay(100);
+            }
+        }
+
+        public void PauseSequence()
+        {
+            isPaused = true;
+        }
+
+        public void ResumeSequence()
+        {
+            isPaused = false;
+        }
+
+        public void TogglePause()
+        {
+            isPaused = !isPaused;
+            string message = isPaused ? "paused" : "resumed";
+            Logger.Log($"Execution {message}");
+        }
+
+        public void StopSequence(CancellationTokenSource token)
+        {
+            token.Cancel();
+            Logger.Log($"Execution stopped");
+        }
+
     }
 }

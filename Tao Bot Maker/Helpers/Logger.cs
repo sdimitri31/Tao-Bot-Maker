@@ -12,6 +12,7 @@ namespace Tao_Bot_Maker.Helpers
         {
             // Ajouter un timestamp et le niveau au message de log
             string logEntry = $"{DateTime.Now} [{level}]: {message}";
+            Console.WriteLine(logEntry);
 
             // Déclencher l'événement
             LogMessageReceived?.Invoke(logEntry, level);

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Tao_Bot_Maker.Model
@@ -9,8 +10,9 @@ namespace Tao_Bot_Maker.Model
     {
         public abstract ActionType Type { get; set; }
 
-        public abstract Task Execute();
-        public abstract Task Execute(int x, int y);
+        public abstract Task Execute(CancellationToken token);
+
+        public abstract Task Execute(int x, int y, CancellationToken token);
 
         public abstract bool Validate(out string errorMessage);
 

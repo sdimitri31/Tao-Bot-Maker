@@ -6,7 +6,7 @@ namespace Tao_Bot_Maker.Model
     {
         IEnumerable<string> GetAllSequenceNames();
         bool RemoveSequence(string name);
-        Sequence GetSequence(string name);
+        Sequence LoadSequence(string name);
         void SaveSequence(Sequence sequence, string name);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LogFramework;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
@@ -67,13 +68,15 @@ namespace Tao_Bot_Maker.Model
             ClickDuration = clickDuration;
             mouseSimulator = new MouseSimulator();
         }
-        public override async Task Execute()
+        public override async Task Execute(CancellationToken token)
         {
-            await Execute(0, 0);
+            await Execute(0, 0, token);
         }
 
-        public override async Task Execute(int x, int y)
+        public override async Task Execute(int x, int y, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
+
             int startX, startY;
             if (UseImageCoordsAsStart)
             {
@@ -85,6 +88,8 @@ namespace Tao_Bot_Maker.Model
                 startX = UseCurrentPosition ? Cursor.Position.X : StartX;
                 startY = UseCurrentPosition ? Cursor.Position.Y : StartY;
             }
+
+            Logger.Log($"Executing mouse action. {ClickType} at ({StartX},{StartY})");
 
             // Set the end coordinates for drag and drop or move actions
             int? endX, endY;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
@@ -20,16 +21,19 @@ namespace Tao_Bot_Maker.Model
             keyboardSimulator = new KeyboardSimulator();
         }
 
-        public override async Task Execute()
+        public override async Task Execute(CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
+
             string keyName = KeyboardSimulator.GetFormatedKeysString(Key);
-            Logger.Log($"Pressing key: {keyName}");
+            Logger.Log($"Executing Key action. Key: {keyName}");
+
             await keyboardSimulator.PressKey(Key);
         }
 
-        public override async Task Execute(int x, int y)
+        public override async Task Execute(int x, int y, CancellationToken token)
         {
-            await Execute();
+            await Execute(token);
         }
 
         public override string ToString()

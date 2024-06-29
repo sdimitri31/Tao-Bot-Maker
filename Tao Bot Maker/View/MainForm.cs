@@ -13,6 +13,7 @@ namespace Tao_Bot_Maker.View
     public partial class MainForm : Form
     {
         private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource cancellationTokenSequenceExecution = new CancellationTokenSource();
 
         private MainFormController mainFormController;
 
@@ -117,7 +118,7 @@ namespace Tao_Bot_Maker.View
         {
             actionsListBox.Items.Clear();
 
-            if(mainFormController.GetCurrentSequence() == null) 
+            if (mainFormController.GetCurrentSequence() == null)
                 return;
 
             foreach (var action in mainFormController.GetCurrentSequence().Actions)
@@ -179,11 +180,12 @@ namespace Tao_Bot_Maker.View
 
         private void StartToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StartSequence();
         }
 
         private void StopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            StopSequence();
         }
 
         private void EnglishToolStripMenuItem_Click(object sender, EventArgs e)
@@ -248,13 +250,9 @@ namespace Tao_Bot_Maker.View
             LoadActions();
         }
 
-        private async void StartBotToolStripButton_Click(object sender, EventArgs e)
+        private void StartBotToolStripButton_Click(object sender, EventArgs e)
         {
-            var sequence = mainFormController.GetCurrentSequence();
-            if (sequence != null)
-            {
-                await mainFormController.ExecuteSequence(sequence);
-            }
+            StartSequence();
         }
 
         private void DeleteActionToolStripButton_Click(object sender, EventArgs e)
@@ -276,7 +274,7 @@ namespace Tao_Bot_Maker.View
 
         private void StopBotToolStripButton_Click(object sender, EventArgs e)
         {
-
+            StopSequence();
         }
 
         private void SaveSequenceToolStripButton_Click(object sender, EventArgs e)
@@ -288,6 +286,37 @@ namespace Tao_Bot_Maker.View
         {
             if (mainFormController.RemoveSequence(sequenceComboBox.SelectedItem.ToString()))
                 New();
+        }
+
+        private async void StartSequence()
+        {
+            Console.WriteLine("StartSequence clicked.");
+            cancellationTokenSequenceExecution.Cancel();
+            cancellationTokenSequenceExecution = new CancellationTokenSource();
+            var token = cancellationTokenSequenceExecution.Token;
+
+            try
+            {
+                await mainFormController.ExecuteSequence(token);
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("Execution of sequence was cancelled.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur : {ex.Message}");
+            }
+        }
+
+        private void PauseBotToolStripButton_Click(object sender, EventArgs e)
+        {
+            mainFormController.TogglePause();
+        }
+
+        private void StopSequence()
+        {
+            mainFormController.StopSequence(cancellationTokenSequenceExecution);
         }
     }
 }
