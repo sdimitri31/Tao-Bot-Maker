@@ -310,6 +310,7 @@
     <None Include="Resources\icons8-do-not-disturb-481.png" />
     <None Include="Resources\icons8-file-481.png" />
     <None Include="Resources\icons8-pencil-drawing-481.png" />
+    <None Include="Resources\icons8-pause-button-48.png" />
     <Content Include="Resources\tao.ico" />
   </ItemGroup>
   <ItemGroup />

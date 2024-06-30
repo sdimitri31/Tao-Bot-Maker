@@ -193,6 +193,16 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_pause_button_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_pause_button_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_pencil_drawing_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-pencil-drawing-48", resourceCulture);

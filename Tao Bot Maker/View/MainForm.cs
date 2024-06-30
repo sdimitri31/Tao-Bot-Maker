@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
