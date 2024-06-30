@@ -9,7 +9,7 @@ namespace Tao_Bot_Maker.View
 {
     public partial class KeyActionPropertiesPanel : UserControl, IActionPropertiesPanel
     {
-        private ActionForm addActionForm;
+        private readonly ActionForm addActionForm;
         private bool isDetection;
 
         public Keys Key { get; set; }
@@ -17,12 +17,25 @@ namespace Tao_Bot_Maker.View
         public KeyActionPropertiesPanel(ActionForm addActionForm)
         {
             InitializeComponent();
+            UpdateUI();
             this.addActionForm = addActionForm;
+        }
+
+        private void UpdateUI()
+        {
+            keyLabel.Text = Resources.Strings.LabelKey;
+            keyButton.Text = Resources.Strings.ButtonKeyUnassigned;
         }
 
         public Action GetAction()
         {
             KeyAction keyAction = new KeyAction(key: Key);
+
+            if (!keyAction.Validate(out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
 
             return keyAction;
         }
@@ -42,7 +55,7 @@ namespace Tao_Bot_Maker.View
             {
                 isDetection = false;
                 if (Key == Keys.None)
-                    keyButton.Text = Properties.strings.button_Key_Unassigned;
+                    keyButton.Text = Resources.Strings.ButtonKeyUnassigned;
                 else
                     keyButton.Text = KeyboardSimulator.GetFormatedKeysString(Key);
             }
@@ -50,7 +63,7 @@ namespace Tao_Bot_Maker.View
             {
                 addActionForm.UnregisterHotkeys();
                 isDetection = true;
-                keyButton.Text = Properties.strings.button_Key_WaitForInput;
+                keyButton.Text = Resources.Strings.ButtonWaitForInput;
             }
         }
 
@@ -70,7 +83,6 @@ namespace Tao_Bot_Maker.View
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //Detects which keys are pressed
-            //if (msg.Msg == Constants.WM_KEYDOWN && isDetection)
             if (isDetection)
             {
                 //Saving input

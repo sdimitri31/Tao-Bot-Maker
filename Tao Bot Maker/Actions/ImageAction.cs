@@ -49,14 +49,15 @@ namespace Tao_Bot_Maker.Model
 
         public override async Task Execute(CancellationToken token)
         {
-            Logger.Log($"Executing image action. Image: {ImageName}, between coords ({StartX},{StartY}) and ({EndX},{EndY})");
+            string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
+            Logger.Log(executeAction);
 
             // Validate the image path
             string imagePath = Path.Combine(imagesFolderPath, ImageName);
             if (!File.Exists(imagePath))
             {
-                Logger.Log($"Error - Image not found at path: {imagePath}.", TraceEventType.Error);
-                throw new FileNotFoundException($"Image not found at path: {imagePath}");
+                string errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, imagePath);
+                throw new FileNotFoundException(errorMessage);
             }
 
             var stopwatch = Stopwatch.StartNew();
@@ -64,7 +65,9 @@ namespace Tao_Bot_Maker.Model
 
             timer.Elapsed += (sender, args) =>
             {
-                Logger.Log($"Searching for image... {stopwatch.ElapsedMilliseconds} ms elapsed.", TraceEventType.Information);
+                string message = string.Format(Resources.Strings.InfoMessageSearchingImageFor, stopwatch.ElapsedMilliseconds);
+
+                Logger.Log(message, TraceEventType.Information);
             };
             timer.Start();
 
@@ -106,7 +109,10 @@ namespace Tao_Bot_Maker.Model
 
                     if (result != null)
                     {
-                        Logger.Log($"Image found at coordinates: ({result[0]}, {result[1]}) after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Information);
+                        string coords = string.Format(Resources.Strings.CoordinatesFormat, result[0], result[1]);
+                        string message = string.Format(Resources.Strings.InfoMessageImageFoundAtCoordsIn, coords, stopwatch.ElapsedMilliseconds);
+
+                        Logger.Log(message, TraceEventType.Information);
 
                         stopwatch.Stop();
                         timer.Stop();
@@ -121,7 +127,9 @@ namespace Tao_Bot_Maker.Model
 
                     if (stopwatch.ElapsedMilliseconds >= Expiration)
                     {
-                        Logger.Log($"Image search timed out after {stopwatch.ElapsedMilliseconds} ms.", TraceEventType.Warning);
+                        string message = string.Format(Resources.Strings.InfoMessageImageSearchTimeOut, stopwatch.ElapsedMilliseconds);
+
+                        Logger.Log(message, TraceEventType.Warning);
 
                         stopwatch.Stop();
                         timer.Stop();
@@ -142,7 +150,6 @@ namespace Tao_Bot_Maker.Model
                 timer.Stop();
                 timer.Dispose();
                 throw new OperationCanceledException(e.Message, e);
-                //Logger.Log($"Operation canceled: {e.Message}", TraceEventType.Warning);
             }
 
         }
@@ -154,7 +161,10 @@ namespace Tao_Bot_Maker.Model
 
         public override string ToString()
         {
-            return $"ImageAction: {ImageName}";
+            string startCoords = string.Format(Resources.Strings.CoordinatesFormat, StartX, StartY);
+            string endCoords = string.Format(Resources.Strings.CoordinatesFormat, EndX, EndY);
+
+            return string.Format(Resources.Strings.ImageActionToString, ImageName, startCoords, endCoords, Expiration);
         }
 
         public override bool Validate(out string errorMessage)
@@ -165,14 +175,14 @@ namespace Tao_Bot_Maker.Model
             string imagePath = Path.Combine(imagesFolderPath, ImageName);
             if (!File.Exists(imagePath))
             {
-                errorMessage = $"Image not found at path: {imagePath}";
+                errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, imagePath);
                 return false;
             }
 
             // Validate threshold
             if (Threshold < 0 || Threshold > 255)
             {
-                errorMessage = "Threshold must be between 0 and 255.";
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.LabelThreshold, 0, 255);
                 return false;
             }
 

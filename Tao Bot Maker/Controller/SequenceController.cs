@@ -142,7 +142,10 @@ namespace Tao_Bot_Maker.Controller
 
             try
             {
-                Logger.Log("Execution started");
+                Logger.Log(Resources.Strings.InfoMessageStartingExecution);
+
+                Exception executionException = null;
+
                 await Task.Run(async () =>
                 {
                     try
@@ -154,15 +157,19 @@ namespace Tao_Bot_Maker.Controller
                     }
                     catch (OperationCanceledException ex)
                     {
-                        Logger.Log($"Operation cancelled : {ex.Message}", TraceEventType.Warning);
+                        Console.WriteLine($"Operation cancelled : {ex.Message}");
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"SequenceController Error : {ex.Message}");
+                        executionException = ex;
                     }
                 }, token);
 
-                Logger.Log("Execution completed");
+                if (executionException != null) {
+                    throw executionException;
+                }
+
+                Logger.Log(Resources.Strings.InfoMessageExecutionComplete);
             }
             catch (Exception ex)
             {
@@ -186,7 +193,6 @@ namespace Tao_Bot_Maker.Controller
             }
             catch (Exception ex)
             {
-                Logger.Log($"Error executing action : {ex.Message}", TraceEventType.Error);
                 throw new Exception(ex.Message, ex);
             }
         }

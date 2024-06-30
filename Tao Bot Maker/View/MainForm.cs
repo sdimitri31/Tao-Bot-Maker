@@ -3,27 +3,27 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
-using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
+using Settings = Tao_Bot_Maker.Model.Settings;
 
 namespace Tao_Bot_Maker.View
 {
     public partial class MainForm : Form
     {
-
-        private MainFormController mainFormController;
+        private readonly MainFormController mainFormController;
 
         public MainForm()
         {
             InitializeComponent();
             Logger.LogMessageReceived += OnLogMessageReceived;
+            CultureManager.CultureChanged += UpdateUI;
 
             mainFormController = new MainFormController(this);
             mainFormController.InitializeHotkeys();
             LoadSettings();
             LoadSequenceNames();
 
-            Logger.Log("Initialized");
+            Logger.Log(Resources.Strings.InfoMessageProgramReady, TraceEventType.Information);
         }
 
         private void New()
@@ -35,7 +35,6 @@ namespace Tao_Bot_Maker.View
 
         private void OnLogMessageReceived(string message, TraceEventType level)
         {
-            // Mettre à jour la TextBox eventLogTextBox avec les messages de log
             if (eventLogTextBox.InvokeRequired)
             {
                 eventLogTextBox.Invoke((MethodInvoker)delegate
@@ -49,6 +48,28 @@ namespace Tao_Bot_Maker.View
             }
         }
 
+        private void UpdateUI()
+        {
+            this.Text = Resources.Strings.FormTitleMain;
+
+            fileToolStripMenuItem.Text = Resources.Strings.MenuFile;
+            newToolStripMenuItem.Text = Resources.Strings.MenuFileNew;
+            saveToolStripMenuItem.Text = Resources.Strings.MenuFileSave;
+            saveAsToolStripMenuItem.Text = Resources.Strings.MenuFileSaveAs;
+            exitToolStripMenuItem.Text = Resources.Strings.MenuFileExit;
+
+            botToolStripMenuItem.Text = Resources.Strings.MenuBot;
+            startToolStripMenuItem.Text = Resources.Strings.MenuBotStart;
+            stopToolStripMenuItem.Text = Resources.Strings.MenuBotStop;
+
+            settingsToolStripMenuItem.Text = Resources.Strings.MenuSettings;
+            languageToolStripMenuItem.Text = Resources.Strings.MenuSettingsLanguage;
+            shortcutsToolStripMenuItem.Text = Resources.Strings.MenuSettingsShortcuts;
+            themeToolStripMenuItem.Text = Resources.Strings.MenuSettingsTheme;
+            settingsToolStripMenuItem1.Text = Resources.Strings.MenuSettings;
+            aboutToolStripMenuItem.Text = Resources.Strings.MenuAbout;
+        }
+
         private void LoadSettings()
         {
             string language = mainFormController.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
@@ -58,9 +79,11 @@ namespace Tao_Bot_Maker.View
             {
                 case "English":
                     englishToolStripMenuItem.Checked = true;
+                    CultureManager.ChangeCulture("en");
                     break;
                 case "Français":
                     francaisToolStripMenuItem.Checked = true;
+                    CultureManager.ChangeCulture("fr");
                     break;
             }
 
@@ -94,8 +117,11 @@ namespace Tao_Bot_Maker.View
             }
             catch (Exception ex)
             {
-                Logger.Log($"Error : {ex.Message}", TraceEventType.Error);
-                MessageBox.Show($"Error : {ex.Message}");
+                string error = Resources.Strings.Error;
+                string fullMessage = string.Format(Resources.Strings.ErrorMessageFormat, error, ex.Message);
+
+                Logger.Log(fullMessage, TraceEventType.Error);
+                MessageBox.Show(fullMessage, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             LoadActions();
@@ -253,6 +279,7 @@ namespace Tao_Bot_Maker.View
             mainFormController.StopSequence();
             mainFormController.UnregisterHotkeys();
             Logger.LogMessageReceived -= OnLogMessageReceived;
+            CultureManager.CultureChanged -= UpdateUI;
         }
 
         private void EditActionToolStripButton_Click(object sender, EventArgs e)
@@ -279,14 +306,7 @@ namespace Tao_Bot_Maker.View
 
         private void StartSequence()
         {
-            try
-            {
-                mainFormController.StartSequence();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erreur : {ex.Message}");
-            }
+            mainFormController.StartSequence();
         }
 
         private void PauseBotToolStripButton_Click(object sender, EventArgs e)

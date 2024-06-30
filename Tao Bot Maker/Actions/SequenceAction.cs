@@ -16,7 +16,7 @@ namespace Tao_Bot_Maker.Model
         public string SequenceName { get; set; }
         public int RepeatCount { get; set; }
 
-        private Sequence sequence;
+        private readonly Sequence sequence;
 
         public SequenceAction(string sequenceName = "", int repeatCount = 1)
         {
@@ -28,7 +28,8 @@ namespace Tao_Bot_Maker.Model
             catch (Exception ex) 
             { 
                 sequence = null; 
-                Logger.Log($"Failed to load sequence {sequenceName}: {ex.Message}", System.Diagnostics.TraceEventType.Error);
+                string errorMessage = string.Format(Resources.Strings.ErrorMessageFailToLoadSequence, sequenceName);
+                Logger.Log($"{errorMessage} {ex.Message}", System.Diagnostics.TraceEventType.Error);
             }
         }
 
@@ -36,17 +37,25 @@ namespace Tao_Bot_Maker.Model
         {
             token.ThrowIfCancellationRequested();
 
-            Logger.Log($"Executing sequence action. {SequenceName} {RepeatCount} times");
+            string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
+            Logger.Log(executeAction);
+
+            try { SequenceController.GetSequence(SequenceName); }
+            catch (Exception ex)
+            {
+                string errorMessage = string.Format(Resources.Strings.ErrorMessageFailToLoadSequence, SequenceName);
+                throw new Exception($"{errorMessage} {ex.Message}");
+            }
 
             for (int i = 0; i < RepeatCount; i++)
             {
-                Logger.Log($"Loop {i + 1} of {RepeatCount}");
+                string logLoop = string.Format(Resources.Strings.SequenceActionLoopNumber, i + 1, RepeatCount);
+                Logger.Log(logLoop);
                 foreach (var action in sequence.Actions)
                 {
                     await action.Execute(token);
                 }
             }
-            Logger.Log($"Repeating sequence completed.");
         }
         public override async Task Execute(int x, int y, CancellationToken token)
         {
@@ -55,28 +64,28 @@ namespace Tao_Bot_Maker.Model
 
         public override string ToString()
         {
-            // Affiche les actions de la séquence
-            return $"SequenceAction: Name: {SequenceName}, Actions: {string.Join(", ", sequence.Actions.Select(a => a.ToString()))} x {RepeatCount}";
+            return string.Format(Resources.Strings.SequenceActionToString, SequenceName, RepeatCount);
         }
 
         public override bool Validate(out string errorMessage)
         {
             if (string.IsNullOrEmpty(SequenceName))
             {
-                errorMessage = "Sequence name cannot be empty.";
+                errorMessage = Resources.Strings.ErrorMessageEmptyFieldSequence;
                 return false;
             }
 
             try { SequenceController.GetSequence(SequenceName); }
             catch (Exception ex)
             {
-                errorMessage = $"Failed to load sequence {SequenceName}: {ex.Message}";
+                errorMessage = string.Format(Resources.Strings.ErrorMessageFailToLoadSequence, SequenceName);
+                errorMessage = $"{errorMessage} {ex.Message}";
                 return false;
             }
 
             if ((RepeatCount < -1 || RepeatCount > 999999) && RepeatCount != 0)
             {
-                errorMessage = "Repeat count must be between -1 and 999999, and cannot be 0.";
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidRepeatCount, 0, -1, 999999);
                 return false;
             }
 

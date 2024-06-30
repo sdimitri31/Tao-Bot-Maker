@@ -10,15 +10,28 @@ namespace Tao_Bot_Maker.View
         public TextActionPropertiesPanel()
         {
             InitializeComponent();
+            UpdateUI();
             InitializeSpeed();
+        }
+
+        private void UpdateUI()
+        {
+            textToTypeLabel.Text = Resources.Strings.LabelTextToType;
+            speedLabel.Text = Resources.Strings.LabelTypingSpeed;
         }
 
         public Action GetAction()
         {
             TextAction textAction = new TextAction(
-                textToType: this.textToTypeTextBox.Text, 
-                typingSpeed: this.speedComboBox.SelectedItem.ToString()
+                textToType: this.textToTypeTextBox.Text,
+                typingSpeed: this.speedComboBox.SelectedIndex
             );
+
+            if (!textAction.Validate(out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
 
             return textAction;
         }
@@ -26,9 +39,9 @@ namespace Tao_Bot_Maker.View
         public void InitializeSpeed()
         {
             this.speedComboBox.Items.AddRange(new object[] {
-                "Slow",
-                "Medium",
-                "Fast"
+                Resources.Strings.ComboBoxSpeedSlow,
+                Resources.Strings.ComboBoxSpeedMedium,
+                Resources.Strings.ComboBoxSpeedFast
             });
         }
 
@@ -37,7 +50,7 @@ namespace Tao_Bot_Maker.View
             if (action != null && action is TextAction textAction)
             {
                 this.textToTypeTextBox.Text = textAction.TextToType;
-                this.speedComboBox.SelectedItem = textAction.TypingSpeed;
+                this.speedComboBox.SelectedIndex = textAction.TypingSpeed;
             }
         }
 

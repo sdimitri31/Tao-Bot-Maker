@@ -30,10 +30,8 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.selectImageButton = new System.Windows.Forms.Button();
-            this.startXCoordinateLabel = new System.Windows.Forms.Label();
-            this.startYCoordinateLabel = new System.Windows.Forms.Label();
-            this.endXCoordinateLabel = new System.Windows.Forms.Label();
-            this.endYCoordinateLabel = new System.Windows.Forms.Label();
+            this.startCoordinatesLabel = new System.Windows.Forms.Label();
+            this.endCoordinatesLabel = new System.Windows.Forms.Label();
             this.thresholdLabel = new System.Windows.Forms.Label();
             this.expirationLabel = new System.Windows.Forms.Label();
             this.startXCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -45,10 +43,10 @@
             this.selectedImageNameLabel = new System.Windows.Forms.Label();
             this.searchImageButton = new System.Windows.Forms.Button();
             this.selectedImagePictureBox = new System.Windows.Forms.PictureBox();
-            this.actionIfFoundLabel = new System.Windows.Forms.Label();
-            this.actionIfNotFoundLabel = new System.Windows.Forms.Label();
-            this.actionIfFoundButton = new System.Windows.Forms.Button();
-            this.actionIfNotFoundButton = new System.Windows.Forms.Button();
+            this.actionIfImageFoundLabel = new System.Windows.Forms.Label();
+            this.actionIfImageNotFoundLabel = new System.Windows.Forms.Label();
+            this.actionIfImageFoundButton = new System.Windows.Forms.Button();
+            this.actionIfImageNotFoundButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).BeginInit();
@@ -68,25 +66,23 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.Controls.Add(this.selectImageButton, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.startXCoordinateLabel, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.startYCoordinateLabel, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.endXCoordinateLabel, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.endYCoordinateLabel, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.endCoordinatesLabel, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.thresholdLabel, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.expirationLabel, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.startXCoordinateNumericUpDown, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.startYCoordinateNumericUpDown, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.endXCoordinateNumericUpDown, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.endYCoordinateNumericUpDown, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.thresholdNumericUpDown, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.expirationNumericUpDown, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.selectedImageNameLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.searchImageButton, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.selectedImagePictureBox, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.actionIfFoundLabel, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.actionIfNotFoundLabel, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.actionIfFoundButton, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.actionIfNotFoundButton, 2, 9);
+            this.tableLayoutPanel1.Controls.Add(this.actionIfImageFoundLabel, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.actionIfImageNotFoundLabel, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.actionIfImageFoundButton, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.actionIfImageNotFoundButton, 2, 9);
+            this.tableLayoutPanel1.Controls.Add(this.endYCoordinateNumericUpDown, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.endXCoordinateNumericUpDown, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.startCoordinatesLabel, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.startYCoordinateNumericUpDown, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.startXCoordinateNumericUpDown, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -116,45 +112,25 @@
             this.selectImageButton.UseVisualStyleBackColor = true;
             this.selectImageButton.Click += new System.EventHandler(this.SelectImageButton_Click);
             // 
-            // startXCoordinateLabel
+            // startCoordinatesLabel
             // 
-            this.startXCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startXCoordinateLabel.AutoSize = true;
-            this.startXCoordinateLabel.Location = new System.Drawing.Point(3, 68);
-            this.startXCoordinateLabel.Name = "startXCoordinateLabel";
-            this.startXCoordinateLabel.Size = new System.Drawing.Size(94, 13);
-            this.startXCoordinateLabel.TabIndex = 2;
-            this.startXCoordinateLabel.Text = "Start X";
+            this.startCoordinatesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.startCoordinatesLabel.AutoSize = true;
+            this.startCoordinatesLabel.Location = new System.Drawing.Point(3, 128);
+            this.startCoordinatesLabel.Name = "startCoordinatesLabel";
+            this.startCoordinatesLabel.Size = new System.Drawing.Size(94, 13);
+            this.startCoordinatesLabel.TabIndex = 2;
+            this.startCoordinatesLabel.Text = "Start coordinates";
             // 
-            // startYCoordinateLabel
+            // endCoordinatesLabel
             // 
-            this.startYCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startYCoordinateLabel.AutoSize = true;
-            this.startYCoordinateLabel.Location = new System.Drawing.Point(3, 98);
-            this.startYCoordinateLabel.Name = "startYCoordinateLabel";
-            this.startYCoordinateLabel.Size = new System.Drawing.Size(94, 13);
-            this.startYCoordinateLabel.TabIndex = 3;
-            this.startYCoordinateLabel.Text = "Start Y";
-            // 
-            // endXCoordinateLabel
-            // 
-            this.endXCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.endXCoordinateLabel.AutoSize = true;
-            this.endXCoordinateLabel.Location = new System.Drawing.Point(3, 128);
-            this.endXCoordinateLabel.Name = "endXCoordinateLabel";
-            this.endXCoordinateLabel.Size = new System.Drawing.Size(94, 13);
-            this.endXCoordinateLabel.TabIndex = 4;
-            this.endXCoordinateLabel.Text = "End X";
-            // 
-            // endYCoordinateLabel
-            // 
-            this.endYCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.endYCoordinateLabel.AutoSize = true;
-            this.endYCoordinateLabel.Location = new System.Drawing.Point(3, 158);
-            this.endYCoordinateLabel.Name = "endYCoordinateLabel";
-            this.endYCoordinateLabel.Size = new System.Drawing.Size(94, 13);
-            this.endYCoordinateLabel.TabIndex = 5;
-            this.endYCoordinateLabel.Text = "End Y";
+            this.endCoordinatesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.endCoordinatesLabel.AutoSize = true;
+            this.endCoordinatesLabel.Location = new System.Drawing.Point(3, 158);
+            this.endCoordinatesLabel.Name = "endCoordinatesLabel";
+            this.endCoordinatesLabel.Size = new System.Drawing.Size(94, 13);
+            this.endCoordinatesLabel.TabIndex = 5;
+            this.endCoordinatesLabel.Text = "End coordinates";
             // 
             // thresholdLabel
             // 
@@ -179,7 +155,7 @@
             // startXCoordinateNumericUpDown
             // 
             this.startXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 65);
+            this.startXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 125);
             this.startXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -197,7 +173,7 @@
             // startYCoordinateNumericUpDown
             // 
             this.startYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startYCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 95);
+            this.startYCoordinateNumericUpDown.Location = new System.Drawing.Point(203, 125);
             this.startYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -215,7 +191,7 @@
             // endXCoordinateNumericUpDown
             // 
             this.endXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.endXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 125);
+            this.endXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 155);
             this.endXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -233,7 +209,7 @@
             // endYCoordinateNumericUpDown
             // 
             this.endYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.endYCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 155);
+            this.endYCoordinateNumericUpDown.Location = new System.Drawing.Point(203, 155);
             this.endYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -288,7 +264,7 @@
             this.selectedImageNameLabel.Name = "selectedImageNameLabel";
             this.selectedImageNameLabel.Size = new System.Drawing.Size(194, 13);
             this.selectedImageNameLabel.TabIndex = 14;
-            this.selectedImageNameLabel.Text = "Selected image name";
+            this.selectedImageNameLabel.Text = "No image selected";
             // 
             // searchImageButton
             // 
@@ -314,51 +290,51 @@
             this.selectedImagePictureBox.TabIndex = 1;
             this.selectedImagePictureBox.TabStop = false;
             // 
-            // actionIfFoundLabel
+            // actionIfImageFoundLabel
             // 
-            this.actionIfFoundLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.actionIfFoundLabel.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.actionIfFoundLabel, 2);
-            this.actionIfFoundLabel.Location = new System.Drawing.Point(3, 248);
-            this.actionIfFoundLabel.Name = "actionIfFoundLabel";
-            this.actionIfFoundLabel.Size = new System.Drawing.Size(194, 13);
-            this.actionIfFoundLabel.TabIndex = 18;
-            this.actionIfFoundLabel.Text = "Action if image found";
+            this.actionIfImageFoundLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.actionIfImageFoundLabel.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.actionIfImageFoundLabel, 2);
+            this.actionIfImageFoundLabel.Location = new System.Drawing.Point(3, 248);
+            this.actionIfImageFoundLabel.Name = "actionIfImageFoundLabel";
+            this.actionIfImageFoundLabel.Size = new System.Drawing.Size(194, 13);
+            this.actionIfImageFoundLabel.TabIndex = 18;
+            this.actionIfImageFoundLabel.Text = "Action if image found";
             // 
-            // actionIfNotFoundLabel
+            // actionIfImageNotFoundLabel
             // 
-            this.actionIfNotFoundLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.actionIfNotFoundLabel.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.actionIfNotFoundLabel, 2);
-            this.actionIfNotFoundLabel.Location = new System.Drawing.Point(3, 278);
-            this.actionIfNotFoundLabel.Name = "actionIfNotFoundLabel";
-            this.actionIfNotFoundLabel.Size = new System.Drawing.Size(194, 13);
-            this.actionIfNotFoundLabel.TabIndex = 19;
-            this.actionIfNotFoundLabel.Text = "Action if image not found";
+            this.actionIfImageNotFoundLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.actionIfImageNotFoundLabel.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.actionIfImageNotFoundLabel, 2);
+            this.actionIfImageNotFoundLabel.Location = new System.Drawing.Point(3, 278);
+            this.actionIfImageNotFoundLabel.Name = "actionIfImageNotFoundLabel";
+            this.actionIfImageNotFoundLabel.Size = new System.Drawing.Size(194, 13);
+            this.actionIfImageNotFoundLabel.TabIndex = 19;
+            this.actionIfImageNotFoundLabel.Text = "Action if image not found";
             // 
-            // actionIfFoundButton
+            // actionIfImageFoundButton
             // 
-            this.actionIfFoundButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.actionIfFoundButton, 2);
-            this.actionIfFoundButton.Location = new System.Drawing.Point(203, 243);
-            this.actionIfFoundButton.Name = "actionIfFoundButton";
-            this.actionIfFoundButton.Size = new System.Drawing.Size(194, 23);
-            this.actionIfFoundButton.TabIndex = 16;
-            this.actionIfFoundButton.Text = "Set action";
-            this.actionIfFoundButton.UseVisualStyleBackColor = true;
-            this.actionIfFoundButton.Click += new System.EventHandler(this.ActionIfFoundButton_Click);
+            this.actionIfImageFoundButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.actionIfImageFoundButton, 2);
+            this.actionIfImageFoundButton.Location = new System.Drawing.Point(203, 243);
+            this.actionIfImageFoundButton.Name = "actionIfImageFoundButton";
+            this.actionIfImageFoundButton.Size = new System.Drawing.Size(194, 23);
+            this.actionIfImageFoundButton.TabIndex = 16;
+            this.actionIfImageFoundButton.Text = "Add action";
+            this.actionIfImageFoundButton.UseVisualStyleBackColor = true;
+            this.actionIfImageFoundButton.Click += new System.EventHandler(this.ActionIfFoundButton_Click);
             // 
-            // actionIfNotFoundButton
+            // actionIfImageNotFoundButton
             // 
-            this.actionIfNotFoundButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.actionIfNotFoundButton, 2);
-            this.actionIfNotFoundButton.Location = new System.Drawing.Point(203, 273);
-            this.actionIfNotFoundButton.Name = "actionIfNotFoundButton";
-            this.actionIfNotFoundButton.Size = new System.Drawing.Size(194, 23);
-            this.actionIfNotFoundButton.TabIndex = 17;
-            this.actionIfNotFoundButton.Text = "Set action";
-            this.actionIfNotFoundButton.UseVisualStyleBackColor = true;
-            this.actionIfNotFoundButton.Click += new System.EventHandler(this.ActionIfNotFoundButton_Click);
+            this.actionIfImageNotFoundButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.actionIfImageNotFoundButton, 2);
+            this.actionIfImageNotFoundButton.Location = new System.Drawing.Point(203, 273);
+            this.actionIfImageNotFoundButton.Name = "actionIfImageNotFoundButton";
+            this.actionIfImageNotFoundButton.Size = new System.Drawing.Size(194, 23);
+            this.actionIfImageNotFoundButton.TabIndex = 17;
+            this.actionIfImageNotFoundButton.Text = "Add action";
+            this.actionIfImageNotFoundButton.UseVisualStyleBackColor = true;
+            this.actionIfImageNotFoundButton.Click += new System.EventHandler(this.ActionIfNotFoundButton_Click);
             // 
             // ImageActionPropertiesPanel
             // 
@@ -384,10 +360,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button selectImageButton;
         private System.Windows.Forms.PictureBox selectedImagePictureBox;
-        private System.Windows.Forms.Label startXCoordinateLabel;
-        private System.Windows.Forms.Label startYCoordinateLabel;
-        private System.Windows.Forms.Label endXCoordinateLabel;
-        private System.Windows.Forms.Label endYCoordinateLabel;
+        private System.Windows.Forms.Label startCoordinatesLabel;
+        private System.Windows.Forms.Label endCoordinatesLabel;
         private System.Windows.Forms.Label thresholdLabel;
         private System.Windows.Forms.Label expirationLabel;
         private System.Windows.Forms.NumericUpDown startXCoordinateNumericUpDown;
@@ -398,9 +372,9 @@
         private System.Windows.Forms.NumericUpDown expirationNumericUpDown;
         private System.Windows.Forms.Label selectedImageNameLabel;
         private System.Windows.Forms.Button searchImageButton;
-        private System.Windows.Forms.Button actionIfFoundButton;
-        private System.Windows.Forms.Button actionIfNotFoundButton;
-        private System.Windows.Forms.Label actionIfFoundLabel;
-        private System.Windows.Forms.Label actionIfNotFoundLabel;
+        private System.Windows.Forms.Button actionIfImageFoundButton;
+        private System.Windows.Forms.Button actionIfImageNotFoundButton;
+        private System.Windows.Forms.Label actionIfImageFoundLabel;
+        private System.Windows.Forms.Label actionIfImageNotFoundLabel;
     }
 }

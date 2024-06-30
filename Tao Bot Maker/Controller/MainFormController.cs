@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
 using Action = Tao_Bot_Maker.Model.Action;
@@ -261,7 +263,11 @@ namespace Tao_Bot_Maker.Controller
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                string error = Resources.Strings.Error;
+                string fullMessage = string.Format(Resources.Strings.ErrorMessageFormat, error, ex.Message);
+
+                Logger.Log(fullMessage, TraceEventType.Error);
+                MessageBox.Show(fullMessage, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

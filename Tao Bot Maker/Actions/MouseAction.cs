@@ -1,5 +1,6 @@
 ﻿using LogFramework;
 using System;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,9 +28,9 @@ namespace Tao_Bot_Maker.Model
         public bool UseImageCoordsAsStart { get; set; }
         public bool UseImageCoordsAsEnd { get; set; }
         public bool UseCurrentPosition { get; set; }
-        public int? EndX { get; set; }
-        public int? EndY { get; set; }
-        public string MoveSpeed { get; set; }
+        public int EndX { get; set; }
+        public int EndY { get; set; }
+        public int MoveSpeed { get; set; }
         public int ScrollAmount { get; set; }
         public int ClickDuration { get; set; }
 
@@ -45,9 +46,9 @@ namespace Tao_Bot_Maker.Model
             bool useImageCoordsAsStart = false,
             bool useImageCoordsAsEnd = false,
             bool useCurrentPosition = false,
-            int? endX = null,
-            int? endY = null,
-            string moveSpeed = "Medium",
+            int endX = 0,
+            int endY = 0,
+            int moveSpeed = 2,
             int scrollAmount = 0,
             int clickDuration = 0)
         {
@@ -77,44 +78,35 @@ namespace Tao_Bot_Maker.Model
         {
             token.ThrowIfCancellationRequested();
 
-            int startX, startY;
             if (UseImageCoordsAsStart)
             {
-                startX = x;
-                startY = y;
+                StartX = x;
+                StartY = y;
             }
             else
             {
-                startX = UseCurrentPosition ? Cursor.Position.X : StartX;
-                startY = UseCurrentPosition ? Cursor.Position.Y : StartY;
+                StartX = UseCurrentPosition ? Cursor.Position.X : StartX;
+                StartY = UseCurrentPosition ? Cursor.Position.Y : StartY;
             }
 
-            Logger.Log($"Executing mouse action. {ClickType} at ({StartX},{StartY})");
-
-            // Set the end coordinates for drag and drop or move actions
-            int? endX, endY;
+            // Set the end coordinates for drag and drop
             if (UseImageCoordsAsEnd)
             {
-                endX = x;
-                endY = y;
-            }
-            else
-            {
-                endX = EndX.HasValue ? EndX.Value : (int?)null;
-                endY = EndY.HasValue ? EndY.Value : (int?)null;
+                EndX = x;
+                EndY = y;
             }
 
             // Determine the move speed
             int moveSpeed;
-            switch (MoveSpeed.ToLower())
+            switch (MoveSpeed)
             {
-                case "slow":
+                case 0:
                     moveSpeed = 30;
                     break;
-                case "medium":
+                case 1:
                     moveSpeed = 10;
                     break;
-                case "fast":
+                case 2:
                     moveSpeed = 5;
                     break;
                 default:
@@ -122,27 +114,26 @@ namespace Tao_Bot_Maker.Model
                     break;
             }
 
+            string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
+            Logger.Log(executeAction);
+
             // Move to start position if not using current position
             if (!UseCurrentPosition)
             {
-                Logger.Log($"Moving cursor to ({startX}, {startY})");
-                await mouseSimulator.Move(startX, startY, moveSpeed);
+                await mouseSimulator.Move(StartX, StartY, moveSpeed);
             }
 
             // Perform the mouse action
             if (Scroll)
             {
-                Logger.Log($"Scrolling by {ScrollAmount}");
                 await mouseSimulator.Scroll(ScrollAmount, ClickDuration);
             }
-            else if (DragAndDrop && endX.HasValue && endY.HasValue)
+            else if (DragAndDrop)
             {
-                Logger.Log($"Drag and drop from ({startX}, {startY}) to ({endX.Value}, {endY.Value})");
-                await mouseSimulator.DragAndDrop(startX, startY, endX.Value, endY.Value, moveSpeed, ClickDuration);
+                await mouseSimulator.DragAndDrop(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
             }
             else if (ClickType != MouseActionType.NoClick)
             {
-                Logger.Log($"Performing {ClickType} click");
                 // Perform the click
                 if (DoubleClick)
                 {
@@ -183,32 +174,69 @@ namespace Tao_Bot_Maker.Model
 
         public override string ToString()
         {
-            // Affiche les informations de l'action de la souris
-            return $"Mouse action: {ClickType} ({StartX}, {StartY}) -> ({EndX}, {EndY})";
+            string actionDescription = "";
+
+            if (Scroll)
+            {
+                string scrollBy = String.Format(Resources.Strings.MouseActionToStringScrollBy, ScrollAmount);
+                string atCoords = String.Format(Resources.Strings.MouseActionToStringAtCoordinates);
+                string coords = string.Format(Resources.Strings.CoordinatesFormat, StartX, StartY);
+                actionDescription += $"{scrollBy} {atCoords} {coords}";
+            }
+            else if (DragAndDrop)
+            {
+                string startCoords = string.Format(Resources.Strings.CoordinatesFormat, StartX, StartY);
+                string endCoords = string.Format(Resources.Strings.CoordinatesFormat, EndX, EndY);
+                string dragAndDrop = String.Format(Resources.Strings.MouseActionToStringDragAndDropFrom, startCoords, endCoords);
+                actionDescription += dragAndDrop;
+            }
+            else
+            {
+                string doubleWord = Resources.Strings.MouseActionToStringDouble;
+                string clickType = DoubleClick ? $"{doubleWord} " : "";
+                actionDescription += $"{clickType}{ClickType}";
+
+                if (UseCurrentPosition)
+                {
+                    actionDescription += " " + Resources.Strings.MouseActionToStringAtCurrentPosition;
+                }
+                else if (UseImageCoordsAsStart)
+                {
+                    actionDescription += " " + Resources.Strings.MouseActionToStringAtImageCoordinates;
+                }
+                else
+                {
+                    string startCoords = string.Format(Resources.Strings.CoordinatesFormat, StartX, StartY);
+                    string atCoords = String.Format(Resources.Strings.MouseActionToStringAtCoordinates);
+                    actionDescription += $" {atCoords} {startCoords}";
+                }
+            }
+
+            return actionDescription;
         }
 
         public override bool Validate(out string errorMessage)
         {
-            int[] coords = new int[] { StartX, StartY, (int)EndX, (int)EndY };
+            int[] coords = new int[] { StartX, StartY, EndX, EndY };
 
             foreach (int coord in coords)
             {
                 if ((coord < -999999) || (coord > 999999))
                 {
-                    errorMessage = "Coordinates must be between -999999 and 999999.";
+                    errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.Coordinates, 0, 2);
                     return false;
                 }
             }
 
             if (!Enum.IsDefined(typeof(MouseActionType), ClickType))
             {
-                errorMessage = "ClickType must be MouseActionType.";
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.LabelClickType);
                 return false;
             }
 
-            if (string.IsNullOrEmpty(MoveSpeed))
+            if ((MoveSpeed < 0) || (MoveSpeed > 2))
             {
-                errorMessage = "Typing speed cannot be empty.";
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.LabelSpeed, 0, 2);
                 return false;
             }
 

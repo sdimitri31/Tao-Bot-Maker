@@ -20,7 +20,23 @@ namespace Tao_Bot_Maker.View
         public ImageActionPropertiesPanel(ActionForm addActionForm)
         {
             InitializeComponent();
+            UpdateUI();
             this.addActionForm = addActionForm;
+        }
+
+        private void UpdateUI()
+        {
+            selectImageButton.Text = Resources.Strings.ButtonSelectImage;
+            selectedImageNameLabel.Text = Resources.Strings.LabelNoImageSelected;
+            startCoordinatesLabel.Text = Resources.Strings.LabelStartCoordinates;
+            endCoordinatesLabel.Text = Resources.Strings.LabelEndCoordinates;
+            thresholdLabel.Text = Resources.Strings.LabelThreshold;
+            expirationLabel.Text = Resources.Strings.LabelExpiration;
+            actionIfImageFoundLabel.Text = Resources.Strings.LabelActionIfImageFound;
+            actionIfImageNotFoundLabel.Text = Resources.Strings.LabelActionIfImageNotFound;
+            searchImageButton.Text = Resources.Strings.ButtonSearchImage;
+            actionIfImageFoundButton.Text = Resources.Strings.ButtonAddAction;
+            actionIfImageNotFoundButton.Text = Resources.Strings.ButtonAddAction;
         }
 
         public Action GetAction()
@@ -36,6 +52,12 @@ namespace Tao_Bot_Maker.View
                 actionIfFound: this.actionIfFound,
                 actionIfNotFound: this.actionNotFound
             );
+
+            if (!imageAction.Validate(out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
 
             return imageAction;
         }
@@ -53,9 +75,9 @@ namespace Tao_Bot_Maker.View
                 this.thresholdNumericUpDown.Value = imageAction.Threshold;
                 this.expirationNumericUpDown.Value = imageAction.Expiration;
                 this.actionIfFound = imageAction.ActionIfFound;
-                actionIfFoundButton.Text = actionIfFound.Type.ToString();
+                actionIfImageFoundButton.Text = actionIfFound.Type.ToString();
                 this.actionNotFound = imageAction.ActionIfNotFound;
-                actionIfNotFoundButton.Text = actionNotFound.Type.ToString();
+                actionIfImageNotFoundButton.Text = actionNotFound.Type.ToString();
             }
         }
 
@@ -90,10 +112,12 @@ namespace Tao_Bot_Maker.View
                         SetImageName(importedImageName);
                         SetPictureFromName(importedImageName);
                     }
-                    else
+                    else if (!string.IsNullOrEmpty(errorMessage))
                     {
                         // Show error message
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string error = Resources.Strings.Error;
+                        string fullMessage = string.Format(Resources.Strings.ErrorMessageFormat, error, errorMessage);
+                        MessageBox.Show(fullMessage, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -101,11 +125,11 @@ namespace Tao_Bot_Maker.View
 
         private string ImportImage(string originalPath, out string errorMessage)
         {
-            errorMessage = "";
+            errorMessage = string.Empty;
 
             if (!File.Exists(originalPath))
             {
-                errorMessage = "Error: File not found.";
+                errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, originalPath);
                 return null;
             }
 
@@ -124,8 +148,10 @@ namespace Tao_Bot_Maker.View
             // Handle file already exists in the target folder
             if (File.Exists(targetFullPath))
             {
-                string message = $"Image \"{imageName}\" already exists in the folder. Do you want to replace it?";
-                DialogResult result = MessageBox.Show(message, "Replace Image?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                string questionMessage = string.Format(Resources.Strings.InfoMessageFileExists, imageName);
+                string question = Resources.Strings.QuestionMessageReplace;
+                string questionMessageCaption = Resources.Strings.MessageCaptionFileExists;
+                DialogResult result = MessageBox.Show($"{questionMessage}\r\n{question}", questionMessageCaption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 switch (result)
                 {
@@ -145,7 +171,6 @@ namespace Tao_Bot_Maker.View
                         break;
 
                     case DialogResult.Cancel:
-                        errorMessage = "Operation cancelled by the user.";
                         return null;
                 }
             }
@@ -167,12 +192,12 @@ namespace Tao_Bot_Maker.View
             {
                 File.Delete(targetPath);
                 File.Copy(sourcePath, targetPath);
-                errorMessage = "";
+                errorMessage = string.Empty;
                 return true;
             }
             catch (Exception ex)
             {
-                errorMessage = $"Error: Unable to replace the file. {ex.Message}";
+                errorMessage = $"{Resources.Strings.ErrorMessageUnableToReplaceFile}\r\n{ex.Message}";
                 return false;
             }
         }
@@ -182,12 +207,12 @@ namespace Tao_Bot_Maker.View
             try
             {
                 File.Copy(sourcePath, targetPath);
-                errorMessage = "";
+                errorMessage = string.Empty;
                 return true;
             }
             catch (Exception ex)
             {
-                errorMessage = $"Error: Unable to copy the file. {ex.Message}";
+                errorMessage = $"{Resources.Strings.ErrorMessageUnableToCopyFile}\r\n{ex.Message}";
                 return false;
             }
         }
@@ -200,13 +225,13 @@ namespace Tao_Bot_Maker.View
                 string newFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + extension;
                 newFilePath = Path.Combine(targetFolderPath, newFileName);
                 File.Copy(sourcePath, newFilePath);
-                errorMessage = "";
+                errorMessage = string.Empty;
                 return true;
             }
             catch (Exception ex)
             {
                 newFilePath = null;
-                errorMessage = $"Error: Unable to rename and copy the file. {ex.Message}";
+                errorMessage = $"{Resources.Strings.ErrorMessageUnableToRenameAndCopyFile1}\r\n{ex.Message}";
                 return false;
             }
         }
@@ -225,11 +250,15 @@ namespace Tao_Bot_Maker.View
 
             if (centerCoordinates != null)
             {
-                MessageBox.Show($"Image found at center coordinates: X = {centerCoordinates[0]}, Y = {centerCoordinates[1]}", "Image Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string coordinates = string.Format(Resources.Strings.CoordinatesFormat, centerCoordinates[0], centerCoordinates[1]);
+                string message = string.Format(Resources.Strings.InfoMessageImageFoundAtCoords, coordinates);
+                string caption = Resources.Strings.InfoMessageImageFound;
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Image not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string caption = Resources.Strings.InfoMessageImageNotFound;
+                MessageBox.Show(caption, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -255,7 +284,6 @@ namespace Tao_Bot_Maker.View
             endYCoordinateNumericUpDown.Value = y;
         }
 
-
         private void ActionIfFoundButton_Click(object sender, EventArgs e)
         {
             addActionForm.UnregisterHotkeys();
@@ -264,7 +292,7 @@ namespace Tao_Bot_Maker.View
                 if (addActionForm.ShowDialog() == DialogResult.OK)
                 {
                     actionIfFound = addActionForm.Action;
-                    actionIfFoundButton.Text = actionIfFound.Type.ToString();
+                    actionIfImageFoundButton.Text = actionIfFound.Type.ToString();
                 }
             }
             addActionForm.RegisterHotkeys();
@@ -278,7 +306,7 @@ namespace Tao_Bot_Maker.View
                 if (addActionForm.ShowDialog() == DialogResult.OK)
                 {
                     actionNotFound = addActionForm.Action;
-                    actionIfNotFoundButton.Text = actionNotFound.Type.ToString();
+                    actionIfImageNotFoundButton.Text = actionNotFound.Type.ToString();
                 }
             }
             addActionForm.RegisterHotkeys();

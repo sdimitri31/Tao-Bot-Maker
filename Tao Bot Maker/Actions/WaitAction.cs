@@ -30,11 +30,10 @@ namespace Tao_Bot_Maker.Model
 
             int waitTime = RandomizeWait ? new Random().Next(MinimumWait, MaximumWait) : MinimumWait;
 
-            Logger.Log($"Executing wait action. Waiting for {waitTime} ms.");
+            string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
+            Logger.Log(executeAction);
 
             await Task.Delay(waitTime);
-
-            Logger.Log("Wait action completed.");
         }
 
         public override async Task Execute(int x, int y, CancellationToken token)
@@ -46,23 +45,26 @@ namespace Tao_Bot_Maker.Model
         {
             if (RandomizeWait)
             {
-                return $"Wait between {MinimumWait} and {MaximumWait} ms";
+                return string.Format(Resources.Strings.WaitActionWithIntervalToString, MinimumWait, MaximumWait);
             }
-            return $"Wait {MinimumWait} ms";
+            else
+            {
+                return string.Format(Resources.Strings.WaitActionToString, MinimumWait);
+            }
         }
 
         public override bool Validate(out string errorMessage)
         {
             if (MinimumWait < 0)
             {
-                errorMessage = "Minimum wait time cannot be less than 0.";
+                errorMessage = Resources.Strings.ErrorMessageWaitActionInvalidMinimumWait;
                 return false;
             }
 
             if (RandomizeWait)
                 if (MaximumWait < MinimumWait)
                 {
-                    errorMessage = "Maximum wait time cannot be less than minimum wait time.";
+                    errorMessage = Resources.Strings.ErrorMessageWaitActionInvalidMaximumWait;
                     return false;
                 }
 

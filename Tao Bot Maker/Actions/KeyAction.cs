@@ -25,8 +25,8 @@ namespace Tao_Bot_Maker.Model
         {
             token.ThrowIfCancellationRequested();
 
-            string keyName = KeyboardSimulator.GetFormatedKeysString(Key);
-            Logger.Log($"Executing Key action. Key: {keyName}");
+            string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
+            Logger.Log(executeAction);
 
             await keyboardSimulator.PressKey(Key);
         }
@@ -38,11 +38,17 @@ namespace Tao_Bot_Maker.Model
 
         public override string ToString()
         {
-            return $"Action key: {KeyboardSimulator.GetFormatedKeysString(Key)}";
+            return string.Format(Resources.Strings.KeyActionToString, KeyboardSimulator.GetFormatedKeysString(Key));
         }
 
         public override bool Validate(out string errorMessage)
         {
+            if (Key == Keys.None)
+            {
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.LabelKey);
+                return false;
+            }
+
             errorMessage = string.Empty;
             return true;
         }

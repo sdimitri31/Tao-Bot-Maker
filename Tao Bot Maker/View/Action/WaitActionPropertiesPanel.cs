@@ -10,6 +10,14 @@ namespace Tao_Bot_Maker.View
         public WaitActionPropertiesPanel()
         {
             InitializeComponent();
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
+            minimumWaitLabel.Text = Resources.Strings.LabelMinimumWait;
+            maximumWaitLabel.Text = Resources.Strings.LabelMaximumWait;
+            randomizeWaitCheckBox.Text = Resources.Strings.LabelRandomizeWait;
         }
 
         public Action GetAction()
@@ -22,7 +30,7 @@ namespace Tao_Bot_Maker.View
 
             if (!waitAction.Validate(out string errorMessage))
             {
-                MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 

@@ -16,7 +16,7 @@ namespace Tao_Bot_Maker.Helpers
             random = new Random();
         }
 
-        public async Task TypeText(string text, string typingSpeed)
+        public async Task TypeText(string text, int typingSpeed)
         {
             text = PreventMultipleReturns(text);
             foreach (char c in text)
@@ -46,9 +46,9 @@ namespace Tao_Bot_Maker.Helpers
             string formatedName = key.ToString();
 
             //Clean name when there is only a modifier
-            formatedName = formatedName.ToString().Replace("ControlKey, Control", Properties.strings.label_Ctrl);
-            formatedName = formatedName.ToString().Replace("Menu, Alt", Properties.strings.label_Alt);
-            formatedName = formatedName.ToString().Replace("ShiftKey, Shift", Properties.strings.label_Shift);
+            formatedName = formatedName.ToString().Replace("ControlKey, Control", Resources.Strings.KeysCtrl);
+            formatedName = formatedName.ToString().Replace("Menu, Alt", Resources.Strings.KeysAlt);
+            formatedName = formatedName.ToString().Replace("ShiftKey, Shift", Resources.Strings.KeysShift);
 
             //Split key from modifiers
             string[] keys = formatedName.Split(',');
@@ -61,9 +61,9 @@ namespace Tao_Bot_Maker.Helpers
             }
 
             //Clean modifier names
-            modifiers = modifiers.Replace("Control", Properties.strings.label_Ctrl);
-            modifiers = modifiers.Replace("Alt", Properties.strings.label_Alt);
-            modifiers = modifiers.Replace("Shift", Properties.strings.label_Shift);
+            modifiers = modifiers.Replace("Control", Resources.Strings.KeysCtrl);
+            modifiers = modifiers.Replace("Alt", Resources.Strings.KeysAlt);
+            modifiers = modifiers.Replace("Shift", Resources.Strings.KeysShift);
             modifiers = modifiers.Replace(",", "");
 
             return modifiers + KeyStringTranslate(keys[0]);
@@ -76,21 +76,21 @@ namespace Tao_Bot_Maker.Helpers
             switch (key)
             {
                 case "Back":
-                    return Properties.strings.Key_Backspace;
+                    return Resources.Strings.KeysBackspace;
                 case "Separator":
                     return "{BREAK}";
                 case "Capital":
-                    return Properties.strings.Key_CapsLock;
+                    return Resources.Strings.KeysCapsLock;
                 case "Delete":
-                    return Properties.strings.Key_Delete;
+                    return Resources.Strings.KeysDelete;
                 case "Down":
-                    return Properties.strings.Key_Down;
+                    return Resources.Strings.KeysDown;
                 case "End":
-                    return Properties.strings.Key_End;
+                    return Resources.Strings.KeysEnd;
                 case "Return":
-                    return Properties.strings.Key_Enter;
+                    return Resources.Strings.KeysEnter;
                 case "Escape":
-                    return Properties.strings.Key_Escape;
+                    return Resources.Strings.KeysEscape;
                 case "Help":
                     return "HELP";
                 case "Home":
@@ -98,7 +98,7 @@ namespace Tao_Bot_Maker.Helpers
                 case "Insert":
                     return "INSERT";
                 case "Left":
-                    return Properties.strings.Key_Left;
+                    return Resources.Strings.KeysLeft;
                 case "NumLock":
                     return "NUMLOCK";
                 case "PageDown":
@@ -108,13 +108,13 @@ namespace Tao_Bot_Maker.Helpers
                 case "PrintScreen":
                     return "PRTSC";
                 case "Right":
-                    return Properties.strings.Key_Right;
+                    return Resources.Strings.KeysRight;
                 case "Scroll":
                     return "SCROLLLOCK";
                 case "Tab":
                     return "TAB";
                 case "Up":
-                    return Properties.strings.Key_Up;
+                    return Resources.Strings.KeysUp;
                 case "F1":
                     return "F1";
                 case "F2":
@@ -156,13 +156,13 @@ namespace Tao_Bot_Maker.Helpers
                 case "Divide":
                     return "/";
                 case "ShiftKey":
-                    return Properties.strings.Key_ShiftKey;
+                    return Resources.Strings.KeysShift;
                 case "ControlKey":
-                    return Properties.strings.Key_ControlKey;
+                    return Resources.Strings.KeysCtrl;
                 case "AltKey":
-                    return Properties.strings.Key_AltKey;
+                    return Resources.Strings.KeysAlt;
                 case "Space":
-                    return Properties.strings.Key_Space;
+                    return Resources.Strings.KeysSpace;
             }
 
             if (keyboardLocale.Equals("fr-FR"))
@@ -266,15 +266,15 @@ namespace Tao_Bot_Maker.Helpers
             return key.ToString();
         }
 
-        private int GetRandomDelayFromSpeed(string speed)
+        private int GetRandomDelayFromSpeed(int speed)
         {
             switch (speed)
             {
-                case "Slow":
+                case 0:
                     return random.Next(100, 200);
-                case "Medium":
+                case 1:
                     return random.Next(40, 70);
-                case "Fast":
+                case 2:
                     return random.Next(10, 25);
                 default:
                     return random.Next(75, 125);

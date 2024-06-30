@@ -14,15 +14,38 @@ namespace Tao_Bot_Maker.View
         public MouseActionPropertiesPanel(bool isFromImageAction = false)
         {
             InitializeComponent();
+            UpdateUI();
             InitializeMoveSpeed();
             leftClickRadioButton.Checked = true;
             this.isFromImageAction = isFromImageAction;
             ShowCoordsFromImage(isFromImageAction);
         }
 
+        private void UpdateUI()
+        {
+            clickTypeLabel.Text = Resources.Strings.LabelClickType;
+            leftClickRadioButton.Text = Resources.Strings.LabelLeftClick;
+            middleClickRadioButton.Text = Resources.Strings.LabelMiddleClick;
+            rightClickRadioButton.Text = Resources.Strings.LabelRightClick;
+            noneClickRadioButton.Text = Resources.Strings.LabelNoClick;
+            doubleClickCheckBox.Text = Resources.Strings.LabelDoubleClick;
+            scrollCheckBox.Text = Resources.Strings.LabelScroll;
+            dragAndDropCheckBox.Text = Resources.Strings.LabelDragAndDrop;
+
+            startCoordinateLabel.Text = Resources.Strings.LabelStartCoordinates;
+            useCurrentPositionCheckBox.Text = Resources.Strings.LabelUseCurrentPosition;
+            startImageCoordCheckBox.Text = Resources.Strings.LabelUseImageCoordinates;
+
+            endCoordinateLabel.Text = Resources.Strings.LabelEndCoordinates;
+            endImageCoordCheckBox.Text = Resources.Strings.LabelUseImageCoordinates;
+
+            speedLabel.Text = Resources.Strings.LabelSpeed;
+            scrollAmountLabel.Text = Resources.Strings.LabelScrollAmount;
+            clickDurationLabel.Text = Resources.Strings.LabelClickDuration;
+        }
+
         private void ShowCoordsFromImage(bool isFromImageAction)
         {
-            useImageCoordsLabel.Visible = isFromImageAction;
             startImageCoordCheckBox.Visible = isFromImageAction;
             endImageCoordCheckBox.Visible = isFromImageAction;
         }
@@ -61,12 +84,18 @@ namespace Tao_Bot_Maker.View
                 useImageCoordsAsStart: startImageCoordCheckBox.Visible ? startImageCoordCheckBox.Checked : false,
                 useImageCoordsAsEnd: endImageCoordCheckBox.Visible ? endImageCoordCheckBox.Checked : false,
                 useCurrentPosition: useCurrentPositionCheckBox.Enabled ? useCurrentPositionCheckBox.Checked : false,
-                endX: endXCoordinateNumericUpDown.Enabled ? (int?)endXCoordinateNumericUpDown.Value : null,
-                endY: endYCoordinateNumericUpDown.Enabled ? (int?)endYCoordinateNumericUpDown.Value : null,
-                moveSpeed: speedComboBox.SelectedItem != null ? speedComboBox.SelectedItem.ToString() : null,
+                endX: (int)endXCoordinateNumericUpDown.Value,
+                endY: (int)endYCoordinateNumericUpDown.Value,
+                moveSpeed: speedComboBox.SelectedIndex,
                 scrollAmount: (int)scrollAmountNumericUpDown.Value,
                 clickDuration: (int)clickDurationNumericUpDown.Value
             );
+
+            if (!mouseAction.Validate(out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
 
             return mouseAction;
         }
@@ -84,9 +113,9 @@ namespace Tao_Bot_Maker.View
                 startImageCoordCheckBox.Checked = mouseAction.UseImageCoordsAsStart;
                 endImageCoordCheckBox.Checked = mouseAction.UseImageCoordsAsEnd;
                 useCurrentPositionCheckBox.Checked = mouseAction.UseCurrentPosition;
-                endXCoordinateNumericUpDown.Value = mouseAction.EndX ?? 0;
-                endYCoordinateNumericUpDown.Value = mouseAction.EndY ?? 0;
-                speedComboBox.SelectedItem = mouseAction.MoveSpeed;
+                endXCoordinateNumericUpDown.Value = mouseAction.EndX;
+                endYCoordinateNumericUpDown.Value = mouseAction.EndY;
+                speedComboBox.SelectedIndex = mouseAction.MoveSpeed;
                 scrollAmountNumericUpDown.Value = mouseAction.ScrollAmount;
                 clickDurationNumericUpDown.Value = mouseAction.ClickDuration;
                 UpdateControlStates();
@@ -123,9 +152,9 @@ namespace Tao_Bot_Maker.View
         public void InitializeMoveSpeed()
         {
             this.speedComboBox.Items.AddRange(new object[] {
-                "Slow",
-                "Medium",
-                "Fast"
+                Resources.Strings.ComboBoxSpeedSlow,
+                Resources.Strings.ComboBoxSpeedMedium,
+                Resources.Strings.ComboBoxSpeedFast
             });
             this.speedComboBox.SelectedIndex = 0;
         }
@@ -161,14 +190,10 @@ namespace Tao_Bot_Maker.View
 
             startXCoordinateNumericUpDown.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
             startYCoordinateNumericUpDown.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
-            startXCoordinateLabel.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
-            startYCoordinateLabel.Enabled = !useCurrentPositionCheckBox.Checked && !isStartImageCoord;
 
             endXCoordinateNumericUpDown.Enabled = isDragAndDrop && !isEndImageCoord;
             endYCoordinateNumericUpDown.Enabled = isDragAndDrop && !isEndImageCoord;
             endCoordinateLabel.Enabled = isDragAndDrop;
-            endXCoordinateLabel.Enabled = isDragAndDrop && !isEndImageCoord;
-            endYCoordinateLabel.Enabled = isDragAndDrop && !isEndImageCoord;
 
             endImageCoordCheckBox.Enabled = isDragAndDrop;
 

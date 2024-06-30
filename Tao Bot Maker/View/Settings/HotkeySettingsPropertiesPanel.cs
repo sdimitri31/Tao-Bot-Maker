@@ -210,23 +210,23 @@ namespace Tao_Bot_Maker.View.Setting
             switch (modifyingHotkey)
             {
                 case Settings.SETTING_HOTKEYSTARTSEQUENCE:
-                    hotkeyStartSequenceButton.Text = Properties.strings.button_Key_WaitForInput;
+                    hotkeyStartSequenceButton.Text = Resources.Strings.ButtonWaitForInput;
                     break;
 
                 case Settings.SETTING_HOTKEYPAUSESEQUENCE:
-                    hotkeyPauseSequenceButton.Text = Properties.strings.button_Key_WaitForInput;
+                    hotkeyPauseSequenceButton.Text = Resources.Strings.ButtonWaitForInput;
                     break;
 
                 case Settings.SETTING_HOTKEYSTOPSEQUENCE:
-                    hotkeyStopSequenceButton.Text = Properties.strings.button_Key_WaitForInput;
+                    hotkeyStopSequenceButton.Text = Resources.Strings.ButtonWaitForInput;
                     break;
 
                 case Settings.SETTING_HOTKEYSTARTCOORDS:
-                    hotkeyStartCoordsButton.Text = Properties.strings.button_Key_WaitForInput;
+                    hotkeyStartCoordsButton.Text = Resources.Strings.ButtonWaitForInput;
                     break;
 
                 case Settings.SETTING_HOTKEYENDCOORDS:
-                    hotkeyEndCoordsButton.Text = Properties.strings.button_Key_WaitForInput;
+                    hotkeyEndCoordsButton.Text = Resources.Strings.ButtonWaitForInput;
                     break;
             }
         }

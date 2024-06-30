@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
 
@@ -18,6 +19,7 @@ namespace Tao_Bot_Maker.View
         public ActionForm(bool isFromImageAction = false, Action existingAction = null)
         {
             InitializeComponent();
+            UpdateUI();
             this.isFromImageAction = isFromImageAction;
             this.Action = existingAction;
             FillActionTypeListBox();
@@ -32,6 +34,14 @@ namespace Tao_Bot_Maker.View
             {
                 actionTypelistBox.SelectedIndex = 0;
             }
+        }
+
+        private void UpdateUI()
+        {
+            this.Text = Resources.Strings.FormTitleNewAction;
+
+            okButton.Text = Resources.Strings.ButtonAdd;
+            cancelButton.Text = Resources.Strings.ButtonCancel;
         }
 
         private void FillPropertiesPanelWithExistingAction(Action existingAction)

@@ -11,19 +11,26 @@ namespace Tao_Bot_Maker.View
         public SequenceActionPropertiesPanel()
         {
             InitializeComponent();
+            UpdateUI();
             InitializeSequence();
+        }
+
+        private void UpdateUI()
+        {
+            sequenceLabel.Text = Resources.Strings.LabelSequence;
+            repeatCountLabel.Text = Resources.Strings.LabelRepeatCount;
         }
 
         public Action GetAction()
         {
             SequenceAction sequenceAction = new SequenceAction(
-                sequenceName: sequenceComboBox.SelectedItem.ToString(),
+                sequenceName: sequenceComboBox.SelectedItem?.ToString(),
                 repeatCount: (int)repeatCountNumericUpDown.Value
             );
 
             if(!sequenceAction.Validate(out string errorMessage))
             {
-                MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
