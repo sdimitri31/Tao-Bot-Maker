@@ -1,17 +1,23 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
+    [JsonConverter(typeof(ActionConverter))]
     public class ImageAction : Action
     {
         public const string imagesFolderPath = "Images";
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
         public string ImageName { get; set; }
         public int StartX { get; set; }
@@ -52,12 +58,9 @@ namespace Tao_Bot_Maker.Model
             string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
             Logger.Log(executeAction);
 
-            // Validate the image path
-            string imagePath = Path.Combine(imagesFolderPath, ImageName);
-            if (!File.Exists(imagePath))
+            if (!Validate(out string errorMessage))
             {
-                string errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, imagePath);
-                throw new FileNotFoundException(errorMessage);
+                throw new Exception(errorMessage);
             }
 
             var stopwatch = Stopwatch.StartNew();
@@ -73,6 +76,7 @@ namespace Tao_Bot_Maker.Model
 
             try
             {
+                string imagePath = Path.Combine(imagesFolderPath, ImageName);
                 while (!token.IsCancellationRequested)
                 {
                     var result = await Task.Run(() =>
@@ -169,42 +173,138 @@ namespace Tao_Bot_Maker.Model
 
         public override bool Validate(out string errorMessage)
         {
-            errorMessage = "";
-
-            // Validate image path
-            string imagePath = Path.Combine(imagesFolderPath, ImageName);
-            if (!File.Exists(imagePath))
-            {
-                errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, imagePath);
+            if (!ValidateActionType(Type, out errorMessage))
                 return false;
-            }
 
-            // Validate threshold
-            if (Threshold < 0 || Threshold > 255)
+            if (!ValidateImageName(ImageName, out errorMessage))
+                return false;
+
+            if (!ValidateImageFile(ImageName, out errorMessage))
+                return false;
+
+            if(!ValidateCoordinate(StartX, out errorMessage))
+                return false;
+
+            if (!ValidateCoordinate(StartY, out errorMessage))
+                return false;
+
+            if (!ValidateCoordinate(EndX, out errorMessage))
+                return false;
+
+            if (!ValidateCoordinate(EndY, out errorMessage))
+                return false;
+
+            if (!ValidateThreshold(Threshold, out errorMessage))
+                return false;
+
+            if (!ValidateExpiration(Expiration, out errorMessage))
+                return false;
+
+            if (!ValidateAction(ActionIfFound, out errorMessage))
+                return false;
+
+            if (!ValidateAction(ActionIfNotFound, out errorMessage))
+                return false;
+
+            return true;
+        }
+
+        public static bool ValidateActionType(ActionType actionType, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if(actionType != ActionType.ImageAction)
             {
-                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.LabelThreshold, 0, 255);
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.ActionType);
                 return false;
             }
 
             return true;
         }
 
-        public override void Update(Action newAction)
+        public static bool ValidateImageName(string imageName, out string errorMessage)
         {
-            base.Update(newAction);
-            var newImageAction = newAction as ImageAction;
-            if (newImageAction != null)
+            errorMessage = string.Empty;
+
+            if(string.IsNullOrEmpty(imageName))
             {
-                this.ImageName = newImageAction.ImageName;
-                this.StartX = newImageAction.StartX;
-                this.StartY = newImageAction.StartY;
-                this.EndX = newImageAction.EndX;
-                this.EndY = newImageAction.EndY;
-                this.Threshold = newImageAction.Threshold;
-                this.Expiration = newImageAction.Expiration;
-                this.ActionIfFound = newImageAction.ActionIfFound;
-                this.ActionIfNotFound = newImageAction.ActionIfNotFound;
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.ImageActionImageName);
+                return false;
             }
+
+            return true;
         }
+
+        public static bool ValidateImageFile(string imageName, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            string imagePath = Path.Combine(imagesFolderPath, imageName);
+            if (!File.Exists(imagePath))
+            {
+                errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, imagePath);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool ValidateCoordinate(int coordToCheck, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if(coordToCheck < -999999 || coordToCheck > 999999)
+            {
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.Coordinates, -999999, 999999);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool ValidateThreshold(int threshold, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if ((threshold < 0) || (threshold > 255))
+            {
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.ImageActionThreshold, 0, 255);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool ValidateExpiration(int expiration, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if ((expiration < 0) || (expiration > 999999))
+            {
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.ImageActionExpiration, 0, 999999);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool ValidateAction(Action action, out string errorMessage)
+        {
+            if(action == null)
+            {
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.Action);
+                return false;
+            }
+
+            if(!action.Validate(out string errorMsg))
+            {
+                errorMessage = errorMsg;
+                return false;
+            }
+
+            errorMessage = string.Empty;
+            return true;
+        }
+
     }
 }

@@ -259,6 +259,11 @@ namespace Tao_Bot_Maker.Controller
         {
             try
             {
+                if(!sequenceController.ValidateSequence(out string errorMessage))
+                {
+                    throw new Exception(errorMessage);
+                }
+
                 await sequenceController.StartSequence();
             }
             catch (Exception ex)

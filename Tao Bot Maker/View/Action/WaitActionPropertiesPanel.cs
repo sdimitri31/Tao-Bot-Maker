@@ -28,12 +28,6 @@ namespace Tao_Bot_Maker.View
                 randomizeWait: this.randomizeWaitCheckBox.Checked
             );
 
-            if (!waitAction.Validate(out string errorMessage))
-            {
-                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-
             return waitAction;
 ;
         }

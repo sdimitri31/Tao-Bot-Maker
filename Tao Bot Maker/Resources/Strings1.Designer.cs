@@ -70,6 +70,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Type.
+        /// </summary>
+        internal static string ActionType {
+            get {
+                return ResourceManager.GetString("ActionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add.
         /// </summary>
         internal static string ButtonAdd {
@@ -205,6 +214,24 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action corrupted, changes needs to be made to be executed..
+        /// </summary>
+        internal static string ErrorMessageCorruptedAction {
+            get {
+                return ResourceManager.GetString("ErrorMessageCorruptedAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unable to load sequence : &quot;{0}&quot;. File might be corrupted..
+        /// </summary>
+        internal static string ErrorMessageCorruptedSequenceFile {
+            get {
+                return ResourceManager.GetString("ErrorMessageCorruptedSequenceFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Sequence name cannot be empty..
         /// </summary>
         internal static string ErrorMessageEmptyFieldSequence {
@@ -219,6 +246,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string ErrorMessageEmptyFieldTextToType {
             get {
                 return ResourceManager.GetString("ErrorMessageEmptyFieldTextToType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence name cannot be empty..
+        /// </summary>
+        internal static string ErrorMessageEmptySequenceName {
+            get {
+                return ResourceManager.GetString("ErrorMessageEmptySequenceName", resourceCulture);
             }
         }
         
@@ -246,6 +282,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string ErrorMessageFormat {
             get {
                 return ResourceManager.GetString("ErrorMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid action at position {0}..
+        /// </summary>
+        internal static string ErrorMessageInvalidActionAtIndex {
+            get {
+                return ResourceManager.GetString("ErrorMessageInvalidActionAtIndex", resourceCulture);
             }
         }
         
@@ -367,11 +412,38 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Expiration.
+        /// </summary>
+        internal static string ImageActionExpiration {
+            get {
+                return ResourceManager.GetString("ImageActionExpiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image name.
+        /// </summary>
+        internal static string ImageActionImageName {
+            get {
+                return ResourceManager.GetString("ImageActionImageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Image.
         /// </summary>
         internal static string ImageActionName {
             get {
                 return ResourceManager.GetString("ImageActionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Threshold.
+        /// </summary>
+        internal static string ImageActionThreshold {
+            get {
+                return ResourceManager.GetString("ImageActionThreshold", resourceCulture);
             }
         }
         

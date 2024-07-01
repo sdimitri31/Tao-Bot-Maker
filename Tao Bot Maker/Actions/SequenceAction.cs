@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +12,19 @@ using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
+    [JsonConverter(typeof(ActionConverter))]
     public class SequenceAction : Action
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
         public string SequenceName { get; set; }
         public int RepeatCount { get; set; }
-
-        private readonly Sequence sequence;
 
         public SequenceAction(string sequenceName = "", int repeatCount = 1)
         {
             Type = ActionType.SequenceAction;
             SequenceName = sequenceName;
             RepeatCount = repeatCount;
-
-            try { sequence = SequenceController.GetSequence(sequenceName); }
-            catch (Exception ex) 
-            { 
-                sequence = null; 
-                string errorMessage = string.Format(Resources.Strings.ErrorMessageFailToLoadSequence, sequenceName);
-                Logger.Log($"{errorMessage} {ex.Message}", System.Diagnostics.TraceEventType.Error);
-            }
         }
 
         public override async Task Execute(CancellationToken token)
@@ -40,13 +34,12 @@ namespace Tao_Bot_Maker.Model
             string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
             Logger.Log(executeAction);
 
-            try { SequenceController.GetSequence(SequenceName); }
-            catch (Exception ex)
+            if (!Validate(out string errorMessage))
             {
-                string errorMessage = string.Format(Resources.Strings.ErrorMessageFailToLoadSequence, SequenceName);
-                throw new Exception($"{errorMessage} {ex.Message}");
+                throw new Exception(errorMessage);
             }
 
+            Sequence sequence = SequenceController.GetSequence(SequenceName);
             for (int i = 0; i < RepeatCount; i++)
             {
                 string logLoop = string.Format(Resources.Strings.SequenceActionLoopNumber, i + 1, RepeatCount);
@@ -57,6 +50,7 @@ namespace Tao_Bot_Maker.Model
                 }
             }
         }
+
         public override async Task Execute(int x, int y, CancellationToken token)
         {
             await Execute(token);

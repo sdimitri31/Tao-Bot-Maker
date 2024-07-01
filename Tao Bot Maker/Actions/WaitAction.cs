@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
+    [JsonConverter(typeof(ActionConverter))]
     public class WaitAction : Action
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
         public int MinimumWait { get; set; }
         public int MaximumWait { get; set; }
@@ -28,11 +28,19 @@ namespace Tao_Bot_Maker.Model
         {
             token.ThrowIfCancellationRequested();
 
-            int waitTime = RandomizeWait ? new Random().Next(MinimumWait, MaximumWait) : MinimumWait;
-
             string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
             Logger.Log(executeAction);
 
+            if (!Validate(out string errorMessage))
+            {
+                throw new Exception(errorMessage);
+            }
+
+            int waitTime = RandomizeWait ? new Random().Next(MinimumWait, MaximumWait) : MinimumWait;
+
+            string messageWaitingFor = string.Format(Resources.Strings.InfoMessageWaitActionWaitingTime, waitTime);
+            Logger.Log(messageWaitingFor);
+            
             await Task.Delay(waitTime);
         }
 

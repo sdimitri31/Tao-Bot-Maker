@@ -16,7 +16,7 @@ namespace Tao_Bot_Maker.Controller
     public class SequenceController
     {
         private CancellationTokenSource sequenceLoadingToken = new CancellationTokenSource();
-        private ISequenceRepository sequenceRepository;
+        private readonly ISequenceRepository sequenceRepository;
         private Sequence sequence;
 
         private CancellationTokenSource sequenceExecutionToken = new CancellationTokenSource();
@@ -69,12 +69,12 @@ namespace Tao_Bot_Maker.Controller
             }
             catch (OperationCanceledException ex)
             {
-                sequence = null;
+                sequence = new Sequence();
                 throw new OperationCanceledException(ex.Message);
             }
             catch (Exception ex)
             {
-                sequence = null;
+                sequence = new Sequence();
                 throw new Exception(ex.Message, ex);
             }
         }
@@ -195,6 +195,23 @@ namespace Tao_Bot_Maker.Controller
             {
                 throw new Exception(ex.Message, ex);
             }
+        }
+
+        public bool ValidateSequence(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            for(int i = 0; i < sequence.Actions.Count; i++)
+            {
+                if (!sequence.Actions[i].Validate(out string errorMsg))
+                {
+                    string invalidActionAtIndex = string.Format(Resources.Strings.ErrorMessageInvalidActionAtIndex, i + 1);
+                    errorMessage = invalidActionAtIndex + "\r\n" + errorMsg;
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public static bool GetIsPaused()

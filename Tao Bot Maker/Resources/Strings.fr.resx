@@ -120,6 +120,9 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="ActionType" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="ButtonAdd" xml:space="preserve">
     <value>Ajouter</value>
   </data>
@@ -165,7 +168,16 @@
   <data name="ErrorMessageCaptionInvalidAction" xml:space="preserve">
     <value>Action invalide</value>
   </data>
+  <data name="ErrorMessageCorruptedAction" xml:space="preserve">
+    <value>Action corrompue, des changements sont nécessaires pour exécuter l'action.</value>
+  </data>
+  <data name="ErrorMessageCorruptedSequenceFile" xml:space="preserve">
+    <value>Impossible de charger la séquence : "{0}". Le fichier est peut-être corrompu.</value>
+  </data>
   <data name="ErrorMessageEmptyFieldSequence" xml:space="preserve">
+    <value>Le nom de la séquence ne peut pas être vide.</value>
+  </data>
+  <data name="ErrorMessageEmptySequenceName" xml:space="preserve">
     <value>Le nom de la séquence ne peut pas être vide.</value>
   </data>
   <data name="ErrorMessageEmptyTextToType" xml:space="preserve">
@@ -179,6 +191,9 @@
   </data>
   <data name="ErrorMessageFormat" xml:space="preserve">
     <value>{0} : {1}</value>
+  </data>
+  <data name="ErrorMessageInvalidActionAtIndex" xml:space="preserve">
+    <value>Action non valide à la position {0}.</value>
   </data>
   <data name="ErrorMessageInvalidIntervalFor" xml:space="preserve">
     <value>La valeur de "{0}" doit être entre {1} et {2}.</value>
@@ -219,8 +234,17 @@
   <data name="FormTitleSettings" xml:space="preserve">
     <value>Paramètres</value>
   </data>
+  <data name="ImageActionExpiration" xml:space="preserve">
+    <value>Expiration</value>
+  </data>
+  <data name="ImageActionImageName" xml:space="preserve">
+    <value>Nom de l'image</value>
+  </data>
   <data name="ImageActionName" xml:space="preserve">
     <value>Image</value>
+  </data>
+  <data name="ImageActionThreshold" xml:space="preserve">
+    <value>Tolérance</value>
   </data>
   <data name="ImageActionToString" xml:space="preserve">
     <value>Recherche de l'image : "{0}" entre les coordonnées : {1} et {2} pendant {3} ms.</value>
@@ -334,7 +358,7 @@
     <value>Coordonnées d'arrivée</value>
   </data>
   <data name="LabelExpiration" xml:space="preserve">
-    <value>Expiration (s)</value>
+    <value>Expiration</value>
   </data>
   <data name="LabelKey" xml:space="preserve">
     <value>Touche</value>

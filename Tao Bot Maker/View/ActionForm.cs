@@ -24,7 +24,7 @@ namespace Tao_Bot_Maker.View
             this.Action = existingAction;
             FillActionTypeListBox();
             RegisterHotkeys();
-            if (existingAction != null)
+            if (existingAction != null && actionTypelistBox.Items.Contains(existingAction.Type))
             {
                 actionTypelistBox.SelectedItem = existingAction.Type;
                 SetPropertiesPanel(existingAction.Type);
@@ -134,6 +134,10 @@ namespace Tao_Bot_Maker.View
         {
             foreach (ActionType actionType in Enum.GetValues(typeof(ActionType)))
             {
+                if (actionType == ActionType.CorruptAction)
+                {
+                    continue;
+                }
                 actionTypelistBox.Items.Add(actionType);
             }
         }
@@ -150,8 +154,9 @@ namespace Tao_Bot_Maker.View
             {
                 var newAction = panel.GetAction();
 
-                if (newAction == null)
+                if (!newAction.Validate(out string errorMessage))
                 {
+                    MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     DialogResult = DialogResult.None;
                 }
                 else

@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
-using static System.Windows.Forms.AxHost;
 
 namespace Tao_Bot_Maker.Model
 {
+    [JsonConverter(typeof(ActionConverter))]
     public class KeyAction : Action
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
         public Keys Key { get; set; }
 
@@ -27,6 +30,11 @@ namespace Tao_Bot_Maker.Model
 
             string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
             Logger.Log(executeAction);
+
+            if (!Validate(out string errorMessage))
+            {
+                throw new Exception(errorMessage);
+            }
 
             await keyboardSimulator.PressKey(Key);
         }
@@ -52,6 +60,7 @@ namespace Tao_Bot_Maker.Model
             errorMessage = string.Empty;
             return true;
         }
+
         public override void Update(Action newAction)
         {
             base.Update(newAction);

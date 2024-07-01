@@ -53,12 +53,6 @@ namespace Tao_Bot_Maker.View
                 actionIfNotFound: this.actionNotFound
             );
 
-            if (!imageAction.Validate(out string errorMessage))
-            {
-                MessageBox.Show(errorMessage, Resources.Strings.ErrorMessageCaptionInvalidAction, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-
             return imageAction;
         }
 

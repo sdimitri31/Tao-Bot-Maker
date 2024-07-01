@@ -1,16 +1,17 @@
-﻿using LogFramework;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
-using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
-using static System.Windows.Forms.LinkLabel;
 
 namespace Tao_Bot_Maker.Model
 {
+    [JsonConverter(typeof(ActionConverter))]
     public class MouseAction : Action
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum MouseActionType
         {
             LeftClick,
@@ -18,7 +19,12 @@ namespace Tao_Bot_Maker.Model
             MiddleClick,
             NoClick
         }
+
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public MouseActionType ClickType { get; set; }
         public bool DoubleClick { get; set; }
         public bool Scroll { get; set; }
@@ -96,6 +102,14 @@ namespace Tao_Bot_Maker.Model
                 EndY = y;
             }
 
+            string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
+            Logger.Log(executeAction);
+
+            if (!Validate(out string errorMessage))
+            {
+                throw new Exception(errorMessage);
+            }
+
             // Determine the move speed
             int moveSpeed;
             switch (MoveSpeed)
@@ -113,9 +127,6 @@ namespace Tao_Bot_Maker.Model
                     moveSpeed = 10;
                     break;
             }
-
-            string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
-            Logger.Log(executeAction);
 
             // Move to start position if not using current position
             if (!UseCurrentPosition)

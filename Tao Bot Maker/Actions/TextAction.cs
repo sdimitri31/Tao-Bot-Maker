@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,8 +8,10 @@ using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
+    [JsonConverter(typeof(ActionConverter))]
     public class TextAction : Action
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
         public string TextToType { get; set; }
         public int TypingSpeed { get; set; }
@@ -28,6 +32,11 @@ namespace Tao_Bot_Maker.Model
 
             string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
             Logger.Log(executeAction);
+
+            if (!Validate(out string errorMessage))
+            {
+                throw new Exception(errorMessage);
+            }
 
             await keyboardSimulator.TypeText(TextToType, TypingSpeed);
         }

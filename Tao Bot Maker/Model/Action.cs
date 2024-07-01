@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Tao_Bot_Maker.Model
     [JsonObject(ItemTypeNameHandling = TypeNameHandling.Auto)]
     public abstract class Action
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public abstract ActionType Type { get; set; }
 
         public abstract Task Execute(CancellationToken token);

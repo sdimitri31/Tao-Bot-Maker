@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using System.IO;
 using Newtonsoft.Json;
 using System.Threading;
@@ -11,7 +9,7 @@ namespace Tao_Bot_Maker.Model
 {
     public class SequenceRepository : ISequenceRepository
     {
-        private string sequencesFolderPath = "Sequences";
+        private readonly string sequencesFolderPath = "Sequences";
 
         public SequenceRepository()
         {
@@ -20,6 +18,7 @@ namespace Tao_Bot_Maker.Model
                 Directory.CreateDirectory(sequencesFolderPath);
             }
         }
+
         public IEnumerable<string> GetAllSequenceNames()
         {
             List<string> sequenceNames = new List<string>();
@@ -51,29 +50,15 @@ namespace Tao_Bot_Maker.Model
                 token.ThrowIfCancellationRequested();
                 Exception loadingException = null;
 
-                if (name == null) return null;
-
                 Sequence sequence = await Task.Run(() =>
                 {
-                    string filePath = Path.Combine(sequencesFolderPath, $"{name}.json");
-                    if (!File.Exists(filePath))
-                    {
-                        loadingException = new Exception($"Cannot locate file at : \"{filePath}\"");
-                        return null;
-                    }
-
                     try
                     {
-                        string json = File.ReadAllText(filePath);
-                        return JsonConvert.DeserializeObject<Sequence>(json, new JsonSerializerSettings
-                        {
-                            TypeNameHandling = TypeNameHandling.Auto,
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                        });
+                        return GetSequence(name);
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        loadingException = new Exception($"Cannot load sequence \"{name}\", file is corrupted");
+                        loadingException = new Exception(ex.Message);
                         return null;
                     }
                 }, token);
@@ -101,33 +86,45 @@ namespace Tao_Bot_Maker.Model
             string json = JsonConvert.SerializeObject(sequence, Formatting.Indented, new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Converters = new List<JsonConverter> { new ActionConverter() }
+
             });
             File.WriteAllText(filePath, json);
         }
 
         public Sequence GetSequence(string name)
         {
-            if (name == null) return null;
+            if (name == null)
+            {
+                string errorMessage = string.Format(Resources.Strings.ErrorMessageEmptySequenceName);
+                throw new FileNotFoundException(errorMessage);
+            }
 
             string filePath = Path.Combine(sequencesFolderPath, $"{name}.json");
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException($"Cannot locate file at : \"{filePath}\"");
+                string errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, filePath);
+                throw new FileNotFoundException(errorMessage);
             }
 
             try
             {
                 string json = File.ReadAllText(filePath);
-                return JsonConvert.DeserializeObject<Sequence>(json, new JsonSerializerSettings
+
+                Sequence sequence = JsonConvert.DeserializeObject<Sequence>(json, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.Auto,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Converters = new List<JsonConverter> { new ActionConverter() }
                 });
+
+                return sequence ?? throw new Exception();
             }
             catch
             {
-                throw new Exception($"Cannot load sequence \"{name}\", file is corrupted");
+                string errorMessage = string.Format(Resources.Strings.ErrorMessageCorruptedSequenceFile, name);
+                throw new Exception(errorMessage);
             }
         }
     }

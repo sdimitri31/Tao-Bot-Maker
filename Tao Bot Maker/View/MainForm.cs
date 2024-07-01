@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
+using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
 using Settings = Tao_Bot_Maker.Model.Settings;
 
@@ -328,6 +330,26 @@ namespace Tao_Bot_Maker.View
                 mainFormController.ExecuteHotkey(m.LParam);
                 return;
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var mouseAction = new MouseAction
+            {
+                Type = ActionType.MouseAction,
+                ClickType = MouseAction.MouseActionType.LeftClick,
+                StartX = 100,
+                StartY = 200,
+                EndX = 300,
+                EndY = 400
+            };
+
+            var json = JsonConvert.SerializeObject(mouseAction, Formatting.Indented, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            var deserializedAction = JsonConvert.DeserializeObject<Action>(json, new ActionConverter());
         }
     }
 }

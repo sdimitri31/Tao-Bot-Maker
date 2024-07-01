@@ -120,6 +120,9 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="ActionType" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="ButtonAdd" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -165,11 +168,20 @@
   <data name="ErrorMessageCaptionInvalidAction" xml:space="preserve">
     <value>Invalid action</value>
   </data>
+  <data name="ErrorMessageCorruptedAction" xml:space="preserve">
+    <value>Action corrupted, changes needs to be made to be executed.</value>
+  </data>
+  <data name="ErrorMessageCorruptedSequenceFile" xml:space="preserve">
+    <value>Unable to load sequence : "{0}". File might be corrupted.</value>
+  </data>
   <data name="ErrorMessageEmptyFieldSequence" xml:space="preserve">
     <value>Sequence name cannot be empty.</value>
   </data>
   <data name="ErrorMessageEmptyFieldTextToType" xml:space="preserve">
     <value>Text to type cannot be empty.</value>
+  </data>
+  <data name="ErrorMessageEmptySequenceName" xml:space="preserve">
+    <value>Sequence name cannot be empty.</value>
   </data>
   <data name="ErrorMessageFailToLoadSequence" xml:space="preserve">
     <value>Failed to load sequence "{0}".</value>
@@ -179,6 +191,9 @@
   </data>
   <data name="ErrorMessageFormat" xml:space="preserve">
     <value>{0} : {1}</value>
+  </data>
+  <data name="ErrorMessageInvalidActionAtIndex" xml:space="preserve">
+    <value>Invalid action at position {0}.</value>
   </data>
   <data name="ErrorMessageInvalidIntervalFor" xml:space="preserve">
     <value>Value of "{0}" must be between {1} and {2}.</value>
@@ -219,8 +234,17 @@
   <data name="FormTitleSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="ImageActionExpiration" xml:space="preserve">
+    <value>Expiration</value>
+  </data>
+  <data name="ImageActionImageName" xml:space="preserve">
+    <value>Image name</value>
+  </data>
   <data name="ImageActionName" xml:space="preserve">
     <value>Image</value>
+  </data>
+  <data name="ImageActionThreshold" xml:space="preserve">
+    <value>Threshold</value>
   </data>
   <data name="ImageActionToString" xml:space="preserve">
     <value>Search image : "{0}" between coordinates : {1} and {2} for {3} ms.</value>

@@ -36,6 +36,28 @@ namespace Tao_Bot_Maker.Helpers
             await Task.Delay(0);
         }
 
+        public static bool IsValidKey(int keyValue)
+        {
+            // Vérifie si la touche principale est valide
+            int keyCode = keyValue & (int)Keys.KeyCode;
+            if (!Enum.IsDefined(typeof(Keys), keyCode))
+            {
+                return false;
+            }
+
+            // Vérifie les modificateurs
+            int modifiers = keyValue & (int)Keys.Modifiers;
+            int validModifiers = (int)(Keys.Shift | Keys.Control | Keys.Alt);
+
+            // Si les modificateurs ne sont pas valides, retourner false
+            if ((modifiers & ~validModifiers) != 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Transform a Keys to a more user friendly string 
         /// </summary>
