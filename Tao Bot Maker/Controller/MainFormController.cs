@@ -173,7 +173,13 @@ namespace Tao_Bot_Maker.Controller
         /// <returns>True if the sequence was successfully removed, otherwise false.</returns>
         public bool RemoveSequence(string sequenceName)
         {
-            return sequenceController.RemoveSequence(sequenceName);
+            if (sequenceController.RemoveSequence(sequenceName))
+            {
+                string message = string.Format(Resources.Strings.InfoMessageDeletedSequence, sequenceName);
+                Logger.Log(message);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

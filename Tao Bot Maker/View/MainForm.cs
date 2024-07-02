@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
@@ -300,10 +301,18 @@ namespace Tao_Bot_Maker.View
             SaveSequence();
         }
 
+        private void PauseBotToolStripButton_Click(object sender, EventArgs e)
+        {
+            mainFormController.TogglePause();
+        }
+
         private void DeleteSequenceToolStripButton_Click(object sender, EventArgs e)
         {
-            if (mainFormController.RemoveSequence(sequenceComboBox.SelectedItem.ToString()))
-                New();
+            if (sequenceComboBox.SelectedItem == null)
+                return;
+
+            string sequenceName = sequenceComboBox.SelectedItem.ToString();
+            DeleteSequence(sequenceName);
         }
 
         private void StartSequence()
@@ -311,14 +320,24 @@ namespace Tao_Bot_Maker.View
             mainFormController.StartSequence();
         }
 
-        private void PauseBotToolStripButton_Click(object sender, EventArgs e)
-        {
-            mainFormController.TogglePause();
-        }
-
         private void StopSequence()
         {
             mainFormController.StopSequence();
+        }
+
+        private void DeleteSequence(string sequenceName)
+        {
+            string message = string.Format(Resources.Strings.WarningMessageDeleteSequence, sequenceName);
+            message += Environment.NewLine;
+            message += Resources.Strings.QuestionMessageDelete;
+
+            DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                if (mainFormController.RemoveSequence(sequenceName))
+                    New();
+            }
         }
 
         protected override void WndProc(ref Message m)
@@ -330,26 +349,6 @@ namespace Tao_Bot_Maker.View
                 mainFormController.ExecuteHotkey(m.LParam);
                 return;
             }
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            var mouseAction = new MouseAction
-            {
-                Type = ActionType.MouseAction,
-                ClickType = MouseAction.MouseActionType.LeftClick,
-                StartX = 100,
-                StartY = 200,
-                EndX = 300,
-                EndY = 400
-            };
-
-            var json = JsonConvert.SerializeObject(mouseAction, Formatting.Indented, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
-            var deserializedAction = JsonConvert.DeserializeObject<Action>(json, new ActionConverter());
         }
     }
 }

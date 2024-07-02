@@ -144,7 +144,7 @@ namespace Tao_Bot_Maker.View
             {
                 string questionMessage = string.Format(Resources.Strings.InfoMessageFileExists, imageName);
                 string question = Resources.Strings.QuestionMessageReplace;
-                string questionMessageCaption = Resources.Strings.MessageCaptionFileExists;
+                string questionMessageCaption = Resources.Strings.CaptionMessageFileExists;
                 DialogResult result = MessageBox.Show($"{questionMessage}\r\n{question}", questionMessageCaption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 switch (result)

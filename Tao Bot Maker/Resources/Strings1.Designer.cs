@@ -151,6 +151,24 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Deletion confirmation.
+        /// </summary>
+        internal static string CaptionMessageDelete {
+            get {
+                return ResourceManager.GetString("CaptionMessageDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Existing file.
+        /// </summary>
+        internal static string CaptionMessageFileExists {
+            get {
+                return ResourceManager.GetString("CaptionMessageFileExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Fast.
         /// </summary>
         internal static string ComboBoxSpeedFast {
@@ -453,6 +471,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string ImageActionToString {
             get {
                 return ResourceManager.GetString("ImageActionToString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence &quot;{0}&quot; has been permantly deleted..
+        /// </summary>
+        internal static string InfoMessageDeletedSequence {
+            get {
+                return ResourceManager.GetString("InfoMessageDeletedSequence", resourceCulture);
             }
         }
         
@@ -1132,15 +1159,6 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Existing file.
-        /// </summary>
-        internal static string MessageCaptionFileExists {
-            get {
-                return ResourceManager.GetString("MessageCaptionFileExists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Mouse.
         /// </summary>
         internal static string MouseActionName {
@@ -1200,6 +1218,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string MouseActionToStringScrollBy {
             get {
                 return ResourceManager.GetString("MouseActionToStringScrollBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to delete it ?.
+        /// </summary>
+        internal static string QuestionMessageDelete {
+            get {
+                return ResourceManager.GetString("QuestionMessageDelete", resourceCulture);
             }
         }
         
@@ -1290,6 +1317,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence &quot;{0}&quot; will be permantly deleted..
+        /// </summary>
+        internal static string WarningMessageDeleteSequence {
+            get {
+                return ResourceManager.GetString("WarningMessageDeleteSequence", resourceCulture);
             }
         }
         

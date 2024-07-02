@@ -147,6 +147,12 @@
   <data name="ButtonWaitForInput" xml:space="preserve">
     <value>Attente d'une touche</value>
   </data>
+  <data name="CaptionMessageDelete" xml:space="preserve">
+    <value>Confirmation de suppression</value>
+  </data>
+  <data name="CaptionMessageFileExists" xml:space="preserve">
+    <value>Fichier existant</value>
+  </data>
   <data name="ComboBoxSpeedFast" xml:space="preserve">
     <value>Rapide</value>
   </data>
@@ -248,6 +254,9 @@
   </data>
   <data name="ImageActionToString" xml:space="preserve">
     <value>Recherche de l'image : "{0}" entre les coordonnées : {1} et {2} pendant {3} ms.</value>
+  </data>
+  <data name="InfoMessageDeletedSequence" xml:space="preserve">
+    <value>La séquence "{0}" a été supprimée définitivement.</value>
   </data>
   <data name="InfoMessageExecuteAction" xml:space="preserve">
     <value>Execution de l'action : {0}.</value>
@@ -471,9 +480,6 @@
   <data name="MenuSettingsTheme" xml:space="preserve">
     <value>Thème</value>
   </data>
-  <data name="MessageCaptionFileExists" xml:space="preserve">
-    <value>Fichier existant</value>
-  </data>
   <data name="MouseActionName" xml:space="preserve">
     <value>Souris</value>
   </data>
@@ -494,6 +500,9 @@
   </data>
   <data name="MouseActionToStringScrollBy" xml:space="preserve">
     <value>Défilement de : {0}</value>
+  </data>
+  <data name="QuestionMessageDelete" xml:space="preserve">
+    <value>Voulez-vous supprimer la séquence ?</value>
   </data>
   <data name="QuestionMessageReplace" xml:space="preserve">
     <value>Voulez-vous le remplacer ?</value>
@@ -524,6 +533,9 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Attention</value>
+  </data>
+  <data name="WarningMessageDeleteSequence" xml:space="preserve">
+    <value>La séquence "{0}" va être supprimée définitivement.</value>
   </data>
   <data name="WarningMessageUnsavedChanges" xml:space="preserve">
     <value>Les modifications non enregistrées vont être perdues.</value>
