@@ -26,6 +26,7 @@ namespace Tao_Bot_Maker.Controller
         public MainFormController(MainForm mainForm)
         {
             NewSequence();
+            SequenceController.SetIsRunning(false);
             settingsController = new SettingsController();
             this.mainForm = mainForm;
         }
@@ -263,6 +264,9 @@ namespace Tao_Bot_Maker.Controller
         /// <exception cref="Exception">Exception thrown if there is an error during sequence execution.</exception>
         public async void StartSequence()
         {
+            if (SequenceController.GetIsRunning())
+                return;
+
             try
             {
                 if (!sequenceController.ValidateSequence(out string errorMessage))
@@ -282,11 +286,19 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
+        public bool GetIsSequenceRunning()
+        {
+            return SequenceController.GetIsRunning();
+        }
+
         /// <summary>
         /// Toggles the pause of the sequence.
         /// </summary>
         public void TogglePause()
         {
+            if (!SequenceController.GetIsRunning())
+                return;
+
             sequenceController.TogglePause();
         }
 
@@ -295,6 +307,9 @@ namespace Tao_Bot_Maker.Controller
         /// </summary>
         public void StopSequence()
         {
+            if (!SequenceController.GetIsRunning())
+                return;
+
             sequenceController.StopSequence();
         }
 

@@ -20,9 +20,11 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             Logger.LogMessageReceived += OnLogMessageReceived;
             CultureManager.CultureChanged += UpdateUI;
+            SequenceController.RunningStateChanged += UpdateUIState;
 
             mainFormController = new MainFormController(this);
             mainFormController.InitializeHotkeys();
+
             LoadSettings();
             LoadSequenceNames();
 
@@ -63,6 +65,7 @@ namespace Tao_Bot_Maker.View
 
             botToolStripMenuItem.Text = Resources.Strings.MenuBot;
             startToolStripMenuItem.Text = Resources.Strings.MenuBotStart;
+            pauseToolStripMenuItem.Text = SequenceController.GetIsPaused() ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotPause;
             stopToolStripMenuItem.Text = Resources.Strings.MenuBotStop;
 
             settingsToolStripMenuItem.Text = Resources.Strings.MenuSettings;
@@ -71,6 +74,38 @@ namespace Tao_Bot_Maker.View
             themeToolStripMenuItem.Text = Resources.Strings.MenuSettingsTheme;
             settingsToolStripMenuItem1.Text = Resources.Strings.MenuSettings;
             aboutToolStripMenuItem.Text = Resources.Strings.MenuAbout;
+
+            startBotToolStripButton.Text = Resources.Strings.MenuBotStart;
+            pauseBotToolStripButton.Text = Resources.Strings.MenuBotPause;
+            stopBotToolStripButton.Text = Resources.Strings.MenuBotStop;
+        }
+
+        private void UpdateUIState()
+        {
+            bool isRunning = SequenceController.GetIsRunning();
+            bool isPaused = SequenceController.GetIsPaused();
+
+            newToolStripMenuItem.Enabled = !isRunning;
+            saveToolStripMenuItem.Enabled = !isRunning;
+            saveAsToolStripMenuItem.Enabled = !isRunning;
+
+            startToolStripMenuItem.Enabled = !isRunning;
+            pauseToolStripMenuItem.Enabled = isRunning;
+            pauseToolStripMenuItem.Text = isPaused ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotPause;
+            stopToolStripMenuItem.Enabled = isRunning;
+
+            addActionToolStripButton.Enabled = !isRunning;
+            editActionToolStripButton.Enabled = !isRunning;
+            deleteActionToolStripButton.Enabled = !isRunning;
+
+            startBotToolStripButton.Visible = !isRunning || isPaused;
+            startBotToolStripButton.Text = isPaused ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotStart;
+            pauseBotToolStripButton.Visible = isRunning && !isPaused;
+            stopBotToolStripButton.Enabled = isRunning;
+
+            sequenceComboBox.Enabled = !isRunning;
+            saveSequenceToolStripButton.Enabled = !isRunning;
+            deleteSequenceToolStripButton.Enabled = !isRunning;
         }
 
         private void LoadSettings()
@@ -283,6 +318,7 @@ namespace Tao_Bot_Maker.View
             mainFormController.UnregisterHotkeys();
             Logger.LogMessageReceived -= OnLogMessageReceived;
             CultureManager.CultureChanged -= UpdateUI;
+            SequenceController.RunningStateChanged -= UpdateUIState;
         }
 
         private void EditActionToolStripButton_Click(object sender, EventArgs e)
@@ -349,6 +385,11 @@ namespace Tao_Bot_Maker.View
                 mainFormController.ExecuteHotkey(m.LParam);
                 return;
             }
+        }
+
+        private void PauseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mainFormController.TogglePause();
         }
     }
 }

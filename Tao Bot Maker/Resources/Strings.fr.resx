@@ -444,6 +444,12 @@
   <data name="MenuBot" xml:space="preserve">
     <value>Bot</value>
   </data>
+  <data name="MenuBotPause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="MenuBotResume" xml:space="preserve">
+    <value>Reprise</value>
+  </data>
   <data name="MenuBotStart" xml:space="preserve">
     <value>Démarrer</value>
   </data>

@@ -66,6 +66,7 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.actionsListBox = new System.Windows.Forms.ListBox();
             this.eventLogTextBox = new System.Windows.Forms.TextBox();
+            this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -136,6 +137,7 @@
             // 
             this.botToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
+            this.pauseToolStripMenuItem,
             this.stopToolStripMenuItem});
             this.botToolStripMenuItem.Name = "botToolStripMenuItem";
             this.botToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -144,14 +146,14 @@
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.StartToolStripMenuItem_Click);
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.StopToolStripMenuItem_Click);
             // 
@@ -410,6 +412,13 @@
             this.eventLogTextBox.Size = new System.Drawing.Size(784, 110);
             this.eventLogTextBox.TabIndex = 0;
             // 
+            // pauseToolStripMenuItem
+            // 
+            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pauseToolStripMenuItem.Text = "Pause";
+            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.PauseToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,5 +485,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton pauseBotToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
     }
 }

@@ -1051,6 +1051,24 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pause.
+        /// </summary>
+        internal static string MenuBotPause {
+            get {
+                return ResourceManager.GetString("MenuBotPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Resume.
+        /// </summary>
+        internal static string MenuBotResume {
+            get {
+                return ResourceManager.GetString("MenuBotResume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Start.
         /// </summary>
         internal static string MenuBotStart {

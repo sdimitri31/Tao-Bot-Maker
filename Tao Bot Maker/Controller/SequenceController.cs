@@ -14,12 +14,15 @@ namespace Tao_Bot_Maker.Controller
 {
     public class SequenceController
     {
+        public static event System.Action RunningStateChanged;
+
         private CancellationTokenSource sequenceLoadingToken = new CancellationTokenSource();
         private readonly ISequenceRepository sequenceRepository;
         private Sequence sequence;
 
         private CancellationTokenSource sequenceExecutionToken = new CancellationTokenSource();
         private static bool isPaused;
+        private static bool isRunning;
 
         public SequenceController()
         {
@@ -137,7 +140,8 @@ namespace Tao_Bot_Maker.Controller
             sequenceExecutionToken.Cancel();
             sequenceExecutionToken = new CancellationTokenSource();
             var token = sequenceExecutionToken.Token;
-            isPaused = false;
+            SetIsPaused(false);
+            SetIsRunning(true);
 
             try
             {
@@ -147,18 +151,24 @@ namespace Tao_Bot_Maker.Controller
                 {
                     await ExecuteAction(action, token);
                 }
-
+                SetIsPaused(false);
+                SetIsRunning(false);
                 Logger.Log(Resources.Strings.InfoMessageExecutionComplete);
             }
-            catch (OperationCanceledException )
+            catch (OperationCanceledException)
             {
+                SetIsPaused(false);
+                SetIsRunning(false);
                 Logger.Log(Resources.Strings.InfoMessageExecutionCancelled, TraceEventType.Information);
             }
             catch (Exception ex)
             {
+                SetIsPaused(false);
+                SetIsRunning(false);
                 throw new Exception(ex.Message, ex);
             }
         }
+
 
         /// <summary>
         /// Executes the provided action asynchronously with the given token, x, and y coordinates.
@@ -184,7 +194,7 @@ namespace Tao_Bot_Maker.Controller
                 }
                 catch (OperationCanceledException)
                 {
-                    // Do nothing, thread is canceled
+                    Console.WriteLine("Thread cancelled by user");
                 }
                 catch (Exception ex)
                 {
@@ -230,9 +240,28 @@ namespace Tao_Bot_Maker.Controller
             return true;
         }
 
+        public static void SetIsRunning(bool value)
+        {
+            isRunning = value;
+            Console.WriteLine("isRunning: " + isRunning);
+            RunningStateChanged?.Invoke(); // Trigger the event.
+        }
+
+        public static void SetIsPaused(bool value)
+        {
+            isPaused = value;
+            Console.WriteLine("isPaused: " + isPaused);
+            RunningStateChanged?.Invoke(); // Trigger the event.
+        }
+
         public static bool GetIsPaused()
         {
             return isPaused;
+        }
+
+        public static bool GetIsRunning()
+        {
+            return isRunning;
         }
 
         public static async Task PauseIfRequested()
@@ -243,19 +272,9 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
-        public void PauseSequence()
-        {
-            isPaused = true;
-        }
-
-        public void ResumeSequence()
-        {
-            isPaused = false;
-        }
-
         public void TogglePause()
         {
-            isPaused = !isPaused;
+            SetIsPaused(!isPaused);
             string message = isPaused ? Resources.Strings.InfoMessageExecutionPaused : Resources.Strings.InfoMessageExecutionResumed;
             Logger.Log(message);
         }
