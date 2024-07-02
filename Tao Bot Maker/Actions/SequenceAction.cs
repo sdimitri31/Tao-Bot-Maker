@@ -27,7 +27,7 @@ namespace Tao_Bot_Maker.Model
             RepeatCount = repeatCount;
         }
 
-        public override async Task Execute(CancellationToken token)
+        public override async Task Execute(CancellationToken token, int x, int y)
         {
             token.ThrowIfCancellationRequested();
 
@@ -42,18 +42,17 @@ namespace Tao_Bot_Maker.Model
             Sequence sequence = SequenceController.GetSequence(SequenceName);
             for (int i = 0; i < RepeatCount; i++)
             {
+                token.ThrowIfCancellationRequested();
+
+                await SequenceController.PauseIfRequested();
+
                 string logLoop = string.Format(Resources.Strings.SequenceActionLoopNumber, i + 1, RepeatCount);
                 Logger.Log(logLoop);
                 foreach (var action in sequence.Actions)
                 {
-                    await action.Execute(token);
+                    await SequenceController.ExecuteAction(action, token);
                 }
             }
-        }
-
-        public override async Task Execute(int x, int y, CancellationToken token)
-        {
-            await Execute(token);
         }
 
         public override string ToString()

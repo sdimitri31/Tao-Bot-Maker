@@ -466,11 +466,38 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cancelling execution..
+        /// </summary>
+        internal static string InfoMessageExecutionCancelled {
+            get {
+                return ResourceManager.GetString("InfoMessageExecutionCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Ending execution..
         /// </summary>
         internal static string InfoMessageExecutionComplete {
             get {
                 return ResourceManager.GetString("InfoMessageExecutionComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pausing execution..
+        /// </summary>
+        internal static string InfoMessageExecutionPaused {
+            get {
+                return ResourceManager.GetString("InfoMessageExecutionPaused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Resuming execution..
+        /// </summary>
+        internal static string InfoMessageExecutionResumed {
+            get {
+                return ResourceManager.GetString("InfoMessageExecutionResumed", resourceCulture);
             }
         }
         

@@ -252,8 +252,17 @@
   <data name="InfoMessageExecuteAction" xml:space="preserve">
     <value>Execution de l'action : {0}.</value>
   </data>
+  <data name="InfoMessageExecutionCancelled" xml:space="preserve">
+    <value>Annulation de l'exécution.</value>
+  </data>
   <data name="InfoMessageExecutionComplete" xml:space="preserve">
     <value>Fin de l'exécution.</value>
+  </data>
+  <data name="InfoMessageExecutionPaused" xml:space="preserve">
+    <value>Mise en pause de l'exécution.</value>
+  </data>
+  <data name="InfoMessageExecutionResumed" xml:space="preserve">
+    <value>Repise de l'exécution.</value>
   </data>
   <data name="InfoMessageFileExists" xml:space="preserve">
     <value>Un fichier avec le nom : "{0}" existe déjà.</value>

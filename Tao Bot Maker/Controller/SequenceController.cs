@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
-using Tao_Bot_Maker.Properties;
 using Tao_Bot_Maker.View;
 using Action = Tao_Bot_Maker.Model.Action;
 
@@ -144,32 +143,16 @@ namespace Tao_Bot_Maker.Controller
             {
                 Logger.Log(Resources.Strings.InfoMessageStartingExecution);
 
-                Exception executionException = null;
-
-                await Task.Run(async () =>
+                foreach (var action in sequence.Actions)
                 {
-                    try
-                    {
-                        foreach (var action in sequence.Actions)
-                        {
-                            await ExecuteAction(action, 0, 0, token);
-                        }
-                    }
-                    catch (OperationCanceledException ex)
-                    {
-                        Console.WriteLine($"Operation cancelled : {ex.Message}");
-                    }
-                    catch (Exception ex)
-                    {
-                        executionException = ex;
-                    }
-                }, token);
-
-                if (executionException != null) {
-                    throw executionException;
+                    await ExecuteAction(action, token);
                 }
 
                 Logger.Log(Resources.Strings.InfoMessageExecutionComplete);
+            }
+            catch (OperationCanceledException )
+            {
+                Logger.Log(Resources.Strings.InfoMessageExecutionCancelled, TraceEventType.Information);
             }
             catch (Exception ex)
             {
@@ -177,23 +160,56 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
-        public static async Task ExecuteAction(Action action, int x, int y, CancellationToken token)
+        /// <summary>
+        /// Executes the provided action asynchronously with the given token, x, and y coordinates.
+        /// </summary>
+        /// <param name="action">The action to execute.</param>
+        /// <param name="token">The cancellation token.</param>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <returns>A Task representing the asynchronous operation.</returns>
+        public static async Task ExecuteAction(Action action, CancellationToken token, int x = 0, int y = 0)
         {
-            try
+            Exception exception = null;
+            // Create a new thread for the action
+            var actionThread = new Thread(() =>
             {
-                token.ThrowIfCancellationRequested();
+                try
+                {
+                    token.ThrowIfCancellationRequested();
 
-                await PauseIfRequested();
+                    PauseIfRequested().GetAwaiter().GetResult();
 
-                await action.Execute(x, y, token);
-            }
-            catch (OperationCanceledException ex)
+                    action.Execute(token, x, y).GetAwaiter().GetResult();
+                }
+                catch (OperationCanceledException)
+                {
+                    // Do nothing, thread is canceled
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
+            });
+
+            // Start the action thread
+            actionThread.Start();
+
+            // Keep the thread alive until completion or cancellation
+            while (actionThread.IsAlive)
             {
-                throw new OperationCanceledException(ex.Message);
+                if (token.IsCancellationRequested)
+                {
+                    actionThread.Abort();
+                    token.ThrowIfCancellationRequested();
+                }
+
+                await Task.Delay(10);
             }
-            catch (Exception ex)
+
+            if (exception != null)
             {
-                throw new Exception(ex.Message, ex);
+                throw exception;
             }
         }
 
@@ -201,7 +217,7 @@ namespace Tao_Bot_Maker.Controller
         {
             errorMessage = string.Empty;
 
-            for(int i = 0; i < sequence.Actions.Count; i++)
+            for (int i = 0; i < sequence.Actions.Count; i++)
             {
                 if (!sequence.Actions[i].Validate(out string errorMsg))
                 {
@@ -240,14 +256,13 @@ namespace Tao_Bot_Maker.Controller
         public void TogglePause()
         {
             isPaused = !isPaused;
-            string message = isPaused ? "paused" : "resumed";
-            Logger.Log($"Execution {message}");
+            string message = isPaused ? Resources.Strings.InfoMessageExecutionPaused : Resources.Strings.InfoMessageExecutionResumed;
+            Logger.Log(message);
         }
 
         public void StopSequence()
         {
             sequenceExecutionToken.Cancel();
-            Logger.Log($"Execution stopped");
         }
 
     }

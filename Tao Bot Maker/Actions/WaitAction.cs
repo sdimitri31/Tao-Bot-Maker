@@ -24,7 +24,7 @@ namespace Tao_Bot_Maker.Model
             RandomizeWait = randomizeWait;
         }
 
-        public override async Task Execute(CancellationToken token)
+        public override async Task Execute(CancellationToken token, int x, int y)
         {
             token.ThrowIfCancellationRequested();
 
@@ -42,11 +42,6 @@ namespace Tao_Bot_Maker.Model
             Logger.Log(messageWaitingFor);
             
             await Task.Delay(waitTime);
-        }
-
-        public override async Task Execute(int x, int y, CancellationToken token)
-        {
-            await Execute(token);
         }
 
         public override string ToString()

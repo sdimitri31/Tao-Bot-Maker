@@ -12,9 +12,7 @@ namespace Tao_Bot_Maker.Model
         [JsonConverter(typeof(StringEnumConverter))]
         public abstract ActionType Type { get; set; }
 
-        public abstract Task Execute(CancellationToken token);
-
-        public abstract Task Execute(int x, int y, CancellationToken token);
+        public abstract Task Execute(CancellationToken token, int x = 0, int y = 0);
 
         public abstract bool Validate(out string errorMessage);
 

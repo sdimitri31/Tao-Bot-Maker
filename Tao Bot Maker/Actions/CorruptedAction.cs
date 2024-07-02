@@ -16,7 +16,7 @@ namespace Tao_Bot_Maker.Model
             Type = ActionType.CorruptAction;
         }
 
-        public override async Task Execute(CancellationToken token)
+        public override async Task Execute(CancellationToken token, int x, int y)
         {
             token.ThrowIfCancellationRequested();
 
@@ -28,11 +28,6 @@ namespace Tao_Bot_Maker.Model
                 throw new Exception(errorMessage);
             }
             await Task.Delay(10, token);
-        }
-
-        public override async Task Execute(int x, int y, CancellationToken token)
-        {
-            await Execute(token);
         }
 
         public override string ToString()

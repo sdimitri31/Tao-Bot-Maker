@@ -53,7 +53,7 @@ namespace Tao_Bot_Maker.Model
             ActionIfNotFound = actionIfNotFound;
         }
 
-        public override async Task Execute(CancellationToken token)
+        public override async Task Execute(CancellationToken token, int x, int y)
         {
             string executeAction = string.Format(Resources.Strings.InfoMessageExecuteAction, this.ToString());
             Logger.Log(executeAction);
@@ -68,9 +68,20 @@ namespace Tao_Bot_Maker.Model
 
             timer.Elapsed += (sender, args) =>
             {
-                string message = string.Format(Resources.Strings.InfoMessageSearchingImageFor, stopwatch.ElapsedMilliseconds);
+                if (token.IsCancellationRequested)
+                {
+                    stopwatch.Stop();
+                    timer.Stop();
+                    timer.Dispose();
+                    return;
+                }
 
-                Logger.Log(message, TraceEventType.Information);
+                if (!SequenceController.GetIsPaused())
+                {
+                    string message = string.Format(Resources.Strings.InfoMessageSearchingImageFor, stopwatch.ElapsedMilliseconds);
+
+                    Logger.Log(message, TraceEventType.Information);
+                }
             };
             timer.Start();
 
@@ -88,11 +99,11 @@ namespace Tao_Bot_Maker.Model
 
                         if (imageCoords != null)
                         {
-                            int x = int.Parse(imageCoords[1]);
-                            int y = int.Parse(imageCoords[2]);
+                            int foundX = int.Parse(imageCoords[1]);
+                            int foundY = int.Parse(imageCoords[2]);
                             var image = Image.FromFile(imagePath);
-                            int centerX = x + (image.Width / 2);
-                            int centerY = y + (image.Height / 2);
+                            int centerX = foundX + (image.Width / 2);
+                            int centerY = foundY + (image.Height / 2);
 
                             return new int[] { centerX, centerY };
                         }
@@ -102,46 +113,41 @@ namespace Tao_Bot_Maker.Model
 
                     token.ThrowIfCancellationRequested();
 
-                    if (SequenceController.GetIsPaused())
+                    if (result != null)
                     {
                         stopwatch.Stop();
                         timer.Stop();
-                        await SequenceController.PauseIfRequested();
-                        stopwatch.Start();
-                        timer.Start();
-                    }
+                        timer.Dispose();
 
-                    if (result != null)
-                    {
+                        await SequenceController.PauseIfRequested();
+
                         string coords = string.Format(Resources.Strings.CoordinatesFormat, result[0], result[1]);
                         string message = string.Format(Resources.Strings.InfoMessageImageFoundAtCoordsIn, coords, stopwatch.ElapsedMilliseconds);
 
                         Logger.Log(message, TraceEventType.Information);
 
-                        stopwatch.Stop();
-                        timer.Stop();
-                        timer.Dispose();
                         if (ActionIfFound != null)
                         {
-                            await SequenceController.PauseIfRequested();
-                            await SequenceController.ExecuteAction(ActionIfFound, result[0], result[1], token);
+                            await SequenceController.ExecuteAction(ActionIfFound, token, result[0], result[1]);
                         }
                         break;
                     }
 
                     if (stopwatch.ElapsedMilliseconds >= Expiration)
                     {
+                        stopwatch.Stop();
+                        timer.Stop();
+                        timer.Dispose();
+
+                        await SequenceController.PauseIfRequested();
+
                         string message = string.Format(Resources.Strings.InfoMessageImageSearchTimeOut, stopwatch.ElapsedMilliseconds);
 
                         Logger.Log(message, TraceEventType.Warning);
 
-                        stopwatch.Stop();
-                        timer.Stop();
-                        timer.Dispose();
                         if (ActionIfNotFound != null)
                         {
-                            await SequenceController.PauseIfRequested();
-                            await ActionIfNotFound.Execute(token);
+                            await SequenceController.ExecuteAction(ActionIfNotFound, token);
                         }
                         break;
                     }
@@ -156,11 +162,6 @@ namespace Tao_Bot_Maker.Model
                 throw new OperationCanceledException(e.Message, e);
             }
 
-        }
-
-        public override async Task Execute(int x, int y, CancellationToken token)
-        {
-            await Execute(token);
         }
 
         public override string ToString()
@@ -182,7 +183,7 @@ namespace Tao_Bot_Maker.Model
             if (!ValidateImageFile(ImageName, out errorMessage))
                 return false;
 
-            if(!ValidateCoordinate(StartX, out errorMessage))
+            if (!ValidateCoordinate(StartX, out errorMessage))
                 return false;
 
             if (!ValidateCoordinate(StartY, out errorMessage))
@@ -213,7 +214,7 @@ namespace Tao_Bot_Maker.Model
         {
             errorMessage = string.Empty;
 
-            if(actionType != ActionType.ImageAction)
+            if (actionType != ActionType.ImageAction)
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.ActionType);
                 return false;
@@ -226,7 +227,7 @@ namespace Tao_Bot_Maker.Model
         {
             errorMessage = string.Empty;
 
-            if(string.IsNullOrEmpty(imageName))
+            if (string.IsNullOrEmpty(imageName))
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.ImageActionImageName);
                 return false;
@@ -253,7 +254,7 @@ namespace Tao_Bot_Maker.Model
         {
             errorMessage = string.Empty;
 
-            if(coordToCheck < -999999 || coordToCheck > 999999)
+            if (coordToCheck < -999999 || coordToCheck > 999999)
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.Coordinates, -999999, 999999);
                 return false;
@@ -290,13 +291,13 @@ namespace Tao_Bot_Maker.Model
 
         public static bool ValidateAction(Action action, out string errorMessage)
         {
-            if(action == null)
+            if (action == null)
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.Action);
                 return false;
             }
 
-            if(!action.Validate(out string errorMsg))
+            if (!action.Validate(out string errorMsg))
             {
                 errorMessage = errorMsg;
                 return false;

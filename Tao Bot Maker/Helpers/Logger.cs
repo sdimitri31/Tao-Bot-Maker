@@ -11,7 +11,7 @@ namespace Tao_Bot_Maker.Helpers
         public static void Log(string message, TraceEventType level = TraceEventType.Information)
         {
             // Ajouter un timestamp et le niveau au message de log
-            string logEntry = $"{DateTime.Now} [{level}]: {message}";
+            string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [{level}]: {message}";
             Console.WriteLine(logEntry);
 
             // Déclencher l'événement
