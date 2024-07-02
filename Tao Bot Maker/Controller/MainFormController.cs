@@ -42,15 +42,15 @@ namespace Tao_Bot_Maker.Controller
             UnregisterHotkeys();
 
             // Initialize and register hotkey for starting the sequence
-            hotkeyStartSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStartSequence"), mainForm);
+            hotkeyStartSequence = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE), mainForm);
             hotkeyStartSequence.Register();
 
             // Initialize and register hotkey for pausing the sequence
-            hotkeyPauseSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyPauseSequence"), mainForm);
+            hotkeyPauseSequence = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE), mainForm);
             hotkeyPauseSequence.Register();
 
             // Initialize and register hotkey for stopping the sequence
-            hotkeyStopSequence = new HotKeyController((Keys)settingsController.GetSettingValue<int>("HotkeyStopSequence"), mainForm);
+            hotkeyStopSequence = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE), mainForm);
             hotkeyStopSequence.Register();
         }
 
@@ -115,16 +115,6 @@ namespace Tao_Bot_Maker.Controller
         public void SetSettingValue(string name, string value, SettingsType type)
         {
             settingsController.SetSettingValue(name, value, type);
-        }
-
-        /// <summary>
-        /// Gets the value of a setting.
-        /// </summary>
-        /// <param name="name">The name of the setting.</param>
-        /// <returns>The value of the setting.</returns>
-        public T GetSettingValue<T>(string name)
-        {
-            return settingsController.GetSettingValue<T>(name);
         }
 
         #endregion

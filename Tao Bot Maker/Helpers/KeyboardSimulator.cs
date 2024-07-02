@@ -79,7 +79,7 @@ namespace Tao_Bot_Maker.Helpers
             //Skip the key
             for (int i = 1; i < keys.Length; i++)
             {
-                modifiers += keys[i].Replace(" ", "") + " + ";
+                modifiers += keys[i].Replace(" ", "") + "+";
             }
 
             //Clean modifier names

@@ -33,32 +33,32 @@
             this.useCurrentPositionCheckBox = new System.Windows.Forms.CheckBox();
             this.startYCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.scrollAmountLabel = new System.Windows.Forms.Label();
-            this.speedLabel = new System.Windows.Forms.Label();
-            this.speedComboBox = new System.Windows.Forms.ComboBox();
-            this.scrollAmountNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.clickDurationLabel = new System.Windows.Forms.Label();
-            this.clickDurationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.leftClickRadioButton = new System.Windows.Forms.RadioButton();
             this.middleClickRadioButton = new System.Windows.Forms.RadioButton();
             this.rightClickRadioButton = new System.Windows.Forms.RadioButton();
-            this.startCoordinateLabel = new System.Windows.Forms.Label();
             this.noneClickRadioButton = new System.Windows.Forms.RadioButton();
             this.doubleClickCheckBox = new System.Windows.Forms.CheckBox();
             this.dragAndDropCheckBox = new System.Windows.Forms.CheckBox();
             this.scrollCheckBox = new System.Windows.Forms.CheckBox();
+            this.startCoordinateLabel = new System.Windows.Forms.Label();
+            this.startImageCoordCheckBox = new System.Windows.Forms.CheckBox();
             this.endCoordinateLabel = new System.Windows.Forms.Label();
             this.endXCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.endYCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.startImageCoordCheckBox = new System.Windows.Forms.CheckBox();
             this.endImageCoordCheckBox = new System.Windows.Forms.CheckBox();
+            this.speedLabel = new System.Windows.Forms.Label();
+            this.speedComboBox = new System.Windows.Forms.ComboBox();
+            this.scrollAmountLabel = new System.Windows.Forms.Label();
+            this.scrollAmountNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.clickDurationLabel = new System.Windows.Forms.Label();
+            this.clickDurationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scrollAmountNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clickDurationNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endXCoordinateNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endYCoordinateNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrollAmountNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clickDurationNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // clickTypeLabel
@@ -173,86 +173,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(500, 421);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
-            // scrollAmountLabel
-            // 
-            this.scrollAmountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrollAmountLabel.AutoSize = true;
-            this.scrollAmountLabel.Location = new System.Drawing.Point(3, 308);
-            this.scrollAmountLabel.Name = "scrollAmountLabel";
-            this.scrollAmountLabel.Size = new System.Drawing.Size(94, 13);
-            this.scrollAmountLabel.TabIndex = 15;
-            this.scrollAmountLabel.Text = "Scroll amount";
-            this.scrollAmountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // speedLabel
-            // 
-            this.speedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedLabel.AutoSize = true;
-            this.speedLabel.Location = new System.Drawing.Point(3, 266);
-            this.speedLabel.Name = "speedLabel";
-            this.speedLabel.Size = new System.Drawing.Size(94, 13);
-            this.speedLabel.TabIndex = 13;
-            this.speedLabel.Text = "Speed";
-            this.speedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // speedComboBox
-            // 
-            this.speedComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.speedComboBox, 2);
-            this.speedComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.speedComboBox.FormattingEnabled = true;
-            this.speedComboBox.Location = new System.Drawing.Point(103, 262);
-            this.speedComboBox.Name = "speedComboBox";
-            this.speedComboBox.Size = new System.Drawing.Size(194, 21);
-            this.speedComboBox.TabIndex = 14;
-            // 
-            // scrollAmountNumericUpDown
-            // 
-            this.scrollAmountNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrollAmountNumericUpDown.Location = new System.Drawing.Point(103, 305);
-            this.scrollAmountNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.scrollAmountNumericUpDown.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.scrollAmountNumericUpDown.Name = "scrollAmountNumericUpDown";
-            this.scrollAmountNumericUpDown.Size = new System.Drawing.Size(94, 20);
-            this.scrollAmountNumericUpDown.TabIndex = 16;
-            // 
-            // clickDurationLabel
-            // 
-            this.clickDurationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.clickDurationLabel.AutoSize = true;
-            this.clickDurationLabel.Location = new System.Drawing.Point(3, 350);
-            this.clickDurationLabel.Name = "clickDurationLabel";
-            this.clickDurationLabel.Size = new System.Drawing.Size(94, 13);
-            this.clickDurationLabel.TabIndex = 17;
-            this.clickDurationLabel.Text = "Click duration";
-            this.clickDurationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // clickDurationNumericUpDown
-            // 
-            this.clickDurationNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.clickDurationNumericUpDown.Location = new System.Drawing.Point(103, 347);
-            this.clickDurationNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.clickDurationNumericUpDown.Name = "clickDurationNumericUpDown";
-            this.clickDurationNumericUpDown.Size = new System.Drawing.Size(94, 20);
-            this.clickDurationNumericUpDown.TabIndex = 18;
-            this.clickDurationNumericUpDown.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
             // leftClickRadioButton
             // 
             this.leftClickRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -300,16 +220,6 @@
             this.rightClickRadioButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.rightClickRadioButton.UseVisualStyleBackColor = true;
             this.rightClickRadioButton.CheckedChanged += new System.EventHandler(this.ClickRadioButton_CheckedChanged);
-            // 
-            // startCoordinateLabel
-            // 
-            this.startCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startCoordinateLabel.AutoSize = true;
-            this.startCoordinateLabel.Location = new System.Drawing.Point(3, 98);
-            this.startCoordinateLabel.Name = "startCoordinateLabel";
-            this.startCoordinateLabel.Size = new System.Drawing.Size(94, 13);
-            this.startCoordinateLabel.TabIndex = 11;
-            this.startCoordinateLabel.Text = "Start coords";
             // 
             // noneClickRadioButton
             // 
@@ -375,6 +285,33 @@
             this.scrollCheckBox.UseVisualStyleBackColor = true;
             this.scrollCheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
+            // startCoordinateLabel
+            // 
+            this.startCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.startCoordinateLabel.AutoSize = true;
+            this.startCoordinateLabel.Location = new System.Drawing.Point(3, 98);
+            this.startCoordinateLabel.Name = "startCoordinateLabel";
+            this.startCoordinateLabel.Size = new System.Drawing.Size(94, 13);
+            this.startCoordinateLabel.TabIndex = 11;
+            this.startCoordinateLabel.Text = "Start coords";
+            // 
+            // startImageCoordCheckBox
+            // 
+            this.startImageCoordCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startImageCoordCheckBox.AutoSize = true;
+            this.startImageCoordCheckBox.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.tableLayoutPanel1.SetColumnSpan(this.startImageCoordCheckBox, 2);
+            this.startImageCoordCheckBox.Location = new System.Drawing.Point(303, 129);
+            this.startImageCoordCheckBox.Name = "startImageCoordCheckBox";
+            this.startImageCoordCheckBox.Size = new System.Drawing.Size(194, 36);
+            this.startImageCoordCheckBox.TabIndex = 26;
+            this.startImageCoordCheckBox.Text = "Use image coordinates";
+            this.startImageCoordCheckBox.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.startImageCoordCheckBox.UseVisualStyleBackColor = true;
+            this.startImageCoordCheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            // 
             // endCoordinateLabel
             // 
             this.endCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -421,23 +358,6 @@
             this.endYCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.endYCoordinateNumericUpDown.TabIndex = 8;
             // 
-            // startImageCoordCheckBox
-            // 
-            this.startImageCoordCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.startImageCoordCheckBox.AutoSize = true;
-            this.startImageCoordCheckBox.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.tableLayoutPanel1.SetColumnSpan(this.startImageCoordCheckBox, 2);
-            this.startImageCoordCheckBox.Location = new System.Drawing.Point(303, 129);
-            this.startImageCoordCheckBox.Name = "startImageCoordCheckBox";
-            this.startImageCoordCheckBox.Size = new System.Drawing.Size(194, 36);
-            this.startImageCoordCheckBox.TabIndex = 26;
-            this.startImageCoordCheckBox.Text = "Use image coordinates";
-            this.startImageCoordCheckBox.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.startImageCoordCheckBox.UseVisualStyleBackColor = true;
-            this.startImageCoordCheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
             // endImageCoordCheckBox
             // 
             this.endImageCoordCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -455,6 +375,86 @@
             this.endImageCoordCheckBox.UseVisualStyleBackColor = true;
             this.endImageCoordCheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
+            // speedLabel
+            // 
+            this.speedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.speedLabel.AutoSize = true;
+            this.speedLabel.Location = new System.Drawing.Point(3, 266);
+            this.speedLabel.Name = "speedLabel";
+            this.speedLabel.Size = new System.Drawing.Size(94, 13);
+            this.speedLabel.TabIndex = 13;
+            this.speedLabel.Text = "Speed";
+            this.speedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // speedComboBox
+            // 
+            this.speedComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.speedComboBox, 2);
+            this.speedComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.speedComboBox.FormattingEnabled = true;
+            this.speedComboBox.Location = new System.Drawing.Point(103, 262);
+            this.speedComboBox.Name = "speedComboBox";
+            this.speedComboBox.Size = new System.Drawing.Size(194, 21);
+            this.speedComboBox.TabIndex = 14;
+            // 
+            // scrollAmountLabel
+            // 
+            this.scrollAmountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.scrollAmountLabel.AutoSize = true;
+            this.scrollAmountLabel.Location = new System.Drawing.Point(3, 308);
+            this.scrollAmountLabel.Name = "scrollAmountLabel";
+            this.scrollAmountLabel.Size = new System.Drawing.Size(94, 13);
+            this.scrollAmountLabel.TabIndex = 15;
+            this.scrollAmountLabel.Text = "Scroll amount";
+            this.scrollAmountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // scrollAmountNumericUpDown
+            // 
+            this.scrollAmountNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.scrollAmountNumericUpDown.Location = new System.Drawing.Point(103, 305);
+            this.scrollAmountNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.scrollAmountNumericUpDown.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.scrollAmountNumericUpDown.Name = "scrollAmountNumericUpDown";
+            this.scrollAmountNumericUpDown.Size = new System.Drawing.Size(94, 20);
+            this.scrollAmountNumericUpDown.TabIndex = 16;
+            // 
+            // clickDurationLabel
+            // 
+            this.clickDurationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.clickDurationLabel.AutoSize = true;
+            this.clickDurationLabel.Location = new System.Drawing.Point(3, 350);
+            this.clickDurationLabel.Name = "clickDurationLabel";
+            this.clickDurationLabel.Size = new System.Drawing.Size(94, 13);
+            this.clickDurationLabel.TabIndex = 17;
+            this.clickDurationLabel.Text = "Click duration";
+            this.clickDurationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // clickDurationNumericUpDown
+            // 
+            this.clickDurationNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.clickDurationNumericUpDown.Location = new System.Drawing.Point(103, 347);
+            this.clickDurationNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.clickDurationNumericUpDown.Name = "clickDurationNumericUpDown";
+            this.clickDurationNumericUpDown.Size = new System.Drawing.Size(94, 20);
+            this.clickDurationNumericUpDown.TabIndex = 18;
+            this.clickDurationNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // MouseActionPropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,10 +466,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scrollAmountNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clickDurationNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.endXCoordinateNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.endYCoordinateNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scrollAmountNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clickDurationNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }

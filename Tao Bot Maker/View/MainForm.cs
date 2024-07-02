@@ -1,6 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using BlueMystic;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
@@ -18,6 +21,8 @@ namespace Tao_Bot_Maker.View
         public MainForm()
         {
             InitializeComponent();
+            //_ = new DarkModeCS(this, false, true);
+
             Logger.LogMessageReceived += OnLogMessageReceived;
             CultureManager.CultureChanged += UpdateUI;
             SequenceController.RunningStateChanged += UpdateUIState;
@@ -30,6 +35,7 @@ namespace Tao_Bot_Maker.View
 
             Logger.Log(Resources.Strings.InfoMessageProgramReady, TraceEventType.Information);
         }
+
 
         private void New()
         {
@@ -110,7 +116,7 @@ namespace Tao_Bot_Maker.View
 
         private void LoadSettings()
         {
-            string language = mainFormController.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
+            string language = SettingsController.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
             englishToolStripMenuItem.Checked = false;
             francaisToolStripMenuItem.Checked = false;
             switch (language)
@@ -125,22 +131,38 @@ namespace Tao_Bot_Maker.View
                     break;
             }
 
-            string theme = mainFormController.GetSettingValue<string>(Settings.SETTING_THEME);
+            string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
             autoToolStripMenuItem.Checked = false;
             lightToolStripMenuItem.Checked = false;
             darkToolStripMenuItem.Checked = false;
             switch (theme)
             {
                 case "Auto":
+                    //ThemeManager.ApplyTheme(this, Themes.LightTheme);
                     autoToolStripMenuItem.Checked = true;
                     break;
                 case "Light":
+                    //ThemeManager.ApplyTheme(this, Themes.LightTheme);
                     lightToolStripMenuItem.Checked = true;
                     break;
                 case "Dark":
+                    //ThemeManager.ApplyTheme(this, Themes.DarkTheme);
                     darkToolStripMenuItem.Checked = true;
                     break;
             }
+
+            newToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)131150);
+            newToolStripMenuItem.ShortcutKeys = (Keys)131150;
+            saveToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)131155);
+            saveToolStripMenuItem.ShortcutKeys = (Keys)131155;
+            saveAsToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)196691);
+            saveAsToolStripMenuItem.ShortcutKeys = (Keys)196691;
+            exitToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)262259);
+            exitToolStripMenuItem.ShortcutKeys = (Keys)262259;
+            startToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE));
+            stopToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE));
+            pauseToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE));
+
         }
 
         private async void LoadSequenceAsync(string sequenceName)
@@ -378,6 +400,13 @@ namespace Tao_Bot_Maker.View
 
         protected override void WndProc(ref Message m)
         {
+            const int WM_SETTINGCHANGE = 0x001A;
+
+            if (m.Msg == WM_SETTINGCHANGE)
+            {
+                //_ = new DarkModeCS(this, false);
+            }
+
             base.WndProc(ref m);
 
             if (m.Msg == 0x0312)

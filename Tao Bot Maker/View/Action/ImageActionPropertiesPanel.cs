@@ -305,5 +305,10 @@ namespace Tao_Bot_Maker.View
             }
             addActionForm.RegisterHotkeys();
         }
+
+        ActionType IActionPropertiesPanel.GetType()
+        {
+            return ActionType.ImageAction;
+        }
     }
 }

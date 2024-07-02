@@ -48,5 +48,9 @@ namespace Tao_Bot_Maker.View
             }
         }
 
+        ActionType IActionPropertiesPanel.GetType()
+        {
+            return ActionType.TextAction;
+        }
     }
 }

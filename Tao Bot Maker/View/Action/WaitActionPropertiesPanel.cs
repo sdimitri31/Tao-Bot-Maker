@@ -29,7 +29,6 @@ namespace Tao_Bot_Maker.View
             );
 
             return waitAction;
-;
         }
 
         public void SetAction(Action action)
@@ -42,5 +41,9 @@ namespace Tao_Bot_Maker.View
             }
         }
 
+        ActionType IActionPropertiesPanel.GetType()
+        {
+            return ActionType.WaitAction;
+        }
     }
 }

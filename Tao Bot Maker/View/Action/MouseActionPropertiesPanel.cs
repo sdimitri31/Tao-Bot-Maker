@@ -280,5 +280,9 @@ namespace Tao_Bot_Maker.View
                 startImageCoordCheckBox.Checked = false;
             }
         }
+        ActionType IActionPropertiesPanel.GetType()
+        {
+            return ActionType.MouseAction;
+        }
     }
 }

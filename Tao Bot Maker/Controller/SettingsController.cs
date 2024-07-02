@@ -29,8 +29,9 @@ namespace Tao_Bot_Maker.Controller
             settings.Save();
         }
 
-        public T GetSettingValue<T>(string name)
+        public static T GetSettingValue<T>(string name)
         {
+            Settings settings = Settings.Load();
             return settings.GetSettingValue<T>(name);
         }
     }

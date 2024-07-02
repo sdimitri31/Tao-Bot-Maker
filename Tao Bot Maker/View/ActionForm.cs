@@ -1,9 +1,14 @@
-﻿using System;
+﻿using BlueMystic;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
+using Tao_Bot_Maker.Properties;
 using Action = Tao_Bot_Maker.Model.Action;
+using Settings = Tao_Bot_Maker.Model.Settings;
 
 namespace Tao_Bot_Maker.View
 {
@@ -15,15 +20,21 @@ namespace Tao_Bot_Maker.View
         private bool isFromImageAction;
         private HotKeyController hotkeyXY;
         private HotKeyController hotkeyXY2;
+        private List<UserControl> panels;
 
         public ActionForm(bool isFromImageAction = false, Action existingAction = null)
         {
             InitializeComponent();
             UpdateUI();
+            RegisterHotkeys();
+
+            panels = new List<UserControl>();
             this.isFromImageAction = isFromImageAction;
             this.Action = existingAction;
-            FillActionTypeListBox();
-            RegisterHotkeys();
+
+            LoadAllActionType(isFromImageAction, existingAction);
+            //_ = new DarkModeCS(this, false);
+
             if (existingAction != null && actionTypelistBox.Items.Contains(existingAction.Type))
             {
                 actionTypelistBox.SelectedItem = existingAction.Type;
@@ -32,8 +43,9 @@ namespace Tao_Bot_Maker.View
             }
             else
             {
-                actionTypelistBox.SelectedIndex = 0;
+                SetPropertiesPanel(ActionType.MouseAction);
             }
+
         }
 
         private void UpdateUI()
@@ -44,59 +56,8 @@ namespace Tao_Bot_Maker.View
             cancelButton.Text = Resources.Strings.ButtonCancel;
         }
 
-        private void FillPropertiesPanelWithExistingAction(Action existingAction)
+        private void AddPropertiesPanel(ActionType actionType, bool isFromImageAction = false, Action existingAction = null)
         {
-            switch (existingAction.Type)
-            {
-                case ActionType.MouseAction:
-                    var mousePanel = actionPropertiesPanel.Controls[0] as MouseActionPropertiesPanel;
-                    mousePanel?.SetAction(existingAction as MouseAction);
-                    break;
-                case ActionType.TextAction:
-                    var textPanel = actionPropertiesPanel.Controls[0] as TextActionPropertiesPanel;
-                    textPanel?.SetAction(existingAction as TextAction);
-                    break;
-                case ActionType.WaitAction:
-                    var waitPanel = actionPropertiesPanel.Controls[0] as WaitActionPropertiesPanel;
-                    waitPanel?.SetAction(existingAction as WaitAction);
-                    break;
-                case ActionType.SequenceAction:
-                    var sequencePanel = actionPropertiesPanel.Controls[0] as SequenceActionPropertiesPanel;
-                    sequencePanel?.SetAction(existingAction as SequenceAction);
-                    break;
-                case ActionType.KeyAction:
-                    var keyPanel = actionPropertiesPanel.Controls[0] as KeyActionPropertiesPanel;
-                    keyPanel?.SetAction(existingAction as KeyAction);
-                    break;
-                case ActionType.ImageAction:
-                    var imagePanel = actionPropertiesPanel.Controls[0] as ImageActionPropertiesPanel;
-                    imagePanel?.SetAction(existingAction as ImageAction);
-                    break;
-                // Ajoutez des cas pour d'autres types d'actions selon votre structure
-                default:
-                    break;
-            }
-        }
-
-        public void RegisterHotkeys()
-        {
-            hotkeyXY = new HotKeyController(Keys.F1, this);
-            hotkeyXY.Register();
-
-            hotkeyXY2 = new HotKeyController(Keys.F2, this);
-            hotkeyXY2.Register();
-        }
-
-        public void UnregisterHotkeys()
-        {
-            hotkeyXY.Unregister();
-            hotkeyXY2.Unregister();
-        }
-
-        private void SetPropertiesPanel(ActionType actionType)
-        {
-            actionPropertiesPanel.Controls.Clear();
-            RegisterHotkeys();
             UserControl panel = null;
 
             switch (actionType)
@@ -119,18 +80,60 @@ namespace Tao_Bot_Maker.View
                 case ActionType.ImageAction:
                     panel = new ImageActionPropertiesPanel(this);
                     break;
-                // Ajoutez des cas pour d'autres types d'actions selon votre structure
                 default:
                     break;
             }
 
             if (panel != null)
             {
+                panel.Location = new Point(0, 0);
+                panel.Visible = false;
                 actionPropertiesPanel.Controls.Add(panel);
+                panels.Add(panel);
             }
         }
 
-        private void FillActionTypeListBox()
+        private void FillPropertiesPanelWithExistingAction(Action existingAction)
+        {
+            foreach (UserControl panel in panels)
+            {
+                if (existingAction.Type == (panel as IActionPropertiesPanel).GetType())
+                    (panel as IActionPropertiesPanel).SetAction(existingAction);
+            }
+        }
+
+        private void SetPropertiesPanel(ActionType actionType)
+        {
+            RegisterHotkeys();
+
+            foreach (UserControl panel in panels)
+            {
+                panel.Visible = (panel as IActionPropertiesPanel).GetType() == actionType;
+            }
+
+        }
+
+        private IActionPropertiesPanel GetSelectedPropertiesPanel()
+        {
+            foreach (UserControl panel in panels)
+            {
+                if (SelectedActionType == (panel as IActionPropertiesPanel).GetType())
+                    return (IActionPropertiesPanel)panel;
+            }
+            return null;
+        }
+
+        private T GetPropertiesPanelByType<T>(ActionType actionType)
+        {
+            foreach (UserControl panel in panels)
+            {
+                if (actionType == (panel as IActionPropertiesPanel).GetType())
+                    return (T)Convert.ChangeType(panel, typeof(T));
+            }
+            return default;
+        }
+
+        private void LoadAllActionType(bool isFromImageAction, Action existingAction)
         {
             foreach (ActionType actionType in Enum.GetValues(typeof(ActionType)))
             {
@@ -139,6 +142,7 @@ namespace Tao_Bot_Maker.View
                     continue;
                 }
                 actionTypelistBox.Items.Add(actionType);
+                AddPropertiesPanel(actionType, isFromImageAction, existingAction);
             }
         }
 
@@ -150,7 +154,8 @@ namespace Tao_Bot_Maker.View
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (actionPropertiesPanel.Controls[0] is IActionPropertiesPanel panel)
+            IActionPropertiesPanel panel = GetSelectedPropertiesPanel();
+            if (panel != null)
             {
                 var newAction = panel.GetAction();
 
@@ -171,6 +176,21 @@ namespace Tao_Bot_Maker.View
         {
             DialogResult = DialogResult.Cancel;
         }
+        
+        public void RegisterHotkeys()
+        {
+            hotkeyXY = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTCOORDS), this);
+            hotkeyXY.Register();
+
+            hotkeyXY2 = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYENDCOORDS), this);
+            hotkeyXY2.Register();
+        }
+
+        public void UnregisterHotkeys()
+        {
+            hotkeyXY.Unregister();
+            hotkeyXY2.Unregister();
+        }
 
         protected override void WndProc(ref Message m)
         {
@@ -178,8 +198,6 @@ namespace Tao_Bot_Maker.View
 
             if (m.Msg == 0x0312)
             {
-                //Keys pressedKey = (Keys)(int)m.LParam;
-
                 Keys pressedKey = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
                 Keys pressedModifier = (Keys)HotKeyController.Reverse3Bits(((int)m.LParam & 0xFFFF));
 
@@ -191,12 +209,10 @@ namespace Tao_Bot_Maker.View
                     switch (SelectedActionType)
                     {
                         case ActionType.MouseAction:
-                            //Send info hotkeyXY has been pressed
-                            ((MouseActionPropertiesPanel)actionPropertiesPanel.Controls[0]).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
+                            GetPropertiesPanelByType<MouseActionPropertiesPanel>(ActionType.MouseAction).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
                             break;
                         case ActionType.ImageAction:
-                            //Send info hotkeyXY has been pressed
-                            ((ImageActionPropertiesPanel)actionPropertiesPanel.Controls[0]).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
+                            GetPropertiesPanelByType<ImageActionPropertiesPanel>(ActionType.ImageAction).HotkeyXY(Cursor.Position.X, Cursor.Position.Y);
                             break;
                     }
                 }
@@ -205,12 +221,10 @@ namespace Tao_Bot_Maker.View
                     switch (SelectedActionType)
                     {
                         case ActionType.MouseAction:
-                            var panel = actionPropertiesPanel.Controls[0] as MouseActionPropertiesPanel;
-                            panel.HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
+                            GetPropertiesPanelByType<MouseActionPropertiesPanel>(ActionType.MouseAction).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
                             break;
                         case ActionType.ImageAction:
-                            //Send info hotkeyXY has been pressed
-                            ((ImageActionPropertiesPanel)actionPropertiesPanel.Controls[0]).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
+                            GetPropertiesPanelByType<ImageActionPropertiesPanel>(ActionType.ImageAction).HotkeyXY2(Cursor.Position.X, Cursor.Position.Y);
                             break;
                     }
                 }

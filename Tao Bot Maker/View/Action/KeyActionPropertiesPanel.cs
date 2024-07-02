@@ -89,5 +89,9 @@ namespace Tao_Bot_Maker.View
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
+        ActionType IActionPropertiesPanel.GetType()
+        {
+            return ActionType.KeyAction;
+        }
     }
 }

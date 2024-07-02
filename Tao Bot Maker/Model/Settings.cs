@@ -30,8 +30,8 @@ namespace Tao_Bot_Maker.Model
                 new Setting(SETTING_SAVELOG, "false", SettingsType.General),
                 new Setting(SETTING_LANGUAGE, "English", SettingsType.General),
                 new Setting(SETTING_THEME, "Light", SettingsType.General),
-                new Setting(SETTING_HOTKEYSTARTSEQUENCE, ((int)Keys.F6).ToString(), SettingsType.Hotkeys),
-                new Setting(SETTING_HOTKEYPAUSESEQUENCE, ((int)Keys.F5).ToString(), SettingsType.Hotkeys),
+                new Setting(SETTING_HOTKEYSTARTSEQUENCE, ((int)Keys.F5).ToString(), SettingsType.Hotkeys),
+                new Setting(SETTING_HOTKEYPAUSESEQUENCE, ((int)Keys.F6).ToString(), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYSTOPSEQUENCE, ((int)Keys.F7).ToString(), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYSTARTCOORDS, ((int)Keys.F1).ToString(), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYENDCOORDS, ((int)Keys.F2).ToString(), SettingsType.Hotkeys)

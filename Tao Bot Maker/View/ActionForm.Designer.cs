@@ -72,7 +72,7 @@
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // AddActionForm
+            // ActionForm
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -83,7 +83,7 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.actionPropertiesPanel);
             this.Controls.Add(this.actionTypelistBox);
-            this.Name = "AddActionForm";
+            this.Name = "ActionForm";
             this.Text = "Add Action";
             this.ResumeLayout(false);
 

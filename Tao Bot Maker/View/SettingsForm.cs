@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueMystic;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace Tao_Bot_Maker.View
         public SettingsForm(Settings settings, SettingsType settingsType = SettingsType.General)
         {
             InitializeComponent();
+            //_ = new DarkModeCS(this, false);
             this.Settings = settings;
             panels = new List<UserControl>();
             FillSettingsTypeListBox();
