@@ -35,6 +35,12 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteSequenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.botToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +85,7 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.botToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.toolStripMenuItem1});
@@ -136,6 +143,55 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addActionToolStripMenuItem,
+            this.editActionToolStripMenuItem,
+            this.deleteActionToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.deleteSequenceToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // addActionToolStripMenuItem
+            // 
+            this.addActionToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_add_48;
+            this.addActionToolStripMenuItem.Name = "addActionToolStripMenuItem";
+            this.addActionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addActionToolStripMenuItem.Text = "Add action";
+            this.addActionToolStripMenuItem.Click += new System.EventHandler(this.AddActionToolStripMenuItem_Click);
+            // 
+            // editActionToolStripMenuItem
+            // 
+            this.editActionToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pencil_drawing_48;
+            this.editActionToolStripMenuItem.Name = "editActionToolStripMenuItem";
+            this.editActionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editActionToolStripMenuItem.Text = "Edit action";
+            this.editActionToolStripMenuItem.Click += new System.EventHandler(this.EditActionToolStripMenuItem_Click);
+            // 
+            // deleteActionToolStripMenuItem
+            // 
+            this.deleteActionToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_do_not_disturb_48;
+            this.deleteActionToolStripMenuItem.Name = "deleteActionToolStripMenuItem";
+            this.deleteActionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteActionToolStripMenuItem.Text = "Delete action";
+            this.deleteActionToolStripMenuItem.Click += new System.EventHandler(this.DeleteActionToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            // 
+            // deleteSequenceToolStripMenuItem
+            // 
+            this.deleteSequenceToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_remove_48;
+            this.deleteSequenceToolStripMenuItem.Name = "deleteSequenceToolStripMenuItem";
+            this.deleteSequenceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteSequenceToolStripMenuItem.Text = "Delete sequence";
+            this.deleteSequenceToolStripMenuItem.Click += new System.EventHandler(this.DeleteSequenceToolStripMenuItem_Click);
             // 
             // botToolStripMenuItem
             // 
@@ -271,7 +327,7 @@
             // 
             this.aboutToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_info_48;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -421,6 +477,7 @@
             this.actionsListBox.Name = "actionsListBox";
             this.actionsListBox.Size = new System.Drawing.Size(784, 248);
             this.actionsListBox.TabIndex = 0;
+            this.actionsListBox.SelectedIndexChanged += new System.EventHandler(this.ActionsListBox_SelectedIndexChanged);
             // 
             // eventLogTextBox
             // 
@@ -499,5 +556,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton pauseBotToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addActionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editActionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteActionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem deleteSequenceToolStripMenuItem;
     }
 }

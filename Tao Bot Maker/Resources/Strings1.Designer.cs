@@ -1159,6 +1159,51 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit.
+        /// </summary>
+        internal static string MenuEdit {
+            get {
+                return ResourceManager.GetString("MenuEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add action.
+        /// </summary>
+        internal static string MenuEditAddAction {
+            get {
+                return ResourceManager.GetString("MenuEditAddAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete action.
+        /// </summary>
+        internal static string MenuEditDeleteAction {
+            get {
+                return ResourceManager.GetString("MenuEditDeleteAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete sequence.
+        /// </summary>
+        internal static string MenuEditDeleteSequence {
+            get {
+                return ResourceManager.GetString("MenuEditDeleteSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit action.
+        /// </summary>
+        internal static string MenuEditEditAction {
+            get {
+                return ResourceManager.GetString("MenuEditEditAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à File.
         /// </summary>
         internal static string MenuFile {

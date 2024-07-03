@@ -35,23 +35,34 @@ namespace Tao_Bot_Maker.View
 
         private void New()
         {
-            if (!SequenceController.GetIsSaved())
+            if (SequenceController.GetIsRunning())
+                return;
+
+            // If not on a new sequence change index
+            // and combobox will handle messageBox for changes
+            if (sequenceComboBox.SelectedIndex != -1)
+                sequenceComboBox.SelectedIndex = -1;
+            else
             {
-                string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
-                message += Environment.NewLine;
-                message += Resources.Strings.QuestionMessageContinue;
-
-                DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result != DialogResult.Yes)
+                // Else we take care of it
+                if (!SequenceController.GetIsSaved())
                 {
-                    return;
+                    string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
+                    message += Environment.NewLine;
+                    message += Resources.Strings.QuestionMessageContinue;
+
+                    DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result != DialogResult.Yes)
+                    {
+                        return;
+                    }
                 }
             }
 
-            sequenceComboBox.SelectedIndex = -1;
             mainFormController.NewSequence();
             LoadActions();
+            UpdateUIState();
         }
 
         private void OnLogMessageReceived(string message, TraceEventType level)
@@ -74,27 +85,49 @@ namespace Tao_Bot_Maker.View
             string unsaved = SequenceController.GetIsSaved() ? "" : " - Unsaved changes";
             this.Text = Resources.Strings.FormTitleMain + unsaved;
 
+            // FILE
             fileToolStripMenuItem.Text = Resources.Strings.MenuFile;
             newToolStripMenuItem.Text = Resources.Strings.MenuFileNew;
             saveToolStripMenuItem.Text = Resources.Strings.MenuFileSave;
             saveAsToolStripMenuItem.Text = Resources.Strings.MenuFileSaveAs;
             exitToolStripMenuItem.Text = Resources.Strings.MenuFileExit;
 
+            // EDIT
+            editToolStripMenuItem.Text = Resources.Strings.MenuEdit;
+            addActionToolStripMenuItem.Text = Resources.Strings.MenuEditAddAction;
+            editActionToolStripMenuItem.Text = Resources.Strings.MenuEditEditAction;
+            deleteActionToolStripMenuItem.Text = Resources.Strings.MenuEditDeleteAction;
+            deleteSequenceToolStripMenuItem.Text = Resources.Strings.MenuEditDeleteSequence;
+
+            // BOT
             botToolStripMenuItem.Text = Resources.Strings.MenuBot;
             startToolStripMenuItem.Text = Resources.Strings.MenuBotStart;
             pauseToolStripMenuItem.Text = SequenceController.GetIsPaused() ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotPause;
             stopToolStripMenuItem.Text = Resources.Strings.MenuBotStop;
 
+            // SETTINGS
             settingsToolStripMenuItem.Text = Resources.Strings.MenuSettings;
             languageToolStripMenuItem.Text = Resources.Strings.MenuSettingsLanguage;
             shortcutsToolStripMenuItem.Text = Resources.Strings.MenuSettingsShortcuts;
             themeToolStripMenuItem.Text = Resources.Strings.MenuSettingsTheme;
             settingsToolStripMenuItem1.Text = Resources.Strings.MenuSettings;
+
+            // ?
             aboutToolStripMenuItem.Text = Resources.Strings.MenuAbout;
 
+            // ACTION BUTTON
+            addActionToolStripButton.Text = Resources.Strings.MenuEditAddAction;
+            editActionToolStripButton.Text = Resources.Strings.MenuEditEditAction;
+            deleteActionToolStripButton.Text = Resources.Strings.MenuEditDeleteAction;
+
+            // BOT BUTTON
             startBotToolStripButton.Text = Resources.Strings.MenuBotStart;
             pauseBotToolStripButton.Text = Resources.Strings.MenuBotPause;
             stopBotToolStripButton.Text = Resources.Strings.MenuBotStop;
+
+            // SEQUENCE BUTTON
+            saveSequenceToolStripButton.Text = Resources.Strings.MenuFileSave;
+            deleteSequenceToolStripButton.Text = Resources.Strings.MenuEditDeleteSequence;
         }
 
         private void UpdateUIState()
@@ -102,27 +135,38 @@ namespace Tao_Bot_Maker.View
             bool isRunning = SequenceController.GetIsRunning();
             bool isPaused = SequenceController.GetIsPaused();
 
+            // FILE
             newToolStripMenuItem.Enabled = !isRunning;
             saveToolStripMenuItem.Enabled = !isRunning;
             saveAsToolStripMenuItem.Enabled = !isRunning;
 
+            // EDIT
+            addActionToolStripMenuItem.Enabled = !isRunning;
+            editActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
+            deleteActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
+            deleteSequenceToolStripMenuItem.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
+
+            // BOT
             startToolStripMenuItem.Enabled = !isRunning;
             pauseToolStripMenuItem.Enabled = isRunning;
             pauseToolStripMenuItem.Text = isPaused ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotPause;
             stopToolStripMenuItem.Enabled = isRunning;
 
+            // ACTION BUTTON
             addActionToolStripButton.Enabled = !isRunning;
-            editActionToolStripButton.Enabled = !isRunning;
-            deleteActionToolStripButton.Enabled = !isRunning;
+            editActionToolStripButton.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
+            deleteActionToolStripButton.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
 
+            // BOT BUTTON
             startBotToolStripButton.Visible = !isRunning || isPaused;
             startBotToolStripButton.Text = isPaused ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotStart;
             pauseBotToolStripButton.Visible = isRunning && !isPaused;
             stopBotToolStripButton.Enabled = isRunning;
 
+            // SEQUENCE BUTTON
             sequenceComboBox.Enabled = !isRunning;
             saveSequenceToolStripButton.Enabled = !isRunning;
-            deleteSequenceToolStripButton.Enabled = !isRunning;
+            deleteSequenceToolStripButton.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
         }
 
         private void LoadSettings()
@@ -344,15 +388,25 @@ namespace Tao_Bot_Maker.View
                     }
                 }
 
-                previousSelectedIndex = sequenceComboBox.SelectedIndex;
                 LoadSequenceAsync(selectedSequenceName);
             }
+            previousSelectedIndex = sequenceComboBox.SelectedIndex;
+            UpdateUIState();
         }
 
         private void AddActionToolStripButton_Click(object sender, EventArgs e)
         {
+            AddAction();
+        }
+
+        private void AddAction()
+        {
+            if (SequenceController.GetIsRunning())
+                return;
+
             mainFormController.AddAction();
             LoadActions();
+            UpdateUIState();
         }
 
         private void StartBotToolStripButton_Click(object sender, EventArgs e)
@@ -362,8 +416,17 @@ namespace Tao_Bot_Maker.View
 
         private void DeleteActionToolStripButton_Click(object sender, EventArgs e)
         {
+            DeleteAction();
+        }
+
+        private void DeleteAction()
+        {
+            if (actionsListBox.SelectedItem == null)
+                return;
+
             mainFormController.RemoveAction((Action)actionsListBox.SelectedItem);
             LoadActions();
+            UpdateUIState();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -392,8 +455,17 @@ namespace Tao_Bot_Maker.View
 
         private void EditActionToolStripButton_Click(object sender, EventArgs e)
         {
+            EditAction();
+        }
+
+        private void EditAction()
+        {
+            if (actionsListBox.SelectedItem == null)
+                return;
+
             mainFormController.UpdateAction((Action)actionsListBox.SelectedItem);
             LoadActions();
+            UpdateUIState();
         }
 
         private void StopBotToolStripButton_Click(object sender, EventArgs e)
@@ -416,8 +488,7 @@ namespace Tao_Bot_Maker.View
             if (sequenceComboBox.SelectedItem == null)
                 return;
 
-            string sequenceName = sequenceComboBox.SelectedItem.ToString();
-            DeleteSequence(sequenceName);
+            DeleteSequence();
         }
 
         private void StartSequence()
@@ -430,8 +501,10 @@ namespace Tao_Bot_Maker.View
             mainFormController.StopSequence();
         }
 
-        private void DeleteSequence(string sequenceName)
+        private void DeleteSequence()
         {
+            string sequenceName = sequenceComboBox.SelectedItem.ToString();
+
             string message = string.Format(Resources.Strings.WarningMessageDeleteSequence, sequenceName);
             message += Environment.NewLine;
             message += Resources.Strings.QuestionMessageDelete;
@@ -466,6 +539,31 @@ namespace Tao_Bot_Maker.View
         private void PauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mainFormController.TogglePause();
+        }
+
+        private void AddActionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddAction();
+        }
+
+        private void EditActionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditAction();
+        }
+
+        private void DeleteActionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteAction();
+        }
+
+        private void DeleteSequenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteSequence();
+        }
+
+        private void ActionsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateUIState();
         }
     }
 }

@@ -480,6 +480,21 @@
   <data name="MenuBotStop" xml:space="preserve">
     <value>Arrêter</value>
   </data>
+  <data name="MenuEdit" xml:space="preserve">
+    <value>Edition</value>
+  </data>
+  <data name="MenuEditAddAction" xml:space="preserve">
+    <value>Ajouter une action</value>
+  </data>
+  <data name="MenuEditDeleteAction" xml:space="preserve">
+    <value>Supprimer l'action</value>
+  </data>
+  <data name="MenuEditDeleteSequence" xml:space="preserve">
+    <value>Supprimer la séquence</value>
+  </data>
+  <data name="MenuEditEditAction" xml:space="preserve">
+    <value>Editer l'action</value>
+  </data>
   <data name="MenuFile" xml:space="preserve">
     <value>Fichier</value>
   </data>
