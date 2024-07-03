@@ -576,6 +576,9 @@
   <data name="TextActionToString" xml:space="preserve">
     <value>Text to type : {0} | TypingSpeed: {1}</value>
   </data>
+  <data name="Unsaved" xml:space="preserve">
+    <value>Unsaved</value>
+  </data>
   <data name="WaitActionName" xml:space="preserve">
     <value>Wait</value>
   </data>

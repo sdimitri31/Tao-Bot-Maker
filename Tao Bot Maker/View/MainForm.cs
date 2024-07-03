@@ -82,7 +82,7 @@ namespace Tao_Bot_Maker.View
 
         private void UpdateUI()
         {
-            string unsaved = SequenceController.GetIsSaved() ? "" : " - Unsaved changes";
+            string unsaved = SequenceController.GetIsSaved() ? "" : " - " + Resources.Strings.Unsaved;
             this.Text = Resources.Strings.FormTitleMain + unsaved;
 
             // FILE

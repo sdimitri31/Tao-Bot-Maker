@@ -1438,6 +1438,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unsaved.
+        /// </summary>
+        internal static string Unsaved {
+            get {
+                return ResourceManager.GetString("Unsaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Wait.
         /// </summary>
         internal static string WaitActionName {

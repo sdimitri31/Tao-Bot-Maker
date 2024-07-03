@@ -573,6 +573,9 @@
   <data name="TextActionToString" xml:space="preserve">
     <value>Texte à écrire : {0} | Vitesse d'écriture : {1}</value>
   </data>
+  <data name="Unsaved" xml:space="preserve">
+    <value>Non enregistré</value>
+  </data>
   <data name="WaitActionName" xml:space="preserve">
     <value>Attente</value>
   </data>
