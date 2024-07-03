@@ -196,6 +196,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Open logs folder.
+        /// </summary>
+        internal static string ButtonOpenLogsFolder {
+            get {
+                return ResourceManager.GetString("ButtonOpenLogsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Search image.
         /// </summary>
         internal static string ButtonSearchImage {
@@ -907,6 +916,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Debug.
+        /// </summary>
+        internal static string LabelDebug {
+            get {
+                return ResourceManager.GetString("LabelDebug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Double click.
         /// </summary>
         internal static string LabelDoubleClick {
@@ -934,6 +952,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error.
+        /// </summary>
+        internal static string LabelError {
+            get {
+                return ResourceManager.GetString("LabelError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Expiration (s).
         /// </summary>
         internal static string LabelExpiration {
@@ -943,11 +970,47 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à End coordinates.
+        /// </summary>
+        internal static string LabelHotkeyEndCoords {
+            get {
+                return ResourceManager.GetString("LabelHotkeyEndCoords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Start coordinates.
+        /// </summary>
+        internal static string LabelHotkeyStartCoords {
+            get {
+                return ResourceManager.GetString("LabelHotkeyStartCoords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Information.
+        /// </summary>
+        internal static string LabelInformation {
+            get {
+                return ResourceManager.GetString("LabelInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key.
         /// </summary>
         internal static string LabelKey {
             get {
                 return ResourceManager.GetString("LabelKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Language.
+        /// </summary>
+        internal static string LabelLanguage {
+            get {
+                return ResourceManager.GetString("LabelLanguage", resourceCulture);
             }
         }
         
@@ -1033,6 +1096,24 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save log of level.
+        /// </summary>
+        internal static string LabelSaveLogLevel {
+            get {
+                return ResourceManager.GetString("LabelSaveLogLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save logs.
+        /// </summary>
+        internal static string LabelSaveLogs {
+            get {
+                return ResourceManager.GetString("LabelSaveLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Scroll.
         /// </summary>
         internal static string LabelScroll {
@@ -1056,6 +1137,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string LabelSequence {
             get {
                 return ResourceManager.GetString("LabelSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Show log of level.
+        /// </summary>
+        internal static string LabelShowLogLevel {
+            get {
+                return ResourceManager.GetString("LabelShowLogLevel", resourceCulture);
             }
         }
         
@@ -1101,6 +1191,42 @@ namespace Tao_Bot_Maker.Resources {
         internal static string LabelTextToType {
             get {
                 return ResourceManager.GetString("LabelTextToType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Theme.
+        /// </summary>
+        internal static string LabelTheme {
+            get {
+                return ResourceManager.GetString("LabelTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Auto.
+        /// </summary>
+        internal static string LabelThemeAuto {
+            get {
+                return ResourceManager.GetString("LabelThemeAuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dark.
+        /// </summary>
+        internal static string LabelThemeDark {
+            get {
+                return ResourceManager.GetString("LabelThemeDark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Light.
+        /// </summary>
+        internal static string LabelThemeLight {
+            get {
+                return ResourceManager.GetString("LabelThemeLight", resourceCulture);
             }
         }
         
@@ -1155,6 +1281,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string LabelWait {
             get {
                 return ResourceManager.GetString("LabelWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Warning.
+        /// </summary>
+        internal static string LabelWarning {
+            get {
+                return ResourceManager.GetString("LabelWarning", resourceCulture);
             }
         }
         
@@ -1479,6 +1614,33 @@ namespace Tao_Bot_Maker.Resources {
         internal static string SequenceActionToString {
             get {
                 return ResourceManager.GetString("SequenceActionToString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à General.
+        /// </summary>
+        internal static string SettingsTypeGeneral {
+            get {
+                return ResourceManager.GetString("SettingsTypeGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Hotkeys.
+        /// </summary>
+        internal static string SettingsTypeHotkeys {
+            get {
+                return ResourceManager.GetString("SettingsTypeHotkeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Other.
+        /// </summary>
+        internal static string SettingsTypeOther {
+            get {
+                return ResourceManager.GetString("SettingsTypeOther", resourceCulture);
             }
         }
         

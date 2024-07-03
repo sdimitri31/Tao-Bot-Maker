@@ -20,7 +20,17 @@ namespace Tao_Bot_Maker.View.Setting
         public HotkeySettingsPropertiesPanel()
         {
             InitializeComponent();
+            UpdateUI();
             textColor = hotkeyStartSequenceLabel.ForeColor;
+        }
+
+        private void UpdateUI()
+        {
+            hotkeyStartSequenceLabel.Text = Resources.Strings.MenuBotStart;
+            hotkeyPauseSequenceLabel.Text = Resources.Strings.MenuBotPause;
+            hotkeyStopSequenceLabel.Text = Resources.Strings.MenuBotStop;
+            hotkeyStartCoordsLabel.Text = Resources.Strings.LabelHotkeyStartCoords;
+            hotkeyEndCoordsLabel.Text = Resources.Strings.LabelHotkeyEndCoords;
         }
 
         public void LoadSettings()

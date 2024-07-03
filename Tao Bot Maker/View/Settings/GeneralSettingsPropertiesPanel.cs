@@ -19,6 +19,13 @@ namespace Tao_Bot_Maker.View.Setting
             InitializeComponent();
             InitializeLanguage();
             InitializeTheme();
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
+            languageLabel.Text = Resources.Strings.LabelTheme;
+            themeLabel.Text = Resources.Strings.LabelLanguage;
         }
 
         public void InitializeLanguage()
@@ -32,22 +39,27 @@ namespace Tao_Bot_Maker.View.Setting
         public void InitializeTheme()
         {
             this.themeComboBox.Items.AddRange(new object[] {
-                "Auto",
-                "Light",
-                "Dark"
+                new DisplayItem<string>("Auto", Resources.Strings.LabelThemeAuto),
+                new DisplayItem<string>("Light", Resources.Strings.LabelThemeLight),
+                new DisplayItem<string>("Dark", Resources.Strings.LabelThemeDark)
             });
         }
 
         public void LoadSettings()
         {
             languageComboBox.SelectedItem = SettingsController.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
-            themeComboBox.SelectedItem = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
+
+            themeComboBox.SelectedItem = themeComboBox.Items.Cast<DisplayItem<string>>().First(item => item.Value == SettingsController.GetSettingValue<string>(Settings.SETTING_THEME));
         }
 
         public void SaveSettings()
         {
             SettingsController.SetSettingValue(Settings.SETTING_LANGUAGE, languageComboBox.SelectedItem.ToString(), SettingsType.General);
-            SettingsController.SetSettingValue(Settings.SETTING_THEME, themeComboBox.SelectedItem.ToString(), SettingsType.General);
+
+            if (themeComboBox.SelectedItem is DisplayItem<string> selectedItem)
+            {
+                SettingsController.SetSettingValue(Settings.SETTING_THEME, selectedItem.Value, SettingsType.General);
+            }
         }
 
         SettingsType ISettingsPropertiesPanel.GetType()

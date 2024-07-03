@@ -162,6 +162,9 @@
   <data name="ButtonOk" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="ButtonOpenLogsFolder" xml:space="preserve">
+    <value>Ouvrir le dossier des logs</value>
+  </data>
   <data name="ButtonSearchImage" xml:space="preserve">
     <value>Chercher l'image</value>
   </data>
@@ -399,6 +402,9 @@
   <data name="LabelCoordinates" xml:space="preserve">
     <value>Coordonnées</value>
   </data>
+  <data name="LabelDebug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
   <data name="LabelDoubleClick" xml:space="preserve">
     <value>Double clic</value>
   </data>
@@ -408,11 +414,26 @@
   <data name="LabelEndCoordinates" xml:space="preserve">
     <value>Coordonnées d'arrivée</value>
   </data>
+  <data name="LabelError" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
   <data name="LabelExpiration" xml:space="preserve">
     <value>Expiration</value>
   </data>
+  <data name="LabelHotkeyEndCoords" xml:space="preserve">
+    <value>Coordonnées de fin</value>
+  </data>
+  <data name="LabelHotkeyStartCoords" xml:space="preserve">
+    <value>Coordonnées de départ</value>
+  </data>
+  <data name="LabelInformation" xml:space="preserve">
+    <value>Information</value>
+  </data>
   <data name="LabelKey" xml:space="preserve">
     <value>Touche</value>
+  </data>
+  <data name="LabelLanguage" xml:space="preserve">
+    <value>Langue</value>
   </data>
   <data name="LabelLeftClick" xml:space="preserve">
     <value>Clic gauche</value>
@@ -438,6 +459,12 @@
   <data name="LabelRepeatCount" xml:space="preserve">
     <value>Nombre de répétitions</value>
   </data>
+  <data name="LabelSaveLogLevel" xml:space="preserve">
+    <value>Sauvegarder le log du niveau</value>
+  </data>
+  <data name="LabelSaveLogs" xml:space="preserve">
+    <value>Sauvegarder les logs</value>
+  </data>
   <data name="LabelScroll" xml:space="preserve">
     <value>Défilement</value>
   </data>
@@ -446,6 +473,9 @@
   </data>
   <data name="LabelSequence" xml:space="preserve">
     <value>Séquence</value>
+  </data>
+  <data name="LabelShowLogLevel" xml:space="preserve">
+    <value>Afficher le log du niveau</value>
   </data>
   <data name="LabelSourceCode" xml:space="preserve">
     <value>Code source :</value>
@@ -461,6 +491,18 @@
   </data>
   <data name="LabelTextToType" xml:space="preserve">
     <value>Texte à écrire</value>
+  </data>
+  <data name="LabelTheme" xml:space="preserve">
+    <value>Thème</value>
+  </data>
+  <data name="LabelThemeAuto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="LabelThemeDark" xml:space="preserve">
+    <value>Sombre</value>
+  </data>
+  <data name="LabelThemeLight" xml:space="preserve">
+    <value>Clair</value>
   </data>
   <data name="LabelThreshold" xml:space="preserve">
     <value>Tolérance</value>
@@ -479,6 +521,9 @@
   </data>
   <data name="LabelWait" xml:space="preserve">
     <value>Attente (ms)</value>
+  </data>
+  <data name="LabelWarning" xml:space="preserve">
+    <value>Attention</value>
   </data>
   <data name="LinkLabelIconEight" xml:space="preserve">
     <value>Icon8 pour les icones</value>
@@ -587,6 +632,15 @@
   </data>
   <data name="SequenceActionToString" xml:space="preserve">
     <value>Séquence : "{0}" x {1}</value>
+  </data>
+  <data name="SettingsTypeGeneral" xml:space="preserve">
+    <value>Général</value>
+  </data>
+  <data name="SettingsTypeHotkeys" xml:space="preserve">
+    <value>Raccourcis</value>
+  </data>
+  <data name="SettingsTypeOther" xml:space="preserve">
+    <value>Autre</value>
   </data>
   <data name="TextActionName" xml:space="preserve">
     <value>Texte</value>

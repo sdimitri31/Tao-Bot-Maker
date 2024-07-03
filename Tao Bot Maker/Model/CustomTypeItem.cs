@@ -1,13 +1,13 @@
 ﻿namespace Tao_Bot_Maker.Model
 {
-    public class ActionTypeItem
+    public class DisplayItem<T>
     {
-        public ActionType Type { get; }
+        public T Value { get; }
         public string DisplayName { get; }
 
-        public ActionTypeItem(ActionType type, string displayName)
+        public DisplayItem(T value, string displayName)
         {
-            Type = type;
+            Value = value;
             DisplayName = displayName;
         }
 

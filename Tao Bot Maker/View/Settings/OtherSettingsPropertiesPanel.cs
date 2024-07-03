@@ -18,6 +18,23 @@ namespace Tao_Bot_Maker.View.Setting
         {
             InitializeComponent();
             InitializeCheckBoxes();
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
+            showLogLevelLabel.Text = Resources.Strings.LabelShowLogLevel;
+            saveLogLevelLabel.Text = Resources.Strings.LabelSaveLogLevel;
+            saveLogLevelWarningCheckBox.Text = Resources.Strings.LabelWarning;
+            saveLogLevelErrorCheckBox.Text = Resources.Strings.LabelError;
+            saveLogLevelDebugCheckBox.Text = Resources.Strings.LabelDebug;
+            saveLogLevelInformationCheckBox.Text = Resources.Strings.LabelInformation;
+            showLogLevelWarningCheckBox.Text = Resources.Strings.LabelWarning;
+            showLogLevelErrorCheckBox.Text = Resources.Strings.LabelError;
+            showLogLevelDebugCheckBox.Text = Resources.Strings.LabelDebug;
+            showLogLevelInformationCheckBox.Text = Resources.Strings.LabelInformation;
+            saveLogCheckBox.Text = Resources.Strings.LabelSaveLogs;
+            openLogFolderButton.Text = Resources.Strings.ButtonOpenLogsFolder;
         }
 
         private void InitializeCheckBoxes()
