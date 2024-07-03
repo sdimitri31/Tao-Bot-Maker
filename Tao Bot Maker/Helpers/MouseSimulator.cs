@@ -77,16 +77,31 @@ namespace Tao_Bot_Maker.Helpers
             }
         }
 
-        public async Task DragAndDrop(int startX, int startY, int endX, int endY, int speed = 10, int holdDuration = 100)
+        public async Task DragAndDropLeftClick(int startX, int startY, int endX, int endY, int speed = 10, int holdDuration = 100)
+        {
+            await DragAndDrop(MouseEventFlags.LeftDown, MouseEventFlags.LeftUp, startX, startY, endX, endY, speed = 10, holdDuration = 100);
+        }
+
+        public async Task DragAndDropMiddleClick(int startX, int startY, int endX, int endY, int speed = 10, int holdDuration = 100)
+        {
+            await DragAndDrop(MouseEventFlags.MiddleDown, MouseEventFlags.MiddleUp, startX, startY, endX, endY, speed = 10, holdDuration = 100);
+        }
+
+        public async Task DragAndDropRightClick(int startX, int startY, int endX, int endY, int speed = 10, int holdDuration = 100)
+        {
+            await DragAndDrop(MouseEventFlags.RightDown, MouseEventFlags.RightUp, startX, startY, endX, endY, speed = 10, holdDuration = 100);
+        }
+
+        private async Task DragAndDrop(MouseEventFlags down, MouseEventFlags up, int startX, int startY, int endX, int endY, int speed = 10, int holdDuration = 100)
         {
             Cursor.Position = new Point(startX, startY);
-            mouse_event((int)MouseEventFlags.LeftDown, (uint)startX, (uint)startY, 0, 0);
+            mouse_event((int)down, (uint)startX, (uint)startY, 0, 0);
 
             await Task.Delay(GetRandomDelay(holdDuration));
 
             await Move(endX, endY, speed);
 
-            mouse_event((int)MouseEventFlags.LeftUp, (uint)endX, (uint)endY, 0, 0);
+            mouse_event((int)up, (uint)endX, (uint)endY, 0, 0);
         }
 
         public async Task Scroll(int amount, int duration = 100)

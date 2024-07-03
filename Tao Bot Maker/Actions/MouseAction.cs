@@ -137,7 +137,21 @@ namespace Tao_Bot_Maker.Model
             }
             else if (DragAndDrop)
             {
-                await mouseSimulator.DragAndDrop(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
+                switch (ClickType)
+                {
+                    case MouseActionType.LeftClick:
+                        await mouseSimulator.DragAndDropLeftClick(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
+                        break;
+                    case MouseActionType.RightClick:
+                        await mouseSimulator.DragAndDropRightClick(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
+                        break;
+                    case MouseActionType.MiddleClick:
+                        await mouseSimulator.DragAndDropMiddleClick(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
+                        break;
+                    case MouseActionType.NoClick:
+                        await mouseSimulator.Move(EndX, EndY, moveSpeed);
+                        break;
+                }
             }
             else if (ClickType != MouseActionType.NoClick)
             {
