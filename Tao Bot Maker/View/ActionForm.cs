@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
@@ -37,7 +38,8 @@ namespace Tao_Bot_Maker.View
 
             if (existingAction != null && actionTypelistBox.Items.Contains(existingAction.Type))
             {
-                actionTypelistBox.SelectedItem = existingAction.Type;
+                actionTypelistBox.SelectedItem = actionTypelistBox.Items.Cast<ActionTypeItem>().First(item => item.Type == existingAction.Type);
+
                 SetPropertiesPanel(existingAction.Type);
                 FillPropertiesPanelWithExistingAction(existingAction);
             }
@@ -141,8 +143,31 @@ namespace Tao_Bot_Maker.View
                 {
                     continue;
                 }
-                actionTypelistBox.Items.Add(actionType);
+
+                string displayName = GetActionTypeDisplayName(actionType);
+                actionTypelistBox.Items.Add(new ActionTypeItem(actionType, displayName));
                 AddPropertiesPanel(actionType, isFromImageAction, existingAction);
+            }
+        }
+
+        private string GetActionTypeDisplayName(ActionType actionType)
+        {
+            switch (actionType)
+            {
+                case ActionType.MouseAction:
+                    return Resources.Strings.ActionTypeMouse;
+                case ActionType.TextAction:
+                    return Resources.Strings.ActionTypeText;
+                case ActionType.WaitAction:
+                    return Resources.Strings.ActionTypeWait;
+                case ActionType.SequenceAction:
+                    return Resources.Strings.ActionTypeSequence;
+                case ActionType.KeyAction:
+                    return Resources.Strings.ActionTypeKey;
+                case ActionType.ImageAction:
+                    return Resources.Strings.ActionTypeImage;
+                default:
+                    return actionType.ToString();
             }
         }
 

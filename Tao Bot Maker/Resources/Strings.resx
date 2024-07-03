@@ -123,6 +123,27 @@
   <data name="ActionType" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="ActionTypeCorrupted" xml:space="preserve">
+    <value>Corrupted</value>
+  </data>
+  <data name="ActionTypeImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ActionTypeKey" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="ActionTypeMouse" xml:space="preserve">
+    <value>Mouse</value>
+  </data>
+  <data name="ActionTypeSequence" xml:space="preserve">
+    <value>Sequence</value>
+  </data>
+  <data name="ActionTypeText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ActionTypeWait" xml:space="preserve">
+    <value>Wait</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>Tao's Bot Maker</value>
   </data>

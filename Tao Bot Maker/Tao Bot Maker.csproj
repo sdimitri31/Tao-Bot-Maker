@@ -121,6 +121,7 @@
     <Compile Include="Actions\SequenceAction.cs" />
     <Compile Include="Actions\TextAction.cs" />
     <Compile Include="Actions\WaitAction.cs" />
+    <Compile Include="Model\ActionTypeItem.cs" />
     <Compile Include="Model\Hotkey.cs" />
     <Compile Include="Model\ISequenceRepository.cs" />
     <Compile Include="Model\Sequence.cs" />

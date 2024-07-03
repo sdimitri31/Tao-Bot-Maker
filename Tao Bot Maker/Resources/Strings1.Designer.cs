@@ -79,6 +79,69 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Corrupted.
+        /// </summary>
+        internal static string ActionTypeCorrupted {
+            get {
+                return ResourceManager.GetString("ActionTypeCorrupted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image.
+        /// </summary>
+        internal static string ActionTypeImage {
+            get {
+                return ResourceManager.GetString("ActionTypeImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Key.
+        /// </summary>
+        internal static string ActionTypeKey {
+            get {
+                return ResourceManager.GetString("ActionTypeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mouse.
+        /// </summary>
+        internal static string ActionTypeMouse {
+            get {
+                return ResourceManager.GetString("ActionTypeMouse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence.
+        /// </summary>
+        internal static string ActionTypeSequence {
+            get {
+                return ResourceManager.GetString("ActionTypeSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Text.
+        /// </summary>
+        internal static string ActionTypeText {
+            get {
+                return ResourceManager.GetString("ActionTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Wait.
+        /// </summary>
+        internal static string ActionTypeWait {
+            get {
+                return ResourceManager.GetString("ActionTypeWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Tao&apos;s Bot Maker.
         /// </summary>
         internal static string AppName {
