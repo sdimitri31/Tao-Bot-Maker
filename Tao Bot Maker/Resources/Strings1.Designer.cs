@@ -79,6 +79,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Tao&apos;s Bot Maker.
+        /// </summary>
+        internal static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add.
         /// </summary>
         internal static string ButtonAdd {
@@ -799,6 +808,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Author :.
+        /// </summary>
+        internal static string LabelAuthor {
+            get {
+                return ResourceManager.GetString("LabelAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click duration.
         /// </summary>
         internal static string LabelClickDuration {
@@ -979,6 +997,24 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Source code :.
+        /// </summary>
+        internal static string LabelSourceCode {
+            get {
+                return ResourceManager.GetString("LabelSourceCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Special thanks to.
+        /// </summary>
+        internal static string LabelSpecialThanks {
+            get {
+                return ResourceManager.GetString("LabelSpecialThanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Speed.
         /// </summary>
         internal static string LabelSpeed {
@@ -1042,11 +1078,29 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Version :.
+        /// </summary>
+        internal static string LabelVersion {
+            get {
+                return ResourceManager.GetString("LabelVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Wait (ms).
         /// </summary>
         internal static string LabelWait {
             get {
                 return ResourceManager.GetString("LabelWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Icon8 for providing icons.
+        /// </summary>
+        internal static string LinkLabelIconEight {
+            get {
+                return ResourceManager.GetString("LinkLabelIconEight", resourceCulture);
             }
         }
         

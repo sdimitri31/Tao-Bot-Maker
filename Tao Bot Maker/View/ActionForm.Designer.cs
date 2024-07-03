@@ -84,6 +84,7 @@
             this.Controls.Add(this.actionPropertiesPanel);
             this.Controls.Add(this.actionTypelistBox);
             this.Name = "ActionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Action";
             this.ResumeLayout(false);
 

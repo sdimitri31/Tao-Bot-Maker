@@ -316,7 +316,8 @@ namespace Tao_Bot_Maker.View
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
         }
 
         private void SequenceComboBox_SelectedIndexChanged(object sender, EventArgs e)

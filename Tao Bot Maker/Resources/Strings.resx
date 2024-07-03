@@ -123,6 +123,9 @@
   <data name="ActionType" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Tao's Bot Maker</value>
+  </data>
   <data name="ButtonAdd" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -363,6 +366,9 @@
   <data name="LabelActionIfImageNotFound" xml:space="preserve">
     <value>Action if image not found</value>
   </data>
+  <data name="LabelAuthor" xml:space="preserve">
+    <value>Author :</value>
+  </data>
   <data name="LabelClickDuration" xml:space="preserve">
     <value>Click duration</value>
   </data>
@@ -423,6 +429,12 @@
   <data name="LabelSequence" xml:space="preserve">
     <value>Sequence</value>
   </data>
+  <data name="LabelSourceCode" xml:space="preserve">
+    <value>Source code :</value>
+  </data>
+  <data name="LabelSpecialThanks" xml:space="preserve">
+    <value>Special thanks to</value>
+  </data>
   <data name="LabelSpeed" xml:space="preserve">
     <value>Speed</value>
   </data>
@@ -444,8 +456,14 @@
   <data name="LabelUseImageCoordinates" xml:space="preserve">
     <value>Use image coordinates</value>
   </data>
+  <data name="LabelVersion" xml:space="preserve">
+    <value>Version :</value>
+  </data>
   <data name="LabelWait" xml:space="preserve">
     <value>Wait (ms)</value>
+  </data>
+  <data name="LinkLabelIconEight" xml:space="preserve">
+    <value>Icon8 for providing icons</value>
   </data>
   <data name="MenuAbout" xml:space="preserve">
     <value>About</value>

@@ -84,6 +84,7 @@
             this.Controls.Add(this.settingsPropertiesPanel);
             this.Controls.Add(this.settingsTypelistBox);
             this.Name = "SettingsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SettingsForm";
             this.ResumeLayout(false);
 
