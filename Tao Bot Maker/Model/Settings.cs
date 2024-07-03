@@ -14,6 +14,8 @@ namespace Tao_Bot_Maker.Model
         private const string settingsFileName = "settings.json";
         private readonly string settingsFilePath = Path.Combine(Directory.GetCurrentDirectory(), settingsFileName);
 
+        public const string SETTING_SHOWLOGLEVEL = "ShowLogLevel";
+        public const string SETTING_SAVELOGLEVEL = "SaveLogLevel";
         public const string SETTING_SAVELOG = "SaveLog";
         public const string SETTING_LANGUAGE = "Language";
         public const string SETTING_THEME = "Theme";
@@ -25,7 +27,9 @@ namespace Tao_Bot_Maker.Model
 
         private static readonly Dictionary<string, string> DefaultValues = new Dictionary<string, string>
         {
-            { SETTING_SAVELOG, "false" },
+            { SETTING_SHOWLOGLEVEL, 0b0111.ToString() },
+            { SETTING_SAVELOGLEVEL, 0b0111.ToString() },
+            { SETTING_SAVELOG, "true" },
             { SETTING_LANGUAGE, "English" },
             { SETTING_THEME, "Light" },
             { SETTING_HOTKEYSTARTSEQUENCE, ((int)Keys.F5).ToString() },
@@ -46,6 +50,8 @@ namespace Tao_Bot_Maker.Model
         {
             return new List<Setting>
             {
+                new Setting(SETTING_SHOWLOGLEVEL, GetDefaultValue(SETTING_SHOWLOGLEVEL), SettingsType.General),
+                new Setting(SETTING_SAVELOGLEVEL, GetDefaultValue(SETTING_SAVELOGLEVEL), SettingsType.General),
                 new Setting(SETTING_SAVELOG, GetDefaultValue(SETTING_SAVELOG), SettingsType.General),
                 new Setting(SETTING_LANGUAGE, GetDefaultValue(SETTING_LANGUAGE), SettingsType.General),
                 new Setting(SETTING_THEME, GetDefaultValue(SETTING_THEME), SettingsType.General),
@@ -109,6 +115,10 @@ namespace Tao_Bot_Maker.Model
                 }
                 catch { Console.WriteLine($"Error converting setting {name} to type {typeof(T)}"); }
             }
+            else if (GetDefaultValue(name) != null)
+            {
+                return (T)Convert.ChangeType(GetDefaultValue(name), typeof(T));
+            }
 
             return default;
         }
@@ -129,6 +139,17 @@ namespace Tao_Bot_Maker.Model
 
             switch (key)
             {
+                case SETTING_SHOWLOGLEVEL:
+                case SETTING_SAVELOGLEVEL:
+                    if (!int.TryParse(value, out int levelInt))
+                    {
+                        return GetDefaultValue(key);
+                    }
+                    if (levelInt < 0x0000 || levelInt > 0x1111)
+                    {
+                        return GetDefaultValue(key);
+                    }
+                    return value;
                 case SETTING_SAVELOG:
                     if (bool.TryParse(value, out _)) return value;
                     break;

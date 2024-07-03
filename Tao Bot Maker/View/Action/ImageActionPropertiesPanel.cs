@@ -1,9 +1,7 @@
-﻿using LogFramework;
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
