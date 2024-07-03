@@ -12,6 +12,8 @@ namespace Tao_Bot_Maker.View
     {
         private readonly MainFormController mainFormController;
 
+        private int previousSelectedIndex = -1;
+
         public MainForm()
         {
             InitializeComponent();
@@ -20,9 +22,9 @@ namespace Tao_Bot_Maker.View
             Logger.LogMessageReceived += OnLogMessageReceived;
             CultureManager.CultureChanged += UpdateUI;
             SequenceController.RunningStateChanged += UpdateUIState;
+            SequenceController.SavedStatusChanged += UpdateUI;
 
             mainFormController = new MainFormController(this);
-            mainFormController.InitializeHotkeys();
 
             LoadSettings();
             LoadSequenceNames();
@@ -33,8 +35,22 @@ namespace Tao_Bot_Maker.View
 
         private void New()
         {
+            if (!SequenceController.GetIsSaved())
+            {
+                string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
+                message += Environment.NewLine;
+                message += Resources.Strings.QuestionMessageContinue;
+
+                DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
+            sequenceComboBox.SelectedIndex = -1;
             mainFormController.NewSequence();
-            LoadSequenceNames();
             LoadActions();
         }
 
@@ -55,7 +71,8 @@ namespace Tao_Bot_Maker.View
 
         private void UpdateUI()
         {
-            this.Text = Resources.Strings.FormTitleMain;
+            string unsaved = SequenceController.GetIsSaved() ? "" : " - Unsaved changes";
+            this.Text = Resources.Strings.FormTitleMain + unsaved;
 
             fileToolStripMenuItem.Text = Resources.Strings.MenuFile;
             newToolStripMenuItem.Text = Resources.Strings.MenuFileNew;
@@ -305,8 +322,28 @@ namespace Tao_Bot_Maker.View
         private void SequenceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedSequenceName = sequenceComboBox.SelectedItem as string;
+
             if (!string.IsNullOrEmpty(selectedSequenceName))
             {
+                if (!SequenceController.GetIsSaved())
+                {
+                    string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
+                    message += Environment.NewLine;
+                    message += Resources.Strings.QuestionMessageContinue;
+
+                    DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result != DialogResult.Yes)
+                    {
+                        // Cancel selection change
+                        sequenceComboBox.SelectedIndexChanged -= SequenceComboBox_SelectedIndexChanged;
+                        sequenceComboBox.SelectedIndex = previousSelectedIndex;
+                        sequenceComboBox.SelectedIndexChanged += SequenceComboBox_SelectedIndexChanged;
+                        return;
+                    }
+                }
+
+                previousSelectedIndex = sequenceComboBox.SelectedIndex;
                 LoadSequenceAsync(selectedSequenceName);
             }
         }
@@ -330,11 +367,26 @@ namespace Tao_Bot_Maker.View
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!SequenceController.GetIsSaved())
+            {
+                string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
+                message += Environment.NewLine;
+                message += Resources.Strings.QuestionMessageExit;
+
+                DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageExit, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
             mainFormController.StopSequence();
             mainFormController.UnregisterHotkeys();
             Logger.LogMessageReceived -= OnLogMessageReceived;
             CultureManager.CultureChanged -= UpdateUI;
             SequenceController.RunningStateChanged -= UpdateUIState;
+            SequenceController.SavedStatusChanged -= UpdateUI;
         }
 
         private void EditActionToolStripButton_Click(object sender, EventArgs e)

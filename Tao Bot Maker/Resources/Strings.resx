@@ -147,8 +147,14 @@
   <data name="ButtonWaitForInput" xml:space="preserve">
     <value>Waiting for input</value>
   </data>
+  <data name="CaptionMessageContinue" xml:space="preserve">
+    <value>Continue confirmation</value>
+  </data>
   <data name="CaptionMessageDelete" xml:space="preserve">
     <value>Deletion confirmation</value>
+  </data>
+  <data name="CaptionMessageExit" xml:space="preserve">
+    <value>Exit confirmation</value>
   </data>
   <data name="CaptionMessageFileExists" xml:space="preserve">
     <value>Existing file</value>
@@ -510,8 +516,14 @@
   <data name="MouseActionToStringScrollBy" xml:space="preserve">
     <value>Scroll by : {0}</value>
   </data>
+  <data name="QuestionMessageContinue" xml:space="preserve">
+    <value>Do you want to continue anyway ?</value>
+  </data>
   <data name="QuestionMessageDelete" xml:space="preserve">
     <value>Do you want to delete it ?</value>
+  </data>
+  <data name="QuestionMessageExit" xml:space="preserve">
+    <value>Do you want to exit ?</value>
   </data>
   <data name="QuestionMessageReplace" xml:space="preserve">
     <value>Do you want to replace it ?</value>

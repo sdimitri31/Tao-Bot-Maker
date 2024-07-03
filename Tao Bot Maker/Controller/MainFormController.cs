@@ -23,9 +23,11 @@ namespace Tao_Bot_Maker.Controller
 
         public MainFormController(MainForm mainForm)
         {
+            sequenceController = new SequenceController();
             NewSequence();
             SequenceController.SetIsRunning(false);
             this.mainForm = mainForm;
+            InitializeHotkeys();
         }
 
         #region Hotkey
@@ -150,7 +152,7 @@ namespace Tao_Bot_Maker.Controller
         /// </summary>
         public void NewSequence()
         {
-            sequenceController = new SequenceController();
+            sequenceController.NewSequence();
             currentSequenceName = null;
         }
 

@@ -20,6 +20,9 @@ namespace Tao_Bot_Maker.Controller
         private readonly ISequenceRepository sequenceRepository;
         private Sequence sequence;
 
+        public static event System.Action SavedStatusChanged;
+        private static bool isSaved = true;
+
         private CancellationTokenSource sequenceExecutionToken = new CancellationTokenSource();
         private static bool isPaused;
         private static bool isRunning;
@@ -27,7 +30,13 @@ namespace Tao_Bot_Maker.Controller
         public SequenceController()
         {
             sequenceRepository = new SequenceRepository();
+            NewSequence();
+        }
+
+        public void NewSequence()
+        {
             sequence = new Sequence();
+            SetIsSaved(true);
         }
 
         public List<string> GetAllSequenceNames()
@@ -67,16 +76,19 @@ namespace Tao_Bot_Maker.Controller
             try
             {
                 sequence = await sequenceRepository.LoadSequenceAsync(name, token);
+                SetIsSaved(true);
                 return sequence;
             }
             catch (OperationCanceledException ex)
             {
                 sequence = new Sequence();
+                SetIsSaved(false);
                 throw new OperationCanceledException(ex.Message);
             }
             catch (Exception ex)
             {
                 sequence = new Sequence();
+                SetIsSaved(false);
                 throw new Exception(ex.Message, ex);
             }
         }
@@ -88,6 +100,7 @@ namespace Tao_Bot_Maker.Controller
                 if (addActionForm.ShowDialog() == DialogResult.OK)
                 {
                     sequence.AddAction(addActionForm.Action);
+                    SetIsSaved(false);
                 }
             }
         }
@@ -99,6 +112,7 @@ namespace Tao_Bot_Maker.Controller
                 if (addActionForm.ShowDialog() == DialogResult.OK)
                 {
                     sequence.UpdateAction(oldAction, addActionForm.Action);
+                    SetIsSaved(false);
                 }
             }
         }
@@ -106,6 +120,7 @@ namespace Tao_Bot_Maker.Controller
         public void RemoveAction(Action action)
         {
             sequence.RemoveAction(action);
+            SetIsSaved(false);
         }
 
         public string SaveSequence(string name = null)
@@ -123,6 +138,7 @@ namespace Tao_Bot_Maker.Controller
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
                         name = Path.GetFileNameWithoutExtension(dialog.FileName);
+                        SetIsSaved(true);
                     }
                     else
                     {
@@ -132,7 +148,19 @@ namespace Tao_Bot_Maker.Controller
             }
 
             sequenceRepository.SaveSequence(sequence, name);
+            SetIsSaved(true);
             return name;
+        }
+
+        public static void SetIsSaved(bool value)
+        {
+            isSaved = value;
+            SavedStatusChanged?.Invoke();
+        }
+
+        public static bool GetIsSaved()
+        {
+            return isSaved;
         }
 
         public async Task StartSequence()

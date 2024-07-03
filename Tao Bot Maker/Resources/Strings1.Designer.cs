@@ -151,11 +151,29 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Continue confirmation.
+        /// </summary>
+        internal static string CaptionMessageContinue {
+            get {
+                return ResourceManager.GetString("CaptionMessageContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Deletion confirmation.
         /// </summary>
         internal static string CaptionMessageDelete {
             get {
                 return ResourceManager.GetString("CaptionMessageDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exit confirmation.
+        /// </summary>
+        internal static string CaptionMessageExit {
+            get {
+                return ResourceManager.GetString("CaptionMessageExit", resourceCulture);
             }
         }
         
@@ -1240,11 +1258,29 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to continue anyway ?.
+        /// </summary>
+        internal static string QuestionMessageContinue {
+            get {
+                return ResourceManager.GetString("QuestionMessageContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you want to delete it ?.
         /// </summary>
         internal static string QuestionMessageDelete {
             get {
                 return ResourceManager.GetString("QuestionMessageDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to exit ?.
+        /// </summary>
+        internal static string QuestionMessageExit {
+            get {
+                return ResourceManager.GetString("QuestionMessageExit", resourceCulture);
             }
         }
         
