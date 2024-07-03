@@ -75,15 +75,22 @@ namespace Tao_Bot_Maker.Model
         public static Settings Load()
         {
             string settingsPath = Path.Combine(Directory.GetCurrentDirectory(), settingsFileName);
-            if (File.Exists(settingsPath))
+            try
             {
-                var json = File.ReadAllText(settingsPath);
-                var settingsList = JsonConvert.DeserializeObject<List<Setting>>(json);
-                foreach (var setting in settingsList)
+                if (File.Exists(settingsPath))
                 {
-                    setting.Value = ValidateSetting(setting.Name, setting.Value);
+                    var json = File.ReadAllText(settingsPath);
+                    var settingsList = JsonConvert.DeserializeObject<List<Setting>>(json);
+                    foreach (var setting in settingsList)
+                    {
+                        setting.Value = ValidateSetting(setting.Name, setting.Value);
+                    }
+                    return new Settings { SettingsList = settingsList };
                 }
-                return new Settings { SettingsList = settingsList };
+            }
+            catch
+            {
+                Console.WriteLine("Error loading settings");
             }
 
             return new Settings();
