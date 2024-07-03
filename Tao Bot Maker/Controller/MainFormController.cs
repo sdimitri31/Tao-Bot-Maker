@@ -21,13 +21,10 @@ namespace Tao_Bot_Maker.Controller
         private SequenceController sequenceController;
         private string currentSequenceName;
 
-        private readonly SettingsController settingsController;
-
         public MainFormController(MainForm mainForm)
         {
             NewSequence();
             SequenceController.SetIsRunning(false);
-            settingsController = new SettingsController();
             this.mainForm = mainForm;
         }
 
@@ -102,7 +99,7 @@ namespace Tao_Bot_Maker.Controller
         public void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
         {
             UnregisterHotkeys();
-            settingsController.OpenSettingsForm(settingsType);
+            SettingsController.OpenSettingsForm(settingsType);
             InitializeHotkeys();
         }
 
@@ -112,9 +109,9 @@ namespace Tao_Bot_Maker.Controller
         /// <param name="name">The name of the setting.</param>
         /// <param name="value">The value of the setting.</param>
         /// <param name="type">The type of the setting.</param>
-        public void SetSettingValue(string name, string value, SettingsType type)
+        public void SetSettingValue<T>(string name, T value, SettingsType type)
         {
-            settingsController.SetSettingValue(name, value, type);
+            SettingsController.SetSettingValue(name, value, type);
         }
 
         #endregion

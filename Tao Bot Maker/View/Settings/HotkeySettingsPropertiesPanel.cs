@@ -23,13 +23,13 @@ namespace Tao_Bot_Maker.View.Setting
             textColor = hotkeyStartSequenceLabel.ForeColor;
         }
 
-        public void LoadSettings(Settings settings)
+        public void LoadSettings()
         {
-            hotkeyStartSequence = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE);
-            hotkeyPauseSequence = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE);
-            hotkeyStopSequence = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE);
-            hotkeyStartCoords = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTCOORDS);
-            hotkeyEndCoords = (Keys)settings.GetSettingValue<int>(Settings.SETTING_HOTKEYENDCOORDS);
+            hotkeyStartSequence = (Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE);
+            hotkeyPauseSequence = (Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE);
+            hotkeyStopSequence = (Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE);
+            hotkeyStartCoords = (Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTCOORDS);
+            hotkeyEndCoords = (Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYENDCOORDS);
 
             hotkeyStartSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyStartSequence);
             hotkeyPauseSequenceButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyPauseSequence);
@@ -38,13 +38,13 @@ namespace Tao_Bot_Maker.View.Setting
             hotkeyEndCoordsButton.Text = KeyboardSimulator.GetFormatedKeysString(hotkeyEndCoords);
         }
 
-        public void SaveSettings(Settings settings)
+        public void SaveSettings()
         {
-            settings.SetSettingValue(Settings.SETTING_HOTKEYSTARTSEQUENCE, (int)hotkeyStartSequence, SettingsType.Hotkeys);
-            settings.SetSettingValue(Settings.SETTING_HOTKEYPAUSESEQUENCE, (int)hotkeyPauseSequence, SettingsType.Hotkeys);
-            settings.SetSettingValue(Settings.SETTING_HOTKEYSTOPSEQUENCE, (int)hotkeyStopSequence, SettingsType.Hotkeys);
-            settings.SetSettingValue(Settings.SETTING_HOTKEYSTARTCOORDS, (int)hotkeyStartCoords, SettingsType.Hotkeys);
-            settings.SetSettingValue(Settings.SETTING_HOTKEYENDCOORDS, (int)hotkeyEndCoords, SettingsType.Hotkeys);
+            SettingsController.SetSettingValue(Settings.SETTING_HOTKEYSTARTSEQUENCE, (int)hotkeyStartSequence, SettingsType.Hotkeys);
+            SettingsController.SetSettingValue(Settings.SETTING_HOTKEYPAUSESEQUENCE, (int)hotkeyPauseSequence, SettingsType.Hotkeys);
+            SettingsController.SetSettingValue(Settings.SETTING_HOTKEYSTOPSEQUENCE, (int)hotkeyStopSequence, SettingsType.Hotkeys);
+            SettingsController.SetSettingValue(Settings.SETTING_HOTKEYSTARTCOORDS, (int)hotkeyStartCoords, SettingsType.Hotkeys);
+            SettingsController.SetSettingValue(Settings.SETTING_HOTKEYENDCOORDS, (int)hotkeyEndCoords, SettingsType.Hotkeys);
         }
 
         SettingsType ISettingsPropertiesPanel.GetType()

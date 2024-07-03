@@ -7,7 +7,7 @@ namespace Tao_Bot_Maker.View
     {
         SettingsType GetType();
 
-        void LoadSettings(Settings settings);
-        void SaveSettings(Settings settings);
+        void LoadSettings();
+        void SaveSettings();
     }
 }

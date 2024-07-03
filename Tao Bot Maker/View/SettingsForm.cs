@@ -1,34 +1,28 @@
-﻿using BlueMystic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.View.Setting;
-using Settings = Tao_Bot_Maker.Model.Settings;
 
 namespace Tao_Bot_Maker.View
 {
     public partial class SettingsForm : Form
     {
-        public SettingsType SelectedSettingsType { get; set; }
-        private SettingsController SettingsController { get; set; }
-        public Settings Settings { get; set; }
+        private SettingsType SelectedSettingsType { get; set; }
 
-        private List<UserControl> panels;
+        private readonly List<UserControl> panels;
 
-        public SettingsForm(Settings settings, SettingsType settingsType = SettingsType.General)
+        public SettingsForm(SettingsType selectedSettingsType = SettingsType.General)
         {
             InitializeComponent();
             //_ = new DarkModeCS(this, false);
-            this.Settings = settings;
             panels = new List<UserControl>();
-            FillSettingsTypeListBox();
+            FillSettingsForm();
             LoadSettings();
-            settingsTypelistBox.SelectedItem = settingsType;
+            settingsTypelistBox.SelectedItem = selectedSettingsType;
         }
 
-        private void FillSettingsTypeListBox()
+        private void FillSettingsForm()
         {
             foreach (SettingsType settingsType in Enum.GetValues(typeof(SettingsType)))
             {
@@ -83,7 +77,7 @@ namespace Tao_Bot_Maker.View
         {
             foreach (UserControl panel in panels)
             {
-                (panel as ISettingsPropertiesPanel).LoadSettings(Settings);
+                (panel as ISettingsPropertiesPanel).LoadSettings();
             }
         }
 
@@ -91,7 +85,7 @@ namespace Tao_Bot_Maker.View
         {
             foreach (UserControl panel in panels)
             {
-                (panel as ISettingsPropertiesPanel).SaveSettings(Settings);
+                (panel as ISettingsPropertiesPanel).SaveSettings();
             }
         }
 

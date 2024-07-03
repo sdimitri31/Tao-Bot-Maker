@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker.View.Setting
@@ -37,16 +38,16 @@ namespace Tao_Bot_Maker.View.Setting
             });
         }
 
-        public void LoadSettings(Settings settings)
+        public void LoadSettings()
         {
-            languageComboBox.SelectedItem = settings.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
-            themeComboBox.SelectedItem = settings.GetSettingValue<string>(Settings.SETTING_THEME);
+            languageComboBox.SelectedItem = SettingsController.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
+            themeComboBox.SelectedItem = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
         }
 
-        public void SaveSettings(Settings settings)
+        public void SaveSettings()
         {
-            settings.SetSettingValue(Settings.SETTING_LANGUAGE, languageComboBox.SelectedItem.ToString(), SettingsType.General);
-            settings.SetSettingValue(Settings.SETTING_THEME, themeComboBox.SelectedItem.ToString(), SettingsType.General);
+            SettingsController.SetSettingValue(Settings.SETTING_LANGUAGE, languageComboBox.SelectedItem.ToString(), SettingsType.General);
+            SettingsController.SetSettingValue(Settings.SETTING_THEME, themeComboBox.SelectedItem.ToString(), SettingsType.General);
         }
 
         SettingsType ISettingsPropertiesPanel.GetType()

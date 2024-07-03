@@ -1,14 +1,8 @@
-﻿using BlueMystic;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
-using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
 using Settings = Tao_Bot_Maker.Model.Settings;
 

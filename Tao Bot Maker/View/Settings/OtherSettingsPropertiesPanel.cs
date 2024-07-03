@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker.View.Setting
@@ -10,14 +11,14 @@ namespace Tao_Bot_Maker.View.Setting
             InitializeComponent();
         }
 
-        public void LoadSettings(Settings settings)
+        public void LoadSettings()
         {
-            saveLogCheckBox.Checked = settings.GetSettingValue<bool>(Settings.SETTING_SAVELOG);
+            saveLogCheckBox.Checked = SettingsController.GetSettingValue<bool>(Settings.SETTING_SAVELOG);
         }
 
-        public void SaveSettings(Settings settings)
+        public void SaveSettings()
         {
-            settings.SetSettingValue(Settings.SETTING_SAVELOG, saveLogCheckBox.Checked, SettingsType.Other);
+            SettingsController.SetSettingValue(Settings.SETTING_SAVELOG, saveLogCheckBox.Checked, SettingsType.Other);
         }
 
         SettingsType ISettingsPropertiesPanel.GetType()

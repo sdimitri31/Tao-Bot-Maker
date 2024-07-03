@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
 
@@ -6,25 +7,18 @@ namespace Tao_Bot_Maker.Controller
 {
     public class SettingsController
     {
-        private Settings settings;
-
-        public SettingsController()
+        public static void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
         {
-            settings = Settings.Load();
-        }
-
-        public void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
-        {
-            var settingsForm = new SettingsForm(settings, settingsType);
+            var settingsForm = new SettingsForm(settingsType);
             if (settingsForm.ShowDialog() == DialogResult.OK)
             {
-                settings = settingsForm.Settings;
-                settings.Save();
+                Console.WriteLine("Settings saved.");
             }
         }
 
-        public void SetSettingValue(string name, string value, SettingsType type)
+        public static void SetSettingValue<T>(string name, T value, SettingsType type)
         {
+            Settings settings = Settings.Load();
             settings.SetSettingValue(name, value, type);
             settings.Save();
         }
