@@ -137,7 +137,6 @@ namespace Tao_Bot_Maker.View
             settingsToolStripMenuItem.Text = Resources.Strings.MenuSettings;
             languageToolStripMenuItem.Text = Resources.Strings.MenuSettingsLanguage;
             shortcutsToolStripMenuItem.Text = Resources.Strings.MenuSettingsShortcuts;
-            themeToolStripMenuItem.Text = Resources.Strings.MenuSettingsTheme;
             settingsToolStripMenuItem1.Text = Resources.Strings.MenuSettings;
 
             // ?
@@ -337,26 +336,6 @@ namespace Tao_Bot_Maker.View
                     break;
             }
 
-            string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
-            autoToolStripMenuItem.Checked = false;
-            lightToolStripMenuItem.Checked = false;
-            darkToolStripMenuItem.Checked = false;
-            switch (theme)
-            {
-                case "Auto":
-                    //ThemeManager.ApplyTheme(this, Themes.LightTheme);
-                    autoToolStripMenuItem.Checked = true;
-                    break;
-                case "Light":
-                    //ThemeManager.ApplyTheme(this, Themes.LightTheme);
-                    lightToolStripMenuItem.Checked = true;
-                    break;
-                case "Dark":
-                    //ThemeManager.ApplyTheme(this, Themes.DarkTheme);
-                    darkToolStripMenuItem.Checked = true;
-                    break;
-            }
-
             newToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)131150);
             newToolStripMenuItem.ShortcutKeys = (Keys)131150;
             saveToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)131155);
@@ -483,24 +462,6 @@ namespace Tao_Bot_Maker.View
         private void ShortcutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mainFormController.OpenSettingsForm(SettingsType.Hotkeys);
-            LoadSettings();
-        }
-
-        private void AutoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mainFormController.SetSettingValue(Settings.SETTING_THEME, "Auto", SettingsType.General);
-            LoadSettings();
-        }
-
-        private void DarkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mainFormController.SetSettingValue(Settings.SETTING_THEME, "Dark", SettingsType.General);
-            LoadSettings();
-        }
-
-        private void LightToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mainFormController.SetSettingValue(Settings.SETTING_THEME, "Light", SettingsType.General);
             LoadSettings();
         }
 
