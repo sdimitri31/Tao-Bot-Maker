@@ -37,7 +37,7 @@ namespace Tao_Bot_Maker.Model
             }
 
             Sequence sequence = SequenceController.GetSequence(SequenceName);
-            for (int i = 0; i < RepeatCount; i++)
+            for (int i = 0; i < RepeatCount || RepeatCount == -1; i++)
             {
                 token.ThrowIfCancellationRequested();
 

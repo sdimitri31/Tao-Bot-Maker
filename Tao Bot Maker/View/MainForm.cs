@@ -19,6 +19,7 @@ namespace Tao_Bot_Maker.View
         private int draggedIndex = -1;
         private int insertIndex = -2;
 
+        private int previousActionSelectedIndex = -1;
         private int previousSequenceSelectedIndex = -1;
 
         public MainForm()
@@ -716,8 +717,10 @@ namespace Tao_Bot_Maker.View
         {
             if (actionsListBox.SelectedIndex > 0)
             {
+                previousActionSelectedIndex = actionsListBox.SelectedIndex;
                 mainFormController.MoveAction(actionsListBox.SelectedIndex - 1, (actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
                 LoadActions();
+                actionsListBox.SelectedIndex = previousActionSelectedIndex - 1;
             }
         }
 
@@ -725,8 +728,10 @@ namespace Tao_Bot_Maker.View
         {
             if (actionsListBox.SelectedIndex < actionsListBox.Items.Count - 1)
             {
+                previousActionSelectedIndex = actionsListBox.SelectedIndex;
                 mainFormController.MoveAction(actionsListBox.SelectedIndex + 1, (actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
                 LoadActions();
+                actionsListBox.SelectedIndex = previousActionSelectedIndex + 1;
             }
         }
 
