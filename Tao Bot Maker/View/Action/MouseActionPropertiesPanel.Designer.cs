@@ -52,6 +52,7 @@
             this.scrollAmountNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.clickDurationLabel = new System.Windows.Forms.Label();
             this.clickDurationNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.overlayCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -89,6 +90,7 @@
             this.startXCoordinateNumericUpDown.Name = "startXCoordinateNumericUpDown";
             this.startXCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.startXCoordinateNumericUpDown.TabIndex = 3;
+            this.startXCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
             // 
             // useCurrentPositionCheckBox
             // 
@@ -124,6 +126,7 @@
             this.startYCoordinateNumericUpDown.Name = "startYCoordinateNumericUpDown";
             this.startYCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.startYCoordinateNumericUpDown.TabIndex = 6;
+            this.startYCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -156,6 +159,7 @@
             this.tableLayoutPanel1.Controls.Add(this.scrollAmountNumericUpDown, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.clickDurationLabel, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.clickDurationNumericUpDown, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.overlayCheckBox, 1, 9);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -339,6 +343,7 @@
             this.endXCoordinateNumericUpDown.Name = "endXCoordinateNumericUpDown";
             this.endXCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.endXCoordinateNumericUpDown.TabIndex = 10;
+            this.endXCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
             // 
             // endYCoordinateNumericUpDown
             // 
@@ -357,6 +362,7 @@
             this.endYCoordinateNumericUpDown.Name = "endYCoordinateNumericUpDown";
             this.endYCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.endYCoordinateNumericUpDown.TabIndex = 8;
+            this.endYCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
             // 
             // endImageCoordCheckBox
             // 
@@ -455,6 +461,22 @@
             0,
             0});
             // 
+            // overlayCheckBox
+            // 
+            this.overlayCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.overlayCheckBox.AutoSize = true;
+            this.overlayCheckBox.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.overlayCheckBox.Location = new System.Drawing.Point(103, 381);
+            this.overlayCheckBox.Name = "overlayCheckBox";
+            this.overlayCheckBox.Size = new System.Drawing.Size(94, 37);
+            this.overlayCheckBox.TabIndex = 28;
+            this.overlayCheckBox.Text = "Enable overlay";
+            this.overlayCheckBox.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.overlayCheckBox.UseVisualStyleBackColor = true;
+            this.overlayCheckBox.CheckedChanged += new System.EventHandler(this.OverlayCheckBox_CheckedChanged);
+            // 
             // MouseActionPropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -462,6 +484,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MouseActionPropertiesPanel";
             this.Size = new System.Drawing.Size(500, 421);
+            this.VisibleChanged += new System.EventHandler(this.MouseActionPropertiesPanel_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -500,5 +523,6 @@
         private System.Windows.Forms.CheckBox scrollCheckBox;
         private System.Windows.Forms.CheckBox startImageCoordCheckBox;
         private System.Windows.Forms.CheckBox endImageCoordCheckBox;
+        private System.Windows.Forms.CheckBox overlayCheckBox;
     }
 }

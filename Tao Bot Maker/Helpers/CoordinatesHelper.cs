@@ -2,7 +2,7 @@
 
 namespace Tao_Bot_Maker.Helpers
 {
-    public static class CoordinateHelper
+    public static class CoordinatesHelper
     {
         /// <summary>
         /// Gets the top-left coordinates between two points.
@@ -28,6 +28,22 @@ namespace Tao_Bot_Maker.Helpers
         public static int[] GetBottomRightCoords(int x1, int y1, int x2, int y2)
         {
             return new int[] { Math.Max(x1, x2), Math.Max(y1, y2) };
+        }
+
+        /// <summary>
+        /// Gets the center coordinates between two points.
+        /// </summary>
+        /// <param name="x">x-coordinate.</param>
+        /// <param name="y">y-coordinate.</param>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
+        /// <returns></returns>
+        public static int[] GetCenterCoords(int x, int y, int width, int height)
+        {
+            int centerX = x + (width / 2);
+            int centerY = y + (height / 2);
+
+            return new int[] { centerX, centerY };
         }
     }
 }

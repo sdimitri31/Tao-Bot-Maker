@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueMystic;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
@@ -17,7 +18,7 @@ namespace Tao_Bot_Maker.View
         public MainForm()
         {
             InitializeComponent();
-            //_ = new DarkModeCS(this, false, true);
+            //_ = new DarkModeCS(this, false);
 
             Logger.LogMessageReceived += OnLogMessageReceived;
             CultureManager.CultureChanged += UpdateUI;
@@ -520,13 +521,6 @@ namespace Tao_Bot_Maker.View
 
         protected override void WndProc(ref Message m)
         {
-            const int WM_SETTINGCHANGE = 0x001A;
-
-            if (m.Msg == WM_SETTINGCHANGE)
-            {
-                //_ = new DarkModeCS(this, false);
-            }
-
             base.WndProc(ref m);
 
             if (m.Msg == 0x0312)

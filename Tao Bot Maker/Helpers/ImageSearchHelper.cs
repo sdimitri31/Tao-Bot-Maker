@@ -1,11 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Drawing;
-using Tao_Bot_Maker.Controller;
-using System.Windows.Forms;
 
 namespace Tao_Bot_Maker.Helpers
 {
@@ -15,7 +10,7 @@ namespace Tao_Bot_Maker.Helpers
         [DllImport(@"ImageSearchDLL.dll")]
         private static extern IntPtr ImageSearch(int x, int y, int right, int bottom, [MarshalAs(UnmanagedType.LPStr)] string imagePath);
 
-        public static string[] UseImageSearchArea(string imgPath, string tolerance, int x1, int y1, int right, int bottom)
+        public static int[] UseImageSearchArea(string imgPath, string tolerance, int x1, int y1, int right, int bottom)
         {
             imgPath = "*" + tolerance + " " + imgPath;
 
@@ -26,11 +21,14 @@ namespace Tao_Bot_Maker.Helpers
 
             string[] data = res.Split('|');
 
-            int x; int y;
-            int.TryParse(data[1], out x);
-            int.TryParse(data[2], out y);
+            int x = int.Parse(data[1]);
+            int y = int.Parse(data[2]);
 
-            return data;
+            // Get the image dimensions
+            int imageWidth = int.Parse(data[3]);
+            int imageHeight = int.Parse(data[4]);
+
+            return new int[] { x, y, imageWidth, imageHeight };
         }
 
         /// <summary>
@@ -43,19 +41,16 @@ namespace Tao_Bot_Maker.Helpers
         /// <param name="X2">Bottom right X</param>
         /// <param name="Y2">Bottom right Y</param>
         /// <returns>String Array with coords</returns>
-        public static String[] FindImage(string path, int Threshold, int X1, int Y1, int X2, int Y2)
+        public static int[] FindImage(string path, int Threshold, int X1, int Y1, int X2, int Y2)
         {
-            String[] results_if_image = null;
+            if (!File.Exists(path))
+                return null;
 
-            if (File.Exists(path))
-            {
-                //Determine where are the corners
-                int[] xy = CoordinateHelper.GetTopLeftCoords(X1, Y1, X2, Y2);
-                int[] xy2 = CoordinateHelper.GetBottomRightCoords(X1, Y1, X2, Y2);
+            //Determine where are the corners
+            int[] xy = CoordinatesHelper.GetTopLeftCoords(X1, Y1, X2, Y2);
+            int[] xy2 = CoordinatesHelper.GetBottomRightCoords(X1, Y1, X2, Y2);
 
-                results_if_image = UseImageSearchArea(path, Threshold.ToString(), xy[0], xy[1], xy2[0], xy2[1]);
-            }
-            return results_if_image;
+            return UseImageSearchArea(path, Threshold.ToString(), xy[0], xy[1], xy2[0], xy2[1]);
         }
 
         /// <summary>
@@ -72,22 +67,10 @@ namespace Tao_Bot_Maker.Helpers
         {
             var result = FindImage(path, Threshold, X1, Y1, X2, Y2);
 
-            if (result == null) return null;
+            if (result == null) 
+                return null;
 
-            // Assuming the result format is "1|x|y"
-            int x = int.Parse(result[1]);
-            int y = int.Parse(result[2]);
-
-            // Get the image dimensions
-            var image = System.Drawing.Image.FromFile(path);
-            int imageWidth = image.Width;
-            int imageHeight = image.Height;
-
-            // Calculate the center coordinates
-            int centerX = x + (imageWidth / 2);
-            int centerY = y + (imageHeight / 2);
-
-            return new int[] { centerX, centerY };
+            return CoordinatesHelper.GetCenterCoords(result[0], result[1], result[2], result[3]);
         }
 
     }

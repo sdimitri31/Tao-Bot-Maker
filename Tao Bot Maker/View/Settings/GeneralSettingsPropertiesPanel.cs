@@ -24,8 +24,8 @@ namespace Tao_Bot_Maker.View.Setting
 
         private void UpdateUI()
         {
-            languageLabel.Text = Resources.Strings.LabelTheme;
-            themeLabel.Text = Resources.Strings.LabelLanguage;
+            languageLabel.Text = Resources.Strings.LabelLanguage;
+            themeLabel.Text = Resources.Strings.LabelTheme;
         }
 
         public void InitializeLanguage()

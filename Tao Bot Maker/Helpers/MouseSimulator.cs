@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,7 +25,7 @@ namespace Tao_Bot_Maker.Helpers
             Wheel = 0x0800
         }
 
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         public async Task LeftClick(int duration = 100)
         {

@@ -30,14 +30,9 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.selectImageButton = new System.Windows.Forms.Button();
-            this.startCoordinatesLabel = new System.Windows.Forms.Label();
             this.endCoordinatesLabel = new System.Windows.Forms.Label();
             this.thresholdLabel = new System.Windows.Forms.Label();
             this.expirationLabel = new System.Windows.Forms.Label();
-            this.startXCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.startYCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.endXCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.endYCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.thresholdNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.expirationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.selectedImageNameLabel = new System.Windows.Forms.Label();
@@ -47,14 +42,20 @@
             this.actionIfImageNotFoundLabel = new System.Windows.Forms.Label();
             this.actionIfImageFoundButton = new System.Windows.Forms.Button();
             this.actionIfImageNotFoundButton = new System.Windows.Forms.Button();
+            this.endYCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.endXCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.startCoordinatesLabel = new System.Windows.Forms.Label();
+            this.startYCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.startXCoordinateNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.overlayCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.endXCoordinateNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.endYCoordinateNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thresholdNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.expirationNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endYCoordinateNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endXCoordinateNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -83,6 +84,7 @@
             this.tableLayoutPanel1.Controls.Add(this.startCoordinatesLabel, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.startYCoordinateNumericUpDown, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.startXCoordinateNumericUpDown, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.overlayCheckBox, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -111,16 +113,6 @@
             this.selectImageButton.Text = "Select image";
             this.selectImageButton.UseVisualStyleBackColor = true;
             this.selectImageButton.Click += new System.EventHandler(this.SelectImageButton_Click);
-            // 
-            // startCoordinatesLabel
-            // 
-            this.startCoordinatesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startCoordinatesLabel.AutoSize = true;
-            this.startCoordinatesLabel.Location = new System.Drawing.Point(3, 128);
-            this.startCoordinatesLabel.Name = "startCoordinatesLabel";
-            this.startCoordinatesLabel.Size = new System.Drawing.Size(94, 13);
-            this.startCoordinatesLabel.TabIndex = 2;
-            this.startCoordinatesLabel.Text = "Start coordinates";
             // 
             // endCoordinatesLabel
             // 
@@ -152,78 +144,6 @@
             this.expirationLabel.TabIndex = 7;
             this.expirationLabel.Text = "Expiration";
             // 
-            // startXCoordinateNumericUpDown
-            // 
-            this.startXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 125);
-            this.startXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.startXCoordinateNumericUpDown.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.startXCoordinateNumericUpDown.Name = "startXCoordinateNumericUpDown";
-            this.startXCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
-            this.startXCoordinateNumericUpDown.TabIndex = 8;
-            // 
-            // startYCoordinateNumericUpDown
-            // 
-            this.startYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.startYCoordinateNumericUpDown.Location = new System.Drawing.Point(203, 125);
-            this.startYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.startYCoordinateNumericUpDown.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.startYCoordinateNumericUpDown.Name = "startYCoordinateNumericUpDown";
-            this.startYCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
-            this.startYCoordinateNumericUpDown.TabIndex = 9;
-            // 
-            // endXCoordinateNumericUpDown
-            // 
-            this.endXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.endXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 155);
-            this.endXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.endXCoordinateNumericUpDown.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.endXCoordinateNumericUpDown.Name = "endXCoordinateNumericUpDown";
-            this.endXCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
-            this.endXCoordinateNumericUpDown.TabIndex = 10;
-            // 
-            // endYCoordinateNumericUpDown
-            // 
-            this.endYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.endYCoordinateNumericUpDown.Location = new System.Drawing.Point(203, 155);
-            this.endYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.endYCoordinateNumericUpDown.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
-            this.endYCoordinateNumericUpDown.Name = "endYCoordinateNumericUpDown";
-            this.endYCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
-            this.endYCoordinateNumericUpDown.TabIndex = 11;
-            // 
             // thresholdNumericUpDown
             // 
             this.thresholdNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -245,6 +165,11 @@
             // expirationNumericUpDown
             // 
             this.expirationNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.expirationNumericUpDown.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.expirationNumericUpDown.Location = new System.Drawing.Point(103, 215);
             this.expirationNumericUpDown.Maximum = new decimal(new int[] {
             999999,
@@ -254,6 +179,7 @@
             this.expirationNumericUpDown.Name = "expirationNumericUpDown";
             this.expirationNumericUpDown.Size = new System.Drawing.Size(94, 20);
             this.expirationNumericUpDown.TabIndex = 13;
+            this.expirationNumericUpDown.ThousandsSeparator = true;
             // 
             // selectedImageNameLabel
             // 
@@ -336,6 +262,105 @@
             this.actionIfImageNotFoundButton.UseVisualStyleBackColor = true;
             this.actionIfImageNotFoundButton.Click += new System.EventHandler(this.ActionIfNotFoundButton_Click);
             // 
+            // endYCoordinateNumericUpDown
+            // 
+            this.endYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.endYCoordinateNumericUpDown.Location = new System.Drawing.Point(203, 155);
+            this.endYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.endYCoordinateNumericUpDown.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.endYCoordinateNumericUpDown.Name = "endYCoordinateNumericUpDown";
+            this.endYCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
+            this.endYCoordinateNumericUpDown.TabIndex = 11;
+            this.endYCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
+            // 
+            // endXCoordinateNumericUpDown
+            // 
+            this.endXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.endXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 155);
+            this.endXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.endXCoordinateNumericUpDown.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.endXCoordinateNumericUpDown.Name = "endXCoordinateNumericUpDown";
+            this.endXCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
+            this.endXCoordinateNumericUpDown.TabIndex = 10;
+            this.endXCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
+            // 
+            // startCoordinatesLabel
+            // 
+            this.startCoordinatesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.startCoordinatesLabel.AutoSize = true;
+            this.startCoordinatesLabel.Location = new System.Drawing.Point(3, 128);
+            this.startCoordinatesLabel.Name = "startCoordinatesLabel";
+            this.startCoordinatesLabel.Size = new System.Drawing.Size(94, 13);
+            this.startCoordinatesLabel.TabIndex = 2;
+            this.startCoordinatesLabel.Text = "Start coordinates";
+            // 
+            // startYCoordinateNumericUpDown
+            // 
+            this.startYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.startYCoordinateNumericUpDown.Location = new System.Drawing.Point(203, 125);
+            this.startYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.startYCoordinateNumericUpDown.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.startYCoordinateNumericUpDown.Name = "startYCoordinateNumericUpDown";
+            this.startYCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
+            this.startYCoordinateNumericUpDown.TabIndex = 9;
+            this.startYCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
+            // 
+            // startXCoordinateNumericUpDown
+            // 
+            this.startXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.startXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 125);
+            this.startXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.startXCoordinateNumericUpDown.Minimum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            -2147483648});
+            this.startXCoordinateNumericUpDown.Name = "startXCoordinateNumericUpDown";
+            this.startXCoordinateNumericUpDown.Size = new System.Drawing.Size(94, 20);
+            this.startXCoordinateNumericUpDown.TabIndex = 8;
+            this.startXCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
+            // 
+            // overlayCheckBox
+            // 
+            this.overlayCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.overlayCheckBox.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.overlayCheckBox, 2);
+            this.overlayCheckBox.Location = new System.Drawing.Point(3, 96);
+            this.overlayCheckBox.Name = "overlayCheckBox";
+            this.overlayCheckBox.Size = new System.Drawing.Size(194, 17);
+            this.overlayCheckBox.TabIndex = 29;
+            this.overlayCheckBox.Text = "Enable overlay";
+            this.overlayCheckBox.UseVisualStyleBackColor = true;
+            this.overlayCheckBox.CheckedChanged += new System.EventHandler(this.OverlayCheckBox_CheckedChanged);
+            // 
             // ImageActionPropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -343,15 +368,16 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ImageActionPropertiesPanel";
             this.Size = new System.Drawing.Size(500, 300);
+            this.VisibleChanged += new System.EventHandler(this.ImageActionPropertiesPanel_VisibleChanged);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.endXCoordinateNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.endYCoordinateNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thresholdNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.expirationNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endYCoordinateNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endXCoordinateNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -376,5 +402,6 @@
         private System.Windows.Forms.Button actionIfImageNotFoundButton;
         private System.Windows.Forms.Label actionIfImageFoundLabel;
         private System.Windows.Forms.Label actionIfImageNotFoundLabel;
+        private System.Windows.Forms.CheckBox overlayCheckBox;
     }
 }

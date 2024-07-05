@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net.Http.Headers;
+using System.Drawing;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Model;
 using static Tao_Bot_Maker.Model.MouseAction;
@@ -10,15 +10,24 @@ namespace Tao_Bot_Maker.View
     public partial class MouseActionPropertiesPanel : UserControl, IActionPropertiesPanel
     {
         private bool isFromImageAction;
+        private DrawingForm drawingForm;
 
         public MouseActionPropertiesPanel(bool isFromImageAction = false)
         {
             InitializeComponent();
             UpdateUI();
             InitializeMoveSpeed();
+            drawingForm = new DrawingForm();
+            drawingForm.Show();
             leftClickRadioButton.Checked = true;
             this.isFromImageAction = isFromImageAction;
             ShowCoordsFromImage(isFromImageAction);
+            this.Disposed += MouseActionPropertiesPanel_Disposed;
+        }
+
+        private void MouseActionPropertiesPanel_Disposed(object sender, EventArgs e)
+        {
+            drawingForm.Close();
         }
 
         private void UpdateUI()
@@ -42,6 +51,8 @@ namespace Tao_Bot_Maker.View
             speedLabel.Text = Resources.Strings.LabelSpeed;
             scrollAmountLabel.Text = Resources.Strings.LabelScrollAmount;
             clickDurationLabel.Text = Resources.Strings.LabelClickDuration;
+
+            overlayCheckBox.Text = Resources.Strings.LabelEnableDrawingOverlay;
         }
 
         private void ShowCoordsFromImage(bool isFromImageAction)
@@ -68,8 +79,30 @@ namespace Tao_Bot_Maker.View
         /// <param name="y">Value for Y2</param>
         public void HotkeyXY2(int x, int y)
         {
-            endXCoordinateNumericUpDown.Value = x;
-            endYCoordinateNumericUpDown.Value = y;
+            if (dragAndDropCheckBox.Checked)
+            {
+                endXCoordinateNumericUpDown.Value = x;
+                endYCoordinateNumericUpDown.Value = y;
+            }
+        }
+
+        /// <summary>
+        /// Draw rectangles from coords using values X1, Y1, X2 and Y2
+        /// </summary>
+        public void DrawArea()
+        {
+            if(!overlayCheckBox.Checked)
+                return;
+            ClearArea();
+            if (!useCurrentPositionCheckBox.Checked)
+                drawingForm.DrawRectangle((int)startXCoordinateNumericUpDown.Value - 5, (int)startYCoordinateNumericUpDown.Value - 5, 10, 10, KnownColor.Green);
+            if (dragAndDropCheckBox.Checked)
+                drawingForm.DrawRectangle((int)endXCoordinateNumericUpDown.Value - 5, (int)endYCoordinateNumericUpDown.Value - 5, 10, 10, KnownColor.Orange);
+        }
+
+        public void ClearArea()
+        {
+            drawingForm.ClearRectangles();
         }
 
         public Action GetAction()
@@ -233,6 +266,7 @@ namespace Tao_Bot_Maker.View
             {
                 endImageCoordCheckBox.Checked = false;
             }
+            DrawArea();
         }
 
         private void DeselectOtherRadioButtons(RadioButton selectedRadioButton)
@@ -280,9 +314,32 @@ namespace Tao_Bot_Maker.View
                 startImageCoordCheckBox.Checked = false;
             }
         }
+
         ActionType IActionPropertiesPanel.GetType()
         {
             return ActionType.MouseAction;
+        }
+
+        private void CoordinatesNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+                DrawArea();
+        }
+
+        private void MouseActionPropertiesPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+                DrawArea();
+            else
+                ClearArea();
+        }
+
+        private void OverlayCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (overlayCheckBox.Checked)
+                DrawArea();
+            else
+                ClearArea();
         }
     }
 }

@@ -943,6 +943,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Overlay.
+        /// </summary>
+        internal static string LabelEnableDrawingOverlay {
+            get {
+                return ResourceManager.GetString("LabelEnableDrawingOverlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à End coordinates.
         /// </summary>
         internal static string LabelEndCoordinates {

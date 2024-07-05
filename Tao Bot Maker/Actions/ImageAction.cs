@@ -99,13 +99,7 @@ namespace Tao_Bot_Maker.Model
 
                         if (imageCoords != null)
                         {
-                            int foundX = int.Parse(imageCoords[1]);
-                            int foundY = int.Parse(imageCoords[2]);
-                            var image = Image.FromFile(imagePath);
-                            int centerX = foundX + (image.Width / 2);
-                            int centerY = foundY + (image.Height / 2);
-
-                            return new int[] { centerX, centerY };
+                            return CoordinatesHelper.GetCenterCoords(imageCoords[0], imageCoords[1], imageCoords[2], imageCoords[3]);
                         }
 
                         return null;

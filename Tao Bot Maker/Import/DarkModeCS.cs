@@ -250,21 +250,37 @@ namespace BlueMystic
 			IsDarkMode = GetWindowsColorMode() <= 0 ? true : false;
 			OScolors = GetSystemColors(OwnerForm);
 
-			if (IsDarkMode && OScolors != null)
-			{
-				if (OwnerForm != null && OwnerForm.Controls != null)
-				{
-					foreach (Control _control in OwnerForm.Controls)
-					{
-						ThemeControl(_control);
-					}
-					OwnerForm.ControlAdded += (object sender, ControlEventArgs e) =>
-					{
-						ThemeControl(e.Control);
-					};
-				}
-			}
-		}
+            if (OScolors != null)
+            {
+                if (OwnerForm != null && OwnerForm.Controls != null)
+                {
+                    OwnerForm.BackColor = OScolors.Background;
+                    foreach (Control _control in OwnerForm.Controls)
+                    {
+                        ThemeControl(_control);
+                    }
+                    OwnerForm.ControlAdded += (object sender, ControlEventArgs e) =>
+                    {
+                        ThemeControl(e.Control);
+                    };
+                }
+            }
+
+            //if (IsDarkMode && OScolors != null)
+            //{
+            //	if (OwnerForm != null && OwnerForm.Controls != null)
+            //	{
+            //		foreach (Control _control in OwnerForm.Controls)
+            //		{
+            //			ThemeControl(_control);
+            //		}
+            //		OwnerForm.ControlAdded += (object sender, ControlEventArgs e) =>
+            //		{
+            //			ThemeControl(e.Control);
+            //		};
+            //	}
+            //}
+        }
 
 		#endregion
 
@@ -274,11 +290,13 @@ namespace BlueMystic
 		/// <param name="control">Can be a Form or any Winforms Control.</param>
 		public void ThemeControl(Control control)
 		{
-			BorderStyle BStyle = (IsDarkMode ? BorderStyle.FixedSingle : BorderStyle.Fixed3D);
-			FlatStyle FStyle = (IsDarkMode ? FlatStyle.Flat : FlatStyle.Standard);
+			//BorderStyle BStyle = (IsDarkMode ? BorderStyle.FixedSingle : BorderStyle.Fixed3D);
+			//FlatStyle FStyle = (IsDarkMode ? FlatStyle.Flat : FlatStyle.Standard);
+            BorderStyle BStyle =BorderStyle.FixedSingle;
+            FlatStyle FStyle = FlatStyle.Flat;
 
-			//Change the Colors only if its the default ones, this allows the user to set own colors:
-			if (control.BackColor == SystemColors.Control || control.BackColor == SystemColors.Window)
+            //Change the Colors only if its the default ones, this allows the user to set own colors:
+            if (control.BackColor == SystemColors.Control || control.BackColor == SystemColors.Window)
 			{
 				control.GetType().GetProperty("BackColor")?.SetValue(control, OScolors.Control);
 			}
@@ -288,23 +306,26 @@ namespace BlueMystic
 			}
 			control.GetType().GetProperty("BorderStyle")?.SetValue(control, BStyle);
 
-			control.HandleCreated += (object sender, EventArgs e) =>
-			{
-				ApplySystemDarkTheme(control);
-			};
+			if(IsDarkMode)
+				control.HandleCreated += (object sender, EventArgs e) =>
+				{
+					ApplySystemDarkTheme(control);
+				};
 			control.ControlAdded += (object sender, ControlEventArgs e) =>
 			{
 				ThemeControl(e.Control);
 			};
 
 			if (control is TextBox tb)
-			{
-				//SetRoundBorders(tb, 4, OScolors.SurfaceDark, 1);
-			}
+            {
+            }
 			if (control is Panel panel)
 			{
-				// Process the panel within the container
-				//panel.BackColor = OScolors.Surface;
+                // Process the panel within the container
+                if (panel.BackColor == SystemColors.Control || panel.BackColor == SystemColors.Window)
+                {
+                    panel.BackColor = OScolors.SurfaceLight;
+                }
 				panel.BorderStyle = BorderStyle.None;
 
 				if (!(panel.Parent is TabControl) || !(panel.Parent is TableLayoutPanel))
@@ -323,7 +344,7 @@ namespace BlueMystic
 			if (control is TableLayoutPanel table)
 			{
 				// Process the panel within the container
-				table.BackColor = table.Parent.BackColor;
+				table.BackColor = OScolors.Surface;
 				table.BorderStyle = BorderStyle.None;
 			}
 			if (control is TabControl tab)
@@ -380,7 +401,7 @@ namespace BlueMystic
 			}
 			if (control is PictureBox pic)
 			{
-				pic.BorderStyle = BorderStyle.None;
+				//pic.BorderStyle = BorderStyle.None;
 				pic.BackColor = pic.Parent.BackColor;
 			}
 			if (control is ListView lView)
@@ -439,7 +460,7 @@ namespace BlueMystic
 				button.FlatAppearance.CheckedBackColor = OScolors.Accent;
 				button.BackColor = OScolors.Control;
 				button.FlatAppearance.BorderColor = (OwnerForm.AcceptButton == button) ?
-					OScolors.Accent : OScolors.Control;
+					OScolors.Accent : OScolors.ControlDark;
 				//SetRoundBorders(button, 4, OScolors.SurfaceDark, 1);
 			}
 			if (control is Label label)
@@ -593,7 +614,7 @@ namespace BlueMystic
 			{
 				var color = colors.ColorizationColor;
 
-				var colorValue = long.Parse(color.ToString(), System.Globalization.NumberStyles.HexNumber);
+				var colorValue = long.Parse(color.ToString());
 
 				var transparency = (colorValue >> 24) & 0xFF;
 				var red = (colorValue >> 16) & 0xFF;
@@ -620,7 +641,7 @@ namespace BlueMystic
 			{
 				var color = colors.ColorizationColor;
 
-				var colorValue = long.Parse(color.ToString(), System.Globalization.NumberStyles.HexNumber);
+				var colorValue = long.Parse(color.ToString());
 
 				var red = (colorValue >> 16) & 0xFF;
 				var green = (colorValue >> 8) & 0xFF;
@@ -670,11 +691,39 @@ namespace BlueMystic
 					ApplySystemDarkTheme(Window);
 
 					Window.BackColor = _ret.Background;
-					Window.ForeColor = _ret.TextInactive;
+					Window.ForeColor = _ret.TextActive;
 				}
 			}
+            else
+            {
+                _ret.Background = Color.FromArgb(250, 250, 250);
+                _ret.BackgroundDark = Color.FromArgb(240, 240, 240);
+                _ret.BackgroundLight = Color.White;
 
-			return _ret;
+                _ret.Surface = Color.FromArgb(240, 240, 240);
+                _ret.SurfaceDark = Color.FromArgb(230, 230, 230);
+                _ret.SurfaceLight = Color.FromArgb(250, 250, 250);
+
+                _ret.Control = Color.White;
+                _ret.ControlDark = ControlPaint.Dark(_ret.Control);
+                _ret.ControlLight = Color.White;
+
+                _ret.TextActive = SystemColors.ControlText;
+                _ret.TextInactive = SystemColors.GrayText;
+                _ret.TextInAccent = GetReadableColor(_ret.Accent);
+
+                //Apply Window's Dark Mode to the Form's Title bar
+                if (Window != null)
+                {
+                    //SetWin32ApiTheme(Window);
+                    ApplySystemDarkTheme(Window);
+
+                    Window.BackColor = _ret.Background;
+                    Window.ForeColor = _ret.TextActive;
+                }
+            }
+
+            return _ret;
 		}
 
 		/// <summary>Apply Round Corners to the indicated Control or Form.</summary>

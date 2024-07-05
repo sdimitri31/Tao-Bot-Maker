@@ -46,6 +46,7 @@
             // 
             // actionPropertiesPanel
             // 
+            this.actionPropertiesPanel.BackColor = System.Drawing.Color.Transparent;
             this.actionPropertiesPanel.Location = new System.Drawing.Point(219, 12);
             this.actionPropertiesPanel.Name = "actionPropertiesPanel";
             this.actionPropertiesPanel.Size = new System.Drawing.Size(569, 397);
@@ -86,6 +87,7 @@
             this.Name = "ActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Action";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ActionForm_FormClosing);
             this.ResumeLayout(false);
 
         }

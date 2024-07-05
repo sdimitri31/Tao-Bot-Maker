@@ -11,6 +11,7 @@ namespace Tao_Bot_Maker.View
     public partial class ImageActionPropertiesPanel : UserControl, IActionPropertiesPanel
     {
         private ActionForm addActionForm;
+        private DrawingForm drawingForm;
         private Action actionIfFound;
         private Action actionNotFound;
         private string selectedImageName;
@@ -19,7 +20,15 @@ namespace Tao_Bot_Maker.View
         {
             InitializeComponent();
             UpdateUI();
+            drawingForm = new DrawingForm();
+            drawingForm.Show();
             this.addActionForm = addActionForm;
+            this.Disposed += ImageActionPropertiesPanel_Disposed;
+        }
+
+        private void ImageActionPropertiesPanel_Disposed(object sender, EventArgs e)
+        {
+            drawingForm.Close();
         }
 
         private void UpdateUI()
@@ -35,6 +44,7 @@ namespace Tao_Bot_Maker.View
             searchImageButton.Text = Resources.Strings.ButtonSearchImage;
             actionIfImageFoundButton.Text = Resources.Strings.ButtonAddAction;
             actionIfImageNotFoundButton.Text = Resources.Strings.ButtonAddAction;
+            overlayCheckBox.Text = Resources.Strings.LabelEnableDrawingOverlay;
         }
 
         public Action GetAction()
@@ -238,10 +248,12 @@ namespace Tao_Bot_Maker.View
             int x2 = (int)endXCoordinateNumericUpDown.Value;
             int y2 = (int)endYCoordinateNumericUpDown.Value;
 
-            int[] centerCoordinates = ImageSearchHelper.FindImageCenter(imagePath, threshold, x1, y1, x2, y2);
+            int[] imageCoordinates = ImageSearchHelper.FindImage(imagePath, threshold, x1, y1, x2, y2);
 
-            if (centerCoordinates != null)
+            if (imageCoordinates != null)
             {
+                drawingForm.DrawRectangle(imageCoordinates[0], imageCoordinates[1], imageCoordinates[2], imageCoordinates[3], KnownColor.Green);
+                int[] centerCoordinates = CoordinatesHelper.GetCenterCoords(imageCoordinates[0], imageCoordinates[1], imageCoordinates[2], imageCoordinates[3]);
                 string coordinates = string.Format(Resources.Strings.CoordinatesFormat, centerCoordinates[0], centerCoordinates[1]);
                 string message = string.Format(Resources.Strings.InfoMessageImageFoundAtCoords, coordinates);
                 string caption = Resources.Strings.InfoMessageImageFound;
@@ -276,6 +288,27 @@ namespace Tao_Bot_Maker.View
             endYCoordinateNumericUpDown.Value = y;
         }
 
+        /// <summary>
+        /// Draw rectangles from coords using values X1, Y1, X2 and Y2
+        /// </summary>
+        public void DrawArea()
+        {
+            if (!overlayCheckBox.Checked)
+                return;
+
+            ClearArea();
+
+            int[] xy = CoordinatesHelper.GetTopLeftCoords((int)startXCoordinateNumericUpDown.Value, (int)startYCoordinateNumericUpDown.Value, (int)endXCoordinateNumericUpDown.Value, (int)endYCoordinateNumericUpDown.Value);
+            int[] xy2 = CoordinatesHelper.GetBottomRightCoords((int)startXCoordinateNumericUpDown.Value, (int)startYCoordinateNumericUpDown.Value, (int)endXCoordinateNumericUpDown.Value, (int)endYCoordinateNumericUpDown.Value);
+
+            drawingForm.DrawRectangleAtCoords(xy[0], xy[1], xy2[0], xy2[1], KnownColor.Green);
+        }
+
+        public void ClearArea()
+        {
+            drawingForm.ClearRectangles();
+        }
+
         private void ActionIfFoundButton_Click(object sender, EventArgs e)
         {
             addActionForm.UnregisterHotkeys();
@@ -307,6 +340,28 @@ namespace Tao_Bot_Maker.View
         ActionType IActionPropertiesPanel.GetType()
         {
             return ActionType.ImageAction;
+        }
+
+        private void ImageActionPropertiesPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+                DrawArea();
+            else
+                ClearArea();
+        }
+
+        private void CoordinatesNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+                DrawArea();
+        }
+
+        private void OverlayCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (overlayCheckBox.Checked)
+                DrawArea();
+            else
+                ClearArea();
         }
     }
 }

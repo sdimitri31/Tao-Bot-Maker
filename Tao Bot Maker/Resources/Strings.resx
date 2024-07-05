@@ -411,6 +411,9 @@
   <data name="LabelDragAndDrop" xml:space="preserve">
     <value>Drag and Drop</value>
   </data>
+  <data name="LabelEnableDrawingOverlay" xml:space="preserve">
+    <value>Overlay</value>
+  </data>
   <data name="LabelEndCoordinates" xml:space="preserve">
     <value>End coordinates</value>
   </data>

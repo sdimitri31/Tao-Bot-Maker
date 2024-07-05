@@ -28,7 +28,6 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             UpdateUI();
             RegisterHotkeys();
-
             panels = new List<UserControl>();
             this.isFromImageAction = isFromImageAction;
             this.Action = existingAction;
@@ -257,6 +256,11 @@ namespace Tao_Bot_Maker.View
                     }
                 }
             }
+        }
+
+        private void ActionForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UnregisterHotkeys();
         }
     }
 }
