@@ -159,7 +159,7 @@
             this.tableLayoutPanel1.Controls.Add(this.scrollAmountNumericUpDown, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.clickDurationLabel, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.clickDurationNumericUpDown, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.overlayCheckBox, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.overlayCheckBox, 3, 8);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -468,9 +468,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.overlayCheckBox.AutoSize = true;
             this.overlayCheckBox.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.overlayCheckBox.Location = new System.Drawing.Point(103, 381);
+            this.overlayCheckBox.Location = new System.Drawing.Point(303, 339);
             this.overlayCheckBox.Name = "overlayCheckBox";
-            this.overlayCheckBox.Size = new System.Drawing.Size(94, 37);
+            this.overlayCheckBox.Size = new System.Drawing.Size(94, 36);
             this.overlayCheckBox.TabIndex = 28;
             this.overlayCheckBox.Text = "Enable overlay";
             this.overlayCheckBox.TextAlign = System.Drawing.ContentAlignment.BottomCenter;

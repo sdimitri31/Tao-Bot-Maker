@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionForm));
             this.actionTypelistBox = new System.Windows.Forms.ListBox();
             this.actionPropertiesPanel = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -84,6 +85,7 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.actionPropertiesPanel);
             this.Controls.Add(this.actionTypelistBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Action";

@@ -16,7 +16,7 @@ namespace Tao_Bot_Maker.View
         {
             appNameLabel.Text = Resources.Strings.AppName;
             versionLabel.Text = Resources.Strings.LabelVersion;
-            versionNumberLabel.Text = Assembly.GetEntryAssembly().GetName().Version.ToString();
+            versionNumberLabel.Text = Assembly.GetEntryAssembly().GetName().Version.ToString() + " (Beta)";
             authorLabel.Text = Resources.Strings.LabelAuthor;
             sourceCodeLabel.Text = Resources.Strings.LabelSourceCode;
             specialThanksLabel.Text = Resources.Strings.LabelSpecialThanks;
