@@ -33,7 +33,7 @@ namespace Tao_Bot_Maker.View
 
             if (existingAction != null && actionTypelistBox.Items.Contains(existingAction.Type))
             {
-                actionTypelistBox.SelectedItem = actionTypelistBox.Items.Cast<DisplayItem<ActionType>>().First(item => item.Value == existingAction.Type);
+                actionTypelistBox.SelectedItem = actionTypelistBox.Items.Cast<CustomDisplayItem<ActionType>>().First(item => item.Value == existingAction.Type);
 
                 SetPropertiesPanel(existingAction.Type);
                 FillPropertiesPanelWithExistingAction(existingAction);
@@ -140,7 +140,7 @@ namespace Tao_Bot_Maker.View
                 }
 
                 string displayName = GetActionTypeDisplayName(actionType);
-                actionTypelistBox.Items.Add(new DisplayItem<ActionType>(actionType, displayName));
+                actionTypelistBox.Items.Add(new CustomDisplayItem<ActionType>(actionType, displayName));
                 AddPropertiesPanel(actionType, isFromImageAction, existingAction);
             }
         }
@@ -168,7 +168,7 @@ namespace Tao_Bot_Maker.View
 
         private void ActionTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (actionTypelistBox.SelectedItem is DisplayItem<ActionType> selectedItem)
+            if (actionTypelistBox.SelectedItem is CustomDisplayItem<ActionType> selectedItem)
             {
                 SelectedActionType = selectedItem.Value;
                 SetPropertiesPanel(SelectedActionType);

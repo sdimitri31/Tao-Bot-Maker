@@ -238,6 +238,12 @@ namespace Tao_Bot_Maker.Controller
             InitializeHotkeys();
         }
 
+
+        public void MoveAction(int newIndex, Action action)
+        {
+            sequenceController.MoveAction(newIndex, action);
+        }
+
         /// <summary>
         /// Removes an action.
         /// </summary>

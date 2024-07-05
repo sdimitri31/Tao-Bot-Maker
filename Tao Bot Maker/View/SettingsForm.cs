@@ -21,7 +21,7 @@ namespace Tao_Bot_Maker.View
             panels = new List<UserControl>();
             FillSettingsForm();
             LoadSettings();
-            settingsTypelistBox.SelectedItem = settingsTypelistBox.Items.Cast<DisplayItem<SettingsType>>().First(item => item.Value == selectedSettingsType);
+            settingsTypelistBox.SelectedItem = settingsTypelistBox.Items.Cast<CustomDisplayItem<SettingsType>>().First(item => item.Value == selectedSettingsType);
         }
 
         private void UpdateUI()
@@ -37,7 +37,7 @@ namespace Tao_Bot_Maker.View
             foreach (SettingsType settingsType in Enum.GetValues(typeof(SettingsType)))
             {
                 string displayName = GetSettingsTypeDisplayName(settingsType);
-                settingsTypelistBox.Items.Add(new DisplayItem<SettingsType>(settingsType, displayName));
+                settingsTypelistBox.Items.Add(new CustomDisplayItem<SettingsType>(settingsType, displayName));
                 AddPropertiesPanel(settingsType);
             }
         }
@@ -95,7 +95,7 @@ namespace Tao_Bot_Maker.View
 
         private void SettingsTypelistBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (settingsTypelistBox.SelectedItem is DisplayItem<SettingsType> selectedItem)
+            if (settingsTypelistBox.SelectedItem is CustomDisplayItem<SettingsType> selectedItem)
             {
                 SelectedSettingsType = selectedItem.Value;
                 ShowPanel(SelectedSettingsType);

@@ -117,6 +117,12 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
+        public void MoveAction(int newIndex, Action action)
+        {
+            sequence.MoveAction(newIndex, action);
+            SetIsSaved(false);
+        }
+
         public void RemoveAction(Action action)
         {
             sequence.RemoveAction(action);

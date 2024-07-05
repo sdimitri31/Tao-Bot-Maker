@@ -32,5 +32,15 @@ namespace Tao_Bot_Maker.Model
             int index = Actions.IndexOf(oldAction);
             Actions[index] = newAction;
         }
+
+        public void MoveAction(int newIndex, Action action)
+        {
+            int oldIndex = Actions.IndexOf(action);
+            Actions.RemoveAt(oldIndex);
+            if (newIndex > Actions.Count - 1)
+                Actions.Add(action);
+            else
+                Actions.Insert(newIndex, action);
+        }
     }
 }

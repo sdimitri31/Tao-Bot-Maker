@@ -39,9 +39,9 @@ namespace Tao_Bot_Maker.View.Setting
         public void InitializeTheme()
         {
             this.themeComboBox.Items.AddRange(new object[] {
-                new DisplayItem<string>("Auto", Resources.Strings.LabelThemeAuto),
-                new DisplayItem<string>("Light", Resources.Strings.LabelThemeLight),
-                new DisplayItem<string>("Dark", Resources.Strings.LabelThemeDark)
+                new CustomDisplayItem<string>("Auto", Resources.Strings.LabelThemeAuto),
+                new CustomDisplayItem<string>("Light", Resources.Strings.LabelThemeLight),
+                new CustomDisplayItem<string>("Dark", Resources.Strings.LabelThemeDark)
             });
         }
 
@@ -49,14 +49,14 @@ namespace Tao_Bot_Maker.View.Setting
         {
             languageComboBox.SelectedItem = SettingsController.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
 
-            themeComboBox.SelectedItem = themeComboBox.Items.Cast<DisplayItem<string>>().First(item => item.Value == SettingsController.GetSettingValue<string>(Settings.SETTING_THEME));
+            themeComboBox.SelectedItem = themeComboBox.Items.Cast<CustomDisplayItem<string>>().First(item => item.Value == SettingsController.GetSettingValue<string>(Settings.SETTING_THEME));
         }
 
         public void SaveSettings()
         {
             SettingsController.SetSettingValue(Settings.SETTING_LANGUAGE, languageComboBox.SelectedItem.ToString(), SettingsType.General);
 
-            if (themeComboBox.SelectedItem is DisplayItem<string> selectedItem)
+            if (themeComboBox.SelectedItem is CustomDisplayItem<string> selectedItem)
             {
                 SettingsController.SetSettingValue(Settings.SETTING_THEME, selectedItem.Value, SettingsType.General);
             }

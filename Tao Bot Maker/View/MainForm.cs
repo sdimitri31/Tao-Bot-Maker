@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
+using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
 using Settings = Tao_Bot_Maker.Model.Settings;
 
@@ -11,6 +14,10 @@ namespace Tao_Bot_Maker.View
     public partial class MainForm : Form
     {
         private readonly MainFormController mainFormController;
+
+        private Point dragStartPoint;
+        private int draggedIndex = -1; 
+        private int insertIndex = -2;
 
         private int previousSelectedIndex = -1;
 
@@ -28,9 +35,28 @@ namespace Tao_Bot_Maker.View
             LoadSettings();
             LoadSequenceNames();
 
+            // Configurer les événements pour le drag and drop
+            actionsListBox.AllowDrop = true;
+            actionsListBox.MouseDown += ActionsListBox_MouseDown;
+            actionsListBox.DragOver += ActionsListBox_DragOver;
+            actionsListBox.DragDrop += ActionsListBox_DragDrop;
+            actionsListBox.DragLeave += ActionsListBox_DragLeave;
+            actionsListBox.MouseMove += ActionsListBox_MouseMove;
+            actionsListBox.DrawItem += ActionsListBox_DrawItem;
+            actionsListBox.DrawMode = DrawMode.OwnerDrawFixed;
+            SetDoubleBuffered(actionsListBox);
+
             Logger.Log(Resources.Strings.InfoMessageProgramReady, TraceEventType.Information);
         }
 
+        private void SetDoubleBuffered(Control control)
+        {
+            if (SystemInformation.TerminalServerSession)
+                return;
+
+            PropertyInfo aProp = typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance);
+            aProp.SetValue(control, true, null);
+        }
 
         private void New()
         {
@@ -168,6 +194,111 @@ namespace Tao_Bot_Maker.View
             deleteSequenceToolStripButton.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
         }
 
+        private void ActionsListBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Enregistrer le point de départ du drag
+            dragStartPoint = e.Location;
+            draggedIndex = actionsListBox.IndexFromPoint(e.Location);
+            Logger.Log("Drag started at index " + draggedIndex + "", TraceEventType.Verbose);
+        }
+
+        private void ActionsListBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                // Si la distance de drag est suffisante, démarrer le drag and drop
+                if (Math.Abs(e.X - dragStartPoint.X) >= SystemInformation.DragSize.Width ||
+                    Math.Abs(e.Y - dragStartPoint.Y) >= SystemInformation.DragSize.Height)
+                {
+                    if (draggedIndex >= 0 && draggedIndex < actionsListBox.Items.Count)
+                    {
+                        actionsListBox.DoDragDrop(actionsListBox.Items[draggedIndex], DragDropEffects.Move);
+                    }
+                }
+            }
+        }
+
+        private void ActionsListBox_DragOver(object sender, DragEventArgs e)
+        {
+            // Permettre le drop si le format de données est correct
+            if (e.Data.GetDataPresent(typeof(CustomDisplayItem<Action>)))
+            {
+                e.Effect = DragDropEffects.Move;
+
+                Point point = actionsListBox.PointToClient(new Point(e.X, e.Y));
+                int newIndex = actionsListBox.IndexFromPoint(point);
+
+                if (newIndex != insertIndex)
+                {
+                    insertIndex = newIndex;
+                    actionsListBox.Invalidate(); // Redessiner seulement si l'index de l'insertion a changé
+                }
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void ActionsListBox_DragDrop(object sender, DragEventArgs e)
+        {
+            // Obtenir l'élément draggué et l'index de drop
+            if (e.Data.GetDataPresent(typeof(CustomDisplayItem<Action>)))
+            {
+                CustomDisplayItem<Action> draggedAction = (CustomDisplayItem<Action>)e.Data.GetData(typeof(CustomDisplayItem<Action>));
+                Action action = draggedAction.Value;
+                Point point = actionsListBox.PointToClient(new Point(e.X, e.Y));
+                int newIndex = actionsListBox.IndexFromPoint(point);
+
+                Logger.Log("Drag ended at index " + newIndex + "", TraceEventType.Verbose);
+
+                if (newIndex == -1)
+                {
+                    newIndex = actionsListBox.Items.Count;
+                }
+
+                if (newIndex != draggedIndex)
+                {
+                    mainFormController.MoveAction(newIndex, action);
+                    LoadActions();
+                }
+            }
+
+            // Réinitialiser l'indicateur de position
+            insertIndex = -2;
+            actionsListBox.Invalidate();
+        }
+
+        private void ActionsListBox_DragLeave(object sender, EventArgs e)
+        {
+            // Réinitialiser l'indicateur de position
+            insertIndex = -2;
+            actionsListBox.Invalidate();
+        }
+
+        private void ActionsListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+                return;
+
+            e.DrawBackground();
+            e.Graphics.DrawString(actionsListBox.Items[e.Index].ToString(), e.Font, Brushes.Black, e.Bounds);
+
+            // Dessiner l'indicateur de position si nécessaire
+            if (e.Index == insertIndex)
+            {
+                e.Graphics.DrawLine(Pens.Red, e.Bounds.Left, e.Bounds.Top, e.Bounds.Right, e.Bounds.Top);
+            }
+
+            // Si nous dessinons le dernier élément et que insertIndex est à -1, dessiner le trait sous l'élément
+            if (e.Index == actionsListBox.Items.Count - 1 && insertIndex == -1)
+            {
+                e.Graphics.DrawLine(Pens.Red, e.Bounds.Left, e.Bounds.Bottom, e.Bounds.Right, e.Bounds.Bottom);
+            }
+
+            e.DrawFocusRectangle();
+        }
+
         private void LoadSettings()
         {
             string language = SettingsController.GetSettingValue<string>(Settings.SETTING_LANGUAGE);
@@ -243,14 +374,15 @@ namespace Tao_Bot_Maker.View
 
         private void LoadActions()
         {
+            actionsListBox.SelectedIndex = -1;
             actionsListBox.Items.Clear();
 
             if (mainFormController.GetSequence() == null)
                 return;
 
-            foreach (var action in mainFormController.GetSequence().Actions)
+            foreach (Action action in mainFormController.GetSequence().Actions)
             {
-                actionsListBox.Items.Add(action);
+                actionsListBox.Items.Add(new CustomDisplayItem<Action>(action, action.ToString()));
             }
         }
 
