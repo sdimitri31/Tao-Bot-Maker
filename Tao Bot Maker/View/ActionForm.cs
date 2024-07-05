@@ -42,7 +42,6 @@ namespace Tao_Bot_Maker.View
             {
                 SetPropertiesPanel(ActionType.MouseAction);
             }
-
         }
 
         private void UpdateUI()

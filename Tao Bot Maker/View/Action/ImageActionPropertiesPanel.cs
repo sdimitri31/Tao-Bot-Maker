@@ -21,7 +21,6 @@ namespace Tao_Bot_Maker.View
             InitializeComponent();
             UpdateUI();
             drawingForm = new DrawingForm();
-            drawingForm.Show();
             this.addActionForm = addActionForm;
             this.Disposed += ImageActionPropertiesPanel_Disposed;
         }
@@ -345,9 +344,16 @@ namespace Tao_Bot_Maker.View
         private void ImageActionPropertiesPanel_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible == true)
+            {
+                drawingForm = new DrawingForm();
+                drawingForm.Show();
                 DrawArea();
+            }
             else
+            {
+                drawingForm.Close();
                 ClearArea();
+            }
         }
 
         private void CoordinatesNumericUpDown_ValueChanged(object sender, EventArgs e)

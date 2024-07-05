@@ -18,7 +18,6 @@ namespace Tao_Bot_Maker.View
             UpdateUI();
             InitializeMoveSpeed();
             drawingForm = new DrawingForm();
-            drawingForm.Show();
             leftClickRadioButton.Checked = true;
             this.isFromImageAction = isFromImageAction;
             ShowCoordsFromImage(isFromImageAction);
@@ -329,9 +328,16 @@ namespace Tao_Bot_Maker.View
         private void MouseActionPropertiesPanel_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible == true)
+            {
+                drawingForm = new DrawingForm();
+                drawingForm.Show();
                 DrawArea();
+            }
             else
+            {
+                drawingForm?.Close();
                 ClearArea();
+            }
         }
 
         private void OverlayCheckBox_CheckedChanged(object sender, EventArgs e)
