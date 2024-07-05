@@ -19,7 +19,7 @@ namespace Tao_Bot_Maker.View
         private int draggedIndex = -1;
         private int insertIndex = -2;
 
-        private int previousSelectedIndex = -1;
+        private int previousSequenceSelectedIndex = -1;
 
         public MainForm()
         {
@@ -121,8 +121,8 @@ namespace Tao_Bot_Maker.View
             editToolStripMenuItem.Text = Resources.Strings.MenuEdit;
             addActionToolStripMenuItem.Text = Resources.Strings.MenuEditAddAction;
             editActionToolStripMenuItem.Text = Resources.Strings.MenuEditEditAction;
-            moveUpToolStripMenuItem.Text = Resources.Strings.MenuEditMoveUp;
-            moveDownToolStripMenuItem.Text = Resources.Strings.MenuEditMoveDown;
+            moveActionUpToolStripMenuItem.Text = Resources.Strings.MenuEditMoveUp;
+            moveActionDownToolStripMenuItem.Text = Resources.Strings.MenuEditMoveDown;
             deleteActionToolStripMenuItem.Text = Resources.Strings.MenuEditDeleteAction;
             deleteSequenceToolStripMenuItem.Text = Resources.Strings.MenuEditDeleteSequence;
 
@@ -171,8 +171,8 @@ namespace Tao_Bot_Maker.View
             addActionToolStripMenuItem.Enabled = !isRunning;
             editActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
             deleteActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
-            moveUpToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex > 0);
-            moveDownToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1) && (actionsListBox.SelectedIndex < actionsListBox.Items.Count - 1);
+            moveActionUpToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex > 0);
+            moveActionDownToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1) && (actionsListBox.SelectedIndex < actionsListBox.Items.Count - 1);
             deleteSequenceToolStripMenuItem.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
 
             // BOT
@@ -196,14 +196,30 @@ namespace Tao_Bot_Maker.View
             sequenceComboBox.Enabled = !isRunning;
             saveSequenceToolStripButton.Enabled = !isRunning;
             deleteSequenceToolStripButton.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
+
+            //CONTEXT MENU
+            moveActionDownContextMenuItem.Enabled = moveActionDownToolStripMenuItem.Enabled;
+            moveActionUpContextMenuItem.Enabled = moveActionUpToolStripMenuItem.Enabled;
+            deleteActionContextMenuItem.Enabled = deleteActionToolStripMenuItem.Enabled;
         }
 
         private void ActionsListBox_MouseDown(object sender, MouseEventArgs e)
         {
-            // Enregistrer le point de départ du drag
-            dragStartPoint = e.Location;
-            draggedIndex = actionsListBox.IndexFromPoint(e.Location);
-            Logger.Log("Drag started at index " + draggedIndex + "", TraceEventType.Verbose);
+            if (e.Button == MouseButtons.Right)
+            {
+                int index = actionsListBox.IndexFromPoint(e.Location);
+                if (index != ListBox.NoMatches)
+                {
+                    actionsListBox.SelectedIndex = index;
+                }
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                dragStartPoint = e.Location;
+                draggedIndex = actionsListBox.IndexFromPoint(e.Location);
+                Logger.Log("Drag started at index " + draggedIndex + "", TraceEventType.Verbose);
+            }
         }
 
         private void ActionsListBox_MouseMove(object sender, MouseEventArgs e)
@@ -517,7 +533,7 @@ namespace Tao_Bot_Maker.View
                     {
                         // Cancel selection change
                         sequenceComboBox.SelectedIndexChanged -= SequenceComboBox_SelectedIndexChanged;
-                        sequenceComboBox.SelectedIndex = previousSelectedIndex;
+                        sequenceComboBox.SelectedIndex = previousSequenceSelectedIndex;
                         sequenceComboBox.SelectedIndexChanged += SequenceComboBox_SelectedIndexChanged;
                         return;
                     }
@@ -525,7 +541,7 @@ namespace Tao_Bot_Maker.View
 
                 LoadSequenceAsync(selectedSequenceName);
             }
-            previousSelectedIndex = sequenceComboBox.SelectedIndex;
+            previousSequenceSelectedIndex = sequenceComboBox.SelectedIndex;
             UpdateUIState();
         }
 
@@ -559,7 +575,7 @@ namespace Tao_Bot_Maker.View
             if (actionsListBox.SelectedItem == null)
                 return;
 
-            mainFormController.RemoveAction((Action)actionsListBox.SelectedItem);
+            mainFormController.RemoveAction((actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
             LoadActions();
             UpdateUIState();
         }
@@ -600,7 +616,7 @@ namespace Tao_Bot_Maker.View
             if (actionsListBox.SelectedItem == null)
                 return;
 
-            mainFormController.UpdateAction((Action)actionsListBox.SelectedItem);
+            mainFormController.UpdateAction((actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
             LoadActions();
             UpdateUIState();
         }

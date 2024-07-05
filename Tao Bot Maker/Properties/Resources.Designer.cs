@@ -253,6 +253,26 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_sort_down_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_sort_down_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_sort_up_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_sort_up_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_stop_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-stop-48", resourceCulture);
