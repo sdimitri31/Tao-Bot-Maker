@@ -1303,7 +1303,7 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Icon8 for providing icons.
+        ///   Recherche une chaîne localisée semblable à Icons8 for providing icons.
         /// </summary>
         internal static string LinkLabelIconEight {
             get {
