@@ -37,6 +37,7 @@ namespace Tao_Bot_Maker.Controller
         /// </summary>
         public void InitializeHotkeys()
         {
+            Logger.Log($"Initializing Hotkeys", TraceEventType.Verbose);
             // Unregister existing hotkeys
             UnregisterHotkeys();
 
@@ -58,6 +59,7 @@ namespace Tao_Bot_Maker.Controller
         /// </summary>
         public void UnregisterHotkeys()
         {
+            Logger.Log($"Unregistering Hotkeys", TraceEventType.Verbose);
             hotkeyStartSequence?.Unregister();
             hotkeyPauseSequence?.Unregister();
             hotkeyStopSequence?.Unregister();
@@ -69,6 +71,8 @@ namespace Tao_Bot_Maker.Controller
         /// <param name="LParam">The parameter containing information about the pressed key and modifier.</param>
         public void ExecuteHotkey(IntPtr LParam)
         {
+            Logger.Log($"Executing Hotkeys", TraceEventType.Verbose);
+
             //m.LParam = 0xKKKKMMMM, K is Key, M is modifier
             Keys pressedKey = (Keys)(((int)LParam >> 16) & 0xFFFF);
             Keys pressedModifier = (Keys)HotKeyController.Reverse3Bits(((int)LParam & 0xFFFF));

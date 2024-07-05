@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Helpers;
@@ -48,6 +48,7 @@ namespace Tao_Bot_Maker.Model
 
         public override bool Validate(out string errorMessage)
         {
+            Logger.Log($"Validating TextAction", TraceEventType.Verbose);
             if (string.IsNullOrEmpty(TextToType))
             {
                 errorMessage = Resources.Strings.ErrorMessageEmptyFieldTextToType;
@@ -60,19 +61,9 @@ namespace Tao_Bot_Maker.Model
                 return false;
             }
 
+            Logger.Log($"Validated TextAction", TraceEventType.Verbose);
             errorMessage = string.Empty;
             return true;
-        }
-
-        public override void Update(Action newAction)
-        {
-            base.Update(newAction);
-            var newTextAction = newAction as TextAction;
-            if (newTextAction != null)
-            {
-                this.TextToType = newTextAction.TextToType;
-                this.TypingSpeed = newTextAction.TypingSpeed;
-            }
         }
     }
 }

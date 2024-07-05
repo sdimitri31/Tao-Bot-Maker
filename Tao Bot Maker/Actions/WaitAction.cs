@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Helpers;
@@ -58,6 +59,7 @@ namespace Tao_Bot_Maker.Model
 
         public override bool Validate(out string errorMessage)
         {
+            Logger.Log($"Validating WaitAction", TraceEventType.Verbose);
             if (MinimumWait < 0)
             {
                 errorMessage = Resources.Strings.ErrorMessageWaitActionInvalidMinimumWait;
@@ -71,20 +73,10 @@ namespace Tao_Bot_Maker.Model
                     return false;
                 }
 
+            Logger.Log($"Validated WaitAction", TraceEventType.Verbose);
             errorMessage = string.Empty;
             return true;
         }
 
-        public override void Update(Action newAction)
-        {
-            base.Update(newAction);
-            var newWaitAction = newAction as WaitAction;
-            if (newWaitAction != null)
-            {
-                this.MinimumWait = newWaitAction.MinimumWait;
-                this.MaximumWait = newWaitAction.MaximumWait;
-                this.RandomizeWait = newWaitAction.RandomizeWait;
-            }
-        }
     }
 }

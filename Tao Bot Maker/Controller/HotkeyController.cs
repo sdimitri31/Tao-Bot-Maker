@@ -12,10 +12,10 @@ namespace Tao_Bot_Maker.Controller
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        private Hotkey hotkey;
+        private readonly Hotkey hotkey;
 
-        private IntPtr hWnd;
-        private int id;
+        private readonly IntPtr hWnd;
+        private readonly int id;
 
         public HotKeyController(Keys key, Form form)
         {

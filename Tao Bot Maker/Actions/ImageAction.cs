@@ -2,11 +2,9 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 
@@ -94,15 +92,8 @@ namespace Tao_Bot_Maker.Model
                     {
                         token.ThrowIfCancellationRequested();
 
-                        // Recherche de l'image
-                        var imageCoords = ImageSearchHelper.FindImage(imagePath, Threshold, StartX, StartY, EndX, EndY);
-
-                        if (imageCoords != null)
-                        {
-                            return CoordinatesHelper.GetCenterCoords(imageCoords[0], imageCoords[1], imageCoords[2], imageCoords[3]);
-                        }
-
-                        return null;
+                        Logger.Log($"Searching for image '{imagePath}' at ({StartX}, {StartY}) to ({EndX}, {EndY}) with threshold '{Threshold}'", TraceEventType.Verbose);
+                        return ImageSearchHelper.FindImageCenter(imagePath, Threshold, StartX, StartY, EndX, EndY);
                     }, token);
 
                     token.ThrowIfCancellationRequested();
@@ -168,6 +159,7 @@ namespace Tao_Bot_Maker.Model
 
         public override bool Validate(out string errorMessage)
         {
+            Logger.Log($"Validating ImageAction", TraceEventType.Verbose);
             if (!ValidateActionType(Type, out errorMessage))
                 return false;
 
@@ -201,11 +193,13 @@ namespace Tao_Bot_Maker.Model
             if (!ValidateAction(ActionIfNotFound, out errorMessage))
                 return false;
 
+            Logger.Log($"Validated ImageAction", TraceEventType.Verbose);
             return true;
         }
 
         public static bool ValidateActionType(ActionType actionType, out string errorMessage)
         {
+            Logger.Log($"Validating action type: {actionType}", TraceEventType.Verbose);
             errorMessage = string.Empty;
 
             if (actionType != ActionType.ImageAction)
@@ -219,6 +213,7 @@ namespace Tao_Bot_Maker.Model
 
         public static bool ValidateImageName(string imageName, out string errorMessage)
         {
+            Logger.Log($"Validating image name: {imageName}", TraceEventType.Verbose);
             errorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(imageName))
@@ -232,6 +227,7 @@ namespace Tao_Bot_Maker.Model
 
         public static bool ValidateImageFile(string imageName, out string errorMessage)
         {
+            Logger.Log($"Validating image file: {imageName}", TraceEventType.Verbose);
             errorMessage = string.Empty;
 
             string imagePath = Path.Combine(imagesFolderPath, imageName);
@@ -246,6 +242,7 @@ namespace Tao_Bot_Maker.Model
 
         public static bool ValidateCoordinate(int coordToCheck, out string errorMessage)
         {
+            Logger.Log($"Validating coordinate: {coordToCheck}", TraceEventType.Verbose);
             errorMessage = string.Empty;
 
             if (coordToCheck < -999999 || coordToCheck > 999999)
@@ -259,6 +256,7 @@ namespace Tao_Bot_Maker.Model
 
         public static bool ValidateThreshold(int threshold, out string errorMessage)
         {
+            Logger.Log($"Validating threshold: {threshold}", TraceEventType.Verbose);
             errorMessage = string.Empty;
 
             if ((threshold < 0) || (threshold > 255))
@@ -272,6 +270,7 @@ namespace Tao_Bot_Maker.Model
 
         public static bool ValidateExpiration(int expiration, out string errorMessage)
         {
+            Logger.Log($"Validating expiration: {expiration}", TraceEventType.Verbose);
             errorMessage = string.Empty;
 
             if ((expiration < 0) || (expiration > 999999))
@@ -285,6 +284,7 @@ namespace Tao_Bot_Maker.Model
 
         public static bool ValidateAction(Action action, out string errorMessage)
         {
+            Logger.Log($"Validating action: {action}", TraceEventType.Verbose);
             if (action == null)
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.Action);

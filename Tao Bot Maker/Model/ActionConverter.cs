@@ -1,8 +1,6 @@
-﻿using BlueMystic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Windows.Forms;
 
 namespace Tao_Bot_Maker.Model
 {

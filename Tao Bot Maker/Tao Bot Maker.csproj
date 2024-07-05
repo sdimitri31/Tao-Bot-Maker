@@ -104,14 +104,6 @@
     <Compile Include="Helpers\KeyboardSimulator.cs" />
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\MouseSimulator.cs" />
-    <Compile Include="Import\DarkModeCS.cs" />
-    <Compile Include="Import\FlatComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Import\FlatTabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Import\Messenger.cs" />
     <Compile Include="Model\ActionConverter.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\Action.cs" />

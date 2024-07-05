@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Tao_Bot_Maker.Controller;
@@ -62,6 +59,7 @@ namespace Tao_Bot_Maker.Model
 
         public override bool Validate(out string errorMessage)
         {
+            Logger.Log($"Validating SequenceAction", TraceEventType.Verbose);
             if (string.IsNullOrEmpty(SequenceName))
             {
                 errorMessage = Resources.Strings.ErrorMessageEmptyFieldSequence;
@@ -82,19 +80,9 @@ namespace Tao_Bot_Maker.Model
                 return false;
             }
 
+            Logger.Log($"Validated SequenceAction", TraceEventType.Verbose);
             errorMessage = string.Empty;
             return true;
-        }
-
-        public override void Update(Action newAction)
-        {
-            base.Update(newAction);
-            var newSequenceAction = newAction as SequenceAction;
-            if (newSequenceAction != null)
-            {
-                this.SequenceName = newSequenceAction.SequenceName;
-                this.RepeatCount = newSequenceAction.RepeatCount;
-            }
         }
     }
 }

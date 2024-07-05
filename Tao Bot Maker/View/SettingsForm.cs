@@ -18,7 +18,6 @@ namespace Tao_Bot_Maker.View
         {
             InitializeComponent();
             UpdateUI();
-            //_ = new DarkModeCS(this, false);
             panels = new List<UserControl>();
             FillSettingsForm();
             LoadSettings();

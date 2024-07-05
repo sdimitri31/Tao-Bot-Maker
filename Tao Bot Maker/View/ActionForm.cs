@@ -1,13 +1,10 @@
-﻿using BlueMystic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
-using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
-using Tao_Bot_Maker.Properties;
 using Action = Tao_Bot_Maker.Model.Action;
 using Settings = Tao_Bot_Maker.Model.Settings;
 
@@ -33,7 +30,6 @@ namespace Tao_Bot_Maker.View
             this.Action = existingAction;
 
             LoadAllActionType(isFromImageAction, existingAction);
-            //_ = new DarkModeCS(this, false);
 
             if (existingAction != null && actionTypelistBox.Items.Contains(existingAction.Type))
             {

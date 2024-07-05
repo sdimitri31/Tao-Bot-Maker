@@ -1,5 +1,4 @@
-﻿using BlueMystic;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
@@ -18,7 +17,6 @@ namespace Tao_Bot_Maker.View
         public MainForm()
         {
             InitializeComponent();
-            //_ = new DarkModeCS(this, false);
 
             Logger.LogMessageReceived += OnLogMessageReceived;
             CultureManager.CultureChanged += UpdateUI;
@@ -446,6 +444,8 @@ namespace Tao_Bot_Maker.View
                     return;
                 }
             }
+
+            Logger.Log("Closing application", TraceEventType.Verbose);
             mainFormController.StopSequence();
             mainFormController.UnregisterHotkeys();
             Logger.LogMessageReceived -= OnLogMessageReceived;

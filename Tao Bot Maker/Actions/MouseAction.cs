@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -238,6 +239,7 @@ namespace Tao_Bot_Maker.Model
 
         public override bool Validate(out string errorMessage)
         {
+            Logger.Log($"Validating MouseAction", TraceEventType.Verbose);
             int[] coords = new int[] { StartX, StartY, EndX, EndY };
 
             foreach (int coord in coords)
@@ -261,31 +263,10 @@ namespace Tao_Bot_Maker.Model
                 return false;
             }
 
+            Logger.Log($"Validated MouseAction", TraceEventType.Verbose);
             errorMessage = string.Empty;
             return true;
         }
 
-        public override void Update(Action newAction)
-        {
-            base.Update(newAction);
-            var newMouseAction = newAction as MouseAction;
-            if (newMouseAction != null)
-            {
-                this.ClickType = newMouseAction.ClickType;
-                this.StartX = newMouseAction.StartX;
-                this.StartY = newMouseAction.StartY;
-                this.EndX = newMouseAction.EndX;
-                this.EndY = newMouseAction.EndY;
-                this.DragAndDrop = newMouseAction.DragAndDrop;
-                this.DoubleClick = newMouseAction.DoubleClick;
-                this.Scroll = newMouseAction.Scroll;
-                this.ScrollAmount = newMouseAction.ScrollAmount;
-                this.ClickDuration = newMouseAction.ClickDuration;
-                this.UseCurrentPosition = newMouseAction.UseCurrentPosition;
-                this.UseImageCoordsAsStart = newMouseAction.UseImageCoordsAsStart;
-                this.UseImageCoordsAsEnd = newMouseAction.UseImageCoordsAsEnd;
-                this.MoveSpeed = newMouseAction.MoveSpeed;
-            }
-        }
     }
 }

@@ -18,9 +18,5 @@ namespace Tao_Bot_Maker.Model
 
         public abstract override String ToString();
 
-        public virtual void Update(Action newAction)
-        {
-            this.Type = newAction.Type;
-        }
     }
 }

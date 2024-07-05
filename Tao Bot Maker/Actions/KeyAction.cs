@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,24 +47,18 @@ namespace Tao_Bot_Maker.Model
 
         public override bool Validate(out string errorMessage)
         {
+            Logger.Log($"Validating KeyAction", TraceEventType.Verbose);
+
             if (Key == Keys.None)
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.LabelKey);
                 return false;
             }
 
+            Logger.Log($"Validated KeyAction", TraceEventType.Verbose);
             errorMessage = string.Empty;
             return true;
         }
 
-        public override void Update(Action newAction)
-        {
-            base.Update(newAction);
-            var newKeyAction = newAction as KeyAction;
-            if (newKeyAction != null)
-            {
-                this.Key = newKeyAction.Key;
-            }
-        }
     }
 }
