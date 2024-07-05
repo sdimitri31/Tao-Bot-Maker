@@ -739,5 +739,13 @@ namespace Tao_Bot_Maker.View
         {
             MoveActionDown();
         }
+
+        private void ActionsListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                DeleteAction();
+            }
+        }
     }
 }
