@@ -1411,6 +1411,24 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Move action down.
+        /// </summary>
+        internal static string MenuEditMoveDown {
+            get {
+                return ResourceManager.GetString("MenuEditMoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Move action up.
+        /// </summary>
+        internal static string MenuEditMoveUp {
+            get {
+                return ResourceManager.GetString("MenuEditMoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à File.
         /// </summary>
         internal static string MenuFile {

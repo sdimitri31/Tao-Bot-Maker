@@ -567,6 +567,12 @@
   <data name="MenuEditEditAction" xml:space="preserve">
     <value>Edit action</value>
   </data>
+  <data name="MenuEditMoveDown" xml:space="preserve">
+    <value>Move action down</value>
+  </data>
+  <data name="MenuEditMoveUp" xml:space="preserve">
+    <value>Move action up</value>
+  </data>
   <data name="MenuFile" xml:space="preserve">
     <value>File</value>
   </data>

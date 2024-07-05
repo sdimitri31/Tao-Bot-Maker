@@ -16,7 +16,7 @@ namespace Tao_Bot_Maker.View
         private readonly MainFormController mainFormController;
 
         private Point dragStartPoint;
-        private int draggedIndex = -1; 
+        private int draggedIndex = -1;
         private int insertIndex = -2;
 
         private int previousSelectedIndex = -1;
@@ -121,6 +121,8 @@ namespace Tao_Bot_Maker.View
             editToolStripMenuItem.Text = Resources.Strings.MenuEdit;
             addActionToolStripMenuItem.Text = Resources.Strings.MenuEditAddAction;
             editActionToolStripMenuItem.Text = Resources.Strings.MenuEditEditAction;
+            moveUpToolStripMenuItem.Text = Resources.Strings.MenuEditMoveUp;
+            moveDownToolStripMenuItem.Text = Resources.Strings.MenuEditMoveDown;
             deleteActionToolStripMenuItem.Text = Resources.Strings.MenuEditDeleteAction;
             deleteSequenceToolStripMenuItem.Text = Resources.Strings.MenuEditDeleteSequence;
 
@@ -169,6 +171,8 @@ namespace Tao_Bot_Maker.View
             addActionToolStripMenuItem.Enabled = !isRunning;
             editActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
             deleteActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
+            moveUpToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex > 0);
+            moveDownToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1) && (actionsListBox.SelectedIndex < actionsListBox.Items.Count - 1);
             deleteSequenceToolStripMenuItem.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
 
             // BOT
@@ -690,6 +694,34 @@ namespace Tao_Bot_Maker.View
         private void ActionsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateUIState();
+        }
+
+        private void MoveActionUp()
+        {
+            if (actionsListBox.SelectedIndex > 0)
+            {
+                mainFormController.MoveAction(actionsListBox.SelectedIndex - 1, (actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
+                LoadActions();
+            }
+        }
+
+        private void MoveActionDown()
+        {
+            if (actionsListBox.SelectedIndex < actionsListBox.Items.Count - 1)
+            {
+                mainFormController.MoveAction(actionsListBox.SelectedIndex + 1, (actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
+                LoadActions();
+            }
+        }
+
+        private void MoveUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoveActionUp();
+        }
+
+        private void MoveDownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoveActionDown();
         }
     }
 }
