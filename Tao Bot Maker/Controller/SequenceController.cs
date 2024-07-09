@@ -93,28 +93,16 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
-        public void AddAction()
+        public void AddAction(Action newAction)
         {
-            using (var addActionForm = new ActionForm())
-            {
-                if (addActionForm.ShowDialog() == DialogResult.OK)
-                {
-                    sequence.AddAction(addActionForm.Action);
-                    SetIsSaved(false);
-                }
-            }
+            sequence.AddAction(newAction);
+            SetIsSaved(false);
         }
 
-        internal void UpdateAction(Action oldAction)
+        internal void UpdateAction(Action oldAction, Action newAction)
         {
-            using (var addActionForm = new ActionForm(false, oldAction))
-            {
-                if (addActionForm.ShowDialog() == DialogResult.OK)
-                {
-                    sequence.UpdateAction(oldAction, addActionForm.Action);
-                    SetIsSaved(false);
-                }
-            }
+            sequence.UpdateAction(oldAction, newAction);
+            SetIsSaved(false);
         }
 
         public void MoveAction(int newIndex, Action action)
@@ -129,33 +117,16 @@ namespace Tao_Bot_Maker.Controller
             SetIsSaved(false);
         }
 
-        public string SaveSequence(string name = null)
+        public void SaveSequence(string name)
         {
-            if (sequence == null)
+            if (sequence == null || string.IsNullOrEmpty(name))
             {
-                return null;
-            }
-
-            if (string.IsNullOrEmpty(name))
-            {
-                using (var dialog = new SaveFileDialog())
-                {
-                    dialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        name = Path.GetFileNameWithoutExtension(dialog.FileName);
-                        SetIsSaved(true);
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
+                Logger.Log("Sequence is null or name is empty", TraceEventType.Error);
+                throw new Exception("Sequence is null or name is empty");
             }
 
             sequenceRepository.SaveSequence(sequence, name);
             SetIsSaved(true);
-            return name;
         }
 
         public static void SetIsSaved(bool value)

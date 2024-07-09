@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
@@ -202,7 +204,14 @@ namespace Tao_Bot_Maker.Controller
         /// </summary>
         public void SaveSequence()
         {
-            sequenceController.SaveSequence(currentSequenceName);
+            try
+            {
+                sequenceController.SaveSequence(currentSequenceName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Resources.Strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -210,7 +219,15 @@ namespace Tao_Bot_Maker.Controller
         /// </summary>
         public void SaveAsSequence()
         {
-            currentSequenceName = sequenceController.SaveSequence(null);
+            using (var dialog = new SaveFileDialog())
+            {
+                dialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    currentSequenceName = Path.GetFileNameWithoutExtension(dialog.FileName);
+                    SaveSequence();
+                }
+            }
         }
 
         #endregion
@@ -223,7 +240,13 @@ namespace Tao_Bot_Maker.Controller
         public void AddAction()
         {
             UnregisterHotkeys();
-            sequenceController.AddAction();
+            using (var actionForm = new ActionForm())
+            {
+                if (actionForm.ShowDialog() == DialogResult.OK)
+                {
+                    sequenceController.AddAction(actionForm.Action);
+                }
+            }
             InitializeHotkeys();
         }
 
@@ -234,7 +257,13 @@ namespace Tao_Bot_Maker.Controller
         public void UpdateAction(Action oldAction)
         {
             UnregisterHotkeys();
-            sequenceController.UpdateAction(oldAction);
+            using (var actionForm = new ActionForm(false, oldAction))
+            {
+                if (actionForm.ShowDialog() == DialogResult.OK)
+                {
+                    sequenceController.UpdateAction(oldAction, actionForm.Action);
+                }
+            }
             InitializeHotkeys();
         }
 

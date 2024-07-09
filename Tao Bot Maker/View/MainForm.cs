@@ -87,6 +87,7 @@ namespace Tao_Bot_Maker.View
             }
 
             mainFormController.NewSequence();
+            LoadSequenceNames();
             LoadActions();
             UpdateUIState();
         }
