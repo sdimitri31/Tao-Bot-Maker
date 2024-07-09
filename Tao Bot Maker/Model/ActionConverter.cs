@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using Tao_Bot_Maker.Helpers;
 
 namespace Tao_Bot_Maker.Model
 {
@@ -21,6 +22,7 @@ namespace Tao_Bot_Maker.Model
                 if (!ValidateJson(jsonObject, out string errorMessage))
                 {
                     Console.WriteLine($"Validation failed: {errorMessage}");
+                    Logger.Log($"Validation failed: {errorMessage}", System.Diagnostics.TraceEventType.Error);
                     return target;
                 }
 
