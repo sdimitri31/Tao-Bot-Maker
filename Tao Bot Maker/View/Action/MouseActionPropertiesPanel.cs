@@ -19,6 +19,7 @@ namespace Tao_Bot_Maker.View
             InitializeMoveSpeed();
             drawingForm = new DrawingForm();
             leftClickRadioButton.Checked = true;
+            clickRadioButton.Checked = true;
             this.isFromImageAction = isFromImageAction;
             ShowCoordsFromImage(isFromImageAction);
             this.Disposed += MouseActionPropertiesPanel_Disposed;
@@ -31,14 +32,15 @@ namespace Tao_Bot_Maker.View
 
         private void UpdateUI()
         {
+            actionLabel.Text = Resources.Strings.LabelMouseActionEventType;
             clickTypeLabel.Text = Resources.Strings.LabelClickType;
             leftClickRadioButton.Text = Resources.Strings.LabelLeftClick;
             middleClickRadioButton.Text = Resources.Strings.LabelMiddleClick;
             rightClickRadioButton.Text = Resources.Strings.LabelRightClick;
             noneClickRadioButton.Text = Resources.Strings.LabelNoClick;
-            doubleClickCheckBox.Text = Resources.Strings.LabelDoubleClick;
-            scrollCheckBox.Text = Resources.Strings.LabelScroll;
-            dragAndDropCheckBox.Text = Resources.Strings.LabelDragAndDrop;
+            doubleClickRadioButton.Text = Resources.Strings.LabelDoubleClick;
+            scrollRadioButton.Text = Resources.Strings.LabelScroll;
+            dragAndDropRadioButton.Text = Resources.Strings.LabelDragAndDrop;
 
             startCoordinateLabel.Text = Resources.Strings.LabelStartCoordinates;
             useCurrentPositionCheckBox.Text = Resources.Strings.LabelUseCurrentPosition;
@@ -78,7 +80,7 @@ namespace Tao_Bot_Maker.View
         /// <param name="y">Value for Y2</param>
         public void HotkeyXY2(int x, int y)
         {
-            if (dragAndDropCheckBox.Checked)
+            if (dragAndDropRadioButton.Checked)
             {
                 endXCoordinateNumericUpDown.Value = x;
                 endYCoordinateNumericUpDown.Value = y;
@@ -95,7 +97,7 @@ namespace Tao_Bot_Maker.View
             ClearArea();
             if (!useCurrentPositionCheckBox.Checked)
                 drawingForm.DrawRectangle((int)startXCoordinateNumericUpDown.Value - 5, (int)startYCoordinateNumericUpDown.Value - 5, 10, 10, KnownColor.Green);
-            if (dragAndDropCheckBox.Checked)
+            if (dragAndDropRadioButton.Checked)
                 drawingForm.DrawRectangle((int)endXCoordinateNumericUpDown.Value - 5, (int)endYCoordinateNumericUpDown.Value - 5, 10, 10, KnownColor.Orange);
         }
 
@@ -108,9 +110,7 @@ namespace Tao_Bot_Maker.View
         {
             MouseAction mouseAction = new MouseAction(
                 clickType: GetMouseActionType(),
-                doubleClick: doubleClickCheckBox.Enabled ? doubleClickCheckBox.Checked : false,
-                scroll: scrollCheckBox.Enabled ? scrollCheckBox.Checked : false,
-                dragAndDrop: dragAndDropCheckBox.Enabled ? dragAndDropCheckBox.Checked : false,
+                eventType: GetMouseActionEventType(),
                 startX: (int)startXCoordinateNumericUpDown.Value,
                 startY: (int)startYCoordinateNumericUpDown.Value,
                 useImageCoordsAsStart: startImageCoordCheckBox.Visible ? startImageCoordCheckBox.Checked : false,
@@ -131,9 +131,7 @@ namespace Tao_Bot_Maker.View
             if (action != null && action is MouseAction mouseAction)
             {
                 SetMouseActionType(mouseAction.ClickType);
-                doubleClickCheckBox.Checked = mouseAction.DoubleClick;
-                scrollCheckBox.Checked = mouseAction.Scroll;
-                dragAndDropCheckBox.Checked = mouseAction.DragAndDrop;
+                SetMouseActionEventType(mouseAction.EventType);
                 startXCoordinateNumericUpDown.Value = mouseAction.StartX;
                 startYCoordinateNumericUpDown.Value = mouseAction.StartY;
                 startImageCoordCheckBox.Checked = mouseAction.UseImageCoordsAsStart;
@@ -148,29 +146,60 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        private MouseAction.MouseActionType GetMouseActionType()
+        private MouseAction.MouseActionClickType GetMouseActionType()
         {
-            if (leftClickRadioButton.Checked) return MouseAction.MouseActionType.LeftClick;
-            if (middleClickRadioButton.Checked) return MouseAction.MouseActionType.MiddleClick;
-            if (rightClickRadioButton.Checked) return MouseAction.MouseActionType.RightClick;
-            return MouseAction.MouseActionType.NoClick;
+            if (leftClickRadioButton.Checked) return MouseAction.MouseActionClickType.LeftClick;
+            if (middleClickRadioButton.Checked) return MouseAction.MouseActionClickType.MiddleClick;
+            if (rightClickRadioButton.Checked) return MouseAction.MouseActionClickType.RightClick;
+            return MouseAction.MouseActionClickType.NoClick;
         }
 
-        private void SetMouseActionType(MouseActionType mouseActionType)
+        private MouseAction.MouseActionEventType GetMouseActionEventType()
+        {
+            if (clickRadioButton.Checked) return MouseAction.MouseActionEventType.Click;
+            if (doubleClickRadioButton.Checked) return MouseAction.MouseActionEventType.DoubleClick;
+            if (scrollRadioButton.Checked) return MouseAction.MouseActionEventType.Scroll;
+            if (dragAndDropRadioButton.Checked) return MouseAction.MouseActionEventType.DragAndDrop;
+            return MouseAction.MouseActionEventType.Click;
+        }
+
+        private void SetMouseActionType(MouseActionClickType mouseActionType)
         {
             switch (mouseActionType)
             {
-                case MouseActionType.LeftClick:
+                case MouseActionClickType.LeftClick:
                     leftClickRadioButton.Checked = true;
                     break;
-                case MouseActionType.MiddleClick:
+                case MouseActionClickType.MiddleClick:
                     middleClickRadioButton.Checked = true;
                     break;
-                case MouseActionType.RightClick:
+                case MouseActionClickType.RightClick:
                     rightClickRadioButton.Checked = true;
                     break;
                 default:
                     noneClickRadioButton.Checked = true;
+                    break;
+            }
+        }
+
+        private void SetMouseActionEventType(MouseActionEventType mouseActionEventType)
+        {
+            switch (mouseActionEventType)
+            {
+                case MouseActionEventType.Click:
+                    clickRadioButton.Checked = true;
+                    break;
+                case MouseActionEventType.DoubleClick:
+                    doubleClickRadioButton.Checked = true;
+                    break;
+                case MouseActionEventType.Scroll:
+                    scrollRadioButton.Checked = true;
+                    break;
+                case MouseActionEventType.DragAndDrop:
+                    dragAndDropRadioButton.Checked = true;
+                    break;
+                default:
+                    clickRadioButton.Checked = true;
                     break;
             }
         }
@@ -208,9 +237,9 @@ namespace Tao_Bot_Maker.View
         {
             bool isClickSelected = leftClickRadioButton.Checked || middleClickRadioButton.Checked || rightClickRadioButton.Checked;
             bool isNoClickSelected = noneClickRadioButton.Checked;
-            bool isDragAndDrop = dragAndDropCheckBox.Checked;
-            bool isScroll = scrollCheckBox.Checked;
-            bool isDoubleClick = doubleClickCheckBox.Checked;
+            bool isDragAndDrop = dragAndDropRadioButton.Checked;
+            bool isScroll = scrollRadioButton.Checked;
+            bool isDoubleClick = doubleClickRadioButton.Checked;
             bool isStartImageCoord = startImageCoordCheckBox.Checked;
             bool isEndImageCoord = endImageCoordCheckBox.Checked;
 
@@ -236,8 +265,6 @@ namespace Tao_Bot_Maker.View
                 leftClickRadioButton.Enabled = false;
                 middleClickRadioButton.Enabled = false;
                 rightClickRadioButton.Enabled = false;
-                doubleClickCheckBox.Checked = false;
-                dragAndDropCheckBox.Checked = false;
                 endImageCoordCheckBox.Checked = false;
             }
             else
@@ -282,24 +309,7 @@ namespace Tao_Bot_Maker.View
 
         private void DeselectIncompatibleCheckBoxes(CheckBox selectedCheckBox)
         {
-            if (selectedCheckBox == doubleClickCheckBox && selectedCheckBox.Checked)
-            {
-                scrollCheckBox.Checked = false;
-                dragAndDropCheckBox.Checked = false;
-                endImageCoordCheckBox.Checked = false;
-            }
-            else if (selectedCheckBox == scrollCheckBox && selectedCheckBox.Checked)
-            {
-                doubleClickCheckBox.Checked = false;
-                dragAndDropCheckBox.Checked = false;
-                endImageCoordCheckBox.Checked = false;
-            }
-            else if (selectedCheckBox == dragAndDropCheckBox && selectedCheckBox.Checked)
-            {
-                doubleClickCheckBox.Checked = false;
-                scrollCheckBox.Checked = false;
-            }
-            else if (selectedCheckBox == startImageCoordCheckBox && selectedCheckBox.Checked)
+            if (selectedCheckBox == startImageCoordCheckBox && selectedCheckBox.Checked)
             {
                 endImageCoordCheckBox.Checked = false;
                 useCurrentPositionCheckBox.Checked = false;
@@ -346,6 +356,11 @@ namespace Tao_Bot_Maker.View
                 DrawArea();
             else
                 ClearArea();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -43,6 +43,7 @@ namespace Tao_Bot_Maker.Controller
             // Unregister existing hotkeys
             UnregisterHotkeys();
 
+            Logger.Log($"Registering Hotkeys", TraceEventType.Verbose);
             // Initialize and register hotkey for starting the sequence
             hotkeyStartSequence = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE), mainForm);
             hotkeyStartSequence.Register();

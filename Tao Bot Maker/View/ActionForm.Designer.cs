@@ -29,25 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionForm));
-            this.actionTypelistBox = new System.Windows.Forms.ListBox();
             this.actionPropertiesPanel = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
+            this.actionTypeFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
-            // 
-            // actionTypelistBox
-            // 
-            this.actionTypelistBox.FormattingEnabled = true;
-            this.actionTypelistBox.IntegralHeight = false;
-            this.actionTypelistBox.Location = new System.Drawing.Point(12, 12);
-            this.actionTypelistBox.Name = "actionTypelistBox";
-            this.actionTypelistBox.Size = new System.Drawing.Size(201, 397);
-            this.actionTypelistBox.TabIndex = 0;
-            this.actionTypelistBox.SelectedIndexChanged += new System.EventHandler(this.ActionTypeListBox_SelectedIndexChanged);
             // 
             // actionPropertiesPanel
             // 
-            this.actionPropertiesPanel.BackColor = System.Drawing.Color.Transparent;
+            this.actionPropertiesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.actionPropertiesPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.actionPropertiesPanel.Location = new System.Drawing.Point(219, 12);
             this.actionPropertiesPanel.Name = "actionPropertiesPanel";
             this.actionPropertiesPanel.Size = new System.Drawing.Size(569, 397);
@@ -55,6 +48,7 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Location = new System.Drawing.Point(713, 415);
             this.cancelButton.Name = "cancelButton";
@@ -66,6 +60,7 @@
             // 
             // okButton
             // 
+            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.Location = new System.Drawing.Point(632, 415);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
@@ -74,6 +69,13 @@
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
+            // actionTypeFlowLayoutPanel
+            // 
+            this.actionTypeFlowLayoutPanel.Location = new System.Drawing.Point(13, 12);
+            this.actionTypeFlowLayoutPanel.Name = "actionTypeFlowLayoutPanel";
+            this.actionTypeFlowLayoutPanel.Size = new System.Drawing.Size(200, 397);
+            this.actionTypeFlowLayoutPanel.TabIndex = 4;
+            // 
             // ActionForm
             // 
             this.AcceptButton = this.okButton;
@@ -81,10 +83,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.actionTypeFlowLayoutPanel);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.actionPropertiesPanel);
-            this.Controls.Add(this.actionTypelistBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -95,10 +97,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox actionTypelistBox;
         private System.Windows.Forms.Panel actionPropertiesPanel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.FlowLayoutPanel actionTypeFlowLayoutPanel;
     }
 }

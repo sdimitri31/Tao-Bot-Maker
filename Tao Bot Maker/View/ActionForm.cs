@@ -27,20 +27,53 @@ namespace Tao_Bot_Maker.View
             RegisterHotkeys();
             panels = new List<UserControl>();
             this.isFromImageAction = isFromImageAction;
-            this.Action = existingAction;
 
-            LoadAllActionType(isFromImageAction, existingAction);
+            Action = existingAction;
+            SelectedActionType = ActionType.MouseAction;
 
-            if (existingAction != null && actionTypelistBox.Items.Contains(existingAction.Type))
+            LoadAllActionType();
+
+            if (existingAction != null)
             {
-                actionTypelistBox.SelectedItem = actionTypelistBox.Items.Cast<CustomDisplayItem<ActionType>>().First(item => item.Value == existingAction.Type);
-
-                SetPropertiesPanel(existingAction.Type);
+                SelectedActionType = existingAction.Type;
                 FillPropertiesPanelWithExistingAction(existingAction);
             }
-            else
+
+            SetPropertiesPanel(SelectedActionType);
+            SetSelectedActionTypeFlowLayout(SelectedActionType);
+        }
+
+        private void AddCustomItem(ActionType actionType)
+        {
+            ActionTypeCustomListItem customItem = new ActionTypeCustomListItem
             {
-                SetPropertiesPanel(ActionType.MouseAction);
+                ActionType = actionType,
+                ActionName = ActionHelper.GetActionTypeDisplayName(actionType),
+                Icon = ActionHelper.GetActionTypeIcon(actionType),
+                Selected = false
+            };
+            customItem.Width = actionTypeFlowLayoutPanel.Width;
+            customItem.Click += ActionTypeCustomListItem_Click;
+
+            actionTypeFlowLayoutPanel.Controls.Add(customItem);
+        }
+
+        private void ActionTypeCustomListItem_Click(object sender, EventArgs e)
+        {
+            ActionTypeCustomListItem item = sender as ActionTypeCustomListItem;
+            if (item != null)
+            {
+                SelectedActionType = item.ActionType;
+                SetPropertiesPanel(SelectedActionType);
+                SetSelectedActionTypeFlowLayout(SelectedActionType);
+            }
+        }
+
+        private void SetSelectedActionTypeFlowLayout(ActionType actionType)
+        {
+            foreach (ActionTypeCustomListItem item in actionTypeFlowLayoutPanel.Controls.OfType<ActionTypeCustomListItem>())
+            {
+                item.Selected = item.ActionType == actionType;
             }
         }
 
@@ -52,7 +85,7 @@ namespace Tao_Bot_Maker.View
             cancelButton.Text = Resources.Strings.ButtonCancel;
         }
 
-        private void AddPropertiesPanel(ActionType actionType, bool isFromImageAction = false, Action existingAction = null)
+        private void AddPropertiesPanel(ActionType actionType)
         {
             UserControl panel = null;
 
@@ -84,6 +117,8 @@ namespace Tao_Bot_Maker.View
             {
                 panel.Location = new Point(0, 0);
                 panel.Visible = false;
+                panel.Size = actionPropertiesPanel.Size;                
+                panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
                 actionPropertiesPanel.Controls.Add(panel);
                 panels.Add(panel);
             }
@@ -106,7 +141,6 @@ namespace Tao_Bot_Maker.View
             {
                 panel.Visible = (panel as IActionPropertiesPanel).GetType() == actionType;
             }
-
         }
 
         private IActionPropertiesPanel GetSelectedPropertiesPanel()
@@ -129,7 +163,7 @@ namespace Tao_Bot_Maker.View
             return default;
         }
 
-        private void LoadAllActionType(bool isFromImageAction, Action existingAction)
+        private void LoadAllActionType()
         {
             foreach (ActionType actionType in Enum.GetValues(typeof(ActionType)))
             {
@@ -138,39 +172,8 @@ namespace Tao_Bot_Maker.View
                     continue;
                 }
 
-                string displayName = GetActionTypeDisplayName(actionType);
-                actionTypelistBox.Items.Add(new CustomDisplayItem<ActionType>(actionType, displayName));
-                AddPropertiesPanel(actionType, isFromImageAction, existingAction);
-            }
-        }
-
-        private string GetActionTypeDisplayName(ActionType actionType)
-        {
-            switch (actionType)
-            {
-                case ActionType.MouseAction:
-                    return Resources.Strings.ActionTypeMouse;
-                case ActionType.TextAction:
-                    return Resources.Strings.ActionTypeText;
-                case ActionType.WaitAction:
-                    return Resources.Strings.ActionTypeWait;
-                case ActionType.SequenceAction:
-                    return Resources.Strings.ActionTypeSequence;
-                case ActionType.KeyAction:
-                    return Resources.Strings.ActionTypeKey;
-                case ActionType.ImageAction:
-                    return Resources.Strings.ActionTypeImage;
-                default:
-                    return actionType.ToString();
-            }
-        }
-
-        private void ActionTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (actionTypelistBox.SelectedItem is CustomDisplayItem<ActionType> selectedItem)
-            {
-                SelectedActionType = selectedItem.Value;
-                SetPropertiesPanel(SelectedActionType);
+                AddPropertiesPanel(actionType);
+                AddCustomItem(actionType);
             }
         }
 
@@ -198,7 +201,7 @@ namespace Tao_Bot_Maker.View
         {
             DialogResult = DialogResult.Cancel;
         }
-        
+
         public void RegisterHotkeys()
         {
             hotkeyXY = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTCOORDS), this);

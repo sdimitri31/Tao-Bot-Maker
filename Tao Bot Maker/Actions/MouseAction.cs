@@ -13,7 +13,7 @@ namespace Tao_Bot_Maker.Model
     public class MouseAction : Action
     {
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum MouseActionType
+        public enum MouseActionClickType
         {
             LeftClick,
             RightClick,
@@ -21,15 +21,24 @@ namespace Tao_Bot_Maker.Model
             NoClick
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum MouseActionEventType
+        {
+            Click,
+            DoubleClick,
+            Scroll,
+            DragAndDrop
+        }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public MouseActionType ClickType { get; set; }
-        public bool DoubleClick { get; set; }
-        public bool Scroll { get; set; }
-        public bool DragAndDrop { get; set; }
+        public MouseActionClickType ClickType { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MouseActionEventType EventType { get; set; }
+
         public int StartX { get; set; }
         public int StartY { get; set; }
         public bool UseImageCoordsAsStart { get; set; }
@@ -44,10 +53,8 @@ namespace Tao_Bot_Maker.Model
         private readonly MouseSimulator mouseSimulator;
 
         public MouseAction(
-            MouseActionType clickType = MouseActionType.LeftClick,
-            bool doubleClick = false,
-            bool scroll = false,
-            bool dragAndDrop = false,
+            MouseActionClickType clickType = MouseActionClickType.LeftClick,
+            MouseActionEventType eventType = MouseActionEventType.Click,
             int startX = 0,
             int startY = 0,
             bool useImageCoordsAsStart = false,
@@ -61,9 +68,7 @@ namespace Tao_Bot_Maker.Model
         {
             Type = ActionType.MouseAction;
             ClickType = clickType;
-            DoubleClick = doubleClick;
-            Scroll = scroll;
-            DragAndDrop = dragAndDrop;
+            EventType = eventType;
             StartX = startX;
             StartY = startY;
             UseImageCoordsAsStart = useImageCoordsAsStart;
@@ -132,44 +137,44 @@ namespace Tao_Bot_Maker.Model
             }
 
             // Perform the mouse action
-            if (Scroll)
+            if (EventType == MouseActionEventType.Scroll)
             {
                 await mouseSimulator.Scroll(ScrollAmount, ClickDuration);
             }
-            else if (DragAndDrop)
+            else if (EventType == MouseActionEventType.DragAndDrop)
             {
                 switch (ClickType)
                 {
-                    case MouseActionType.LeftClick:
+                    case MouseActionClickType.LeftClick:
                         await mouseSimulator.DragAndDropLeftClick(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
                         break;
-                    case MouseActionType.RightClick:
+                    case MouseActionClickType.RightClick:
                         await mouseSimulator.DragAndDropRightClick(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
                         break;
-                    case MouseActionType.MiddleClick:
+                    case MouseActionClickType.MiddleClick:
                         await mouseSimulator.DragAndDropMiddleClick(StartX, StartY, EndX, EndY, moveSpeed, ClickDuration);
                         break;
-                    case MouseActionType.NoClick:
+                    case MouseActionClickType.NoClick:
                         await mouseSimulator.Move(EndX, EndY, moveSpeed);
                         break;
                 }
             }
-            else if (ClickType != MouseActionType.NoClick)
+            else if (ClickType != MouseActionClickType.NoClick)
             {
                 // Perform the click
-                if (DoubleClick)
+                if (EventType == MouseActionEventType.DoubleClick)
                 {
                     switch (ClickType)
                     {
-                        case MouseActionType.LeftClick:
+                        case MouseActionClickType.LeftClick:
                             await mouseSimulator.DoubleClick(ClickDuration);
                             break;
-                        case MouseActionType.RightClick:
+                        case MouseActionClickType.RightClick:
                             await mouseSimulator.RightClick(ClickDuration);
                             await Task.Delay(mouseSimulator.GetRandomDelay(ClickDuration));
                             await mouseSimulator.RightClick(ClickDuration);
                             break;
-                        case MouseActionType.MiddleClick:
+                        case MouseActionClickType.MiddleClick:
                             await mouseSimulator.MiddleClick(ClickDuration);
                             await Task.Delay(mouseSimulator.GetRandomDelay(ClickDuration));
                             await mouseSimulator.MiddleClick(ClickDuration);
@@ -180,13 +185,13 @@ namespace Tao_Bot_Maker.Model
                 {
                     switch (ClickType)
                     {
-                        case MouseActionType.LeftClick:
+                        case MouseActionClickType.LeftClick:
                             await mouseSimulator.LeftClick(ClickDuration);
                             break;
-                        case MouseActionType.RightClick:
+                        case MouseActionClickType.RightClick:
                             await mouseSimulator.RightClick(ClickDuration);
                             break;
-                        case MouseActionType.MiddleClick:
+                        case MouseActionClickType.MiddleClick:
                             await mouseSimulator.MiddleClick(ClickDuration);
                             break;
                     }
@@ -198,14 +203,14 @@ namespace Tao_Bot_Maker.Model
         {
             string actionDescription = "";
 
-            if (Scroll)
+            if (EventType == MouseActionEventType.Scroll)
             {
                 string scrollBy = String.Format(Resources.Strings.MouseActionToStringScrollBy, ScrollAmount);
                 string atCoords = String.Format(Resources.Strings.MouseActionToStringAtCoordinates);
                 string coords = string.Format(Resources.Strings.CoordinatesFormat, StartX, StartY);
                 actionDescription += $"{scrollBy} {atCoords} {coords}";
             }
-            else if (DragAndDrop)
+            else if (EventType == MouseActionEventType.DragAndDrop)
             {
                 string startCoords = string.Format(Resources.Strings.CoordinatesFormat, StartX, StartY);
                 string endCoords = string.Format(Resources.Strings.CoordinatesFormat, EndX, EndY);
@@ -215,7 +220,7 @@ namespace Tao_Bot_Maker.Model
             else
             {
                 string doubleWord = Resources.Strings.MouseActionToStringDouble;
-                string clickType = DoubleClick ? $"{doubleWord} " : "";
+                string clickType = EventType == MouseActionEventType.DoubleClick ? $"{doubleWord} " : "";
                 actionDescription += $"{clickType}{ClickType}";
 
                 if (UseCurrentPosition)
@@ -251,9 +256,15 @@ namespace Tao_Bot_Maker.Model
                 }
             }
 
-            if (!Enum.IsDefined(typeof(MouseActionType), ClickType))
+            if (!Enum.IsDefined(typeof(MouseActionClickType), ClickType))
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.LabelClickType);
+                return false;
+            }
+
+            if (!Enum.IsDefined(typeof(MouseActionEventType), EventType))
+            {
+                errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidValueFor, Resources.Strings.LabelMouseActionEventType);
                 return false;
             }
 

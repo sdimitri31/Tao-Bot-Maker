@@ -1060,6 +1060,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Action type.
+        /// </summary>
+        internal static string LabelMouseActionEventType {
+            get {
+                return ResourceManager.GetString("LabelMouseActionEventType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Move.
         /// </summary>
         internal static string LabelNoClick {

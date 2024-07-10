@@ -450,6 +450,9 @@
   <data name="LabelMinimumWait" xml:space="preserve">
     <value>Attente minimum (ms)</value>
   </data>
+  <data name="LabelMouseActionEventType" xml:space="preserve">
+    <value>Type d'action</value>
+  </data>
   <data name="LabelNoClick" xml:space="preserve">
     <value>Déplacement</value>
   </data>
@@ -461,6 +464,9 @@
   </data>
   <data name="LabelRepeatCount" xml:space="preserve">
     <value>Nombre de répétitions</value>
+  </data>
+  <data name="LabelRightClick" xml:space="preserve">
+    <value>Clic droit</value>
   </data>
   <data name="LabelSaveLogLevel" xml:space="preserve">
     <value>Sauvegarder le log du niveau</value>

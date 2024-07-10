@@ -216,9 +216,7 @@ namespace Tao_Bot_Maker.Model
         {
             errorMessage = string.Empty;
             if (jsonObject["ClickType"] == null ||
-                jsonObject["DoubleClick"] == null ||
-                jsonObject["Scroll"] == null ||
-                jsonObject["DragAndDrop"] == null ||
+                jsonObject["EventType"] == null ||
                 jsonObject["StartX"] == null ||
                 jsonObject["StartY"] == null ||
                 jsonObject["UseImageCoordsAsStart"] == null ||
@@ -234,10 +232,8 @@ namespace Tao_Bot_Maker.Model
                 return false;
             }
 
-            if (!ValidateEnum<MouseAction.MouseActionType>(jsonObject["ClickType"], out errorMessage) ||
-                !ValidateBool(jsonObject["DoubleClick"], out errorMessage) ||
-                !ValidateBool(jsonObject["Scroll"], out errorMessage) ||
-                !ValidateBool(jsonObject["DragAndDrop"], out errorMessage) ||
+            if (!ValidateEnum<MouseAction.MouseActionClickType>(jsonObject["ClickType"], out errorMessage) ||
+                !ValidateEnum<MouseAction.MouseActionEventType>(jsonObject["EventType"], out errorMessage) ||
                 !ValidateCoordinate(jsonObject["StartX"], out errorMessage) ||
                 !ValidateCoordinate(jsonObject["StartY"], out errorMessage) ||
                 !ValidateBool(jsonObject["UseImageCoordsAsStart"], out errorMessage) ||

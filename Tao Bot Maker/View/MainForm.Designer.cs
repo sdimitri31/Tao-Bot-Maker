@@ -269,14 +269,14 @@
             this.francaisToolStripMenuItem});
             this.languageToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_language_48;
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.languageToolStripMenuItem.Text = "Language";
             // 
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_great_britain_48;
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.englishToolStripMenuItem.Text = "English";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.EnglishToolStripMenuItem_Click);
             // 
@@ -284,7 +284,7 @@
             // 
             this.francaisToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_france_48;
             this.francaisToolStripMenuItem.Name = "francaisToolStripMenuItem";
-            this.francaisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.francaisToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.francaisToolStripMenuItem.Text = "Français";
             this.francaisToolStripMenuItem.Click += new System.EventHandler(this.FrenchToolStripMenuItem_Click);
             // 
@@ -292,19 +292,19 @@
             // 
             this.shortcutsToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
             this.shortcutsToolStripMenuItem.Name = "shortcutsToolStripMenuItem";
-            this.shortcutsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.shortcutsToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.shortcutsToolStripMenuItem.Text = "Shortcuts";
             this.shortcutsToolStripMenuItem.Click += new System.EventHandler(this.ShortcutsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(123, 6);
             // 
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.settingsToolStripMenuItem1.Text = "Settings";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 

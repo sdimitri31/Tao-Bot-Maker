@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\CorruptedAction.cs" />
+    <Compile Include="Helpers\ActionHelper.cs" />
     <Compile Include="Controller\MainFormController.cs" />
     <Compile Include="Controller\SequenceController.cs" />
     <Compile Include="Controller\HotkeyController.cs" />
@@ -121,6 +122,11 @@
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\SettingsType.cs" />
+    <Compile Include="Resources\Images.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Images.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Strings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,6 +139,12 @@
     </Compile>
     <Compile Include="View\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ActionTypeCustomListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\ActionTypeCustomListItem.Designer.cs">
+      <DependentUpon>ActionTypeCustomListItem.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Action\IActionPropertiesPanel.cs" />
     <Compile Include="View\ActionForm.cs">
@@ -214,6 +226,10 @@
     <Compile Include="View\Settings\GeneralSettingsPropertiesPanel.Designer.cs">
       <DependentUpon>GeneralSettingsPropertiesPanel.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Resources\Images.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.fr.resx" />
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -235,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ActionForm.resx">
       <DependentUpon>ActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ActionTypeCustomListItem.resx">
+      <DependentUpon>ActionTypeCustomListItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\DrawingForm.resx">
       <DependentUpon>DrawingForm.cs</DependentUpon>
@@ -324,6 +343,14 @@
     <None Include="Resources\icons8-pause-button-48.png" />
     <None Include="Resources\icons8-sort-up-48.png" />
     <None Include="Resources\icons8-sort-down-48.png" />
+    <None Include="Resources\icons8-cursor-48.png" />
+    <None Include="Resources\icons8-align-text-left-48.png" />
+    <None Include="Resources\icons8-image-48.png" />
+    <None Include="Resources\icons8-timeline-48.png" />
+    <None Include="Resources\icons8-keyboard-48.png" />
+    <None Include="Resources\icons8-computer-mouse-48.png" />
+    <None Include="Resources\icons8-sand-timer-48.png" />
+    <None Include="Resources\icons8-error-48.png" />
     <Content Include="Resources\tao.ico" />
   </ItemGroup>
   <ItemGroup />

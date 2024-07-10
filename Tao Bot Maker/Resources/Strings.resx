@@ -450,6 +450,9 @@
   <data name="LabelMinimumWait" xml:space="preserve">
     <value>Wait minimum (ms)</value>
   </data>
+  <data name="LabelMouseActionEventType" xml:space="preserve">
+    <value>Action type</value>
+  </data>
   <data name="LabelNoClick" xml:space="preserve">
     <value>Move</value>
   </data>
