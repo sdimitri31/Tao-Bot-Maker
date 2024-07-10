@@ -11,6 +11,7 @@ namespace Tao_Bot_Maker.View
         {
             InitializeComponent();
             UpdateUI();
+            UpdateUIState();
         }
 
         private void UpdateUI()
@@ -20,11 +21,17 @@ namespace Tao_Bot_Maker.View
             randomizeWaitCheckBox.Text = Resources.Strings.LabelRandomizeWait;
         }
 
+        private void UpdateUIState()
+        {
+            this.maximumWaitLabel.Enabled = randomizeWaitCheckBox.Checked;
+            this.maximumWaitNumericUpDown.Enabled = randomizeWaitCheckBox.Checked;
+        }
+
         public Action GetAction()
         {
             WaitAction waitAction = new WaitAction(
-                minimumWait: (int)this.minimumWaitNumericUpDown.Value, 
-                maximumWait: (int)this.maximumWaitNumericUpDown.Value, 
+                minimumWait: (int)this.minimumWaitNumericUpDown.Value,
+                maximumWait: (int)this.maximumWaitNumericUpDown.Value,
                 randomizeWait: this.randomizeWaitCheckBox.Checked
             );
 
@@ -39,11 +46,17 @@ namespace Tao_Bot_Maker.View
                 this.maximumWaitNumericUpDown.Value = waitAction.MaximumWait;
                 this.randomizeWaitCheckBox.Checked = waitAction.RandomizeWait;
             }
+            UpdateUIState();
         }
 
         ActionType IActionPropertiesPanel.GetType()
         {
             return ActionType.WaitAction;
+        }
+
+        private void RandomizeWaitCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateUIState();
         }
     }
 }
