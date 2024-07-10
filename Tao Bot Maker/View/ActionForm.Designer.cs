@@ -44,6 +44,7 @@
             this.actionPropertiesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.actionPropertiesPanel.AutoScroll = true;
             this.actionPropertiesPanel.BackColor = System.Drawing.Color.Silver;
             this.actionPropertiesPanel.Location = new System.Drawing.Point(213, 0);
             this.actionPropertiesPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -77,9 +78,9 @@
             // actionTypeFlowLayoutPanel
             // 
             this.actionTypeFlowLayoutPanel.BackColor = System.Drawing.Color.Transparent;
-            this.actionTypeFlowLayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.actionTypeFlowLayoutPanel.Location = new System.Drawing.Point(11, 12);
             this.actionTypeFlowLayoutPanel.Name = "actionTypeFlowLayoutPanel";
-            this.actionTypeFlowLayoutPanel.Size = new System.Drawing.Size(207, 406);
+            this.actionTypeFlowLayoutPanel.Size = new System.Drawing.Size(191, 392);
             this.actionTypeFlowLayoutPanel.TabIndex = 4;
             // 
             // bottomPanel
@@ -100,6 +101,7 @@
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
+            this.leftPanel.Padding = new System.Windows.Forms.Padding(8);
             this.leftPanel.Size = new System.Drawing.Size(213, 415);
             this.leftPanel.TabIndex = 6;
             // 

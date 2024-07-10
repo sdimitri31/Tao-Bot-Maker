@@ -37,6 +37,7 @@ namespace Tao_Bot_Maker.View
                 Resources.Strings.ComboBoxSpeedMedium,
                 Resources.Strings.ComboBoxSpeedFast
             });
+            this.speedComboBox.SelectedIndex = 0;
         }
 
         public void SetAction(Action action)

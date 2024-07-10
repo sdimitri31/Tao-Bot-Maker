@@ -29,71 +29,76 @@
         private void InitializeComponent()
         {
             this.keyLabel = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.keyButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.keyPanel = new System.Windows.Forms.Panel();
+            this.keyTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.keyPanel.SuspendLayout();
+            this.keyTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // keyLabel
             // 
             this.keyLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.keyLabel.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.keyLabel, 2);
-            this.keyLabel.Location = new System.Drawing.Point(3, 8);
+            this.keyLabel.Location = new System.Drawing.Point(3, 10);
             this.keyLabel.Name = "keyLabel";
-            this.keyLabel.Size = new System.Drawing.Size(194, 13);
+            this.keyLabel.Size = new System.Drawing.Size(113, 13);
             this.keyLabel.TabIndex = 0;
             this.keyLabel.Text = "Key";
             this.keyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.keyLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.keyButton, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(500, 300);
-            this.tableLayoutPanel1.TabIndex = 6;
-            // 
             // keyButton
             // 
             this.keyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.keyButton, 2);
-            this.keyButton.Location = new System.Drawing.Point(203, 3);
+            this.keyButton.Location = new System.Drawing.Point(122, 5);
             this.keyButton.Name = "keyButton";
-            this.keyButton.Size = new System.Drawing.Size(194, 23);
+            this.keyButton.Size = new System.Drawing.Size(354, 23);
             this.keyButton.TabIndex = 1;
             this.keyButton.Text = "Unassigned";
             this.keyButton.UseVisualStyleBackColor = true;
             this.keyButton.Click += new System.EventHandler(this.KeyButton_Click);
             // 
+            // keyPanel
+            // 
+            this.keyPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.keyPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.keyPanel.Controls.Add(this.keyTableLayoutPanel);
+            this.keyPanel.Location = new System.Drawing.Point(8, 8);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.keyPanel.Name = "keyPanel";
+            this.keyPanel.Padding = new System.Windows.Forms.Padding(8);
+            this.keyPanel.Size = new System.Drawing.Size(495, 50);
+            this.keyPanel.TabIndex = 33;
+            // 
+            // keyTableLayoutPanel
+            // 
+            this.keyTableLayoutPanel.ColumnCount = 2;
+            this.keyTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.keyTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.keyTableLayoutPanel.Controls.Add(this.keyButton, 1, 0);
+            this.keyTableLayoutPanel.Controls.Add(this.keyLabel, 0, 0);
+            this.keyTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keyTableLayoutPanel.Location = new System.Drawing.Point(8, 8);
+            this.keyTableLayoutPanel.Name = "keyTableLayoutPanel";
+            this.keyTableLayoutPanel.RowCount = 1;
+            this.keyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.keyTableLayoutPanel.Size = new System.Drawing.Size(479, 34);
+            this.keyTableLayoutPanel.TabIndex = 0;
+            // 
             // KeyActionPropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.keyPanel);
+            this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.Name = "KeyActionPropertiesPanel";
-            this.Size = new System.Drawing.Size(500, 300);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.Padding = new System.Windows.Forms.Padding(8);
+            this.Size = new System.Drawing.Size(511, 68);
+            this.keyPanel.ResumeLayout(false);
+            this.keyTableLayoutPanel.ResumeLayout(false);
+            this.keyTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -101,7 +106,8 @@
         #endregion
 
         private System.Windows.Forms.Label keyLabel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button keyButton;
+        private System.Windows.Forms.Panel keyPanel;
+        private System.Windows.Forms.TableLayoutPanel keyTableLayoutPanel;
     }
 }

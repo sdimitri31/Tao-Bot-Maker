@@ -117,8 +117,8 @@ namespace Tao_Bot_Maker.View
             {
                 panel.Location = new Point(0, 0);
                 panel.Visible = false;
-                panel.Size = actionPropertiesPanel.Size;                
-                panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+                panel.Width = actionPropertiesPanel.Width;
+                panel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 actionPropertiesPanel.Controls.Add(panel);
                 panels.Add(panel);
             }
