@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
-using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
 using Settings = Tao_Bot_Maker.Model.Settings;
 
@@ -15,11 +16,12 @@ namespace Tao_Bot_Maker.View
     {
         private readonly MainFormController mainFormController;
 
-        private Point dragStartPoint;
-        private int draggedIndex = -1;
-        private int insertIndex = -2;
+        // Used for the insertion line
+        private int insertionIndex = -1;
+        private int draggedItemIndex = -1;
 
-        private int previousActionSelectedIndex = -1;
+        private int selectedActionIndex = -1;
+
         private int previousSequenceSelectedIndex = -1;
 
         public MainForm()
@@ -30,33 +32,14 @@ namespace Tao_Bot_Maker.View
             CultureManager.CultureChanged += UpdateUI;
             SequenceController.RunningStateChanged += UpdateUIState;
             SequenceController.SavedStatusChanged += UpdateUI;
+            actionFlowLayoutPanel.KeyDown += new KeyEventHandler(ActionFlowLayoutPanel_KeyDown);
 
             mainFormController = new MainFormController(this);
 
             LoadSettings();
             LoadSequenceNames();
 
-            // Configurer les événements pour le drag and drop
-            actionsListBox.AllowDrop = true;
-            actionsListBox.MouseDown += ActionsListBox_MouseDown;
-            actionsListBox.DragOver += ActionsListBox_DragOver;
-            actionsListBox.DragDrop += ActionsListBox_DragDrop;
-            actionsListBox.DragLeave += ActionsListBox_DragLeave;
-            actionsListBox.MouseMove += ActionsListBox_MouseMove;
-            actionsListBox.DrawItem += ActionsListBox_DrawItem;
-            actionsListBox.DrawMode = DrawMode.OwnerDrawFixed;
-            SetDoubleBuffered(actionsListBox);
-
             Logger.Log(Resources.Strings.InfoMessageProgramReady, TraceEventType.Information);
-        }
-
-        private void SetDoubleBuffered(Control control)
-        {
-            if (SystemInformation.TerminalServerSession)
-                return;
-
-            PropertyInfo aProp = typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance);
-            aProp.SetValue(control, true, null);
         }
 
         private void New()
@@ -170,10 +153,10 @@ namespace Tao_Bot_Maker.View
 
             // EDIT
             addActionToolStripMenuItem.Enabled = !isRunning;
-            editActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
-            deleteActionToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
-            moveActionUpToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex > 0);
-            moveActionDownToolStripMenuItem.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1) && (actionsListBox.SelectedIndex < actionsListBox.Items.Count - 1);
+            editActionToolStripMenuItem.Enabled = !isRunning && (selectedActionIndex != -1);
+            deleteActionToolStripMenuItem.Enabled = !isRunning && (selectedActionIndex != -1);
+            moveActionUpToolStripMenuItem.Enabled = !isRunning && (selectedActionIndex > 0);
+            moveActionDownToolStripMenuItem.Enabled = !isRunning && (selectedActionIndex != -1) && (selectedActionIndex < actionFlowLayoutPanel.Controls.Count - 1);
             deleteSequenceToolStripMenuItem.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
 
             // BOT
@@ -184,8 +167,8 @@ namespace Tao_Bot_Maker.View
 
             // ACTION BUTTON
             addActionToolStripButton.Enabled = !isRunning;
-            editActionToolStripButton.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
-            deleteActionToolStripButton.Enabled = !isRunning && (actionsListBox.SelectedIndex != -1);
+            editActionToolStripButton.Enabled = !isRunning && (selectedActionIndex != -1);
+            deleteActionToolStripButton.Enabled = !isRunning && (selectedActionIndex != -1);
 
             // BOT BUTTON
             startBotToolStripButton.Visible = !isRunning || isPaused;
@@ -202,122 +185,6 @@ namespace Tao_Bot_Maker.View
             moveActionDownContextMenuItem.Enabled = moveActionDownToolStripMenuItem.Enabled;
             moveActionUpContextMenuItem.Enabled = moveActionUpToolStripMenuItem.Enabled;
             deleteActionContextMenuItem.Enabled = deleteActionToolStripMenuItem.Enabled;
-        }
-
-        private void ActionsListBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                int index = actionsListBox.IndexFromPoint(e.Location);
-                if (index != ListBox.NoMatches)
-                {
-                    actionsListBox.SelectedIndex = index;
-                }
-            }
-
-            if (e.Button == MouseButtons.Left)
-            {
-                dragStartPoint = e.Location;
-                draggedIndex = actionsListBox.IndexFromPoint(e.Location);
-                Logger.Log("Drag started at index " + draggedIndex + "", TraceEventType.Verbose);
-            }
-        }
-
-        private void ActionsListBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
-            {
-                // Si la distance de drag est suffisante, démarrer le drag and drop
-                if (Math.Abs(e.X - dragStartPoint.X) >= SystemInformation.DragSize.Width ||
-                    Math.Abs(e.Y - dragStartPoint.Y) >= SystemInformation.DragSize.Height)
-                {
-                    if (draggedIndex >= 0 && draggedIndex < actionsListBox.Items.Count)
-                    {
-                        actionsListBox.DoDragDrop(actionsListBox.Items[draggedIndex], DragDropEffects.Move);
-                    }
-                }
-            }
-        }
-
-        private void ActionsListBox_DragOver(object sender, DragEventArgs e)
-        {
-            // Permettre le drop si le format de données est correct
-            if (e.Data.GetDataPresent(typeof(CustomDisplayItem<Action>)))
-            {
-                e.Effect = DragDropEffects.Move;
-
-                Point point = actionsListBox.PointToClient(new Point(e.X, e.Y));
-                int newIndex = actionsListBox.IndexFromPoint(point);
-
-                if (newIndex != insertIndex)
-                {
-                    insertIndex = newIndex;
-                    actionsListBox.Invalidate(); // Redessiner seulement si l'index de l'insertion a changé
-                }
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
-
-        private void ActionsListBox_DragDrop(object sender, DragEventArgs e)
-        {
-            // Obtenir l'élément draggué et l'index de drop
-            if (e.Data.GetDataPresent(typeof(CustomDisplayItem<Action>)))
-            {
-                CustomDisplayItem<Action> draggedAction = (CustomDisplayItem<Action>)e.Data.GetData(typeof(CustomDisplayItem<Action>));
-                Action action = draggedAction.Value;
-                Point point = actionsListBox.PointToClient(new Point(e.X, e.Y));
-                int newIndex = actionsListBox.IndexFromPoint(point);
-
-                Logger.Log("Drag ended at index " + newIndex + "", TraceEventType.Verbose);
-
-                if (newIndex == -1)
-                {
-                    newIndex = actionsListBox.Items.Count;
-                }
-
-                if (newIndex != draggedIndex)
-                {
-                    mainFormController.MoveAction(newIndex, action);
-                    LoadActions();
-                }
-            }
-
-            // Réinitialiser l'indicateur de position
-            insertIndex = -2;
-            actionsListBox.Invalidate();
-        }
-
-        private void ActionsListBox_DragLeave(object sender, EventArgs e)
-        {
-            // Réinitialiser l'indicateur de position
-            insertIndex = -2;
-            actionsListBox.Invalidate();
-        }
-
-        private void ActionsListBox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0)
-                return;
-
-            e.DrawBackground();
-            e.Graphics.DrawString(actionsListBox.Items[e.Index].ToString(), e.Font, Brushes.Black, e.Bounds);
-
-            // Dessiner l'indicateur de position si nécessaire
-            if (e.Index == insertIndex)
-            {
-                e.Graphics.DrawLine(Pens.Red, e.Bounds.Left, e.Bounds.Top, e.Bounds.Right, e.Bounds.Top);
-            }
-
-            // Si nous dessinons le dernier élément et que insertIndex est à -1, dessiner le trait sous l'élément
-            if (e.Index == actionsListBox.Items.Count - 1 && insertIndex == -1)
-            {
-                e.Graphics.DrawLine(Pens.Red, e.Bounds.Left, e.Bounds.Bottom, e.Bounds.Right, e.Bounds.Bottom);
-            }
-
-            e.DrawFocusRectangle();
         }
 
         private void LoadSettings()
@@ -375,16 +242,71 @@ namespace Tao_Bot_Maker.View
 
         private void LoadActions()
         {
-            actionsListBox.SelectedIndex = -1;
-            actionsListBox.Items.Clear();
+            actionFlowLayoutPanel.Controls.Clear();
+            SetSelectedActionIndex(-1);
 
             if (mainFormController.GetSequence() == null)
                 return;
 
             foreach (Action action in mainFormController.GetSequence().Actions)
             {
-                actionsListBox.Items.Add(new CustomDisplayItem<Action>(action, action.ToString()));
+                AddCustomItem(action);
             }
+        }
+
+
+        private void AddCustomItem(Action action)
+        {
+            var customItem = new ActionCustomListItem();
+            customItem.SetAction(action);
+
+            customItem.Click += ActionCustomListItem_Click;
+            customItem.MouseDown += ActionCustomListView_MouseDown;
+            customItem.KeyDown += ActionFlowLayoutPanel_KeyDown;
+
+            customItem.Width = actionFlowLayoutPanel.ClientSize.Width;
+            customItem.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+
+            customItem.SurfaceColor = Color.Silver;
+
+            actionFlowLayoutPanel.Controls.Add(customItem);
+        }
+
+        private void ActionCustomListItem_Click(object sender, EventArgs e)
+        {
+            Logger.Log("Click from: " + sender, TraceEventType.Verbose);
+            SetSelectedAction((sender as ActionCustomListItem).Action);
+        }
+
+        private void SetSelectedAction(Action action)
+        {
+            foreach (ActionCustomListItem item in actionFlowLayoutPanel.Controls.OfType<ActionCustomListItem>())
+            {
+                item.Selected = item.Action == action;
+            }
+
+            try
+            {
+                selectedActionIndex = actionFlowLayoutPanel.Controls.GetChildIndex(actionFlowLayoutPanel.Controls.OfType<ActionCustomListItem>().First(x => x.Action == action));
+            }
+            catch (Exception)
+            {
+                selectedActionIndex = -1;
+            }
+            UpdateUIState();
+            Logger.Log("Selected action index: " + selectedActionIndex, TraceEventType.Verbose);
+        }
+
+        private void SetSelectedActionIndex(int index)
+        {
+            Action action = (index < 0) || (index >= mainFormController.GetSequence().Actions.Count()) ? null : mainFormController.GetSequence().Actions.ElementAt(index);
+            SetSelectedAction(action);
+        }
+
+        private Action GetSelectedAction()
+        {
+            Action action = (selectedActionIndex < 0) || (selectedActionIndex >= mainFormController.GetSequence().Actions.Count()) ? null : mainFormController.GetSequence().Actions.ElementAt(selectedActionIndex);
+            return action;
         }
 
         private void LoadSequenceNames()
@@ -535,12 +457,12 @@ namespace Tao_Bot_Maker.View
 
         private void DeleteAction()
         {
-            if (actionsListBox.SelectedItem == null)
+            if (selectedActionIndex < 0)
                 return;
 
-            mainFormController.RemoveAction((actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
-            LoadActions();
-            UpdateUIState();
+            mainFormController.RemoveAction(actionFlowLayoutPanel.Controls.OfType<ActionCustomListItem>().ElementAt(selectedActionIndex).Action);
+            actionFlowLayoutPanel.Controls.RemoveAt(selectedActionIndex);
+            SetSelectedAction(null);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -576,12 +498,12 @@ namespace Tao_Bot_Maker.View
 
         private void EditAction()
         {
-            if (actionsListBox.SelectedItem == null)
+            if (selectedActionIndex < 0)
                 return;
 
-            mainFormController.UpdateAction((actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
+            mainFormController.UpdateAction(actionFlowLayoutPanel.Controls.OfType<ActionCustomListItem>().ElementAt(selectedActionIndex).Action);
             LoadActions();
-            UpdateUIState();
+            SetSelectedActionIndex(selectedActionIndex);
         }
 
         private void StopBotToolStripButton_Click(object sender, EventArgs e)
@@ -670,30 +592,25 @@ namespace Tao_Bot_Maker.View
             DeleteSequence();
         }
 
-        private void ActionsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateUIState();
-        }
-
         private void MoveActionUp()
         {
-            if (actionsListBox.SelectedIndex > 0)
+            if (selectedActionIndex > 0 && selectedActionIndex < actionFlowLayoutPanel.Controls.Count)
             {
-                previousActionSelectedIndex = actionsListBox.SelectedIndex;
-                mainFormController.MoveAction(actionsListBox.SelectedIndex - 1, (actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
-                LoadActions();
-                actionsListBox.SelectedIndex = previousActionSelectedIndex - 1;
+                Action action = GetSelectedAction();
+                mainFormController.MoveAction(selectedActionIndex - 1, action);
+                actionFlowLayoutPanel.Controls.SetChildIndex(actionFlowLayoutPanel.Controls[selectedActionIndex], selectedActionIndex - 1);
+                SetSelectedAction(action);
             }
         }
 
         private void MoveActionDown()
         {
-            if (actionsListBox.SelectedIndex < actionsListBox.Items.Count - 1)
+            if (selectedActionIndex < actionFlowLayoutPanel.Controls.Count - 1 && selectedActionIndex >= 0)
             {
-                previousActionSelectedIndex = actionsListBox.SelectedIndex;
-                mainFormController.MoveAction(actionsListBox.SelectedIndex + 1, (actionsListBox.SelectedItem as CustomDisplayItem<Action>).Value);
-                LoadActions();
-                actionsListBox.SelectedIndex = previousActionSelectedIndex + 1;
+                Action action = GetSelectedAction();
+                mainFormController.MoveAction(selectedActionIndex + 1, action);
+                actionFlowLayoutPanel.Controls.SetChildIndex(actionFlowLayoutPanel.Controls[selectedActionIndex], selectedActionIndex + 1);
+                SetSelectedAction(action);
             }
         }
 
@@ -707,11 +624,163 @@ namespace Tao_Bot_Maker.View
             MoveActionDown();
         }
 
-        private void ActionsListBox_KeyDown(object sender, KeyEventArgs e)
+        private void ActionCustomListView_MouseDown(object sender, MouseEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete)
+            if (e.Button == MouseButtons.Right)
+            {
+                Logger.Log("MouseDown Right from: " + sender, TraceEventType.Verbose);
+                if (sender is ActionCustomListItem)
+                {
+                    ActionCustomListItem item = (ActionCustomListItem)sender;
+                    SetSelectedAction(item.Action);
+                }
+                else
+                {
+                    SetSelectedAction(null);
+                }
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                Logger.Log("MouseDown Left from: " + sender, TraceEventType.Verbose);
+                if (sender is FlowLayoutPanel)
+                {
+                    SetSelectedAction(null);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Start drag and drop
+        /// </summary>
+        private void ActionFlowLayoutPanel_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(ActionCustomListItem)))
+            {
+                draggedItemIndex = actionFlowLayoutPanel.Controls.GetChildIndex((Control)e.Data.GetData(typeof(ActionCustomListItem)));
+                Logger.Log("Start dragging item at index: " + draggedItemIndex, TraceEventType.Verbose);
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        /// <summary>
+        /// Move the dragged item to the new position
+        /// </summary>
+        private void ActionFlowLayoutPanel_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(ActionCustomListItem)))
+            {
+                var droppedItem = (ActionCustomListItem)e.Data.GetData(typeof(ActionCustomListItem));
+                Point clientPoint = actionFlowLayoutPanel.PointToClient(new Point(e.X, e.Y));
+                Control targetControl = actionFlowLayoutPanel.GetChildAtPoint(clientPoint);
+                int targetIndex = targetControl != null ? actionFlowLayoutPanel.Controls.GetChildIndex(targetControl) : actionFlowLayoutPanel.Controls.Count - 1;
+
+                // Move the item to the new position
+                Logger.Log($"Moving item from {draggedItemIndex} to {targetIndex}", TraceEventType.Verbose);
+                actionFlowLayoutPanel.Controls.SetChildIndex(droppedItem, targetIndex);
+                mainFormController.MoveAction(targetIndex, droppedItem.Action);
+
+                // Remove the insertion line
+                DrawInsertionLine(-1);
+            }
+        }
+
+        /// <summary>
+        /// Update the position of the insertion line when hovering over a control
+        /// </summary>
+        private void ActionFlowLayoutPanel_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(ActionCustomListItem)))
+            {
+                Point clientPoint = actionFlowLayoutPanel.PointToClient(new Point(e.X, e.Y));
+                Control targetControl = actionFlowLayoutPanel.GetChildAtPoint(clientPoint);
+                int targetIndex = targetControl != null ? actionFlowLayoutPanel.Controls.GetChildIndex(targetControl) : insertionIndex;
+
+                if (targetIndex >= actionFlowLayoutPanel.Controls.Count)
+                {
+                    targetIndex = actionFlowLayoutPanel.Controls.Count - 1;
+                }
+
+                if (targetIndex != insertionIndex)
+                {
+                    DrawInsertionLine(targetIndex);
+                }
+
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        /// <summary>
+        /// Triggers Paint event to draw the insertion line
+        /// </summary>
+        /// <param name="index"></param>
+        private void DrawInsertionLine(int index)
+        {
+            insertionIndex = index;
+            actionFlowLayoutPanel.Invalidate();
+        }
+
+        /// <summary>
+        /// Draws the insertion line
+        /// </summary>
+        private void ActionFlowLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+            if (insertionIndex >= 0 && insertionIndex <= actionFlowLayoutPanel.Controls.Count)
+            {
+                Control control = (insertionIndex < actionFlowLayoutPanel.Controls.Count) ? actionFlowLayoutPanel.Controls[insertionIndex] : null;
+
+                int y = insertionIndex < draggedItemIndex ? control.Top - 4 : control.Bottom + 4;
+
+                using (Pen pen = new Pen(Color.Red, 2))
+                {
+                    e.Graphics.DrawLine(pen, new Point(0, y), new Point(actionFlowLayoutPanel.ClientSize.Width, y));
+                }
+            }
+        }
+
+        private void ActionFlowLayoutPanel_Click(object sender, EventArgs e)
+        {
+            // Unselect any selected action
+            SetSelectedAction(null);
+        }
+
+        private void ActionFlowLayoutPanel_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Delete:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        void ActionFlowLayoutPanel_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
             {
                 DeleteAction();
+            }
+        }
+
+        /// <summary>
+        /// Resizes ActionCustomListItem to fit the actionFlowLayoutPanel
+        /// </summary>
+        private void ActionFlowLayoutPanel_ClientSizeChanged(object sender, EventArgs e)
+        {
+            foreach (Control control in actionFlowLayoutPanel.Controls)
+            {
+                if (control is ActionCustomListItem customItem)
+                {
+                    customItem.Width = actionFlowLayoutPanel.ClientSize.Width;
+                }
             }
         }
     }

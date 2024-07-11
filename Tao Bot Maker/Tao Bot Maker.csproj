@@ -140,6 +140,12 @@
     <Compile Include="View\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ActionCustomListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\ActionCustomListItem.Designer.cs">
+      <DependentUpon>ActionCustomListItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ActionTypeCustomListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     <EmbeddedResource Include="View\ActionForm.resx">
       <DependentUpon>ActionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ActionCustomListItem.resx">
+      <DependentUpon>ActionCustomListItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ActionTypeCustomListItem.resx">
       <DependentUpon>ActionTypeCustomListItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,6 +360,7 @@
     <None Include="Resources\icons8-computer-mouse-48.png" />
     <None Include="Resources\icons8-sand-timer-48.png" />
     <None Include="Resources\icons8-error-48.png" />
+    <None Include="Resources\icons8-drag-48.png" />
     <Content Include="Resources\tao.ico" />
   </ItemGroup>
   <ItemGroup />
