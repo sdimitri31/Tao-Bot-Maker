@@ -50,12 +50,13 @@
             // keyButton
             // 
             this.keyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.keyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.keyButton.Location = new System.Drawing.Point(122, 5);
             this.keyButton.Name = "keyButton";
             this.keyButton.Size = new System.Drawing.Size(354, 23);
             this.keyButton.TabIndex = 1;
             this.keyButton.Text = "Unassigned";
-            this.keyButton.UseVisualStyleBackColor = true;
+            this.keyButton.UseVisualStyleBackColor = false;
             this.keyButton.Click += new System.EventHandler(this.KeyButton_Click);
             // 
             // keyPanel

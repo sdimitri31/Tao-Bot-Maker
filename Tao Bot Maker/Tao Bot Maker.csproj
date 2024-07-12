@@ -99,6 +99,7 @@
     <Compile Include="Controller\SequenceController.cs" />
     <Compile Include="Controller\HotkeyController.cs" />
     <Compile Include="Controller\SettingsController.cs" />
+    <Compile Include="Helpers\AppThemeHelper.cs" />
     <Compile Include="Helpers\CoordinatesHelper.cs" />
     <Compile Include="Helpers\CultureManager.cs" />
     <Compile Include="Helpers\ImageSearchHelper.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="View\ActionForm.Designer.cs">
       <DependentUpon>ActionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\AppTheme.cs" />
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

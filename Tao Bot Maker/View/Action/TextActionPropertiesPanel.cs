@@ -53,5 +53,13 @@ namespace Tao_Bot_Maker.View
         {
             return ActionType.TextAction;
         }
+
+        public void SetTheme(AppTheme theme)
+        {
+            textToTypePanel.BackColor = theme.BackColorElevationThree;
+            textToTypePanel.ForeColor = theme.ForeColor;
+            speedPanel.BackColor = theme.BackColorElevationThree;
+            speedPanel.ForeColor = theme.ForeColor;
+        }
     }
 }

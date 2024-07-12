@@ -24,12 +24,8 @@ namespace Tao_Bot_Maker.View
         public ActionCustomListItem()
         {
             InitializeComponent();
+            SetAction(new CorruptedAction());
             AttachEvents(this);
-            SurfaceColor = Color.Gainsboro;
-            HighlightBackColor = SystemColors.Highlight;
-            HighlightForeColor = SystemColors.HighlightText;
-            TextColor = SystemColors.ControlText;
-            HoverColor = Color.WhiteSmoke;
         }
 
         public void SetAction(Action action)
@@ -70,6 +66,16 @@ namespace Tao_Bot_Maker.View
         }
 
         private Color _surfaceColor;
+        private Color _textColor;
+
+        private Color _highlightBackColor;
+        private Color _highlightForeColor;
+
+        private Color _hoverBackColor;
+        private Color _hoverForeColor;
+
+        private Color _pressedBackColor;
+        private Color _pressedForeColor;
 
         public Color SurfaceColor
         {
@@ -81,24 +87,6 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        private Color _highlightBackColor;
-
-        public Color HighlightBackColor
-        {
-            get { return _highlightBackColor; }
-            set { _highlightBackColor = value; }
-        }
-
-        private Color _highlightForeColor;
-
-        public Color HighlightForeColor
-        {
-            get { return _highlightForeColor; }
-            set { _highlightForeColor = value; }
-        }
-
-        private Color _textColor;
-
         public Color TextColor
         {
             get { return _textColor; }
@@ -109,14 +97,41 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        private Color _hoverColor;
-
-        public Color HoverColor
+        public Color HighlightBackColor
         {
-            get { return _hoverColor; }
-            set { _hoverColor = value; }
+            get { return _highlightBackColor; }
+            set { _highlightBackColor = value; }
         }
 
+        public Color HighlightForeColor
+        {
+            get { return _highlightForeColor; }
+            set { _highlightForeColor = value; }
+        }
+
+        public Color HoverBackColor
+        {
+            get { return _hoverBackColor; }
+            set { _hoverBackColor = value; }
+        }
+
+        public Color HoverForeColor
+        {
+            get { return _hoverForeColor; }
+            set { _hoverForeColor = value; }
+        }
+
+        public Color PressedBackColor
+        {
+            get { return _pressedBackColor; }
+            set { _pressedBackColor = value; }
+        }
+
+        public Color PressedForeColor
+        {
+            get { return _pressedForeColor; }
+            set { _pressedForeColor = value; }
+        }
 
         private void AttachEvents(Control parent)
         {
@@ -160,7 +175,8 @@ namespace Tao_Bot_Maker.View
         {
             if (!Selected)
             {
-                BackColor = HoverColor;
+                BackColor = HoverBackColor;
+                ForeColor = HoverForeColor;
             }
         }
 
@@ -180,6 +196,7 @@ namespace Tao_Bot_Maker.View
             if (!Selected)
             {
                 BackColor = SurfaceColor;
+                ForeColor = TextColor;
             }
         }
 

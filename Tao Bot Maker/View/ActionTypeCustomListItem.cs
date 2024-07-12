@@ -56,10 +56,80 @@ namespace Tao_Bot_Maker.View
             set
             {
                 _isSelected = value;
-                ForeColor = value ? SystemColors.HighlightText : Color.Black;
-                BackColor = value ? SystemColors.Highlight : Color.LightGray;
+                ForeColor = value ? HighlightForeColor : TextColor;
+                BackColor = value ? HighlightBackColor : SurfaceColor;
             }
         }
+
+
+        private Color _surfaceColor;
+        private Color _textColor;
+
+        private Color _highlightBackColor;
+        private Color _highlightForeColor;
+
+        private Color _hoverBackColor;
+        private Color _hoverForeColor;
+
+        private Color _pressedBackColor;
+        private Color _pressedForeColor;
+
+        public Color SurfaceColor
+        {
+            get { return _surfaceColor; }
+            set
+            {
+                _surfaceColor = value;
+                this.BackColor = value;
+            }
+        }
+
+        public Color TextColor
+        {
+            get { return _textColor; }
+            set
+            {
+                _textColor = value;
+                this.ForeColor = value;
+            }
+        }
+
+        public Color HighlightBackColor
+        {
+            get { return _highlightBackColor; }
+            set { _highlightBackColor = value; }
+        }
+
+        public Color HighlightForeColor
+        {
+            get { return _highlightForeColor; }
+            set { _highlightForeColor = value; }
+        }
+
+        public Color HoverBackColor
+        {
+            get { return _hoverBackColor; }
+            set { _hoverBackColor = value; }
+        }
+
+        public Color HoverForeColor
+        {
+            get { return _hoverForeColor; }
+            set { _hoverForeColor = value; }
+        }
+
+        public Color PressedBackColor
+        {
+            get { return _pressedBackColor; }
+            set { _pressedBackColor = value; }
+        }
+
+        public Color PressedForeColor
+        {
+            get { return _pressedForeColor; }
+            set { _pressedForeColor = value; }
+        }
+
 
         private void AttachEvents(Control parent)
         {
@@ -112,7 +182,8 @@ namespace Tao_Bot_Maker.View
         {
             if (!Selected)
             {
-                BackColor = Color.Gainsboro;
+                BackColor = HoverBackColor;
+                ForeColor = HoverForeColor;
             }
         }
 
@@ -120,7 +191,8 @@ namespace Tao_Bot_Maker.View
         {
             if (!Selected)
             {
-                BackColor = Color.LightGray;
+                BackColor = SurfaceColor;
+                ForeColor = TextColor;
             }
         }
     }

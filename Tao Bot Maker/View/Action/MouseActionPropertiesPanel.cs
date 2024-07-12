@@ -25,6 +25,33 @@ namespace Tao_Bot_Maker.View
             this.Disposed += MouseActionPropertiesPanel_Disposed;
         }
 
+        public void SetTheme(AppTheme theme)
+        {
+            actionPanel.BackColor = theme.BackColorElevationThree;
+            actionPanel.ForeColor = theme.ForeColor;
+
+            clickPanel.BackColor = theme.BackColorElevationThree;
+            clickPanel.ForeColor = theme.ForeColor;
+
+            startCoordsPanel.BackColor = theme.BackColorElevationThree;
+            startCoordsPanel.ForeColor = theme.ForeColor;
+
+            endCoordsPanel.BackColor = theme.BackColorElevationThree;
+            endCoordsPanel.ForeColor = theme.ForeColor;
+
+            speedPanel.BackColor = theme.BackColorElevationThree;
+            speedPanel.ForeColor = theme.ForeColor;
+
+            scrollPanel.BackColor = theme.BackColorElevationThree;
+            scrollPanel.ForeColor = theme.ForeColor;
+
+            clickDurationPanel.BackColor = theme.BackColorElevationThree;
+            clickDurationPanel.ForeColor = theme.ForeColor;
+
+            overlayPanel.BackColor = theme.BackColorElevationThree;
+            overlayPanel.ForeColor = theme.ForeColor;
+        }
+
         private void MouseActionPropertiesPanel_Disposed(object sender, EventArgs e)
         {
             drawingForm.Close();

@@ -11,5 +11,7 @@ namespace Tao_Bot_Maker.View
 
         void SetAction(Action action);
 
+        void SetTheme(AppTheme theme);
+
     }
 }

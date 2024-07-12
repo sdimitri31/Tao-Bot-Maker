@@ -97,6 +97,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.MinimumSize = new System.Drawing.Size(0, 50);
             this.Name = "ActionCustomListItem";

@@ -58,5 +58,17 @@ namespace Tao_Bot_Maker.View
         {
             UpdateUIState();
         }
+
+        public void SetTheme(AppTheme theme)
+        {
+            minimumWaitPanel.BackColor = theme.BackColorElevationThree;
+            minimumWaitPanel.ForeColor = theme.ForeColor;
+
+            randomizeWaitPanel.BackColor = theme.BackColorElevationThree;
+            randomizeWaitPanel.ForeColor = theme.ForeColor;
+
+            maximumWaitPanel.BackColor = theme.BackColorElevationThree;
+            maximumWaitPanel.ForeColor = theme.ForeColor;
+        }
     }
 }

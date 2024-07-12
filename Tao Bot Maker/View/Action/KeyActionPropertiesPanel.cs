@@ -36,7 +36,7 @@ namespace Tao_Bot_Maker.View
 
         public void SetAction(Action action)
         {
-            if(action != null && action is KeyAction keyAction)
+            if (action != null && action is KeyAction keyAction)
             {
                 Key = keyAction.Key;
                 keyButton.Text = KeyboardSimulator.GetFormatedKeysString(Key);
@@ -92,6 +92,39 @@ namespace Tao_Bot_Maker.View
         ActionType IActionPropertiesPanel.GetType()
         {
             return ActionType.KeyAction;
+        }
+
+        public void SetTheme(AppTheme theme)
+        {
+            foreach (Control control in this.Controls)
+            {
+                SetTheme(theme, control);
+            }
+        }
+
+        public void SetTheme(AppTheme theme, Control control = null)
+        {
+            if (control is Button)
+            {
+                ((Button)control).FlatAppearance.BorderColor = theme.BackColorElevationThree;
+                ((Button)control).FlatAppearance.MouseOverBackColor = theme.HoverBackColor;
+                control.BackColor = theme.BackColorElevationFour;
+                control.ForeColor = theme.ForeColor;
+            }
+
+            if (control is Panel)
+            {
+                control.BackColor = theme.BackColorElevationThree;
+                control.ForeColor = theme.ForeColor;
+            }
+
+            if (control.HasChildren)
+            {
+                foreach (Control child in control.Controls)
+                {
+                    SetTheme(theme, child);
+                }
+            }
         }
     }
 }

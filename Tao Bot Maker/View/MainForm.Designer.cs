@@ -71,7 +71,7 @@
             this.saveSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.deleteSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.actionFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.actionPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.actionListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.moveActionUpContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveActionDownContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -342,6 +342,7 @@
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(10, 0, 1, 0);
+            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip.Size = new System.Drawing.Size(784, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip1";
@@ -452,9 +453,7 @@
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.BackColor = System.Drawing.Color.Gray;
-            this.splitContainer.Panel1.Controls.Add(this.actionFlowLayoutPanel);
-            this.splitContainer.Panel1.Padding = new System.Windows.Forms.Padding(8);
+            this.splitContainer.Panel1.Controls.Add(this.actionPanel);
             // 
             // splitContainer.Panel2
             // 
@@ -465,25 +464,26 @@
             this.splitContainer.SplitterDistance = 248;
             this.splitContainer.TabIndex = 2;
             // 
-            // actionFlowLayoutPanel
+            // actionPanel
             // 
-            this.actionFlowLayoutPanel.AllowDrop = true;
-            this.actionFlowLayoutPanel.AutoScroll = true;
-            this.actionFlowLayoutPanel.BackColor = System.Drawing.Color.Transparent;
-            this.actionFlowLayoutPanel.ContextMenuStrip = this.actionListBoxContextMenuStrip;
-            this.actionFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.actionFlowLayoutPanel.Location = new System.Drawing.Point(8, 8);
-            this.actionFlowLayoutPanel.Name = "actionFlowLayoutPanel";
-            this.actionFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.actionFlowLayoutPanel.Size = new System.Drawing.Size(768, 232);
-            this.actionFlowLayoutPanel.TabIndex = 0;
-            this.actionFlowLayoutPanel.ClientSizeChanged += new System.EventHandler(this.ActionFlowLayoutPanel_ClientSizeChanged);
-            this.actionFlowLayoutPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragDrop);
-            this.actionFlowLayoutPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragEnter);
-            this.actionFlowLayoutPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragOver);
-            this.actionFlowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ActionFlowLayoutPanel_Paint);
-            this.actionFlowLayoutPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ActionCustomListView_MouseDown);
-            this.actionFlowLayoutPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ActionFlowLayoutPanel_PreviewKeyDown);
+            this.actionPanel.AllowDrop = true;
+            this.actionPanel.AutoScroll = true;
+            this.actionPanel.BackColor = System.Drawing.Color.Transparent;
+            this.actionPanel.ContextMenuStrip = this.actionListBoxContextMenuStrip;
+            this.actionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.actionPanel.Location = new System.Drawing.Point(0, 0);
+            this.actionPanel.Name = "actionPanel";
+            this.actionPanel.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
+            this.actionPanel.Size = new System.Drawing.Size(784, 248);
+            this.actionPanel.TabIndex = 2;
+            this.actionPanel.ClientSizeChanged += new System.EventHandler(this.ActionPanel_ClientSizeChanged);
+            this.actionPanel.Click += new System.EventHandler(this.ActionFlowLayoutPanel_Click);
+            this.actionPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragDrop);
+            this.actionPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragEnter);
+            this.actionPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragOver);
+            this.actionPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ActionFlowLayoutPanel_Paint);
+            this.actionPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ActionCustomListView_MouseDown);
+            this.actionPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ActionFlowLayoutPanel_PreviewKeyDown);
             // 
             // actionListBoxContextMenuStrip
             // 
@@ -493,6 +493,7 @@
             this.deleteActionContextMenuItem});
             this.actionListBoxContextMenuStrip.Name = "actionListBoxContextMenuStrip";
             this.actionListBoxContextMenuStrip.Size = new System.Drawing.Size(174, 70);
+            this.actionListBoxContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.ActionListBoxContextMenuStrip_Opening);
             // 
             // moveActionUpContextMenuItem
             // 
@@ -520,7 +521,6 @@
             // 
             // eventLogTextBox
             // 
-            this.eventLogTextBox.BackColor = System.Drawing.Color.DarkGray;
             this.eventLogTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.eventLogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.eventLogTextBox.Location = new System.Drawing.Point(8, 8);
@@ -607,6 +607,6 @@
         private System.Windows.Forms.ToolStripMenuItem moveActionUpContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveActionDownContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteActionContextMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel actionFlowLayoutPanel;
+        private System.Windows.Forms.FlowLayoutPanel actionPanel;
     }
 }

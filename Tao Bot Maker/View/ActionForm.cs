@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
-using Tao_Bot_Maker.Model;
+using Tao_Bot_Maker.Helpers;
 using Action = Tao_Bot_Maker.Model.Action;
 using Settings = Tao_Bot_Maker.Model.Settings;
 
@@ -33,6 +33,8 @@ namespace Tao_Bot_Maker.View
 
             LoadAllActionType();
 
+            AppThemeHelper.ApplyTheme(AppThemeHelper.DarkTheme(), this);
+
             if (existingAction != null)
             {
                 SelectedActionType = existingAction.Type;
@@ -42,6 +44,7 @@ namespace Tao_Bot_Maker.View
             SetPropertiesPanel(SelectedActionType);
             SetSelectedActionTypeFlowLayout(SelectedActionType);
         }
+
 
         private void AddCustomItem(ActionType actionType)
         {
@@ -54,6 +57,8 @@ namespace Tao_Bot_Maker.View
             };
             customItem.Width = actionTypeFlowLayoutPanel.Width;
             customItem.Click += ActionTypeCustomListItem_Click;
+
+            customItem.Margin = new Padding(customItem.Margin.Left, customItem.Margin.Top, customItem.Margin.Right, 8);
 
             actionTypeFlowLayoutPanel.Controls.Add(customItem);
         }

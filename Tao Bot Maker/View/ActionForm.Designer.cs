@@ -34,9 +34,7 @@
             this.okButton = new System.Windows.Forms.Button();
             this.actionTypeFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.leftPanel = new System.Windows.Forms.Panel();
             this.bottomPanel.SuspendLayout();
-            this.leftPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionPropertiesPanel
@@ -77,10 +75,11 @@
             // 
             // actionTypeFlowLayoutPanel
             // 
-            this.actionTypeFlowLayoutPanel.BackColor = System.Drawing.Color.Transparent;
-            this.actionTypeFlowLayoutPanel.Location = new System.Drawing.Point(11, 12);
+            this.actionTypeFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.actionTypeFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.actionTypeFlowLayoutPanel.Name = "actionTypeFlowLayoutPanel";
-            this.actionTypeFlowLayoutPanel.Size = new System.Drawing.Size(191, 392);
+            this.actionTypeFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(4, 8, 0, 0);
+            this.actionTypeFlowLayoutPanel.Size = new System.Drawing.Size(213, 415);
             this.actionTypeFlowLayoutPanel.TabIndex = 4;
             // 
             // bottomPanel
@@ -94,17 +93,6 @@
             this.bottomPanel.Size = new System.Drawing.Size(800, 47);
             this.bottomPanel.TabIndex = 5;
             // 
-            // leftPanel
-            // 
-            this.leftPanel.BackColor = System.Drawing.Color.DarkGray;
-            this.leftPanel.Controls.Add(this.actionTypeFlowLayoutPanel);
-            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.leftPanel.Location = new System.Drawing.Point(0, 0);
-            this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.leftPanel.Size = new System.Drawing.Size(213, 415);
-            this.leftPanel.TabIndex = 6;
-            // 
             // ActionForm
             // 
             this.AcceptButton = this.okButton;
@@ -113,7 +101,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(800, 462);
-            this.Controls.Add(this.leftPanel);
+            this.Controls.Add(this.actionTypeFlowLayoutPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.actionPropertiesPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -122,7 +110,6 @@
             this.Text = "Add Action";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ActionForm_FormClosing);
             this.bottomPanel.ResumeLayout(false);
-            this.leftPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -133,6 +120,5 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.FlowLayoutPanel actionTypeFlowLayoutPanel;
         private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.Panel leftPanel;
     }
 }

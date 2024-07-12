@@ -369,5 +369,29 @@ namespace Tao_Bot_Maker.View
             else
                 ClearArea();
         }
+
+        public void SetTheme(AppTheme theme)
+        {
+            imageSelectionPanel.BackColor = theme.BackColorElevationThree;
+            imageSelectionPanel.ForeColor = theme.ForeColor;
+
+            coordinatesPanel.BackColor = theme.BackColorElevationThree;
+            coordinatesPanel.ForeColor = theme.ForeColor;
+
+            overlayPanel.BackColor = theme.BackColorElevationThree;
+            overlayPanel.ForeColor = theme.ForeColor;
+
+            thresholdPanel.BackColor = theme.BackColorElevationThree;
+            thresholdPanel.ForeColor = theme.ForeColor;
+
+            expirationPanel.BackColor = theme.BackColorElevationThree;
+            expirationPanel.ForeColor = theme.ForeColor;
+
+            actionIfFoundPanel.BackColor = theme.BackColorElevationThree;
+            actionIfFoundPanel.ForeColor = theme.ForeColor;
+
+            actionIfNotFoundPanel.BackColor = theme.BackColorElevationThree;
+            actionIfNotFoundPanel.ForeColor = theme.ForeColor;
+        }
     }
 }
