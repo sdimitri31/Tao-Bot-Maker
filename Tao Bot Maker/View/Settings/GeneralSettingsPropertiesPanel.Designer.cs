@@ -31,6 +31,8 @@
             this.languageLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
+            this.themeLabel = new System.Windows.Forms.Label();
+            this.themeComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +57,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.Controls.Add(this.languageLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.languageComboBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.themeLabel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.themeComboBox, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -83,6 +87,28 @@
             this.languageComboBox.Size = new System.Drawing.Size(194, 21);
             this.languageComboBox.TabIndex = 1;
             // 
+            // themeLabel
+            // 
+            this.themeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.themeLabel.AutoSize = true;
+            this.themeLabel.Location = new System.Drawing.Point(3, 38);
+            this.themeLabel.Name = "themeLabel";
+            this.themeLabel.Size = new System.Drawing.Size(94, 13);
+            this.themeLabel.TabIndex = 2;
+            this.themeLabel.Text = "Theme";
+            this.themeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // themeComboBox
+            // 
+            this.themeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.themeComboBox, 2);
+            this.themeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.themeComboBox.FormattingEnabled = true;
+            this.themeComboBox.Location = new System.Drawing.Point(103, 34);
+            this.themeComboBox.Name = "themeComboBox";
+            this.themeComboBox.Size = new System.Drawing.Size(194, 21);
+            this.themeComboBox.TabIndex = 3;
+            // 
             // GeneralSettingsPropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -101,5 +127,7 @@
         private System.Windows.Forms.Label languageLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox languageComboBox;
+        private System.Windows.Forms.Label themeLabel;
+        private System.Windows.Forms.ComboBox themeComboBox;
     }
 }

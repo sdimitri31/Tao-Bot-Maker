@@ -12,6 +12,7 @@ namespace Tao_Bot_Maker.View
 {
     public partial class ActionForm : Form
     {
+        private AppTheme appTheme;
         public ActionType SelectedActionType { get; set; }
         public Action Action { get; set; }
 
@@ -31,9 +32,8 @@ namespace Tao_Bot_Maker.View
             Action = existingAction;
             SelectedActionType = ActionType.MouseAction;
 
+            LoadThemeSettings();
             LoadAllActionType();
-
-            AppThemeHelper.ApplyTheme(AppThemeHelper.DarkTheme(), this);
 
             if (existingAction != null)
             {
@@ -45,6 +45,12 @@ namespace Tao_Bot_Maker.View
             SetSelectedActionTypeFlowLayout(SelectedActionType);
         }
 
+        private void LoadThemeSettings()
+        {
+            string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
+            appTheme = AppThemeHelper.GetAppThemeFromName(theme);
+            AppThemeHelper.ApplyTheme(appTheme, this);
+        }
 
         private void AddCustomItem(ActionType actionType)
         {
@@ -60,6 +66,7 @@ namespace Tao_Bot_Maker.View
 
             customItem.Margin = new Padding(customItem.Margin.Left, customItem.Margin.Top, customItem.Margin.Right, 8);
 
+            AppThemeHelper.ApplyThemeToControl(appTheme, customItem, 2);
             actionTypeFlowLayoutPanel.Controls.Add(customItem);
         }
 
@@ -126,6 +133,7 @@ namespace Tao_Bot_Maker.View
                 panel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 actionPropertiesPanel.Controls.Add(panel);
                 panels.Add(panel);
+                AppThemeHelper.ApplyThemeToControl(appTheme, panel, 2);
             }
         }
 

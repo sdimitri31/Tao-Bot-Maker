@@ -18,6 +18,7 @@ namespace Tao_Bot_Maker.Model
         public const string SETTING_SAVELOGLEVEL = "SaveLogLevel";
         public const string SETTING_SAVELOG = "SaveLog";
         public const string SETTING_LANGUAGE = "Language";
+        public const string SETTING_THEME = "Theme";
         public const string SETTING_HOTKEYSTARTSEQUENCE = "HotkeyStartSequence";
         public const string SETTING_HOTKEYPAUSESEQUENCE = "HotkeyPauseSequence";
         public const string SETTING_HOTKEYSTOPSEQUENCE = "HotkeyStopSequence";
@@ -30,6 +31,7 @@ namespace Tao_Bot_Maker.Model
             { SETTING_SAVELOGLEVEL, 0b0111.ToString() },
             { SETTING_SAVELOG, "true" },
             { SETTING_LANGUAGE, "English" },
+            { SETTING_THEME, "Auto" },
             { SETTING_HOTKEYSTARTSEQUENCE, ((int)Keys.F5).ToString() },
             { SETTING_HOTKEYPAUSESEQUENCE, ((int)Keys.F6).ToString() },
             { SETTING_HOTKEYSTOPSEQUENCE, ((int)Keys.F7).ToString() },
@@ -48,10 +50,11 @@ namespace Tao_Bot_Maker.Model
         {
             return new List<Setting>
             {
-                new Setting(SETTING_SHOWLOGLEVEL, GetDefaultValue(SETTING_SHOWLOGLEVEL), SettingsType.General),
-                new Setting(SETTING_SAVELOGLEVEL, GetDefaultValue(SETTING_SAVELOGLEVEL), SettingsType.General),
-                new Setting(SETTING_SAVELOG, GetDefaultValue(SETTING_SAVELOG), SettingsType.General),
+                new Setting(SETTING_SHOWLOGLEVEL, GetDefaultValue(SETTING_SHOWLOGLEVEL), SettingsType.Other),
+                new Setting(SETTING_SAVELOGLEVEL, GetDefaultValue(SETTING_SAVELOGLEVEL), SettingsType.Other),
+                new Setting(SETTING_SAVELOG, GetDefaultValue(SETTING_SAVELOG), SettingsType.Other),
                 new Setting(SETTING_LANGUAGE, GetDefaultValue(SETTING_LANGUAGE), SettingsType.General),
+                new Setting(SETTING_THEME, GetDefaultValue(SETTING_THEME), SettingsType.General),
                 new Setting(SETTING_HOTKEYSTARTSEQUENCE, GetDefaultValue(SETTING_HOTKEYSTARTSEQUENCE), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYPAUSESEQUENCE, GetDefaultValue(SETTING_HOTKEYPAUSESEQUENCE), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYSTOPSEQUENCE, GetDefaultValue(SETTING_HOTKEYSTOPSEQUENCE), SettingsType.Hotkeys),
@@ -123,7 +126,7 @@ namespace Tao_Bot_Maker.Model
         private static readonly Dictionary<string, List<string>> ValidValues = new Dictionary<string, List<string>>
         {
             { SETTING_LANGUAGE, new List<string> { "English", "Français" } },
-            // Add more settings and their valid values as needed
+            { SETTING_THEME, new List<string> { "Auto", "Light", "Dark" } },
         };
 
         private static string ValidateSetting(string key, string value)

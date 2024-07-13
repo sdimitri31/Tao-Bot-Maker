@@ -15,7 +15,7 @@ namespace Tao_Bot_Maker.View
     public partial class MainForm : Form
     {
         private readonly MainFormController mainFormController;
-
+        private AppTheme appTheme;
         // Used for the insertion line
         private int insertionIndex = -1;
         private int draggedItemIndex = -1;
@@ -34,8 +34,6 @@ namespace Tao_Bot_Maker.View
             actionPanel.KeyDown += new KeyEventHandler(ActionFlowLayoutPanel_KeyDown);
 
             mainFormController = new MainFormController(this);
-
-            AppThemeHelper.ApplyTheme(AppThemeHelper.DarkTheme(), this);
 
             LoadSettings();
             LoadSequenceNames();
@@ -218,6 +216,29 @@ namespace Tao_Bot_Maker.View
             stopToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE));
             pauseToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE));
 
+            LoadThemeSettings();
+        }
+
+        private void LoadThemeSettings()
+        {
+            string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
+            autoThemeToolStripMenuItem.Checked = false;
+            darkThemeToolStripMenuItem.Checked = false;
+            lightThemeToolStripMenuItem.Checked = false;
+            switch (theme)
+            {
+                case "Dark":
+                    darkThemeToolStripMenuItem.Checked = true;
+                    break;
+                case "Light":
+                    lightThemeToolStripMenuItem.Checked = true;
+                    break;
+                default:
+                    autoThemeToolStripMenuItem.Checked = true;
+                    break;
+            }
+            appTheme = AppThemeHelper.GetAppThemeFromName(theme);
+            AppThemeHelper.ApplyTheme(appTheme, this);
         }
 
         private async void LoadSequenceAsync(string sequenceName)
@@ -278,19 +299,9 @@ namespace Tao_Bot_Maker.View
             customItem.MouseDown += ActionCustomListView_MouseDown;
             customItem.KeyDown += ActionFlowLayoutPanel_KeyDown;
 
-            customItem.Width = actionPanel.ClientSize.Width - actionPanel.Padding.Left - actionPanel.Padding.Right;
+            customItem.Width = actionPanel.ClientSize.Width - actionPanel.Padding.Left - actionPanel.Padding.Right - 2;
 
-            var theme = AppThemeHelper.DarkTheme();
-
-            customItem.SurfaceColor = AppThemeHelper.GetElevationColor(theme, 3);
-            customItem.TextColor = theme.ForeColor;
-            customItem.HighlightBackColor = theme.HighlightBackColor;
-            customItem.HighlightForeColor = theme.HighlightForeColor;
-            customItem.HoverBackColor = theme.HoverBackColor;
-            customItem.HoverForeColor = theme.HoverForeColor;
-            customItem.PressedBackColor = theme.PressedBackColor;
-            customItem.PressedForeColor = theme.PressedForeColor;
-
+            AppThemeHelper.ApplyThemeToControl(appTheme, customItem, 2);
             actionPanel.Controls.Add(customItem);
         }
 
@@ -796,7 +807,7 @@ namespace Tao_Bot_Maker.View
         {
             foreach (Control control in actionPanel.Controls)
             {
-                control.Width = actionPanel.ClientSize.Width - actionPanel.Padding.Left - actionPanel.Padding.Right;
+                control.Width = actionPanel.ClientSize.Width - actionPanel.Padding.Left - actionPanel.Padding.Right - 2;
             }
         }
 
@@ -807,6 +818,24 @@ namespace Tao_Bot_Maker.View
                 !moveActionUpContextMenuItem.Enabled && 
                 !deleteActionContextMenuItem.Enabled)
                 e.Cancel = true;
+        }
+
+        private void DarkThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsController.SetSettingValue(Settings.SETTING_THEME, SettingsController.GetSelectedThemeValueFromResource(Resources.Strings.LabelThemeDark), SettingsType.General);
+            LoadThemeSettings();
+        }
+
+        private void LightThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsController.SetSettingValue(Settings.SETTING_THEME, SettingsController.GetSelectedThemeValueFromResource(Resources.Strings.LabelThemeLight), SettingsType.General);
+            LoadThemeSettings();
+        }
+
+        private void AutoThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsController.SetSettingValue(Settings.SETTING_THEME, SettingsController.GetSelectedThemeValueFromResource(Resources.Strings.LabelThemeAuto), SettingsType.General);
+            LoadThemeSettings();
         }
     }
 }

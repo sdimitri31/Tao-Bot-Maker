@@ -32,5 +32,38 @@ namespace Tao_Bot_Maker.Controller
             Settings settings = Settings.Load();
             return settings.GetSettingValue<T>(name);
         }
+
+        public static string GetSelectedThemeValueFromResource(string selectedItem)
+        {
+            if (selectedItem == Resources.Strings.LabelThemeAuto)
+                return "Auto";
+            else if (selectedItem == Resources.Strings.LabelThemeLight)
+                return "Light";
+            else if (selectedItem == Resources.Strings.LabelThemeDark)
+                return "Dark";
+            else
+                return "Auto";
+        }
+
+        public static string GetSelectedThemeResourceFromValue(string themeName)
+        {
+            string selectedItem;
+            switch (themeName)
+            {
+                case "Auto":
+                    selectedItem = Resources.Strings.LabelThemeAuto;
+                    break;
+                case "Light":
+                    selectedItem = Resources.Strings.LabelThemeLight;
+                    break;
+                case "Dark":
+                    selectedItem = Resources.Strings.LabelThemeDark;
+                    break;
+                default:
+                    selectedItem = Resources.Strings.LabelThemeAuto;
+                    break;
+            }
+            return selectedItem;
+        }
     }
 }

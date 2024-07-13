@@ -11,22 +11,26 @@ namespace Tao_Bot_Maker.View
         public Color BackColorElevationFour { get; set; }
         public Color BackColorElevationFive { get; set; }
         public Color BackColorElevationSix { get; set; }
-        public Color ForeColor { get; set; }
 
         // For selected surfaces and text
         public Color HighlightBackColor { get; set; }
+        public Color HighlightBorderColor { get; set; }
         public Color HighlightForeColor { get; set; }
 
         // For hovered surfaces
         public Color HoverBackColor { get; set; }
+        public Color HoverBorderColor { get; set; }
         public Color HoverForeColor { get; set; }
 
         // For pressed state
         public Color PressedBackColor { get; set; }
+        public Color PressedBorderColor { get; set; }
         public Color PressedForeColor { get; set; }
 
 
+        public Color ForeColor { get; set; }
         public Color DisabledTextColor { get; set; }
+        public Color LinkForeColor { get; set; }
 
         // Constructor for easy initialization
         public AppTheme()
@@ -40,14 +44,18 @@ namespace Tao_Bot_Maker.View
             BackColorElevationSix = Color.Black;
             ForeColor = Color.Black;
             DisabledTextColor = SystemColors.GrayText;
+            LinkForeColor = Color.LightBlue;
 
             HighlightBackColor = Color.Blue;
+            HighlightBorderColor = Color.LightGray;
             HighlightForeColor = Color.White;
 
             HoverBackColor = Color.LightBlue;
+            HoverBorderColor = Color.LightGray;
             HoverForeColor = Color.Black;
 
             PressedBackColor = Color.DarkBlue;
+            PressedBorderColor = Color.DarkGray;
             PressedForeColor = Color.White;
         }
     }

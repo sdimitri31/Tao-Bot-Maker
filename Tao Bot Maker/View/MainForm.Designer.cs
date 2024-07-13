@@ -77,6 +77,10 @@
             this.moveActionDownContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventLogTextBox = new System.Windows.Forms.TextBox();
+            this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lightThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -256,6 +260,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.languageToolStripMenuItem,
             this.shortcutsToolStripMenuItem,
+            this.themeToolStripMenuItem,
             this.toolStripSeparator4,
             this.settingsToolStripMenuItem1});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -269,7 +274,7 @@
             this.francaisToolStripMenuItem});
             this.languageToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_language_48;
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.languageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.languageToolStripMenuItem.Text = "Language";
             // 
             // englishToolStripMenuItem
@@ -292,19 +297,19 @@
             // 
             this.shortcutsToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
             this.shortcutsToolStripMenuItem.Name = "shortcutsToolStripMenuItem";
-            this.shortcutsToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.shortcutsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.shortcutsToolStripMenuItem.Text = "Shortcuts";
             this.shortcutsToolStripMenuItem.Click += new System.EventHandler(this.ShortcutsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(123, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem1.Text = "Settings";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -453,15 +458,16 @@
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer.Panel1.Controls.Add(this.actionPanel);
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.BackColor = System.Drawing.Color.Gray;
+            this.splitContainer.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer.Panel2.Controls.Add(this.eventLogTextBox);
             this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(8);
             this.splitContainer.Size = new System.Drawing.Size(784, 362);
-            this.splitContainer.SplitterDistance = 248;
+            this.splitContainer.SplitterDistance = 247;
             this.splitContainer.TabIndex = 2;
             // 
             // actionPanel
@@ -474,7 +480,7 @@
             this.actionPanel.Location = new System.Drawing.Point(0, 0);
             this.actionPanel.Name = "actionPanel";
             this.actionPanel.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
-            this.actionPanel.Size = new System.Drawing.Size(784, 248);
+            this.actionPanel.Size = new System.Drawing.Size(784, 247);
             this.actionPanel.TabIndex = 2;
             this.actionPanel.ClientSizeChanged += new System.EventHandler(this.ActionPanel_ClientSizeChanged);
             this.actionPanel.Click += new System.EventHandler(this.ActionFlowLayoutPanel_Click);
@@ -528,8 +534,39 @@
             this.eventLogTextBox.Name = "eventLogTextBox";
             this.eventLogTextBox.ReadOnly = true;
             this.eventLogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.eventLogTextBox.Size = new System.Drawing.Size(768, 94);
+            this.eventLogTextBox.Size = new System.Drawing.Size(768, 95);
             this.eventLogTextBox.TabIndex = 0;
+            // 
+            // themeToolStripMenuItem
+            // 
+            this.themeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoThemeToolStripMenuItem,
+            this.lightThemeToolStripMenuItem,
+            this.darkThemeToolStripMenuItem});
+            this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeToolStripMenuItem.Text = "Theme";
+            // 
+            // autoThemeToolStripMenuItem
+            // 
+            this.autoThemeToolStripMenuItem.Name = "autoThemeToolStripMenuItem";
+            this.autoThemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autoThemeToolStripMenuItem.Text = "Auto";
+            this.autoThemeToolStripMenuItem.Click += new System.EventHandler(this.AutoThemeToolStripMenuItem_Click);
+            // 
+            // lightThemeToolStripMenuItem
+            // 
+            this.lightThemeToolStripMenuItem.Name = "lightThemeToolStripMenuItem";
+            this.lightThemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lightThemeToolStripMenuItem.Text = "Light";
+            this.lightThemeToolStripMenuItem.Click += new System.EventHandler(this.LightThemeToolStripMenuItem_Click);
+            // 
+            // darkThemeToolStripMenuItem
+            // 
+            this.darkThemeToolStripMenuItem.Name = "darkThemeToolStripMenuItem";
+            this.darkThemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.darkThemeToolStripMenuItem.Text = "Dark";
+            this.darkThemeToolStripMenuItem.Click += new System.EventHandler(this.DarkThemeToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -608,5 +645,9 @@
         private System.Windows.Forms.ToolStripMenuItem moveActionDownContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteActionContextMenuItem;
         private System.Windows.Forms.FlowLayoutPanel actionPanel;
+        private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoThemeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lightThemeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darkThemeToolStripMenuItem;
     }
 }

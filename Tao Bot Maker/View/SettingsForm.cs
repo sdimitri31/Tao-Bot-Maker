@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Tao_Bot_Maker.Controller;
+using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View.Setting;
 
@@ -10,6 +12,7 @@ namespace Tao_Bot_Maker.View
 {
     public partial class SettingsForm : Form
     {
+        private AppTheme appTheme;
         private SettingsType SelectedSettingsType { get; set; }
 
         private readonly List<UserControl> panels;
@@ -21,7 +24,16 @@ namespace Tao_Bot_Maker.View
             panels = new List<UserControl>();
             FillSettingsForm();
             LoadSettings();
+
+            LoadThemeSettings();
             settingsTypelistBox.SelectedItem = settingsTypelistBox.Items.Cast<CustomDisplayItem<SettingsType>>().First(item => item.Value == selectedSettingsType);
+        }
+
+        private void LoadThemeSettings()
+        {
+            string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
+            appTheme = AppThemeHelper.GetAppThemeFromName(theme);
+            AppThemeHelper.ApplyTheme(appTheme, this);
         }
 
         private void UpdateUI()

@@ -84,7 +84,7 @@
             // 
             // bottomPanel
             // 
-            this.bottomPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.bottomPanel.BackColor = System.Drawing.Color.Transparent;
             this.bottomPanel.Controls.Add(this.okButton);
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
