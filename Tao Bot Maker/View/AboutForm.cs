@@ -21,7 +21,7 @@ namespace Tao_Bot_Maker.View
         {
             string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
             appTheme = AppThemeHelper.GetAppThemeFromName(theme);
-            AppThemeHelper.ApplyTheme(appTheme, this);
+            AppThemeHelper.ApplyTheme(appTheme, this, 1);
         }
 
         private void InitializeAboutForm()

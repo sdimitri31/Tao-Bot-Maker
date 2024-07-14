@@ -49,7 +49,7 @@ namespace Tao_Bot_Maker.View
         {
             string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
             appTheme = AppThemeHelper.GetAppThemeFromName(theme);
-            AppThemeHelper.ApplyTheme(appTheme, this);
+            AppThemeHelper.ApplyTheme(appTheme, this, 1);
         }
 
         private void AddCustomItem(ActionType actionType)
@@ -66,8 +66,8 @@ namespace Tao_Bot_Maker.View
 
             customItem.Margin = new Padding(customItem.Margin.Left, customItem.Margin.Top, customItem.Margin.Right, 8);
 
-            AppThemeHelper.ApplyThemeToControl(appTheme, customItem, 2);
             actionTypeFlowLayoutPanel.Controls.Add(customItem);
+            AppThemeHelper.ApplyThemeToControl(appTheme, customItem, 2);
         }
 
         private void ActionTypeCustomListItem_Click(object sender, EventArgs e)

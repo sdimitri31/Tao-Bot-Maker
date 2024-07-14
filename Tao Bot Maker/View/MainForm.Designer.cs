@@ -54,6 +54,10 @@
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.francaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shortcutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lightThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,10 +81,6 @@
             this.moveActionDownContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventLogTextBox = new System.Windows.Forms.TextBox();
-            this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lightThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -274,7 +274,7 @@
             this.francaisToolStripMenuItem});
             this.languageToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_language_48;
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.languageToolStripMenuItem.Text = "Language";
             // 
             // englishToolStripMenuItem
@@ -297,19 +297,50 @@
             // 
             this.shortcutsToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
             this.shortcutsToolStripMenuItem.Name = "shortcutsToolStripMenuItem";
-            this.shortcutsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.shortcutsToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.shortcutsToolStripMenuItem.Text = "Shortcuts";
             this.shortcutsToolStripMenuItem.Click += new System.EventHandler(this.ShortcutsToolStripMenuItem_Click);
+            // 
+            // themeToolStripMenuItem
+            // 
+            this.themeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoThemeToolStripMenuItem,
+            this.lightThemeToolStripMenuItem,
+            this.darkThemeToolStripMenuItem});
+            this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.themeToolStripMenuItem.Text = "Theme";
+            // 
+            // autoThemeToolStripMenuItem
+            // 
+            this.autoThemeToolStripMenuItem.Name = "autoThemeToolStripMenuItem";
+            this.autoThemeToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.autoThemeToolStripMenuItem.Text = "Auto";
+            this.autoThemeToolStripMenuItem.Click += new System.EventHandler(this.AutoThemeToolStripMenuItem_Click);
+            // 
+            // lightThemeToolStripMenuItem
+            // 
+            this.lightThemeToolStripMenuItem.Name = "lightThemeToolStripMenuItem";
+            this.lightThemeToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.lightThemeToolStripMenuItem.Text = "Light";
+            this.lightThemeToolStripMenuItem.Click += new System.EventHandler(this.LightThemeToolStripMenuItem_Click);
+            // 
+            // darkThemeToolStripMenuItem
+            // 
+            this.darkThemeToolStripMenuItem.Name = "darkThemeToolStripMenuItem";
+            this.darkThemeToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.darkThemeToolStripMenuItem.Text = "Dark";
+            this.darkThemeToolStripMenuItem.Click += new System.EventHandler(this.DarkThemeToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(123, 6);
             // 
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.settingsToolStripMenuItem1.Text = "Settings";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -458,12 +489,10 @@
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer.Panel1.Controls.Add(this.actionPanel);
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer.Panel2.Controls.Add(this.eventLogTextBox);
             this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(8);
             this.splitContainer.Size = new System.Drawing.Size(784, 362);
@@ -536,37 +565,6 @@
             this.eventLogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.eventLogTextBox.Size = new System.Drawing.Size(768, 95);
             this.eventLogTextBox.TabIndex = 0;
-            // 
-            // themeToolStripMenuItem
-            // 
-            this.themeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.autoThemeToolStripMenuItem,
-            this.lightThemeToolStripMenuItem,
-            this.darkThemeToolStripMenuItem});
-            this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.themeToolStripMenuItem.Text = "Theme";
-            // 
-            // autoThemeToolStripMenuItem
-            // 
-            this.autoThemeToolStripMenuItem.Name = "autoThemeToolStripMenuItem";
-            this.autoThemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.autoThemeToolStripMenuItem.Text = "Auto";
-            this.autoThemeToolStripMenuItem.Click += new System.EventHandler(this.AutoThemeToolStripMenuItem_Click);
-            // 
-            // lightThemeToolStripMenuItem
-            // 
-            this.lightThemeToolStripMenuItem.Name = "lightThemeToolStripMenuItem";
-            this.lightThemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.lightThemeToolStripMenuItem.Text = "Light";
-            this.lightThemeToolStripMenuItem.Click += new System.EventHandler(this.LightThemeToolStripMenuItem_Click);
-            // 
-            // darkThemeToolStripMenuItem
-            // 
-            this.darkThemeToolStripMenuItem.Name = "darkThemeToolStripMenuItem";
-            this.darkThemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.darkThemeToolStripMenuItem.Text = "Dark";
-            this.darkThemeToolStripMenuItem.Click += new System.EventHandler(this.DarkThemeToolStripMenuItem_Click);
             // 
             // MainForm
             // 

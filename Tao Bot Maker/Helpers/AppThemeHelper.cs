@@ -57,12 +57,17 @@ namespace Tao_Bot_Maker.Helpers
         {
             var myTheme = new AppTheme
             {
-                BackColorElevationOne = Color.White,
-                BackColorElevationTwo = Color.FromArgb(230, 230, 230),
-                BackColorElevationThree = Color.FromArgb(200, 200, 200),
-                BackColorElevationFour = Color.FromArgb(180, 180, 180),
-                BackColorElevationFive = Color.FromArgb(150, 150, 150),
-                BackColorElevationSix = Color.FromArgb(100, 100, 100),
+                BackColorElevationZero = Color.White,
+                BackColorElevationOne = Color.FromArgb(245, 245, 245),
+                BackColorElevationTwo = Color.FromArgb(235, 235, 235),
+                BackColorElevationThree = Color.FromArgb(225, 225, 225),
+                BackColorElevationFour = Color.FromArgb(215, 215, 215),
+                BackColorElevationFive = Color.FromArgb(205, 205, 205),
+                BackColorElevationSix = Color.FromArgb(195, 195, 195),
+                BackColorElevationSeven = Color.FromArgb(185, 185, 185),
+                BackColorElevationEight = Color.FromArgb(175, 175, 175),
+                BackColorElevationNine = Color.FromArgb(165, 165, 165),
+                BackColorElevationTen = Color.FromArgb(155, 155, 155),
                 HighlightBackColor = SystemColors.Highlight,
                 HighlightBorderColor = SystemColors.Highlight,
                 HighlightForeColor = SystemColors.HighlightText,
@@ -84,12 +89,17 @@ namespace Tao_Bot_Maker.Helpers
         {
             var myTheme = new AppTheme
             {
-                BackColorElevationOne = Color.FromArgb(26, 26, 26),
-                BackColorElevationTwo = Color.FromArgb(33, 33, 33),
-                BackColorElevationThree = Color.FromArgb(50, 50, 50),
-                BackColorElevationFour = Color.FromArgb(80, 80, 80),
-                BackColorElevationFive = Color.FromArgb(100, 100, 100),
-                BackColorElevationSix = Color.FromArgb(120, 120, 120),
+                BackColorElevationZero = Color.Black,
+                BackColorElevationOne = Color.FromArgb(20, 20, 20),
+                BackColorElevationTwo = Color.FromArgb(30, 30, 30),
+                BackColorElevationThree = Color.FromArgb(40, 40, 40),
+                BackColorElevationFour = Color.FromArgb(50, 50, 50),
+                BackColorElevationFive = Color.FromArgb(60, 60, 60),
+                BackColorElevationSix = Color.FromArgb(70, 70, 70),
+                BackColorElevationSeven = Color.FromArgb(80, 80, 80),
+                BackColorElevationEight = Color.FromArgb(90, 90, 90),
+                BackColorElevationNine = Color.FromArgb(100, 100, 100),
+                BackColorElevationTen = Color.FromArgb(110, 110, 110),
                 HighlightBackColor = SystemColors.Highlight,
                 HighlightBorderColor = SystemColors.Highlight,
                 HighlightForeColor = SystemColors.HighlightText,
@@ -109,23 +119,42 @@ namespace Tao_Bot_Maker.Helpers
 
         public static Color GetElevationColor(AppTheme theme, int elevation)
         {
+            if (elevation < 0)
+            {
+                return theme.BackColorElevationZero;
+            }
+            else if (elevation > 10)
+            {
+                return theme.BackColorElevationTen;
+            }
+
             switch (elevation)
             {
                 case 0:
-                    return theme.BackColorElevationOne;
+                    return theme.BackColorElevationZero;
                 case 1:
-                    return theme.BackColorElevationTwo;
-                case 2:
-                    return theme.BackColorElevationThree;
-                case 3:
-                    return theme.BackColorElevationFour;
-                case 4:
-                    return theme.BackColorElevationFive;
-                case 5:
-                    return theme.BackColorElevationSix;
-                default:
                     return theme.BackColorElevationOne;
+                case 2:
+                    return theme.BackColorElevationTwo;
+                case 3:
+                    return theme.BackColorElevationThree;
+                case 4:
+                    return theme.BackColorElevationFour;
+                case 5:
+                    return theme.BackColorElevationFive;
+                case 6:
+                    return theme.BackColorElevationSix;
+                case 7:
+                    return theme.BackColorElevationSeven;
+                case 8:
+                    return theme.BackColorElevationEight;
+                case 9:
+                    return theme.BackColorElevationNine;
+                case 10:
+                    return theme.BackColorElevationTen;
             }
+
+            return theme.BackColorElevationTen;
         }
 
         public static void ApplyTheme(AppTheme theme, Form form, int elevation = 0)
@@ -135,23 +164,25 @@ namespace Tao_Bot_Maker.Helpers
 
             foreach (Control control in form.Controls)
             {
-                ApplyThemeToControl(theme, control, elevation + 1);
+                ApplyThemeToControl(theme, control, elevation);
             }
         }
 
         public static void ApplyThemeToControl(AppTheme theme, Control control, int elevation)
         {
             // Reduce elevation if transparent
-            if (control.BackColor == Color.Transparent)
+            if ((control.Parent.BackColor == Color.Transparent) || (control is SplitContainer))
             {
                 elevation--;
             }
             switch (control)
             {
+                case ContextMenuStrip contextMenuStrip: // not accessible need to investigate
+                    ApplyThemeToContextMenuStrip(theme, contextMenuStrip, elevation);
+                    break;
                 case ActionTypeCustomListItem actionTypeCustomListItem:
                     ApplyThemeToActionTypeCustomListItem(theme, actionTypeCustomListItem, elevation);
                     break;
-
                 case ActionCustomListItem actionCustomListItem:
                     ApplyThemeToActionCustomListItem(theme, actionCustomListItem, elevation);
                     break;
@@ -177,14 +208,14 @@ namespace Tao_Bot_Maker.Helpers
                     ApplyThemeToPanel(theme, panel, elevation);
                     break;
                 case MenuStrip menuStrip:
-                    ApplyThemeToMenuStrip(theme, menuStrip);
+                    ApplyThemeToMenuStrip(theme, menuStrip, elevation);
                     break;
                 case ToolStrip toolStrip:
-                    ApplyThemeToToolStrip(theme, toolStrip);
+                    ApplyThemeToToolStrip(theme, toolStrip, elevation);
                     break;
             }
 
-            if (!(control is MenuStrip) && !(control is ToolStrip) && control.HasChildren)
+            if (!(control is MenuStrip) && !(control is ToolStrip) && !(control is ActionCustomListItem) && control.HasChildren)
             {
                 foreach (Control child in control.Controls)
                 {
@@ -193,13 +224,27 @@ namespace Tao_Bot_Maker.Helpers
             }
         }
 
+        private static void ApplyThemeToContextMenuStrip(AppTheme theme, ContextMenuStrip contextMenuStrip, int elevation)
+        {
+            contextMenuStrip.RenderMode = ToolStripRenderMode.Professional;
+            contextMenuStrip.Renderer = new CustomToolStripRenderer(theme, elevation);
+            contextMenuStrip.BackColor = GetElevationColor(theme, elevation);
+            contextMenuStrip.ForeColor = theme.ForeColor;
+
+            foreach (ToolStripMenuItem menuItem in contextMenuStrip.Items)
+            {
+                ApplyThemeToMenuItem(theme, menuItem, elevation);
+            }
+
+        }
+
         private static void ApplyThemeToActionTypeCustomListItem(AppTheme theme, ActionTypeCustomListItem actionTypeCustomListItem, int elevation)
         {
             actionTypeCustomListItem.SurfaceColor = GetElevationColor(theme, elevation);
             actionTypeCustomListItem.TextColor = theme.ForeColor;
             actionTypeCustomListItem.HighlightBackColor = theme.HighlightBackColor;
             actionTypeCustomListItem.HighlightForeColor = theme.HighlightForeColor;
-            actionTypeCustomListItem.HoverBackColor = GetElevationColor(theme, elevation - 1);
+            actionTypeCustomListItem.HoverBackColor = GetElevationColor(theme, elevation + 1);
             actionTypeCustomListItem.HoverForeColor = theme.HoverForeColor;
             actionTypeCustomListItem.PressedBackColor = theme.PressedBackColor;
             actionTypeCustomListItem.PressedForeColor = theme.PressedForeColor;
@@ -211,7 +256,7 @@ namespace Tao_Bot_Maker.Helpers
             actionCustomListItem.TextColor = theme.ForeColor;
             actionCustomListItem.HighlightBackColor = theme.HighlightBackColor;
             actionCustomListItem.HighlightForeColor = theme.HighlightForeColor;
-            actionCustomListItem.HoverBackColor = GetElevationColor(theme, elevation - 1);
+            actionCustomListItem.HoverBackColor = GetElevationColor(theme, elevation + 1);
             actionCustomListItem.HoverForeColor = theme.HoverForeColor;
             actionCustomListItem.PressedBackColor = theme.PressedBackColor;
             actionCustomListItem.PressedForeColor = theme.PressedForeColor;
@@ -222,18 +267,18 @@ namespace Tao_Bot_Maker.Helpers
             button.FlatStyle = FlatStyle.Flat;
             button.BackColor = GetElevationColor(theme, elevation);
             button.ForeColor = theme.ForeColor;
-            button.FlatAppearance.BorderColor = GetElevationColor(theme, elevation - 1);
+            button.FlatAppearance.BorderColor = GetElevationColor(theme, elevation + 1);
             // Handle button hover and disabled text colors
             button.MouseEnter += (sender, e) =>
             {
-                button.FlatAppearance.MouseOverBackColor = theme.HoverBackColor;
-                button.FlatAppearance.BorderColor = theme.HoverBorderColor;
-                button.ForeColor = theme.HoverForeColor;
+                button.FlatAppearance.MouseOverBackColor = GetElevationColor(theme, elevation + 1);
+                button.FlatAppearance.BorderColor = GetElevationColor(theme, elevation + 2);
+                button.ForeColor = theme.ForeColor;
             };
             button.MouseLeave += (sender, e) =>
             {
                 button.BackColor = GetElevationColor(theme, elevation);
-                button.FlatAppearance.BorderColor = GetElevationColor(theme, elevation - 1);
+                button.FlatAppearance.BorderColor = GetElevationColor(theme, elevation + 1);
                 button.ForeColor = theme.ForeColor;
             };
             button.EnabledChanged += (sender, e) => button.ForeColor = button.Enabled ? theme.ForeColor : theme.DisabledTextColor;
@@ -244,7 +289,6 @@ namespace Tao_Bot_Maker.Helpers
             linkLabel.LinkColor = theme.LinkForeColor;
             linkLabel.EnabledChanged += (sender, e) => linkLabel.ForeColor = linkLabel.Enabled ? theme.ForeColor : theme.DisabledTextColor;
         }
-
 
         private static void ApplyThemeToLabel(AppTheme theme, Label label)
         {
@@ -266,33 +310,35 @@ namespace Tao_Bot_Maker.Helpers
 
         private static void ApplyThemeToFlowLayoutPanel(AppTheme theme, FlowLayoutPanel flowLayoutPanel, int elevation)
         {
-            flowLayoutPanel.BackColor = GetElevationColor(theme, elevation);
+            if (flowLayoutPanel.BackColor != Color.Transparent)
+                flowLayoutPanel.BackColor = GetElevationColor(theme, elevation);
             flowLayoutPanel.ForeColor = theme.ForeColor;
         }
 
         private static void ApplyThemeToPanel(AppTheme theme, Panel panel, int elevation)
         {
-            panel.BackColor = GetElevationColor(theme, elevation);
+            if (panel.BackColor != Color.Transparent)
+                panel.BackColor = GetElevationColor(theme, elevation);
             panel.ForeColor = theme.ForeColor;
         }
 
-        private static void ApplyThemeToMenuStrip(AppTheme theme, MenuStrip menuStrip)
+        private static void ApplyThemeToMenuStrip(AppTheme theme, MenuStrip menuStrip, int elevation)
         {
             menuStrip.RenderMode = ToolStripRenderMode.Professional;
-            menuStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable(theme));
-            menuStrip.BackColor = theme.BackColorElevationOne;
+            menuStrip.Renderer = new CustomToolStripRenderer(theme, elevation);
+            menuStrip.BackColor = GetElevationColor(theme, elevation);
             menuStrip.ForeColor = theme.ForeColor;
 
             foreach (ToolStripMenuItem menuItem in menuStrip.Items)
             {
-                ApplyThemeToMenuItem(theme, menuItem);
+                ApplyThemeToMenuItem(theme, menuItem, elevation);
             }
         }
 
-        private static void ApplyThemeToMenuItem(AppTheme theme, ToolStripMenuItem menuItem)
+        private static void ApplyThemeToMenuItem(AppTheme theme, ToolStripMenuItem menuItem, int elevation)
         {
-            menuItem.BackColor = theme.BackColorElevationOne;
-            menuItem.ForeColor = theme.ForeColor;
+            menuItem.BackColor = GetElevationColor(theme, elevation);
+            menuItem.ForeColor = menuItem.Enabled ? theme.ForeColor : theme.DisabledTextColor;
             menuItem.MouseEnter += (sender, e) => menuItem.ForeColor = theme.ForeColor;
             menuItem.MouseLeave += (sender, e) => menuItem.ForeColor = theme.ForeColor;
             menuItem.EnabledChanged += (sender, e) => menuItem.ForeColor = menuItem.Enabled ? theme.ForeColor : theme.DisabledTextColor;
@@ -301,72 +347,67 @@ namespace Tao_Bot_Maker.Helpers
             {
                 if (subItem is ToolStripMenuItem subMenuItem)
                 {
-                    ApplyThemeToMenuItem(theme, subMenuItem);
-                    subItem.BackColor = theme.BackColorElevationTwo; // Color dropdown menu items
+                    subItem.BackColor = GetElevationColor(theme, elevation); // Color dropdown menu items
+                    ApplyThemeToMenuItem(theme, subMenuItem, elevation);
                 }
                 else if (subItem is ToolStripSeparator separator)
                 {
                     separator.Paint += (sender, e) =>
                     {
-                        e.Graphics.FillRectangle(new SolidBrush(theme.BackColorElevationTwo), e.ClipRectangle);
-                        e.Graphics.DrawLine(new Pen(theme.BackColorElevationThree), e.ClipRectangle.Left, e.ClipRectangle.Height / 2, e.ClipRectangle.Right, e.ClipRectangle.Height / 2);
+                        e.Graphics.FillRectangle(new SolidBrush(GetElevationColor(theme, elevation)), e.ClipRectangle);
+                        e.Graphics.DrawLine(new Pen(GetElevationColor(theme, elevation + 1)), e.ClipRectangle.Left, e.ClipRectangle.Height / 2, e.ClipRectangle.Right, e.ClipRectangle.Height / 2);
                     };
                 }
             }
-
-            if (menuItem.DropDown is ContextMenuStrip contextMenuStrip)
-            {
-                contextMenuStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable(theme));
-            }
         }
 
-        private static void ApplyThemeToToolStrip(AppTheme theme, ToolStrip toolStrip)
+        private static void ApplyThemeToToolStrip(AppTheme theme, ToolStrip toolStrip, int elevation)
         {
             toolStrip.RenderMode = ToolStripRenderMode.Professional;
-            toolStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable(theme));
-            toolStrip.BackColor = theme.BackColorElevationOne;
+            toolStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable(theme, elevation));
+            toolStrip.BackColor = GetElevationColor(theme, elevation);
             toolStrip.ForeColor = theme.ForeColor;
 
             foreach (ToolStripItem item in toolStrip.Items)
             {
                 if (item is ToolStripButton button)
                 {
-                    ApplyThemeToToolStripButton(theme, button);
+                    ApplyThemeToToolStripButton(theme, button, elevation);
                 }
                 else if (item is ToolStripSeparator separator)
                 {
                     separator.Paint += (sender, e) =>
                     {
                         // Override the default rendering of the separator
-                        e.Graphics.FillRectangle(new SolidBrush(theme.BackColorElevationOne), e.ClipRectangle);
-                        e.Graphics.DrawLine(new Pen(theme.BackColorElevationThree), e.ClipRectangle.Width / 2, e.ClipRectangle.Top + 5, e.ClipRectangle.Width / 2, e.ClipRectangle.Bottom - 5);
+                        e.Graphics.FillRectangle(new SolidBrush(GetElevationColor(theme, elevation)), e.ClipRectangle);
+                        e.Graphics.DrawLine(new Pen(GetElevationColor(theme, elevation + 1)), e.ClipRectangle.Width / 2, e.ClipRectangle.Top + 5, e.ClipRectangle.Width / 2, e.ClipRectangle.Bottom - 5);
                     };
                 }
                 else if (item is ToolStripComboBox comboBox)
                 {
-                    ApplyThemeToToolStripComboBox(theme, comboBox);
+                    ApplyThemeToToolStripComboBox(theme, comboBox, elevation);
                 }
             }
         }
 
-        private static void ApplyThemeToToolStripButton(AppTheme theme, ToolStripButton button)
+        private static void ApplyThemeToToolStripButton(AppTheme theme, ToolStripButton button, int elevation)
         {
-            button.BackColor = theme.BackColorElevationOne;
+            button.BackColor = GetElevationColor(theme, elevation);
             button.ForeColor = button.Enabled ? theme.ForeColor : theme.DisabledTextColor;
 
             void ApplyHoverStyle()
             {
                 if (button.Enabled)
                 {
-                    button.BackColor = theme.HoverBackColor;
-                    button.ForeColor = theme.HoverForeColor;
+                    button.BackColor = GetElevationColor(theme, elevation + 1);
+                    button.ForeColor = theme.ForeColor;
                     button.Invalidate();
                 }
             }
 
             void ApplyDefaultStyle()
             {
-                button.BackColor = theme.BackColorElevationOne;
+                button.BackColor = GetElevationColor(theme, elevation);
                 button.ForeColor = button.Enabled ? theme.ForeColor : theme.DisabledTextColor;
                 button.Invalidate();
             }
@@ -375,8 +416,8 @@ namespace Tao_Bot_Maker.Helpers
             {
                 if (button.Enabled)
                 {
-                    button.BackColor = theme.PressedBackColor;
-                    button.ForeColor = theme.PressedForeColor;
+                    button.BackColor = GetElevationColor(theme, elevation);
+                    button.ForeColor = theme.ForeColor;
                     button.Invalidate();
                 }
             }
@@ -392,11 +433,20 @@ namespace Tao_Bot_Maker.Helpers
                 if (button.Enabled)
                 {
                     Rectangle rect = new Rectangle(0, 0, button.Width - 1, button.Height - 1);
-                    using (Pen pen = new Pen(theme.HoverBorderColor))
+                    using (Pen penBorder = new Pen(Color.Transparent))
                     {
-                        if (button.BackColor == theme.HoverBackColor || button.BackColor == theme.PressedBackColor)
+                        if (button.Selected)
                         {
-                            e.Graphics.DrawRectangle(pen, rect);
+                            button.BackColor = GetElevationColor(theme, elevation + 1);
+                            penBorder.Color = GetElevationColor(theme, elevation + 2);
+                            e.Graphics.DrawRectangle(penBorder, rect);
+                        }
+
+                        if (button.Pressed)
+                        {
+                            button.BackColor = GetElevationColor(theme, elevation);
+                            penBorder.Color = GetElevationColor(theme, elevation + 1);
+                            e.Graphics.DrawRectangle(penBorder, rect);
                         }
                     }
                 }
@@ -405,10 +455,10 @@ namespace Tao_Bot_Maker.Helpers
             button.Margin = new Padding(0, 5, 0, 5);
         }
 
-        private static void ApplyThemeToToolStripComboBox(AppTheme theme, ToolStripComboBox comboBox)
+        private static void ApplyThemeToToolStripComboBox(AppTheme theme, ToolStripComboBox comboBox, int elevation)
         {
             // Set background and foreground colors
-            comboBox.BackColor = theme.BackColorElevationTwo;
+            comboBox.BackColor = GetElevationColor(theme, elevation);
             comboBox.ForeColor = theme.ForeColor;
 
             // Custom painting for ComboBox dropdown
@@ -422,7 +472,7 @@ namespace Tao_Bot_Maker.Helpers
 
                 // Determine the color based on the state
                 Color textColor = (e.State & DrawItemState.Selected) == DrawItemState.Selected
-                                    ? theme.HoverForeColor
+                                    ? GetElevationColor(theme, elevation + 1)
                                     : theme.ForeColor;
 
                 // Draw the text
@@ -437,42 +487,75 @@ namespace Tao_Bot_Maker.Helpers
     public class CustomColorTable : ProfessionalColorTable
     {
         private readonly AppTheme _theme;
+        private readonly int _elevation;
 
-        public CustomColorTable(AppTheme theme)
+        public CustomColorTable(AppTheme theme, int elevation)
         {
             _theme = theme;
+            _elevation = elevation;
         }
 
-        public override Color MenuItemSelected => _theme.BackColorElevationThree; // Selected dropdown menu item
-        public override Color MenuItemBorder => _theme.BackColorElevationFour; // Border around Selected dropdown menu item
-        public override Color MenuBorder => _theme.BackColorElevationThree; // Border around menu item (File, Edit, etc) and dropdown menu
-        public override Color MenuItemPressedGradientBegin => _theme.BackColorElevationTwo; // Pressed menu item (File, Edit, etc)
-        public override Color MenuItemPressedGradientMiddle => _theme.BackColorElevationTwo;// Pressed menu item (File, Edit, etc)
-        public override Color MenuItemPressedGradientEnd => _theme.BackColorElevationTwo; // Pressed menu item (File, Edit, etc)
-        public override Color MenuItemSelectedGradientBegin => _theme.BackColorElevationTwo; // Hovered menu item (File, Edit, etc)
-        public override Color MenuItemSelectedGradientEnd => _theme.BackColorElevationTwo; // Hovered menu item (File, Edit, etc)
-        public override Color ToolStripDropDownBackground => _theme.BackColorElevationTwo; // Border around dropdown menu except left side
-        public override Color ImageMarginGradientBegin => _theme.BackColorElevationTwo; // Border left side around dropdown menu
-        public override Color ImageMarginGradientMiddle => _theme.BackColorElevationTwo; // Border left side around dropdown menu
-        public override Color ImageMarginGradientEnd => _theme.BackColorElevationTwo; // Border left side around dropdown menu
+        public override Color MenuItemSelected => AppThemeHelper.GetElevationColor(_theme, _elevation + 1); // Hovered dropdown menu item
+        public override Color MenuItemBorder => AppThemeHelper.GetElevationColor(_theme, _elevation + 2); // Border around Hovered dropdown menu item
+        public override Color MenuBorder => AppThemeHelper.GetElevationColor(_theme, _elevation + 1); // Border around menu item (File, Edit, etc) and dropdown menu
+        public override Color MenuItemPressedGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation); // Pressed menu item (File, Edit, etc)
+        public override Color MenuItemPressedGradientMiddle => AppThemeHelper.GetElevationColor(_theme, _elevation);// Pressed menu item (File, Edit, etc)
+        public override Color MenuItemPressedGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation); // Pressed menu item (File, Edit, etc)
+        public override Color MenuItemSelectedGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation + 1); // Hovered menu item (File, Edit, etc)
+        public override Color MenuItemSelectedGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation + 1); // Hovered menu item (File, Edit, etc)
+        public override Color ToolStripDropDownBackground => AppThemeHelper.GetElevationColor(_theme, _elevation); // Border around dropdown menu except left side
+        public override Color ImageMarginGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation); // Border left side around dropdown menu
+        public override Color ImageMarginGradientMiddle => AppThemeHelper.GetElevationColor(_theme, _elevation); // Border left side around dropdown menu
+        public override Color ImageMarginGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation); // Border left side around dropdown menu
 
 
-        public override Color ToolStripBorder => _theme.BackColorElevationOne; // Border color around ToolStrip
-        public override Color ToolStripContentPanelGradientBegin => _theme.BackColorElevationTwo;
-        public override Color ToolStripContentPanelGradientEnd => _theme.BackColorElevationTwo;
-        public override Color ToolStripPanelGradientBegin => _theme.BackColorElevationTwo;
-        public override Color ToolStripPanelGradientEnd => _theme.BackColorElevationTwo;
-        public override Color ToolStripGradientBegin => _theme.BackColorElevationTwo;
-        public override Color ToolStripGradientMiddle => _theme.BackColorElevationTwo;
-        public override Color ToolStripGradientEnd => _theme.BackColorElevationTwo;
-        public override Color OverflowButtonGradientBegin => _theme.BackColorElevationTwo;
-        public override Color OverflowButtonGradientEnd => _theme.BackColorElevationTwo;
-        public override Color OverflowButtonGradientMiddle => _theme.BackColorElevationTwo;
+        public override Color ToolStripBorder => AppThemeHelper.GetElevationColor(_theme, _elevation); // Border color around ToolStrip
+        public override Color ToolStripContentPanelGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color ToolStripContentPanelGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color ToolStripPanelGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color ToolStripPanelGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color ToolStripGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color ToolStripGradientMiddle => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color ToolStripGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color OverflowButtonGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color OverflowButtonGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
+        public override Color OverflowButtonGradientMiddle => AppThemeHelper.GetElevationColor(_theme, _elevation + 1);
 
-        public override Color ButtonSelectedGradientBegin => _theme.HoverBackColor; // Toolstrip button background
-        public override Color ButtonSelectedGradientEnd => _theme.HoverBackColor; // Toolstrip button background
-        public override Color ButtonSelectedGradientMiddle => _theme.HoverBackColor; // Toolstrip button background
-        public override Color ButtonSelectedBorder => _theme.HoverBorderColor; // Toolstrip button border
+        public override Color ButtonSelectedGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation + 1); // Toolstrip button background
+        public override Color ButtonSelectedGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation + 1); // Toolstrip button background
+        public override Color ButtonSelectedGradientMiddle => AppThemeHelper.GetElevationColor(_theme, _elevation + 1); // Toolstrip button background
+        public override Color ButtonSelectedBorder => AppThemeHelper.GetElevationColor(_theme, _elevation + 2); // Toolstrip button border
+        public override Color ButtonPressedGradientBegin => AppThemeHelper.GetElevationColor(_theme, _elevation);
+        public override Color ButtonPressedGradientEnd => AppThemeHelper.GetElevationColor(_theme, _elevation);
+        public override Color ButtonPressedGradientMiddle => AppThemeHelper.GetElevationColor(_theme, _elevation);
     }
 
+    public class CustomToolStripRenderer : ToolStripProfessionalRenderer
+    {
+        private AppTheme theme;
+        private int elevation;
+
+        public CustomToolStripRenderer(AppTheme theme, int elevation) : base(new CustomColorTable(theme, elevation))
+        {
+            this.theme = theme;
+            this.elevation = elevation;
+        }
+
+        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+        {
+            base.OnRenderMenuItemBackground(e);
+
+            // Hide border when hovering a disabled menu item
+            if (e.Item.Selected && !e.Item.Enabled)
+            {
+                ToolStripMenuItem item = e.Item as ToolStripMenuItem;
+                Color color = AppThemeHelper.GetElevationColor(theme, elevation);
+                Rectangle rect = new Rectangle(2, 0, item.Width - 4, item.Height - 1);
+                using (Pen pen = new Pen(color))
+                {
+                    e.Graphics.DrawRectangle(pen, rect);
+                }
+            }
+        }
+    }
 }

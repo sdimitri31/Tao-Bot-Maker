@@ -238,7 +238,7 @@ namespace Tao_Bot_Maker.View
                     break;
             }
             appTheme = AppThemeHelper.GetAppThemeFromName(theme);
-            AppThemeHelper.ApplyTheme(appTheme, this);
+            AppThemeHelper.ApplyTheme(appTheme, this, 1);
         }
 
         private async void LoadSequenceAsync(string sequenceName)
@@ -301,8 +301,8 @@ namespace Tao_Bot_Maker.View
 
             customItem.Width = actionPanel.ClientSize.Width - actionPanel.Padding.Left - actionPanel.Padding.Right - 2;
 
-            AppThemeHelper.ApplyThemeToControl(appTheme, customItem, 2);
             actionPanel.Controls.Add(customItem);
+            AppThemeHelper.ApplyThemeToControl(appTheme, customItem, 3);
         }
 
         private void ActionCustomListItem_Click(object sender, EventArgs e)
