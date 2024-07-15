@@ -1,0 +1,18 @@
+Changelog:
+2.0.3-beta:
+Add: 'Edit action' in contextMenu
+Fix: Missing translation in contextMenu
+Fix: Prevening crash when trying to search for a picture without providing picture in Action Image Panel
+Fix: In Action Key Panel, stops focusing button to set a key to allow to press 'Enter' to add action
+
+2.0.2-beta:
+Fix: Preventing crash when moving action at invalid index
+Add: Action ContextMenu is now themed
+
+2.0.0-beta:
+- Sequence execution can be paused and be resumed (will pause when possible)
+- Overlay can draw area on multiples screens
+- New code architecture
+- New sequence system, old sequences will not work
+- New setting system, old settings will not work
+- New UI with Theme support

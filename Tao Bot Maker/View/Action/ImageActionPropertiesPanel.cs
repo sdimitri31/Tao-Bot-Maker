@@ -239,6 +239,9 @@ namespace Tao_Bot_Maker.View
 
         private void SearchImageButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(selectedImageName))
+                return;
+
             string targetFolderPath = Path.Combine(Directory.GetCurrentDirectory(), ImageAction.imagesFolderPath);
             string imagePath = Path.Combine(targetFolderPath, selectedImageName);
             int threshold = (int)thresholdNumericUpDown.Value;

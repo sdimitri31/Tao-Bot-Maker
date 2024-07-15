@@ -139,6 +139,12 @@ namespace Tao_Bot_Maker.View
             // SEQUENCE BUTTON
             saveSequenceToolStripButton.Text = Resources.Strings.MenuFileSave;
             deleteSequenceToolStripButton.Text = Resources.Strings.MenuEditDeleteSequence;
+
+            // CONTEXT MENU
+            moveActionUpContextMenuItem.Text = Resources.Strings.MenuEditMoveUp;
+            moveActionDownContextMenuItem.Text = Resources.Strings.MenuEditMoveDown;
+            editActionContextMenuItem.Text = Resources.Strings.MenuEditEditAction;
+            deleteActionContextMenuItem.Text = Resources.Strings.MenuEditDeleteAction;
         }
 
         private void UpdateUIState()
@@ -238,7 +244,7 @@ namespace Tao_Bot_Maker.View
                     break;
             }
             appTheme = AppThemeHelper.GetAppThemeFromName(theme);
-            AppThemeHelper.ApplyTheme(appTheme, this, 1);
+            AppThemeHelper.ApplyTheme(appTheme, this, 0);
         }
 
         private async void LoadSequenceAsync(string sequenceName)
@@ -275,19 +281,25 @@ namespace Tao_Bot_Maker.View
             {
                 AddCustomItem(action);
             }
-            AddBottomSpacer();
+            AddBottomMarginToLastAction();
         }
 
         /// <summary>
-        /// Fix missing marging bottom on last action
+        /// Fix missing marging bottom on last action to get space to draw the insertion line
         /// </summary>
-        private void AddBottomSpacer()
+        private void AddBottomMarginToLastAction()
         {
-            var spacer = new Panel();
-            spacer.Height = 8;
-            spacer.Dock = DockStyle.Bottom;
-            spacer.BackColor = Color.Transparent;
-            actionPanel.Controls.Add(spacer);
+            foreach (Control c in actionPanel.Controls)
+            {
+                if (c != actionPanel.Controls[actionPanel.Controls.Count - 1])
+                {
+                    c.Margin = new Padding(c.Margin.Left, c.Margin.Top, c.Margin.Right, 8);
+                }
+                else if (c == actionPanel.Controls[actionPanel.Controls.Count - 1])
+                {
+                    c.Margin = new Padding(c.Margin.Left, c.Margin.Top, c.Margin.Right, 16);
+                }
+            }
         }
 
         private void AddCustomItem(Action action)
@@ -495,6 +507,7 @@ namespace Tao_Bot_Maker.View
 
             mainFormController.RemoveAction(actionPanel.Controls.OfType<ActionCustomListItem>().ElementAt(selectedActionIndex).Action);
             actionPanel.Controls.RemoveAt(selectedActionIndex);
+            AddBottomMarginToLastAction();
             SetSelectedAction(null);
         }
 
@@ -633,6 +646,7 @@ namespace Tao_Bot_Maker.View
                 mainFormController.MoveAction(selectedActionIndex - 1, action);
                 actionPanel.Controls.SetChildIndex(actionPanel.Controls[selectedActionIndex], selectedActionIndex - 1);
                 SetSelectedAction(action);
+                AddBottomMarginToLastAction();
             }
         }
 
@@ -644,6 +658,7 @@ namespace Tao_Bot_Maker.View
                 mainFormController.MoveAction(selectedActionIndex + 1, action);
                 actionPanel.Controls.SetChildIndex(actionPanel.Controls[selectedActionIndex], selectedActionIndex + 1);
                 SetSelectedAction(action);
+                AddBottomMarginToLastAction();
             }
         }
 
@@ -716,7 +731,7 @@ namespace Tao_Bot_Maker.View
                 Logger.Log($"Moving item from {draggedItemIndex} to {targetIndex}", TraceEventType.Verbose);
                 actionPanel.Controls.SetChildIndex(droppedItem, targetIndex);
                 mainFormController.MoveAction(targetIndex, droppedItem.Action);
-
+                AddBottomMarginToLastAction();
                 // Remove the insertion line
                 DrawInsertionLine(-1);
             }
@@ -814,8 +829,8 @@ namespace Tao_Bot_Maker.View
         private void ActionListBoxContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             // Disable the context menu if no action is selected
-            if (!moveActionDownContextMenuItem.Enabled && 
-                !moveActionUpContextMenuItem.Enabled && 
+            if (!moveActionDownContextMenuItem.Enabled &&
+                !moveActionUpContextMenuItem.Enabled &&
                 !deleteActionContextMenuItem.Enabled)
                 e.Cancel = true;
         }
@@ -836,6 +851,17 @@ namespace Tao_Bot_Maker.View
         {
             SettingsController.SetSettingValue(Settings.SETTING_THEME, SettingsController.GetSelectedThemeValueFromResource(Resources.Strings.LabelThemeAuto), SettingsType.General);
             LoadThemeSettings();
+        }
+
+        private void EditActionContextMenuItem_Click(object sender, EventArgs e)
+        {
+            EditAction();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            TestView testView = new TestView();
+            testView.Show();
         }
     }
 }

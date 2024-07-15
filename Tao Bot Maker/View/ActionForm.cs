@@ -49,7 +49,7 @@ namespace Tao_Bot_Maker.View
         {
             string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
             appTheme = AppThemeHelper.GetAppThemeFromName(theme);
-            AppThemeHelper.ApplyTheme(appTheme, this, 1);
+            AppThemeHelper.ApplyTheme(appTheme, this);
         }
 
         private void AddCustomItem(ActionType actionType)
@@ -133,7 +133,7 @@ namespace Tao_Bot_Maker.View
                 panel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 actionPropertiesPanel.Controls.Add(panel);
                 panels.Add(panel);
-                AppThemeHelper.ApplyThemeToControl(appTheme, panel, 2);
+                AppThemeHelper.ApplyThemeToControl(appTheme, actionPropertiesPanel, 3);
             }
         }
 

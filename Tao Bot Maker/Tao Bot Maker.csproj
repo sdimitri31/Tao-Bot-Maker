@@ -234,6 +234,12 @@
     <Compile Include="View\Settings\GeneralSettingsPropertiesPanel.Designer.cs">
       <DependentUpon>GeneralSettingsPropertiesPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\TestView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TestView.Designer.cs">
+      <DependentUpon>TestView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Resources\Images.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Images.Designer.cs</LastGenOutput>
@@ -301,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Settings\GeneralSettingsPropertiesPanel.resx">
       <DependentUpon>GeneralSettingsPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TestView.resx">
+      <DependentUpon>TestView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -370,6 +379,7 @@
   <PropertyGroup>
     <PostBuildEvent>cd "Tao Bot Maker"\bin\Release
 xcopy /Y ..\..\..\README.txt
+xcopy /Y ..\..\..\Changelog.txt
 xcopy /Y C:\ImageSearchDLL.dll
 del *.pdb *.config *.zip
 tar -acvf ..\..\..\TaoBotMaker_v2.0.zip *

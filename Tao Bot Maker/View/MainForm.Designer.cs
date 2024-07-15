@@ -74,11 +74,13 @@
             this.sequenceComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.saveSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.deleteSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.actionPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.actionListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.moveActionUpContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveActionDownContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventLogTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
@@ -374,7 +376,8 @@
             this.toolStripSeparator2,
             this.sequenceComboBox,
             this.saveSequenceToolStripButton,
-            this.deleteSequenceToolStripButton});
+            this.deleteSequenceToolStripButton,
+            this.toolStripButton1});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(10, 0, 1, 0);
@@ -480,6 +483,16 @@
             this.deleteSequenceToolStripButton.Text = "Delete sequence";
             this.deleteSequenceToolStripButton.Click += new System.EventHandler(this.DeleteSequenceToolStripButton_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // splitContainer
             // 
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -489,6 +502,7 @@
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer.Panel1.Controls.Add(this.actionPanel);
             // 
             // splitContainer.Panel2
@@ -503,12 +517,12 @@
             // 
             this.actionPanel.AllowDrop = true;
             this.actionPanel.AutoScroll = true;
-            this.actionPanel.BackColor = System.Drawing.Color.Transparent;
+            this.actionPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.actionPanel.ContextMenuStrip = this.actionListBoxContextMenuStrip;
             this.actionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.actionPanel.Location = new System.Drawing.Point(0, 0);
             this.actionPanel.Name = "actionPanel";
-            this.actionPanel.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
+            this.actionPanel.Padding = new System.Windows.Forms.Padding(8);
             this.actionPanel.Size = new System.Drawing.Size(784, 247);
             this.actionPanel.TabIndex = 2;
             this.actionPanel.ClientSizeChanged += new System.EventHandler(this.ActionPanel_ClientSizeChanged);
@@ -525,9 +539,10 @@
             this.actionListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveActionUpContextMenuItem,
             this.moveActionDownContextMenuItem,
+            this.editActionContextMenuItem,
             this.deleteActionContextMenuItem});
             this.actionListBoxContextMenuStrip.Name = "actionListBoxContextMenuStrip";
-            this.actionListBoxContextMenuStrip.Size = new System.Drawing.Size(174, 70);
+            this.actionListBoxContextMenuStrip.Size = new System.Drawing.Size(174, 92);
             this.actionListBoxContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.ActionListBoxContextMenuStrip_Opening);
             // 
             // moveActionUpContextMenuItem
@@ -545,6 +560,14 @@
             this.moveActionDownContextMenuItem.Size = new System.Drawing.Size(173, 22);
             this.moveActionDownContextMenuItem.Text = "Move action down";
             this.moveActionDownContextMenuItem.Click += new System.EventHandler(this.MoveDownToolStripMenuItem_Click);
+            // 
+            // editActionContextMenuItem
+            // 
+            this.editActionContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pencil_drawing_48;
+            this.editActionContextMenuItem.Name = "editActionContextMenuItem";
+            this.editActionContextMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.editActionContextMenuItem.Text = "Edit action";
+            this.editActionContextMenuItem.Click += new System.EventHandler(this.EditActionContextMenuItem_Click);
             // 
             // deleteActionContextMenuItem
             // 
@@ -647,5 +670,7 @@
         private System.Windows.Forms.ToolStripMenuItem autoThemeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lightThemeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem darkThemeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editActionContextMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

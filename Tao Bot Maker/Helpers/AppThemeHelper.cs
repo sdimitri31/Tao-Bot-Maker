@@ -164,14 +164,14 @@ namespace Tao_Bot_Maker.Helpers
 
             foreach (Control control in form.Controls)
             {
-                ApplyThemeToControl(theme, control, elevation);
+                ApplyThemeToControl(theme, control, elevation + 1);
             }
         }
 
         public static void ApplyThemeToControl(AppTheme theme, Control control, int elevation)
         {
             // Reduce elevation if transparent
-            if ((control.Parent.BackColor == Color.Transparent) || (control is SplitContainer))
+            if ((control.Parent.BackColor == Color.Transparent))
             {
                 elevation--;
             }
@@ -226,6 +226,9 @@ namespace Tao_Bot_Maker.Helpers
 
         private static void ApplyThemeToContextMenuStrip(AppTheme theme, ContextMenuStrip contextMenuStrip, int elevation)
         {
+            if (contextMenuStrip == null)
+                return;
+
             contextMenuStrip.RenderMode = ToolStripRenderMode.Professional;
             contextMenuStrip.Renderer = new CustomToolStripRenderer(theme, elevation);
             contextMenuStrip.BackColor = GetElevationColor(theme, elevation);
