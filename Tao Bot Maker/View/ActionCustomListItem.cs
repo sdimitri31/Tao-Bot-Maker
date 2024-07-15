@@ -16,6 +16,7 @@ namespace Tao_Bot_Maker.View
         public new event EventHandler MouseLeave;
         public new event MouseEventHandler MouseDown;
         public new event EventHandler<KeyEventArgs> KeyDown;
+        public new event EventHandler DoubleClick;
 
         private Action _action;
         private Image _icon;
@@ -142,6 +143,7 @@ namespace Tao_Bot_Maker.View
                 control.MouseLeave += RelayMouseLeaveEvent;
                 control.MouseDown += RelayMouseDownEvent;
                 control.KeyDown += RelayKeyDownEvent;
+                control.DoubleClick += RelayDoubleClickEvent;
                 if (control.HasChildren)
                 {
                     AttachEvents(control);
@@ -229,6 +231,17 @@ namespace Tao_Bot_Maker.View
         {
             KeyDown(this, e);
             base.OnKeyDown(e);
+        }
+
+        private void RelayDoubleClickEvent(object sender, EventArgs e)
+        {
+            this.OnDoubleClick(e);
+        }
+
+        protected override void OnDoubleClick(EventArgs e)
+        {
+            DoubleClick?.Invoke(this, e);
+            base.OnDoubleClick(e);
         }
     }
 }

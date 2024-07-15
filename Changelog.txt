@@ -1,6 +1,7 @@
 Changelog:
 2.0.3-beta:
 Add: 'Edit action' in contextMenu
+Add: DoubleClick on action opens edit form
 Fix: Missing translation in contextMenu
 Fix: Prevening crash when trying to search for a picture without providing picture in Action Image Panel
 Fix: In Action Key Panel, stops focusing button to set a key to allow to press 'Enter' to add action

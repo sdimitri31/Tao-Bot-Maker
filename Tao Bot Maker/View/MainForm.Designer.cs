@@ -74,7 +74,6 @@
             this.sequenceComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.saveSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.deleteSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.actionPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.actionListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -376,8 +375,7 @@
             this.toolStripSeparator2,
             this.sequenceComboBox,
             this.saveSequenceToolStripButton,
-            this.deleteSequenceToolStripButton,
-            this.toolStripButton1});
+            this.deleteSequenceToolStripButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(10, 0, 1, 0);
@@ -483,16 +481,6 @@
             this.deleteSequenceToolStripButton.Text = "Delete sequence";
             this.deleteSequenceToolStripButton.Click += new System.EventHandler(this.DeleteSequenceToolStripButton_Click);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
             // splitContainer
             // 
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -531,6 +519,7 @@
             this.actionPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragEnter);
             this.actionPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragOver);
             this.actionPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ActionFlowLayoutPanel_Paint);
+            this.actionPanel.DoubleClick += new System.EventHandler(this.ActionFlowLayoutPanel_DoubleClick);
             this.actionPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ActionCustomListView_MouseDown);
             this.actionPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ActionFlowLayoutPanel_PreviewKeyDown);
             // 
@@ -671,6 +660,5 @@
         private System.Windows.Forms.ToolStripMenuItem lightThemeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem darkThemeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editActionContextMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

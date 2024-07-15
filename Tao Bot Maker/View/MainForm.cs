@@ -310,6 +310,7 @@ namespace Tao_Bot_Maker.View
             customItem.Click += ActionCustomListItem_Click;
             customItem.MouseDown += ActionCustomListView_MouseDown;
             customItem.KeyDown += ActionFlowLayoutPanel_KeyDown;
+            customItem.DoubleClick += ActionFlowLayoutPanel_DoubleClick;
 
             customItem.Width = actionPanel.ClientSize.Width - actionPanel.Padding.Left - actionPanel.Padding.Right - 2;
 
@@ -858,10 +859,9 @@ namespace Tao_Bot_Maker.View
             EditAction();
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void ActionFlowLayoutPanel_DoubleClick(object sender, EventArgs e)
         {
-            TestView testView = new TestView();
-            testView.Show();
+            EditAction();
         }
     }
 }
