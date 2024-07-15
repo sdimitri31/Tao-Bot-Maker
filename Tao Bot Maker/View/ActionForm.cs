@@ -61,7 +61,7 @@ namespace Tao_Bot_Maker.View
                 Icon = ActionHelper.GetActionTypeIcon(actionType),
                 Selected = false
             };
-            customItem.Width = actionTypeFlowLayoutPanel.Width;
+            customItem.Width = actionTypeFlowLayoutPanel.Width - 16;
             customItem.Click += ActionTypeCustomListItem_Click;
 
             customItem.Margin = new Padding(customItem.Margin.Left, customItem.Margin.Top, customItem.Margin.Right, 8);

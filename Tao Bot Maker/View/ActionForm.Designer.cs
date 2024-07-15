@@ -78,7 +78,7 @@
             this.actionTypeFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.actionTypeFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.actionTypeFlowLayoutPanel.Name = "actionTypeFlowLayoutPanel";
-            this.actionTypeFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(4, 8, 0, 0);
+            this.actionTypeFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
             this.actionTypeFlowLayoutPanel.Size = new System.Drawing.Size(213, 415);
             this.actionTypeFlowLayoutPanel.TabIndex = 4;
             // 

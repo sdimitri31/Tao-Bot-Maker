@@ -60,7 +60,7 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.iconPictureBox);
-            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Margin = new System.Windows.Forms.Padding(8, 0, 8, 8);
             this.Name = "ActionTypeCustomListItem";
             this.Size = new System.Drawing.Size(150, 30);
             this.MouseEnter += new System.EventHandler(this.ActionTypeCustomListItem_MouseEnter);
