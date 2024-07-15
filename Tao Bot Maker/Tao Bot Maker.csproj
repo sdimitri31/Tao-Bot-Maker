@@ -25,7 +25,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.4.4.0</ApplicationVersion>
+    <ApplicationVersion>2.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -372,7 +372,7 @@
 xcopy /Y ..\..\..\README.txt
 xcopy /Y C:\ImageSearchDLL.dll
 del *.pdb *.config *.zip
-tar -acvf ..\..\..\TaoBotMaker_v0.4.24.zip *
+tar -acvf ..\..\..\TaoBotMaker_v2.0.zip *
 cd ..\..\..</PostBuildEvent>
   </PropertyGroup>
 </Project>

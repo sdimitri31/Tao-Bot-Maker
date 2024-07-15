@@ -177,7 +177,7 @@ namespace Tao_Bot_Maker.Helpers
             }
             switch (control)
             {
-                case ContextMenuStrip contextMenuStrip: // not accessible need to investigate
+                case ContextMenuStrip contextMenuStrip:
                     ApplyThemeToContextMenuStrip(theme, contextMenuStrip, elevation);
                     break;
                 case ActionTypeCustomListItem actionTypeCustomListItem:
@@ -313,6 +313,7 @@ namespace Tao_Bot_Maker.Helpers
             if (flowLayoutPanel.BackColor != Color.Transparent)
                 flowLayoutPanel.BackColor = GetElevationColor(theme, elevation);
             flowLayoutPanel.ForeColor = theme.ForeColor;
+            ApplyThemeToContextMenuStrip(theme, flowLayoutPanel.ContextMenuStrip, elevation);
         }
 
         private static void ApplyThemeToPanel(AppTheme theme, Panel panel, int elevation)
