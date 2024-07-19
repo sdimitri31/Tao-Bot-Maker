@@ -205,6 +205,24 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Open sequences folder.
+        /// </summary>
+        internal static string ButtonOpenSequencesFolder {
+            get {
+                return ResourceManager.GetString("ButtonOpenSequencesFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save.
+        /// </summary>
+        internal static string ButtonSave {
+            get {
+                return ResourceManager.GetString("ButtonSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Search image.
         /// </summary>
         internal static string ButtonSearchImage {
@@ -1114,6 +1132,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Saved sequences.
+        /// </summary>
+        internal static string LabelSavedSequences {
+            get {
+                return ResourceManager.GetString("LabelSavedSequences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Save log of level.
         /// </summary>
         internal static string LabelSaveLogLevel {
@@ -1155,6 +1182,15 @@ namespace Tao_Bot_Maker.Resources {
         internal static string LabelSequence {
             get {
                 return ResourceManager.GetString("LabelSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sequence name.
+        /// </summary>
+        internal static string LabelSequenceName {
+            get {
+                return ResourceManager.GetString("LabelSequenceName", resourceCulture);
             }
         }
         

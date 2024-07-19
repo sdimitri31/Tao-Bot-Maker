@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
-using Tao_Bot_Maker.View;
 using Action = Tao_Bot_Maker.Model.Action;
 
 namespace Tao_Bot_Maker.Controller
@@ -47,6 +44,11 @@ namespace Tao_Bot_Maker.Controller
         public bool RemoveSequence(string name)
         {
             return sequenceRepository.RemoveSequence(name);
+        }
+
+        public string GetSequenceFolder()
+        {
+            return SequenceRepository.sequencesFolderPath;
         }
 
         public Sequence GetSequence()

@@ -191,6 +191,12 @@
     <Compile Include="View\DrawingForm.Designer.cs">
       <DependentUpon>DrawingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\SaveSequenceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SaveSequenceForm.Designer.cs">
+      <DependentUpon>SaveSequenceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Action\ImageActionPropertiesPanel.resx">
       <DependentUpon>ImageActionPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SaveSequenceForm.resx">
+      <DependentUpon>SaveSequenceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

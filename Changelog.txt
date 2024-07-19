@@ -1,4 +1,7 @@
 Changelog:
+2.0.4-beta:
+Add: New form when saving sequences
+
 2.0.3-beta:
 Add: 'Edit action' in contextMenu
 Add: DoubleClick on action opens edit form

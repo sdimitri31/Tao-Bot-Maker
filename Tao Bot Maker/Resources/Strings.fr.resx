@@ -165,6 +165,12 @@
   <data name="ButtonOpenLogsFolder" xml:space="preserve">
     <value>Ouvrir le dossier des logs</value>
   </data>
+  <data name="ButtonOpenSequencesFolder" xml:space="preserve">
+    <value>Ouvrir le dossier des séquences</value>
+  </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
   <data name="ButtonSearchImage" xml:space="preserve">
     <value>Chercher l'image</value>
   </data>
@@ -468,6 +474,9 @@
   <data name="LabelRightClick" xml:space="preserve">
     <value>Clic droit</value>
   </data>
+  <data name="LabelSavedSequences" xml:space="preserve">
+    <value>Séquences enregistrées</value>
+  </data>
   <data name="LabelSaveLogLevel" xml:space="preserve">
     <value>Sauvegarder le log du niveau</value>
   </data>
@@ -482,6 +491,9 @@
   </data>
   <data name="LabelSequence" xml:space="preserve">
     <value>Séquence</value>
+  </data>
+  <data name="LabelSequenceName" xml:space="preserve">
+    <value>Nom de la séquence</value>
   </data>
   <data name="LabelShowLogLevel" xml:space="preserve">
     <value>Afficher le log du niveau</value>

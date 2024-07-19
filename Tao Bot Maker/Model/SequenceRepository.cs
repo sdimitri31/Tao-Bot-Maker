@@ -9,7 +9,7 @@ namespace Tao_Bot_Maker.Model
 {
     public class SequenceRepository : ISequenceRepository
     {
-        private readonly string sequencesFolderPath = "Sequences";
+        public static string sequencesFolderPath = "Sequences";
 
         public SequenceRepository()
         {

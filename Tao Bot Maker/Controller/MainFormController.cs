@@ -220,12 +220,11 @@ namespace Tao_Bot_Maker.Controller
         /// </summary>
         public void SaveAsSequence()
         {
-            using (var dialog = new SaveFileDialog())
+            using (var dialog = new SaveSequenceForm())
             {
-                dialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    currentSequenceName = Path.GetFileNameWithoutExtension(dialog.FileName);
+                    currentSequenceName = dialog.FileName;
                     SaveSequence();
                 }
             }
