@@ -24,7 +24,6 @@ namespace Tao_Bot_Maker.View
         public ActionForm(bool isFromImageAction = false, Action existingAction = null)
         {
             InitializeComponent();
-            UpdateUI();
             RegisterHotkeys();
             panels = new List<UserControl>();
             this.isFromImageAction = isFromImageAction;
@@ -43,6 +42,7 @@ namespace Tao_Bot_Maker.View
 
             SetPropertiesPanel(SelectedActionType);
             SetSelectedActionTypeFlowLayout(SelectedActionType);
+            UpdateUI();
         }
 
         private void LoadThemeSettings()
@@ -91,7 +91,7 @@ namespace Tao_Bot_Maker.View
 
         private void UpdateUI()
         {
-            this.Text = Resources.Strings.FormTitleNewAction;
+            this.Text = Action == null ? Resources.Strings.FormTitleNewAction : Resources.Strings.FormTitleEditAction;
 
             okButton.Text = Resources.Strings.ButtonAdd;
             cancelButton.Text = Resources.Strings.ButtonCancel;

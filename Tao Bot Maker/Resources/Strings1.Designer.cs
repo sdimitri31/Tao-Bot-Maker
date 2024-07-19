@@ -511,6 +511,15 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit action.
+        /// </summary>
+        internal static string FormTitleEditAction {
+            get {
+                return ResourceManager.GetString("FormTitleEditAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Tao&apos;s Bot Maker.
         /// </summary>
         internal static string FormTitleMain {

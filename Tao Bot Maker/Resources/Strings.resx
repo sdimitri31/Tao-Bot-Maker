@@ -267,6 +267,9 @@
   <data name="ErrorMessageWaitActionInvalidMinimumWait" xml:space="preserve">
     <value>Minimum wait time cannot be less than 0.</value>
   </data>
+  <data name="FormTitleEditAction" xml:space="preserve">
+    <value>Edit action</value>
+  </data>
   <data name="FormTitleMain" xml:space="preserve">
     <value>Tao's Bot Maker</value>
   </data>
