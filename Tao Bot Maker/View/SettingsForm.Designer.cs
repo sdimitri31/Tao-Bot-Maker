@@ -31,13 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.bottomPanel = new System.Windows.Forms.Panel();
             this.settingsPropertiesPanel = new System.Windows.Forms.Panel();
-            this.settingsTypelistBox = new System.Windows.Forms.ListBox();
+            this.settingsTypeFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(632, 415);
+            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.Location = new System.Drawing.Point(632, 12);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 7;
@@ -47,8 +50,9 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(713, 415);
+            this.cancelButton.Location = new System.Drawing.Point(713, 12);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -56,22 +60,39 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // bottomPanel
+            // 
+            this.bottomPanel.BackColor = System.Drawing.Color.Transparent;
+            this.bottomPanel.Controls.Add(this.cancelButton);
+            this.bottomPanel.Controls.Add(this.okButton);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 403);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(800, 47);
+            this.bottomPanel.TabIndex = 8;
+            // 
             // settingsPropertiesPanel
             // 
-            this.settingsPropertiesPanel.Location = new System.Drawing.Point(219, 12);
+            this.settingsPropertiesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsPropertiesPanel.BackColor = System.Drawing.Color.Silver;
+            this.settingsPropertiesPanel.Location = new System.Drawing.Point(213, 0);
+            this.settingsPropertiesPanel.Margin = new System.Windows.Forms.Padding(0);
             this.settingsPropertiesPanel.Name = "settingsPropertiesPanel";
-            this.settingsPropertiesPanel.Size = new System.Drawing.Size(569, 397);
-            this.settingsPropertiesPanel.TabIndex = 5;
+            this.settingsPropertiesPanel.Size = new System.Drawing.Size(587, 403);
+            this.settingsPropertiesPanel.TabIndex = 10;
             // 
-            // settingsTypelistBox
+            // settingsTypeFlowLayoutPanel
             // 
-            this.settingsTypelistBox.FormattingEnabled = true;
-            this.settingsTypelistBox.IntegralHeight = false;
-            this.settingsTypelistBox.Location = new System.Drawing.Point(12, 12);
-            this.settingsTypelistBox.Name = "settingsTypelistBox";
-            this.settingsTypelistBox.Size = new System.Drawing.Size(201, 397);
-            this.settingsTypelistBox.TabIndex = 4;
-            this.settingsTypelistBox.SelectedIndexChanged += new System.EventHandler(this.SettingsTypelistBox_SelectedIndexChanged);
+            this.settingsTypeFlowLayoutPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.settingsTypeFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.settingsTypeFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.settingsTypeFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.settingsTypeFlowLayoutPanel.Name = "settingsTypeFlowLayoutPanel";
+            this.settingsTypeFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.settingsTypeFlowLayoutPanel.Size = new System.Drawing.Size(213, 403);
+            this.settingsTypeFlowLayoutPanel.TabIndex = 5;
             // 
             // SettingsForm
             // 
@@ -80,14 +101,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.okButton);
-            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.settingsTypeFlowLayoutPanel);
             this.Controls.Add(this.settingsPropertiesPanel);
-            this.Controls.Add(this.settingsTypelistBox);
+            this.Controls.Add(this.bottomPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SettingsForm";
+            this.bottomPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -96,7 +117,8 @@
 
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel settingsPropertiesPanel;
-        private System.Windows.Forms.ListBox settingsTypelistBox;
+        private System.Windows.Forms.FlowLayoutPanel settingsTypeFlowLayoutPanel;
     }
 }

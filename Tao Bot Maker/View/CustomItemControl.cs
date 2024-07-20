@@ -5,40 +5,53 @@ using Tao_Bot_Maker.Model;
 
 namespace Tao_Bot_Maker.View
 {
-    public partial class ActionTypeCustomListItem : UserControl
+    public partial class CustomItemControl<T> : UserControl
     {
+        private PictureBox iconPictureBox;
+        private Label textLabel;
+
         public new event EventHandler Click;
         public new event EventHandler MouseEnter;
         public new event EventHandler MouseLeave;
 
-        public ActionTypeCustomListItem()
+        private CustomItem<T> _customDisplayItem;
+        private T _data;
+        private string _text;
+        private Image _icon;
+        private bool _isSelected;
+
+        public CustomItem<T> Item
         {
-            InitializeComponent();
-            AttachEvents(this);
-        }
-
-        private ActionType _actionType;
-
-        public ActionType ActionType { 
-            get { return _actionType; } 
-            set { _actionType = value; } 
-        }
-
-        private string _name;
-
-        public string ActionName
-        {
-            get { return _name; }
+            get { return _customDisplayItem; }
             set
             {
-                _name = value;
-                nameLabel.Text = _name;
+                ItemText = value.DisplayName;
+                ItemIcon = value.Image;
+                Data = value.Value;
+                _customDisplayItem = value;
             }
         }
 
-        private Image _icon;
+        public T Data
+        {
+            get { return _data; }
+            set
+            {
+                _data = value;
+            }
+        }
 
-        public Image Icon
+        public string ItemText
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                textLabel.Text = _text;
+            }
+        }
+        
+        public Image ItemIcon
         {
             get { return _icon; }
             set
@@ -47,8 +60,6 @@ namespace Tao_Bot_Maker.View
                 iconPictureBox.Image = value;
             }
         }
-
-        private bool _isSelected;
 
         public bool Selected
         {
@@ -60,7 +71,6 @@ namespace Tao_Bot_Maker.View
                 BackColor = value ? HighlightBackColor : SurfaceColor;
             }
         }
-
 
         private Color _surfaceColor;
         private Color _textColor;
@@ -130,6 +140,56 @@ namespace Tao_Bot_Maker.View
             set { _pressedForeColor = value; }
         }
 
+        public CustomItemControl()
+        {
+            InitializeComponent();
+            AttachEvents(this);
+        }
+
+        private void InitializeComponent()
+        {
+            this.textLabel = new System.Windows.Forms.Label();
+            this.iconPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // textLabel
+            // 
+            this.textLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textLabel.Location = new System.Drawing.Point(38, 3);
+            this.textLabel.Name = "textLabel";
+            this.textLabel.Size = new System.Drawing.Size(109, 25);
+            this.textLabel.TabIndex = 1;
+            this.textLabel.Text = "Item text";
+            this.textLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // iconPictureBox
+            // 
+            this.iconPictureBox.Location = new System.Drawing.Point(5, 2);
+            this.iconPictureBox.Margin = new System.Windows.Forms.Padding(5);
+            this.iconPictureBox.Name = "iconPictureBox";
+            this.iconPictureBox.Size = new System.Drawing.Size(25, 25);
+            this.iconPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.iconPictureBox.TabIndex = 0;
+            this.iconPictureBox.TabStop = false;
+            // 
+            // CustomItemControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(this.textLabel);
+            this.Controls.Add(this.iconPictureBox);
+            this.Margin = new System.Windows.Forms.Padding(8, 0, 8, 8);
+            this.Name = "CustomItemControl";
+            this.Size = new System.Drawing.Size(150, 30);
+            this.MouseEnter += new System.EventHandler(this.CustomItemControl_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.CustomItemControl_MouseLeave);
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
 
         private void AttachEvents(Control parent)
         {
@@ -178,7 +238,7 @@ namespace Tao_Bot_Maker.View
             base.OnMouseLeave(e);
         }
 
-        private void ActionTypeCustomListItem_MouseEnter(object sender, EventArgs e)
+        private void CustomItemControl_MouseEnter(object sender, EventArgs e)
         {
             if (!Selected)
             {
@@ -187,7 +247,7 @@ namespace Tao_Bot_Maker.View
             }
         }
 
-        private void ActionTypeCustomListItem_MouseLeave(object sender, EventArgs e)
+        private void CustomItemControl_MouseLeave(object sender, EventArgs e)
         {
             if (!Selected)
             {

@@ -1,6 +1,9 @@
 Changelog:
 2.0.4-beta:
 Add: New form when saving sequences
+Add: Improved UI in settings
+Fix: Missing icons in Settings menu strip
+Fix: Changed ActionTypeCustomListItem to generic class CustomListItem for better reusability
 Fix: Missing form title when editing an action
 
 2.0.3-beta:

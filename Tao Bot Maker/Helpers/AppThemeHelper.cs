@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using Tao_Bot_Maker.View;
 using Button = System.Windows.Forms.Button;
@@ -180,9 +181,6 @@ namespace Tao_Bot_Maker.Helpers
                 case ContextMenuStrip contextMenuStrip:
                     ApplyThemeToContextMenuStrip(theme, contextMenuStrip, elevation);
                     break;
-                case ActionTypeCustomListItem actionTypeCustomListItem:
-                    ApplyThemeToActionTypeCustomListItem(theme, actionTypeCustomListItem, elevation);
-                    break;
                 case ActionCustomListItem actionCustomListItem:
                     ApplyThemeToActionCustomListItem(theme, actionCustomListItem, elevation);
                     break;
@@ -213,6 +211,15 @@ namespace Tao_Bot_Maker.Helpers
                 case ToolStrip toolStrip:
                     ApplyThemeToToolStrip(theme, toolStrip, elevation);
                     break;
+                default:
+                    var controlType = control.GetType();
+                    if (controlType.IsGenericType && controlType.GetGenericTypeDefinition() == typeof(CustomItemControl<>))
+                    {
+                        var method = typeof(AppThemeHelper).GetMethod(nameof(ApplyThemeToCustomListItem), BindingFlags.NonPublic | BindingFlags.Static);
+                        var genericMethod = method.MakeGenericMethod(controlType.GetGenericArguments());
+                        genericMethod.Invoke(null, new object[] { theme, control, elevation });
+                    }
+                    break;
             }
 
             if (!(control is MenuStrip) && !(control is ToolStrip) && !(control is ActionCustomListItem) && control.HasChildren)
@@ -241,7 +248,7 @@ namespace Tao_Bot_Maker.Helpers
 
         }
 
-        private static void ApplyThemeToActionTypeCustomListItem(AppTheme theme, ActionTypeCustomListItem actionTypeCustomListItem, int elevation)
+        private static void ApplyThemeToCustomListItem<T>(AppTheme theme, CustomItemControl<T> actionTypeCustomListItem, int elevation)
         {
             actionTypeCustomListItem.SurfaceColor = GetElevationColor(theme, elevation);
             actionTypeCustomListItem.TextColor = theme.ForeColor;

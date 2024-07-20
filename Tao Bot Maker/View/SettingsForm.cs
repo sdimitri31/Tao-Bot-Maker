@@ -21,19 +21,20 @@ namespace Tao_Bot_Maker.View
         {
             InitializeComponent();
             UpdateUI();
+            ApplyTheme();
             panels = new List<UserControl>();
-            FillSettingsForm();
+            SelectedSettingsType = selectedSettingsType;
+            LoadAllSettingsType();
             LoadSettings();
-
-            LoadThemeSettings();
-            settingsTypelistBox.SelectedItem = settingsTypelistBox.Items.Cast<CustomDisplayItem<SettingsType>>().First(item => item.Value == selectedSettingsType);
+            SetSelectedSettingsTypeFlowLayout(SelectedSettingsType);
+            SetPropertiesPanel(SelectedSettingsType);
         }
 
-        private void LoadThemeSettings()
+        private void ApplyTheme()
         {
             string theme = SettingsController.GetSettingValue<string>(Settings.SETTING_THEME);
             appTheme = AppThemeHelper.GetAppThemeFromName(theme);
-            AppThemeHelper.ApplyTheme(appTheme, this, 1);
+            AppThemeHelper.ApplyTheme(appTheme, this);
         }
 
         private void UpdateUI()
@@ -44,13 +45,55 @@ namespace Tao_Bot_Maker.View
             cancelButton.Text = Resources.Strings.ButtonCancel;
         }
 
-        private void FillSettingsForm()
+        private void AddCustomItem(SettingsType settingsType)
+        {
+            CustomItemControl<SettingsType> customItem = new CustomItemControl<SettingsType>
+            {
+                Item = new CustomItem<SettingsType>(settingsType, GetSettingsTypeDisplayName(settingsType), GetSettingsTypeIcon(settingsType)),
+                Selected = false
+            };
+            customItem.Width = settingsTypeFlowLayoutPanel.Width - 16;
+            customItem.Click += SettingsTypeCustomListItem_Click;
+
+            customItem.Margin = new Padding(customItem.Margin.Left, customItem.Margin.Top, customItem.Margin.Right, 8);
+
+            settingsTypeFlowLayoutPanel.Controls.Add(customItem);
+            AppThemeHelper.ApplyThemeToControl(appTheme, customItem, 2);
+        }
+
+        private void SettingsTypeCustomListItem_Click(object sender, EventArgs e)
+        {
+            CustomItemControl<SettingsType> item = sender as CustomItemControl<SettingsType>;
+            if (item != null)
+            {
+                SelectedSettingsType = item.Data;
+                SetPropertiesPanel(SelectedSettingsType);
+                SetSelectedSettingsTypeFlowLayout(SelectedSettingsType);
+            }
+        }
+
+        private void SetSelectedSettingsTypeFlowLayout(SettingsType settingsType)
+        {
+            foreach (CustomItemControl<SettingsType> item in settingsTypeFlowLayoutPanel.Controls.OfType<CustomItemControl<SettingsType>>())
+            {
+                item.Selected = item.Data == settingsType;
+            }
+        }
+
+        private void SetPropertiesPanel(SettingsType settingsType)
+        {
+            foreach (UserControl panel in panels)
+            {
+                panel.Visible = (panel as ISettingsPropertiesPanel).GetType() == settingsType;
+            }
+        }
+
+        private void LoadAllSettingsType()
         {
             foreach (SettingsType settingsType in Enum.GetValues(typeof(SettingsType)))
             {
-                string displayName = GetSettingsTypeDisplayName(settingsType);
-                settingsTypelistBox.Items.Add(new CustomDisplayItem<SettingsType>(settingsType, displayName));
                 AddPropertiesPanel(settingsType);
+                AddCustomItem(settingsType);
             }
         }
 
@@ -66,6 +109,21 @@ namespace Tao_Bot_Maker.View
                     return Resources.Strings.SettingsTypeGeneral;
                 default:
                     return setttingsType.ToString();
+            }
+        }
+
+        private Image GetSettingsTypeIcon(SettingsType setttingsType)
+        {
+            switch (setttingsType)
+            {
+                case SettingsType.Other:
+                    return Resources.Images.SettingTypeOther;
+                case SettingsType.Hotkeys:
+                    return Resources.Images.SettingTypeHotkey;
+                case SettingsType.General:
+                    return Resources.Images.SettingTypeGeneral;
+                default:
+                    return Resources.Images.SettingTypeGeneral;
             }
         }
 
@@ -92,8 +150,11 @@ namespace Tao_Bot_Maker.View
             {
                 panel.Location = new Point(0, 0);
                 panel.Visible = false;
+                panel.Width = settingsPropertiesPanel.Width;
+                panel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 settingsPropertiesPanel.Controls.Add(panel);
                 panels.Add(panel);
+                AppThemeHelper.ApplyThemeToControl(appTheme, settingsPropertiesPanel, 3);
             }
         }
 
@@ -102,15 +163,6 @@ namespace Tao_Bot_Maker.View
             foreach (UserControl panel in panels)
             {
                 panel.Visible = (panel as ISettingsPropertiesPanel).GetType() == settingsType;
-            }
-        }
-
-        private void SettingsTypelistBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (settingsTypelistBox.SelectedItem is CustomDisplayItem<SettingsType> selectedItem)
-            {
-                SelectedSettingsType = selectedItem.Value;
-                ShowPanel(SelectedSettingsType);
             }
         }
 

@@ -115,7 +115,7 @@
     <Compile Include="Actions\SequenceAction.cs" />
     <Compile Include="Actions\TextAction.cs" />
     <Compile Include="Actions\WaitAction.cs" />
-    <Compile Include="Model\CustomDisplayItem.cs" />
+    <Compile Include="Model\CustomItem.cs" />
     <Compile Include="Model\Hotkey.cs" />
     <Compile Include="Model\ISequenceRepository.cs" />
     <Compile Include="Model\Sequence.cs" />
@@ -147,11 +147,8 @@
     <Compile Include="View\ActionCustomListItem.Designer.cs">
       <DependentUpon>ActionCustomListItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ActionTypeCustomListItem.cs">
+    <Compile Include="View\CustomItemControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionTypeCustomListItem.Designer.cs">
-      <DependentUpon>ActionTypeCustomListItem.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Action\IActionPropertiesPanel.cs" />
     <Compile Include="View\ActionForm.cs">
@@ -269,8 +266,8 @@
     <EmbeddedResource Include="View\ActionCustomListItem.resx">
       <DependentUpon>ActionCustomListItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionTypeCustomListItem.resx">
-      <DependentUpon>ActionTypeCustomListItem.cs</DependentUpon>
+    <EmbeddedResource Include="View\CustomItemControl.resx">
+      <DependentUpon>CustomItemControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\DrawingForm.resx">
       <DependentUpon>DrawingForm.cs</DependentUpon>
@@ -372,6 +369,11 @@
     <None Include="Resources\icons8-sand-timer-48.png" />
     <None Include="Resources\icons8-error-48.png" />
     <None Include="Resources\icons8-drag-48.png" />
+    <None Include="Resources\icons8-support-48.png" />
+    <None Include="Resources\icons8-monitor-48.png" />
+    <None Include="Resources\icons8-brightness-48.png" />
+    <None Include="Resources\icons8-settings-48.png" />
+    <None Include="Resources\icons8-black-and-white-48.png" />
     <Content Include="Resources\tao.ico" />
   </ItemGroup>
   <ItemGroup />

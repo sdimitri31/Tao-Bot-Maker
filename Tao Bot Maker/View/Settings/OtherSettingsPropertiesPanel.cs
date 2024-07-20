@@ -18,6 +18,7 @@ namespace Tao_Bot_Maker.View.Setting
         {
             InitializeComponent();
             InitializeCheckBoxes();
+            UpdateSaveLogLevelPanelState();
             UpdateUI();
         }
 
@@ -74,6 +75,11 @@ namespace Tao_Bot_Maker.View.Setting
             return flag;
         }
 
+        private void UpdateSaveLogLevelPanelState()
+        {
+            saveLogLevelPanel.Enabled = saveLogCheckBox.Checked;
+        }
+
         public void LoadSettings()
         {
             saveLogCheckBox.Checked = SettingsController.GetSettingValue<bool>(Settings.SETTING_SAVELOG);
@@ -103,11 +109,7 @@ namespace Tao_Bot_Maker.View.Setting
 
         private void SaveLogCheckBox_CheckedChanged(object sender, System.EventArgs e)
         {
-            saveLogLevelLabel.Enabled = saveLogCheckBox.Checked;
-            foreach (var checkBox in saveLogCheckBoxes)
-            {
-                checkBox.Enabled = saveLogCheckBox.Checked;
-            }
+            UpdateSaveLogLevelPanelState();
         }
     }
 }

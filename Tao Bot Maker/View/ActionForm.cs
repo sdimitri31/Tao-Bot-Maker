@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
+using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;
 using Settings = Tao_Bot_Maker.Model.Settings;
 
@@ -54,11 +55,9 @@ namespace Tao_Bot_Maker.View
 
         private void AddCustomItem(ActionType actionType)
         {
-            ActionTypeCustomListItem customItem = new ActionTypeCustomListItem
+            CustomItemControl<ActionType> customItem = new CustomItemControl<ActionType>
             {
-                ActionType = actionType,
-                ActionName = ActionHelper.GetActionTypeDisplayName(actionType),
-                Icon = ActionHelper.GetActionTypeIcon(actionType),
+                Item = new CustomItem<ActionType>(actionType, ActionHelper.GetActionTypeDisplayName(actionType), ActionHelper.GetActionTypeIcon(actionType)),
                 Selected = false
             };
             customItem.Width = actionTypeFlowLayoutPanel.Width - 16;
@@ -72,10 +71,10 @@ namespace Tao_Bot_Maker.View
 
         private void ActionTypeCustomListItem_Click(object sender, EventArgs e)
         {
-            ActionTypeCustomListItem item = sender as ActionTypeCustomListItem;
+            CustomItemControl<ActionType> item = sender as CustomItemControl<ActionType>;
             if (item != null)
             {
-                SelectedActionType = item.ActionType;
+                SelectedActionType = item.Data;
                 SetPropertiesPanel(SelectedActionType);
                 SetSelectedActionTypeFlowLayout(SelectedActionType);
             }
@@ -83,9 +82,9 @@ namespace Tao_Bot_Maker.View
 
         private void SetSelectedActionTypeFlowLayout(ActionType actionType)
         {
-            foreach (ActionTypeCustomListItem item in actionTypeFlowLayoutPanel.Controls.OfType<ActionTypeCustomListItem>())
+            foreach (CustomItemControl<ActionType> item in actionTypeFlowLayoutPanel.Controls.OfType<CustomItemControl<ActionType>>())
             {
-                item.Selected = item.ActionType == actionType;
+                item.Selected = item.Data == actionType;
             }
         }
 

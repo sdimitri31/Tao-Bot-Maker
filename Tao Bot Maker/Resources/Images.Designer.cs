@@ -139,5 +139,35 @@ namespace Tao_Bot_Maker.Resources {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingTypeGeneral {
+            get {
+                object obj = ResourceManager.GetObject("SettingTypeGeneral", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingTypeHotkey {
+            get {
+                object obj = ResourceManager.GetObject("SettingTypeHotkey", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingTypeOther {
+            get {
+                object obj = ResourceManager.GetObject("SettingTypeOther", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

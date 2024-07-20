@@ -1,14 +1,18 @@
-﻿namespace Tao_Bot_Maker.Model
+﻿using System.Drawing;
+
+namespace Tao_Bot_Maker.Model
 {
-    public class CustomDisplayItem<T>
+    public class CustomItem<T>
     {
         public T Value { get; }
         public string DisplayName { get; }
+        public Image Image { get; }
 
-        public CustomDisplayItem(T value, string displayName)
+        public CustomItem(T value, string displayName, Image image = null)
         {
             Value = value;
             DisplayName = displayName;
+            Image = image;
         }
 
         public override string ToString()
