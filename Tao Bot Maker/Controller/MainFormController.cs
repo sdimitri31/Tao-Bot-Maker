@@ -17,7 +17,6 @@ namespace Tao_Bot_Maker.Controller
         private readonly MainForm mainForm;
 
         private HotKeyController hotkeyStartSequence;
-        private HotKeyController hotkeyPauseSequence;
         private HotKeyController hotkeyStopSequence;
 
         private SequenceController sequenceController;
@@ -48,10 +47,6 @@ namespace Tao_Bot_Maker.Controller
             hotkeyStartSequence = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE), mainForm);
             hotkeyStartSequence.Register();
 
-            // Initialize and register hotkey for pausing the sequence
-            hotkeyPauseSequence = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE), mainForm);
-            hotkeyPauseSequence.Register();
-
             // Initialize and register hotkey for stopping the sequence
             hotkeyStopSequence = new HotKeyController((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE), mainForm);
             hotkeyStopSequence.Register();
@@ -64,7 +59,6 @@ namespace Tao_Bot_Maker.Controller
         {
             Logger.Log($"Unregistering Hotkeys", TraceEventType.Verbose);
             hotkeyStartSequence?.Unregister();
-            hotkeyPauseSequence?.Unregister();
             hotkeyStopSequence?.Unregister();
         }
 
@@ -85,11 +79,14 @@ namespace Tao_Bot_Maker.Controller
 
             if (hotkeyStartSequence.GetKey() == pressedHotkey)
             {
-                StartSequence();
-            }
-            else if (hotkeyPauseSequence.GetKey() == pressedHotkey)
-            {
-                TogglePause();
+                if (SequenceController.GetIsRunning())
+                {
+                    TogglePause();
+                }
+                else
+                {
+                    StartSequence();
+                }
             }
             else if (hotkeyStopSequence.GetKey() == pressedHotkey)
             {
@@ -293,7 +290,10 @@ namespace Tao_Bot_Maker.Controller
         public async void StartSequence()
         {
             if (SequenceController.GetIsRunning())
+            {
+                TogglePause();
                 return;
+            }
 
             try
             {

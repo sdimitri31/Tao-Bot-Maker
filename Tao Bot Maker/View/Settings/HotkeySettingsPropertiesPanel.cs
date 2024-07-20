@@ -220,13 +220,5 @@ namespace Tao_Bot_Maker.View.Setting
                     break;
             }
         }
-
-        private void HotkeyTogglePauseButton_Click(object sender, EventArgs e)
-        {
-            if (modifyingHotkey == Settings.SETTING_HOTKEYPAUSESEQUENCE)
-                SetModifyingHotkey("");
-            else
-                SetModifyingHotkey(Settings.SETTING_HOTKEYPAUSESEQUENCE);
-        }
     }
 }

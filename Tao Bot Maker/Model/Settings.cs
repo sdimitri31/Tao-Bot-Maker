@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace Tao_Bot_Maker.Model
 {
@@ -20,7 +18,6 @@ namespace Tao_Bot_Maker.Model
         public const string SETTING_LANGUAGE = "Language";
         public const string SETTING_THEME = "Theme";
         public const string SETTING_HOTKEYSTARTSEQUENCE = "HotkeyStartSequence";
-        public const string SETTING_HOTKEYPAUSESEQUENCE = "HotkeyPauseSequence";
         public const string SETTING_HOTKEYSTOPSEQUENCE = "HotkeyStopSequence";
         public const string SETTING_HOTKEYSTARTCOORDS = "HotkeyStartCoords";
         public const string SETTING_HOTKEYENDCOORDS = "HotkeyEndCoords";
@@ -32,8 +29,7 @@ namespace Tao_Bot_Maker.Model
             { SETTING_SAVELOG, "true" },
             { SETTING_LANGUAGE, "English" },
             { SETTING_THEME, "Auto" },
-            { SETTING_HOTKEYSTARTSEQUENCE, ((int)Keys.F5).ToString() },
-            { SETTING_HOTKEYPAUSESEQUENCE, ((int)Keys.F6).ToString() },
+            { SETTING_HOTKEYSTARTSEQUENCE, ((int)Keys.F6).ToString() },
             { SETTING_HOTKEYSTOPSEQUENCE, ((int)Keys.F7).ToString() },
             { SETTING_HOTKEYSTARTCOORDS, ((int)Keys.F1).ToString() },
             { SETTING_HOTKEYENDCOORDS, ((int)Keys.F2).ToString() }
@@ -56,7 +52,6 @@ namespace Tao_Bot_Maker.Model
                 new Setting(SETTING_LANGUAGE, GetDefaultValue(SETTING_LANGUAGE), SettingsType.General),
                 new Setting(SETTING_THEME, GetDefaultValue(SETTING_THEME), SettingsType.General),
                 new Setting(SETTING_HOTKEYSTARTSEQUENCE, GetDefaultValue(SETTING_HOTKEYSTARTSEQUENCE), SettingsType.Hotkeys),
-                new Setting(SETTING_HOTKEYPAUSESEQUENCE, GetDefaultValue(SETTING_HOTKEYPAUSESEQUENCE), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYSTOPSEQUENCE, GetDefaultValue(SETTING_HOTKEYSTOPSEQUENCE), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYSTARTCOORDS, GetDefaultValue(SETTING_HOTKEYSTARTCOORDS), SettingsType.Hotkeys),
                 new Setting(SETTING_HOTKEYENDCOORDS, GetDefaultValue(SETTING_HOTKEYENDCOORDS), SettingsType.Hotkeys)
@@ -153,7 +148,6 @@ namespace Tao_Bot_Maker.Model
                     if (bool.TryParse(value, out _)) return value;
                     break;
                 case SETTING_HOTKEYSTARTSEQUENCE:
-                case SETTING_HOTKEYPAUSESEQUENCE:
                 case SETTING_HOTKEYSTOPSEQUENCE:
                 case SETTING_HOTKEYSTARTCOORDS:
                 case SETTING_HOTKEYENDCOORDS:

@@ -95,6 +95,8 @@ namespace Tao_Bot_Maker.View
             string unsaved = SequenceController.GetIsSaved() ? "" : " - " + Resources.Strings.Unsaved;
             this.Text = Resources.Strings.FormTitleMain + unsaved;
 
+            string startButtonText = Resources.Strings.MenuBotStart + " / " + Resources.Strings.MenuBotPause + " / " + Resources.Strings.MenuBotResume;
+
             // FILE
             fileToolStripMenuItem.Text = Resources.Strings.MenuFile;
             newToolStripMenuItem.Text = Resources.Strings.MenuFileNew;
@@ -113,8 +115,7 @@ namespace Tao_Bot_Maker.View
 
             // BOT
             botToolStripMenuItem.Text = Resources.Strings.MenuBot;
-            startToolStripMenuItem.Text = Resources.Strings.MenuBotStart;
-            pauseToolStripMenuItem.Text = SequenceController.GetIsPaused() ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotPause;
+            startToolStripMenuItem.Text = startButtonText;
             stopToolStripMenuItem.Text = Resources.Strings.MenuBotStop;
 
             // SETTINGS
@@ -122,6 +123,10 @@ namespace Tao_Bot_Maker.View
             languageToolStripMenuItem.Text = Resources.Strings.MenuSettingsLanguage;
             shortcutsToolStripMenuItem.Text = Resources.Strings.MenuSettingsShortcuts;
             settingsToolStripMenuItem1.Text = Resources.Strings.MenuSettings;
+            themeToolStripMenuItem.Text = Resources.Strings.MenuSettingsTheme;
+            autoThemeToolStripMenuItem.Text = Resources.Strings.LabelThemeAuto;
+            lightThemeToolStripMenuItem.Text = Resources.Strings.LabelThemeLight;
+            darkThemeToolStripMenuItem.Text = Resources.Strings.LabelThemeDark;
 
             // ?
             aboutToolStripMenuItem.Text = Resources.Strings.MenuAbout;
@@ -132,7 +137,7 @@ namespace Tao_Bot_Maker.View
             deleteActionToolStripButton.Text = Resources.Strings.MenuEditDeleteAction;
 
             // BOT BUTTON
-            startBotToolStripButton.Text = Resources.Strings.MenuBotStart;
+            startBotToolStripButton.Text = SequenceController.GetIsPaused() ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotStart;
             pauseBotToolStripButton.Text = Resources.Strings.MenuBotPause;
             stopBotToolStripButton.Text = Resources.Strings.MenuBotStop;
 
@@ -166,9 +171,7 @@ namespace Tao_Bot_Maker.View
             deleteSequenceToolStripMenuItem.Enabled = !isRunning && (sequenceComboBox.SelectedIndex != -1);
 
             // BOT
-            startToolStripMenuItem.Enabled = !isRunning;
-            pauseToolStripMenuItem.Enabled = isRunning;
-            pauseToolStripMenuItem.Text = isPaused ? Resources.Strings.MenuBotResume : Resources.Strings.MenuBotPause;
+            startToolStripMenuItem.Enabled = true;
             stopToolStripMenuItem.Enabled = isRunning;
 
             // ACTION BUTTON
@@ -220,7 +223,6 @@ namespace Tao_Bot_Maker.View
             exitToolStripMenuItem.ShortcutKeys = (Keys)262259;
             startToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTARTSEQUENCE));
             stopToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYSTOPSEQUENCE));
-            pauseToolStripMenuItem.ShortcutKeyDisplayString = KeyboardSimulator.GetFormatedKeysString((Keys)SettingsController.GetSettingValue<int>(Settings.SETTING_HOTKEYPAUSESEQUENCE));
 
             LoadThemeSettings();
         }

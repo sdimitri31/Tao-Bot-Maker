@@ -2,6 +2,8 @@ Changelog:
 2.0.4-beta:
 Add: New form when saving sequences
 Add: Improved UI in settings
+Add: Merged Start and Pause/Resume buttons
+Fix: Missing translation for theme settings in menu strip
 Fix: Missing icons in Settings menu strip
 Fix: Changed ActionTypeCustomListItem to generic class CustomListItem for better reusability
 Fix: Missing form title when editing an action
