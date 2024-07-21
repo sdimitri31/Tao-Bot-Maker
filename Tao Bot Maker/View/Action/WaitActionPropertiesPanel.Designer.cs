@@ -203,6 +203,7 @@
             this.Controls.Add(this.maximumWaitPanel);
             this.Controls.Add(this.randomizeWaitPanel);
             this.Controls.Add(this.minimumWaitPanel);
+            this.DoubleBuffered = true;
             this.Name = "WaitActionPropertiesPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(497, 187);

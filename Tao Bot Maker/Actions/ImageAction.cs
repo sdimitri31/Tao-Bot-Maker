@@ -13,7 +13,7 @@ namespace Tao_Bot_Maker.Model
     [JsonConverter(typeof(ActionConverter))]
     public class ImageAction : Action
     {
-        public const string imagesFolderPath = "Images";
+        public const string IMAGESFOLDERNAME = "Images";
 
         [JsonConverter(typeof(StringEnumConverter))]
         public override ActionType Type { get; set; }
@@ -85,7 +85,7 @@ namespace Tao_Bot_Maker.Model
 
             try
             {
-                string imagePath = Path.Combine(imagesFolderPath, ImageName);
+                string imagePath = Path.Combine(IMAGESFOLDERNAME, ImageName);
                 while (!token.IsCancellationRequested)
                 {
                     var result = await Task.Run(() =>
@@ -230,7 +230,7 @@ namespace Tao_Bot_Maker.Model
             Logger.Log($"Validating image file: {imageName}", TraceEventType.Verbose);
             errorMessage = string.Empty;
 
-            string imagePath = Path.Combine(imagesFolderPath, imageName);
+            string imagePath = Path.Combine(IMAGESFOLDERNAME, imageName);
             if (!File.Exists(imagePath))
             {
                 errorMessage = string.Format(Resources.Strings.ErrorMessageFileNotFound, imagePath);

@@ -251,7 +251,7 @@ namespace Tao_Bot_Maker.Model
             {
                 if ((coord < -999999) || (coord > 999999))
                 {
-                    errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.Coordinates, 0, 2);
+                    errorMessage = string.Format(Resources.Strings.ErrorMessageInvalidIntervalFor, Resources.Strings.Coordinates, -999999, 999999);
                     return false;
                 }
             }

@@ -34,6 +34,7 @@ namespace Tao_Bot_Maker.View
 
             LoadThemeSettings();
             LoadAllActionType();
+            AppThemeHelper.ApplyThemeToControl(appTheme, actionPropertiesPanel, 2);
 
             if (existingAction != null)
             {
@@ -75,8 +76,8 @@ namespace Tao_Bot_Maker.View
             if (item != null)
             {
                 SelectedActionType = item.Data;
-                SetPropertiesPanel(SelectedActionType);
                 SetSelectedActionTypeFlowLayout(SelectedActionType);
+                SetPropertiesPanel(SelectedActionType);
             }
         }
 
@@ -132,7 +133,6 @@ namespace Tao_Bot_Maker.View
                 panel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 actionPropertiesPanel.Controls.Add(panel);
                 panels.Add(panel);
-                AppThemeHelper.ApplyThemeToControl(appTheme, actionPropertiesPanel, 3);
             }
         }
 

@@ -17,10 +17,10 @@ namespace Tao_Bot_Maker.View
         public Color BackColorElevationNine { get; set; }
         public Color BackColorElevationTen { get; set; }
 
+        // For text
         public Color ForeColor { get; set; }
         public Color DisabledTextColor { get; set; }
         public Color LinkForeColor { get; set; }
-
 
         // For selected surfaces and text
         public Color HighlightBackColor { get; set; }
@@ -37,39 +37,32 @@ namespace Tao_Bot_Maker.View
         public Color PressedBorderColor { get; set; }
         public Color PressedForeColor { get; set; }
 
-
-
         // Constructor for easy initialization
         public AppTheme()
         {
-            // Set default colors or you can set them dynamically
-            BackColorElevationZero = Color.Empty;
-            BackColorElevationOne = Color.White;
-            BackColorElevationTwo = Color.LightGray;
-            BackColorElevationThree = Color.Gray;
-            BackColorElevationFour = Color.DarkGray;
-            BackColorElevationFive = Color.DimGray;
-            BackColorElevationSix = Color.Black;
-            BackColorElevationSeven = Color.DarkGray;
-            BackColorElevationEight = Color.Black;
-            BackColorElevationNine = Color.DarkGray;
-            BackColorElevationTen = Color.DarkGray;
-
-            ForeColor = Color.Black;
-            DisabledTextColor = SystemColors.GrayText;
-            LinkForeColor = Color.LightBlue;
-
-            HighlightBackColor = Color.Blue;
-            HighlightBorderColor = Color.LightGray;
-            HighlightForeColor = Color.White;
-
-            HoverBackColor = Color.LightBlue;
-            HoverBorderColor = Color.LightGray;
+            // Set default colors
+            BackColorElevationZero = Color.White;
+            BackColorElevationOne = Color.FromArgb(245, 245, 245);
+            BackColorElevationTwo = Color.FromArgb(235, 235, 235);
+            BackColorElevationThree = Color.FromArgb(225, 225, 225);
+            BackColorElevationFour = Color.FromArgb(215, 215, 215);
+            BackColorElevationFive = Color.FromArgb(205, 205, 205);
+            BackColorElevationSix = Color.FromArgb(195, 195, 195);
+            BackColorElevationSeven = Color.FromArgb(185, 185, 185);
+            BackColorElevationEight = Color.FromArgb(175, 175, 175);
+            BackColorElevationTen = Color.FromArgb(155, 155, 155);
+            HighlightBackColor = SystemColors.Highlight;
+            HighlightBorderColor = SystemColors.Highlight;
+            HighlightForeColor = SystemColors.HighlightText;
+            HoverBackColor = Color.FromArgb(200, 200, 200);
+            HoverBorderColor = Color.FromArgb(180, 180, 180);
             HoverForeColor = Color.Black;
-
             PressedBackColor = Color.DarkBlue;
-            PressedBorderColor = Color.DarkGray;
+            PressedBorderColor = Color.DarkBlue;
             PressedForeColor = Color.White;
+            ForeColor = Color.Black;
+            LinkForeColor = Color.Blue;
+            DisabledTextColor = SystemColors.GrayText;
         }
     }
 

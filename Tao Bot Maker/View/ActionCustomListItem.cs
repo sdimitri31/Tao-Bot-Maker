@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Tao_Bot_Maker.Controller;
@@ -212,6 +210,15 @@ namespace Tao_Bot_Maker.View
             MouseDown?.Invoke(this, e);
             base.OnMouseDown(e);
         }
+        
+        private void ActionCustomListItem_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!Selected)
+            {
+                BackColor = PressedBackColor;
+                ForeColor = PressedForeColor;
+            }
+        }
 
         private void DragPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
@@ -242,6 +249,15 @@ namespace Tao_Bot_Maker.View
         {
             DoubleClick?.Invoke(this, e);
             base.OnDoubleClick(e);
+        }
+
+        private void ActionCustomListItem_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!Selected)
+            {
+                BackColor = SurfaceColor;
+                ForeColor = TextColor;
+            }
         }
     }
 }

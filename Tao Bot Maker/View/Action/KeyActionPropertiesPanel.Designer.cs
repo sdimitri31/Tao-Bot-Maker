@@ -92,6 +92,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.keyPanel);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.Name = "KeyActionPropertiesPanel";
             this.Padding = new System.Windows.Forms.Padding(8);

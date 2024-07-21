@@ -722,6 +722,7 @@
             this.Controls.Add(this.startCoordsPanel);
             this.Controls.Add(this.actionPanel);
             this.Controls.Add(this.clickPanel);
+            this.DoubleBuffered = true;
             this.Name = "MouseActionPropertiesPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(621, 476);

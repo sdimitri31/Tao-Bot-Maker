@@ -25,7 +25,7 @@ namespace Tao_Bot_Maker.Controller
             id = this.GetHashCode();
         }
 
-        public void SetHotkey(Keys hotkey)
+        public void SetKey(Keys hotkey)
         {
             this.hotkey.Key = hotkey;
         }

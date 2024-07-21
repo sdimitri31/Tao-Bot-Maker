@@ -46,7 +46,7 @@ namespace Tao_Bot_Maker.View.Setting
         public void SaveSettings()
         {
             SettingsController.SetSettingValue(Settings.SETTING_LANGUAGE, languageComboBox.SelectedItem.ToString(), SettingsType.General);
-            SettingsController.SetSettingValue(Settings.SETTING_THEME, SettingsController.GetSelectedThemeValueFromResource(themeComboBox.SelectedText), SettingsType.General);
+            SettingsController.SetSettingValue(Settings.SETTING_THEME, SettingsController.GetSelectedThemeValueFromResource(themeComboBox.SelectedItem.ToString()), SettingsType.General);
         }
 
         SettingsType ISettingsPropertiesPanel.GetType()

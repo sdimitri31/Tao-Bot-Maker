@@ -90,7 +90,7 @@ namespace Tao_Bot_Maker.View
 
         private void SetPictureFromName(string imageName)
         {
-            string imagePath = Path.Combine(ImageAction.imagesFolderPath, imageName);
+            string imagePath = Path.Combine(ImageAction.IMAGESFOLDERNAME, imageName);
             selectedImagePictureBox.Image = Image.FromFile(imagePath);
         }
 
@@ -135,7 +135,7 @@ namespace Tao_Bot_Maker.View
             }
 
             string imageName = Path.GetFileName(originalPath);
-            string targetFolderPath = Path.Combine(Directory.GetCurrentDirectory(), ImageAction.imagesFolderPath);
+            string targetFolderPath = Path.Combine(Directory.GetCurrentDirectory(), ImageAction.IMAGESFOLDERNAME);
             string targetFullPath = Path.Combine(targetFolderPath, imageName);
 
             // Create images folder if not present
@@ -242,7 +242,7 @@ namespace Tao_Bot_Maker.View
             if (string.IsNullOrEmpty(selectedImageName))
                 return;
 
-            string targetFolderPath = Path.Combine(Directory.GetCurrentDirectory(), ImageAction.imagesFolderPath);
+            string targetFolderPath = Path.Combine(Directory.GetCurrentDirectory(), ImageAction.IMAGESFOLDERNAME);
             string imagePath = Path.Combine(targetFolderPath, selectedImageName);
             int threshold = (int)thresholdNumericUpDown.Value;
             int x1 = (int)startXCoordinateNumericUpDown.Value;

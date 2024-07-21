@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Tao_Bot_Maker.View;
@@ -19,22 +17,28 @@ namespace Tao_Bot_Maker.Controller
         private HotKeyController hotkeyStartSequence;
         private HotKeyController hotkeyStopSequence;
 
-        private SequenceController sequenceController;
+        private readonly SequenceController sequenceController;
         private string currentSequenceName;
+
+        public bool IsSequenceRunning { get { return SequenceController.GetIsRunning(); } }
+        public bool IsSequencePaused { get { return SequenceController.GetIsPaused(); } }
+        public bool IsSequenceSaved { get { return SequenceController.GetIsSaved(); } }
+        public Keys KeyStartSequence { get { return hotkeyStartSequence.GetKey(); } }
+        public Keys KeyStopSequence { get { return hotkeyStopSequence.GetKey(); } }
 
         public MainFormController(MainForm mainForm)
         {
+            this.mainForm = mainForm;
             sequenceController = new SequenceController();
             NewSequence();
             SequenceController.SetIsRunning(false);
-            this.mainForm = mainForm;
             InitializeHotkeys();
         }
 
         #region Hotkey
 
         /// <summary>
-        /// Initializes the hotkeys by unregistering existing hotkeys and registering new hotkeys based on settings.
+        /// Initializes hotkeys by unregistering existing hotkeys and registering new hotkeys based on settings.
         /// </summary>
         public void InitializeHotkeys()
         {
@@ -53,7 +57,7 @@ namespace Tao_Bot_Maker.Controller
         }
 
         /// <summary>
-        /// Unregisters the existing hotkeys for starting, pausing, and stopping sequences.
+        /// Unregisters existing hotkeys for starting, pausing, and stopping sequences.
         /// </summary>
         public void UnregisterHotkeys()
         {
@@ -99,9 +103,9 @@ namespace Tao_Bot_Maker.Controller
         #region Settings
 
         /// <summary>
-        /// Opens the settings form.
+        /// Opens settings form.
         /// </summary>
-        /// <param name="settingsType">The type of settings to open the form for.</param>
+        /// <param name="settingsType">Setting type to show when opening settings form.</param>
         public void OpenSettingsForm(SettingsType settingsType = SettingsType.General)
         {
             UnregisterHotkeys();
@@ -115,9 +119,50 @@ namespace Tao_Bot_Maker.Controller
         /// <param name="name">The name of the setting.</param>
         /// <param name="value">The value of the setting.</param>
         /// <param name="type">The type of the setting.</param>
-        public void SetSettingValue<T>(string name, T value, SettingsType type)
+        private void SetSettingValue<T>(string name, T value, SettingsType type)
         {
             SettingsController.SetSettingValue(name, value, type);
+        }
+
+        /// <summary>
+        /// Gets the value of a setting.
+        /// </summary>
+        /// <typeparam name="T">Return type</typeparam>
+        /// <param name="name">Parameter name</param>
+        /// <returns>Value of the parameter</returns>
+        private T GetSettingValue<T>(string name)
+        {
+            return SettingsController.GetSettingValue<T>(name);
+        }
+
+        public void SetLanguageSettings(string language)
+        {
+            SetSettingValue(Settings.SETTING_LANGUAGE, language, SettingsType.General);
+        }
+
+        public string GetLanguageSettings()
+        {
+            string language = GetSettingValue<string>(Settings.SETTING_LANGUAGE);
+            switch (language)
+            {
+                case "English":
+                    CultureManager.ChangeCulture("en");
+                    break;
+                case "Français":
+                    CultureManager.ChangeCulture("fr");
+                    break;
+            }
+            return language;
+        }
+
+        public void SetThemeSettings(string theme)
+        {
+            SetSettingValue(Settings.SETTING_THEME, theme, SettingsType.General);
+        }
+
+        public string GetThemeSettings()
+        {
+            return GetSettingValue<string>(Settings.SETTING_THEME);
         }
 
         #endregion
@@ -198,7 +243,7 @@ namespace Tao_Bot_Maker.Controller
         }
 
         /// <summary>
-        /// Saves the current sequence.
+        /// Saves current sequence.
         /// </summary>
         public void SaveSequence()
         {
@@ -213,7 +258,7 @@ namespace Tao_Bot_Maker.Controller
         }
 
         /// <summary>
-        /// Saves the current sequence as a new sequence.
+        /// Saves current sequence as a new sequence.
         /// </summary>
         public void SaveAsSequence()
         {
@@ -264,7 +309,11 @@ namespace Tao_Bot_Maker.Controller
             InitializeHotkeys();
         }
 
-
+        /// <summary>
+        /// Moves an action to a new index.
+        /// </summary>
+        /// <param name="newIndex">New index.</param>
+        /// <param name="action">Action to move.</param>
         public void MoveAction(int newIndex, Action action)
         {
             sequenceController.MoveAction(newIndex, action);
@@ -289,7 +338,7 @@ namespace Tao_Bot_Maker.Controller
         /// <exception cref="Exception">Exception thrown if there is an error during sequence execution.</exception>
         public async void StartSequence()
         {
-            if (SequenceController.GetIsRunning())
+            if (IsSequenceRunning)
             {
                 TogglePause();
                 return;
@@ -314,31 +363,41 @@ namespace Tao_Bot_Maker.Controller
             }
         }
 
-        public bool GetIsSequenceRunning()
-        {
-            return SequenceController.GetIsRunning();
-        }
-
         /// <summary>
         /// Toggles the pause of the sequence.
         /// </summary>
         public void TogglePause()
         {
-            if (!SequenceController.GetIsRunning())
+            if (!IsSequenceRunning)
                 return;
 
             sequenceController.TogglePause();
         }
 
         /// <summary>
-        /// Stops the sequence.
+        /// Stops the execution of the sequence.
         /// </summary>
         public void StopSequence()
         {
-            if (!SequenceController.GetIsRunning())
+            if (!IsSequenceRunning)
                 return;
 
             sequenceController.StopSequence();
+        }
+
+        #endregion
+
+        #region About
+
+        /// <summary>
+        /// Opens About form.
+        /// </summary>
+        public void About()
+        {
+            using (var aboutForm = new AboutForm())
+            {
+                aboutForm.ShowDialog();
+            }
         }
 
         #endregion

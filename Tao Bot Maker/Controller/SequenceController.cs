@@ -121,10 +121,16 @@ namespace Tao_Bot_Maker.Controller
 
         public void SaveSequence(string name)
         {
-            if (sequence == null || string.IsNullOrEmpty(name))
+            if (sequence == null)
             {
-                Logger.Log("Sequence is null or name is empty", TraceEventType.Error);
-                throw new Exception("Sequence is null or name is empty");
+                Logger.Log("Cannot save sequence because Sequence is null", TraceEventType.Critical);
+                throw new Exception("Cannot save sequence because Sequence is null");
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                Logger.Log(Resources.Strings.ErrorMessageEmptyFieldSequence, TraceEventType.Error);
+                throw new Exception(Resources.Strings.ErrorMessageEmptyFieldSequence);
             }
 
             sequenceRepository.SaveSequence(sequence, name);

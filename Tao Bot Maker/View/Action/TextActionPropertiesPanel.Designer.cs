@@ -152,6 +152,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.speedPanel);
             this.Controls.Add(this.textToTypePanel);
+            this.DoubleBuffered = true;
             this.Name = "TextActionPropertiesPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(500, 176);

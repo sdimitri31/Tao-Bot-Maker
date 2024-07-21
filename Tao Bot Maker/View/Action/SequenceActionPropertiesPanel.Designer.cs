@@ -155,6 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.repeatCountPanel);
             this.Controls.Add(this.sequencePanel);
+            this.DoubleBuffered = true;
             this.Name = "SequenceActionPropertiesPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(500, 128);

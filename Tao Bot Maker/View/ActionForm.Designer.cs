@@ -104,6 +104,7 @@
             this.Controls.Add(this.actionTypeFlowLayoutPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.actionPropertiesPanel);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

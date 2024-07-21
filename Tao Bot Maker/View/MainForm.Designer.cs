@@ -32,55 +32,55 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.botToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.sequenceComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.actionPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.actionListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.eventLogTextBox = new System.Windows.Forms.TextBox();
-            this.moveActionUpContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.moveActionDownContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addActionToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.editActionToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.deleteActionToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.startBotToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.pauseBotToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.stopBotToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.saveSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.deleteSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveActionUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveActionDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteSequenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.botToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.francaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shortcutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lightThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.addActionToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.editActionToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.deleteActionToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.startBotToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.pauseBotToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.stopBotToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.sequenceComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.saveSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.deleteSequenceToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.actionFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.actionListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.moveActionUpContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveActionDownContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteActionContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eventLogTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -116,281 +116,6 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(108, 6);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addActionToolStripMenuItem,
-            this.editActionToolStripMenuItem,
-            this.deleteActionToolStripMenuItem,
-            this.moveActionUpToolStripMenuItem,
-            this.moveActionDownToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.deleteSequenceToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(157, 6);
-            // 
-            // botToolStripMenuItem
-            // 
-            this.botToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.startToolStripMenuItem,
-            this.stopToolStripMenuItem});
-            this.botToolStripMenuItem.Name = "botToolStripMenuItem";
-            this.botToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.botToolStripMenuItem.Text = "Bot";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.languageToolStripMenuItem,
-            this.shortcutsToolStripMenuItem,
-            this.themeToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.settingsToolStripMenuItem1});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
-            this.toolStripMenuItem1.Text = "?";
-            // 
-            // toolStrip
-            // 
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addActionToolStripButton,
-            this.editActionToolStripButton,
-            this.deleteActionToolStripButton,
-            this.toolStripSeparator1,
-            this.startBotToolStripButton,
-            this.pauseBotToolStripButton,
-            this.stopBotToolStripButton,
-            this.toolStripSeparator2,
-            this.sequenceComboBox,
-            this.saveSequenceToolStripButton,
-            this.deleteSequenceToolStripButton});
-            this.toolStrip.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(10, 0, 1, 0);
-            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip.Size = new System.Drawing.Size(784, 25);
-            this.toolStrip.TabIndex = 1;
-            this.toolStrip.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // sequenceComboBox
-            // 
-            this.sequenceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sequenceComboBox.Name = "sequenceComboBox";
-            this.sequenceComboBox.Size = new System.Drawing.Size(121, 25);
-            this.sequenceComboBox.SelectedIndexChanged += new System.EventHandler(this.SequenceComboBox_SelectedIndexChanged);
-            // 
-            // splitContainer
-            // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 49);
-            this.splitContainer.Name = "splitContainer";
-            this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer.Panel1
-            // 
-            this.splitContainer.Panel1.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer.Panel1.Controls.Add(this.actionPanel);
-            // 
-            // splitContainer.Panel2
-            // 
-            this.splitContainer.Panel2.Controls.Add(this.eventLogTextBox);
-            this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(8);
-            this.splitContainer.Size = new System.Drawing.Size(784, 362);
-            this.splitContainer.SplitterDistance = 247;
-            this.splitContainer.TabIndex = 2;
-            // 
-            // actionPanel
-            // 
-            this.actionPanel.AllowDrop = true;
-            this.actionPanel.AutoScroll = true;
-            this.actionPanel.BackColor = System.Drawing.Color.Gainsboro;
-            this.actionPanel.ContextMenuStrip = this.actionListBoxContextMenuStrip;
-            this.actionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.actionPanel.Location = new System.Drawing.Point(0, 0);
-            this.actionPanel.Name = "actionPanel";
-            this.actionPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.actionPanel.Size = new System.Drawing.Size(784, 247);
-            this.actionPanel.TabIndex = 2;
-            this.actionPanel.ClientSizeChanged += new System.EventHandler(this.ActionPanel_ClientSizeChanged);
-            this.actionPanel.Click += new System.EventHandler(this.ActionFlowLayoutPanel_Click);
-            this.actionPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragDrop);
-            this.actionPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragEnter);
-            this.actionPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragOver);
-            this.actionPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ActionFlowLayoutPanel_Paint);
-            this.actionPanel.DoubleClick += new System.EventHandler(this.ActionFlowLayoutPanel_DoubleClick);
-            this.actionPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ActionCustomListView_MouseDown);
-            this.actionPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ActionFlowLayoutPanel_PreviewKeyDown);
-            // 
-            // actionListBoxContextMenuStrip
-            // 
-            this.actionListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.moveActionUpContextMenuItem,
-            this.moveActionDownContextMenuItem,
-            this.editActionContextMenuItem,
-            this.deleteActionContextMenuItem});
-            this.actionListBoxContextMenuStrip.Name = "actionListBoxContextMenuStrip";
-            this.actionListBoxContextMenuStrip.Size = new System.Drawing.Size(174, 92);
-            this.actionListBoxContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.ActionListBoxContextMenuStrip_Opening);
-            // 
-            // eventLogTextBox
-            // 
-            this.eventLogTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventLogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.eventLogTextBox.Location = new System.Drawing.Point(8, 8);
-            this.eventLogTextBox.Multiline = true;
-            this.eventLogTextBox.Name = "eventLogTextBox";
-            this.eventLogTextBox.ReadOnly = true;
-            this.eventLogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.eventLogTextBox.Size = new System.Drawing.Size(768, 95);
-            this.eventLogTextBox.TabIndex = 0;
-            // 
-            // moveActionUpContextMenuItem
-            // 
-            this.moveActionUpContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_sort_up_48;
-            this.moveActionUpContextMenuItem.Name = "moveActionUpContextMenuItem";
-            this.moveActionUpContextMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.moveActionUpContextMenuItem.Text = "Move action up";
-            this.moveActionUpContextMenuItem.Click += new System.EventHandler(this.MoveUpToolStripMenuItem_Click);
-            // 
-            // moveActionDownContextMenuItem
-            // 
-            this.moveActionDownContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_sort_down_48;
-            this.moveActionDownContextMenuItem.Name = "moveActionDownContextMenuItem";
-            this.moveActionDownContextMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.moveActionDownContextMenuItem.Text = "Move action down";
-            this.moveActionDownContextMenuItem.Click += new System.EventHandler(this.MoveDownToolStripMenuItem_Click);
-            // 
-            // editActionContextMenuItem
-            // 
-            this.editActionContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pencil_drawing_48;
-            this.editActionContextMenuItem.Name = "editActionContextMenuItem";
-            this.editActionContextMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.editActionContextMenuItem.Text = "Edit action";
-            this.editActionContextMenuItem.Click += new System.EventHandler(this.EditActionContextMenuItem_Click);
-            // 
-            // deleteActionContextMenuItem
-            // 
-            this.deleteActionContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_do_not_disturb_48;
-            this.deleteActionContextMenuItem.Name = "deleteActionContextMenuItem";
-            this.deleteActionContextMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.deleteActionContextMenuItem.Text = "Delete action";
-            this.deleteActionContextMenuItem.Click += new System.EventHandler(this.DeleteActionToolStripMenuItem_Click);
-            // 
-            // addActionToolStripButton
-            // 
-            this.addActionToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.addActionToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_add_48;
-            this.addActionToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.addActionToolStripButton.Name = "addActionToolStripButton";
-            this.addActionToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.addActionToolStripButton.Text = "Add";
-            this.addActionToolStripButton.Click += new System.EventHandler(this.AddActionToolStripButton_Click);
-            // 
-            // editActionToolStripButton
-            // 
-            this.editActionToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.editActionToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pencil_drawing_48;
-            this.editActionToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.editActionToolStripButton.Name = "editActionToolStripButton";
-            this.editActionToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.editActionToolStripButton.Text = "Edit";
-            this.editActionToolStripButton.Click += new System.EventHandler(this.EditActionToolStripButton_Click);
-            // 
-            // deleteActionToolStripButton
-            // 
-            this.deleteActionToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.deleteActionToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_do_not_disturb_48;
-            this.deleteActionToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.deleteActionToolStripButton.Name = "deleteActionToolStripButton";
-            this.deleteActionToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.deleteActionToolStripButton.Text = "Delete";
-            this.deleteActionToolStripButton.Click += new System.EventHandler(this.DeleteActionToolStripButton_Click);
-            // 
-            // startBotToolStripButton
-            // 
-            this.startBotToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.startBotToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_circled_play_48;
-            this.startBotToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.startBotToolStripButton.Name = "startBotToolStripButton";
-            this.startBotToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.startBotToolStripButton.Text = "Start bot";
-            this.startBotToolStripButton.Click += new System.EventHandler(this.StartBotToolStripButton_Click);
-            // 
-            // pauseBotToolStripButton
-            // 
-            this.pauseBotToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pauseBotToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pause_button_48;
-            this.pauseBotToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pauseBotToolStripButton.Name = "pauseBotToolStripButton";
-            this.pauseBotToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.pauseBotToolStripButton.Text = "Pause bot";
-            this.pauseBotToolStripButton.Click += new System.EventHandler(this.PauseBotToolStripButton_Click);
-            // 
-            // stopBotToolStripButton
-            // 
-            this.stopBotToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.stopBotToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_stop_circled_48;
-            this.stopBotToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.stopBotToolStripButton.Name = "stopBotToolStripButton";
-            this.stopBotToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.stopBotToolStripButton.Text = "Stop bot";
-            this.stopBotToolStripButton.Click += new System.EventHandler(this.StopBotToolStripButton_Click);
-            // 
-            // saveSequenceToolStripButton
-            // 
-            this.saveSequenceToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveSequenceToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_save_48;
-            this.saveSequenceToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveSequenceToolStripButton.Name = "saveSequenceToolStripButton";
-            this.saveSequenceToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveSequenceToolStripButton.Text = "Save";
-            this.saveSequenceToolStripButton.Click += new System.EventHandler(this.SaveSequenceToolStripButton_Click);
-            // 
-            // deleteSequenceToolStripButton
-            // 
-            this.deleteSequenceToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.deleteSequenceToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_remove_48;
-            this.deleteSequenceToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.deleteSequenceToolStripButton.Name = "deleteSequenceToolStripButton";
-            this.deleteSequenceToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.deleteSequenceToolStripButton.Text = "Delete sequence";
-            this.deleteSequenceToolStripButton.Click += new System.EventHandler(this.DeleteSequenceToolStripButton_Click);
-            // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_file_48;
@@ -415,6 +140,11 @@
             this.saveAsToolStripMenuItem.Text = "SaveAs";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(108, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_close_48;
@@ -422,6 +152,20 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addActionToolStripMenuItem,
+            this.editActionToolStripMenuItem,
+            this.deleteActionToolStripMenuItem,
+            this.moveActionUpToolStripMenuItem,
+            this.moveActionDownToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.deleteSequenceToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
             // 
             // addActionToolStripMenuItem
             // 
@@ -463,6 +207,11 @@
             this.moveActionDownToolStripMenuItem.Text = "Move down";
             this.moveActionDownToolStripMenuItem.Click += new System.EventHandler(this.MoveDownToolStripMenuItem_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(157, 6);
+            // 
             // deleteSequenceToolStripMenuItem
             // 
             this.deleteSequenceToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_remove_48;
@@ -471,11 +220,20 @@
             this.deleteSequenceToolStripMenuItem.Text = "Delete sequence";
             this.deleteSequenceToolStripMenuItem.Click += new System.EventHandler(this.DeleteSequenceToolStripMenuItem_Click);
             // 
+            // botToolStripMenuItem
+            // 
+            this.botToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripMenuItem,
+            this.stopToolStripMenuItem});
+            this.botToolStripMenuItem.Name = "botToolStripMenuItem";
+            this.botToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.botToolStripMenuItem.Text = "Bot";
+            // 
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_circled_play_48;
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.startToolStripMenuItem.Text = "Start / Pause";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.StartToolStripMenuItem_Click);
             // 
@@ -483,9 +241,21 @@
             // 
             this.stopToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_stop_circled_48;
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.StopToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.languageToolStripMenuItem,
+            this.hotkeysToolStripMenuItem,
+            this.themeToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.settingsToolStripMenuItem1});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // languageToolStripMenuItem
             // 
@@ -494,7 +264,7 @@
             this.francaisToolStripMenuItem});
             this.languageToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_language_48;
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.languageToolStripMenuItem.Text = "Language";
             // 
             // englishToolStripMenuItem
@@ -513,13 +283,13 @@
             this.francaisToolStripMenuItem.Text = "Français";
             this.francaisToolStripMenuItem.Click += new System.EventHandler(this.FrenchToolStripMenuItem_Click);
             // 
-            // shortcutsToolStripMenuItem
+            // hotkeysToolStripMenuItem
             // 
-            this.shortcutsToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
-            this.shortcutsToolStripMenuItem.Name = "shortcutsToolStripMenuItem";
-            this.shortcutsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.shortcutsToolStripMenuItem.Text = "Shortcuts";
-            this.shortcutsToolStripMenuItem.Click += new System.EventHandler(this.ShortcutsToolStripMenuItem_Click);
+            this.hotkeysToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_keypad_48;
+            this.hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
+            this.hotkeysToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.hotkeysToolStripMenuItem.Text = "Hotkeys";
+            this.hotkeysToolStripMenuItem.Click += new System.EventHandler(this.HotkeysToolStripMenuItem_Click);
             // 
             // themeToolStripMenuItem
             // 
@@ -529,7 +299,7 @@
             this.darkThemeToolStripMenuItem});
             this.themeToolStripMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_black_and_white_48;
             this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.themeToolStripMenuItem.Text = "Theme";
             // 
             // autoThemeToolStripMenuItem
@@ -553,13 +323,26 @@
             this.darkThemeToolStripMenuItem.Text = "Dark";
             this.darkThemeToolStripMenuItem.Click += new System.EventHandler(this.DarkThemeToolStripMenuItem_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(123, 6);
+            // 
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_settings_48;
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.settingsToolStripMenuItem1.Text = "Settings";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
+            this.toolStripMenuItem1.Text = "?";
             // 
             // aboutToolStripMenuItem
             // 
@@ -569,6 +352,223 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
+            // toolStrip
+            // 
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addActionToolStripButton,
+            this.editActionToolStripButton,
+            this.deleteActionToolStripButton,
+            this.toolStripSeparator1,
+            this.startBotToolStripButton,
+            this.pauseBotToolStripButton,
+            this.stopBotToolStripButton,
+            this.toolStripSeparator2,
+            this.sequenceComboBox,
+            this.saveSequenceToolStripButton,
+            this.deleteSequenceToolStripButton});
+            this.toolStrip.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(10, 0, 1, 0);
+            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip.Size = new System.Drawing.Size(784, 25);
+            this.toolStrip.TabIndex = 1;
+            this.toolStrip.Text = "toolStrip1";
+            // 
+            // addActionToolStripButton
+            // 
+            this.addActionToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.addActionToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_add_48;
+            this.addActionToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.addActionToolStripButton.Name = "addActionToolStripButton";
+            this.addActionToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.addActionToolStripButton.Text = "Add";
+            this.addActionToolStripButton.Click += new System.EventHandler(this.AddActionToolStripButton_Click);
+            // 
+            // editActionToolStripButton
+            // 
+            this.editActionToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.editActionToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pencil_drawing_48;
+            this.editActionToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.editActionToolStripButton.Name = "editActionToolStripButton";
+            this.editActionToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.editActionToolStripButton.Text = "Edit";
+            this.editActionToolStripButton.Click += new System.EventHandler(this.EditActionToolStripButton_Click);
+            // 
+            // deleteActionToolStripButton
+            // 
+            this.deleteActionToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deleteActionToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_do_not_disturb_48;
+            this.deleteActionToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.deleteActionToolStripButton.Name = "deleteActionToolStripButton";
+            this.deleteActionToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.deleteActionToolStripButton.Text = "Delete";
+            this.deleteActionToolStripButton.Click += new System.EventHandler(this.DeleteActionToolStripButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // startBotToolStripButton
+            // 
+            this.startBotToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.startBotToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_circled_play_48;
+            this.startBotToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.startBotToolStripButton.Name = "startBotToolStripButton";
+            this.startBotToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.startBotToolStripButton.Text = "Start bot";
+            this.startBotToolStripButton.Click += new System.EventHandler(this.StartBotToolStripButton_Click);
+            // 
+            // pauseBotToolStripButton
+            // 
+            this.pauseBotToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pauseBotToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pause_button_48;
+            this.pauseBotToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pauseBotToolStripButton.Name = "pauseBotToolStripButton";
+            this.pauseBotToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.pauseBotToolStripButton.Text = "Pause bot";
+            this.pauseBotToolStripButton.Click += new System.EventHandler(this.PauseBotToolStripButton_Click);
+            // 
+            // stopBotToolStripButton
+            // 
+            this.stopBotToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stopBotToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_stop_circled_48;
+            this.stopBotToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stopBotToolStripButton.Name = "stopBotToolStripButton";
+            this.stopBotToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.stopBotToolStripButton.Text = "Stop bot";
+            this.stopBotToolStripButton.Click += new System.EventHandler(this.StopBotToolStripButton_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // sequenceComboBox
+            // 
+            this.sequenceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sequenceComboBox.Name = "sequenceComboBox";
+            this.sequenceComboBox.Size = new System.Drawing.Size(121, 25);
+            this.sequenceComboBox.SelectedIndexChanged += new System.EventHandler(this.SequenceComboBox_SelectedIndexChanged);
+            // 
+            // saveSequenceToolStripButton
+            // 
+            this.saveSequenceToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveSequenceToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_save_48;
+            this.saveSequenceToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveSequenceToolStripButton.Name = "saveSequenceToolStripButton";
+            this.saveSequenceToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.saveSequenceToolStripButton.Text = "Save";
+            this.saveSequenceToolStripButton.Click += new System.EventHandler(this.SaveSequenceToolStripButton_Click);
+            // 
+            // deleteSequenceToolStripButton
+            // 
+            this.deleteSequenceToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deleteSequenceToolStripButton.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_remove_48;
+            this.deleteSequenceToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.deleteSequenceToolStripButton.Name = "deleteSequenceToolStripButton";
+            this.deleteSequenceToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.deleteSequenceToolStripButton.Text = "Delete sequence";
+            this.deleteSequenceToolStripButton.Click += new System.EventHandler(this.DeleteSequenceToolStripButton_Click);
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer.Name = "splitContainer";
+            this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer.Panel1.Controls.Add(this.actionFlowLayoutPanel);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.eventLogTextBox);
+            this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(8);
+            this.splitContainer.Size = new System.Drawing.Size(784, 362);
+            this.splitContainer.SplitterDistance = 247;
+            this.splitContainer.TabIndex = 2;
+            // 
+            // actionFlowLayoutPanel
+            // 
+            this.actionFlowLayoutPanel.AllowDrop = true;
+            this.actionFlowLayoutPanel.AutoScroll = true;
+            this.actionFlowLayoutPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.actionFlowLayoutPanel.ContextMenuStrip = this.actionListBoxContextMenuStrip;
+            this.actionFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.actionFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.actionFlowLayoutPanel.Name = "actionFlowLayoutPanel";
+            this.actionFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(8);
+            this.actionFlowLayoutPanel.Size = new System.Drawing.Size(784, 247);
+            this.actionFlowLayoutPanel.TabIndex = 2;
+            this.actionFlowLayoutPanel.ClientSizeChanged += new System.EventHandler(this.ActionFlowLayoutPanel_ClientSizeChanged);
+            this.actionFlowLayoutPanel.Click += new System.EventHandler(this.ActionFlowLayoutPanel_Click);
+            this.actionFlowLayoutPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragDrop);
+            this.actionFlowLayoutPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragEnter);
+            this.actionFlowLayoutPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.ActionFlowLayoutPanel_DragOver);
+            this.actionFlowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ActionFlowLayoutPanel_Paint);
+            this.actionFlowLayoutPanel.DoubleClick += new System.EventHandler(this.ActionFlowLayoutPanel_DoubleClick);
+            this.actionFlowLayoutPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ActionFlowLayoutPanel_MouseDown);
+            this.actionFlowLayoutPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ActionFlowLayoutPanel_PreviewKeyDown);
+            // 
+            // actionListBoxContextMenuStrip
+            // 
+            this.actionListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.moveActionUpContextMenuItem,
+            this.moveActionDownContextMenuItem,
+            this.editActionContextMenuItem,
+            this.deleteActionContextMenuItem});
+            this.actionListBoxContextMenuStrip.Name = "actionListBoxContextMenuStrip";
+            this.actionListBoxContextMenuStrip.Size = new System.Drawing.Size(174, 92);
+            this.actionListBoxContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.ActionListBoxContextMenuStrip_Opening);
+            // 
+            // moveActionUpContextMenuItem
+            // 
+            this.moveActionUpContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_sort_up_48;
+            this.moveActionUpContextMenuItem.Name = "moveActionUpContextMenuItem";
+            this.moveActionUpContextMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.moveActionUpContextMenuItem.Text = "Move action up";
+            this.moveActionUpContextMenuItem.Click += new System.EventHandler(this.MoveUpToolStripMenuItem_Click);
+            // 
+            // moveActionDownContextMenuItem
+            // 
+            this.moveActionDownContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_sort_down_48;
+            this.moveActionDownContextMenuItem.Name = "moveActionDownContextMenuItem";
+            this.moveActionDownContextMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.moveActionDownContextMenuItem.Text = "Move action down";
+            this.moveActionDownContextMenuItem.Click += new System.EventHandler(this.MoveDownToolStripMenuItem_Click);
+            // 
+            // editActionContextMenuItem
+            // 
+            this.editActionContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_pencil_drawing_48;
+            this.editActionContextMenuItem.Name = "editActionContextMenuItem";
+            this.editActionContextMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.editActionContextMenuItem.Text = "Edit action";
+            this.editActionContextMenuItem.Click += new System.EventHandler(this.EditActionToolStripButton_Click);
+            // 
+            // deleteActionContextMenuItem
+            // 
+            this.deleteActionContextMenuItem.Image = global::Tao_Bot_Maker.Properties.Resources.icons8_do_not_disturb_48;
+            this.deleteActionContextMenuItem.Name = "deleteActionContextMenuItem";
+            this.deleteActionContextMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.deleteActionContextMenuItem.Text = "Delete action";
+            this.deleteActionContextMenuItem.Click += new System.EventHandler(this.DeleteActionToolStripMenuItem_Click);
+            // 
+            // eventLogTextBox
+            // 
+            this.eventLogTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventLogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventLogTextBox.Location = new System.Drawing.Point(8, 8);
+            this.eventLogTextBox.Multiline = true;
+            this.eventLogTextBox.Name = "eventLogTextBox";
+            this.eventLogTextBox.ReadOnly = true;
+            this.eventLogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.eventLogTextBox.Size = new System.Drawing.Size(768, 95);
+            this.eventLogTextBox.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,6 +577,7 @@
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
@@ -612,7 +613,7 @@
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shortcutsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hotkeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -644,7 +645,7 @@
         private System.Windows.Forms.ToolStripMenuItem moveActionUpContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveActionDownContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteActionContextMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel actionPanel;
+        private System.Windows.Forms.FlowLayoutPanel actionFlowLayoutPanel;
         private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoThemeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lightThemeToolStripMenuItem;

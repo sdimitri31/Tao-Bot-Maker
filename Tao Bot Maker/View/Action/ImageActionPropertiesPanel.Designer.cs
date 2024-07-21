@@ -552,6 +552,7 @@
             this.Controls.Add(this.overlayPanel);
             this.Controls.Add(this.coordinatesPanel);
             this.Controls.Add(this.imageSelectionPanel);
+            this.DoubleBuffered = true;
             this.Name = "ImageActionPropertiesPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(500, 617);

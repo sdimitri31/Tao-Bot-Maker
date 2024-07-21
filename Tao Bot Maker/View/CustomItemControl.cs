@@ -13,6 +13,7 @@ namespace Tao_Bot_Maker.View
         public new event EventHandler Click;
         public new event EventHandler MouseEnter;
         public new event EventHandler MouseLeave;
+        public new event MouseEventHandler MouseDown;
 
         private CustomItem<T> _customDisplayItem;
         private T _data;
@@ -180,11 +181,14 @@ namespace Tao_Bot_Maker.View
             this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.textLabel);
             this.Controls.Add(this.iconPictureBox);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(8, 0, 8, 8);
             this.Name = "CustomItemControl";
             this.Size = new System.Drawing.Size(150, 30);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CustomItemControl_MouseDown);
             this.MouseEnter += new System.EventHandler(this.CustomItemControl_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.CustomItemControl_MouseLeave);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CustomItemControl_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -198,6 +202,7 @@ namespace Tao_Bot_Maker.View
                 control.Click += RelayClickEvent;
                 control.MouseEnter += RelayMouseEnterEvent;
                 control.MouseLeave += RelayMouseLeaveEvent;
+                control.MouseDown += RelayMouseDownEvent;
                 if (control.HasChildren)
                 {
                     AttachEvents(control);
@@ -248,6 +253,35 @@ namespace Tao_Bot_Maker.View
         }
 
         private void CustomItemControl_MouseLeave(object sender, EventArgs e)
+        {
+            if (!Selected)
+            {
+                BackColor = SurfaceColor;
+                ForeColor = TextColor;
+            }
+        }
+
+        private void RelayMouseDownEvent(object sender, MouseEventArgs e)
+        {
+            this.OnMouseDown(e);
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            MouseDown?.Invoke(this, e);
+            base.OnMouseDown(e);
+        }
+
+        private void CustomItemControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!Selected)
+            {
+                BackColor = PressedBackColor;
+                ForeColor = PressedForeColor;
+            }
+        }
+
+        private void CustomItemControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (!Selected)
             {

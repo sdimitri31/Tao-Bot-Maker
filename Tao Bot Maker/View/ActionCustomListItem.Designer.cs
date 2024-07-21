@@ -103,8 +103,10 @@
             this.Name = "ActionCustomListItem";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(424, 50);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ActionCustomListItem_MouseDown);
             this.MouseEnter += new System.EventHandler(this.ActionTypeCustomListItem_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.ActionTypeCustomListItem_MouseLeave);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ActionCustomListItem_MouseUp);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dragPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.actionIconPictureBox)).EndInit();

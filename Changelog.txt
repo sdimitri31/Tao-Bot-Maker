@@ -1,4 +1,10 @@
 Changelog:
+2.0.5:
+Fix: Pressed state color on Action Item wasn't used
+Fix: Pressed state color on CustomItem wasn't used
+Fix: Changing theme in Settings Form was not saving selected theme
+Fix: Code optimisations
+
 2.0.4-beta:
 Add: New form when saving sequences
 Add: Improved UI in settings

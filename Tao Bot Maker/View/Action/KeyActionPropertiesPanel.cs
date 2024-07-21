@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Tao_Bot_Maker.Controller;
 using Tao_Bot_Maker.Helpers;
 using Tao_Bot_Maker.Model;
 using Action = Tao_Bot_Maker.Model.Action;

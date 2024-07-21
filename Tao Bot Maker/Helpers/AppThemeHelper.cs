@@ -171,6 +171,7 @@ namespace Tao_Bot_Maker.Helpers
 
         public static void ApplyThemeToControl(AppTheme theme, Control control, int elevation)
         {
+            bool applyToChildren = true;
             // Reduce elevation if transparent
             if ((control.Parent.BackColor == Color.Transparent))
             {
@@ -183,6 +184,7 @@ namespace Tao_Bot_Maker.Helpers
                     break;
                 case ActionCustomListItem actionCustomListItem:
                     ApplyThemeToActionCustomListItem(theme, actionCustomListItem, elevation);
+                    applyToChildren = false;
                     break;
                 case Button button:
                     ApplyThemeToButton(theme, button, elevation);
@@ -192,6 +194,10 @@ namespace Tao_Bot_Maker.Helpers
                     break;
                 case Label label:
                     ApplyThemeToLabel(theme, label);
+                    break;
+                case NumericUpDown numericUpDown:
+                    ApplyThemeToNumericUpDown(theme, numericUpDown, elevation);
+                    applyToChildren = false;
                     break;
                 case TextBox textBox:
                     ApplyThemeToTextBox(theme, textBox, elevation);
@@ -207,9 +213,11 @@ namespace Tao_Bot_Maker.Helpers
                     break;
                 case MenuStrip menuStrip:
                     ApplyThemeToMenuStrip(theme, menuStrip, elevation);
+                    applyToChildren = false;
                     break;
                 case ToolStrip toolStrip:
                     ApplyThemeToToolStrip(theme, toolStrip, elevation);
+                    applyToChildren = false;
                     break;
                 default:
                     var controlType = control.GetType();
@@ -222,7 +230,7 @@ namespace Tao_Bot_Maker.Helpers
                     break;
             }
 
-            if (!(control is MenuStrip) && !(control is ToolStrip) && !(control is ActionCustomListItem) && control.HasChildren)
+            if (applyToChildren && control.HasChildren)
             {
                 foreach (Control child in control.Controls)
                 {
@@ -256,8 +264,8 @@ namespace Tao_Bot_Maker.Helpers
             actionTypeCustomListItem.HighlightForeColor = theme.HighlightForeColor;
             actionTypeCustomListItem.HoverBackColor = GetElevationColor(theme, elevation + 1);
             actionTypeCustomListItem.HoverForeColor = theme.HoverForeColor;
-            actionTypeCustomListItem.PressedBackColor = theme.PressedBackColor;
-            actionTypeCustomListItem.PressedForeColor = theme.PressedForeColor;
+            actionTypeCustomListItem.PressedBackColor = GetElevationColor(theme, elevation - 2);
+            actionTypeCustomListItem.PressedForeColor = theme.ForeColor;
         }
 
         private static void ApplyThemeToActionCustomListItem(AppTheme theme, ActionCustomListItem actionCustomListItem, int elevation)
@@ -268,8 +276,8 @@ namespace Tao_Bot_Maker.Helpers
             actionCustomListItem.HighlightForeColor = theme.HighlightForeColor;
             actionCustomListItem.HoverBackColor = GetElevationColor(theme, elevation + 1);
             actionCustomListItem.HoverForeColor = theme.HoverForeColor;
-            actionCustomListItem.PressedBackColor = theme.PressedBackColor;
-            actionCustomListItem.PressedForeColor = theme.PressedForeColor;
+            actionCustomListItem.PressedBackColor = GetElevationColor(theme, elevation - 2);
+            actionCustomListItem.PressedForeColor = theme.ForeColor;
         }
 
         private static void ApplyThemeToButton(AppTheme theme, Button button, int elevation)
@@ -304,6 +312,26 @@ namespace Tao_Bot_Maker.Helpers
         {
             label.ForeColor = theme.ForeColor;
             label.EnabledChanged += (sender, e) => label.ForeColor = label.Enabled ? theme.ForeColor : theme.DisabledTextColor;
+        }
+
+        private static void ApplyThemeToNumericUpDown(AppTheme theme, NumericUpDown numericUpDown, int elevation)
+        {
+            //numericUpDown.BackColor = GetElevationColor(theme, elevation);
+            numericUpDown.BackColor = theme.BackColorElevationZero;
+
+            foreach (Control control in numericUpDown.Controls)
+            {
+                if (control is TextBox)
+                {
+                    control.BackColor = theme.BackColorElevationZero;
+                    control.ForeColor = theme.ForeColor;
+                }
+                else if (control is UpDownBase upDownBase)
+                {
+                    upDownBase.BackColor = theme.BackColorElevationZero;
+                    upDownBase.ForeColor = theme.ForeColor;
+                }
+            }
         }
 
         private static void ApplyThemeToTextBox(AppTheme theme, TextBox textBox, int elevation)
