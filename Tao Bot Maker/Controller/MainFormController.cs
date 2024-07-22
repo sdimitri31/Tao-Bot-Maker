@@ -279,34 +279,42 @@ namespace Tao_Bot_Maker.Controller
         /// <summary>
         /// Open form to add an action.
         /// </summary>
-        public void AddAction()
+        /// <returns>The added action. null if the user cancels.</returns>
+        public Action AddAction()
         {
             UnregisterHotkeys();
+            Action action = null;
             using (var actionForm = new ActionForm())
             {
                 if (actionForm.ShowDialog() == DialogResult.OK)
                 {
                     sequenceController.AddAction(actionForm.Action);
+                    action = actionForm.Action;
                 }
             }
             InitializeHotkeys();
+            return action;
         }
 
         /// <summary>
         /// Open form to update an action.
         /// </summary>
         /// <param name="oldAction">Action to update.</param>
-        public void UpdateAction(Action oldAction)
+        /// <returns>The updated action. null if the user cancels.</returns>
+        public Action UpdateAction(Action oldAction)
         {
             UnregisterHotkeys();
+            Action action = null;
             using (var actionForm = new ActionForm(false, oldAction))
             {
                 if (actionForm.ShowDialog() == DialogResult.OK)
                 {
                     sequenceController.UpdateAction(oldAction, actionForm.Action);
+                    action = actionForm.Action;
                 }
             }
             InitializeHotkeys();
+            return action;
         }
 
         /// <summary>

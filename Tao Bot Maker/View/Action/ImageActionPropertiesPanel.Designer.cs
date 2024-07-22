@@ -329,6 +329,8 @@
             // 
             this.overlayCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.overlayCheckBox.AutoSize = true;
+            this.overlayCheckBox.Checked = true;
+            this.overlayCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.overlayCheckBox.Location = new System.Drawing.Point(128, 8);
             this.overlayCheckBox.Name = "overlayCheckBox";
             this.overlayCheckBox.Size = new System.Drawing.Size(337, 17);

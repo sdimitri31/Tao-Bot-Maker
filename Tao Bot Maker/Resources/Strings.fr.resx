@@ -430,7 +430,7 @@
     <value>Erreur</value>
   </data>
   <data name="LabelExpiration" xml:space="preserve">
-    <value>Expiration</value>
+    <value>Expiration (ms)</value>
   </data>
   <data name="LabelHotkeyEndCoords" xml:space="preserve">
     <value>Coordonnées de fin</value>

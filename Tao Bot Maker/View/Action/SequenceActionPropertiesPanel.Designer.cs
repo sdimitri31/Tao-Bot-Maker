@@ -82,6 +82,11 @@
             this.repeatCountNumericUpDown.Name = "repeatCountNumericUpDown";
             this.repeatCountNumericUpDown.Size = new System.Drawing.Size(345, 20);
             this.repeatCountNumericUpDown.TabIndex = 16;
+            this.repeatCountNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // sequenceComboBox
             // 

@@ -1,4 +1,15 @@
 Changelog:
+2.0.6:
+Fix: Default value of Repeat count in Action sequence set to 1
+Fix: Default value of Click duration in ActionForm mouse set to 10
+Fix: Minimum value of Click duration in ActionForm mouse set to 0
+Fix: Missing value changed event for end coords in ActionForm mouse
+Fix: Increased size of panels to allow checkboxes to show two lines of text in ActionForm mouse
+Fix: Overlay default value set to enabled
+Fix: Wrong unit for LabelExpiration in ActionForm image
+Fix: Current loaded image couldn't be replaced by same name file in ActionForm image
+Fix: Updating action list UI only for added or edited action instead of loading every actions
+
 2.0.5:
 Fix: Pressed state color on Action Item wasn't used
 Fix: Pressed state color on CustomItem wasn't used

@@ -91,7 +91,13 @@ namespace Tao_Bot_Maker.View
         private void SetPictureFromName(string imageName)
         {
             string imagePath = Path.Combine(ImageAction.IMAGESFOLDERNAME, imageName);
-            selectedImagePictureBox.Image = Image.FromFile(imagePath);
+            if (!File.Exists(imagePath))
+                return;
+
+            using (var imageStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+            {
+                selectedImagePictureBox.Image = Image.FromStream(imageStream);
+            }
         }
 
         private void SelectImageButton_Click(object sender, EventArgs e)

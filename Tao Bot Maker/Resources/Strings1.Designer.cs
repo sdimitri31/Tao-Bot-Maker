@@ -997,7 +997,7 @@ namespace Tao_Bot_Maker.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Expiration (s).
+        ///   Recherche une chaîne localisée semblable à Expiration (ms).
         /// </summary>
         internal static string LabelExpiration {
             get {

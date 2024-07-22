@@ -98,7 +98,7 @@
             // 
             this.clickTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.clickTypeLabel.AutoSize = true;
-            this.clickTypeLabel.Location = new System.Drawing.Point(3, 10);
+            this.clickTypeLabel.Location = new System.Drawing.Point(3, 13);
             this.clickTypeLabel.Name = "clickTypeLabel";
             this.clickTypeLabel.Size = new System.Drawing.Size(94, 13);
             this.clickTypeLabel.TabIndex = 0;
@@ -109,7 +109,7 @@
             // 
             this.startXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.startXCoordinateNumericUpDown.AutoSize = true;
-            this.startXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 7);
+            this.startXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 9);
             this.startXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -133,7 +133,7 @@
             this.useCurrentPositionCheckBox.AutoSize = true;
             this.useCurrentPositionCheckBox.Location = new System.Drawing.Point(347, 3);
             this.useCurrentPositionCheckBox.Name = "useCurrentPositionCheckBox";
-            this.useCurrentPositionCheckBox.Size = new System.Drawing.Size(116, 28);
+            this.useCurrentPositionCheckBox.Size = new System.Drawing.Size(116, 33);
             this.useCurrentPositionCheckBox.TabIndex = 4;
             this.useCurrentPositionCheckBox.Text = "Use current position";
             this.useCurrentPositionCheckBox.UseVisualStyleBackColor = true;
@@ -143,7 +143,7 @@
             // 
             this.startYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.startYCoordinateNumericUpDown.AutoSize = true;
-            this.startYCoordinateNumericUpDown.Location = new System.Drawing.Point(225, 7);
+            this.startYCoordinateNumericUpDown.Location = new System.Drawing.Point(225, 9);
             this.startYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -167,7 +167,7 @@
             this.leftClickRadioButton.AutoSize = true;
             this.leftClickRadioButton.Location = new System.Drawing.Point(103, 3);
             this.leftClickRadioButton.Name = "leftClickRadioButton";
-            this.leftClickRadioButton.Size = new System.Drawing.Size(116, 28);
+            this.leftClickRadioButton.Size = new System.Drawing.Size(116, 33);
             this.leftClickRadioButton.TabIndex = 19;
             this.leftClickRadioButton.Text = "Left click";
             this.leftClickRadioButton.UseVisualStyleBackColor = true;
@@ -181,7 +181,7 @@
             this.middleClickRadioButton.AutoSize = true;
             this.middleClickRadioButton.Location = new System.Drawing.Point(225, 3);
             this.middleClickRadioButton.Name = "middleClickRadioButton";
-            this.middleClickRadioButton.Size = new System.Drawing.Size(116, 28);
+            this.middleClickRadioButton.Size = new System.Drawing.Size(116, 33);
             this.middleClickRadioButton.TabIndex = 20;
             this.middleClickRadioButton.Text = "Middle click";
             this.middleClickRadioButton.UseVisualStyleBackColor = true;
@@ -195,7 +195,7 @@
             this.rightClickRadioButton.AutoSize = true;
             this.rightClickRadioButton.Location = new System.Drawing.Point(347, 3);
             this.rightClickRadioButton.Name = "rightClickRadioButton";
-            this.rightClickRadioButton.Size = new System.Drawing.Size(116, 28);
+            this.rightClickRadioButton.Size = new System.Drawing.Size(116, 33);
             this.rightClickRadioButton.TabIndex = 21;
             this.rightClickRadioButton.Text = "Right click";
             this.rightClickRadioButton.UseVisualStyleBackColor = true;
@@ -209,7 +209,7 @@
             this.noneClickRadioButton.AutoSize = true;
             this.noneClickRadioButton.Location = new System.Drawing.Point(469, 3);
             this.noneClickRadioButton.Name = "noneClickRadioButton";
-            this.noneClickRadioButton.Size = new System.Drawing.Size(117, 28);
+            this.noneClickRadioButton.Size = new System.Drawing.Size(117, 33);
             this.noneClickRadioButton.TabIndex = 22;
             this.noneClickRadioButton.Text = "No click";
             this.noneClickRadioButton.UseVisualStyleBackColor = true;
@@ -219,7 +219,7 @@
             // 
             this.startCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.startCoordinateLabel.AutoSize = true;
-            this.startCoordinateLabel.Location = new System.Drawing.Point(3, 10);
+            this.startCoordinateLabel.Location = new System.Drawing.Point(3, 13);
             this.startCoordinateLabel.Name = "startCoordinateLabel";
             this.startCoordinateLabel.Size = new System.Drawing.Size(94, 13);
             this.startCoordinateLabel.TabIndex = 11;
@@ -234,7 +234,7 @@
             this.startImageCoordCheckBox.AutoSize = true;
             this.startImageCoordCheckBox.Location = new System.Drawing.Point(469, 3);
             this.startImageCoordCheckBox.Name = "startImageCoordCheckBox";
-            this.startImageCoordCheckBox.Size = new System.Drawing.Size(117, 28);
+            this.startImageCoordCheckBox.Size = new System.Drawing.Size(117, 33);
             this.startImageCoordCheckBox.TabIndex = 26;
             this.startImageCoordCheckBox.Text = "Use image coordinates";
             this.startImageCoordCheckBox.UseVisualStyleBackColor = true;
@@ -245,7 +245,7 @@
             this.speedComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.speedComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.speedComboBox.FormattingEnabled = true;
-            this.speedComboBox.Location = new System.Drawing.Point(103, 6);
+            this.speedComboBox.Location = new System.Drawing.Point(103, 9);
             this.speedComboBox.Name = "speedComboBox";
             this.speedComboBox.Size = new System.Drawing.Size(483, 21);
             this.speedComboBox.TabIndex = 14;
@@ -254,7 +254,9 @@
             // 
             this.overlayCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.overlayCheckBox.AutoSize = true;
-            this.overlayCheckBox.Location = new System.Drawing.Point(103, 8);
+            this.overlayCheckBox.Checked = true;
+            this.overlayCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.overlayCheckBox.Location = new System.Drawing.Point(103, 11);
             this.overlayCheckBox.Name = "overlayCheckBox";
             this.overlayCheckBox.Size = new System.Drawing.Size(483, 17);
             this.overlayCheckBox.TabIndex = 28;
@@ -268,11 +270,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clickPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.clickPanel.Controls.Add(this.clickTableLayoutPanel);
-            this.clickPanel.Location = new System.Drawing.Point(8, 66);
+            this.clickPanel.Location = new System.Drawing.Point(8, 71);
             this.clickPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.clickPanel.Name = "clickPanel";
             this.clickPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.clickPanel.Size = new System.Drawing.Size(605, 50);
+            this.clickPanel.Size = new System.Drawing.Size(605, 55);
             this.clickPanel.TabIndex = 7;
             // 
             // clickTableLayoutPanel
@@ -293,7 +295,7 @@
             this.clickTableLayoutPanel.Name = "clickTableLayoutPanel";
             this.clickTableLayoutPanel.RowCount = 1;
             this.clickTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.clickTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.clickTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.clickTableLayoutPanel.TabIndex = 33;
             // 
             // actionPanel
@@ -306,7 +308,7 @@
             this.actionPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.actionPanel.Name = "actionPanel";
             this.actionPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.actionPanel.Size = new System.Drawing.Size(605, 50);
+            this.actionPanel.Size = new System.Drawing.Size(605, 55);
             this.actionPanel.TabIndex = 8;
             // 
             // actionTableLayoutPanel
@@ -327,14 +329,14 @@
             this.actionTableLayoutPanel.Name = "actionTableLayoutPanel";
             this.actionTableLayoutPanel.RowCount = 1;
             this.actionTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.actionTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.actionTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.actionTableLayoutPanel.TabIndex = 32;
             // 
             // actionLabel
             // 
             this.actionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.actionLabel.AutoSize = true;
-            this.actionLabel.Location = new System.Drawing.Point(3, 10);
+            this.actionLabel.Location = new System.Drawing.Point(3, 13);
             this.actionLabel.Name = "actionLabel";
             this.actionLabel.Size = new System.Drawing.Size(94, 13);
             this.actionLabel.TabIndex = 31;
@@ -349,7 +351,7 @@
             this.dragAndDropRadioButton.AutoSize = true;
             this.dragAndDropRadioButton.Location = new System.Drawing.Point(469, 3);
             this.dragAndDropRadioButton.Name = "dragAndDropRadioButton";
-            this.dragAndDropRadioButton.Size = new System.Drawing.Size(117, 28);
+            this.dragAndDropRadioButton.Size = new System.Drawing.Size(117, 33);
             this.dragAndDropRadioButton.TabIndex = 30;
             this.dragAndDropRadioButton.TabStop = true;
             this.dragAndDropRadioButton.Text = "Drag and Drop";
@@ -364,7 +366,7 @@
             this.clickRadioButton.AutoSize = true;
             this.clickRadioButton.Location = new System.Drawing.Point(103, 3);
             this.clickRadioButton.Name = "clickRadioButton";
-            this.clickRadioButton.Size = new System.Drawing.Size(116, 28);
+            this.clickRadioButton.Size = new System.Drawing.Size(116, 33);
             this.clickRadioButton.TabIndex = 27;
             this.clickRadioButton.TabStop = true;
             this.clickRadioButton.Text = "Click";
@@ -379,7 +381,7 @@
             this.scrollRadioButton.AutoSize = true;
             this.scrollRadioButton.Location = new System.Drawing.Point(347, 3);
             this.scrollRadioButton.Name = "scrollRadioButton";
-            this.scrollRadioButton.Size = new System.Drawing.Size(116, 28);
+            this.scrollRadioButton.Size = new System.Drawing.Size(116, 33);
             this.scrollRadioButton.TabIndex = 29;
             this.scrollRadioButton.TabStop = true;
             this.scrollRadioButton.Text = "Scroll";
@@ -394,7 +396,7 @@
             this.doubleClickRadioButton.AutoSize = true;
             this.doubleClickRadioButton.Location = new System.Drawing.Point(225, 3);
             this.doubleClickRadioButton.Name = "doubleClickRadioButton";
-            this.doubleClickRadioButton.Size = new System.Drawing.Size(116, 28);
+            this.doubleClickRadioButton.Size = new System.Drawing.Size(116, 33);
             this.doubleClickRadioButton.TabIndex = 28;
             this.doubleClickRadioButton.TabStop = true;
             this.doubleClickRadioButton.Text = "Double click";
@@ -407,11 +409,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.startCoordsPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.startCoordsPanel.Controls.Add(this.startCoordsTableLayoutPanel);
-            this.startCoordsPanel.Location = new System.Drawing.Point(8, 124);
+            this.startCoordsPanel.Location = new System.Drawing.Point(8, 134);
             this.startCoordsPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.startCoordsPanel.Name = "startCoordsPanel";
             this.startCoordsPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.startCoordsPanel.Size = new System.Drawing.Size(605, 50);
+            this.startCoordsPanel.Size = new System.Drawing.Size(605, 55);
             this.startCoordsPanel.TabIndex = 9;
             // 
             // startCoordsTableLayoutPanel
@@ -432,7 +434,7 @@
             this.startCoordsTableLayoutPanel.Name = "startCoordsTableLayoutPanel";
             this.startCoordsTableLayoutPanel.RowCount = 1;
             this.startCoordsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.startCoordsTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.startCoordsTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.startCoordsTableLayoutPanel.TabIndex = 34;
             // 
             // endCoordsPanel
@@ -441,11 +443,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.endCoordsPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.endCoordsPanel.Controls.Add(this.endCoordsTableLayoutPanel);
-            this.endCoordsPanel.Location = new System.Drawing.Point(8, 182);
+            this.endCoordsPanel.Location = new System.Drawing.Point(8, 197);
             this.endCoordsPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.endCoordsPanel.Name = "endCoordsPanel";
             this.endCoordsPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.endCoordsPanel.Size = new System.Drawing.Size(605, 50);
+            this.endCoordsPanel.Size = new System.Drawing.Size(605, 55);
             this.endCoordsPanel.TabIndex = 27;
             // 
             // endCoordsTableLayoutPanel
@@ -465,14 +467,14 @@
             this.endCoordsTableLayoutPanel.Name = "endCoordsTableLayoutPanel";
             this.endCoordsTableLayoutPanel.RowCount = 1;
             this.endCoordsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.endCoordsTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.endCoordsTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.endCoordsTableLayoutPanel.TabIndex = 35;
             // 
             // endYCoordinateNumericUpDown
             // 
             this.endYCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.endYCoordinateNumericUpDown.AutoSize = true;
-            this.endYCoordinateNumericUpDown.Location = new System.Drawing.Point(225, 7);
+            this.endYCoordinateNumericUpDown.Location = new System.Drawing.Point(225, 9);
             this.endYCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -486,12 +488,13 @@
             this.endYCoordinateNumericUpDown.Name = "endYCoordinateNumericUpDown";
             this.endYCoordinateNumericUpDown.Size = new System.Drawing.Size(116, 20);
             this.endYCoordinateNumericUpDown.TabIndex = 6;
+            this.endYCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
             // 
             // endXCoordinateNumericUpDown
             // 
             this.endXCoordinateNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.endXCoordinateNumericUpDown.AutoSize = true;
-            this.endXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 7);
+            this.endXCoordinateNumericUpDown.Location = new System.Drawing.Point(103, 9);
             this.endXCoordinateNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -505,6 +508,7 @@
             this.endXCoordinateNumericUpDown.Name = "endXCoordinateNumericUpDown";
             this.endXCoordinateNumericUpDown.Size = new System.Drawing.Size(116, 20);
             this.endXCoordinateNumericUpDown.TabIndex = 3;
+            this.endXCoordinateNumericUpDown.ValueChanged += new System.EventHandler(this.CoordinatesNumericUpDown_ValueChanged);
             // 
             // endImageCoordCheckBox
             // 
@@ -514,7 +518,7 @@
             this.endImageCoordCheckBox.AutoSize = true;
             this.endImageCoordCheckBox.Location = new System.Drawing.Point(469, 3);
             this.endImageCoordCheckBox.Name = "endImageCoordCheckBox";
-            this.endImageCoordCheckBox.Size = new System.Drawing.Size(117, 28);
+            this.endImageCoordCheckBox.Size = new System.Drawing.Size(117, 33);
             this.endImageCoordCheckBox.TabIndex = 26;
             this.endImageCoordCheckBox.Text = "Use image coordinates";
             this.endImageCoordCheckBox.UseVisualStyleBackColor = true;
@@ -523,7 +527,7 @@
             // 
             this.endCoordinateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.endCoordinateLabel.AutoSize = true;
-            this.endCoordinateLabel.Location = new System.Drawing.Point(3, 10);
+            this.endCoordinateLabel.Location = new System.Drawing.Point(3, 13);
             this.endCoordinateLabel.Name = "endCoordinateLabel";
             this.endCoordinateLabel.Size = new System.Drawing.Size(94, 13);
             this.endCoordinateLabel.TabIndex = 11;
@@ -536,11 +540,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.speedPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.speedPanel.Controls.Add(this.speedTableLayoutPanel);
-            this.speedPanel.Location = new System.Drawing.Point(8, 240);
+            this.speedPanel.Location = new System.Drawing.Point(8, 260);
             this.speedPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.speedPanel.Name = "speedPanel";
             this.speedPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.speedPanel.Size = new System.Drawing.Size(605, 50);
+            this.speedPanel.Size = new System.Drawing.Size(605, 55);
             this.speedPanel.TabIndex = 28;
             // 
             // speedTableLayoutPanel
@@ -555,14 +559,14 @@
             this.speedTableLayoutPanel.Name = "speedTableLayoutPanel";
             this.speedTableLayoutPanel.RowCount = 1;
             this.speedTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.speedTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.speedTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.speedTableLayoutPanel.TabIndex = 15;
             // 
             // speedLabel
             // 
             this.speedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.speedLabel.AutoSize = true;
-            this.speedLabel.Location = new System.Drawing.Point(3, 10);
+            this.speedLabel.Location = new System.Drawing.Point(3, 13);
             this.speedLabel.Name = "speedLabel";
             this.speedLabel.Size = new System.Drawing.Size(94, 13);
             this.speedLabel.TabIndex = 11;
@@ -575,11 +579,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.scrollPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.scrollPanel.Controls.Add(this.scrollTableLayoutPanel);
-            this.scrollPanel.Location = new System.Drawing.Point(8, 298);
+            this.scrollPanel.Location = new System.Drawing.Point(8, 323);
             this.scrollPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.scrollPanel.Name = "scrollPanel";
             this.scrollPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.scrollPanel.Size = new System.Drawing.Size(605, 50);
+            this.scrollPanel.Size = new System.Drawing.Size(605, 55);
             this.scrollPanel.TabIndex = 29;
             // 
             // scrollTableLayoutPanel
@@ -594,13 +598,13 @@
             this.scrollTableLayoutPanel.Name = "scrollTableLayoutPanel";
             this.scrollTableLayoutPanel.RowCount = 1;
             this.scrollTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.scrollTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.scrollTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.scrollTableLayoutPanel.TabIndex = 16;
             // 
             // scrollAmountNumericUpDown
             // 
             this.scrollAmountNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrollAmountNumericUpDown.Location = new System.Drawing.Point(103, 7);
+            this.scrollAmountNumericUpDown.Location = new System.Drawing.Point(103, 9);
             this.scrollAmountNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -619,7 +623,7 @@
             // 
             this.scrollAmountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.scrollAmountLabel.AutoSize = true;
-            this.scrollAmountLabel.Location = new System.Drawing.Point(3, 10);
+            this.scrollAmountLabel.Location = new System.Drawing.Point(3, 13);
             this.scrollAmountLabel.Name = "scrollAmountLabel";
             this.scrollAmountLabel.Size = new System.Drawing.Size(94, 13);
             this.scrollAmountLabel.TabIndex = 11;
@@ -632,11 +636,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clickDurationPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.clickDurationPanel.Controls.Add(this.clickDurationTableLayoutPanel);
-            this.clickDurationPanel.Location = new System.Drawing.Point(8, 356);
+            this.clickDurationPanel.Location = new System.Drawing.Point(8, 386);
             this.clickDurationPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.clickDurationPanel.Name = "clickDurationPanel";
             this.clickDurationPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.clickDurationPanel.Size = new System.Drawing.Size(605, 50);
+            this.clickDurationPanel.Size = new System.Drawing.Size(605, 55);
             this.clickDurationPanel.TabIndex = 30;
             // 
             // clickDurationTableLayoutPanel
@@ -651,32 +655,32 @@
             this.clickDurationTableLayoutPanel.Name = "clickDurationTableLayoutPanel";
             this.clickDurationTableLayoutPanel.RowCount = 1;
             this.clickDurationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.clickDurationTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.clickDurationTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.clickDurationTableLayoutPanel.TabIndex = 17;
             // 
             // clickDurationNumericUpDown
             // 
             this.clickDurationNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.clickDurationNumericUpDown.Location = new System.Drawing.Point(103, 7);
+            this.clickDurationNumericUpDown.Location = new System.Drawing.Point(103, 9);
             this.clickDurationNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
-            this.clickDurationNumericUpDown.Minimum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            -2147483648});
             this.clickDurationNumericUpDown.Name = "clickDurationNumericUpDown";
             this.clickDurationNumericUpDown.Size = new System.Drawing.Size(483, 20);
             this.clickDurationNumericUpDown.TabIndex = 3;
+            this.clickDurationNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // clickDurationLabel
             // 
             this.clickDurationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.clickDurationLabel.AutoSize = true;
-            this.clickDurationLabel.Location = new System.Drawing.Point(3, 10);
+            this.clickDurationLabel.Location = new System.Drawing.Point(3, 13);
             this.clickDurationLabel.Name = "clickDurationLabel";
             this.clickDurationLabel.Size = new System.Drawing.Size(94, 13);
             this.clickDurationLabel.TabIndex = 11;
@@ -689,11 +693,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.overlayPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.overlayPanel.Controls.Add(this.overlayTableLayoutPanel);
-            this.overlayPanel.Location = new System.Drawing.Point(8, 414);
+            this.overlayPanel.Location = new System.Drawing.Point(8, 449);
             this.overlayPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.overlayPanel.Name = "overlayPanel";
             this.overlayPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.overlayPanel.Size = new System.Drawing.Size(605, 50);
+            this.overlayPanel.Size = new System.Drawing.Size(605, 55);
             this.overlayPanel.TabIndex = 31;
             // 
             // overlayTableLayoutPanel
@@ -707,7 +711,7 @@
             this.overlayTableLayoutPanel.Name = "overlayTableLayoutPanel";
             this.overlayTableLayoutPanel.RowCount = 1;
             this.overlayTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.overlayTableLayoutPanel.Size = new System.Drawing.Size(589, 34);
+            this.overlayTableLayoutPanel.Size = new System.Drawing.Size(589, 39);
             this.overlayTableLayoutPanel.TabIndex = 29;
             // 
             // MouseActionPropertiesPanel
@@ -725,7 +729,7 @@
             this.DoubleBuffered = true;
             this.Name = "MouseActionPropertiesPanel";
             this.Padding = new System.Windows.Forms.Padding(8);
-            this.Size = new System.Drawing.Size(621, 476);
+            this.Size = new System.Drawing.Size(621, 512);
             this.VisibleChanged += new System.EventHandler(this.MouseActionPropertiesPanel_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.startXCoordinateNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.startYCoordinateNumericUpDown)).EndInit();

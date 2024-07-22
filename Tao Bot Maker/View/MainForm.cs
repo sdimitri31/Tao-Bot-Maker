@@ -30,7 +30,7 @@ namespace Tao_Bot_Maker.View
             Logger.LogMessageReceived += OnLogMessageReceived;
             CultureManager.CultureChanged += UpdateUICulture;
             SequenceController.RunningStateChanged += UpdateUIState;
-            SequenceController.SavedStatusChanged += UpdateUICulture;
+            SequenceController.SavedStatusChanged += UpdateUITitle;
             actionFlowLayoutPanel.KeyDown += new KeyEventHandler(ActionFlowLayoutPanel_KeyDown);
 
             LoadSettings();
@@ -42,41 +42,56 @@ namespace Tao_Bot_Maker.View
 
         private void New()
         {
+            Logger.Log("New", TraceEventType.Verbose);
             if (mainFormController.IsSequenceRunning)
                 return;
 
-            // If not on a new sequence change index
-            // and combobox will handle messageBox for changes
+            // If not on a new sequence, change index
+            sequenceComboBox.SelectedIndexChanged -= SequenceComboBox_SelectedIndexChanged;
             if (sequenceComboBox.SelectedIndex != -1)
                 sequenceComboBox.SelectedIndex = -1;
-            else
+
+            if (!mainFormController.IsSequenceSaved)
             {
-                // Else we take care of it
-                if (!mainFormController.IsSequenceSaved)
+                string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
+                message += Environment.NewLine;
+                message += Resources.Strings.QuestionMessageContinue;
+
+                DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
                 {
-                    string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
-                    message += Environment.NewLine;
-                    message += Resources.Strings.QuestionMessageContinue;
-
-                    DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (result != DialogResult.Yes)
-                    {
-                        return;
-                    }
+                    // Cancel selection change
+                    sequenceComboBox.SelectedIndex = previousSequenceSelectedIndex;
+                    sequenceComboBox.SelectedIndexChanged += SequenceComboBox_SelectedIndexChanged;
+                    return;
                 }
             }
 
+            sequenceComboBox.SelectedIndexChanged += SequenceComboBox_SelectedIndexChanged;
             mainFormController.NewSequence();
             LoadSequenceNames();
             LoadActions();
             UpdateUIState();
         }
 
-        private void UpdateUICulture()
+        private void ApplyThemeToControl(Control control, int elevation = 0)
         {
+            string theme = mainFormController.GetThemeSettings();
+            AppThemeHelper.ApplyThemeToControl(AppThemeHelper.GetAppThemeFromName(theme), control, elevation);
+        }
+
+        private void UpdateUITitle()
+        {
+            Logger.Log("Updating UI Title", TraceEventType.Verbose);
             string unsaved = mainFormController.IsSequenceSaved ? "" : " - " + Resources.Strings.Unsaved;
             this.Text = Resources.Strings.FormTitleMain + unsaved;
+        }
+
+        private void UpdateUICulture()
+        {
+            Logger.Log("Updating UI Culture", TraceEventType.Verbose);
+            UpdateUITitle();
 
             string startButtonText = Resources.Strings.MenuBotStart + " / " + Resources.Strings.MenuBotPause + " / " + Resources.Strings.MenuBotResume;
 
@@ -137,8 +152,12 @@ namespace Tao_Bot_Maker.View
 
         private void UpdateUIState()
         {
+            Logger.Log("Updating UI State", TraceEventType.Verbose);
             bool isRunning = mainFormController.IsSequenceRunning;
             bool isPaused = mainFormController.IsSequencePaused;
+
+            // TITLE
+            UpdateUITitle();
 
             // FILE
             newToolStripMenuItem.Enabled = !isRunning;
@@ -262,11 +281,21 @@ namespace Tao_Bot_Maker.View
         /// </summary>
         private void AddAction()
         {
+            Logger.Log("Adding action", TraceEventType.Verbose);
             if (mainFormController.IsSequenceRunning)
                 return;
 
-            mainFormController.AddAction();
-            LoadActions();
+            Action addedAction = mainFormController.AddAction();
+
+            if (addedAction == null)
+                return;
+
+            ActionCustomListItem actionItem = GetActionItem(addedAction);
+            ApplyThemeToControl(actionItem, 3);
+
+            actionFlowLayoutPanel.Controls.Add(actionItem);
+            AddBottomMarginToLastAction();
+            actionFlowLayoutPanel.ScrollControlIntoView(actionItem);
             UpdateUIState();
         }
 
@@ -275,11 +304,22 @@ namespace Tao_Bot_Maker.View
         /// </summary>
         private void EditAction()
         {
+            Logger.Log($"Editing action {selectedActionIndex}", TraceEventType.Verbose);
             if (selectedActionIndex < 0)
                 return;
 
-            mainFormController.UpdateAction(actionFlowLayoutPanel.Controls.OfType<ActionCustomListItem>().ElementAt(selectedActionIndex).Action);
-            LoadActions();
+            Action editedAction = mainFormController.UpdateAction(actionFlowLayoutPanel.Controls.OfType<ActionCustomListItem>().ElementAt(selectedActionIndex).Action);
+
+            if (editedAction == null)
+                return;
+
+            ActionCustomListItem actionItem = GetActionItem(editedAction);
+            ApplyThemeToControl(actionItem, 3);
+
+            actionFlowLayoutPanel.Controls.RemoveAt(selectedActionIndex);
+            actionFlowLayoutPanel.Controls.Add(actionItem);
+            actionFlowLayoutPanel.Controls.SetChildIndex(actionItem, selectedActionIndex);
+            AddBottomMarginToLastAction();
             SetSelectedActionByIndex(selectedActionIndex);
         }
 
@@ -288,6 +328,7 @@ namespace Tao_Bot_Maker.View
         /// </summary>
         private void DeleteAction()
         {
+            Logger.Log($"Deleting action {selectedActionIndex}", TraceEventType.Verbose);
             if (selectedActionIndex < 0)
                 return;
 
@@ -332,6 +373,7 @@ namespace Tao_Bot_Maker.View
         /// </summary>
         private void LoadActions()
         {
+            Logger.Log("Loading actions", TraceEventType.Verbose);
             actionFlowLayoutPanel.Controls.Clear();
             SetSelectedActionByIndex(-1);
 
@@ -343,8 +385,7 @@ namespace Tao_Bot_Maker.View
                 actionFlowLayoutPanel.Controls.Add(GetActionItem(action));
             }
 
-            string theme = mainFormController.GetThemeSettings();
-            AppThemeHelper.ApplyThemeToControl(AppThemeHelper.GetAppThemeFromName(theme), actionFlowLayoutPanel, 3);
+            ApplyThemeToControl(actionFlowLayoutPanel, 3);
 
             AddBottomMarginToLastAction();
         }
@@ -439,6 +480,7 @@ namespace Tao_Bot_Maker.View
         /// </summary>
         private void LoadSequenceNames()
         {
+            Logger.Log("Loading sequence names", TraceEventType.Verbose);
             sequenceComboBox.Items.Clear();
             foreach (var sequenceName in mainFormController.GetAllSequenceNames())
             {
@@ -452,6 +494,7 @@ namespace Tao_Bot_Maker.View
         /// <param name="sequenceName"></param>
         private async void LoadSequenceAsync(string sequenceName)
         {
+            Logger.Log($"Loading sequence '{sequenceName}'", TraceEventType.Verbose);
             try
             {
                 await mainFormController.LoadSequenceAsync(sequenceName);
@@ -521,6 +564,7 @@ namespace Tao_Bot_Maker.View
 
             if (result == DialogResult.Yes)
             {
+                Logger.Log($"Deleting sequence '{sequenceName}'", TraceEventType.Verbose);
                 if (mainFormController.RemoveSequence(sequenceName))
                     New();
             }
@@ -750,28 +794,28 @@ namespace Tao_Bot_Maker.View
         // Combo Box Selection Change
         private void SequenceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!mainFormController.IsSequenceSaved)
+            {
+                string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
+                message += Environment.NewLine;
+                message += Resources.Strings.QuestionMessageContinue;
+
+                DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    // Cancel selection change
+                    sequenceComboBox.SelectedIndexChanged -= SequenceComboBox_SelectedIndexChanged;
+                    sequenceComboBox.SelectedIndex = previousSequenceSelectedIndex;
+                    sequenceComboBox.SelectedIndexChanged += SequenceComboBox_SelectedIndexChanged;
+                    return;
+                }
+            }
+
             string selectedSequenceName = sequenceComboBox.SelectedItem as string;
 
             if (!string.IsNullOrEmpty(selectedSequenceName))
             {
-                if (!mainFormController.IsSequenceSaved)
-                {
-                    string message = string.Format(Resources.Strings.WarningMessageUnsavedChanges);
-                    message += Environment.NewLine;
-                    message += Resources.Strings.QuestionMessageContinue;
-
-                    DialogResult result = MessageBox.Show(message, Resources.Strings.CaptionMessageContinue, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (result != DialogResult.Yes)
-                    {
-                        // Cancel selection change
-                        sequenceComboBox.SelectedIndexChanged -= SequenceComboBox_SelectedIndexChanged;
-                        sequenceComboBox.SelectedIndex = previousSequenceSelectedIndex;
-                        sequenceComboBox.SelectedIndexChanged += SequenceComboBox_SelectedIndexChanged;
-                        return;
-                    }
-                }
-
                 LoadSequenceAsync(selectedSequenceName);
             }
             previousSequenceSelectedIndex = sequenceComboBox.SelectedIndex;
@@ -1028,7 +1072,7 @@ namespace Tao_Bot_Maker.View
         private void ActionListBoxContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             // Disable the context menu if no action is selected
-            if(selectedActionIndex == -1)
+            if (selectedActionIndex == -1)
                 e.Cancel = true;
         }
 

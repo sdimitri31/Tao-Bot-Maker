@@ -173,7 +173,7 @@ namespace Tao_Bot_Maker.Helpers
         {
             bool applyToChildren = true;
             // Reduce elevation if transparent
-            if ((control.Parent.BackColor == Color.Transparent))
+            if ((control.Parent != null) && (control.Parent.BackColor == Color.Transparent))
             {
                 elevation--;
             }
