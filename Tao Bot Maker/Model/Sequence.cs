@@ -1,24 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Tao_Bot_Maker
+namespace Tao_Bot_Maker.Model
 {
     public class Sequence
     {
-        public string Name { get; set; }
-
         public List<Action> Actions { get; set; }
-        
-        public bool IsSaved { get; set; }
 
-        public Sequence(string name = "", List<Action> actions = null, bool isSaved = true)
+        public Sequence()
         {
-            this.Name = name;
-
-            if (actions != null) this.Actions = actions;
-            else this.Actions = new List<Action>();
-
-            this.IsSaved = isSaved;
+            Actions = new List<Action>();
         }
 
+        public void AddAction(Action action)
+        {
+            Actions.Add(action);
+        }
+
+        public void RemoveAction(Action action)
+        {
+            Actions.Remove(action);
+        }
+
+        public void ClearActions()
+        {
+            Actions.Clear();
+        }
+
+        internal void UpdateAction(Action oldAction, Action newAction)
+        {
+            int index = Actions.IndexOf(oldAction);
+            Actions[index] = newAction;
+        }
+
+        public void MoveAction(int newIndex, Action action)
+        {
+            int oldIndex = Actions.IndexOf(action);
+            if (oldIndex == -1) 
+                return;
+
+            Actions.RemoveAt(oldIndex);
+            if (newIndex > Actions.Count - 1)
+                Actions.Add(action);
+            else
+                Actions.Insert(newIndex, action);
+        }
     }
 }

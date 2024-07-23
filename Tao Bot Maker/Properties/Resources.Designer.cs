@@ -83,6 +83,26 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_black_and_white_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_black_and_white_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_brightness_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_brightness_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_change_theme_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-change-theme-48", resourceCulture);
@@ -116,6 +136,16 @@ namespace Tao_Bot_Maker.Properties {
         internal static System.Drawing.Bitmap icons8_do_not_disturb_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-do-not-disturb-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_drag_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_drag_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,6 +223,16 @@ namespace Tao_Bot_Maker.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_pause_button_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_pause_button_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_pencil_drawing_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-pencil-drawing-48", resourceCulture);
@@ -236,6 +276,36 @@ namespace Tao_Bot_Maker.Properties {
         internal static System.Drawing.Bitmap icons8_save_as_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-save-as-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_settings_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_settings_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_sort_down_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_sort_down_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_sort_up_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_sort_up_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -25,7 +25,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.4.4.0</ApplicationVersion>
+    <ApplicationVersion>2.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -52,11 +52,36 @@
     <ApplicationIcon>Resources\tao.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LogFramework">
-      <HintPath>..\..\..\Log\LogFramework\bin\Debug\LogFramework.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,143 +93,159 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ActionKeyController.cs" />
-    <Compile Include="Controller\Bot.cs" />
-    <Compile Include="Controller\HotKeyController.cs" />
-    <Compile Include="Controller\ActionController.cs" />
-    <Compile Include="Controller\ActionClickController.cs" />
-    <Compile Include="Controller\ActionLoopController.cs" />
-    <Compile Include="Controller\ActionImageSearchController.cs" />
-    <Compile Include="Controller\ActionSequenceController.cs" />
-    <Compile Include="Controller\ActionTextController.cs" />
-    <Compile Include="Controller\ActionWaitController.cs" />
-    <Compile Include="Controller\ImageSearchController.cs" />
-    <Compile Include="Controller\IniFile.cs" />
-    <Compile Include="Controller\Log.cs" />
+    <Compile Include="Actions\CorruptedAction.cs" />
+    <Compile Include="Helpers\ActionHelper.cs" />
+    <Compile Include="Controller\MainFormController.cs" />
     <Compile Include="Controller\SequenceController.cs" />
+    <Compile Include="Controller\HotkeyController.cs" />
     <Compile Include="Controller\SettingsController.cs" />
-    <Compile Include="Controller\Utils.cs" />
-    <Compile Include="Import\DarkModeCS.cs" />
-    <Compile Include="Import\FlatComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Import\FlatTabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Import\Messenger.cs" />
-    <Compile Include="Model\ActionIfPicture.cs" />
-    <Compile Include="Model\ActionKey.cs" />
-    <Compile Include="Model\ComboboxItemActionType.cs" />
-    <Compile Include="Model\Constants.cs" />
+    <Compile Include="Helpers\AppThemeHelper.cs" />
+    <Compile Include="Helpers\CoordinatesHelper.cs" />
+    <Compile Include="Helpers\CultureManager.cs" />
+    <Compile Include="Helpers\ImageSearchHelper.cs" />
+    <Compile Include="Helpers\KeyboardSimulator.cs" />
+    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\MouseSimulator.cs" />
+    <Compile Include="Model\ActionConverter.cs" />
+    <Compile Include="Model\ActionType.cs" />
+    <Compile Include="Model\Action.cs" />
+    <Compile Include="Actions\ImageAction.cs" />
+    <Compile Include="Actions\KeyAction.cs" />
+    <Compile Include="Actions\MouseAction.cs" />
+    <Compile Include="Actions\SequenceAction.cs" />
+    <Compile Include="Actions\TextAction.cs" />
+    <Compile Include="Actions\WaitAction.cs" />
+    <Compile Include="Model\CustomItem.cs" />
     <Compile Include="Model\Hotkey.cs" />
-    <Compile Include="Properties\strings.Designer.cs">
+    <Compile Include="Model\ISequenceRepository.cs" />
+    <Compile Include="Model\Sequence.cs" />
+    <Compile Include="Model\SequenceRepository.cs" />
+    <Compile Include="Model\Setting.cs" />
+    <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\SettingsType.cs" />
+    <Compile Include="Resources\Images.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>strings.resx</DependentUpon>
+      <DependentUpon>Images.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\About.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Resources\Strings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\About.Designer.cs">
-      <DependentUpon>About.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ActionKeyPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionKeyPanel.Designer.cs">
-      <DependentUpon>ActionKeyPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\DrawingRectangle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MainApp.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MainApp.Designer.cs">
-      <DependentUpon>MainApp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Action.cs" />
-    <Compile Include="Model\ActionWait.cs" />
-    <Compile Include="Model\ActionLoop.cs" />
-    <Compile Include="Model\ActionClick.cs" />
-    <Compile Include="Model\ActionPictureWait.cs" />
-    <Compile Include="Model\ActionSequence.cs" />
-    <Compile Include="Model\ActionImageSearch.cs" />
-    <Compile Include="Model\ActionText.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Sequence.cs" />
-    <Compile Include="Controller\SequenceXmlManager.cs" />
-    <Compile Include="View\ActionClickPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionClickPanel.Designer.cs">
-      <DependentUpon>ActionClickPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ActionImageSearchPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionImageSearchPanel.Designer.cs">
-      <DependentUpon>ActionImageSearchPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ActionTextPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionTextPanel.Designer.cs">
-      <DependentUpon>ActionTextPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ActionLoopPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionLoopPanel.Designer.cs">
-      <DependentUpon>ActionLoopPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ActionSequencePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\ActionSequencePanel.Designer.cs">
-      <DependentUpon>ActionSequencePanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ActionView.cs">
+    <Compile Include="View\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ActionView.Designer.cs">
-      <DependentUpon>ActionView.cs</DependentUpon>
+    <Compile Include="View\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ActionWaitPanel.cs">
+    <Compile Include="View\ActionCustomListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\ActionWaitPanel.Designer.cs">
-      <DependentUpon>ActionWaitPanel.cs</DependentUpon>
+    <Compile Include="View\ActionCustomListItem.Designer.cs">
+      <DependentUpon>ActionCustomListItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SaveSequenceView.cs">
+    <Compile Include="View\CustomItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Action\IActionPropertiesPanel.cs" />
+    <Compile Include="View\ActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SaveSequenceView.Designer.cs">
-      <DependentUpon>SaveSequenceView.cs</DependentUpon>
+    <Compile Include="View\ActionForm.Designer.cs">
+      <DependentUpon>ActionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\HotkeyView.cs">
+    <Compile Include="Model\AppTheme.cs" />
+    <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\HotkeyView.Designer.cs">
-      <DependentUpon>HotkeyView.cs</DependentUpon>
+    <Compile Include="View\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Properties\strings.fr.resx" />
-    <EmbeddedResource Include="Properties\strings.resx">
+    <Compile Include="View\Action\KeyActionPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Action\KeyActionPropertiesPanel.Designer.cs">
+      <DependentUpon>KeyActionPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Action\SequenceActionPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Action\SequenceActionPropertiesPanel.Designer.cs">
+      <DependentUpon>SequenceActionPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Action\ImageActionPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Action\ImageActionPropertiesPanel.Designer.cs">
+      <DependentUpon>ImageActionPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DrawingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DrawingForm.Designer.cs">
+      <DependentUpon>DrawingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SaveSequenceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SaveSequenceForm.Designer.cs">
+      <DependentUpon>SaveSequenceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Action\WaitActionPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Action\WaitActionPropertiesPanel.Designer.cs">
+      <DependentUpon>WaitActionPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Action\TextActionPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Action\TextActionPropertiesPanel.Designer.cs">
+      <DependentUpon>TextActionPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Action\MouseActionPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Action\MouseActionPropertiesPanel.Designer.cs">
+      <DependentUpon>MouseActionPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\ISettingsPropertiesPanel.cs" />
+    <Compile Include="View\Settings\OtherSettingsPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Settings\OtherSettingsPropertiesPanel.Designer.cs">
+      <DependentUpon>OtherSettingsPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\HotkeySettingsPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Settings\HotkeySettingsPropertiesPanel.Designer.cs">
+      <DependentUpon>HotkeySettingsPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\GeneralSettingsPropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Settings\GeneralSettingsPropertiesPanel.Designer.cs">
+      <DependentUpon>GeneralSettingsPropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resources\Images.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>strings.Designer.cs</LastGenOutput>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\About.resx">
-      <DependentUpon>About.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionKeyPanel.resx">
-      <DependentUpon>ActionKeyPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\DrawingRectangle.resx">
-      <DependentUpon>DrawingRectangle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MainApp.resx">
-      <DependentUpon>MainApp.cs</DependentUpon>
+    <EmbeddedResource Include="Resources\Strings.fr.resx" />
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -216,33 +257,58 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\ActionClickPanel.resx">
-      <DependentUpon>ActionClickPanel.cs</DependentUpon>
+    <EmbeddedResource Include="View\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionImageSearchPanel.resx">
-      <DependentUpon>ActionImageSearchPanel.cs</DependentUpon>
+    <EmbeddedResource Include="View\ActionForm.resx">
+      <DependentUpon>ActionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionTextPanel.resx">
-      <DependentUpon>ActionTextPanel.cs</DependentUpon>
+    <EmbeddedResource Include="View\ActionCustomListItem.resx">
+      <DependentUpon>ActionCustomListItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionLoopPanel.resx">
-      <DependentUpon>ActionLoopPanel.cs</DependentUpon>
+    <EmbeddedResource Include="View\CustomItemControl.resx">
+      <DependentUpon>CustomItemControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionSequencePanel.resx">
-      <DependentUpon>ActionSequencePanel.cs</DependentUpon>
+    <EmbeddedResource Include="View\DrawingForm.resx">
+      <DependentUpon>DrawingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionView.resx">
-      <DependentUpon>ActionView.cs</DependentUpon>
+    <EmbeddedResource Include="View\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ActionWaitPanel.resx">
-      <DependentUpon>ActionWaitPanel.cs</DependentUpon>
+    <EmbeddedResource Include="View\Action\KeyActionPropertiesPanel.resx">
+      <DependentUpon>KeyActionPropertiesPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SaveSequenceView.resx">
-      <DependentUpon>SaveSequenceView.cs</DependentUpon>
+    <EmbeddedResource Include="View\Action\SequenceActionPropertiesPanel.resx">
+      <DependentUpon>SequenceActionPropertiesPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\HotkeyView.resx">
-      <DependentUpon>HotkeyView.cs</DependentUpon>
+    <EmbeddedResource Include="View\Action\ImageActionPropertiesPanel.resx">
+      <DependentUpon>ImageActionPropertiesPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\SaveSequenceForm.resx">
+      <DependentUpon>SaveSequenceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Action\WaitActionPropertiesPanel.resx">
+      <DependentUpon>WaitActionPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Action\TextActionPropertiesPanel.resx">
+      <DependentUpon>TextActionPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Action\MouseActionPropertiesPanel.resx">
+      <DependentUpon>MouseActionPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Settings\OtherSettingsPropertiesPanel.resx">
+      <DependentUpon>OtherSettingsPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Settings\HotkeySettingsPropertiesPanel.resx">
+      <DependentUpon>HotkeySettingsPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Settings\GeneralSettingsPropertiesPanel.resx">
+      <DependentUpon>GeneralSettingsPropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -291,15 +357,34 @@
     <None Include="Resources\icons8-do-not-disturb-481.png" />
     <None Include="Resources\icons8-file-481.png" />
     <None Include="Resources\icons8-pencil-drawing-481.png" />
+    <None Include="Resources\icons8-pause-button-48.png" />
+    <None Include="Resources\icons8-sort-up-48.png" />
+    <None Include="Resources\icons8-sort-down-48.png" />
+    <None Include="Resources\icons8-cursor-48.png" />
+    <None Include="Resources\icons8-align-text-left-48.png" />
+    <None Include="Resources\icons8-image-48.png" />
+    <None Include="Resources\icons8-timeline-48.png" />
+    <None Include="Resources\icons8-keyboard-48.png" />
+    <None Include="Resources\icons8-computer-mouse-48.png" />
+    <None Include="Resources\icons8-sand-timer-48.png" />
+    <None Include="Resources\icons8-error-48.png" />
+    <None Include="Resources\icons8-drag-48.png" />
+    <None Include="Resources\icons8-support-48.png" />
+    <None Include="Resources\icons8-monitor-48.png" />
+    <None Include="Resources\icons8-brightness-48.png" />
+    <None Include="Resources\icons8-settings-48.png" />
+    <None Include="Resources\icons8-black-and-white-48.png" />
     <Content Include="Resources\tao.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd "Tao Bot Maker"\bin\Release
 xcopy /Y ..\..\..\README.txt
+xcopy /Y ..\..\..\Changelog.txt
 xcopy /Y C:\ImageSearchDLL.dll
 del *.pdb *.config *.zip
-tar -acvf ..\..\..\TaoBotMaker_v0.4.24.zip *
+tar -acvf ..\..\..\TaoBotMaker_v2.0.6.zip *
 cd ..\..\..</PostBuildEvent>
   </PropertyGroup>
 </Project>

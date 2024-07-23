@@ -1,48 +1,22 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Tao_Bot_Maker
+namespace Tao_Bot_Maker.Model
 {
-    public class Action
+    [JsonObject(ItemTypeNameHandling = TypeNameHandling.Auto)]
+    public abstract class Action
     {
-        /// <summary>
-        /// Enum containing all action type
-        /// </summary>
-        public enum ActionType
-        {
-            Text = 0,
-            Wait = 1,
-            Click = 5,
-            Loop = 6,
-            ImageSearch = 7,
-            Key = 8
-        }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public abstract ActionType Type { get; set; }
 
-        /// <summary>
-        /// Enum containing all action type no longer supported
-        /// </summary>
-        public enum DeprecatedActionType
-        {
-            PictureWait = 2,
-            IfPicture = 3,
-            Sequence = 4,
-        }
+        public abstract Task Execute(CancellationToken token, int x = 0, int y = 0);
 
-        public int Type { get; set; }
+        public abstract bool Validate(out string errorMessage);
 
-        /// <summary>
-        /// Store a message containing details about errors when creating an action
-        /// </summary>
-        public string ErrorMessage { get; set; }
-
-        public override string ToString()
-        {
-            return "Main Class Action";
-        }
-
-        public Action(string errorMessage = "")
-        {
-            ErrorMessage = errorMessage;
-        }
+        public abstract override String ToString();
 
     }
 }

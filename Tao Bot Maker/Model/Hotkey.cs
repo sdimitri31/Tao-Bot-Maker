@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Tao_Bot_Maker
+namespace Tao_Bot_Maker.Model
 {
     public class Hotkey
     {
@@ -17,8 +17,8 @@ namespace Tao_Bot_Maker
 
         public Keys Key { get; set; }
 
-        public Hotkey(Keys key) 
-        { 
+        public Hotkey(Keys key)
+        {
             Key = key;
         }
 

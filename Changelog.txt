@@ -1,0 +1,45 @@
+Changelog:
+2.0.6:
+Fix: Default value of Repeat count in Action sequence set to 1
+Fix: Default value of Click duration in ActionForm mouse set to 10
+Fix: Minimum value of Click duration in ActionForm mouse set to 0
+Fix: Missing value changed event for end coords in ActionForm mouse
+Fix: Increased size of panels to allow checkboxes to show two lines of text in ActionForm mouse
+Fix: Overlay default value set to enabled
+Fix: Wrong unit for LabelExpiration in ActionForm image
+Fix: Current loaded image couldn't be replaced by same name file in ActionForm image
+Fix: Updating action list UI only for added or edited action instead of loading every actions
+
+2.0.5:
+Fix: Pressed state color on Action Item wasn't used
+Fix: Pressed state color on CustomItem wasn't used
+Fix: Changing theme in Settings Form was not saving selected theme
+Fix: Code optimisations
+
+2.0.4-beta:
+Add: New form when saving sequences
+Add: Improved UI in settings
+Add: Merged Start and Pause/Resume buttons
+Fix: Missing translation for theme settings in menu strip
+Fix: Missing icons in Settings menu strip
+Fix: Changed ActionTypeCustomListItem to generic class CustomListItem for better reusability
+Fix: Missing form title when editing an action
+
+2.0.3-beta:
+Add: 'Edit action' in contextMenu
+Add: DoubleClick on action opens edit form
+Fix: Missing translation in contextMenu
+Fix: Prevening crash when trying to search for a picture without providing picture in Action Image Panel
+Fix: In Action Key Panel, stops focusing button to set a key to allow to press 'Enter' to add action
+
+2.0.2-beta:
+Fix: Preventing crash when moving action at invalid index
+Add: Action ContextMenu is now themed
+
+2.0.0-beta:
+- Sequence execution can be paused and be resumed (will pause when possible)
+- Overlay can draw area on multiples screens
+- New code architecture
+- New sequence system, old sequences will not work
+- New setting system, old settings will not work
+- New UI with Theme support

@@ -1,0 +1,702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ActionType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ActionTypeCorrupted" xml:space="preserve">
+    <value>Corrupted</value>
+  </data>
+  <data name="ActionTypeImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ActionTypeKey" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="ActionTypeMouse" xml:space="preserve">
+    <value>Mouse</value>
+  </data>
+  <data name="ActionTypeSequence" xml:space="preserve">
+    <value>Sequence</value>
+  </data>
+  <data name="ActionTypeText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ActionTypeWait" xml:space="preserve">
+    <value>Wait</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Tao's Bot Maker</value>
+  </data>
+  <data name="ButtonAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ButtonAddAction" xml:space="preserve">
+    <value>Add action</value>
+  </data>
+  <data name="ButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ButtonKeyUnassigned" xml:space="preserve">
+    <value>Unassigned</value>
+  </data>
+  <data name="ButtonOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ButtonOpenLogsFolder" xml:space="preserve">
+    <value>Open logs folder</value>
+  </data>
+  <data name="ButtonOpenSequencesFolder" xml:space="preserve">
+    <value>Open sequences folder</value>
+  </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ButtonSearchImage" xml:space="preserve">
+    <value>Search image</value>
+  </data>
+  <data name="ButtonSelectImage" xml:space="preserve">
+    <value>Select image</value>
+  </data>
+  <data name="ButtonWaitForInput" xml:space="preserve">
+    <value>Waiting for input</value>
+  </data>
+  <data name="CaptionMessageContinue" xml:space="preserve">
+    <value>Continue confirmation</value>
+  </data>
+  <data name="CaptionMessageDelete" xml:space="preserve">
+    <value>Deletion confirmation</value>
+  </data>
+  <data name="CaptionMessageExit" xml:space="preserve">
+    <value>Exit confirmation</value>
+  </data>
+  <data name="CaptionMessageFileExists" xml:space="preserve">
+    <value>Existing file</value>
+  </data>
+  <data name="ComboBoxSpeedFast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="ComboBoxSpeedMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="ComboBoxSpeedSlow" xml:space="preserve">
+    <value>Slow</value>
+  </data>
+  <data name="Coordinates" xml:space="preserve">
+    <value>Coordinates</value>
+  </data>
+  <data name="CoordinatesFormat" xml:space="preserve">
+    <value>({0},{1})</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorMessageCaptionInvalidAction" xml:space="preserve">
+    <value>Invalid action</value>
+  </data>
+  <data name="ErrorMessageCorruptedAction" xml:space="preserve">
+    <value>Action corrupted, changes needs to be made to be executed.</value>
+  </data>
+  <data name="ErrorMessageCorruptedSequenceFile" xml:space="preserve">
+    <value>Unable to load sequence : "{0}". File might be corrupted.</value>
+  </data>
+  <data name="ErrorMessageEmptyFieldSequence" xml:space="preserve">
+    <value>Sequence name cannot be empty.</value>
+  </data>
+  <data name="ErrorMessageEmptyFieldTextToType" xml:space="preserve">
+    <value>Text to type cannot be empty.</value>
+  </data>
+  <data name="ErrorMessageEmptySequenceName" xml:space="preserve">
+    <value>Sequence name cannot be empty.</value>
+  </data>
+  <data name="ErrorMessageFailToLoadSequence" xml:space="preserve">
+    <value>Failed to load sequence "{0}".</value>
+  </data>
+  <data name="ErrorMessageFileNotFound" xml:space="preserve">
+    <value>File not found at : "{0}"</value>
+  </data>
+  <data name="ErrorMessageFormat" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="ErrorMessageInvalidActionAtIndex" xml:space="preserve">
+    <value>Invalid action at position {0}.</value>
+  </data>
+  <data name="ErrorMessageInvalidIntervalFor" xml:space="preserve">
+    <value>Value of "{0}" must be between {1} and {2}.</value>
+  </data>
+  <data name="ErrorMessageInvalidRepeatCount" xml:space="preserve">
+    <value>Repeat count cannot be {0}, and must be between {1} and {2}.</value>
+  </data>
+  <data name="ErrorMessageInvalidTypingSpeed" xml:space="preserve">
+    <value>Typing speed must be between {0} and {1}.</value>
+  </data>
+  <data name="ErrorMessageInvalidValueFor" xml:space="preserve">
+    <value>Invalid value for "{0}"</value>
+  </data>
+  <data name="ErrorMessageUnableToCopyFile" xml:space="preserve">
+    <value>Unable to copy the file.</value>
+  </data>
+  <data name="ErrorMessageUnableToRenameAndCopyFile1" xml:space="preserve">
+    <value>Unable to rename and copy the file.</value>
+  </data>
+  <data name="ErrorMessageUnableToReplaceFile" xml:space="preserve">
+    <value>Unable to replace the file.</value>
+  </data>
+  <data name="ErrorMessageWaitActionInvalidMaximumWait" xml:space="preserve">
+    <value>Maximum wait time cannot be less than minimum wait time.</value>
+  </data>
+  <data name="ErrorMessageWaitActionInvalidMinimumWait" xml:space="preserve">
+    <value>Minimum wait time cannot be less than 0.</value>
+  </data>
+  <data name="FormTitleEditAction" xml:space="preserve">
+    <value>Edit action</value>
+  </data>
+  <data name="FormTitleMain" xml:space="preserve">
+    <value>Tao's Bot Maker</value>
+  </data>
+  <data name="FormTitleNewAction" xml:space="preserve">
+    <value>Add action</value>
+  </data>
+  <data name="FormTitleSaveSequence" xml:space="preserve">
+    <value>Save sequence</value>
+  </data>
+  <data name="FormTitleSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ImageActionExpiration" xml:space="preserve">
+    <value>Expiration</value>
+  </data>
+  <data name="ImageActionImageName" xml:space="preserve">
+    <value>Image name</value>
+  </data>
+  <data name="ImageActionName" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageActionThreshold" xml:space="preserve">
+    <value>Threshold</value>
+  </data>
+  <data name="ImageActionToString" xml:space="preserve">
+    <value>Search image : "{0}" between coordinates : {1} and {2} for {3} ms.</value>
+  </data>
+  <data name="InfoMessageDeletedSequence" xml:space="preserve">
+    <value>Sequence "{0}" has been permantly deleted.</value>
+  </data>
+  <data name="InfoMessageExecuteAction" xml:space="preserve">
+    <value>Executing action : {0}.</value>
+  </data>
+  <data name="InfoMessageExecutionCancelled" xml:space="preserve">
+    <value>Cancelling execution.</value>
+  </data>
+  <data name="InfoMessageExecutionComplete" xml:space="preserve">
+    <value>Ending execution.</value>
+  </data>
+  <data name="InfoMessageExecutionPaused" xml:space="preserve">
+    <value>Pausing execution.</value>
+  </data>
+  <data name="InfoMessageExecutionResumed" xml:space="preserve">
+    <value>Resuming execution.</value>
+  </data>
+  <data name="InfoMessageFileExists" xml:space="preserve">
+    <value>File name : "{0}" already exists.</value>
+  </data>
+  <data name="InfoMessageImageFound" xml:space="preserve">
+    <value>Image found</value>
+  </data>
+  <data name="InfoMessageImageFoundAtCoords" xml:space="preserve">
+    <value>Image found at coordinates: {0}</value>
+  </data>
+  <data name="InfoMessageImageFoundAtCoordsIn" xml:space="preserve">
+    <value>Image found at coordinates: {0} in {1} ms.</value>
+  </data>
+  <data name="InfoMessageImageNotFound" xml:space="preserve">
+    <value>Image not found</value>
+  </data>
+  <data name="InfoMessageImageSearchTimeOut" xml:space="preserve">
+    <value>Image search timed out after {0} ms.</value>
+  </data>
+  <data name="InfoMessageProgramReady" xml:space="preserve">
+    <value>Program ready to use</value>
+  </data>
+  <data name="InfoMessageSearchingImageFor" xml:space="preserve">
+    <value>Searching for image... {0} ms elapsed.</value>
+  </data>
+  <data name="InfoMessageStartingExecution" xml:space="preserve">
+    <value>Starting execution.</value>
+  </data>
+  <data name="InfoMessageWaitActionWaitingTime" xml:space="preserve">
+    <value>Waiting for {0} ms.</value>
+  </data>
+  <data name="KeyActionName" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="KeyActionToString" xml:space="preserve">
+    <value>Key : {0}</value>
+  </data>
+  <data name="KeysAlt" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="KeysBackspace" xml:space="preserve">
+    <value>Backspace</value>
+  </data>
+  <data name="KeysCapsLock" xml:space="preserve">
+    <value>CapsLock</value>
+  </data>
+  <data name="KeysCtrl" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="KeysDelete" xml:space="preserve">
+    <value>Del</value>
+  </data>
+  <data name="KeysDown" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="KeysEnd" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="KeysEnter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="KeysEscape" xml:space="preserve">
+    <value>Escape</value>
+  </data>
+  <data name="KeysLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="KeysRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="KeysShift" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="KeysSpace" xml:space="preserve">
+    <value>Space</value>
+  </data>
+  <data name="KeysUp" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="LabelActionIfImageFound" xml:space="preserve">
+    <value>Action if image found</value>
+  </data>
+  <data name="LabelActionIfImageNotFound" xml:space="preserve">
+    <value>Action if image not found</value>
+  </data>
+  <data name="LabelAuthor" xml:space="preserve">
+    <value>Author :</value>
+  </data>
+  <data name="LabelClickDuration" xml:space="preserve">
+    <value>Click duration</value>
+  </data>
+  <data name="LabelClickType" xml:space="preserve">
+    <value>Click type</value>
+  </data>
+  <data name="LabelCoordinates" xml:space="preserve">
+    <value>Coordinates</value>
+  </data>
+  <data name="LabelDebug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="LabelDoubleClick" xml:space="preserve">
+    <value>Double click</value>
+  </data>
+  <data name="LabelDragAndDrop" xml:space="preserve">
+    <value>Drag and Drop</value>
+  </data>
+  <data name="LabelEnableDrawingOverlay" xml:space="preserve">
+    <value>Overlay</value>
+  </data>
+  <data name="LabelEndCoordinates" xml:space="preserve">
+    <value>End coordinates</value>
+  </data>
+  <data name="LabelError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LabelExpiration" xml:space="preserve">
+    <value>Expiration (ms)</value>
+  </data>
+  <data name="LabelHotkeyEndCoords" xml:space="preserve">
+    <value>End coordinates</value>
+  </data>
+  <data name="LabelHotkeyStartCoords" xml:space="preserve">
+    <value>Start coordinates</value>
+  </data>
+  <data name="LabelInformation" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="LabelKey" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="LabelLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LabelLeftClick" xml:space="preserve">
+    <value>Left click</value>
+  </data>
+  <data name="LabelMaximumWait" xml:space="preserve">
+    <value>Wait maximum (ms)</value>
+  </data>
+  <data name="LabelMiddleClick" xml:space="preserve">
+    <value>Middle click</value>
+  </data>
+  <data name="LabelMinimumWait" xml:space="preserve">
+    <value>Wait minimum (ms)</value>
+  </data>
+  <data name="LabelMouseActionEventType" xml:space="preserve">
+    <value>Action type</value>
+  </data>
+  <data name="LabelNoClick" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="LabelNoImageSelected" xml:space="preserve">
+    <value>No image selected</value>
+  </data>
+  <data name="LabelRandomizeWait" xml:space="preserve">
+    <value>Randomize interval</value>
+  </data>
+  <data name="LabelRepeatCount" xml:space="preserve">
+    <value>Repeat count</value>
+  </data>
+  <data name="LabelRightClick" xml:space="preserve">
+    <value>Right click</value>
+  </data>
+  <data name="LabelSavedSequences" xml:space="preserve">
+    <value>Saved sequences</value>
+  </data>
+  <data name="LabelSaveLogLevel" xml:space="preserve">
+    <value>Save log of level</value>
+  </data>
+  <data name="LabelSaveLogs" xml:space="preserve">
+    <value>Save logs</value>
+  </data>
+  <data name="LabelScroll" xml:space="preserve">
+    <value>Scroll</value>
+  </data>
+  <data name="LabelScrollAmount" xml:space="preserve">
+    <value>Scroll amount</value>
+  </data>
+  <data name="LabelSequence" xml:space="preserve">
+    <value>Sequence</value>
+  </data>
+  <data name="LabelSequenceName" xml:space="preserve">
+    <value>Sequence name</value>
+  </data>
+  <data name="LabelShowLogLevel" xml:space="preserve">
+    <value>Show log of level</value>
+  </data>
+  <data name="LabelSourceCode" xml:space="preserve">
+    <value>Source code :</value>
+  </data>
+  <data name="LabelSpecialThanks" xml:space="preserve">
+    <value>Special thanks to</value>
+  </data>
+  <data name="LabelSpeed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="LabelStartCoordinates" xml:space="preserve">
+    <value>Start coordinates</value>
+  </data>
+  <data name="LabelTextToType" xml:space="preserve">
+    <value>Text to type</value>
+  </data>
+  <data name="LabelTheme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="LabelThemeAuto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="LabelThemeDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="LabelThemeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="LabelThreshold" xml:space="preserve">
+    <value>Threshold</value>
+  </data>
+  <data name="LabelTypingSpeed" xml:space="preserve">
+    <value>Typing speed</value>
+  </data>
+  <data name="LabelUseCurrentPosition" xml:space="preserve">
+    <value>Use current position</value>
+  </data>
+  <data name="LabelUseImageCoordinates" xml:space="preserve">
+    <value>Use image coordinates</value>
+  </data>
+  <data name="LabelVersion" xml:space="preserve">
+    <value>Version :</value>
+  </data>
+  <data name="LabelWait" xml:space="preserve">
+    <value>Wait (ms)</value>
+  </data>
+  <data name="LabelWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="LinkLabelIconEight" xml:space="preserve">
+    <value>Icons8 for providing icons</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="MenuBot" xml:space="preserve">
+    <value>Bot</value>
+  </data>
+  <data name="MenuBotPause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="MenuBotResume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="MenuBotStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="MenuBotStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="MenuEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="MenuEditAddAction" xml:space="preserve">
+    <value>Add action</value>
+  </data>
+  <data name="MenuEditDeleteAction" xml:space="preserve">
+    <value>Delete action</value>
+  </data>
+  <data name="MenuEditDeleteSequence" xml:space="preserve">
+    <value>Delete sequence</value>
+  </data>
+  <data name="MenuEditEditAction" xml:space="preserve">
+    <value>Edit action</value>
+  </data>
+  <data name="MenuEditMoveDown" xml:space="preserve">
+    <value>Move action down</value>
+  </data>
+  <data name="MenuEditMoveUp" xml:space="preserve">
+    <value>Move action up</value>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="MenuFileExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="MenuFileNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="MenuFileSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MenuFileSaveAs" xml:space="preserve">
+    <value>Save as ...</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MenuSettingsLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="MenuSettingsSaveLogs" xml:space="preserve">
+    <value>Save logs</value>
+  </data>
+  <data name="MenuSettingsShortcuts" xml:space="preserve">
+    <value>Hotkeys</value>
+  </data>
+  <data name="MenuSettingsTheme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="MouseActionName" xml:space="preserve">
+    <value>Mouse</value>
+  </data>
+  <data name="MouseActionToStringAtCoordinates" xml:space="preserve">
+    <value>at coordinates</value>
+  </data>
+  <data name="MouseActionToStringAtCurrentPosition" xml:space="preserve">
+    <value>at current position</value>
+  </data>
+  <data name="MouseActionToStringAtImageCoordinates" xml:space="preserve">
+    <value>at image coordinates</value>
+  </data>
+  <data name="MouseActionToStringDouble" xml:space="preserve">
+    <value>Double</value>
+  </data>
+  <data name="MouseActionToStringDragAndDropFrom" xml:space="preserve">
+    <value>Drag and Drop from {0} to {1}</value>
+  </data>
+  <data name="MouseActionToStringScrollBy" xml:space="preserve">
+    <value>Scroll by : {0}</value>
+  </data>
+  <data name="QuestionMessageContinue" xml:space="preserve">
+    <value>Do you want to continue anyway ?</value>
+  </data>
+  <data name="QuestionMessageDelete" xml:space="preserve">
+    <value>Do you want to delete it ?</value>
+  </data>
+  <data name="QuestionMessageExit" xml:space="preserve">
+    <value>Do you want to exit ?</value>
+  </data>
+  <data name="QuestionMessageReplace" xml:space="preserve">
+    <value>Do you want to replace it ?</value>
+  </data>
+  <data name="SequenceActionLoopNumber" xml:space="preserve">
+    <value>Loop {0} of {1}</value>
+  </data>
+  <data name="SequenceActionName" xml:space="preserve">
+    <value>Sequence</value>
+  </data>
+  <data name="SequenceActionToString" xml:space="preserve">
+    <value>Sequence : "{0}" x {1}</value>
+  </data>
+  <data name="SettingsTypeGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="SettingsTypeHotkeys" xml:space="preserve">
+    <value>Hotkeys</value>
+  </data>
+  <data name="SettingsTypeOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="TextActionName" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="TextActionToString" xml:space="preserve">
+    <value>Text to type : {0} | TypingSpeed: {1}</value>
+  </data>
+  <data name="Unsaved" xml:space="preserve">
+    <value>Unsaved</value>
+  </data>
+  <data name="WaitActionName" xml:space="preserve">
+    <value>Wait</value>
+  </data>
+  <data name="WaitActionToString" xml:space="preserve">
+    <value>Wait {0} ms</value>
+  </data>
+  <data name="WaitActionWithIntervalToString" xml:space="preserve">
+    <value>Wait between {0} and {1} ms</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="WarningMessageDeleteSequence" xml:space="preserve">
+    <value>Sequence "{0}" will be permantly deleted.</value>
+  </data>
+  <data name="WarningMessageUnsavedChanges" xml:space="preserve">
+    <value>Unsaved changes will be lost.</value>
+  </data>
+</root>

@@ -1,162 +1,301 @@
-﻿using System.Collections.Generic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using Tao_Bot_Maker.View;
+using Tao_Bot_Maker.Helpers;
+using Tao_Bot_Maker.Model;
+using Action = Tao_Bot_Maker.Model.Action;
 
-namespace Tao_Bot_Maker
+namespace Tao_Bot_Maker.Controller
 {
     public class SequenceController
     {
+        public static event System.Action RunningStateChanged;
+
+        private CancellationTokenSource sequenceLoadingToken = new CancellationTokenSource();
+        private readonly ISequenceRepository sequenceRepository;
         private Sequence sequence;
 
-        public SequenceController(string name = "", List<Action> actions = null, bool isSaved = true)
+        public static event System.Action SavedStatusChanged;
+        private static bool isSaved = true;
+
+        private CancellationTokenSource sequenceExecutionToken = new CancellationTokenSource();
+        private static bool isPaused;
+        private static bool isRunning;
+
+        public SequenceController()
         {
-            sequence = new Sequence(name, actions, isSaved);
+            sequenceRepository = new SequenceRepository();
+            NewSequence();
         }
 
-        public Sequence Sequence
+        public void NewSequence()
         {
-            get => this.sequence;
-            set => this.sequence = value;
+            sequence = new Sequence();
+            SetIsSaved(true);
         }
 
-        public string SequenceName
+        public List<string> GetAllSequenceNames()
         {
-            get => sequence.Name;
-            set => sequence.Name = value;
+            return (List<string>)sequenceRepository.GetAllSequenceNames();
         }
 
-        public bool IsSaved()
+        public bool RemoveSequence(string name)
         {
-            return sequence.IsSaved;
+            return sequenceRepository.RemoveSequence(name);
         }
 
-        public List<Action> GetActions() => sequence.Actions;
-
-        public bool AddAction(Action actionToAdd)
+        public string GetSequenceFolder()
         {
-            if (actionToAdd == null)
-                return false;
-
-            sequence.Actions.Add(actionToAdd);
-            sequence.IsSaved = false;
-            return true;
+            return SequenceRepository.sequencesFolderPath;
         }
 
-        public bool RemoveAction(Action actionToRemove)
+        public Sequence GetSequence()
         {
-            if (actionToRemove == null)
-                return false;
-
-            sequence.Actions.Remove(actionToRemove);
-            sequence.IsSaved = false;
-            return true;
+            return sequence;
         }
 
-        public bool RemoveAction(int indexActionToRemove)
+        public static Sequence GetSequence(string name)
         {
-            if (indexActionToRemove < 0)
-                return false;
-
-            if (indexActionToRemove > sequence.Actions.Count - 1)
-                return false;
-
-            sequence.Actions.RemoveAt(indexActionToRemove);
-            sequence.IsSaved = false;
-            return true;
-        }
-
-        public bool EditAction(int selectedActionIndex, Action action)
-        {
-            if (!RemoveAction(selectedActionIndex))
-                return false;
-
-            if (!InsertAction(selectedActionIndex, action))
-                return false;
-
-            return true;
-        }
-
-
-        public bool InsertAction(int indexAction, Action action)
-        {
-            if (indexAction < 0)
-                return false;
-
-            if (indexAction > sequence.Actions.Count - 1)
-                return AddAction(action);
-
-            if (action == null)
-                return false;
-
-            sequence.Actions.Insert(indexAction, action);
-            sequence.IsSaved = false;
-            return true;
-        }
-
-        public bool ClearActions()
-        {
-            sequence.Actions.Clear();
-            sequence.IsSaved = false;
-            return true;
-        }
-
-        public bool Save(string sequenceName = "")
-        {
-            bool saveResult;
-            if (string.IsNullOrEmpty(sequenceName))
-                saveResult = SaveAs();
-            else
-                saveResult = SequenceXmlManager.SaveSequence(sequenceName, this);
-
-            sequence.IsSaved = saveResult;
-            return saveResult;
-        }
-
-        private bool SaveAs()
-        {
-            SaveSequenceView saveSequenceView = new SaveSequenceView(this);
-            saveSequenceView.StartPosition = FormStartPosition.CenterParent;
-
-            var result = saveSequenceView.ShowDialog();
-
-            if (result == DialogResult.OK)
+            try
             {
-                this.SequenceName = saveSequenceView.ReturnValueSequenceName;
-                return true;
+                return new SequenceRepository().GetSequence(name);
             }
-            return false;
-        }
-
-        public bool LoadSequence(string sequenceName = "")
-        {
-            if (string.IsNullOrEmpty(sequenceName))
-                return false;
-
-            Sequence sequenceResult = SequenceXmlManager.LoadSequence(sequenceName);
-
-            if (sequenceResult == null)
-                return false;
-
-            this.sequence = sequenceResult;
-
-            return true;
-        }
-
-        public static bool DeleteSequence(string sequenceName)
-        {
-            if (string.IsNullOrEmpty(sequenceName))
-                return false;
-
-            DialogResult dr = MessageBox.Show(Properties.strings.MessageBox_WarningDeleteSequence, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (dr == DialogResult.Yes)
+            catch (Exception ex)
             {
-                return SequenceXmlManager.DeleteSequence(sequenceName);
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        public async Task<Sequence> LoadSequenceAsync(string name)
+        {
+            // Cancel any ongoing task
+            sequenceLoadingToken.Cancel();
+            sequenceLoadingToken = new CancellationTokenSource();
+            var token = sequenceLoadingToken.Token;
+
+            try
+            {
+                sequence = await sequenceRepository.LoadSequenceAsync(name, token);
+                SetIsSaved(true);
+                return sequence;
+            }
+            catch (OperationCanceledException ex)
+            {
+                sequence = new Sequence();
+                SetIsSaved(false);
+                throw new OperationCanceledException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                sequence = new Sequence();
+                SetIsSaved(false);
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        public void AddAction(Action newAction)
+        {
+            sequence.AddAction(newAction);
+            SetIsSaved(false);
+        }
+
+        internal void UpdateAction(Action oldAction, Action newAction)
+        {
+            sequence.UpdateAction(oldAction, newAction);
+            SetIsSaved(false);
+        }
+
+        public void MoveAction(int newIndex, Action action)
+        {
+            sequence.MoveAction(newIndex, action);
+            SetIsSaved(false);
+        }
+
+        public void RemoveAction(Action action)
+        {
+            sequence.RemoveAction(action);
+            SetIsSaved(false);
+        }
+
+        public void SaveSequence(string name)
+        {
+            if (sequence == null)
+            {
+                Logger.Log("Cannot save sequence because Sequence is null", TraceEventType.Critical);
+                throw new Exception("Cannot save sequence because Sequence is null");
             }
 
-            return false;
+            if (string.IsNullOrEmpty(name))
+            {
+                Logger.Log(Resources.Strings.ErrorMessageEmptyFieldSequence, TraceEventType.Error);
+                throw new Exception(Resources.Strings.ErrorMessageEmptyFieldSequence);
+            }
+
+            sequenceRepository.SaveSequence(sequence, name);
+            SetIsSaved(true);
         }
+
+        public static void SetIsSaved(bool value)
+        {
+            isSaved = value;
+            SavedStatusChanged?.Invoke();
+        }
+
+        public static bool GetIsSaved()
+        {
+            return isSaved;
+        }
+
+        public async Task StartSequence()
+        {
+            sequenceExecutionToken.Cancel();
+            sequenceExecutionToken = new CancellationTokenSource();
+            var token = sequenceExecutionToken.Token;
+            SetIsPaused(false);
+            SetIsRunning(true);
+
+            try
+            {
+                Logger.Log(Resources.Strings.InfoMessageStartingExecution);
+
+                foreach (var action in sequence.Actions)
+                {
+                    await ExecuteAction(action, token);
+                }
+                SetIsPaused(false);
+                SetIsRunning(false);
+                Logger.Log(Resources.Strings.InfoMessageExecutionComplete);
+            }
+            catch (OperationCanceledException)
+            {
+                SetIsPaused(false);
+                SetIsRunning(false);
+                Logger.Log(Resources.Strings.InfoMessageExecutionCancelled, TraceEventType.Information);
+            }
+            catch (Exception ex)
+            {
+                SetIsPaused(false);
+                SetIsRunning(false);
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+
+        /// <summary>
+        /// Executes the provided action asynchronously with the given token, x, and y coordinates.
+        /// </summary>
+        /// <param name="action">The action to execute.</param>
+        /// <param name="token">The cancellation token.</param>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <returns>A Task representing the asynchronous operation.</returns>
+        public static async Task ExecuteAction(Action action, CancellationToken token, int x = 0, int y = 0)
+        {
+            Exception exception = null;
+            // Create a new thread for the action
+            var actionThread = new Thread(() =>
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+
+                    PauseIfRequested().GetAwaiter().GetResult();
+
+                    action.Execute(token, x, y).GetAwaiter().GetResult();
+                }
+                catch (OperationCanceledException)
+                {
+                    Console.WriteLine("Thread cancelled by user");
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
+            });
+
+            // Start the action thread
+            actionThread.Start();
+
+            // Keep the thread alive until completion or cancellation
+            while (actionThread.IsAlive)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    actionThread.Abort();
+                    token.ThrowIfCancellationRequested();
+                }
+
+                await Task.Delay(10);
+            }
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+        }
+
+        public bool ValidateSequence(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            for (int i = 0; i < sequence.Actions.Count; i++)
+            {
+                if (!sequence.Actions[i].Validate(out string errorMsg))
+                {
+                    string invalidActionAtIndex = string.Format(Resources.Strings.ErrorMessageInvalidActionAtIndex, i + 1);
+                    errorMessage = invalidActionAtIndex + "\r\n" + errorMsg;
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static void SetIsRunning(bool value)
+        {
+            isRunning = value;
+            Console.WriteLine("isRunning: " + isRunning);
+            RunningStateChanged?.Invoke(); // Trigger the event.
+        }
+
+        public static void SetIsPaused(bool value)
+        {
+            isPaused = value;
+            Console.WriteLine("isPaused: " + isPaused);
+            RunningStateChanged?.Invoke(); // Trigger the event.
+        }
+
+        public static bool GetIsPaused()
+        {
+            return isPaused;
+        }
+
+        public static bool GetIsRunning()
+        {
+            return isRunning;
+        }
+
+        public static async Task PauseIfRequested()
+        {
+            while (GetIsPaused())
+            {
+                await Task.Delay(100);
+            }
+        }
+
+        public void TogglePause()
+        {
+            SetIsPaused(!isPaused);
+            string message = isPaused ? Resources.Strings.InfoMessageExecutionPaused : Resources.Strings.InfoMessageExecutionResumed;
+            Logger.Log(message);
+        }
+
+        public void StopSequence()
+        {
+            sequenceExecutionToken.Cancel();
+        }
+
     }
 }
